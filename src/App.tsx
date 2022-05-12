@@ -1,12 +1,12 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home/Home';
-import './App.css';
+import TermsOfService from './pages/Terms of service/Terms of service';
 
 function App() {
-  console.log('dssf')
   return (
     <Routes>
+      <Route path="/terms-of-service" element={<TermsOfService />} />
       <Route path="/" element={<Home />} />
     </Routes>
   );
