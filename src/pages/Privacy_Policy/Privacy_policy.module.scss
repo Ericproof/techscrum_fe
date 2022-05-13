@@ -2,41 +2,49 @@
     display: block;
     background: #f5f7fa;
     box-sizing: border-box;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .content{
-    padding-right: 12px;
-    padding-left: 400px;
     padding-bottom: 6rem!important;
     padding-top: 5rem!important;
+}
+
+.smallScreen{
+    display: none;
 }
 
 .header1{
     font-weight: 600;
     font-size: 1.186rem;
     color: #a7acc5!important;
+    margin: 0 auto;
+    text-align: center;
     margin-bottom: 0.2rem!important;
-    margin-left: 15rem;
     margin-top: 4rem
 }
 
 .header2{
     font-weight: 400;
     font-size: 2.6rem;
-    margin:0;
-    margin-left: 9rem;
+    margin:0 auto;
     margin-top: 0.9rem;
-    
+    text-align: center;
 }
 
 .hr{
     background-color: #6a84ed;
     height: 4px;
     width: 100px;
+    margin: 0 auto;
     margin-top: 2rem!important;
     margin-bottom: 8rem!important;
-    margin-right: auto!important;
-    margin-left: 14rem;
+}
+
+.section{
+    padding-right: 100px;
+    padding-left: 400px;
 }
 
 h4{
@@ -68,4 +76,22 @@ li{
 
 .br{
     margin-top: 1.5rem;
+}
+
+@media screen and (max-width: 992px){
+    .smallScreen{
+        height: 283px;
+        display: block;
+    }
+    .section{
+        padding-right: 100px;
+        padding-left: 100px;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .section{
+        padding-right: 30px;
+        padding-left: 30px;
+    }
 }

@@ -8,7 +8,8 @@ export default function PrivacyPolicy() {
         <h3 className={styles.header1}>LEGAL</h3>
         <h1 className={styles.header2}>Privacy policy</h1>
         <hr className={styles.hr} />
-        <section>
+        <div className={styles.smallScreen}> </div>
+        <section className={styles.section}>
           <h4>Business Privacy Policy</h4>
           <p>
             This privacy policy sets out how TechScrum.com and any related products, services, apps
