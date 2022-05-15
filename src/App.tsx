@@ -1,14 +1,14 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Home from './pages/Home/Home';
+// import Home from "./pages/Home/Home";
+import Gdpr from './pages/Gdpr/Gdpr';
 import './App.css';
 
 function App() {
-  console.log('dssf')
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/GDPR" element={<GDOR />} />
+      {/* <Route path="/" element={<Home />} /> */}
+      <Route path="/Gdpr" element={<Gdpr />} />
     </Routes>
   );
 }
