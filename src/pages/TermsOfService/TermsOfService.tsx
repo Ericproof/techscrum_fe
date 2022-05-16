@@ -4,13 +4,13 @@ import styles from './TermsOfService.module.scss';
 export default function TermsOfService() {
   return (
     <div className={styles.container}>
-      <div className={styles.container_header}>
-        <div className={styles.container_Legal}>Legal</div>
-        <h1 className={styles.container_Terms}>Terms of service</h1>
-        <hr className={styles.container_underline} />
+      <div className={styles.containerHeader}>
+        <div className={styles.containerLegal}>Legal</div>
+        <h1 className={styles.containerTerms}>Terms of service</h1>
+        <hr className={styles.containerUnderline} />
       </div>
 
-      <div id={styles.container_text} className={styles.container_content}>
+      <div id={styles.containerText} className={styles.containerContent}>
         <h2>Techscrum.com Terms Of Service</h2>
         <p>
           These Terms of Service govern your use of the Techscrum.com platform and all services
