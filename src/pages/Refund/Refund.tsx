@@ -4,15 +4,15 @@ import styles from './Refund.module.scss';
 export default function Refund() {
   return (
     <div className={styles.container}>
-      <div className={styles.legalCenter}>
-        <title>legal</title>
-        <h1>Refund policy</h1>
-        <div className={styles.underline}>
-          <hr />
-        </div>
+      <div className={styles.legalTitle}>
+        <h2>legal</h2>
+
+        <h1>Refund Policy</h1>
+
+        <hr />
       </div>
 
-      <div className={styles.legal_text}>
+      <div className={styles.refundText}>
         <p>
           If you use the free version of TechScrum, you will never be charged. However, you can
           upgrade your account at any time
@@ -41,7 +41,7 @@ export default function Refund() {
           To cancel your subscription on a paid plan, you must cancel your PayPal Subscription from
           within PayPal. Once your paypal account has been cancelled, your monthly payment will be
           cancelled You can cancel your account at any time simply by logging in, going to the
-          Subscription page and clicking the ‘Cancel my account’ link
+          Subscription page and clicking the ‘ Cancel my account ’link
         </p>
 
         <p>

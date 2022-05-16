@@ -1,67 +1,109 @@
-.container,html
-{
-   background: #f5f7fa;
-   font-family: 'Fakt Soft','-apple-system','Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-   font-size: 14px;
-   font-weight: 400;
-   line-height: 1.6;
-   -webkit-font-smoothing: 'anti aliased';
-   
-}
+* {
+   font-family: FaktSoft, Arial, Helvetica, sans-serif;
+     margin: 100px;
+     background: #f5f7fa;
+     
 
-.container {
-   color: #212529;
-}
+ }
 
-p {
-   font-family: 'Fakt Soft','Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-   font-size: 1.143rem;
-   margin-top: 0;
-   margin-bottom: 1.5rem;
-   color: #494e6a!important;
-   text-align: left;   
-}
+ .container {
 
-.title {
-   color: #a7acc5!important;
-   font-weight: 600;
-   margin-top: 8rem !important;
-   margin-bottom: 1.5rem!important;
-   text-transform: uppercase!important;
-   text-align: center!important;
-}
+     padding-top: 147px;
 
-h1 {
-   margin: 0!important;
-   font-weight: 400;
-   font-size: 3rem;
-   color: inherit;
-   margin-block-start: 0.67em;
-   margin-block-end: 0.67em;
-   margin-inline-start: 0;
-   margin-inline-end: 0;
-   -webkit-font-smoothing: antialiased;
-   font-variant-ligatures: common-ligatures;
-   text-align: center!important;
-}
+     padding-right: 12px;
 
-.underline {
-   background-color: #6a84ed;
-   border: 0;
-   height: 4px;
-   width: 100px;
-   margin-bottom:9rem!important;
-   margin-top: 3rem!important;
-   display: block;
-   padding:0;   
-}
+     padding-left: 12px;
 
-@media screen and (min-width: 320px) and (max-width:1156px){
+     margin: 0 84px 84px;
 
-    .container{
+ }
+
+ .legalTitle {
+
+     width: 100%;
+
+     text-align: center!important;
+
+     font-weight: 600;
+
+     font-size: 18px;
+
+     color: #a7acc5;
+
+     padding-bottom: 21px;
+     
+
+ }
+
+ h1 {
+
+     margin: 0!important;
+     
+     font-weight: 400;
     
-        position: fixed;
-        height: 100%;
-        width: 100%;
-        z-index: 0;
-    }}
+     font-size: 2.5rem;
+     
+     color: #212529;
+
+     text-align: center!important;
+
+ }
+
+ h2 {
+
+     color: #a7acc5;
+
+     font-size: 16px;
+
+     margin: 0 0 21px;
+
+     text-align: center;
+
+     text-transform: uppercase!important;
+
+ }
+
+ hr {
+
+     background-color: #6a84ed;
+
+     border: 0;
+
+     height: 4px;
+
+     width: 100px;
+
+     margin: 42px auto;
+
+ }
+
+ .RefundText {
+   
+
+     padding-left: 12px;
+
+     padding-right: 12px;
+
+     text-align: left;
+
+     width: 100%;
+
+ }
+
+ p {
+
+     color: #494e6a;
+
+     margin: 0 0 21px;
+
+     font-size: 16px;
+
+     font-weight: 400;
+
+     line-height: 1.6;
+
+     width: 894px;
+
+     text-overflow: ellipsis !important;
+
+ }
