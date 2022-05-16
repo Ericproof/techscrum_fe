@@ -10,6 +10,29 @@
   padding-left: 12px;
   margin: 0px 84px;
   margin-bottom: 84px;
+
+  @media (max-width: 960px) {
+    .content {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    max-width: 744px;
+  }
+
+  @media screen and(min-width: 992px) {
+    max-width: 992px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    max-width: 1164px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    max-width: 1224px;
+  }
 }
 
 .content {
@@ -54,6 +77,17 @@ hr {
 .sidebar {
   padding: 0 12px;
   width: 320px;
+  @media screen and (max-width: 992px) {
+    padding-left: 12px;
+
+    padding-right: 12px;
+
+    width: 100%;
+  }
+
+  @media screen and (min-width: 992px) {
+    width: 25%;
+  }
 }
 
 ul {
@@ -97,7 +131,6 @@ li:hover {
   border: 0;
   color: #4da2f8;
 }
-
 .gdprText {
   padding-left: 12px;
   padding-right: 12px;
@@ -147,27 +180,4 @@ h3 {
   margin: 0 0 21px;
   font-size: 18px;
   font-weight: 500;
-}
-
-@media (max-width: 960px) {
-  * {
-    width: 100%;
-  }
-  .title {
-    width: 60%;
-  }
-  .content {
-    display: flex;
-    flex-direction: column;
-  }
-  .sidebar {
-    width: 50%;
-  }
-  .gdprText {
-    width: 100%;
-  }
-  p {
-    width: auto;
-    padding-right: 1px;
-  }
 }
