@@ -1,15 +1,13 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Home from './pages/Home/Home';
-import './App.css';
+import PrivacyStatment from './pages/PrivacyStatment/PrivacyStatment';
 
 function App() {
-  console.log('dssf')
+  // console.log('dssf')
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<PrivacyStatment />} />
     </Routes>
   );
 }
-
 export default App;
