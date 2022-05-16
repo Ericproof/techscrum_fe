@@ -1,12 +1,13 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import PrivacyStatment from './pages/PrivacyStatment/PrivacyStatment';
+import Home from './pages/Home/Home';
+import PrivacyStatment from './pages/PrivacyStatment/privacyStatment';
 
 function App() {
-  // console.log('dssf')
   return (
     <Routes>
       <Route path="/" element={<PrivacyStatment />} />
+      <Route path="/" element={<Home />} />
     </Routes>
   );
 }

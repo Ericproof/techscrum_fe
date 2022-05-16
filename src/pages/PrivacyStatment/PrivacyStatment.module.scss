@@ -32,21 +32,21 @@ html {
   padding-top: 10.5rem;
   margin-bottom: 6rem;
 }
-.textcenter {
+.textCenter {
   text-align: center;
   padding-bottom: 6rem;
 }
-.textcenter span {
+.textCenter span {
   font-weight: 600;
   text-transform: uppercase;
   color: #a7acc5;
   font-size: 1.286rem;
   margin-bottom: 1.5rem;
 }
-.textcenter h1 {
+.textCenter h1 {
   font-weight: 400;
 }
-hr {
+.textCenter hr {
   background-color: var(--hr-color);
   border: 0;
   width: 100px;
@@ -58,13 +58,13 @@ hr {
   box-sizing: content-box;
   overflow: visible;
 }
-.main_content {
+.mainContent {
   display: flex;
   flex-wrap: wrap;
   margin-left: -12px;
   margin-right: -12px;
 }
-.content_nav {
+.contentNav {
   flex: 0 0 25%;
   max-width: 25%;
   padding-left: 12px;
@@ -131,7 +131,7 @@ hr {
     flex: 0 0 66.666666%;
     max-width: 66.66666%;
   }
-  .content_nav {
+  .contentNav {
     flex: 0 0 33.3333%;
     max-width: 33.33333%;
   }
@@ -144,7 +144,7 @@ hr {
     flex: 0 0 100%;
     max-width: 100%;
   }
-  .content_nav {
+  .contentNav {
     flex: 0 0 100%;
     max-width: 100%;
   }

@@ -1,16 +1,16 @@
 import React from 'react';
-import styles from './PrivacyStatment.module.scss';
+import styles from './privacyStatment.module.scss';
 
 export default function PrivacyStatment() {
   return (
     <div className={styles.container}>
-      <div className={styles.textcenter}>
+      <div className={styles.textCenter}>
         <span>Legal</span>
         <h1>Privacy policy</h1>
         <hr />
       </div>
-      <div className={styles.main_content}>
-        <div className={styles.content_nav}> </div>
+      <div className={styles.mainContent}>
+        <div className={styles.contentNav}> </div>
         <div className={styles.content}>
           <h2>What is a Privacy Statement and Why is It Important</h2>
           <p>
