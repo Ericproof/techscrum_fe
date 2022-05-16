@@ -11,7 +11,7 @@
   margin: 0px 84px;
   margin-bottom: 84px;
 
-  @media (max-width: 960px) {
+  @media (max-width: 1380px) {
     .content {
       display: flex;
       flex-direction: column;
@@ -19,19 +19,19 @@
   }
 
   @media screen and (min-width: 768px) {
-    max-width: 744px;
+    max-width: 30%;
   }
 
   @media screen and(min-width: 992px) {
-    max-width: 992px;
+    max-width: 50%;
   }
 
   @media screen and (min-width: 1280px) {
-    max-width: 1164px;
+    max-width: 70%;
   }
 
   @media screen and (min-width: 1440px) {
-    max-width: 1224px;
+    max-width: 100%;
   }
 }
 
