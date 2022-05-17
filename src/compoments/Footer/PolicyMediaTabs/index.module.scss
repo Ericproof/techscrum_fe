@@ -50,12 +50,16 @@ $small_size: 768px;
             }
 
             svg{
-                width: 24px;
-                height: 24px;
+                max-width: 24px;
+                max-height: 24px;
+                width: 100%;
+                height: 100%;
 
                 @media(min-width:$small_size) and (max-width:$max_size){
-                    width: 20px;
-                    height: 20px;
+                    max-width: 20px;
+                    max-height: 20px;
+                    width: 100%;
+                    height: 100%;
                 }
             }
         }
@@ -65,8 +69,10 @@ $small_size: 768px;
         align-self: center;
         a{
             img{
-                width:135px;
-                height:40px;
+                max-width:135px;
+                max-height:40px;
+                width: 100%;
+                height: 100%;
 
                 @media(max-width:$max_size){
                     max-width:118px;
