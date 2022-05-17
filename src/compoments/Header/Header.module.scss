@@ -14,9 +14,9 @@ nav{
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    position:relative;
+    position:fixed;
     text-decoration: none;
-    background-color: transparent;
+    background-color: white;
     box-shadow: none;
     z-index: 2000;
     min-height: 50px;
@@ -54,7 +54,7 @@ nav{
             height: 50px;
             vertical-align: middle;
         }
-        .service_list_tabs{
+        .serviceListTabs{
             display: flex;
             flex-direction: row;
             gap: 14px;
@@ -103,7 +103,8 @@ nav{
                         max-height: auto;
                         width: 400px;
                     }
-                    .service_container_three_columns{
+                    .serviceContainerThreeColumns{
+                        display: none;
                         display: flex;
                         flex-direction: row;
                         justify-content: space-between;
@@ -229,7 +230,7 @@ nav{
                                     }
                                 }
                             }
-                            a.pink_btn{
+                            a.pinkBtn{
                                 margin-top: 20px;
                                 width: 100%;
                                 display: block;
@@ -289,7 +290,7 @@ nav{
                             .space{
                                 flex: 1;
                             }
-                            a.blue_btn{
+                            a.blueBtn{
                                 width: 100%;
                                 margin-top: 33px;
                                 display: block;
@@ -317,7 +318,7 @@ nav{
                     right: 0;
                     top: 78px;
                     max-height: calc(95vh - 78px);
-                    .service_container_two_columns{
+                    .serviceContainerTwoColumns{
                         display: flex;
                         justify-content: space-between;
                         gap: 10px;
@@ -345,7 +346,7 @@ nav{
                             }
                         }
                         div.left{
-                            .left_services_lists{
+                            .leftServicesLists{
                                 display: flex;
                                 flex-wrap: wrap;
                                 align-items: flex-start;
@@ -395,7 +396,7 @@ nav{
                                 }
                             }
 
-                            a.pink_btn{
+                            a.pinkBtn{
                                 display: block;
                                 text-transform: uppercase;
                                 font-size: 14px;
@@ -412,7 +413,7 @@ nav{
                         div.right{
                             border-left: 1px solid #d6dee7;
                             padding-left: 30px;
-                            .right_services_lists{
+                            .rightServicesLists{
                                 display: flex;
                                 flex-direction: column;
                                 flex-wrap: wrap;
@@ -440,7 +441,7 @@ nav{
                                     }
                                 }
                             }
-                            a.blue_btn{
+                            a.blueBtn{
                                 display: block;
                                 text-transform: uppercase;
                                 font-size: 14px;
@@ -464,7 +465,7 @@ nav{
                 display: none;
             }
         }
-        .functions_login_tabs{
+        .functionsLoginTabs{
             display: flex;
             flex-direction: row;
             gap: 14px;
@@ -504,7 +505,7 @@ nav{
                 }
             }
         }
-        .menu_bar{
+        .menuBar{
             display: none;
             @media (max-width:$max_size){
                 display: flex;

@@ -29,21 +29,21 @@ import {
   AiOutlineClose
 } from 'react-icons/ai';
 import styles from './Header.module.scss';
-import icon from '../../Asset/icon.png';
+import icon from './icon.png';
 
 export default function Header() {
   return (
     <nav>
       <div className={styles.container}>
         <img src={icon} alt="TeamScrumIcon" />
-        <div className={styles.service_list_tabs}>
+        <div className={styles.serviceListTabs}>
           <div>
             <a href="/#">
               Platform
               <AiOutlineDown />
             </a>
             <div className={styles.subNavThreeColumns}>
-              <div className={styles.service_container_three_columns}>
+              <div className={styles.serviceContainerThreeColumns}>
                 <div className={styles.left}>
                   <h1>overview</h1>
                   <div>
@@ -132,7 +132,7 @@ export default function Header() {
                     </div>
                   </div>
                   <div className={styles.space} />
-                  <a className={styles.pink_btn} href="/#">
+                  <a className={styles.pinkBtn} href="/#">
                     see all features &gt;
                   </a>
                 </div>
@@ -177,7 +177,7 @@ export default function Header() {
                     </div>
                   </div>
                   <div className={styles.space} />
-                  <a className={styles.blue_btn} href="/#">
+                  <a className={styles.blueBtn} href="/#">
                     see all products &gt;
                   </a>
                 </div>
@@ -190,10 +190,10 @@ export default function Header() {
               <AiOutlineDown />
             </a>
             <div className={styles.subNavTwoColumns}>
-              <div className={styles.service_container_two_columns}>
+              <div className={styles.serviceContainerTwoColumns}>
                 <div className={styles.left}>
                   <h1>For</h1>
-                  <div className={styles.left_services_lists}>
+                  <div className={styles.leftServicesLists}>
                     <div>
                       <a href="/#">
                         <AiOutlineDisconnect />
@@ -249,13 +249,13 @@ export default function Header() {
                       </a>
                     </div>
                   </div>
-                  <a className={styles.pink_btn} href="/#">
+                  <a className={styles.pinkBtn} href="/#">
                     see use cases &gt;
                   </a>
                 </div>
                 <div className={styles.right}>
                   <h1>use cases</h1>
-                  <div className={styles.right_services_lists}>
+                  <div className={styles.rightServicesLists}>
                     <a href="/#">
                       Remote work <span>Popular</span>
                     </a>
@@ -265,7 +265,7 @@ export default function Header() {
                     <a href="/#">Resources management</a>
                     <a href="/#">Project collaboration</a>
                   </div>
-                  <a className={styles.blue_btn} href="/#">
+                  <a className={styles.blueBtn} href="/#">
                     see use cases &gt;
                   </a>
                 </div>
@@ -281,10 +281,10 @@ export default function Header() {
               <AiOutlineDown />
             </a>
             <div className={styles.subNavTwoColumns}>
-              <div className={styles.service_container_two_columns}>
+              <div className={styles.serviceContainerTwoColumns}>
                 <div className={styles.left}>
                   <h1>Learning</h1>
-                  <div className={styles.left_services_lists}>
+                  <div className={styles.leftServicesLists}>
                     <div>
                       <a href="/#">
                         <AiFillProfile />
@@ -369,13 +369,13 @@ export default function Header() {
                       </a>
                     </div>
                   </div>
-                  <a className={styles.pink_btn} href="/#">
+                  <a className={styles.pinkBtn} href="/#">
                     see use cases &gt;
                   </a>
                 </div>
                 <div className={styles.right}>
                   <h1>templates</h1>
-                  <div className={styles.right_services_lists}>
+                  <div className={styles.rightServicesLists}>
                     <a href="/#">Client Onboarding</a>
                     <a href="/#">Website Project Plan</a>
                     <a href="/#">Marketing Campaign</a>
@@ -384,7 +384,7 @@ export default function Header() {
                     <a href="/#">Event Planning Template</a>
                   </div>
                   <div className={styles.space} />
-                  <a className={styles.blue_btn} href="/#">
+                  <a className={styles.blueBtn} href="/#">
                     see use cases &gt;
                   </a>
                 </div>
@@ -393,14 +393,14 @@ export default function Header() {
           </div>
         </div>
         <div className={styles.space} />
-        <div className={styles.functions_login_tabs}>
+        <div className={styles.functionsLoginTabs}>
           <a href="/#">Book a Demo</a>
           <a href="/#">Login</a>
           <a className={styles.btn} href="/#">
             Try it to free
           </a>
         </div>
-        <div className={styles.menu_bar}>
+        <div className={styles.menuBar}>
           <AiOutlineMenu />
           <AiOutlineClose />
         </div>

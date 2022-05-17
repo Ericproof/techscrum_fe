@@ -1,0 +1,124 @@
+$max_size: 992px;
+$small_size: 768px;
+
+.teamworkLabel{
+    position: relative;
+    min-height: 400px;
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    padding:5.5rem 30px;
+
+    @media(max-width:$small_size){
+        flex-direction: column;
+    }
+    .labelBackground{
+        background-image: linear-gradient(-90deg,#6126e6,#854cff);
+        bottom: 0;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transform: skewY(4deg);
+        transform-origin: top left;
+        width: 100%;
+        z-index: -10;
+    }
+
+    .content{
+        align-self: center;
+        max-width: 500px;
+
+        @media(min-width:$small_size) and (max-width:$max_size){
+            max-width: 400px;
+        }
+        @media (max-width:$small_size){
+            max-width: 550px;
+            align-self: flex-start;
+        }
+        h1{
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-variant-ligatures: common-ligatures;
+            line-height: 1;
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+
+            @media(max-width:$max_size){
+                font-size: 1.3rem;
+            }
+        }
+        p{
+            line-height: 1.6;
+            color: #d5c8fb;
+            font-size: 1.1rem;
+            font-weight: 300;
+            margin-block-start: 1em;
+            margin-block-end: 1em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+
+            @media(max-width:$max_size){
+                font-size: .9rem;
+            }
+        }
+    }
+    
+    .buttonList{
+        max-width: 25%;
+        margin-left: 8.3333333333%;
+        display:flex;
+        flex-direction: column;
+        justify-content:center;
+
+        @media(max-width:$small_size){
+            //flex-direction: row;
+            align-self: flex-start;
+            display:inline;
+            max-width: 100%;
+            margin-left: 0;
+        }
+
+        a{
+            display: inline-block;
+            font-weight: 400;
+            white-space: nowrap;
+            vertical-align: middle;
+            user-select: none;
+            border: 1px solid transparent;
+            padding: 1.1rem 1.4rem;
+            font-size: 1.1rem;
+            line-height: 1.25;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+                    font-family: FaktSoft,Arial,Helvetica,sans-serif;
+                    font-weight: 500;
+
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+
+            align-self: flex-start;
+        }
+
+        a.white {
+            background-color: #fff;
+            color: #212529;
+            &:hover{
+                background-color: #a7acc5;
+            }
+        }
+        a.black{
+            background-color: #0b0e1f;
+            color: white;
+            &:hover{
+                background-color: #1d1c39;
+                color: #a7acc5;
+            }
+        }
+    }
+}
