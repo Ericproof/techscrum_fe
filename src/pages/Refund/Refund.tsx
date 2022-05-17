@@ -20,21 +20,18 @@ export default function Refund() {
               <a href="https://www.techscrum.com/legal/cookie-policy/">Cookie Policy</a>
             </li>
             <li>
-              <a href="https://www.ttechscrum.com/legal/gdpr/">GDPR compliance</a>
+              <a href="https://www.techscrum.com/legal/gdpr/">GDPR compliance</a>
             </li>
 
             <li>
               <a href="https://www.techscrum.com/legal/privacy-policy/">Privacy Policy</a>
             </li>
-
             <li>
               <a href="https://www.techscrum.com/legal/privacy-statement/">Privacy Statement</a>
             </li>
-
             <li>
               <a href="https://www.techscrum.com/legal/refund-policy/">Refund Policy</a>
             </li>
-
             <li>
               <a href="https://www.techscrum.com/legal/terms-of-service/">Terms of Service</a>
             </li>
