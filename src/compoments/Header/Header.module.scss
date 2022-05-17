@@ -50,8 +50,10 @@ nav{
         }
 
         img{
-            width: 140px;
-            height: 50px;
+            max-width: 140px;
+            max-height: 50px;
+            width: 100%;
+            height: 100%;
             vertical-align: middle;
         }
         .serviceListTabs{
@@ -84,8 +86,10 @@ nav{
                     svg{
                         margin-left:5px;
                         @media (max-width: $max_size) {
-                            width: 15px;
-                            height: 15px;
+                            max-width: 15px;
+                            max-height: 15px;
+                            width: 100%;
+                            height: 100%;
                         }
                     }
                 }
@@ -101,7 +105,8 @@ nav{
                     @media (max-width: $max_size) {
                         top: auto;
                         max-height: auto;
-                        width: 400px;
+                        max-width: 400px;
+                        width: 100%;
                     }
                     .serviceContainerThreeColumns{
                         display: none;
@@ -207,8 +212,10 @@ nav{
                                         flex-direction: row;
                                         text-decoration: none;
                                         svg{
-                                            width: 24px;
-                                            height: 24px;
+                                            max-width: 24px;
+                                            max-height: 24px;
+                                            width: 100%;
+                                            height: 100%;
                                             margin-right: 15px;
                                         }
                                         div{
@@ -265,8 +272,10 @@ nav{
                                     text-decoration: none;
                                     background: transparent;
                                     svg{
-                                        width: 55px;
-                                        height: 55px;
+                                        max-width: 55px;
+                                        max-height: 55px;
+                                        width: 100%;
+                                        height: 100%;
                                         margin-right: 15px;
                                     }
                                     div{
@@ -360,8 +369,10 @@ nav{
                                         display: flex;
                                         flex-direction:row;
                                         svg{
-                                            width: 24px;
-                                            height: 24px;
+                                            max-width: 24px;
+                                            max-height: 24px;
+                                            width: 100%;
+                                            height: 100%;
                                             margin-right: 15px;
                                             padding: 5px;
                                         }
@@ -395,7 +406,6 @@ nav{
                                     }
                                 }
                             }
-
                             a.pinkBtn{
                                 display: block;
                                 text-transform: uppercase;
@@ -515,8 +525,10 @@ nav{
                 right: 20px;
             }
             svg{
-                width: 30px; 
-                height: 30px;
+                max-width: 30px;
+                max-height: 30px;
+                width: 100%;
+                height: 100%;
                 cursor: pointer;
             }
         }
