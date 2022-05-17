@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './TermsOfService.module.scss';
+import styles from './termsOfService.module.scss';
 
 export default function TermsOfService() {
   return (
