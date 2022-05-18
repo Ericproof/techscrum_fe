@@ -12,7 +12,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/Gdpr" element={<Gdpr />} />
+      <Route path="/gdpr" element={<Gdpr />} />
       <Route path="/terms-of-service" element={<TermsOfService />} />
       <Route path="/privacy-statement" element={<PrivacyStatment />} />
       <Route path="/refund-policy" element={<RefundPolicy />} />
