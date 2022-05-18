@@ -1,7 +1,7 @@
 :root {
-  --p-tag-color: #494e6a;
-  --hr-color: #6a84ed;
-  --a-tag-color: #4da2f8;
+  --pTagColor: #494e6a;
+  --hrColor: #6a84ed;
+  --aTagColor: #4da2f8;
 }
 
 * {
@@ -47,7 +47,7 @@ html {
   font-weight: 400;
 }
 .textCenter hr {
-  background-color: var(--hr-color);
+  background-color: var(--hrColor);
   border: 0;
   width: 100px;
   height: 4px;
@@ -91,7 +91,7 @@ html {
   margin-top: 0;
   margin-bottom: 1.5rem;
   font-size: 1.143rem;
-  color: var(--p-tag-color);
+  color: var(--pTagColor);
 }
 .content h3 {
   text-align: left;
@@ -108,7 +108,7 @@ html {
   padding-left: 40px;
 }
 .content a {
-  color: var(--a-tag-color);
+  color: var(--aTagColor);
 }
 @media (max-width: 1440px) {
   .container {
