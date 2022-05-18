@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './Home.module.scss';
-import Footer from '../../compoments/Footer';
 
 export default function Home() {
   return (
