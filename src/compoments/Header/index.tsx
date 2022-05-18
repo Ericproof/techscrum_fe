@@ -28,7 +28,7 @@ import {
   AiOutlineMenu,
   AiOutlineClose
 } from 'react-icons/ai';
-import styles from './header.module.scss';
+import styles from './index.module.scss';
 import icon from './icon.png';
 
 export default function Header() {
