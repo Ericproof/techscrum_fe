@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './Refund.module.scss';
+import styles from './refundPolicy.module.scss';
 
-export default function Refund() {
+export default function RefundPolicy() {
   return (
     <div className={styles.container}>
       <div className={styles.legalTitle}>
