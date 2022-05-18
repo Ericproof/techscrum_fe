@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './privacyStatment.module.scss';
+import styles from './index.module.scss';
 
 export default function PrivacyStatment() {
   return (
