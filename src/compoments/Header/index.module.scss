@@ -1,0 +1,550 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+}
+
+nav{
+    $max_size: 1201px;
+    $small_size: 1000px;
+    font-family: "FaktSoft",Arial,Helvetica,"sans-serif";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position:fixed;
+    text-decoration: none;
+    background-color: white;
+    box-shadow: none;
+    z-index: 2000;
+    min-height: 50px;
+    max-height: 80px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: background-color .05s ease-in-out,box-shadow .15s ease-in-out,max-height .3s ease-in-out;
+    @media (max-width:$max_size){
+        max-width: 400px;
+        width: 100%;
+        min-height: none;
+        max-height: none;
+        margin: 0;
+        height: 100vh;
+        
+        overflow-y: auto;
+    }
+    .container{
+        align-self: auto;
+        display: flex;
+        flex-direction: row;
+        justify-content:space-between;
+        padding: 15px;
+        width: 100%;
+        max-width: 1224px;
+        margin: 0 auto;
+        @media (max-width: $max_size) {
+            flex-direction: column;
+            max-height: auto;
+        }
+
+        img{
+            max-width: 140px;
+            max-height: 50px;
+            width: 100%;
+            height: 100%;
+            vertical-align: middle;
+        }
+        .serviceListTabs{
+            display: flex;
+            flex-direction: row;
+            gap: 14px;
+            margin-left: 42px;
+            @media (max-width: $max_size) {
+                flex-direction: column;
+                margin-left: 0;
+            }
+            div{
+                align-self: center;
+                @media (max-width: $max_size) {
+                    width: 100%;
+                }
+                a{
+                    text-decoration: none;
+                    color: black;
+                    cursor: pointer;
+                    @media (max-width: $max_size) {
+                        border-radius: 0;
+                        border-bottom: 1px solid rgba(0,0,0,.058823529411764705);
+                        width: 100%;
+                        padding: 15px 5px;
+                        display: flex;
+                        justify-content: space-between;
+                        font-size: 15px;
+                    }
+                    svg{
+                        margin-left:5px;
+                        @media (max-width: $max_size) {
+                            width: 15px;
+                            height: 15px;
+                        }
+                    }
+                }
+                .subNavThreeColumns{
+                    background-color: white;
+                    position: fixed;
+                    z-index: 2000;
+                    left: 0;
+                    right: 0;
+                    top: 78px;
+                    max-height: calc(95vh - 78px);
+                    @media (max-width: $max_size) {
+                        position:relative;
+                        top: none;
+                        max-height: none;
+                        width: 100%;
+                    }
+                    .serviceContainerThreeColumns{
+                        display:color;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        gap: 10px;
+                        padding-top: 35px;
+                        padding-bottom: 35px;
+                        max-width: 1224px;
+                        width: 100%;
+                        padding-right: 15px;
+                        padding-left: 15px;
+                        margin-right: auto;
+                        margin-left: auto;
+                        @media (max-width: $max_size) {
+                            flex-direction: column;
+                        }
+                        div{
+                            align-self: auto;
+                            opacity: 1;
+                            transition-delay: .2s;
+                            transform: translateY(0);
+                            transition: opacity .2s,transform .4s;
+                            display: flex;
+                            flex-direction: column;
+                            min-width: 280px;
+                            border-left: 1px solid #d6dee7;
+                            padding-left: 30px;
+                            @media (max-width: $max_size) {
+                                border-left: 0;
+                                padding-left: 0;
+                            }
+                            h1{
+                                font-weight: 400;
+                                font-size: 14px;
+                                color: #727491;
+                                text-transform: uppercase;
+                                margin-bottom: 25px;
+                                padding-left: 10px;
+                                @media (max-width: $max_size) {
+                                    margin-bottom: 5px;
+                                }
+                            }
+                        }
+                        div.left{
+                            border-left: 0;
+                            padding: 0px;
+                            div{
+                                border-left: 0;
+                                padding: 0px;
+                                display: flex;
+                                flex-direction: column;
+                                flex-wrap: wrap;
+                                align-items: flex-start;
+                                div{
+                                    position: relative;
+                                    display: flex;
+                                    width: 100%;
+                                    margin-bottom: 2px;
+                                    padding: 10px;
+                                    a{
+                                        display: flex;
+                                        flex-direction: column;
+                                        cursor: pointer;
+                                        h2{
+                                            margin: 0px;
+                                            color: #1d1c35;
+                                            font-size: 16px;
+                                            font-weight: 600;
+                                        }
+                                        p{
+                                            color: #494e6a;
+                                            font-size: 12px;
+                                            font-weight: 400;
+                                            margin-top: 5px;
+                                            width: 100%;
+                                            max-width: 230px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        div.middle{
+                            div{
+                                border-left: 0;
+                                padding: 0px;
+                                display: flex;
+                                flex-direction: row;
+                                @media (min-width:$small_size) and (max-width:$max_size) {
+                                    flex-direction: column;
+                                }
+                                flex-wrap: wrap;
+                                align-items: flex-start;
+                                div{
+                                    margin-top: 20px;
+                                    width: 48%;
+                                    a{
+                                        background: transparent;
+                                        cursor: pointer;
+                                        color: #373753;
+                                        display: flex;
+                                        flex-direction: row;
+                                        text-decoration: none;
+                                        svg{
+                                            width: 24px;
+                                            height: 24px;
+                                            margin-right: 15px;
+                                        }
+                                        div{
+                                            margin-top: 0;
+                                            h2{
+                                                color: #1d1c35;
+                                                font-size: 16px;
+                                                font-weight: 600;
+                                                margin: 0;
+                                            }
+                                            p{
+                                                margin-top: 12px;
+                                                color: #494e6a;
+                                                font-size: 14px;
+                                                font-weight: 400;
+                                                max-width: 230px;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            a.pinkBtn{
+                                margin-top: 20px;
+                                width: 100%;
+                                display: block;
+                                text-transform: uppercase;
+                                font-size: 14px;
+                                font-weight: 600;
+                                border-radius: 2px;
+                                padding: 10px;
+                                text-align: center;
+                                transition: all .2s ease-in-out;
+                                color: #ff22b1;
+                                background: #fdf3fa;
+                                text-decoration: none;
+                            }
+                        }
+                        div.right{
+                            div{
+                                border-left: 0;
+                                padding: 0px;
+                                display: flex;
+                                flex-direction: column;
+                                flex-wrap: wrap;
+                                align-items: flex-start;
+                                a{
+                                    margin-top: 10px;
+                                    position: relative;
+                                    display: flex;
+                                    flex-direction: row;
+                                    width: 100%;
+                                    margin-bottom: 2px;
+                                    padding: 10px;
+                                    text-decoration: none;
+                                    background: transparent;
+                                    svg{
+                                        width: 55px;
+                                        height: 55px;
+                                        margin-right: 15px;
+                                    }
+                                    div{
+                                        h2{
+                                            color: #1d1c35;
+                                            font-size: 16px;
+                                            font-weight: 600;
+                                            margin: 0;
+                                        }
+                                        p{
+                                            color: #494e6a;
+                                            font-size: 14px;
+                                            font-weight: 400;
+                                            margin-top: 5px;
+                                            width: 100%;
+                                            max-width: 230px;
+                                        }
+                                    }
+                                }
+                            }
+                            .space{
+                                flex: 1;
+                            }
+                            a.blueBtn{
+                                width: 100%;
+                                margin-top: 33px;
+                                display: block;
+                                text-transform: uppercase;
+                                font-size: 14px;
+                                font-weight: 600;
+                                border-radius: 2px;
+                                padding: 10px;
+                                text-align: center;
+                                transition: all .2s ease-in-out;
+                                color: #4461d7;
+                                background: #edf1fe;
+                                align-self: center;
+                                text-decoration: none;
+                            }
+                        }
+                    }
+                }
+                .subNavTwoColumns{
+                    display: none;
+                    background-color: white;
+                    position: fixed;
+                    z-index: 2000;
+                    left: 0;
+                    right: 0;
+                    top: 78px;
+                    max-height: calc(95vh - 78px);
+
+                    @media (max-width: $max_size) {
+                        position:relative;
+                        top: none;
+                        max-height: none;
+                        width: 100%;
+                    }
+                    .serviceContainerTwoColumns{
+                        display: flex;
+                        justify-content: space-between;
+                        gap: 10px;
+                        padding-top: 35px;
+                        padding-bottom: 35px;
+                        max-width: 1224px;
+
+                        width: 100%;
+                        padding-right: 15px;
+                        padding-left: 15px;
+                        margin-right: auto;
+                        margin-left: auto;
+                        @media (max-width: $max_size) {
+                            flex-direction: column;
+                        }
+                        div{
+                            display: flex;
+                            flex-direction: column;
+                            min-width: 280px;
+                            align-self: auto;
+                            h1{
+                                font-weight: 400;
+                                font-size: 14px;
+                                color: #727491;
+                                text-transform: uppercase;
+                                margin-bottom: 25px;
+                                padding-left: 10px;
+                            }
+                        }
+                        div.left{
+                            .leftServicesLists{
+                                display: flex;
+                                flex-wrap: wrap;
+                                align-items: flex-start;
+                                flex-direction: row;
+                                div{
+                                    width: 33.3%;
+                                    a{
+                                        text-decoration: none;
+                                        padding: 17px 10px;
+                                        margin: 0;
+                                        display: flex;
+                                        flex-direction:row;
+                                        svg{
+                                            width: 24px;
+                                            height: 24px;
+                                            margin-right: 15px;
+                                            padding: 5px;
+                                        }
+                                        div{
+                                            h2{
+                                                color: #1d1c35;
+                                                font-size: 16px;
+                                                font-weight: 600;
+                                                margin: 0;
+                                                span{
+                                                    background: #fce9f5;
+                                                    border-radius: 3px;
+                                                    color: #ff22b1;
+                                                    font-size: 10px;
+                                                    font-weight: 400;
+                                                    line-height: 16px;
+                                                    text-align: center;
+                                                    padding: 4px 4px;
+                                                    margin-left: 5px;
+                                                }
+                                            }
+                                            p{
+                                                margin-top: 12px;
+                                                color: #494e6a;
+                                                font-size: 14px;
+                                                font-weight: 400;
+                                                width: 100%;
+                                                max-width: 230px;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            a.pinkBtn{
+                                display: block;
+                                text-transform: uppercase;
+                                font-size: 14px;
+                                font-weight: 600;
+                                border-radius: 2px;
+                                padding: 10px;
+                                text-align: center;
+                                transition: all .2s ease-in-out;
+                                color: #ff22b1;
+                                background: #fdf3fa;
+                                text-decoration: none;
+                            }
+                        }
+                        div.right{
+                            border-left: 1px solid #d6dee7;
+                            padding-left: 30px;
+                            @media (max-width: $max_size) {
+                                border-left: 0;
+                                padding-left: 0;
+                            }
+                            .rightServicesLists{
+                                display: flex;
+                                flex-direction: column;
+                                flex-wrap: wrap;
+                                align-items: flex-start;
+                                a{
+                                    position: relative;
+                                    display: flex;
+                                    width: 100%;
+                                    padding: 10px;
+                                    padding-left: 18px;
+                                    text-decoration: none;
+                                    color: #1d1c35;
+                                    font-size: 14px;
+                                    font-weight: 600;
+                                    span{
+                                        background: #fce9f5;
+                                        border-radius: 3px;
+                                        color: #ff22b1;
+                                        font-size: 10px;
+                                        font-weight: 400;
+                                        line-height: 16px;
+                                        text-align: center;
+                                        padding: 4px 4px;
+                                        margin-left: 5px;
+                                    }
+                                }
+                            }
+                            a.blueBtn{
+                                display: block;
+                                text-transform: uppercase;
+                                font-size: 14px;
+                                font-weight: 600;
+                                border-radius: 2px;
+                                padding: 10px;
+                                text-align: center;
+                                transition: all .2s ease-in-out;
+                                color: #4461d7;
+                                background: #edf1fe;
+                                text-decoration: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .space{
+            flex: 1;
+            @media (max-width: $max_size) {
+                display: none;
+            }
+        }
+        .functionsLoginTabs{
+            display: flex;
+            flex-direction: row;
+            gap: 14px;
+            @media (max-width: $max_size) {
+                flex-direction: column;
+                margin-top: 14px;
+            }
+            a{
+                font-size: 16px;
+                line-height: 150%;
+                font-weight: 400;
+                display: inline-flex;
+                cursor: pointer;
+                color: #1d1c39;
+                padding: 10px;
+                border-radius: 5px;
+                transition: background-color .2s ease-in-out;
+                text-decoration: none;
+
+                @media (max-width: $max_size) {
+                    border-bottom: 1px solid rgba(0,0,0,.058823529411764705);
+                    padding: 15px 5px;
+                    font-size: 15px;
+                }
+            }
+            a.btn{
+                border-radius: 32px;
+                background: #6a84ed;
+                font-weight: 600;
+                font-size: 16px;
+                line-height: 150%;
+                letter-spacing: .75px;
+                padding: 16px 24px;
+                color: #fff;
+                @media (max-width: $max_size) {
+                    display: flex;
+                    justify-content:center;
+                }
+            }
+        }
+        .menuBar{
+            display: none;
+            @media (max-width:$max_size){
+                display: flex;
+                float: right;
+                position: absolute;
+                top: 20px;
+                right: 20px;
+            }
+            svg{
+                max-width: 30px;
+                max-height: 30px;
+                width: 100%;
+                height: 100%;
+                cursor: pointer;
+            }
+        }
+    }
+    .burBackground{
+        display:none;
+        z-index: 50;
+        background-color: transparent;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        filter:blur(1rem);
+    }
+}
