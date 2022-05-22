@@ -79,7 +79,7 @@
           padding: 4px 0px;
           max-height: 317.5px;
           position: absolute;
-          top: 84px;
+          top: 81px;
           button {
             background: rgb(255, 255, 255);
             color: rgb(23, 43, 77);
@@ -153,6 +153,14 @@
             label {
               font-size: 14px;
               color: #172b4d;
+              display: flex;
+              flex-direction: column;
+            }
+            span {
+              font-size: 0.86em;
+              color: #6b778c;
+              font-weight: 600;
+              display: inline-block;
             }
             input {
               background-color: #fafbfc;
@@ -180,6 +188,14 @@
             label {
               font-size: 14px;
               color: #172b4d;
+              display: flex;
+              flex-direction: column;
+            }
+            span {
+              font-size: 0.86em;
+              color: #6b778c;
+              font-weight: 600;
+              display: inline-block;
             }
             input {
               background-color: #fafbfc;
@@ -201,40 +217,6 @@
               }
             }
           }
-          .leadDropdownMenu {
-            display: flex;
-            flex-direction: column;
-            margin-top: 20px;
-            margin-bottom: 4px;
-            label {
-              display: flex;
-              flex-direction: column;
-              font-size: 14px;
-              color: #172b4d;
-            }
-            p {
-              font-size: 0.85em;
-              line-height: 1.33333;
-              display: flex;
-              margin-top: 6px;
-              font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-                'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-              font-weight: normal;
-              color: #6b778c;
-              padding: 0;
-            }
-          }
-          .assigneeDropdownMenu {
-            display: flex;
-            flex-direction: column;
-            label {
-              display: flex;
-              flex-direction: column;
-              font-size: 14px;
-              color: #172b4d;
-            }
-          }
-
           button {
             margin-top: 16px;
             border-width: 0px;
