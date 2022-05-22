@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { grey } from '@mui/material/colors';
@@ -52,30 +51,19 @@ export default function Setting() {
             </div>
             <form>
               <div className={styles.nameInputArea}>
-                <label htmlFor="Name">Name</label>
-                <input type="text" id="Name" name="Name" />
+                <label htmlFor="Name">
+                  <span>Name</span>
+                  <input type="text" id="Name" name="Name" />
+                </label>
               </div>
               <div className={styles.keyInputArea}>
-                <label htmlFor="Key">Key</label>
-                <input type="text" id="Key" name="Key" />
-              </div>
-              <div className={styles.leadDropdownMenu}>
-                <label htmlFor="projectLead">
-                  Project lead
-                  <ProjectLead />
-                </label>
-                <p>Make sure your project lead has access to issues in the project.</p>
-              </div>
-              <div className={styles.assigneeDropdownMenu}>
-                <label htmlFor="defaultAssignee">
-                  Default assignee
-                  {/* <select id="defaultAssignee" name="defaultAssignee">
-                    <option value="Project lead">Project lead</option>
-                    <option value="Unassigned">Unassigned</option>
-                  </select> */}
-                  <Assignee />
+                <label htmlFor="key">
+                  <span>Key</span>
+                  <input type="text" id="key" name="Key" />
                 </label>
               </div>
+              <ProjectLead />
+              <Assignee />
               <button className={styles.saveBtn} type="submit">
                 Save
               </button>
