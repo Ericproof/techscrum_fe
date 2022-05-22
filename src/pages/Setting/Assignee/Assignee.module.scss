@@ -1,44 +1,102 @@
-.assigneeContainer {
-  position: relative;
-  box-sizing: border-box;
-  margin-top: 6px;
-  .assigneeDropdownOpen {
+.assigneeDropdownMenu {
+  display: flex;
+  flex-direction: column;
+  label {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    cursor: pointer;
-    .assigneeMenu {
-      cursor: pointer;
-      background-color: rgb(255, 255, 255);
+    font-size: 14px;
+    color: #172b4d;
+  }
+  span {
+    font-size: 0.86em;
+    color: #6b778c;
+    font-weight: 600;
+    display: inline-block;
+  }
+  .assigneeContainer {
+    position: relative;
+    box-sizing: border-box;
+    margin-top: 6px;
+    .assigneeDropdownOpen {
+      display: flex;
+      flex-direction: column;
       width: 100%;
-      z-index: 999;
-      ul {
-        list-style: none;
-        display: flex;
-        flex-direction: column;
-        padding-left: 0;
-        border: rgb(202, 200, 200);
-        border-style: solid;
-        border-radius: 3px;
-        margin: 6px 0;
-        li {
+      cursor: pointer;
+      .assigneeMenu {
+        cursor: pointer;
+        background-color: rgb(255, 255, 255);
+        width: 100%;
+        z-index: 999;
+        ul {
+          list-style: none;
           display: flex;
+          flex-direction: column;
+          padding-left: 0;
+          border: rgb(202, 200, 200);
+          border-style: solid;
+          border-radius: 3px;
+          margin: 6px 0;
+          li {
+            display: flex;
+            align-items: center;
+            height: 39px;
+            padding-left: 11px;
+            &:hover {
+              border-style: solid;
+              border-left-color: #4c9aff;
+              border-right: none;
+              border-top: none;
+              border-bottom: none;
+              background-color: rgb(235, 236, 240);
+            }
+          }
+        }
+      }
+      .assigneeInputField {
+        align-items: center;
+        border-radius: 3px;
+        border-style: solid;
+        border-width: 2px;
+        box-shadow: none;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        min-height: 36px;
+        position: relative;
+        padding: 0px;
+        outline: 0px !important;
+        background-color: rgb(255, 255, 255);
+        border-color: #4c9aff;
+        height: 36px;
+        padding-right: 4px;
+        input {
           align-items: center;
-          height: 39px;
-          padding-left: 11px;
-          &:hover {
-            border-style: solid;
-            border-left-color: #4c9aff;
-            border-right: none;
-            border-top: none;
-            border-bottom: none;
-            background-color: rgb(235, 236, 240);
+          display: flex;
+          flex: 1 1 0%;
+          flex-wrap: wrap;
+          position: relative;
+          overflow: hidden;
+          box-sizing: border-box;
+          padding: 2px 6px;
+          outline: none;
+          border: none;
+          font-size: 14px;
+          font-family: Arial;
+          font-weight: 400;
+          font-style: normal;
+          letter-spacing: normal;
+          text-transform: none;
+          color: #172b4d;
+          &::placeholder {
+            color: #172b4d;
           }
         }
       }
     }
-    .assigneeInputField {
+    .assigneeDropdownClose {
       align-items: center;
+      background-color: #f4f5f7;
+      border-color: #f4f5f7;
       border-radius: 3px;
       border-style: solid;
       border-width: 2px;
@@ -46,75 +104,33 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      min-height: 36px;
+      min-height: 40px;
       position: relative;
+      transition: background-color 200ms ease-in-out 0s, border-color 200ms ease-in-out 0s;
+      box-sizing: border-box;
       padding: 0px;
       outline: 0px !important;
-      background-color: rgb(255, 255, 255);
-      border-color: #4c9aff;
-      height: 36px;
-      padding-right: 4px;
-      input {
-        align-items: center;
-        display: flex;
-        flex: 1 1 0%;
-        flex-wrap: wrap;
-        position: relative;
-        overflow: hidden;
-        box-sizing: border-box;
-        padding: 2px 6px;
-        outline: none;
-        border: none;
-        font-size: 14px;
-        font-family: Arial;
-        font-weight: 400;
-        font-style: normal;
-        letter-spacing: normal;
-        text-transform: none;
-        color: #172b4d;
-        &::placeholder {
-          color: #172b4d;
-        }
+      &:hover {
+        background-color: #ebecf0;
+        border-color: #ebecf0;
       }
-    }
-  }
-  .assigneeDropdownClose {
-    align-items: center;
-    background-color: #f4f5f7;
-    border-color: #f4f5f7;
-    border-radius: 3px;
-    border-style: solid;
-    border-width: 2px;
-    box-shadow: none;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    min-height: 40px;
-    position: relative;
-    transition: background-color 200ms ease-in-out 0s, border-color 200ms ease-in-out 0s;
-    box-sizing: border-box;
-    padding: 0px;
-    outline: 0px !important;
-    &:hover {
-      background-color: #ebecf0;
-      border-color: #ebecf0;
-    }
-    .assigneeInputClose {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-      padding-right: 4px;
-      cursor: pointer;
-      span {
-        align-items: center;
+      .assigneeInputClose {
         display: flex;
-        flex: 1 1 0%;
-        flex-wrap: wrap;
-        position: relative;
-        overflow: hidden;
-        box-sizing: border-box;
-        padding: 2px 6px;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding-right: 4px;
+        cursor: pointer;
+        span {
+          align-items: center;
+          display: flex;
+          flex: 1 1 0%;
+          flex-wrap: wrap;
+          position: relative;
+          overflow: hidden;
+          box-sizing: border-box;
+          padding: 2px 6px;
+        }
       }
     }
   }
