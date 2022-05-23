@@ -1,7 +1,12 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home/Home';
+import Gdpr from './pages/GDPR/GDPR';
 import CookiePolicy from './pages/CookiePolicy/CookiePolicy';
+import TermsOfService from './pages/TermsOfService';
+import RefundPolicy from './pages/RefundPolicy/refundPolicy';
+import PrivacyPolicy from './pages/PrivacyPolicy/privacyPolicy';
+import PrivacyStatement from './pages/PrivacyStatment';
 import './App.css';
 
 function App() {
@@ -9,8 +14,12 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/cookie-policy" element={<CookiePolicy />} />
+      <Route path="/gdpr" element={<Gdpr />} />
+      <Route path="/terms-of-service" element={<TermsOfService />} />
+      <Route path="/privacy-statement" element={<PrivacyStatement />} />
+      <Route path="/refund-policy" element={<RefundPolicy />} />
+      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
     </Routes>
   );
 }
-
 export default App;
