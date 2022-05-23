@@ -10,9 +10,14 @@ $col: 8.3333%;
 body {
   background: #f5f7fa;
 }
-
-.main {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.main {
   background: #f5f7fa;
   font-family: 'FaktSoft', Arial, Helvetica, 'sans-serif';
   font-size: 14px;
@@ -84,11 +89,13 @@ body {
 }
 
 .sidebar {
-  @media screen and (max-width: 992px) {
-    width: 100%;
+  @media screen and (min-width: 768px) {
+    flex: 0 0 100%;
+    max-width: 100%;
   }
   @media screen and (min-width: 992px) {
-    width: 25%;
+    flex: 0 0 33.3333333333%;
+    max-width: 33.3333333333%;
   }
   padding-left: 12px;
   padding-right: 12px;
@@ -127,10 +134,12 @@ body {
   padding-left: 12px;
   padding-right: 12px;
   @media screen and (max-width: 992px) {
-    width: 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
   }
   @media screen and (min-width: 992px) {
-    width: 75%;
+    flex: 0 0 66.6666666667%;
+    max-width: 66.6666666667%;
   }
   p {
     font-family: FaktSoft, Arial, Helvetica, sans-serif;
