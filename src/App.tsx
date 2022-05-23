@@ -6,7 +6,7 @@ import CookiePolicy from './pages/CookiePolicy/CookiePolicy';
 import TermsOfService from './pages/TermsOfService';
 import RefundPolicy from './pages/RefundPolicy/refundPolicy';
 import PrivacyPolicy from './pages/PrivacyPolicy/privacyPolicy';
-import PrivacyStatement from './pages/PrivacyStatment';
+import PrivacyStatement from './pages/PrivacyStatement/privacyStatement';
 import './App.css';
 
 function App() {
