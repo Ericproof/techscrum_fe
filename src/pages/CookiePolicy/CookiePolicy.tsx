@@ -5,15 +5,15 @@ export default function CookiePolicy() {
   return (
     <div className={styles.main}>
       <div className={styles.container}>
-        <div className={styles.text_center}>
-          <div>LEGAL</div>
+        <div className={styles.textCenter}>
+          <p>LEGAL</p>
           <h1>Cookie Policy</h1>
           <hr />
         </div>
         <div className={styles.row}>
           <div className={styles.sidebar}>
-            <ul className={styles.sticky_sidebar}>
-              <li style={{ border: '0' }}>
+            <ul className={styles.stickySidebar}>
+              <li id={styles.RemoveBorder}>
                 <a href="https://www.TechScrum.com/legal/" style={{ padding: '0 0 7px 0' }}>
                   Our Legal Documents
                 </a>
@@ -38,7 +38,7 @@ export default function CookiePolicy() {
               </li>
             </ul>
           </div>
-          <div className={styles.legal_text}>
+          <div className={styles.legalText}>
             <p>
               TechScrum.com makes use of cookies and other tracking technologies on our company
               website (ie: TechScrum.com), within our Software as a Service (SaaS) product offerings
