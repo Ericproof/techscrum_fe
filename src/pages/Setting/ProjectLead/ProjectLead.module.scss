@@ -93,6 +93,7 @@
           border: rgb(202, 200, 200);
           border-style: solid;
           border-radius: 3px;
+          border-width: 1px;
           li {
             display: flex;
             align-items: center;
@@ -120,6 +121,9 @@
               letter-spacing: normal;
               text-transform: none;
               flex: 1 1 100%;
+              font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+                'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+              color: rgb(23, 43, 77);
             }
           }
         }
@@ -169,6 +173,11 @@
           margin-left: 14px;
           display: flex;
           width: 100%;
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+            'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+          font-size: 14px;
+          color: rgb(23, 43, 77);
+          font-weight: 400;
         }
       }
     }
