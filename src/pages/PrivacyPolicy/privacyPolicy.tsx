@@ -29,27 +29,29 @@ export default function PrivacyPolicy() {
             business service and products that you receive from us. The information may include the
             following:
           </p>
-          <ul>
-            <li>Name and job title.</li>
-            <li>Business address</li>
-            <li>Business telephone number</li>
-            <li>Email address</li>
-            <li>IP-address</li>
-            <li>Location data</li>
+          <ul className={styles.ul}>
+            <li className={styles.li}>Name and job title.</li>
+            <li className={styles.li}>Business address</li>
+            <li className={styles.li}>Business telephone number</li>
+            <li className={styles.li}>Email address</li>
+            <li className={styles.li}>IP-address</li>
+            <li className={styles.li}>Location data</li>
           </ul>
           <h4>What we do with the information we gather</h4>
           <p>
             We require this information to understand your needs and provide you with a better
             service, and in particular for the following reasons:
           </p>
-          <ul>
-            <li>Internal record keeping.</li>
-            <li>We may use the information to improve our products and services.</li>
-            <li>
+          <ul className={styles.ul}>
+            <li className={styles.li}>Internal record keeping.</li>
+            <li className={styles.li}>
+              We may use the information to improve our products and services.
+            </li>
+            <li className={styles.li}>
               We will communicate with individuals using our products based on their usage type and
               their communication preferences, as described here:
-              <ul>
-                <li className={styles.br}>
+              <ul className={styles.ul}>
+                <li className={`${styles.br} ${styles.li}`}>
                   Free Trial Users: We will support your free trial experience by sending you
                   product and service-related announcements via email regarding technical or
                   administrative issues considered valuable or essential to your continued ability
@@ -57,7 +59,7 @@ export default function PrivacyPolicy() {
                   do not wish to receive these please unsubscribe by emailing
                   unsubscribeTechScrum.com
                 </li>
-                <li>
+                <li className={styles.li}>
                   Paid Users (including customers on a Free plan): From time to time, we may send
                   you technical notices, updates, security alerts, and support and administrative
                   messages and subscription alerts. These emails are not promotional in nature. If
@@ -71,7 +73,7 @@ export default function PrivacyPolicy() {
                 </li>
               </ul>
             </li>
-            <li>
+            <li className={styles.li}>
               From time to time, we may also use your information to contact you for market research
               purposes. We may contact you by email, phone, fax or mail.
             </li>
@@ -81,8 +83,8 @@ export default function PrivacyPolicy() {
             Privacy Policy, if you provide the App access to the following types of your Google
             data, the App’s use of that data will be subject to these additional restrictions:
           </p>
-          <ul>
-            <li>
+          <ul className={styles.ul}>
+            <li className={styles.li}>
               The App will only use access to read, write, modify or control Gmail message bodies
               (including attachments), metadata, headers, and settings to provide a web email client
               that allows users to compose, send, read,and process emails and will not transfer this
@@ -90,17 +92,22 @@ export default function PrivacyPolicy() {
               features, comply with applicable law, or as part of a merger, acquisition, or sale of
               assets.
             </li>
-            <li>The App will not use this Gmail data for serving advertisements.</li>
-            <li>
+            <li className={styles.li}>
+              The App will not use this Gmail data for serving advertisements.
+            </li>
+            <li className={styles.li}>
               The App will not allow humans to read this data unless we have your affirmative
               agreement for specific messages, doing so is necessary for security purposes such as
               investigating abuse, to comply with applicable law, or for the App’s internal
               operations and even then only when the data have been aggregated and anonymized.
             </li>
-            <li>
+            <li className={styles.li}>
               The App use and transfer to any other app of information received from Google APIs
-              will adhere to{' '}
-              <a href="https://developers.google.com/terms/api-services-user-data-policy#additional_requirements_for_specific_api_scopes">
+              will adhere to
+              <a
+                className={styles.a}
+                href="https://developers.google.com/terms/api-services-user-data-policy#additional_requirements_for_specific_api_scopes"
+              >
                 Google API Services User Data Policy
               </a>
               , including the Limited Use requirements.
@@ -120,7 +127,10 @@ export default function PrivacyPolicy() {
           </p>
           <p>
             For more information on our use of cookies, please read our{' '}
-            <a href="https://www.TechScrum.com/legal/cookie-policy/">Cookie Policy</a> .
+            <a className={styles.a} href="https://www.TechScrum.com/legal/cookie-policy/">
+              Cookie Policy
+            </a>
+            .
           </p>
           <h4>Links to other websites</h4>
           <p>
@@ -136,13 +146,13 @@ export default function PrivacyPolicy() {
             You may choose to restrict the collection or use of your personal information in the
             following ways:
           </p>
-          <ul>
-            <li>
+          <ul className={styles.ul}>
+            <li className={styles.li}>
               Whenever you are asked to fill in a form on the website, look for the box that you can
               click to indicate that you do not want the information to be used by anybody for
               direct marketing purposes.
             </li>
-            <li>
+            <li className={styles.li}>
               If you have previously agreed to us using your personal information for direct
               marketing purposes, you may change your mind at any time by writing to or emailing us
               at privacyTechScrum.com.
