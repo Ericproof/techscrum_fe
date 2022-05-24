@@ -21,7 +21,7 @@ function ProjectLead() {
             <div className={styles.leadDropdownOpen}>
               <div className={styles.leadInputField}>
                 <img className={styles.userAvatar} src={userAvatar} alt="avatar" />
-                <input type="Text" />
+                <input dir="auto" type="Text" />
                 <i
                   role="button"
                   aria-label="openDropdown"
