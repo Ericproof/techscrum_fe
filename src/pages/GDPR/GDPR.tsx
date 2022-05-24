@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './GDPR.module.scss';
+import styles from './Gdpr.module.scss';
 
 export default function Gdpr() {
   return (
@@ -9,7 +9,7 @@ export default function Gdpr() {
         <h1>GDPR compliance</h1>
         <hr />
       </div>
-      <div className={styles.content}>
+      <div className={styles.gdprContent}>
         <div className={styles.gdprSidebar}>
           <ul>
             <li className={styles.legalDoc}>

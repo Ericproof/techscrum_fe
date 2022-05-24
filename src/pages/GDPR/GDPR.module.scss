@@ -1,7 +1,7 @@
 * {
-  box-sizing: border-box;
   margin: 80px;
-  background-color: #f5f7fa;
+  background: #f5f7fa;
+  box-sizing: border-box;
 }
 
 .container {
@@ -35,12 +35,12 @@
   }
 }
 
-.content {
+.gdprContent {
   display: flex;
   flex-direction: row;
 }
 
-.title {
+.gdprTitle {
   width: 100%;
   text-align: center !important;
   font-weight: 600;
@@ -57,7 +57,7 @@
   margin: 0px 0px 21px;
 }
 
-h1 {
+.gdprTitle h1 {
   font-size: 42px;
   margin: 0px;
   font-weight: 400;
