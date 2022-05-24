@@ -4,34 +4,34 @@ import styles from './GDPR.module.scss';
 export default function Gdpr() {
   return (
     <div className={styles.container}>
-      <div className={styles.title}>
+      <div className={styles.gdprTitle}>
         <h4>LEGAL</h4>
         <h1>GDPR compliance</h1>
         <hr />
       </div>
       <div className={styles.content}>
-        <div className={styles.sidebar}>
+        <div className={styles.gdprSidebar}>
           <ul>
             <li className={styles.legalDoc}>
-              <a href="https://www.teamwork.com/legal/">Our Legal Documents</a>
+              <a href="https://www.techscrum.com/legal/">Our Legal Documents</a>
             </li>
             <li>
-              <a href="https://www.teamwork.com/legal/cookie-policy/">Cookie Policy</a>
+              <a href="https://www.techscrum.com/legal/cookie-policy/">Cookie Policy</a>
             </li>
             <li>
-              <a href="https://www.teamwork.com/legal/gdpr/">GDPR compliance</a>
+              <a href="https://www.techscrum.com/legal/gdpr/">GDPR compliance</a>
             </li>
             <li>
-              <a href="https://www.teamwork.com/legal/privacy-policy/">Privacy Policy</a>
+              <a href="https://www.techscrum.com/legal/privacy-policy/">Privacy Policy</a>
             </li>
             <li>
-              <a href="https://www.teamwork.com/legal/privacy-statement/">Privacy Statement</a>
+              <a href="https://www.techscrum.com/legal/privacy-statement/">Privacy Statement</a>
             </li>
             <li>
-              <a href="https://www.teamwork.com/legal/refund-policy/">Refund Policy</a>
+              <a href="https://www.techscrum.com/legal/refund-policy/">Refund Policy</a>
             </li>
             <li>
-              <a href="https://www.teamwork.com/legal/terms-of-service/">Terms of Service</a>
+              <a href="https://www.techscrum.com/legal/terms-of-service/">Terms of Service</a>
             </li>
           </ul>
         </div>
