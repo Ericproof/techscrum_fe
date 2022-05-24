@@ -15,7 +15,7 @@ function Assignee() {
   return (
     <div className={styles.assigneeDropdownMenu}>
       <label htmlFor="defaultAssignee">
-        <span> Default assignee</span>
+        <span className={styles.assigneeTitle}> Default assignee</span>
         <div className={styles.assigneeContainer}>
           {toggle ? (
             <div className={styles.assigneeDropdownOpen}>
