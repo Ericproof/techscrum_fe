@@ -5,7 +5,7 @@ export default function RefundPolicy() {
   return (
     <div className={styles.container}>
       <div className={styles.legalTitle}>
-        <h2>legal</h2>
+        <h1 className={styles.containerLegal}>legal</h1>
 
         <h1>Refund Policy</h1>
         <hr />
@@ -50,7 +50,7 @@ export default function RefundPolicy() {
 
           <p>
             When your 30-day free trial period expires, you will be asked to create a paid
-            subscription on the Subscription page of your Teamwork installation to continue using
+            subscription on the Subscription page of your TechScrum installation to continue using
             the paid service You will be charged monthly approximately 30-days from the date you
             make the first payment
           </p>
