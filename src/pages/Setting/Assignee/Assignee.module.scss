@@ -7,11 +7,16 @@
     font-size: 14px;
     color: #172b4d;
   }
-  span {
+  .assigneeTitle {
     font-size: 0.86em;
-    color: #6b778c;
+    line-height: 1.33333;
+    color: rgb(107, 119, 140);
     font-weight: 600;
     display: inline-block;
+    margin-top: 0px;
+    margin-bottom: 4px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, 'Fira Sans',
+      'Droid Sans', 'Helvetica Neue', sans-serif;
   }
   .assigneeContainer {
     position: relative;
@@ -36,6 +41,7 @@
           border-style: solid;
           border-radius: 3px;
           margin: 6px 0;
+          border-width: 1px;
           li {
             display: flex;
             align-items: center;
@@ -130,6 +136,11 @@
           overflow: hidden;
           box-sizing: border-box;
           padding: 2px 6px;
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+            'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+          font-size: 14px;
+          color: rgb(23, 43, 77);
+          font-weight: 400;
         }
       }
     }
