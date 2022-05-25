@@ -1,4 +1,3 @@
-
 .container {
   font-family: FaktSoft, Arial, Helvetica, sans-serif;
   padding-top: 147px;
@@ -6,12 +5,16 @@
   padding-left: 28px;
   margin: 0 98px 98px;
   border: o;
-  @media (max-width: 1380px) {
+  @media (max-width: 992px) {
     .refundContent {
       display: flex;
       flex-direction: column;
     }
   }
+  @media (max-width: 1280px) {
+    .refundText {
+      width:688px;
+  }}
   @media screen and (min-width: 768px) {
     max-width: 30%;
   }
@@ -38,16 +41,15 @@
   font-weight: 400;
   font-size: 42px;
   color: #212529;
-  padding-bottom: 1.5rem;
+  padding-bottom: 1rem;
 }
 .containerLegal {
   color: #a7acc5;
   font-size: 16px;
   margin: 0 0 21px;
   font-weight: 600;
-  text-align: center !important;
   text-transform: uppercase !important;
-  padding-bottom: 1.5rem;
+  padding-bottom: 1rem;
 }
 hr {
   background-color: #6a84ed;
@@ -69,17 +71,20 @@ hr {
 }
 .sideLi {
   color: #494e6a;
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 23.4px;
   border-left: 2px solid #e7ebf1;
   list-style-type: none;
+  padding-left: 14px;
+  padding-right: 14px;
+  padding-top: 7px;
+  padding-bottom: 7px;
   margin: 0;  
 }
 .sideLi a {
-  line-height: 1.3;
+  display: block;
   text-decoration: none;
-  font-weight: 600;
-  font-size: 1rem;
-  padding: 0;
   margin: 0;
   color: #373753;
 }
@@ -94,10 +99,15 @@ hr {
   text-align: left;
   box-sizing: border-box;
   color: #494e6a;
-  font-size: 16px;
+  font-size: 1.143rem;
   font-weight: 400;
-  line-height: 1.6;
-  text-overflow: ellipsis !important;
-  width:894px;
+  line-height: 22.4px;
+  text-size-adjust: 100%;
+  width:893px;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+.refundText p {
+  margin-bottom: 1.5rem;
 }
 
