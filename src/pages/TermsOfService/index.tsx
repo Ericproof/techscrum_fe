@@ -14,9 +14,9 @@ export default function TermsOfService() {
         <h2>Techscrum.com Terms Of Service</h2>
         <p>
           These Terms of Service govern your use of the Techscrum.com platform and all services
-          connected to the Techscrum.com platform, including, but not limited to the Techscrum,Desk,
-          Chat, Spaces, CRM software products, websites, related mobile or desktop application and
-          all integrations. (“Techscrum.com services”), provided by Techscrum.com Ltd.
+          connected to the Techscrum.com platform, including, but not limited to the Techscrum,
+          Desk, Chat, Spaces, CRM software products, websites, related mobile or desktop application
+          and all integrations. (“Techscrum.com services”), provided by Techscrum.com Ltd.
         </p>
         <h2>Acceptance Of Terms</h2>
         <p>
