@@ -3,7 +3,7 @@ import styles from './GDPR.module.scss';
 
 export default function Gdpr() {
   return (
-    <div className={styles.container}>
+    <div className={styles.gdprContainer}>
       <div className={styles.gdprTitle}>
         <h4>LEGAL</h4>
         <h1>GDPR compliance</h1>
