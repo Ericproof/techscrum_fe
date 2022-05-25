@@ -3,53 +3,55 @@ import styles from './privacyPolicy.module.scss';
 
 export default function PrivacyPolicy() {
   return (
-    <div className={styles.main}>
-      <div className={styles.content}>
-        <h3 className={styles.header1}>LEGAL</h3>
-        <h1 className={styles.header2}>Privacy policy</h1>
-        <hr className={styles.hr} />
-        <div className={styles.smallScreen}> </div>
-        <section className={styles.section}>
-          <h4>Business Privacy Policy</h4>
-          <p>
+    <div className={styles.privacyPolicyMain}>
+      <div className={styles.privacyPolicyContent}>
+        <h3 className={styles.privacyPolicyHeader1}>LEGAL</h3>
+        <h1 className={styles.privacyPolicyHeader2}>Privacy policy</h1>
+        <hr className={styles.privacyPolicyHr} />
+        <div className={styles.privacyPolicySmallScreen}> </div>
+        <section className={styles.privacyPolicySection}>
+          <h4 className={styles.privacyPolicyH4}>Business Privacy Policy</h4>
+          <p className={styles.privacyPolicyP}>
             This privacy policy sets out how TechScrum.com and any related products, services, apps
             or integrations uses and protects any information that you provide when you use our
             products TechScrum, Desk, Spaces, CRM, any of our mobile or desktop app offerings and
             our integrations with third party apps and services.
           </p>
-          <p>
+          <p className={styles.privacyPolicyP}>
             TechScrum.com is committed to ensuring that your privacy is protected. Should we ask you
             to provide certain information by which you can be identified when using our products,
             then you can be assured that it will only be used in accordance with this privacy
             statement. This policy is effective from 25th May 2018.
           </p>
-          <h4>What we collect</h4>
-          <p>
+          <h4 className={styles.privacyPolicyH4}>What we collect</h4>
+          <p className={styles.privacyPolicyP}>
             We may collect certain information that we need in order to provide you with the
             business service and products that you receive from us. The information may include the
             following:
           </p>
-          <ul>
-            <li>Name and job title.</li>
-            <li>Business address</li>
-            <li>Business telephone number</li>
-            <li>Email address</li>
-            <li>IP-address</li>
-            <li>Location data</li>
+          <ul className={styles.privacyPolicyUl}>
+            <li className={styles.privacyPolicyLi}>Name and job title.</li>
+            <li className={styles.privacyPolicyLi}>Business address</li>
+            <li className={styles.privacyPolicyLi}>Business telephone number</li>
+            <li className={styles.privacyPolicyLi}>Email address</li>
+            <li className={styles.privacyPolicyLi}>IP-address</li>
+            <li className={styles.privacyPolicyLi}>Location data</li>
           </ul>
-          <h4>What we do with the information we gather</h4>
-          <p>
+          <h4 className={styles.privacyPolicyH4}>What we do with the information we gather</h4>
+          <p className={styles.privacyPolicyP}>
             We require this information to understand your needs and provide you with a better
             service, and in particular for the following reasons:
           </p>
-          <ul>
-            <li>Internal record keeping.</li>
-            <li>We may use the information to improve our products and services.</li>
-            <li>
+          <ul className={styles.privacyPolicyUl}>
+            <li className={styles.privacyPolicyLi}>Internal record keeping.</li>
+            <li className={styles.privacyPolicyLi}>
+              We may use the information to improve our products and services.
+            </li>
+            <li className={styles.privacyPolicyLi}>
               We will communicate with individuals using our products based on their usage type and
               their communication preferences, as described here:
-              <ul>
-                <li className={styles.br}>
+              <ul className={styles.privacyPolicyUl}>
+                <li className={`${styles.privacyPolicyBr} ${styles.privacyPolicyLi}`}>
                   Free Trial Users: We will support your free trial experience by sending you
                   product and service-related announcements via email regarding technical or
                   administrative issues considered valuable or essential to your continued ability
@@ -57,7 +59,7 @@ export default function PrivacyPolicy() {
                   do not wish to receive these please unsubscribe by emailing
                   unsubscribeTechScrum.com
                 </li>
-                <li>
+                <li className={styles.privacyPolicyLi}>
                   Paid Users (including customers on a Free plan): From time to time, we may send
                   you technical notices, updates, security alerts, and support and administrative
                   messages and subscription alerts. These emails are not promotional in nature. If
@@ -71,7 +73,7 @@ export default function PrivacyPolicy() {
                 </li>
               </ul>
             </li>
-            <li>
+            <li className={styles.privacyPolicyLi}>
               From time to time, we may also use your information to contact you for market research
               purposes. We may contact you by email, phone, fax or mail.
             </li>
@@ -81,8 +83,8 @@ export default function PrivacyPolicy() {
             Privacy Policy, if you provide the App access to the following types of your Google
             data, the App’s use of that data will be subject to these additional restrictions:
           </p>
-          <ul>
-            <li>
+          <ul className={styles.privacyPolicyUl}>
+            <li className={styles.privacyPolicyLi}>
               The App will only use access to read, write, modify or control Gmail message bodies
               (including attachments), metadata, headers, and settings to provide a web email client
               that allows users to compose, send, read,and process emails and will not transfer this
@@ -90,40 +92,51 @@ export default function PrivacyPolicy() {
               features, comply with applicable law, or as part of a merger, acquisition, or sale of
               assets.
             </li>
-            <li>The App will not use this Gmail data for serving advertisements.</li>
-            <li>
+            <li className={styles.privacyPolicyLi}>
+              The App will not use this Gmail data for serving advertisements.
+            </li>
+            <li className={styles.privacyPolicyLi}>
               The App will not allow humans to read this data unless we have your affirmative
               agreement for specific messages, doing so is necessary for security purposes such as
               investigating abuse, to comply with applicable law, or for the App’s internal
               operations and even then only when the data have been aggregated and anonymized.
             </li>
-            <li>
+            <li className={styles.privacyPolicyLi}>
               The App use and transfer to any other app of information received from Google APIs
-              will adhere to{' '}
-              <a href="https://developers.google.com/terms/api-services-user-data-policy#additional_requirements_for_specific_api_scopes">
+              will adhere to
+              <a
+                className={styles.privacyPolicyA}
+                href="https://developers.google.com/terms/api-services-user-data-policy#additional_requirements_for_specific_api_scopes"
+              >
                 Google API Services User Data Policy
               </a>
               , including the Limited Use requirements.
             </li>
           </ul>
-          <h4>Security</h4>
-          <p>
+          <h4 className={styles.privacyPolicyH4}>Security</h4>
+          <p className={styles.privacyPolicyP}>
             We are committed to ensuring that your information is secure. In order to prevent
             unauthorised access or disclosure, we have put in place suitable physical, electronic
             and managerial procedures to safeguard and secure the information we collect online.
           </p>
-          <h4>How we use cookies</h4>
-          <p>
+          <h4 className={styles.privacyPolicyH4}>How we use cookies</h4>
+          <p className={styles.privacyPolicyP}>
             Cookies allow web applications to respond to you as an individual. The web application
             can tailor its operations to your needs, likes and dislikes by gathering and remembering
             information about your preferences.
           </p>
-          <p>
+          <p className={styles.privacyPolicyP}>
             For more information on our use of cookies, please read our{' '}
-            <a href="https://www.TechScrum.com/legal/cookie-policy/">Cookie Policy</a> .
+            <a
+              className={styles.privacyPolicyA}
+              href="https://www.TechScrum.com/legal/cookie-policy/"
+            >
+              Cookie Policy
+            </a>
+            .
           </p>
-          <h4>Links to other websites</h4>
-          <p>
+          <h4 className={styles.privacyPolicyH4}>Links to other websites</h4>
+          <p className={styles.privacyPolicyP}>
             Our website may contain links to other websites of interest. However, once you have used
             these links to leave our site, you should note that we do not have any control over that
             other website. Therefore, we cannot be responsible for the protection and privacy of any
@@ -131,30 +144,30 @@ export default function PrivacyPolicy() {
             by this privacy statement. You should exercise caution and look at the privacy statement
             applicable to the website in question.
           </p>
-          <h4>Controlling your personal information</h4>
-          <p>
+          <h4 className={styles.privacyPolicyH4}>Controlling your personal information</h4>
+          <p className={styles.privacyPolicyP}>
             You may choose to restrict the collection or use of your personal information in the
             following ways:
           </p>
-          <ul>
-            <li>
+          <ul className={styles.privacyPolicyUl}>
+            <li className={styles.privacyPolicyLi}>
               Whenever you are asked to fill in a form on the website, look for the box that you can
               click to indicate that you do not want the information to be used by anybody for
               direct marketing purposes.
             </li>
-            <li>
+            <li className={styles.privacyPolicyLi}>
               If you have previously agreed to us using your personal information for direct
               marketing purposes, you may change your mind at any time by writing to or emailing us
               at privacyTechScrum.com.
             </li>
           </ul>
-          <p>
+          <p className={styles.privacyPolicyP}>
             We will not sell, distribute or lease your personal information to third parties unless
             we have your permission or are required by law to do so. We may use your personal
             information to send you promotional information about third parties which we think you
             may find interesting if you tell us that you wish this to happen.
           </p>
-          <p>
+          <p className={styles.privacyPolicyP}>
             You may request details of personal information which we hold about you. If you believe
             that any information we are holding on you is incorrect or incomplete, please write to
             or email us as soon as possible, at privacyTechScrum.com. We will promptly correct any
