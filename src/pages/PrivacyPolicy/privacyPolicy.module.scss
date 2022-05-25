@@ -1,4 +1,4 @@
-.main{
+.privacyPolicyMain{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -9,16 +9,16 @@
     margin-left: auto;
 }
 
-.content{
+.privacyPolicyContent{
     padding-bottom: 6rem!important;
     padding-top: 5rem!important;
 }
 
-.smallScreen{
+.privacyPolicySmallScreen{
     display: none;
 }
 
-.header1{
+.privacyPolicyHeader1{
     font-weight: 600;
     font-size: 1.186rem;
     color: #a7acc5!important;
@@ -28,7 +28,7 @@
     margin-top: 4rem
 }
 
-.header2{
+.privacyPolicyHeader2{
     font-weight: 400;
     font-size: 2.6rem;
     margin:0 auto;
@@ -36,7 +36,7 @@
     text-align: center;
 }
 
-.hr{
+.privacyPolicyHr{
     background-color: #6a84ed;
     height: 4px;
     width: 100px;
@@ -45,12 +45,12 @@
     margin-bottom: 8rem!important;
 }
 
-.section{
+.privacyPolicySection{
     padding-right: 100px;
     padding-left: 400px;
 }
 
-h4{
+.privacyPolicyH4{
     line-height: 1.5rem;
     margin-bottom: 1.5rem!important;
     font-size: 1.714rem;
@@ -58,7 +58,7 @@ h4{
     color: black
 }
 
-p{
+.privacyPolicyP{
     font-family: FaktSoft,Arial,Helvetica,sans-serif;
     font-weight: 400;
     line-height: 1.6;
@@ -69,11 +69,11 @@ p{
     width: 100%;
 }
 
-.ul {
+.privacyPolicyUl {
     width: 100%;
 }
 
-.li{
+.privacyPolicyLi{
     font-family: FaktSoft,Arial,Helvetica,sans-serif;
     font-weight: 400;
     line-height: 1.6;
@@ -88,11 +88,11 @@ p{
     padding: 0;
 }
 
-.li:hover{
+.privacyPolicyLi:hover{
     border: none;
 }
 
-.a{
+.privacyPolicyA{
     color:  #4da2f8;
     text-decoration: underline;
     margin-top: 0;
@@ -102,16 +102,16 @@ p{
     font-size: 1rem;
 }
 
-.br{
+.privacyPolicyBr{
     margin-top: 1.5rem;
 }
 
 @media screen and (max-width: 992px){
-    .smallScreen{
+    .privacyPolicySmallScreen{
         height: 283px;
         display: block;
     }
-    .section{
+    .privacyPolicySection{
         padding-right: 100px;
         padding-left: 100px;
         max-width: 992;
@@ -120,7 +120,7 @@ p{
 }
 
 @media screen and (max-width: 768px){
-    .section{
+    .privacyPolicySection{
         padding-right: 30px;
         padding-left: 30px;
     }
