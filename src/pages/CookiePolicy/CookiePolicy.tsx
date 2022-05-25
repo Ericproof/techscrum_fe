@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './CookiePolicy.module.scss';
+import styles from './cookiePolicy.module.scss';
 
 export default function CookiePolicy() {
   return (
