@@ -13,26 +13,26 @@ export default function RefundPolicy() {
       <div className={styles.refundContent}>
         <div className={styles.sidebar}>
           <ul>
-            <li className={styles.legalSide}>
+            <li className={styles.sideLi}>
               <a href="https://www.techscrum.com/legal/">Our Legal Documents</a>
             </li>
-            <li>
+            <li className={styles.sideLi}>
               <a href="https://www.techscrum.com/legal/cookie-policy/">Cookie Policy</a>
             </li>
-            <li>
+            <li className={styles.sideLi}>
               <a href="https://www.techscrum.com/legal/gdpr/">GDPR compliance</a>
             </li>
 
-            <li>
+            <li className={styles.sideLi}>
               <a href="https://www.techscrum.com/legal/privacy-policy/">Privacy Policy</a>
             </li>
-            <li>
+            <li className={styles.sideLi}>
               <a href="https://www.techscrum.com/legal/privacy-statement/">Privacy Statement</a>
             </li>
-            <li>
+            <li className={styles.sideLi}>
               <a href="https://www.techscrum.com/legal/refund-policy/">Refund Policy</a>
             </li>
-            <li>
+            <li className={styles.sideLi}>
               <a href="https://www.techscrum.com/legal/terms-of-service/">Terms of Service</a>
             </li>
           </ul>
