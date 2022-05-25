@@ -14,7 +14,7 @@ export default function TermsOfService() {
         <h2>Techscrum.com Terms Of Service</h2>
         <p>
           These Terms of Service govern your use of the Techscrum.com platform and all services
-          connected to the Techscrum.com platform, including, but not limited to the Teamwork, Desk,
+          connected to the Techscrum.com platform, including, but not limited to the Techscrum,Desk,
           Chat, Spaces, CRM software products, websites, related mobile or desktop application and
           all integrations. (“Techscrum.com services”), provided by Techscrum.com Ltd.
         </p>
@@ -22,7 +22,7 @@ export default function TermsOfService() {
         <p>
           This Terms of Service document is an agreement you must accept in order to use
           Techscrum.com&apos;s Services. This is a legal agreement (“Agreement”) between You and
-          Teamwork Teamwork Crew Ltd. trading as Techscrum.com (“Company”), for use of any of the
+          Techscrum Techscrum Crew Ltd. trading as Techscrum.com (“Company”), for use of any of the
           Techscrum.com services services which You selected or initiated. “You” refers to the
           individual who who registered provided in the Techscrum.com website his or her credit card
           mechanism for the Services or, if the Services are being purchased on behalf of an entity
@@ -246,8 +246,8 @@ export default function TermsOfService() {
           The features made available through the Techscrum.com services are intended for the normal
           use of the software. Abuse of features may result in a ban or removal of service. (E.g: Do
           not use reply-by-email address in automated systems such as Google Alerts etc. Do not
-          auto-direct emails to a specific reply-by-email Teamwork email address) RSS feeds used
-          where Teamwork data is published publicly may be disabled. RSS feeds are intended for
+          auto-direct emails to a specific reply-by-email Techscrum email address) RSS feeds used
+          where Techscrum data is published publicly may be disabled. RSS feeds are intended for
           private consumption only.
         </p>
         <p>
