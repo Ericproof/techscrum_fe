@@ -3,14 +3,14 @@ import styles from './CookiePolicy.module.scss';
 
 export default function CookiePolicy() {
   return (
-    <div className={styles.main}>
-      <div className={styles.container}>
-        <div className={styles.textCenter}>
+    <div className={styles.cookieMain}>
+      <div className={styles.cookieContainer}>
+        <div className={styles.cookieTextCenter}>
           <p>LEGAL</p>
           <h1>Cookie Policy</h1>
           <hr />
         </div>
-        <div className={styles.row}>
+        <div className={styles.cookieRow}>
           <div className={styles.sidebar}>
             <ul className={styles.stickySidebar}>
               <li id={styles.RemoveBorder}>

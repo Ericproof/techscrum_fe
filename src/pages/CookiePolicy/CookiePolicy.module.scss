@@ -1,4 +1,4 @@
-.main {
+.cookieMain {
   background: #f5f7fa;
   font-family: 'FaktSoft', Arial, Helvetica, 'sans-serif';
   font-size: 14px;
@@ -8,7 +8,7 @@
   -webkit-font-smoothing: antialiased;
 }
 
-.container {
+.cookieContainer {
   padding-top: 147px;
   padding-right: 12px;
   padding-left: 12px;
@@ -34,7 +34,7 @@
   }
 }
 
-.textCenter {
+.cookieTextCenter {
   width: 100%;
   text-align: center !important;
   p {
@@ -62,7 +62,7 @@
   }
 }
 
-.row {
+.cookieRow {
   display: flex;
   flex-wrap: wrap;
   margin-right: -12px;
