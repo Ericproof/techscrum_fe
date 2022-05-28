@@ -11,7 +11,7 @@
     font-size: 0.86em;
     line-height: 1.33333;
     color: rgb(107, 119, 140);
-    font-weight: 600;
+    font-weight: 700;
     display: inline-block;
     margin-top: 0px;
     margin-bottom: 4px;
@@ -43,17 +43,27 @@
           margin: 6px 0;
           border-width: 1px;
           li {
-            display: flex;
-            align-items: center;
-            height: 39px;
-            padding-left: 11px;
-            &:hover {
-              border-style: solid;
-              border-left-color: #4c9aff;
-              border-right: none;
-              border-top: none;
-              border-bottom: none;
-              background-color: rgb(235, 236, 240);
+            margin: 4px 0;
+            .assigneeOptions {
+              border: none;
+              width: 100%;
+              background-color: rgb(255, 255, 255);
+              color: #172b4d;
+              display: flex;
+              align-items: center;
+              padding-left: 11px;
+              height: 32px;
+              font-size: 14px;
+              font-weight: 500px;
+              cursor: pointer;
+              &:hover {
+                border-style: solid;
+                border-left-color: #0052cc;
+                border-right: none;
+                border-top: none;
+                border-bottom: none;
+                background-color: rgb(235, 236, 240);
+              }
             }
           }
         }
