@@ -1,64 +1,73 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import userAvatar from '../../../assets/userAvatar.png';
 import styles from './ProjectLead.module.scss';
+import UseOutsideAlerter from '../OutsideAlerter';
 
 function ProjectLead() {
   const users = [
     { id: 1, avatar: 'https://picsum.photos/50', name: 'Yiu Kitman' },
     { id: 2, avatar: 'https://picsum.photos/50', name: 'Emil' },
-    { id: 3, avatar: 'https://picsum.photos/50', name: 'Belinda Wang' }
+    { id: 3, avatar: 'https://picsum.photos/50', name: 'Belinda Wang' },
+    { id: 4, avatar: 'https://picsum.photos/50', name: 'Andy' }
   ];
-  const [toggle, setToggle] = useState(false);
+
   const [userInfo, setUserInfo] = useState(users[0]);
+  // const [clickedInside, setClickedInside] = useState(false);
+  // const myRef = useRef<HTMLDivElement>(null);
+
+  // const handleClickInside = (e: { target: any }) => {
+  //   if (!myRef.current.contains(e.target)) {
+  //     setClickedInside(false);
+  //   }
+  // };
+
+  // const handleClickOutside = () => setClickedInside(true);
+
+  // useEffect(() => {
+  //   document.addEventListener('mousedown', handleClickInside);
+  //   return () => document.removeEventListener('mousedown', handleClickInside);
+  // });
+  const { visible, setVisible, myRef } = UseOutsideAlerter(false);
+  const handleClickOutside = () => setVisible(true);
   return (
-    <div className={styles.leadDropdownMenu}>
+    <div ref={myRef} className={styles.leadDropdownMenu}>
       <label htmlFor="projectLead">
         <span> Project lead</span>
         <div className={styles.leadDropdownContainer}>
-          {toggle ? (
+          {visible ? (
             <div className={styles.leadDropdownOpen}>
               <div className={styles.leadInputField}>
                 <img className={styles.userAvatar} src={userAvatar} alt="avatar" />
                 <input dir="auto" type="Text" />
-                <i
-                  role="button"
-                  aria-label="openDropdown"
-                  tabIndex={0}
-                  onClick={() => setToggle(false)}
-                />
+                <button className={styles.optionToggle} type="button" onClick={handleClickOutside}>
+                  <i role="button" aria-label="openDropdown" tabIndex={0} />
+                </button>
               </div>
               <div className={styles.leadMenu}>
                 <ul>
                   {users.map((user) => (
-                    <li
-                      onClick={() => {
-                        setUserInfo({ id: user.id, avatar: user.avatar, name: user.name });
-                        setToggle(false);
-                      }}
-                    >
-                      <img src={user.avatar} alt="avatar" />
-                      <span>{user.name}</span>
+                    <li>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setUserInfo({ id: user.id, avatar: user.avatar, name: user.name });
+                          setVisible(false);
+                        }}
+                      >
+                        <img src={user.avatar} alt="avatar" />
+                        <span>{user.name}</span>
+                      </button>
                     </li>
                   ))}
                 </ul>
               </div>
             </div>
           ) : (
-            <div className={styles.leadDropdownClose}>
-              <div
-                className={styles.leadInputClose}
-                role="button"
-                tabIndex={0}
-                onClick={() => {
-                  setToggle(true);
-                }}
-              >
-                <img src={userInfo.avatar} alt="avatar" />
-                <span>{userInfo.name}</span>
-              </div>
-            </div>
+            <button className={styles.leadInputClose} type="button" onClick={handleClickOutside}>
+              <img src={userInfo.avatar} alt="avatar" />
+              <span>{userInfo.name}</span>
+            </button>
           )}
         </div>
       </label>
