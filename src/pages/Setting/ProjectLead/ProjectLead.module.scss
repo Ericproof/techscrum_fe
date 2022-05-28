@@ -12,7 +12,7 @@
   span {
     font-size: 0.86em;
     color: #6b778c;
-    font-weight: 600;
+    font-weight: 700;
     display: inline-block;
   }
   .leadDropdownContainer {
@@ -46,8 +46,7 @@
         flex-flow: row nowrap;
         box-sizing: border-box;
         padding: 6px 6px 6px 6px;
-        -webkit-box-flex: 1;
-        overflow: hidden auto;
+        overflow: hidden;
         max-height: 100%;
         position: relative;
         cursor: pointer;
@@ -73,9 +72,17 @@
           cursor: pointer;
           outline: none;
         }
-        i {
-          width: 24px;
-          height: 24px;
+        .optionToggle {
+          border: none;
+          background-color: rgb(255, 255, 255);
+          width: 30px;
+          height: 30px;
+          cursor: pointer;
+          i {
+            background-color: rgb(255, 255, 255);
+            width: 24px;
+            height: 24px;
+          }
         }
       }
       .leadMenu {
@@ -95,43 +102,49 @@
           border-radius: 3px;
           border-width: 1px;
           li {
-            display: flex;
-            align-items: center;
-            height: 49px;
-            padding-left: 11px;
-            &:hover {
-              border-style: solid;
-              border-left-color: #4c9aff;
-              border-right: none;
-              border-top: none;
-              border-bottom: none;
-              background-color: rgb(244, 245, 247);
-            }
-            img {
-              width: 31px;
-              border-radius: 50%;
-            }
-            span {
-              margin-left: 10px;
+            width: 100%;
+            button {
               display: flex;
-              font-size: 14px;
-              font-family: Arial;
-              font-weight: 400;
-              font-style: normal;
-              letter-spacing: normal;
-              text-transform: none;
-              flex: 1 1 100%;
-              font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-                'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-              color: rgb(23, 43, 77);
+              align-items: center;
+              height: 49px;
+              padding-left: 11px;
+              border: none;
+              background-color: rgb(255, 255, 255);
+              width: 100%;
+              cursor: pointer;
+              &:hover {
+                border-style: solid;
+                border-left-color: #4c9aff;
+                border-right: none;
+                border-top: none;
+                border-bottom: none;
+                background-color: rgb(244, 245, 247);
+              }
+              img {
+                width: 31px;
+                border-radius: 50%;
+              }
+              span {
+                margin-left: 10px;
+                display: flex;
+                font-size: 14px;
+                font-family: Arial;
+                font-weight: 400;
+                font-style: normal;
+                letter-spacing: normal;
+                text-transform: none;
+                flex: 1 1 100%;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+                  'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+                color: rgb(23, 43, 77);
+              }
             }
           }
         }
       }
     }
-    .leadDropdownClose {
-      -webkit-box-align: stretch;
-      align-items: stretch;
+
+    .leadInputClose {
       background-color: rgb(244, 245, 247);
       border-color: rgb(223, 225, 230);
       border-radius: 3px;
@@ -139,58 +152,55 @@
       border-width: 2px;
       box-shadow: none;
       cursor: pointer;
-      display: flex;
-      flex-wrap: wrap;
-      -webkit-box-pack: justify;
       justify-content: space-between;
       min-height: 44px;
-      position: relative;
-      box-sizing: border-box;
       padding: 0px;
       width: 100%;
       height: 44px;
       max-width: 100%;
       outline: 0px;
+      align-items: center;
+      display: flex;
+      flex: 1 1 0%;
+      overflow: hidden auto;
+      max-height: 100%;
+      position: relative;
+      margin: 0;
+      padding-left: 15px;
       &:hover {
         background-color: rgb(235, 236, 240);
         border-color: rgb(223, 225, 230);
       }
-      .leadInputClose {
+      img {
         display: flex;
-        align-items: center;
-        min-width: 0px;
-        max-width: 100%;
-        padding-left: 15px;
-        line-height: 1.4;
+        height: 24px;
+        width: 24px;
+        border-radius: 50%;
+      }
+      span {
+        margin-left: 14px;
+        display: flex;
         width: 100%;
-        img {
-          display: flex;
-          height: 24px;
-          width: 24px;
-          border-radius: 50%;
-        }
-        span {
-          margin-left: 14px;
-          display: flex;
-          width: 100%;
-          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-            'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-          font-size: 14px;
-          color: rgb(23, 43, 77);
-          font-weight: 400;
-        }
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+          'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+        font-size: 14px;
+        color: rgb(23, 43, 77);
+        font-weight: 400;
       }
     }
   }
   p {
     font-size: 0.85em;
-    line-height: 1.33333;
+    line-height: 16px;
+    letter-spacing: normal;
     display: flex;
     margin-top: 6px;
+    font-size: 12px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, 'Fira Sans',
       'Droid Sans', 'Helvetica Neue', sans-serif;
-    font-weight: normal;
+    font-weight: 500;
     color: #6b778c;
     padding: 0;
+    width: 90%;
   }
 }
