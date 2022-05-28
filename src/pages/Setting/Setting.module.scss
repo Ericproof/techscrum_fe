@@ -28,11 +28,14 @@
               background: none;
               text-decoration: none;
               transition-duration: 0s, 0.15s;
-              color: var(--ds-text-subtle, #8993a4) !important;
+              color: #8993a4;
               span {
-                font-weight: 400;
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
+                  Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
                 font-size: 14px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 1.43;
                 color: #6b778c;
                 cursor: pointer;
               }
@@ -49,6 +52,7 @@
             flex-shrink: 0;
             padding: 0px 10px;
             text-align: center;
+            color: #6b778c;
           }
         }
       }
@@ -161,15 +165,12 @@
               width: 375px;
               height: 476px;
               display: flex;
-              /* width: 100%; */
               max-width: 100vw;
-              /* height: 100%; */
               flex: 1 1 auto;
               flex-direction: column;
               background-color: #ffffff;
               color: #091e42;
               pointer-events: auto;
-              /* min-height: 100vh; */
               max-height: none;
               h3 {
                 margin: 15px;
@@ -293,10 +294,12 @@
                         li {
                           padding-right: 5px;
                           margin: 0px;
-                          img {
-                            width: 40px;
-                            height: 40px;
-                            cursor: pointer;
+                          button {
+                            img {
+                              width: 40px;
+                              height: 40px;
+                              cursor: pointer;
+                            }
                           }
                         }
                       }
@@ -403,6 +406,9 @@
                         max-height: 100%;
                         color: rgb(66, 82, 110);
                         vertical-align: bottom;
+                        .AiOutlineArrowLeft {
+                          color: rgb(66, 82, 110);
+                        }
                       }
                     }
                     h4 {
@@ -413,8 +419,8 @@
                         'Ubuntu', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
                       font-size: 14px;
                       font-style: normal;
-                      font-weight: 400;
-                      line-height: 1.42857142857143;
+                      font-weight: 500;
+                      line-height: 1.43;
                     }
                   }
                   ul {
@@ -427,13 +433,16 @@
                     padding: 0px;
                     margin: 0px;
                     li {
-                      padding-right: 4px;
-                      padding-left: 4px;
-                      padding-bottom: 8px;
-                      margin: 0px;
-                      img {
-                        width: 72px;
-                        height: 72px;
+                      .defaultIconOptions {
+                        border: none;
+                        background-color: rgb(255, 255, 255);
+                        cursor: pointer;
+                        padding: 2px 4px 8px 4px;
+                        margin: 0px;
+                        img {
+                          width: 72px;
+                          height: 72px;
+                        }
                       }
                     }
                   }
@@ -450,7 +459,7 @@
                   font-size: 14px;
                   font-style: normal;
                   font-family: inherit;
-                  font-weight: 500;
+                  font-weight: 700;
                   cursor: pointer;
                   line-height: 2.28571em;
                   color: #ffffff;
@@ -468,7 +477,7 @@
                   font-size: 14px;
                   font-style: normal;
                   font-family: inherit;
-                  font-weight: 500;
+                  font-weight: 700;
                   cursor: pointer;
                   line-height: 2.28571em;
                   color: #42526e;
@@ -509,7 +518,7 @@
             padding: 2px 16px;
             font-family: inherit;
             font-size: 14px;
-            font-weight: 700;
+            font-weight: 600;
             &:hover {
               background: rgba(9, 30, 66, 0.08);
               text-decoration: inherit;
@@ -533,7 +542,7 @@
             span {
               font-size: 0.86em;
               color: #6b778c;
-              font-weight: 600;
+              font-weight: 700;
               display: inline-block;
             }
             input {
@@ -568,7 +577,7 @@
             span {
               font-size: 0.86em;
               color: #6b778c;
-              font-weight: 600;
+              font-weight: 700;
               display: inline-block;
             }
             input {
@@ -591,7 +600,7 @@
               }
             }
           }
-          button {
+          .saveBtn {
             margin-top: 16px;
             border-width: 0px;
             border-radius: 3px;
@@ -608,6 +617,37 @@
             padding: 0px 12px;
             color: #ffffff;
             align-items: center;
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 400px) {
+  .settingPage {
+    .settingContent {
+      .nav {
+        width: 110%;
+      }
+      header {
+        width: 107%;
+      }
+      .editSection {
+        .editContainer {
+          .popupPage {
+            .popupSection {
+              top: 0;
+              .popupWindow {
+                width: 310px;
+                .defaultIconSection {
+                  .defaultIconContainer {
+                    ul {
+                      width: 318px;
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
