@@ -9,22 +9,6 @@ function Assignee() {
     { id: 2, state: 'Unassigned' }
   ];
   const [assignState, setAssignState] = useState(assignees[0]);
-  // const [clickedInside, setClickedInside] = useState(false);
-  // const myRef = useRef<HTMLDivElement>(null);
-
-  // const handleClickInside = (e: { target: any }) => {
-  //   if (!myRef.current.contains(e.target)) {
-  //     setClickedInside(false);
-  //   }
-  // };
-
-  // const handleClickOutside = () => setClickedInside(true);
-
-  // useEffect(() => {
-  //   document.addEventListener('mousedown', handleClickInside);
-  //   return () => document.removeEventListener('mousedown', handleClickInside);
-  // });
-
   const { visible, setVisible, myRef } = UseOutsideAlerter(false);
   const handleClickOutside = () => setVisible(true);
   return (
@@ -40,6 +24,7 @@ function Assignee() {
                     <li>
                       <button
                         type="button"
+                        key={(assignee.id, assignee.state)}
                         className={styles.assigneeOptions}
                         onClick={() => {
                           setAssignState({ id: assignee.id, state: assignee.state });
