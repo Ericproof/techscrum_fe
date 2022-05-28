@@ -1,55 +1,72 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState } from 'react';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { grey } from '@mui/material/colors';
+import { MdKeyboardArrowDown } from 'react-icons/md';
 import styles from './Assignee.module.scss';
+import UseOutsideAlerter from '../OutsideAlerter';
 
 function Assignee() {
   const assignees = [
     { id: 1, state: 'Project lead' },
     { id: 2, state: 'Unassigned' }
   ];
-  const [toggle, setToggle] = useState(false);
   const [assignState, setAssignState] = useState(assignees[0]);
+  // const [clickedInside, setClickedInside] = useState(false);
+  // const myRef = useRef<HTMLDivElement>(null);
+
+  // const handleClickInside = (e: { target: any }) => {
+  //   if (!myRef.current.contains(e.target)) {
+  //     setClickedInside(false);
+  //   }
+  // };
+
+  // const handleClickOutside = () => setClickedInside(true);
+
+  // useEffect(() => {
+  //   document.addEventListener('mousedown', handleClickInside);
+  //   return () => document.removeEventListener('mousedown', handleClickInside);
+  // });
+
+  const { visible, setVisible, myRef } = UseOutsideAlerter(false);
+  const handleClickOutside = () => setVisible(true);
   return (
-    <div className={styles.assigneeDropdownMenu}>
+    <div ref={myRef} className={styles.assigneeDropdownMenu}>
       <label htmlFor="defaultAssignee">
         <span className={styles.assigneeTitle}> Default assignee</span>
         <div className={styles.assigneeContainer}>
-          {toggle ? (
+          {visible ? (
             <div className={styles.assigneeDropdownOpen}>
               <div className={styles.assigneeMenu}>
                 <ul>
                   {assignees.map((assignee) => (
-                    <li
-                      onClick={() => {
-                        setAssignState({ id: assignee.id, state: assignee.state });
-                        setToggle(false);
-                      }}
-                      key={assignee.id}
-                    >
-                      <span>{assignee.state}</span>
+                    <li>
+                      <button
+                        type="button"
+                        className={styles.assigneeOptions}
+                        onClick={() => {
+                          setAssignState({ id: assignee.id, state: assignee.state });
+                          setVisible(false);
+                        }}
+                      >
+                        {assignee.state}
+                      </button>
                     </li>
                   ))}
                 </ul>
               </div>
               <div className={styles.assigneeInputField}>
-                <input type="Text" placeholder={assignState.state} id="defaultAssignee" />
-                <KeyboardArrowDownIcon
-                  sx={{ color: grey[700], fontSize: 24 }}
-                  onClick={() => setToggle(false)}
+                <input
+                  dir="auto"
+                  type="Text"
+                  placeholder={assignState.state}
+                  id="defaultAssignee"
                 />
+                <MdKeyboardArrowDown color="#42526E" size="24px" onClick={handleClickOutside} />
               </div>
             </div>
           ) : (
             <div className={styles.assigneeDropdownClose}>
               <div className={styles.assigneeInputClose}>
                 <span>{assignState.state}</span>
-                <KeyboardArrowDownIcon
-                  sx={{ color: grey[700], fontSize: 24 }}
-                  onClick={() => setToggle(true)}
-                />
+                <MdKeyboardArrowDown color="#42526E" size="24px" onClick={handleClickOutside} />
               </div>
             </div>
           )}
