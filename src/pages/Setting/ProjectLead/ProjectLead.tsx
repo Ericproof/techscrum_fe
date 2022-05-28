@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import userAvatar from '../../../assets/userAvatar.png';
 import styles from './ProjectLead.module.scss';
@@ -13,21 +12,6 @@ function ProjectLead() {
   ];
 
   const [userInfo, setUserInfo] = useState(users[0]);
-  // const [clickedInside, setClickedInside] = useState(false);
-  // const myRef = useRef<HTMLDivElement>(null);
-
-  // const handleClickInside = (e: { target: any }) => {
-  //   if (!myRef.current.contains(e.target)) {
-  //     setClickedInside(false);
-  //   }
-  // };
-
-  // const handleClickOutside = () => setClickedInside(true);
-
-  // useEffect(() => {
-  //   document.addEventListener('mousedown', handleClickInside);
-  //   return () => document.removeEventListener('mousedown', handleClickInside);
-  // });
   const { visible, setVisible, myRef } = UseOutsideAlerter(false);
   const handleClickOutside = () => setVisible(true);
   return (
@@ -50,6 +34,7 @@ function ProjectLead() {
                     <li>
                       <button
                         type="button"
+                        key={(user.id, user.avatar, user.name)}
                         onClick={() => {
                           setUserInfo({ id: user.id, avatar: user.avatar, name: user.name });
                           setVisible(false);
