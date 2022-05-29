@@ -6,9 +6,6 @@
 
 .container {
   padding: 4rem;
-  // flex: 1 1 auto;
-  // position: relative;
-  // padding: 0px 24px;
   max-width: 50%;
   color: var(--ds-text-highEmphasis, #172b4d);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
@@ -18,16 +15,6 @@
   font-weight: 400;
   line-height: 1.42857142857143;
 }
-
-// .container {
-//   background: rgba(9, 30, 66, 0.54);
-//   inset: 0px;
-//   opacity: 1;
-//   pointer-events: initial;
-//   position: fixed;
-//   transition: opacity 220ms ease 0s;
-//   z-index: 500;
-// }
 
 .container2 {
   padding: 4rem;
