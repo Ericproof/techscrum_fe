@@ -31,10 +31,9 @@ function ProjectLead() {
               <div className={styles.leadMenu}>
                 <ul>
                   {users.map((user) => (
-                    <li>
+                    <li key={user.id}>
                       <button
                         type="button"
-                        key={(user.id, user.avatar, user.name)}
                         onClick={() => {
                           setUserInfo({ id: user.id, avatar: user.avatar, name: user.name });
                           setVisible(false);
