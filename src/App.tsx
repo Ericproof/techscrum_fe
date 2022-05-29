@@ -6,6 +6,7 @@ import TermsOfService from './pages/TermsOfService';
 import RefundPolicy from './pages/RefundPolicy/refundPolicy';
 import PrivacyPolicy from './pages/PrivacyPolicy/privacyPolicy';
 import PrivacyStatment from './pages/PrivacyStatment/index';
+import UserPage from './pages/SettingPage/UserPage/UserPage';
 import './App.css';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Route path="/privacy-statement" element={<PrivacyStatment />} />
       <Route path="/refund-policy" element={<RefundPolicy />} />
       <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+      <Route path="/user-page" element={<UserPage />} />
     </Routes>
   );
 }
