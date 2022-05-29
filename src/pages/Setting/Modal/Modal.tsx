@@ -17,37 +17,42 @@ import icon13 from '../../../assets/icon13.png';
 import icon14 from '../../../assets/icon14.png';
 import icon15 from '../../../assets/icon15.png';
 import icon16 from '../../../assets/icon16.png';
+import defaultIcon from '../../../assets/defaultIcon.png';
 import uploadImage from '../../../assets/uploadImage.png';
 
-function Modal({ shown, close }: { shown: boolean; close: object }) {
+function Modal({ shown, close }: { shown: boolean; close: () => void }) {
   const icons = [
-    { id: 1, photo: icon2 },
-    { id: 2, photo: icon3 },
-    { id: 3, photo: icon4 },
-    { id: 4, photo: icon5 },
-    { id: 5, photo: icon6 },
-    { id: 6, photo: icon7 },
-    { id: 7, photo: icon8 },
-    { id: 8, photo: icon9 },
-    { id: 9, photo: icon10 },
-    { id: 10, photo: icon11 },
-    { id: 11, photo: icon12 },
-    { id: 12, photo: icon13 },
-    { id: 13, photo: icon14 },
-    { id: 14, photo: icon15 },
-    { id: 15, photo: icon16 }
+    { id: 1, photo: defaultIcon },
+    { id: 2, photo: icon2 },
+    { id: 3, photo: icon3 },
+    { id: 4, photo: icon4 },
+    { id: 5, photo: icon5 },
+    { id: 6, photo: icon6 },
+    { id: 7, photo: icon7 },
+    { id: 8, photo: icon8 },
+    { id: 9, photo: icon9 },
+    { id: 10, photo: icon10 },
+    { id: 11, photo: icon11 },
+    { id: 12, photo: icon12 },
+    { id: 13, photo: icon13 },
+    { id: 14, photo: icon14 },
+    { id: 15, photo: icon15 },
+    { id: 16, photo: icon16 }
   ];
   const firstFiveIcons = icons.slice(0, 5);
-  const [editIcon, setEditIcon] = useState(icons[0]);
+  const fiveIcons = firstFiveIcons.map((firstFiveIcon) => (
+    <li key={firstFiveIcon.id}>
+      <img src={firstFiveIcon.photo} alt="icon" />
+    </li>
+  ));
+  const listIcons = icons.map((icon) => (
+    <li key={icon.id}>
+      <img src={icon.photo} alt="icon" />
+    </li>
+  ));
   const [iconCollection, setIconCollection] = useState(false);
   return shown ? (
-    <div
-      className={styles.modalBackdrop}
-      onClick={() => {
-        close();
-      }}
-      aria-hidden="true"
-    >
+    <div className={styles.modalBackdrop} onClick={close} aria-hidden="true">
       <div
         className={styles.modalContent}
         onClick={(e) => {
@@ -74,22 +79,7 @@ function Modal({ shown, close }: { shown: boolean; close: object }) {
                       </button>
                       <h4>Default icons</h4>
                     </div>
-                    <ul>
-                      {icons.map((icon) => (
-                        <li>
-                          <button
-                            type="button"
-                            key={(icon.id, icon.photo)}
-                            className={styles.defaultIconOptions}
-                            onClick={() => {
-                              setEditIcon({ id: icon.id, photo: icon.photo });
-                            }}
-                          >
-                            <img src={icon.photo} alt="icon" />
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
+                    <ul>{listIcons}</ul>
                   </div>
                 </div>
               ) : (
@@ -116,7 +106,7 @@ function Modal({ shown, close }: { shown: boolean; close: object }) {
                     <div className={styles.photoCollection}>
                       <div className={styles.iconList}>
                         <ul>
-                          {firstFiveIcons.map((firstFiveIcon) => (
+                          {/* {firstFiveIcons.map((firstFiveIcon) => (
                             <li>
                               <button
                                 type="button"
@@ -131,7 +121,8 @@ function Modal({ shown, close }: { shown: boolean; close: object }) {
                                 <img src={firstFiveIcon.photo} alt="icon" />
                               </button>
                             </li>
-                          ))}
+                          ))} */}
+                          {fiveIcons}
                         </ul>
                       </div>
                       <button type="button" onClick={() => setIconCollection(true)}>
@@ -144,13 +135,7 @@ function Modal({ shown, close }: { shown: boolean; close: object }) {
                 </div>
               )}
               <div className={styles.buttonSection}>
-                <button
-                  className={styles.selectBtn}
-                  type="button"
-                  onClick={() => {
-                    close();
-                  }}
-                >
+                <button className={styles.selectBtn} type="button" onClick={close}>
                   Select
                 </button>
                 <button className={styles.cancelBtn} type="button" onClick={close}>
