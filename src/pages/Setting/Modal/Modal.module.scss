@@ -14,7 +14,7 @@
       .popupSection {
         max-width: 100%;
         z-index: 510;
-        bottom: 50px;
+        bottom: 100px;
         left: 0px;
         transition-duration: 350ms;
         transition-property: transform;
@@ -25,7 +25,7 @@
         position: relative;
         .popupWindow {
           width: 375px;
-          height: 476px;
+          height: 484px;
           display: flex;
           max-width: 100vw;
           flex: 1 1 auto;
@@ -155,12 +155,10 @@
                     li {
                       padding-right: 5px;
                       margin: 0px;
-                      button {
-                        img {
-                          width: 40px;
-                          height: 40px;
-                          cursor: pointer;
-                        }
+                      img {
+                        width: 40px;
+                        height: 40px;
+                        cursor: pointer;
                       }
                     }
                   }
@@ -294,16 +292,14 @@
                 padding: 0px;
                 margin: 0px;
                 li {
-                  .defaultIconOptions {
-                    border: none;
-                    background-color: rgb(255, 255, 255);
-                    cursor: pointer;
-                    padding: 2px 4px 8px 4px;
-                    margin: 0px;
-                    img {
-                      width: 72px;
-                      height: 72px;
-                    }
+                  border: none;
+                  background-color: rgb(255, 255, 255);
+                  cursor: pointer;
+                  padding: 2px 4px 8px 4px;
+                  margin: 0px;
+                  img {
+                    width: 72px;
+                    height: 72px;
                   }
                 }
               }
@@ -311,7 +307,7 @@
           }
           .buttonSection {
             display: flex;
-            padding: 22px 24px 24px;
+            padding: 0 24px 24px;
             position: relative;
             align-items: center;
             justify-content: flex-end;
@@ -364,10 +360,10 @@
     .modalContent {
       .popupPage {
         .popupSection {
-          top: 0;
+          bottom: 30px;
           .popupWindow {
             width: 297px;
-            height: 472px;
+            height: 470px;
             .defaultIconSection {
               .defaultIconContainer {
                 ul {
