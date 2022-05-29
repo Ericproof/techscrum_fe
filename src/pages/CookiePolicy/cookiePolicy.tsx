@@ -14,27 +14,27 @@ export default function CookiePolicy() {
           <div className={styles.sidebar}>
             <ul className={styles.stickySidebar}>
               <li id={styles.RemoveBorder}>
-                <a href="https://www.TechScrum.com/legal/" style={{ padding: '0 0 7px 0' }}>
+                <a href="https://www.techscrum.com/legal/" style={{ padding: '0 0 7px 0' }}>
                   Our Legal Documents
                 </a>
               </li>
               <li>
-                <a href="https://www.TechScrum.com/legal/">Cookie Policy</a>
+                <a href="https://www.techscrum.com/cookie-policy/">Cookie Policy</a>
               </li>
               <li>
-                <a href="https://www.TechScrum.com/legal/">GDPR compliance</a>
+                <a href="https://www.techscrum.com/gdpr/">GDPR compliance</a>
               </li>
               <li>
-                <a href="https://www.TechScrum.com/legal/">Privacy Policy</a>
+                <a href="https://www.techscrum.com/privacy-policy/">Privacy Policy</a>
               </li>
               <li>
-                <a href="https://www.TechScrum.com/legal/">Privacy Statement</a>
+                <a href="https://www.techscrum.com/privacy-statement/">Privacy Statement</a>
               </li>
               <li>
-                <a href="https://www.TechScrum.com/legal/">Refund Policy</a>
+                <a href="https://www.techscrum.com/refund-policy/">Refund Policy</a>
               </li>
               <li>
-                <a href="https://www.TechScrum.com/legal/">Terms of Service</a>
+                <a href="https://www.techscrum.com/terms-of-service/">Terms of Service</a>
               </li>
             </ul>
           </div>
