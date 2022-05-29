@@ -190,7 +190,6 @@
     }
   }
   p {
-    font-size: 0.85em;
     line-height: 16px;
     letter-spacing: normal;
     display: flex;
@@ -202,5 +201,14 @@
     color: #6b778c;
     padding: 0;
     width: 90%;
+  }
+}
+
+@media (max-width: 400px) {
+  .leadDropdownMenu {
+    p {
+      font-size: 10px;
+      width: 100%;
+    }
   }
 }
