@@ -21,10 +21,9 @@ function Assignee() {
               <div className={styles.assigneeMenu}>
                 <ul>
                   {assignees.map((assignee) => (
-                    <li>
+                    <li key={assignee.id}>
                       <button
                         type="button"
-                        key={(assignee.id, assignee.state)}
                         className={styles.assigneeOptions}
                         onClick={() => {
                           setAssignState({ id: assignee.id, state: assignee.state });
