@@ -260,6 +260,11 @@
             padding: 0px 12px;
             color: #ffffff;
             align-items: center;
+            &:hover {
+              background: #0065ff;
+              text-decoration: inherit;
+              transition-duration: 0s, 0.15s;
+            }
           }
         }
       }
