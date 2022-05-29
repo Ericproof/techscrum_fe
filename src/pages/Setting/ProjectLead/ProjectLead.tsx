@@ -3,14 +3,13 @@ import userAvatar from '../../../assets/userAvatar.png';
 import styles from './ProjectLead.module.scss';
 import UseOutsideAlerter from '../OutsideAlerter';
 
-function ProjectLead() {
+export default function ProjectLead() {
   const users = [
     { id: 1, avatar: 'https://picsum.photos/50', name: 'Yiu Kitman' },
     { id: 2, avatar: 'https://picsum.photos/50', name: 'Emil' },
     { id: 3, avatar: 'https://picsum.photos/50', name: 'Belinda Wang' },
     { id: 4, avatar: 'https://picsum.photos/50', name: 'Andy' }
   ];
-
   const [userInfo, setUserInfo] = useState(users[0]);
   const { visible, setVisible, myRef } = UseOutsideAlerter(false);
   const handleClickOutside = () => setVisible(true);
@@ -59,5 +58,3 @@ function ProjectLead() {
     </div>
   );
 }
-
-export default ProjectLead;

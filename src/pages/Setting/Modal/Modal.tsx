@@ -20,7 +20,7 @@ import icon16 from '../../../assets/icon16.png';
 import defaultIcon from '../../../assets/defaultIcon.png';
 import uploadImage from '../../../assets/uploadImage.png';
 
-function Modal({ shown, close }: { shown: boolean; close: () => void }) {
+export default function Modal({ shown, close }: { shown: boolean; close: () => void }) {
   const icons = [
     { id: 1, photo: defaultIcon },
     { id: 2, photo: icon2 },
@@ -131,5 +131,3 @@ function Modal({ shown, close }: { shown: boolean; close: () => void }) {
     </div>
   ) : null;
 }
-
-export default Modal;

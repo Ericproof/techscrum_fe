@@ -3,7 +3,7 @@ import { MdKeyboardArrowDown } from 'react-icons/md';
 import styles from './Assignee.module.scss';
 import UseOutsideAlerter from '../OutsideAlerter';
 
-function Assignee() {
+export default function Assignee() {
   const assignees = [
     { id: 1, state: 'Project lead' },
     { id: 2, state: 'Unassigned' }
@@ -59,5 +59,3 @@ function Assignee() {
     </div>
   );
 }
-
-export default Assignee;
