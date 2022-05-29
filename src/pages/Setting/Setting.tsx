@@ -9,7 +9,6 @@ import Modal from './Modal/Modal';
 export default function Setting() {
   const [toggle, setToggle] = useState(false);
   const [modalShown, toggleModal] = useState(false);
-
   return (
     <div className={styles.settingPage}>
       <div className={styles.settingContent}>
