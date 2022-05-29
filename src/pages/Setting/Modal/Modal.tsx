@@ -105,25 +105,7 @@ function Modal({ shown, close }: { shown: boolean; close: () => void }) {
                     </div>
                     <div className={styles.photoCollection}>
                       <div className={styles.iconList}>
-                        <ul>
-                          {/* {firstFiveIcons.map((firstFiveIcon) => (
-                            <li>
-                              <button
-                                type="button"
-                                key={(firstFiveIcon.id, firstFiveIcon.photo)}
-                                onClick={() => {
-                                  setEditIcon({
-                                    id: firstFiveIcon.id,
-                                    photo: firstFiveIcon.photo
-                                  });
-                                }}
-                              >
-                                <img src={firstFiveIcon.photo} alt="icon" />
-                              </button>
-                            </li>
-                          ))} */}
-                          {fiveIcons}
-                        </ul>
+                        <ul>{fiveIcons}</ul>
                       </div>
                       <button type="button" onClick={() => setIconCollection(true)}>
                         <span>
