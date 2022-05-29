@@ -1,11 +1,10 @@
-/* eslint-disable consistent-return */
 import React, { useRef } from 'react';
 import style from './addPeopleModal.module.scss';
 import search from '../AccessSearchBar/img/search-line.svg';
 import dropDownArrow from './svg/arrow-drop-down-line.svg';
-import { Iprops } from '../typings';
+import { IProps } from '../typings';
 
-export default function AddPeopleModal({ cancelClick, addClick, memberList }: Iprops) {
+export default function AddPeopleModal({ cancelClick, addClick, memberList }: IProps) {
   const handleAddInputRef = useRef<HTMLInputElement>(null);
 
   const handleAddClick = (): void => {
@@ -14,16 +13,16 @@ export default function AddPeopleModal({ cancelClick, addClick, memberList }: Ip
     if (val.length) {
       const isExist = memberList.find((member) => member.name === val);
       if (isExist) {
-        // eslint-disable-next-line no-alert
-        return alert('The name already exists, please change your name!');
+        return;
       }
 
       addClick({
         id: new Date().getTime(),
         name: val
       });
-      // eslint-disable-next-line
-      handleAddInputRef.current!.value = '';
+
+      const handelInputVCurrent = handleAddInputRef.current as HTMLInputElement;
+      handelInputVCurrent.value = '';
     }
   };
 

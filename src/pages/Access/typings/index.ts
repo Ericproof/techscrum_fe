@@ -3,7 +3,7 @@ export interface IMember {
   name: string;
 }
 
-export interface Iprops {
+export interface IProps {
   cancelClick: () => void;
   addClick: (people: IMember) => void;
   memberList: IMember[];
