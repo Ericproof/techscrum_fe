@@ -179,6 +179,10 @@
                     color: #ffffff;
                     justify-content: center;
                     align-items: center;
+                    svg {
+                      color: #42526e;
+                      font-size: 22px;
+                    }
                   }
                   &:hover {
                     border-width: 0px;
@@ -265,8 +269,9 @@
                     max-height: 100%;
                     color: rgb(66, 82, 110);
                     vertical-align: bottom;
-                    .AiOutlineArrowLeft {
+                    svg {
                       color: rgb(66, 82, 110);
+                      font-size: 22px;
                     }
                   }
                 }

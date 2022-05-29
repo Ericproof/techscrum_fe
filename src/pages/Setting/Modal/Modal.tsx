@@ -74,7 +74,7 @@ export default function Modal({ shown, close }: { shown: boolean; close: () => v
                         onClick={() => setIconCollection(false)}
                       >
                         <span>
-                          <FiArrowLeft color="grey" size="24px" />
+                          <FiArrowLeft />
                         </span>
                       </button>
                       <h4>Default icons</h4>
@@ -109,7 +109,7 @@ export default function Modal({ shown, close }: { shown: boolean; close: () => v
                       </div>
                       <button type="button" onClick={() => setIconCollection(true)}>
                         <span>
-                          <RiMoreFill color="#42526E" size="22px" />
+                          <RiMoreFill />
                         </span>
                       </button>
                     </div>

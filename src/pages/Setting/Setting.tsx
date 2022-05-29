@@ -38,7 +38,7 @@ export default function Setting() {
           {toggle ? (
             <div className={styles.openTrash}>
               <div className={styles.menuOpen}>
-                <RiMoreFill color="#fff" size="24px" onClick={() => setToggle(false)} />
+                <RiMoreFill onClick={() => setToggle(false)} />
               </div>
               <div className={styles.trash}>
                 <button type="button">Move to trash</button>
@@ -46,7 +46,7 @@ export default function Setting() {
             </div>
           ) : (
             <div className={styles.menuClose}>
-              <RiMoreFill color="#42526E" size="24px" onClick={() => setToggle(true)} />
+              <RiMoreFill onClick={() => setToggle(true)} />
             </div>
           )}
         </header>

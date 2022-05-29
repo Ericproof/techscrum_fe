@@ -43,14 +43,14 @@ export default function Assignee() {
                   placeholder={assignState.state}
                   id="defaultAssignee"
                 />
-                <MdKeyboardArrowDown color="#42526E" size="24px" onClick={handleClickOutside} />
+                <MdKeyboardArrowDown onClick={handleClickOutside} />
               </div>
             </div>
           ) : (
             <div className={styles.assigneeDropdownClose}>
               <div className={styles.assigneeInputClose}>
                 <span>{assignState.state}</span>
-                <MdKeyboardArrowDown color="#42526E" size="24px" onClick={handleClickOutside} />
+                <MdKeyboardArrowDown onClick={handleClickOutside} />
               </div>
             </div>
           )}
