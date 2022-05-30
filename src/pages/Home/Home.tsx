@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './Home.module.scss';
-import Header from '../../compoments/Header';
 
 export default function Home() {
   return (
