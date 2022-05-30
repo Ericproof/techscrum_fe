@@ -1,6 +1,6 @@
 import React from 'react';
 import Textfield from '@atlaskit/textfield';
-import style from './accessSearchBar.module.scss';
+import style from './AccessSearchBar.module.scss';
 
 export default function AccessSearchBar() {
   return (

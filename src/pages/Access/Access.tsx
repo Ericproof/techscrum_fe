@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import style from './index.module.scss';
-import Header from './AccessHeader/accessHeader';
-import SearchBar from './AccessSearchBar/accessSearchBar';
-import Main from './AccessMain/accessMain';
-import Modal from './AddPeopleModal/addPeopleModal';
-import { IMember } from './typings';
+import style from './Access.module.scss';
+import Header from './AccessHeader/AccessHeader';
+import SearchBar from './AccessSearchBar/AccessSearchBar';
+import Main from './AccessMain/AccessMain';
+import Modal from './AddPeopleModal/AddPeopleModal';
+import { IMember } from './Typings/Typings';
 
 export default function AccessPage() {
   const [modal, setModal] = useState(false);

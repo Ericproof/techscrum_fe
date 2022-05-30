@@ -1,6 +1,6 @@
 import React from 'react';
-import style from './accessHeader.module.scss';
-import HeaderNav from './AccessHeaderNav/accessHeaderNav';
+import style from './AccessHeader.module.scss';
+import HeaderNav from './AccessHeaderNav/AccessHeaderNav';
 
 interface ModalStateClick {
   modalStateClick: () => void;

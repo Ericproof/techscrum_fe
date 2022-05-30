@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './accessHeaderNav.module.scss';
+import style from './AccessHeaderNav.module.scss';
 
 export default function AccessHeaderNav() {
   return (
