@@ -1,17 +1,17 @@
 import React from 'react';
-import styles from './index.module.scss';
+import styles from './privacyStatement.module.scss';
 
-export default function PrivacyStatment() {
+export default function PrivacyStatement() {
   return (
-    <div className={styles.container}>
-      <div className={styles.textCenter}>
+    <div className={styles.privacyStatementContainer}>
+      <div className={styles.privacyStatementTextCenter}>
         <span>Legal</span>
-        <h1>Privacy policy</h1>
+        <h1>Privacy Statement</h1>
         <hr />
       </div>
-      <div className={styles.mainContent}>
-        <div className={styles.contentNav}> </div>
-        <div className={styles.content}>
+      <div className={styles.privacyStatementMainContent}>
+        <div className={styles.privacyStatementContentNav}> </div>
+        <div className={styles.privacyStatementContent}>
           <h2>What is a Privacy Statement and Why is It Important</h2>
           <p>
             We know your personal information is important to you and it is also important to
@@ -56,7 +56,7 @@ export default function PrivacyStatment() {
           <h3>Cookies</h3>
           <p>
             For more information on our use of cookies, please read our{' '}
-            <a href="#cookies-ploicy">Cookie Policy</a>.
+            <a href="/cookies-ploicy">Cookie Policy</a>.
           </p>
           <p>
             We may also process other information, which is not personal data within the meaning of
@@ -259,7 +259,7 @@ export default function PrivacyStatment() {
             We are committed to protecting the security of your personal data. We use a variety of
             security technologies and procedures to help protect your personal data from
             unauthorised access and use. For more detailed and technical information please see our{' '}
-            <a href="#securitypage">Security Page</a>.
+            <a href="/security-page">Security Page</a>.
           </p>
           <p>
             As effective as modern security practices are, no physical or electronic security system
