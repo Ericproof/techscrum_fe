@@ -27,42 +27,44 @@ export default function AddPeopleModal({ cancelClick, addClick, memberList }: IP
   };
 
   return (
-    <div className={style.container}>
-      <div className={style.dialog}>
-        <header>
-          <h1>Add people</h1>
-        </header>
-        <div className={style.bodyContent}>
-          <div className={style.inputContent}>
-            <input
-              type="text"
-              name="input"
-              className={style.inputRight}
-              placeholder="Type a name, group or email address"
-              ref={handleAddInputRef}
-            />
-            <img className={style.inputImg} src={search} alt="search" />
-          </div>
-          <div className={style.roleContent}>
-            <span>Role</span>
+    <div className={style.background}>
+      <div className={style.container}>
+        <div className={style.dialog}>
+          <header>
+            <h1>Add people</h1>
+          </header>
+          <div className={style.bodyContent}>
             <div className={style.inputContent}>
-              <button className={style.inputRight} type="button">
-                Member
-              </button>
-              <img className={style.inputImg} src={dropDownArrow} alt="search" />
+              <input
+                type="text"
+                name="input"
+                className={style.inputRight}
+                placeholder="Type a name, group or email address"
+                ref={handleAddInputRef}
+              />
+              <img className={style.inputImg} src={search} alt="search" />
+            </div>
+            <div className={style.roleContent}>
+              <span>Role</span>
+              <div className={style.inputContent}>
+                <button className={style.inputRight} type="button">
+                  Member
+                </button>
+                <img className={style.inputImg} src={dropDownArrow} alt="search" />
+              </div>
             </div>
           </div>
+          <footer>
+            <div className={style.footerContent}>
+              <button className={style.cancelButton} type="button" onClick={cancelClick}>
+                <span>Cancel</span>
+              </button>
+              <button className={style.addButton} type="button" onClick={handleAddClick}>
+                <span>Add</span>
+              </button>
+            </div>
+          </footer>
         </div>
-        <footer>
-          <div className={style.footerContent}>
-            <button className={style.cancelButton} type="button" onClick={cancelClick}>
-              <span>Cancel</span>
-            </button>
-            <button className={style.addButton} type="button" onClick={handleAddClick}>
-              <span>Add</span>
-            </button>
-          </div>
-        </footer>
       </div>
     </div>
   );
