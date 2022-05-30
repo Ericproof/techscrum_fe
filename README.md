@@ -6,10 +6,8 @@
 
 ### Tech Stack
 
-- Agenda (Job scheduling)
-- Winston (Logging framework)
-- Nodemon (Automatically restarts application when code files are updated)
-- Compression (Enabling gzip compression in Express.js)
+- React
+- Redux
 
 ### Prerequisites
 
