@@ -10,14 +10,16 @@ import './App.css';
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/gdpr" element={<Gdpr />} />
-      <Route path="/terms-of-service" element={<TermsOfService />} />
-      <Route path="/privacy-statement" element={<PrivacyStatment />} />
-      <Route path="/refund-policy" element={<RefundPolicy />} />
-      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/gdpr" element={<Gdpr />} />
+        <Route path="/terms-of-service" element={<TermsOfService />} />
+        <Route path="/privacy-statement" element={<PrivacyStatment />} />
+        <Route path="/refund-policy" element={<RefundPolicy />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+      </Routes>
+    </>
   );
 }
 export default App;
