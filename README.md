@@ -6,8 +6,8 @@
 
 ### Tech Stack
 
-- React (Job scheduling)
-- Redux (Logging framework)
+- React
+- Redux
 
 ### Prerequisites
 

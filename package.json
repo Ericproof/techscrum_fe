@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@atlaskit/textfield": "^5.1.11",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.2.0",
     "@testing-library/user-event": "^13.5.0",
@@ -25,7 +26,8 @@
     "eject": "react-scripts eject",
     "format": "prettier --write src/**/*.tsx",
     "lint": "eslint src/",
-    "lint-fix": "eslint src --quiet --fix"
+    "lint-fix": "eslint src --quiet --fix",
+    "deploy": "aws s3 sync build s3://techscrumapp.com"
   },
   "eslintConfig": {
     "extends": [
