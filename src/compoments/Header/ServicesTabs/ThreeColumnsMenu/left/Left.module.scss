@@ -1,0 +1,41 @@
+div.left{
+    border-left: 0;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    align-self: auto;
+    div{
+        border-left: 0;
+        padding: 0px;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        div{
+            position: relative;
+            display: flex;
+            width: 100%;
+            margin-bottom: 2px;
+            padding: 10px;
+            a{
+                display: flex;
+                flex-direction: column;
+                cursor: pointer;
+                h2{
+                    margin: 0px;
+                    color: #1d1c35;
+                    font-size: 16px;
+                    font-weight: 600;
+                }
+                p{
+                    color: #494e6a;
+                    font-size: 12px;
+                    font-weight: 400;
+                    margin-top: 5px;
+                    width: 100%;
+                    max-width: 230px;
+                }
+            }
+        }
+    }
+}
