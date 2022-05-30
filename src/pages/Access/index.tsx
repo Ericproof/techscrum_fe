@@ -29,7 +29,7 @@ export default function AccessPage() {
   return (
     <>
       {modal && <Modal cancelClick={modalStateClick} addClick={addClick} memberList={memberList} />}
-      <div className={modal ? style.container2 : style.container}>
+      <div className={style.container}>
         <Header modalStateClick={modalStateClick} />
         <br />
         <br />
