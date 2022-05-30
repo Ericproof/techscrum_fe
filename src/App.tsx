@@ -3,12 +3,12 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import Setting from './pages/Setting/Setting';
 import Gdpr from './pages/GDPR/GDPR';
-import CookiePolicy from './pages/CookiePolicy/cookiePolicy';
-import TermsOfService from './pages/TermsOfService';
-import RefundPolicy from './pages/RefundPolicy/refundPolicy';
-import PrivacyPolicy from './pages/PrivacyPolicy/privacyPolicy';
-import PrivacyStatement from './pages/PrivacyStatement/privacyStatement';
-import Access from './pages/Access';
+import CookiePolicy from './pages/CookiePolicy/CookiePolicy';
+import TermsOfService from './pages/TermsOfService/TermsOfServices';
+import RefundPolicy from './pages/RefundPolicy/RefundPolicy';
+import PrivacyPolicy from './pages/PrivacyPolicy/PrivacyPolicy';
+import PrivacyStatement from './pages/PrivacyStatement/PrivacyStatement';
+import Access from './pages/Access/Access';
 import './App.css';
 
 function App() {
