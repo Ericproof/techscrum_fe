@@ -22,8 +22,6 @@ pipelines:
             - node
           script:
             - npm install
-            # CI=true in default variables for Bitbucket Pipelines https://support.atlassian.com/bitbucket-cloud/docs/variables-in-pipelines/
-            - npm test
       - step:
           name: Lint the node package
           script:
