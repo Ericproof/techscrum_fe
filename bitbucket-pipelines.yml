@@ -40,7 +40,6 @@ pipelines:
             script:
               - npm install
               # CI=true in default variables for Bitbucket Pipelines https://support.atlassian.com/bitbucket-cloud/docs/variables-in-pipelines/
-              - npm test
               - npm run build
             artifacts:
               - build/**
