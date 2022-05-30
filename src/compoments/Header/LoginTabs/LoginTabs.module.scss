@@ -19,6 +19,7 @@ $small_size: 1000px;
         padding: 10px;
         border-radius: 5px;
         transition: background-color .2s ease-in-out;
+        text-decoration: none;
 
         @media (max-width: $max_size) {
             border-bottom: 1px solid rgba(0,0,0,.058823529411764705);

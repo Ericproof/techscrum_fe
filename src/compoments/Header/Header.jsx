@@ -1,7 +1,7 @@
 import React from 'react';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 import styles from './Header.module.scss';
-import Icon from './IconTab';
+import Icon from './IconTab/IconTab';
 import ServiceTabs from './ServicesTabs/ServicesTabs';
 import LoginTabs from './LoginTabs/LoginTabs';
 
