@@ -26,7 +26,8 @@
     "eject": "react-scripts eject",
     "format": "prettier --write src/**/*.tsx",
     "lint": "eslint src/",
-    "lint-fix": "eslint src --quiet --fix"
+    "lint-fix": "eslint src --quiet --fix",
+    "deploy": "aws s3 sync build s3://techscrumapp.com"
   },
   "eslintConfig": {
     "extends": [

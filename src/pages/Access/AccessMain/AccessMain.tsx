@@ -1,6 +1,6 @@
 import React from 'react';
-import { IMember, IRemove } from '../typings';
-import style from './accessMain.module.scss';
+import { IMember, IRemove } from '../Typings/Typings';
+import style from './AccessMain.module.scss';
 
 export default function AccessMain({ removeClick, memberList }: IRemove) {
   return (

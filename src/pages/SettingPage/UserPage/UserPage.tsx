@@ -1,6 +1,6 @@
 import React from 'react';
 import { ImEarth } from 'react-icons/im';
-import icon from './pic.jpg';
+// import icon from './pic.jpg';
 
 import styles from './UserPage.module.scss';
 
@@ -60,7 +60,7 @@ export default function UserPage() {
         <div className={styles.userIcon}>
           <h2>Photo</h2>
           <div className={styles.picBorder}>
-            <img src={icon} alt="icon" />
+            <img src="icon" alt="icon" />
           </div>
           <p className={styles.iconPublic}>
             <ImEarth /> &nbsp; Public
