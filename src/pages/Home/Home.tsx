@@ -30,10 +30,10 @@ export default function Home() {
               <span className={styles.headerIndigo}> project manager </span>
               needs to get the job done
             </h3>
+            <p className={styles.jobDoneText}>
+              Teamwork delivers them all so you can reach every milestone
+            </p>
           </div>
-          <p className={styles.jobDoneText}>
-            Teamwork delivers them all so you can reach every milestone
-          </p>
           <div className={styles.jobDoneRows}>
             <div className={styles.businessPicture}>
               <img src={increaseProfitability} alt="business" />
@@ -86,7 +86,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className={styles.jobDoneRows}>
+          <div className={styles.collaborationRows}>
             <picture>
               <img src={realTimeCollaboration} alt="realTimeCollaboration" />
             </picture>
@@ -283,7 +283,7 @@ export default function Home() {
               </div>
             </a>
           </div>
-          <div className={styles.cardsCta}>
+          <div className={styles.cardsButtons}>
             <a className={styles.ctaButton} href="https://www.teamwork.com/signup/" target="_self">
               Start Your Free Trial
             </a>
