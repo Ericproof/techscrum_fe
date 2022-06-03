@@ -1,3 +1,1310 @@
-.header {
-  color: red;
+.homePage {
+  .jobDoneSection {
+    padding-bottom: 120px;
+    background-color: #fff;
+    overflow: hidden;
+    font-family: FaktSoft, Arial, Helvetica, sans-serif;
+    .jobDoneContainer {
+      width: 100%;
+      padding-right: 15px;
+      padding-left: 15px;
+      margin-right: auto;
+      margin-left: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .jobDoneHeader {
+        margin: 0 auto;
+        text-align: center;
+        max-width: 869px;
+        h3 {
+          font-size: 50px;
+          font-weight: 700;
+          line-height: 112%;
+          letter-spacing: 1px;
+          margin-bottom: 7px;
+          margin-top: 50px;
+          color: rgb(29, 28, 53);
+          .headerPink {
+            color: #ff22b1;
+            font-weight: bolder;
+          }
+          .headerIndigo {
+            color: #6a84ed;
+          }
+        }
+      }
+      .jobDoneText {
+        margin: 0 auto;
+        margin-bottom: 70px;
+        text-align: center;
+        font-size: 20px;
+        font-weight: 400;
+        font-family: FaktSoft, Arial, Helvetica, sans-serif;
+        line-height: 160%;
+        letter-spacing: 0.75px;
+        color: #494e6a;
+      }
+      .jobDoneRows {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 100px;
+        box-sizing: border-box;
+        .businessContent {
+          min-width: 440px;
+          max-width: 500px;
+          padding-right: 50px;
+          h3 {
+            margin-bottom: 28px;
+            margin-top: 8px;
+            font-size: 39px;
+            font-family: FaktSoft, Arial, Helvetica, sans-serif;
+            font-weight: 300;
+            line-height: 133%;
+            color: #1d1c35;
+          }
+          .jobDoneParagraph {
+            margin-bottom: 37px;
+            width: 90%;
+            p {
+              font-size: 16px;
+              font-weight: 400;
+              line-height: 150%;
+              letter-spacing: 0.75px;
+              font-family: FaktSoft, Arial, Helvetica, sans-serif;
+              color: #494e6a;
+              margin-top: 0;
+              margin-bottom: 1rem;
+              a {
+                color: #4461d7;
+                text-decoration: none;
+              }
+            }
+          }
+          .jobDoneQuote {
+            position: relative;
+            display: flex;
+            color: #727491;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 157%;
+            letter-spacing: 0.25px;
+            margin-bottom: 23px;
+            align-items: flex-start;
+            .quoteAvatar {
+              width: 50px;
+              height: 50px;
+              border-radius: 50%;
+              background: linear-gradient(135deg, #7433ff 3%, #ffbcfe 94%);
+              padding: 2px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              picture {
+                width: 50px;
+                height: 50px;
+                max-width: none;
+                img {
+                  width: 46px;
+                  height: 46px;
+                  border-radius: 50%;
+                  border: 2px solid #fff;
+                }
+              }
+            }
+            .quoteWrap {
+              flex: 1;
+              padding-left: 16px;
+              .quoteText {
+                margin-bottom: 25px;
+                color: #727491;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 157%;
+                letter-spacing: 0.25px;
+                margin-top: 0;
+                width: 461px;
+                height: 44px;
+              }
+              .quoteAuthor {
+                display: flex;
+                font-size: 14px;
+                .authorName {
+                  color: #ff22b1;
+                }
+                .authorRole {
+                  font-size: 14px;
+                }
+                .authorRole::before {
+                  content: ', ';
+                }
+              }
+            }
+          }
+          .jobDoneCta {
+            display: flex;
+            align-items: center;
+            line-height: 1.6;
+            .ctaButton {
+              border-radius: 32px;
+              background: #6a84ed;
+              font-weight: 600;
+              font-size: 21px;
+              line-height: 150%;
+              letter-spacing: 0.75px;
+              padding: 16px 24px;
+              color: #fff;
+              text-decoration: none;
+              display: inline-flex;
+              align-items: center;
+              font-family: FaktSoft;
+              border: none;
+              cursor: pointer;
+              transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            }
+            .ctaText {
+              font-size: 17px;
+              font-weight: 500;
+              line-height: 157%;
+              letter-spacing: 0.25px;
+              color: #727491;
+              font-family: FaktSoft, Arial, Helvetica, sans-serif;
+              margin-left: 1.5rem;
+              margin-top: 0;
+              margin-bottom: 0;
+            }
+          }
+        }
+        .businessPicture {
+          max-width: 50%;
+          overflow: hidden;
+          img {
+            height: auto;
+            width: 600px;
+            aspect-ratio: auto 600 / 480;
+            max-width: 100%;
+          }
+        }
+      }
+      .jobDoneRows {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 100px;
+        box-sizing: border-box;
+        picture {
+          max-width: 50%;
+          overflow: hidden;
+          img {
+            max-width: 100%;
+            height: auto;
+            width: 600px;
+            aspect-ratio: auto 600 / 480;
+          }
+        }
+        .collaborationContent {
+          min-width: 440px;
+          max-width: 500px;
+          padding-left: 50px;
+          h3 {
+            margin-bottom: 29px;
+            margin-top: 0px;
+            font-size: 36px;
+            font-weight: 100;
+            line-height: 133%;
+            color: #1d1c35;
+            width: 87%;
+          }
+          .jobDoneParagraph {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 150%;
+            width: 94%;
+            margin-bottom: 37px;
+            p {
+              letter-spacing: 0.75px;
+              color: #494e6a;
+              margin-top: 0;
+              margin-bottom: 1rem;
+              a {
+                text-decoration: none;
+                color: #4461d7;
+              }
+            }
+          }
+          .jobDoneQuote {
+            position: relative;
+            display: flex;
+            color: #727491;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 157%;
+            letter-spacing: 0.25px;
+            margin-bottom: 37px;
+            .quoteAvatar {
+              width: 50px;
+              height: 50px;
+              border-radius: 50%;
+              background: linear-gradient(135deg, #7433ff 3%, #ffbcfe 94%);
+              padding: 2px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              picture {
+                width: 50px;
+                height: 50px;
+                max-width: none;
+                img {
+                  width: 46px;
+                  height: 46px;
+                  border-radius: 50%;
+                  border: 2px solid #fff;
+                }
+              }
+            }
+            .quoteWrap {
+              flex: 1;
+              padding-left: 16px;
+              .quoteText {
+                margin-bottom: 25px;
+                color: #727491;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 157%;
+                letter-spacing: 0.25px;
+                margin-top: 0;
+                width: 380px;
+              }
+              .quoteAuthor {
+                display: flex;
+                font-size: 14px;
+                .authorName {
+                  color: #ff22b1;
+                }
+                .authorRole {
+                  font-size: 13px;
+                }
+                .authorRole::before {
+                  content: ', ';
+                }
+              }
+            }
+          }
+          .jobDoneCta {
+            display: flex;
+            align-items: center;
+            line-height: 1.6;
+            .ctaButton {
+              border-radius: 32px;
+              background: #6a84ed;
+              font-weight: 600;
+              font-size: 21px;
+              line-height: 150%;
+              letter-spacing: 0.75px;
+              padding: 16px 24px;
+              color: #fff;
+              text-decoration: none;
+              font-family: FaktSoft;
+              border: none;
+              cursor: pointer;
+              transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            }
+            .ctaText {
+              font-size: 17px;
+              font-weight: 500;
+              line-height: 157%;
+              letter-spacing: 0.25px;
+              color: #727491;
+              font-family: FaktSoft, Arial, Helvetica, sans-serif;
+              margin-left: 1.5rem;
+            }
+          }
+        }
+      }
+      .projectManagementRow {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0;
+        .projectManagementContent {
+          min-width: 440px;
+          max-width: 500px;
+          padding-right: 50px;
+          h3 {
+            margin-bottom: 29px;
+            margin-top: 0;
+            font-size: 36px;
+            font-family: FaktSoft, Arial, Helvetica, sans-serif;
+            font-weight: 300;
+            line-height: 133%;
+            letter-spacing: 1px;
+            color: #1d1c35;
+            width: 95%;
+          }
+          .jobDoneParagraph {
+            margin-bottom: 37px;
+            width: 90%;
+            p {
+              font-size: 16px;
+              font-weight: 400;
+              line-height: 150%;
+              letter-spacing: 0.75px;
+              font-family: FaktSoft, Arial, Helvetica, sans-serif;
+              color: #494e6a;
+              margin-top: 0;
+              margin-bottom: 1rem;
+              a {
+                color: #4461d7;
+                text-decoration: none;
+              }
+            }
+          }
+          .jobDoneQuote {
+            position: relative;
+            display: flex;
+            color: #727491;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 157%;
+            letter-spacing: 0.25px;
+            margin-bottom: 37px;
+            align-items: flex-start;
+            .quoteAvatar {
+              width: 50px;
+              height: 50px;
+              border-radius: 50%;
+              background: linear-gradient(135deg, #7433ff 3%, #ffbcfe 94%);
+              padding: 2px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              picture {
+                width: 50px;
+                height: 50px;
+                max-width: none;
+                img {
+                  width: 46px;
+                  height: 46px;
+                  border-radius: 50%;
+                  border: 2px solid #fff;
+                }
+              }
+            }
+            .quoteWrap {
+              flex: 1;
+              padding-left: 16px;
+              .quoteText {
+                margin-bottom: 25px;
+                color: #727491;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 157%;
+                letter-spacing: 0.25px;
+                margin-top: 0;
+                width: 88%;
+              }
+              .quoteAuthor {
+                display: flex;
+                font-size: 14px;
+                .authorName {
+                  color: #ff22b1;
+                }
+                .authorRole {
+                  font-size: 14px;
+                }
+                .authorRole::before {
+                  content: ', ';
+                }
+              }
+            }
+          }
+          .jobDoneCta {
+            display: flex;
+            align-items: center;
+            .ctaButton {
+              border-radius: 32px;
+              background: #6a84ed;
+              font-weight: 600;
+              font-size: 21px;
+              line-height: 150%;
+              letter-spacing: 0.75px;
+              padding: 16px 24px;
+              color: #fff;
+              text-decoration: none;
+              font-family: FaktSoft;
+              border: none;
+              cursor: pointer;
+              transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            }
+            .ctaText {
+              font-size: 17px;
+              font-weight: 500;
+              line-height: 157%;
+              letter-spacing: 0.25px;
+              color: #727491;
+              font-family: FaktSoft, Arial, Helvetica, sans-serif;
+              margin-left: 1.5rem;
+              margin-top: 0;
+              margin-bottom: 0;
+            }
+          }
+        }
+        picture {
+          max-width: 50%;
+          overflow: hidden;
+          img {
+            height: 474px;
+            width: 600px;
+            max-width: 100%;
+          }
+        }
+      }
+    }
+  }
+  .switchingSection {
+    background-color: #f5f7fa;
+    padding: 120px 0;
+    .switchingContainer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding-right: 15px;
+      padding-left: 15px;
+      margin-right: auto;
+      margin-left: auto;
+      .switchingContent {
+        min-width: 420px;
+        h3 {
+          margin-bottom: 35px;
+          max-width: 473px;
+          font-size: 50px;
+          font-weight: 700;
+          line-height: 112%;
+          font-family: FaktSoft, Arial, Helvetica, sans-serif;
+          letter-spacing: 1px;
+          margin-top: 0;
+        }
+        p {
+          margin-bottom: 44px;
+          max-width: 354px;
+          font-size: 20px;
+          font-weight: 400;
+          line-height: 160%;
+          letter-spacing: 0.75px;
+          margin-top: 0;
+        }
+        .switchingCta {
+          display: flex;
+          align-items: center;
+          line-height: 1.6;
+          .ctaButton {
+            border-radius: 32px;
+            background: #6a84ed;
+            font-weight: 600;
+            font-size: 21px;
+            line-height: 150%;
+            letter-spacing: 0.75px;
+            padding: 16px 24px;
+            color: #fff;
+            text-decoration: none;
+          }
+          .ctaText {
+            font-size: 17px;
+            font-weight: 500;
+            line-height: 157%;
+            letter-spacing: 0.25px;
+            color: #727491;
+            font-family: FaktSoft, Arial, Helvetica, sans-serif;
+            margin-left: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 0;
+          }
+        }
+      }
+      .switchingPicture {
+        max-width: 600px;
+        overflow: hidden;
+        img {
+          max-width: 100%;
+          height: auto;
+          width: 687px;
+          aspect-ratio: auto 687 / 428;
+        }
+      }
+    }
+  }
+  .cardsSection {
+    padding: 120px 0;
+    background-color: #fff;
+    .cardsContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+      padding-right: 15px;
+      padding-left: 15px;
+      margin-right: auto;
+      margin-left: auto;
+      h3 {
+        max-width: 760px;
+        margin-bottom: 25px;
+        font-size: 50px;
+        font-weight: 700;
+        line-height: 112%;
+        font-family: FaktSoft, Arial, Helvetica, sans-serif;
+        letter-spacing: 1px;
+        color: rgb(33, 37, 41);
+        span {
+          color: #ff22b1;
+        }
+      }
+      .cardsParagraph {
+        max-width: 627px;
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 160%;
+        font-family: FaktSoft, Arial, Helvetica, sans-serif;
+        letter-spacing: 0.75px;
+        color: #494e6a;
+        text-align: center;
+        p {
+          color: #494e6a;
+          font-size: 20px;
+          font-weight: 400;
+          line-height: 160%;
+          margin-top: 0;
+          margin-bottom: 1rem;
+          span {
+            color: #ff22b1;
+          }
+        }
+      }
+      .cardsCards {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        gap: 40px;
+        margin-top: 60px;
+        .eachCards {
+          margin-right: 20px;
+          max-width: 350px;
+          width: 100%;
+          background: #eef1f6;
+          border-radius: 24px;
+          overflow: hidden;
+          text-align: left;
+          transition: transform 0.2s ease-in-out;
+          text-decoration: none;
+          color: #373753;
+          cursor: pointer;
+          picture {
+            display: block;
+            max-width: 100%;
+            overflow: hidden;
+            max-height: 225px;
+            img {
+              width: 350px;
+              height: 225px;
+              vertical-align: middle;
+              border-style: none;
+            }
+          }
+          .cardsWrap {
+            padding: 25px 20px;
+            .cardsTag {
+              display: inline-block;
+              background: #d6dee7;
+              border-radius: 8px;
+              padding: 3px 8px;
+              color: #727491;
+              font-size: 14px;
+            }
+            .cardsName {
+              font-size: 21px;
+              line-height: 145%;
+              color: #1d1c39;
+              margin-top: 8px;
+              font-weight: 700;
+            }
+            .cardsCta {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-top: 30px;
+              .cardsHeart {
+                display: flex;
+                align-items: center;
+                svg {
+                  margin-right: 16px;
+                  fill: #ff22b1;
+                  color: #ff22b1;
+                }
+                span {
+                  font-size: 16px;
+                  line-height: 150%;
+                  color: #727491;
+                  font-weight: 600;
+                  cursor: pointer;
+                }
+              }
+              button {
+                border-radius: 24px;
+                background: transparent;
+                box-shadow: inset 0 0 0 2px #1d1c39;
+                color: #1d1c39;
+                font-size: 14px;
+                line-height: 157%;
+                padding: 9px 16px;
+                font-weight: 600;
+                min-height: 27px;
+                letter-spacing: 0.25px;
+                display: inline-flex;
+                align-items: center;
+                user-select: none;
+                text-align: center;
+                font-family: FaktSoft;
+                border: none;
+                cursor: pointer;
+                transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+              }
+            }
+          }
+        }
+      }
+      .cardsCta {
+        display: flex;
+        align-items: center;
+        margin-top: 53px;
+        box-sizing: border-box;
+        text-align: center;
+        .ctaButton {
+          border-radius: 32px;
+          background: #6a84ed;
+          margin: 0 5px;
+          font-weight: 600;
+          font-size: 21px;
+          line-height: 150%;
+          letter-spacing: 0.75px;
+          padding: 16px 24px;
+          color: #fff;
+          display: inline-flex;
+          align-items: center;
+          user-select: none;
+          text-align: center;
+          font-family: FaktSoft;
+          border: none;
+          cursor: pointer;
+          transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+          text-decoration: none;
+        }
+        .viewTemplateButton {
+          border-radius: 32px;
+          background: transparent;
+          box-shadow: inset 0 0 0 2px #1d1c39;
+          color: #1d1c39;
+          margin: 0 5px;
+          font-weight: 600;
+          font-size: 21px;
+          line-height: 150%;
+          letter-spacing: 0.75px;
+          padding: 16px 24px;
+          display: inline-flex;
+          align-items: center;
+          user-select: none;
+          text-align: center;
+          font-family: FaktSoft;
+          border: none;
+          cursor: pointer;
+          transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+  .clientsSection {
+    padding: 120px 0;
+    background-color: #fff;
+    .clientsContainer {
+      display: flex;
+      width: 100%;
+      padding-right: 15px;
+      padding-left: 15px;
+      margin-right: auto;
+      margin-left: auto;
+      picture {
+        width: 50%;
+        img {
+          width: 90%;
+          height: auto;
+        }
+      }
+      .clientsContent {
+        width: 50%;
+        h3 {
+          max-width: 382px;
+          margin-bottom: 30px;
+          font-size: 42px;
+          font-weight: 700;
+          line-height: 114%;
+          font-family: FaktSoft, Arial, Helvetica, sans-serif;
+          letter-spacing: 1px;
+          color: #1d1c35;
+          margin-top: 0;
+        }
+        p {
+          max-width: 462px;
+          margin-bottom: 50px;
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 150%;
+          font-family: FaktSoft, Arial, Helvetica, sans-serif;
+          letter-spacing: 0.75px;
+          color: #494e6a;
+        }
+        .clientsQuote {
+          position: relative;
+          display: flex;
+          color: #727491;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 157%;
+          letter-spacing: 0.25px;
+          margin-bottom: 23px;
+          align-items: flex-start;
+          .quoteAvatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #7433ff 3%, #ffbcfe 94%);
+            padding: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            picture {
+              width: 50px;
+              height: 50px;
+              max-width: none;
+              img {
+                width: 46px;
+                height: 46px;
+                border-radius: 50%;
+                border: 2px solid #fff;
+              }
+            }
+          }
+          .quoteWrap {
+            flex: 1;
+            padding-left: 16px;
+            .quoteText {
+              margin-bottom: 25px;
+              color: #727491;
+              font-weight: 500;
+              font-size: 14px;
+              line-height: 157%;
+              letter-spacing: 0.25px;
+              margin-top: 0;
+              width: 380px;
+              height: 44px;
+            }
+            .quoteAuthor {
+              display: flex;
+              font-size: 14px;
+              .authorName {
+                color: #ff22b1;
+              }
+              .authorRole {
+                font-size: 14px;
+              }
+              .authorRole::before {
+                content: ', ';
+              }
+            }
+          }
+        }
+        .clientsCta {
+          display: flex;
+          align-items: center;
+          line-height: 1.6;
+          .ctaButton {
+            border-radius: 32px;
+            background: #6a84ed;
+            font-weight: 600;
+            font-size: 21px;
+            line-height: 150%;
+            letter-spacing: 0.75px;
+            padding: 16px 24px;
+            color: #fff;
+            text-decoration: none;
+          }
+          .ctaText {
+            font-size: 17px;
+            font-weight: 500;
+            line-height: 157%;
+            letter-spacing: 0.25px;
+            color: #727491;
+            font-family: FaktSoft, Arial, Helvetica, sans-serif;
+            margin-left: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+  .supportSection {
+    padding: 120px 0;
+    background: #f5f7fa;
+    .supportContainer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding-right: 15px;
+      padding-left: 15px;
+      margin-right: auto;
+      margin-left: auto;
+      .supportContent {
+        font-size: 50px;
+        font-weight: 700;
+        line-height: 112%;
+        h3 {
+          font-size: 50px;
+          font-weight: 700;
+          line-height: 112%;
+          letter-spacing: 1px;
+          color: #1d1c35;
+          margin-bottom: 2rem;
+          font-family: inherit;
+          margin-top: 0;
+          span {
+            color: #ff22b1;
+          }
+        }
+        p {
+          margin-bottom: 60px;
+          max-width: 577px;
+          font-size: 20px;
+          font-weight: 400;
+          line-height: 160%;
+          font-family: FaktSoft, Arial, Helvetica, sans-serif;
+          letter-spacing: 0.75px;
+          color: #1d1c35;
+          margin-top: 0;
+        }
+        .supportButtons {
+          display: flex;
+          margin-bottom: 40px;
+          .supportCall {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            margin-right: 40px;
+            transition: transform 0.2s ease-in-out;
+            color: #373753;
+            text-decoration: none;
+            background-color: transparent;
+            font-family: 'FaktSoft', Arial, Helvetica, 'sans-serif';
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.6;
+            picture {
+              cursor: pointer;
+              img {
+                vertical-align: middle;
+                border-style: none;
+                width: 50px;
+                aspect-ratio: auto 50 / 50;
+                height: 50px;
+              }
+            }
+            span {
+              font-size: 20px;
+              margin-left: 17px;
+              cursor: pointer;
+            }
+          }
+          .supportContact {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            margin-right: 40px;
+            transition: transform 0.2s ease-in-out;
+            color: #373753;
+            text-decoration: none;
+            background-color: transparent;
+            font-family: 'FaktSoft', Arial, Helvetica, 'sans-serif';
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.6;
+            picture {
+              cursor: pointer;
+              img {
+                vertical-align: middle;
+                border-style: none;
+                width: 50px;
+                aspect-ratio: auto 50 / 50;
+                height: 50px;
+              }
+            }
+            span {
+              font-size: 20px;
+              margin-left: 17px;
+              cursor: pointer;
+            }
+          }
+        }
+        .supportParagraph {
+          font-size: 16px;
+          color: #727491;
+        }
+        .supportQuote {
+          position: relative;
+          display: flex;
+          color: #727491;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 157%;
+          letter-spacing: 0.25px;
+          margin-bottom: 23px;
+          align-items: flex-start;
+          .quoteAvatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #7433ff 3%, #ffbcfe 94%);
+            padding: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            picture {
+              width: 50px;
+              height: 50px;
+              max-width: none;
+              img {
+                width: 46px;
+                height: 46px;
+                border-radius: 50%;
+                border: 2px solid #fff;
+              }
+            }
+          }
+          .quoteWrap {
+            flex: 1;
+            padding-left: 16px;
+            .quoteText {
+              margin-bottom: 25px;
+              color: #727491;
+              font-weight: 500;
+              font-size: 14px;
+              line-height: 157%;
+              letter-spacing: 0.25px;
+              margin-top: 0;
+              width: 415px;
+              height: 66px;
+            }
+            .quoteAuthor {
+              display: flex;
+              font-size: 14px;
+              .authorName {
+                color: #ff22b1;
+              }
+              .authorRole {
+                font-size: 14px;
+              }
+              .authorRole::before {
+                content: ', ';
+              }
+            }
+          }
+        }
+      }
+      .supportPicture {
+        max-width: 470px;
+        img {
+          width: 100%;
+          height: auto;
+          aspect-ratio: auto 470 / 454;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 730px) {
+  .homePage {
+    width: 103%;
+    margin-left: 29px;
+    .jobDoneSection {
+      .jobDoneContainer {
+        .jobDoneRows {
+          .businessContent {
+            min-width: auto;
+            width: 100%;
+            padding: 0;
+            margin-top: 20px;
+          }
+        }
+        .jobDoneRows {
+          flex-direction: column;
+          margin-bottom: 40px;
+          picture {
+            max-width: 300px;
+          }
+          .collaborationContent {
+            min-width: auto;
+            width: 100%;
+            padding: 0;
+            margin-top: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+@media (min-width: 731px) {
+  .homePage {
+    .jobDoneSection {
+      .jobDoneContainer {
+        .jobDoneRows {
+          .businessContent {
+            padding-left: 0;
+            padding-right: 50px;
+          }
+        }
+        .projectManagementRow {
+          .projectManagementContent {
+            padding-left: 0;
+            padding-right: 50px;
+          }
+        }
+      }
+    }
+  }
+}
+@media (min-width: 768px) {
+  .homePage {
+    .jobDoneSection {
+      .jobDoneContainer {
+        max-width: 744px;
+      }
+    }
+    .switchingSection {
+      .switchingContainer {
+        max-width: 744px;
+      }
+    }
+    .cardsSection {
+      .cardsContainer {
+        max-width: 744px;
+      }
+    }
+    .clientsSection {
+      .clientsContainer {
+        max-width: 744px;
+      }
+    }
+    .supportSection {
+      .supportContainer {
+        max-width: 744px;
+      }
+    }
+  }
+}
+@media (max-width: 800px) {
+  .homePage {
+    .jobDoneSection {
+      padding-bottom: 80px;
+    }
+    .switchingSection {
+      padding: 80px 0;
+    }
+    .cardsSection {
+      padding: 80px 0;
+    }
+    .clientsSection {
+      padding: 80px 0;
+    }
+    .supportSection {
+      padding: 80px 0;
+    }
+  }
+}
+@media (min-width: 992px) {
+  .homePage {
+    .jobDoneSection {
+      .jobDoneContainer {
+        max-width: 992px;
+      }
+    }
+    .switchingSection {
+      .switchingContainer {
+        max-width: 992px;
+      }
+    }
+    .cardsSection {
+      .cardsContainer {
+        max-width: 992px;
+      }
+    }
+    .clientsSection {
+      .clientsContainer {
+        max-width: 992px;
+      }
+    }
+    .supportSection {
+      .supportContainer {
+        max-width: 992px;
+      }
+    }
+  }
+}
+@media (max-width: 995px) {
+  .homePage {
+    .jobDoneSection {
+      .jobDoneContainer {
+        .jobDoneRows {
+          .businessContent {
+            .jobDoneParagraph {
+              p {
+                font-size: 14px;
+              }
+            }
+            .jobDoneQuote {
+              font-size: 13px;
+              .quoteWrap {
+                .quoteText {
+                  font-weight: 600;
+                }
+                .quoteAuthor {
+                  flex-direction: column;
+                  font-size: 13px;
+                  .authorRole {
+                    font-size: 12px;
+                  }
+                  .authorRole::before {
+                    content: '';
+                  }
+                }
+              }
+            }
+          }
+        }
+        .jobDoneRows {
+          .collaborationContent {
+            .jobDoneQuote {
+              font-size: 13px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 997px) {
+  .homePage {
+    .jobDoneSection {
+      .jobDoneContainer {
+        .jobDoneHeader {
+          h3 {
+            font-size: 30px;
+          }
+        }
+        .jobDoneText {
+          font-size: 16px;
+        }
+        .jobDoneRows {
+          .businessContent {
+            h3 {
+              font-size: 27px;
+            }
+            .jobDoneParagraph {
+              font-size: 15px;
+              width: 100%;
+            }
+          }
+        }
+        .jobDoneRows {
+          .collaborationContent {
+            h3 {
+              font-size: 26px;
+            }
+            .jobDoneParagraph {
+              font-size: 14px;
+              font-weight: 500;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 1024px) {
+  .homePage {
+    .jobDoneSection {
+      padding-bottom: 100px;
+    }
+    .switchingSection {
+      padding: 100px 0;
+    }
+    .cardsSection {
+      padding: 100px 0;
+    }
+    .clientsSection {
+      padding: 100px 0;
+    }
+    .supportSection {
+      padding: 100px 0;
+    }
+  }
+}
+@media (min-width: 1280px) {
+  .homePage {
+    .jobDoneSection {
+      .jobDoneContainer {
+        max-width: 1164px;
+      }
+    }
+    .switchingSection {
+      .switchingContainer {
+        max-width: 1164px;
+      }
+    }
+    .cardsSection {
+      .cardsContainer {
+        max-width: 1164px;
+      }
+    }
+    .clientsSection {
+      .clientsContainer {
+        max-width: 1164px;
+      }
+    }
+    .supportSection {
+      .supportContainer {
+        max-width: 1164px;
+      }
+    }
+  }
+}
+@media (min-width: 1440px) {
+  .homePage {
+    .jobDoneSection {
+      .jobDoneContainer {
+        max-width: 1224px;
+      }
+    }
+    .cardsSection {
+      .cardsContainer {
+        max-width: 1224px;
+      }
+    }
+    .supportSection {
+      .supportContainer {
+        max-width: 1224px;
+      }
+    }
+  }
 }
