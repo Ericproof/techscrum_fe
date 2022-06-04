@@ -164,6 +164,10 @@
               border: none;
               cursor: pointer;
               transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+              &:hover {
+                outline: none;
+                box-shadow: inset 0 0 0 100px rgb(0 0 0 / 30%);
+              }
             }
             .ctaText {
               font-size: 14px;
@@ -276,7 +280,6 @@
                 line-height: 157%;
                 letter-spacing: 0.25px;
                 margin-top: 0;
-                width: 380px;
               }
               .quoteAuthor {
                 display: flex;
@@ -311,6 +314,10 @@
               border: none;
               cursor: pointer;
               transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+              &:hover {
+                outline: none;
+                box-shadow: inset 0 0 0 100px rgb(0 0 0 / 30%);
+              }
             }
             .ctaText {
               font-size: 14px;
@@ -438,6 +445,10 @@
               border: none;
               cursor: pointer;
               transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+              &:hover {
+                outline: none;
+                box-shadow: inset 0 0 0 100px rgb(0 0 0 / 30%);
+              }
             }
             .ctaText {
               font-size: 14px;
@@ -510,6 +521,10 @@
             padding: 16px 24px;
             color: #fff;
             text-decoration: none;
+            &:hover {
+              outline: none;
+              box-shadow: inset 0 0 0 100px rgb(0 0 0 / 30%);
+            }
           }
           .ctaText {
             font-size: 14px;
@@ -669,8 +684,16 @@
                 border: none;
                 cursor: pointer;
                 transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+                &:hover {
+                  outline: none;
+                  background: #1d1c39;
+                  color: #fff;
+                }
               }
             }
+          }
+          &:hover {
+            transform: translateY(-10px);
           }
         }
         .eachCards:last-child {
@@ -702,6 +725,10 @@
           cursor: pointer;
           transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
           text-decoration: none;
+          &:hover {
+            outline: none;
+            box-shadow: inset 0 0 0 100px rgb(0 0 0 / 30%);
+          }
         }
         .viewTemplateButton {
           border-radius: 32px;
@@ -723,6 +750,11 @@
           cursor: pointer;
           transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
           text-decoration: none;
+          &:hover {
+            outline: none;
+            background: #1d1c39;
+            color: #fff;
+          }
         }
       }
     }
@@ -841,6 +873,10 @@
             color: #fff;
             text-decoration: none;
             text-align: center;
+            &:hover {
+              outline: none;
+              box-shadow: inset 0 0 0 100px rgb(0 0 0 / 30%);
+            }
           }
           .ctaText {
             font-size: 14px;
@@ -927,6 +963,10 @@
               margin-left: 17px;
               cursor: pointer;
             }
+            &:hover {
+              color: #000 !important;
+              transform: scale(1.05);
+            }
           }
           .supportContact {
             cursor: pointer;
@@ -955,6 +995,10 @@
               font-size: 20px;
               margin-left: 17px;
               cursor: pointer;
+            }
+            &:hover {
+              color: #000 !important;
+              transform: scale(1.05);
             }
           }
         }
@@ -1023,6 +1067,7 @@
       }
       .supportPicture {
         max-width: 470px;
+        width: 70%;
         img {
           width: 100%;
           height: auto;
