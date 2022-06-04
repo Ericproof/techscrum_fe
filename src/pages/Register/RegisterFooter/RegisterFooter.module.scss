@@ -1,0 +1,24 @@
+.registerFooter {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  border-top: 1px solid rgb(223, 225, 230);
+
+  img {
+    margin: 10px 0;
+    width: 190px;
+    height: 70px;
+    align-self: center;
+  }
+
+  p {
+    padding-top: 0px;
+    color: rgb(107, 119, 140);
+    a {
+      text-decoration: none;
+      color: rgb(0, 82, 204);
+    }
+  }
+}
