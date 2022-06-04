@@ -1,16 +1,16 @@
 import axios from 'axios';
 import RegisterForm from './entity/register';
+import config from '../../config/config.json';
 
 export default async function register(registerForm: RegisterForm) {
-  const path = process.env.API_ADDRESS || `http://192.168.1.111:8000/api/v1/register`;
+  const path = `${config.apiAddress}/register`;
   try {
-    const result = await axios.post(path, { register }).then((res) => {
+    const result = await axios.post(path, { registerForm }).then((res) => {
       return res.data;
     });
     return result;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      // 👇️ error: AxiosError<any, any>
       return error.message;
     }
     return 'An unexpected error occurred';

@@ -1,7 +1,8 @@
 import axios from 'axios';
+import config from '../../config/config.json';
 
 export default async function emailCheck(email: string) {
-  const path = process.env.API_ADDRESS || `http://192.168.1.111:8000/api/v1/register/${email}`;
+  const path = `${config.apiAddress}/register/${email}`;
   try {
     const result = await axios.get(path).then((res) => {
       return res.data;

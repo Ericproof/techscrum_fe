@@ -9,7 +9,6 @@ export default function Register() {
     <div className={styles.registerContainer}>
       <RegisterBackground />
       <RegisterMain />
-      <div className={styles.space} />
       <RegisterFooter />
     </div>
   );

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import emailCheck from '../../../api/register/emailCheck';
 import register from '../../../api/register/register';
 import styles from './RegisterMain.module.scss';
@@ -10,15 +11,24 @@ import AppleIcon from './apple-logo.svg';
 export default function RegisterMain() {
   const queryString = window.location.href.toString().split('?')[1];
   const query = new URLSearchParams(queryString);
+  const navigate = useNavigate();
+  /* eslint-disable no-useless-escape */
+  const illegalCharacter = /[%&]/;
 
-  let emailRecorder = query.has('email') && query.get('email') !== null ? query.get('email')! : '';
+  let emailRecorder =
+    query.has('email') && query.get('email') !== null ? query.get('email') ?? '' : '';
   let nameRecorder = '';
   let passwordRecorder = '';
 
   let emailCheckProcess: boolean =
     query.has('emailCheckProcess') && query.get('emailCheckProcess') !== null
-      ? Boolean(query.get('emailCheckProcess'))!
+      ? Boolean(query.get('emailCheckProcess')) ?? false
       : false;
+
+  const tip = (error: string) => {
+    const tipLabel = document.getElementById('tip') as HTMLInputElement;
+    tipLabel.textContent = error;
+  };
 
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
@@ -26,20 +36,24 @@ export default function RegisterMain() {
       const result = await emailCheck(emailRecorder);
       if (result.result) {
         emailCheckProcess = true;
-        const link = `${window.location.href}?email=${emailRecorder}&emailCheckProcess=${emailCheckProcess}`;
-        window.location.href = link;
-      } else alert(' The email already exists. Please try again');
-    } else {
-      const resResult = await register({
-        email: emailRecorder,
-        name: nameRecorder,
-        password: passwordRecorder
-      });
-      const { token } = resResult;
-      if (token === undefined) alert(' Something Go Wrong, Please contact staff! ');
-      else {
-        window.location.href = window.location.origin;
+        navigate(`/register?email=${emailRecorder}&emailCheckProcess=${emailCheckProcess}`);
+      } else {
+        tip('Something Go Wrong, Please contact staff!');
       }
+      return;
+    }
+
+    const resResult = await register({
+      email: emailRecorder,
+      name: nameRecorder,
+      password: passwordRecorder
+    });
+
+    const { token } = resResult;
+    if (token === undefined) {
+      tip('Something Go Wrong, Please contact staff!');
+    } else {
+      navigate(`/`);
     }
   };
 
@@ -52,7 +66,10 @@ export default function RegisterMain() {
   };
 
   const setPassword = (password: string) => {
-    passwordRecorder = password;
+    if (!illegalCharacter.test(password) || password === '') {
+      passwordRecorder = password;
+      tip('');
+    } else tip('Illegal Character Detected');
   };
 
   return (
@@ -61,6 +78,7 @@ export default function RegisterMain() {
       <form onSubmit={handleSubmit}>
         <h1>Register to continue</h1>
         <h1>Your team&apos;s site</h1>
+        <p id="tip" />
         <input
           className={styles.email}
           type="email"
@@ -69,6 +87,7 @@ export default function RegisterMain() {
           defaultValue={emailRecorder}
           onChange={(e) => setEmail(e.target.value)}
           disabled={emailCheckProcess}
+          required
         />
         {emailCheckProcess && (
           <>
@@ -77,14 +96,16 @@ export default function RegisterMain() {
               type="text"
               placeholder="Input Your Name"
               name="name"
-              defaultValue="123"
               onChange={(e) => setName(e.target.value)}
+              required
             />
             <input
               className={styles.password}
               type="password"
-              placeholder="Input Password"
+              placeholder="Input Your Password"
               name="password"
+              minLength={8}
+              maxLength={16}
               onChange={(e) => setPassword(e.target.value)}
             />
           </>
