@@ -1,5 +1,5 @@
 import axios from 'axios';
-import config from '../../config/config.json';
+import config from '../../config/config';
 
 export default async function emailCheck(email: string) {
   const path = `${config.apiAddress}/register/${email}`;

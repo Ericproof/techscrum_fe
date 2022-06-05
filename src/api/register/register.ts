@@ -1,6 +1,6 @@
 import axios from 'axios';
 import RegisterForm from './entity/register';
-import config from '../../config/config.json';
+import config from '../../config/config';
 
 export default async function register(registerForm: RegisterForm) {
   const path = `${config.apiAddress}/register`;
