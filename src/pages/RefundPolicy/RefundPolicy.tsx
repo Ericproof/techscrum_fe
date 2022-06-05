@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link, Outlet, Route, Routes } from 'react-router-dom';
 import styles from './RefundPolicy.module.scss';
 
 export default function RefundPolicy() {
   return (
-    <div className={styles.container}>
+    <div className={styles.refundContainer}>
       <div className={styles.legalTitle}>
         <h1 className={styles.containerLegal}>legal</h1>
 
@@ -12,30 +13,32 @@ export default function RefundPolicy() {
       </div>
       <div className={styles.refundContent}>
         <div className={styles.sidebar}>
-          <ul className={styles.sideUl}>
-            <li className={styles.sideLi}>
-              <a href="https://www.techscrum.com/legal/">Our Legal Documents</a>
+          <ul className={styles.stickySidebar}>
+            <li id={styles.RemoveBorder}>
+              <Link to="/" style={{ padding: '0 0 7px 0' }}>
+                Our Legal Documents
+              </Link>
             </li>
-            <li className={styles.sideLi}>
-              <a href="https://www.techscrum.com/legal/cookie-policy/">Cookie Policy</a>
+            <li>
+              <Link to="/cookie-policy">Cookie Policy</Link>
             </li>
-            <li className={styles.sideLi}>
-              <a href="https://www.techscrum.com/legal/gdpr/">GDPR compliance</a>
+            <li>
+              <Link to="/gdpr">GDPR compliance</Link>
             </li>
-
-            <li className={styles.sideLi}>
-              <a href="https://www.techscrum.com/legal/privacy-policy/">Privacy Policy</a>
+            <li>
+              <Link to="/privacy-policy">Privacy Policy</Link>
             </li>
-            <li className={styles.sideLi}>
-              <a href="https://www.techscrum.com/legal/privacy-statement/">Privacy Statement</a>
+            <li>
+              <Link to="/privacy-statement">Privacy Statement</Link>
             </li>
-            <li className={styles.sideLi}>
-              <a href="https://www.techscrum.com/legal/refund-policy/">Refund Policy</a>
+            <li>
+              <Link to="/refund-policy">Refund Policy</Link>
             </li>
-            <li className={styles.sideLi}>
-              <a href="https://www.techscrum.com/legal/terms-of-service/">Terms of Service</a>
+            <li>
+              <Link to="/terms-of-service">Terms Of Service</Link>
             </li>
           </ul>
+          <Outlet />
         </div>
         <div className={styles.refundText}>
           <p className={styles.refundText}>
