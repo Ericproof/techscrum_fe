@@ -38,7 +38,7 @@ export default function RegisterMain() {
         emailCheckProcess = true;
         navigate(`/register?email=${emailRecorder}&emailCheckProcess=${emailCheckProcess}`);
       } else {
-        tip('Something Go Wrong, Please contact staff!');
+        tip('The email already exists. Please try again');
       }
       return;
     }
