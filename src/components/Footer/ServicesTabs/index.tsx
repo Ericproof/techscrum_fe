@@ -50,7 +50,7 @@ const solution = {
 const resources = {
   title: 'resources',
   contents: [
-    { href: '/#', item: 'Blog' },
+    { href: '/terms-of-service', item: 'Term of Service' },
     { href: '/#', item: 'Project management guild' },
     { href: '/#', item: 'Project timeline guild' },
     { href: '/#', item: 'Project schedule guild' },
