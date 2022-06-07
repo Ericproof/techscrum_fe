@@ -53,7 +53,7 @@ export default function RegisterMain() {
     if (token === undefined) {
       tip('Something Go Wrong, Please contact staff!');
     } else {
-      localStorage.setItem("token", token);
+      localStorage.setItem('token', token);
       navigate(`/`);
     }
   };
