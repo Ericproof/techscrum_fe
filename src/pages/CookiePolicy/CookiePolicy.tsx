@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, Outlet, Route, Routes } from 'react-router-dom';
 import styles from './CookiePolicy.module.scss';
 
 export default function CookiePolicy() {
@@ -14,29 +15,30 @@ export default function CookiePolicy() {
           <div className={styles.sidebar}>
             <ul className={styles.stickySidebar}>
               <li id={styles.RemoveBorder}>
-                <a href="https://www.techscrum.com/legal/" style={{ padding: '0 0 7px 0' }}>
+                <Link to="/" style={{ padding: '0 0 7px 0' }}>
                   Our Legal Documents
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="https://www.techscrum.com/cookie-policy/">Cookie Policy</a>
+                <Link to="/cookie-policy">Cookie Policy</Link>
               </li>
               <li>
-                <a href="https://www.techscrum.com/gdpr/">GDPR compliance</a>
+                <Link to="/gdpr">GDPR compliance</Link>
               </li>
               <li>
-                <a href="https://www.techscrum.com/privacy-policy/">Privacy Policy</a>
+                <Link to="/privacy-policy">Privacy Policy</Link>
               </li>
               <li>
-                <a href="https://www.techscrum.com/privacy-statement/">Privacy Statement</a>
+                <Link to="/privacy-statement">Privacy Statement</Link>
               </li>
               <li>
-                <a href="https://www.techscrum.com/refund-policy/">Refund Policy</a>
+                <Link to="/refund-policy">Refund Policy</Link>
               </li>
               <li>
-                <a href="https://www.techscrum.com/terms-of-service/">Terms of Service</a>
+                <Link to="/terms-of-service">Terms Of Service</Link>
               </li>
             </ul>
+            <Outlet />
           </div>
           <div className={styles.legalText}>
             <p>
