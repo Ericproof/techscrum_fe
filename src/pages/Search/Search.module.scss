@@ -1,0 +1,28 @@
+.SearchBar{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    font-family: "FaktSoft",Arial,Helvetica,"sans-serif";
+
+}
+.SearchBar input{
+    margin-top:20px;
+    width: 300px;
+    height: 40px;
+    font-size: 20px;
+    padding-top:10px;
+}
+.autocomplete{
+    width: 100%;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0,0,0.3);
+}
+.autocompleteItems {
+    border-bottom: 1px solid;
+    padding: 10px 5px;
+    cursor: pointer;
+    color: lightblue;
+    font-weight: bold;
+}

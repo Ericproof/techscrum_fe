@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, Outlet, Route, Routes } from 'react-router-dom';
 import styles from './GDPR.module.scss';
 
 export default function Gdpr() {
@@ -10,30 +11,33 @@ export default function Gdpr() {
         <hr />
       </div>
       <div className={styles.gdprContent}>
-        <div className={styles.gdprSidebar}>
-          <ul>
-            <li className={styles.legalDoc}>
-              <a href="https://www.techscrum.com/legal/">Our Legal Documents</a>
+        <div className={styles.sidebar}>
+          <ul className={styles.stickySidebar}>
+            <li id={styles.RemoveBorder}>
+              <Link to="/" style={{ padding: '0 0 7px 0' }}>
+                Our Legal Documents
+              </Link>
             </li>
             <li>
-              <a href="https://www.techscrum.com/legal/cookie-policy/">Cookie Policy</a>
+              <Link to="/cookie-policy">Cookie Policy</Link>
             </li>
             <li>
-              <a href="https://www.techscrum.com/legal/gdpr/">GDPR compliance</a>
+              <Link to="/gdpr">GDPR compliance</Link>
             </li>
             <li>
-              <a href="https://www.techscrum.com/legal/privacy-policy/">Privacy Policy</a>
+              <Link to="/privacy-policy">Privacy Policy</Link>
             </li>
             <li>
-              <a href="https://www.techscrum.com/legal/privacy-statement/">Privacy Statement</a>
+              <Link to="/privacy-statement">Privacy Statement</Link>
             </li>
             <li>
-              <a href="https://www.techscrum.com/legal/refund-policy/">Refund Policy</a>
+              <Link to="/refund-policy">Refund Policy</Link>
             </li>
             <li>
-              <a href="https://www.techscrum.com/legal/terms-of-service/">Terms of Service</a>
+              <Link to="/terms-of-service">Terms Of Service</Link>
             </li>
           </ul>
+          <Outlet />
         </div>
         <div className={styles.gdprText}>
           <h2>What is the GDPR?</h2>
