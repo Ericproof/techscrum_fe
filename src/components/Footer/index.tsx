@@ -7,7 +7,7 @@ export default function index() {
   return (
     <footer>
       <CooperateTabs />
-      <ServicesTabs />
+      {/* <ServicesTabs /> */}
       <PolicyMediaTabs />
     </footer>
   );

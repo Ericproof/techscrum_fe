@@ -32,13 +32,13 @@ export default function Home() {
           <div className={styles.jobDoneContainer}>
             <div className={styles.jobDoneHeader}>
               <h3>
-                Everything a founder,
-                <span className={styles.headerPink}> account director</span>, and
-                <span className={styles.headerIndigo}> project manager </span>
-                needs to get the job done
+                Ship
+                <span className={styles.headerPink}> faster </span> and
+                <span className={styles.headerIndigo}> reliably </span>
+                with TechScrum
               </h3>
               <p className={styles.jobDoneText}>
-                Teamwork delivers them all so you can reach every milestone
+                TechScrum delivers them all so you can reach every milestone
               </p>
             </div>
             <div className={styles.jobDoneRows}>
@@ -49,7 +49,7 @@ export default function Home() {
                 <h3>Increase profitability and grow your business</h3>
                 <div className={styles.jobDoneParagraph}>
                   <p>
-                    Teamwork gives you the tools and reports you need to maximize resources and
+                    TechScrum gives you the tools and reports you need to maximize resources and
                     never miss a billable minute again. Get a bird&apos;s eye view of every project,
                     from milestones to
                     <a href="https://www.teamwork.com/solutions/project-planning/">
@@ -64,7 +64,7 @@ export default function Home() {
                     , and more.
                   </p>
                 </div>
-                <div className={styles.jobDoneQuote}>
+                <div className={styles.jobDoneQuote} style={{ display: 'none' }}>
                   <div className={styles.quoteAvatar}>
                     <picture>
                       <img src={kfirPravda} alt="avatar" />
@@ -98,19 +98,12 @@ export default function Home() {
                 <img src={realTimeCollaboration} alt="realTimeCollaboration" />
               </picture>
               <div className={styles.collaborationContent}>
-                <h3>
-                  Real-time collaboration that keeps clients, teammates, and leadership on the same
-                  page
-                </h3>
+                <h3>Features to help your team succeed</h3>
                 <div className={styles.jobDoneParagraph}>
                   <p>
-                    Forget crossed wires, unread Slacks, and endless emails.
-                    <a href="https://www.teamwork.com/solutions/project-collaboration/">
-                      {' '}
-                      Collaborate in real-time with your team{' '}
-                    </a>
-                    and clients to get your questions answered and projects delivered on time and on
-                    budget.
+                    Log activities such as delay time and daily scrum meeting notes. Which can help
+                    you find why projects delays so that and ensure delivers them on time and on
+                    budget
                   </p>
                 </div>
                 <div className={styles.jobDoneQuote}>
@@ -121,7 +114,7 @@ export default function Home() {
                   </div>
                   <div className={styles.quoteWrap}>
                     <p className={styles.quoteText}>
-                      “Teamwork helps me keep up with all the thousands of activities between all
+                      “TechScrum helps me keep up with all the thousands of activities between all
                       our clients. It gives me full oversight on what&apos;s moving and what&apos;s
                       not.”
                     </p>
@@ -158,7 +151,7 @@ export default function Home() {
                       {' '}
                       gantt chart
                     </a>
-                    , and assigning cards to multiple team members, Teamwork has you covered.
+                    , and assigning cards to multiple team members, TechScrum has you covered.
                   </p>
                 </div>
                 <div className={styles.jobDoneQuote}>
@@ -167,9 +160,9 @@ export default function Home() {
                       <img src={reneeR} alt="avatar" />
                     </picture>
                   </div>
-                  <div className={styles.quoteWrap}>
+                  <div className={styles.quoteWrap} style={{ display: 'none' }}>
                     <p className={styles.quoteText}>
-                      “Teamwork is the first thing I open and the last thing I close: it tells me
+                      “TechScrum is the first thing I open and the last thing I close: it tells me
                       what happened when I was asleep, what I need to do that day, and it helps me
                       plan for the future.”
                     </p>
@@ -196,10 +189,10 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section className={styles.switchingSection}>
+        <section className={styles.switchingSection} style={{ display: 'none' }}>
           <div className={styles.switchingContainer}>
             <div className={styles.switchingContent}>
-              <h3>Switching to Teamwork?</h3>
+              <h3>Switching to TechScrum?</h3>
               <p>Easily import all your tasks and projects in one click.</p>
               <div className={styles.switchingCta}>
                 <a
@@ -225,7 +218,7 @@ export default function Home() {
             </h3>
             <div className={styles.cardsParagraph}>
               <p>
-                No matter the job, <span>Teamwork</span> has a template to get it done. Whether you
+                No matter the job, <span>TechScrum</span> has a template to get it done. Whether you
                 or your client is in marketing, operations, creative, engineering, or IT -
                 we&apos;ve got you covered.
               </p>
@@ -318,9 +311,9 @@ export default function Home() {
             <div className={styles.clientsContent}>
               <h3>Clients actually use it with me!</h3>
               <p>
-                Teamwork was built so you can manage ALL your client work in one platform. From
+                TechScrum was built so you can manage ALL your client work in one platform. From
                 invoicing, to time tracking, to unlimited client access, everything you need to run
-                your client services is in Teamwork.
+                your client services is in TechScrum.
               </p>
               <div className={styles.clientsQuote}>
                 <div className={styles.quoteAvatar}>
@@ -330,7 +323,7 @@ export default function Home() {
                 </div>
                 <div className={styles.quoteWrap}>
                   <p className={styles.quoteText}>
-                    “Teamwork is the first project management tool that I&apos;ve been able to get
+                    “TechScrum is the first project management tool that I&apos;ve been able to get
                     clients to actually use with me. I&apos;ve tried Asana and Trello, and clients
                     just ignored them.”
                   </p>
@@ -387,10 +380,7 @@ export default function Home() {
                   <span>Contact</span>
                 </a>
               </div>
-              <p className={styles.supportParagraph}>
-                See why we have a 99% customer happiness rating
-              </p>
-              <div className={styles.supportQuote}>
+              <div className={styles.supportQuote} style={{ display: 'none' }}>
                 <div className={styles.quoteAvatar}>
                   <picture>
                     <img src={shekharTamasker} alt="avatar" />
@@ -398,8 +388,8 @@ export default function Home() {
                 </div>
                 <div className={styles.quoteWrap}>
                   <p className={styles.quoteText}>
-                    “What reassured us was Teamwork&apos;s reliable and prompt customer service. If
-                    ever an issue came up, Teamwork replied and resolved it promptly.”
+                    “What reassured us was TechScrum&apos;s reliable and prompt customer service. If
+                    ever an issue came up, TechScrum replied and resolved it promptly.”
                   </p>
                   <div className={styles.quoteAuthor}>
                     <span className={styles.authorName}>Shekhar Tamasker</span>
