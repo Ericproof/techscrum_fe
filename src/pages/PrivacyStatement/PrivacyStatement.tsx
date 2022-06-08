@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, Outlet, Route, Routes } from 'react-router-dom';
 import styles from './PrivacyStatement.module.scss';
 
 export default function PrivacyStatement() {
@@ -10,7 +11,34 @@ export default function PrivacyStatement() {
         <hr />
       </div>
       <div className={styles.privacyStatementMainContent}>
-        <div className={styles.privacyStatementContentNav}> </div>
+        <div className={styles.sidebar}>
+          <ul className={styles.stickySidebar}>
+            <li id={styles.RemoveBorder}>
+              <Link to="/" style={{ padding: '0 0 7px 0' }}>
+                Our Legal Documents
+              </Link>
+            </li>
+            <li>
+              <Link to="/cookie-policy">Cookie Policy</Link>
+            </li>
+            <li>
+              <Link to="/gdpr">GDPR compliance</Link>
+            </li>
+            <li>
+              <Link to="/privacy-policy">Privacy Policy</Link>
+            </li>
+            <li>
+              <Link to="/privacy-statement">Privacy Statement</Link>
+            </li>
+            <li>
+              <Link to="/refund-policy">Refund Policy</Link>
+            </li>
+            <li>
+              <Link to="/terms-of-service">Terms Of Service</Link>
+            </li>
+          </ul>
+          <Outlet />
+        </div>
         <div className={styles.privacyStatementContent}>
           <h2>What is a Privacy Statement and Why is It Important</h2>
           <p>

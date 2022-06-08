@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home/Home';
+import Register from './pages/Register/Register';
 import Setting from './pages/Setting/Setting';
 import Gdpr from './pages/GDPR/GDPR';
 import CookiePolicy from './pages/CookiePolicy/CookiePolicy';
@@ -16,6 +17,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/register" element={<Register />} />
       <Route path="/settings" element={<Setting />} />
       <Route path="/cookie-policy" element={<CookiePolicy />} />
       <Route path="/gdpr" element={<Gdpr />} />
