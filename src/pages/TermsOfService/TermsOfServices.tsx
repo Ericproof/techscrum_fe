@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Outlet, Route, Routes } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import styles from './TermsOfServices.module.scss';
 
 export default function TermsOfService() {
