@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { BsSuitHeartFill } from 'react-icons/bs';
+import axios from 'axios';
 import styles from './Home.module.scss';
 import call from '../../assets/call.svg';
 import cover from '../../assets/cover.png';
@@ -21,6 +23,16 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/index';
 
 export default function Home() {
+  const isLogin = false;
+  const navigate = useNavigate();
+  useEffect(() => {
+    axios.get('http://localhost:8000/api/v1/tenants?domain=d&name=dsf').then((res) => {
+      if(isLogin){
+        navigate('/404');
+      }
+    });
+  }, []);
+
   return (
     <div>
       <Header />
