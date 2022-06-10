@@ -12,6 +12,7 @@ import PrivacyStatement from './pages/PrivacyStatement/PrivacyStatement';
 import UserPage from './pages/SettingPage/UserPage/UserPage';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import Access from './pages/Access/Access';
+import Board from './pages/Board';
 import './App.css';
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
       <Route path="/privacy-policy" element={<PrivacyPolicy />} />
       <Route path="/user-page" element={<UserPage />} />
       <Route path="/access" element={<Access />} />
+      <Route path="/board" element={<Board />} />
       <Route path="*" element={<ErrorPage />} />
     </Routes>
   );

@@ -27,7 +27,7 @@ export default function Home() {
   const navigate = useNavigate();
   useEffect(() => {
     axios.get('http://localhost:8000/api/v1/tenants?domain=d&name=dsf').then((res) => {
-      if(isLogin){
+      if (isLogin) {
         navigate('/404');
       }
     });
