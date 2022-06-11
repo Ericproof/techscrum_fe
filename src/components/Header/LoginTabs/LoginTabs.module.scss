@@ -47,6 +47,8 @@ $small_size: 1000px;
     }
 }
 
-.functionLoginTabsResponseShow{
-    display: flex;
+.functionLoginTabsActive{
+    @media (max-width: $max_size) {
+        display: flex;
+    }
 }

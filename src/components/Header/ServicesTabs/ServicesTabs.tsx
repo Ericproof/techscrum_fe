@@ -352,7 +352,7 @@ export default function ServicesTabs({ show }: Props) {
   };
 
   return (
-    <div className={`${styles.serviceListTabs} ${show ? styles.serviceListTabsResponseShow : ''}`}>
+    <div className={`${styles.serviceListTabs} ${show ? styles.serviceListTabsActive : ''}`}>
       <div>
         <a href="/#" onClick={() => activeMenu('platform')}>
           Platform

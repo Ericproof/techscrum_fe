@@ -43,7 +43,7 @@ $small_size: 1000px;
     }
 }
 
-.serviceListTabsResponseShow{
+.serviceListTabsActive{
     @media (max-width: $max_size) {
         display: flex;
     }
