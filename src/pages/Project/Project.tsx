@@ -56,9 +56,10 @@ export default function Project() {
       x: mouseStarPosition.left + window.scrollX,
       y: mouseStarPosition.top + window.scrollY
     };
-    if (refStar[id].current !== null && refStar[id] !== null) {
-      refStar[id].current!.style.top = `${starPosition.y + 45}px`;
-      refStar[id].current!.style.left = `${starPosition.x - 33}px`;
+    const { current } = refStar[id];
+    if (current !== null) {
+      current.style.top = `${starPosition.y + 45}px`;
+      current.style.left = `${starPosition.x - 33}px`;
     }
   };
   const getProfilePosition = (e: React.MouseEvent<HTMLDivElement>, id: number) => {
@@ -67,9 +68,10 @@ export default function Project() {
       x: mouseProfilePosition.left + window.scrollX,
       y: mouseProfilePosition.top + window.scrollY
     };
-    if (refProfile[id].current !== null && refProfile[id] !== null) {
-      refProfile[id].current!.style.top = `${profilePosition.y - 170}px`;
-      refProfile[id].current!.style.left = `${profilePosition.x + 1}px`;
+    const { current } = refProfile[id];
+    if (current !== null) {
+      current.style.top = `${profilePosition.y - 170}px`;
+      current.style.left = `${profilePosition.x + 1}px`;
     }
   };
   return (
