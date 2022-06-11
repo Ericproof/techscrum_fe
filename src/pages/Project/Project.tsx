@@ -1,7 +1,77 @@
-import React from 'react';
+import React, { useState, createRef } from 'react';
+import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
+import { FiSearch } from 'react-icons/fi';
 import styles from './Project.module.scss';
 
+const projects = [
+  {
+    id: 0,
+    star: false,
+    icon: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10418?size=small',
+    name: 'example',
+    key: 'EX',
+    type: 'Team-managed software',
+    lead: 'Evan Lin',
+    avatar:
+      'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/EL-3.png?ssl=1'
+  },
+  {
+    id: 1,
+    star: false,
+    icon: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10411?size=small',
+    name: 'TECHSCRUM',
+    key: 'TEC',
+    type: 'Team-managed software',
+    lead: 'Yiu Kitman',
+    avatar:
+      'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/YK-3.png?ssl=1'
+  },
+  {
+    id: 2,
+    star: false,
+    icon: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10412?size=small',
+    name: 'Template',
+    key: 'TEM',
+    type: 'Company-managed software',
+    lead: 'Yiu Kitman',
+    avatar:
+      'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/YK-3.png?ssl=1'
+  }
+];
 export default function Project() {
+  const [projectList, setProjectList] = useState(projects);
+  const [value, setValue] = useState(0);
+  const refStar = projectList.map(() => createRef<HTMLDivElement>());
+  const refProfile = projectList.map(() => createRef<HTMLDivElement>());
+
+  const setProjectStar = (id: number) => {
+    const index = projectList.findIndex((project) => project.id === id);
+    projectList[index].star = !projectList[index].star;
+    setProjectList(projectList);
+    setValue(value + 1);
+  };
+  const getStarPosition = (e: React.MouseEvent<HTMLDivElement>, id: number) => {
+    const mouseStarPosition = e.currentTarget.getBoundingClientRect();
+    const starPosition = {
+      x: mouseStarPosition.left + window.scrollX,
+      y: mouseStarPosition.top + window.scrollY
+    };
+    if (refStar[id].current !== null && refStar[id] !== null) {
+      refStar[id].current!.style.top = `${starPosition.y + 45}px`;
+      refStar[id].current!.style.left = `${starPosition.x - 33}px`;
+    }
+  };
+  const getProfilePosition = (e: React.MouseEvent<HTMLDivElement>, id: number) => {
+    const mouseProfilePosition = e.currentTarget.getBoundingClientRect();
+    const profilePosition = {
+      x: mouseProfilePosition.left + window.scrollX,
+      y: mouseProfilePosition.top + window.scrollY
+    };
+    if (refProfile[id].current !== null && refProfile[id] !== null) {
+      refProfile[id].current!.style.top = `${profilePosition.y - 170}px`;
+      refProfile[id].current!.style.left = `${profilePosition.x + 1}px`;
+    }
+  };
   return (
     <div className={styles.projectPage}>
       <div className={styles.projectContainer}>
@@ -13,18 +83,20 @@ export default function Project() {
             </div>
             <div className={styles.searchBar}>
               <input />
-              <span>
-                <svg />
-              </span>
+              <div className={styles.searchIcon}>
+                <span>
+                  <FiSearch />
+                </span>
+              </div>
             </div>
           </div>
           <div className={styles.mainContent}>
             <table aria-label="Projects details">
-              <thead className={styles.tableHeader}>
+              <thead>
                 <tr>
                   <th className={styles.stars}>
                     <span>
-                      <svg />
+                      <AiFillStar />
                     </span>
                   </th>
                   <th className={styles.names}>
@@ -45,73 +117,107 @@ export default function Project() {
                 </tr>
               </thead>
               <tbody>
-                <tr className={styles.example}>
-                  <td className={styles.star}>
-                    <div className={styles.changeStar}>
-                      <span>
-                        <button type="button" className={styles.starBtn}>
-                          <div className={styles.starStyle}>
-                            <span>
-                              <svg />
-                            </span>
-                          </div>
-                        </button>
-                      </span>
-                    </div>
-                  </td>
-                  <td className={styles.name}>
-                    <a className={styles.nameContainer} href="">
-                      <div className={styles.nameContent}>
-                        <img
-                          src="https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10418"
-                          alt="icon"
-                        />
-                        <span className={styles.exampleName}>example</span>
+                {projectList.map((project) => (
+                  <tr key={project.id}>
+                    <td className={styles.star}>
+                      <div
+                        className={styles.changeStar}
+                        onMouseOver={(e: React.MouseEvent<HTMLDivElement>) =>
+                          getStarPosition(e, project.id)
+                        }
+                        onFocus={() => undefined}
+                      >
+                        <span>
+                          {project.star ? (
+                            <button
+                              type="button"
+                              className={styles.starBtn}
+                              onClick={() => setProjectStar(project.id)}
+                            >
+                              <div className={styles.starStyle}>
+                                <span className={styles.isStar}>
+                                  <AiFillStar />
+                                  <div className={styles.notification} ref={refStar[project.id]}>
+                                    Remove from Starred
+                                  </div>
+                                </span>
+                              </div>
+                            </button>
+                          ) : (
+                            <button
+                              type="button"
+                              className={styles.unStarBtn}
+                              onClick={() => setProjectStar(project.id)}
+                            >
+                              <div className={styles.starStyle}>
+                                <span className={styles.unStar}>
+                                  <AiOutlineStar />
+                                  <div className={styles.notification} ref={refStar[project.id]}>
+                                    Add to Starred
+                                  </div>
+                                </span>
+                              </div>
+                            </button>
+                          )}
+                        </span>
                       </div>
-                    </a>
-                  </td>
-                  <td className={styles.key}>
-                    <span className={styles.keyName}>EX</span>
-                  </td>
-                  <td className={styles.type}>
-                    <div className={styles.typeContent}>
-                      <span className={styles.typeName}>Team-managed software</span>
-                    </div>
-                  </td>
-                  <td className={styles.lead}>
-                    <div className={styles.leadContainer}>
-                      <div className={styles.leadContent}>
-                        <a href="">
-                          <div className={styles.leadInfo}>
-                            <div className={styles.avatar}>
-                              <span>
-                                <img alt="avatar" />
-                              </span>
+                    </td>
+                    <td className={styles.name}>
+                      <a href="/#">
+                        <div className={styles.nameContent}>
+                          <img src={project.icon} alt="icon" />
+                          <span>{project.name}</span>
+                        </div>
+                      </a>
+                    </td>
+                    <td className={styles.key}>
+                      <span className={styles.keyName}>{project.key}</span>
+                    </td>
+                    <td className={styles.type}>
+                      <div className={styles.typeContent}>
+                        <span>{project.type}</span>
+                      </div>
+                    </td>
+                    <td className={styles.lead}>
+                      <div
+                        className={styles.leadContainer}
+                        onMouseOver={(e: React.MouseEvent<HTMLDivElement>) =>
+                          getProfilePosition(e, project.id)
+                        }
+                        onFocus={() => undefined}
+                      >
+                        <div className={styles.leadContent}>
+                          <a href="/#">
+                            <div className={styles.leadInfo}>
+                              <div className={styles.avatar}>
+                                <span>
+                                  <span className={styles.avatarImg} />
+                                </span>
+                              </div>
+                              <span>{project.lead}</span>
                             </div>
-                            <span className={styles.leadName}>Evan Lin</span>
-                          </div>
-                        </a>
+                            <div className={styles.profileSection} ref={refProfile[project.id]}>
+                              <div className={styles.profileContainer}>
+                                <div className={styles.profileContent}>
+                                  <div className={styles.avatar}>
+                                    <img src={project.avatar} alt="avatar" />
+                                  </div>
+                                  <div className={styles.name}>
+                                    <span>{project.lead}</span>
+                                  </div>
+                                  <div className={styles.viewProfile}>
+                                    <button type="button">View profile</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
                       </div>
-                    </div>
-                  </td>
-                  <td className={styles.button} />
-                </tr>
-                <tr className={styles.project}>
-                  <td className={styles.star}></td>
-                  <td className={styles.name}></td>
-                  <td className={styles.key}></td>
-                  <td className={styles.type}></td>
-                  <td className={styles.lead}></td>
-                  <td className={styles.button}></td>
-                </tr>
-                <tr className={styles.template}>
-                  <td className={styles.star}></td>
-                  <td className={styles.name}></td>
-                  <td className={styles.key}></td>
-                  <td className={styles.type}></td>
-                  <td className={styles.lead}></td>
-                  <td className={styles.button}></td>
-                </tr>
+                    </td>
+                    <td className={styles.button} />
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>

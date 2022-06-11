@@ -11,6 +11,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy/PrivacyPolicy';
 import PrivacyStatement from './pages/PrivacyStatement/PrivacyStatement';
 import UserPage from './pages/SettingPage/UserPage/UserPage';
 import Access from './pages/Access/Access';
+import Project from './pages/Project/Project';
 import './App.css';
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
       <Route path="/privacy-policy" element={<PrivacyPolicy />} />
       <Route path="/user-page" element={<UserPage />} />
       <Route path="/access" element={<Access />} />
+      <Route path="/projects" element={<Project />} />
     </Routes>
   );
 }
