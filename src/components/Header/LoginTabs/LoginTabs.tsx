@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styles from './LoginTabs.module.scss';
 
 interface Props {
@@ -11,10 +12,10 @@ export default function loginTabs({ show }: Props) {
       className={`${styles.functionsLoginTabs} ${show ? styles.functionLoginTabsResponseShow : ''}`}
     >
       <a href="/#">Book a Demo</a>
-      <a href="/#">Login</a>
-      <a className={styles.btn} href="/#">
+      <Link to="/login">Login</Link>
+      <Link className={styles.btn} to="/register">
         Try it to free
-      </a>
+      </Link>
     </div>
   );
 }
