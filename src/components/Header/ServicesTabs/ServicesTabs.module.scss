@@ -7,6 +7,7 @@ $small_size: 1000px;
     gap: 14px;
     margin-left: 42px;
     @media (max-width: $max_size) {
+        display: none;
         flex-direction: column;
         margin-left: 0;
     }
@@ -30,11 +31,20 @@ $small_size: 1000px;
             }
             svg{
                 margin-left:5px;
+                min-width: 10px;
+                min-height: 10px;
                 @media (max-width: $max_size) {
-                    width: 15px;
-                    height: 15px;
+                    margin-right: 50px;
+                    min-width: 7.5px;
+                    min-height: 7.5px;
                 }
             }
         }
+    }
+}
+
+.serviceListTabsResponseShow{
+    @media (max-width: $max_size) {
+        display: flex;
     }
 }

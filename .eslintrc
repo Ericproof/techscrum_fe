@@ -29,7 +29,7 @@
     },
     "rules": {
       "linebreak-style": "off",
-      "no-console" : "error",
+      //"no-console" : "error",
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
       "prettier/prettier": [

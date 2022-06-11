@@ -38,16 +38,19 @@ interface Props {
       };
     };
   };
+  active: boolean;
 }
 
-export default function threeColumnsMenu({ servicesInfo }: Props) {
+export default function threeColumnsMenu({ servicesInfo, active = false }: Props) {
   return (
-    <div className={styles.subNavThreeColumns}>
-      <div className={styles.serviceContainerThreeColumns}>
-        <Left leftContent={servicesInfo.leftContent} />
-        <Middle middleContent={servicesInfo.middleContent} />
-        <Right rightContent={servicesInfo.rightContent} />
-      </div>
+    <div className={active ? styles.subNavThreeColumns : styles.threeColumnsMenuNotActive}>
+      {active && (
+        <div className={styles.serviceContainerThreeColumns}>
+          <Left leftContent={servicesInfo.leftContent} />
+          <Middle middleContent={servicesInfo.middleContent} />
+          <Right rightContent={servicesInfo.rightContent} />
+        </div>
+      )}
     </div>
   );
 }

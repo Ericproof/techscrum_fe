@@ -1,9 +1,15 @@
 import React from 'react';
 import styles from './LoginTabs.module.scss';
 
-export default function loginTabs() {
+interface Props {
+  show: boolean;
+}
+
+export default function loginTabs({ show }: Props) {
   return (
-    <div className={styles.functionsLoginTabs}>
+    <div
+      className={`${styles.functionsLoginTabs} ${show ? styles.functionLoginTabsResponseShow : ''}`}
+    >
       <a href="/#">Book a Demo</a>
       <a href="/#">Login</a>
       <a className={styles.btn} href="/#">

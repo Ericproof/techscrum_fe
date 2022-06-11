@@ -25,7 +25,7 @@ export default function threeColumnsRight({ rightContent }: Props) {
       <div>
         {rightContent.content.map((service) => {
           return (
-            <div>
+            <div key={service.title}>
               <a href={service.href}>
                 <service.icon />
                 <div>

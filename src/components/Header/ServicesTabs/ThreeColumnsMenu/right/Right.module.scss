@@ -1,3 +1,6 @@
+$max_size: 1201px;
+$small_size: 1000px;
+
 div.right{
     border-left: 1px solid #d6dee7;
     padding-left: 30px;
@@ -12,6 +15,10 @@ div.right{
         flex-wrap: wrap;
         align-items: flex-start;
         margin-left: 50px;
+
+        @media(max-width: $max_size){
+            margin-left: 0px;
+        }
         a{
             margin-top: 10px;
             position: relative;
@@ -22,6 +29,9 @@ div.right{
             padding: 10px;
             text-decoration: none;
             background: transparent;
+            @media(max-width: $max_size){
+                margin-left: 0px;
+            }
             svg{
                 width: 55px;
                 height: 55px;
@@ -64,5 +74,10 @@ div.right{
         background: #edf1fe;
         align-self: center;
         text-decoration: none;
+
+        @media(max-width: $max_size){
+            width: 300px;
+            margin-left: -50px;
+        }
     }
 }

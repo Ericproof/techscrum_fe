@@ -23,7 +23,7 @@ export default function left({ rightContent }: Props) {
       <div className={styles.rightServicesLists}>
         {rightContent.content.map((service) => {
           return (
-            <a href={service.href}>
+            <a href={service.href} key={service.title}>
               {service.title} {service.hot ? <span>Popular</span> : ''}
             </a>
           );
