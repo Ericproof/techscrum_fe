@@ -74,6 +74,7 @@ export default function Project() {
       current.style.left = `${profilePosition.x + 1}px`;
     }
   };
+
   return (
     <div className={styles.projectPage}>
       <div className={styles.projectContainer}>
