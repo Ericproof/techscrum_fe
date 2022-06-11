@@ -1,14 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styles from './LoginTabs.module.scss';
 
-export default function loginTabs() {
+export default function LoginTabs() {
   return (
     <div className={styles.functionsLoginTabs}>
       <a href="/#">Book a Demo</a>
-      <a href="/#">Login</a>
-      <a className={styles.btn} href="/#">
+      <Link to="/login">Login</Link>
+      <Link className={styles.btn} to="/register">
         Try it to free
-      </a>
+      </Link>
     </div>
   );
 }

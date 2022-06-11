@@ -17,7 +17,7 @@ function Search() {
     timer = setTimeout(() => {
       handleChange(value);
       clearTimeout(timer);
-    }, 1000);
+    }, 2000);
   };
 
   const optimizedFn = (value: string) => {
