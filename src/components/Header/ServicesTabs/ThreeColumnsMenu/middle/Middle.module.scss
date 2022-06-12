@@ -28,8 +28,8 @@ div.middle{
                 flex-direction: row;
                 text-decoration: none;
                 svg{
-                    width: 24px;
-                    height: 24px;
+                    min-width: 24px;
+                    min-height: 24px;
                     margin-right: 15px;
                 }
                 div{
@@ -56,7 +56,7 @@ div.middle{
     }
     a.pinkBtn{
         margin-top: 20px;
-        width: 100%;
+        width: 95%;
         display: block;
         text-transform: uppercase;
         font-size: 14px;
@@ -68,5 +68,9 @@ div.middle{
         color: #ff22b1;
         background: #fdf3fa;
         text-decoration: none;
+
+        @media(max-width: $max_size){
+            width: 300px;
+        }
     }
 }
