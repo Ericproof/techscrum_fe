@@ -4,7 +4,7 @@ import NavBottom from './NavBottom/navBottom';
 import NavMain from './NavMain/navMain';
 import NavTop from './NavTop/navTop';
 import style from './nav.module.scss';
-import Board from '../Board/index';
+import Board from '../../pages/Board/index';
 
 export default function Nav() {
   return (
