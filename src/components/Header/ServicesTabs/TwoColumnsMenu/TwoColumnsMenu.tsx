@@ -33,15 +33,18 @@ interface Props {
       };
     };
   };
+  active: boolean;
 }
 
-export default function twoCloumnsMenu({ servicesInfo }: Props) {
+export default function twoCloumnsMenu({ servicesInfo, active }: Props) {
   return (
-    <div className={styles.subNavTwoColumns}>
-      <div className={styles.serviceContainerTwoColumns}>
-        <Left leftContent={servicesInfo.leftContent} />
-        <Right rightContent={servicesInfo.rightContent} />
-      </div>
+    <div className={active ? styles.subNavTwoColumns : styles.subNavTwoColumnsNotActive}>
+      {active && (
+        <div className={styles.serviceContainerTwoColumns}>
+          <Left leftContent={servicesInfo.leftContent} />
+          <Right rightContent={servicesInfo.rightContent} />
+        </div>
+      )}
     </div>
   );
 }

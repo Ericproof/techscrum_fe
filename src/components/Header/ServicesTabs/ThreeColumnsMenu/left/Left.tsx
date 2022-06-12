@@ -15,7 +15,7 @@ export default function threeColumnsLeft({ leftContent }: Props) {
       <div>
         {leftContent.content.map((service) => {
           return (
-            <div>
+            <div key={service.title}>
               <a href={service.href}>
                 <h2>{service.title}</h2>
                 <p>{service.description}</p>
