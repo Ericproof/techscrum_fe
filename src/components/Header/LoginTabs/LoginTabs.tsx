@@ -2,9 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './LoginTabs.module.scss';
 
-export default function LoginTabs() {
+interface Props {
+  show: boolean;
+}
+
+export default function loginTabs({ show }: Props) {
   return (
-    <div className={styles.functionsLoginTabs}>
+    <div className={`${styles.functionsLoginTabs} ${show ? styles.functionLoginTabsActive : ''}`}>
       <a href="/#">Book a Demo</a>
       <Link to="/login">Login</Link>
       <Link className={styles.btn} to="/register">
