@@ -36,7 +36,6 @@ export default function Home() {
   return (
     <div>
       <Header />
-      
       <div className={styles.homePage}>
         <section className={styles.jobDoneSection}>
           <div className={styles.jobDoneContainer}>
