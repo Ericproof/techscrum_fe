@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import emailCheck from '../../../api/register/emailCheck';
 import register from '../../../api/register/register';
 import styles from './RegisterMain.module.scss';
-import Icon from '../icon.png';
+import Icon from '../../../assets/logo.svg';
 import GoogleIcon from './google-logo.svg';
 import MicrosoftIcon from './microsoft-logo.svg';
 import AppleIcon from './apple-logo.svg';
@@ -114,7 +114,7 @@ export default function RegisterMain() {
         <p>
           By registering, I accept the <a href="/#">TechScrum Terms of Service</a> and confirm
           acceptance of the
-          <a href="/#">Privacy Policy.</a>
+          <a href="/#"> Privacy Policy.</a>
         </p>
         <button type="submit">Register</button>
         <p>or</p>
@@ -138,7 +138,7 @@ export default function RegisterMain() {
       </form>
       <p className={styles.registerMainFooter}>
         This page is protected by reCAPTCHA and complies with Google&apos;s
-        <a href="/#">Privacy Policy</a> and <a href="/#">Terms of Service</a>
+        <a href="/#"> Privacy Policy</a> and <a href="/#">Terms of Service</a>
       </p>
     </div>
   );
