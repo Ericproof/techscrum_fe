@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import emailCheck from '../../../api/register/emailCheck';
 import register from '../../../api/register/register';
 import styles from './RegisterMain.module.scss';
@@ -112,9 +112,10 @@ export default function RegisterMain() {
           </>
         )}
         <p>
-          By registering, I accept the <a href="/#">TechScrum Terms of Service</a> and confirm
-          acceptance of the
-          <a href="/#">Privacy Policy.</a>
+          By registering, I accept the{' '}
+          <Link to="/terms-of-service">TechScrum Terms of Service</Link> and confirm acceptance of
+          the
+          <Link to="/privacy-policy"> Privacy Policy.</Link>
         </p>
         <button type="submit">Register</button>
         <p>or</p>
@@ -133,12 +134,13 @@ export default function RegisterMain() {
           </a>
         </div>
         <div className={styles.formFooter}>
-          <a href="/#">Already have TechScrum Account? Login</a>
+          <Link to="/login">Already have TechScrum Account? Login</Link>
         </div>
       </form>
       <p className={styles.registerMainFooter}>
         This page is protected by reCAPTCHA and complies with Google&apos;s
-        <a href="/#">Privacy Policy</a> and <a href="/#">Terms of Service</a>
+        <Link to="/privacy-policy"> Privacy Policy</Link> and{' '}
+        <Link to="/terms-of-service">Terms of Service</Link>
       </p>
     </div>
   );
