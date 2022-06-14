@@ -1,5 +1,6 @@
 import React, { useState, createRef } from 'react';
 import { AiOutlineStar, AiFillStar, AiOutlinePlus } from 'react-icons/ai';
+import { BsBoxArrowUpRight } from 'react-icons/bs';
 import { CgMenuGridR } from 'react-icons/cg';
 import { IoIosArrowDown } from 'react-icons/io';
 import styles from './ProjectHeader.module.scss';
@@ -31,8 +32,9 @@ export default function ProjectHeader() {
   const [projectDropdown, setProjectDropdown] = useState(false);
   const [projectList, setProjectList] = useState(projects);
   const [value, setValue] = useState(0);
-  const [setting, setSetting] = useState(false);
+  const [settingList, setSettingList] = useState(false);
   const refStar = projectList.map(() => createRef<HTMLDivElement>());
+
   const setProjectStar = (id: number) => {
     const index = projectList.findIndex((project) => project.id === id);
     projectList[index].star = !projectList[index].star;
@@ -54,7 +56,7 @@ export default function ProjectHeader() {
 
   return (
     <header className={styles.projectHeader}>
-      <nav className={styles.leftSection}>
+      <nav>
         <div className={styles.menu}>
           <button type="button">
             <span>
@@ -103,7 +105,7 @@ export default function ProjectHeader() {
                       <ul>
                         {projectList.map((project) => (
                           <li key={project.id}>
-                            <a href="/#">
+                            <a href="/#" target="_self">
                               <div className={styles.left}>
                                 <span className={styles.iconSection}>
                                   <div className={styles.iconContainer}>
@@ -244,21 +246,81 @@ export default function ProjectHeader() {
           </div>
         </div>
       </nav>
-      <div className={styles.rightSection}>
-        <div className={styles.avatarSection}>
-          <div className={styles.avatarContainer}>
-            <button type="button">
-              <span>
-                <div className={styles.avatarContent}>
-                  <span>
-                    <svg />
-                  </span>
+      {users.map((user) => (
+        <div className={styles.rightSection}>
+          {settingList ? (
+            <>
+              <div className={styles.avatarSection}>
+                <div className={styles.avatarContainer}>
+                  <button type="button" onClick={() => setSettingList(false)}>
+                    <span>
+                      <div className={styles.avatarContent}>
+                        <span>
+                          <img src={user.avatar} alt="avatar" />
+                        </span>
+                      </div>
+                    </span>
+                  </button>
                 </div>
-              </span>
-            </button>
-          </div>
+              </div>
+              <div className={styles.settingDropdown}>
+                <div className={styles.settingContainer}>
+                  <div className={styles.settingContent}>
+                    <div className={styles.settingTop} />
+                    <div className={styles.settingDetails}>
+                      <div className={styles.personal}>
+                        <span>TECHSCRUM</span>
+                        <a href="/#">
+                          <div className={styles.title}>
+                            <span>Personal settings</span>
+                          </div>
+                        </a>
+                      </div>
+                      <div className={styles.account}>
+                        <span>{user.name}</span>
+                        <a href="/#">
+                          <div className={styles.title}>
+                            <span>Profile</span>
+                          </div>
+                        </a>
+                        <a href="/#">
+                          <div className={styles.title}>
+                            <span>Accounting settings</span>
+                          </div>
+                          <div className={styles.iconSection}>
+                            <div className={styles.icon}>
+                              <BsBoxArrowUpRight />
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                    <div className={styles.settingBottom}>
+                      <div className={styles.logOutSection}>
+                        <svg />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
+          ) : (
+            <div className={styles.avatarSection}>
+              <div className={styles.avatarContainer}>
+                <button type="button" onClick={() => setSettingList(false)}>
+                  <span>
+                    <div className={styles.avatarContent}>
+                      <span>
+                        <img src={user.avatar} alt="avatar" />
+                      </span>
+                    </div>
+                  </span>
+                </button>
+              </div>
+            </div>
+          )}
         </div>
-      </div>
+      ))}
     </header>
   );
 }
