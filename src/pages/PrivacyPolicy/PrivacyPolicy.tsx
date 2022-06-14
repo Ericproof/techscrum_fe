@@ -7,7 +7,7 @@ export default function PrivacyPolicy() {
     <div className={styles.privacyPolicyMain}>
       <div className={styles.privacyPolicyContent}>
         <h3 className={styles.privacyPolicyHeader1}>LEGAL</h3>
-        <h1 className={styles.privacyPolicyHeader2}>Privacy policy</h1>
+        <h1 className={styles.privacyPolicyHeader2}>Privacy Policy</h1>
         <hr className={styles.privacyPolicyHr} />
         <div className={styles.privacyPolicySmallScreen}>
           <div className={styles.sidebar}>

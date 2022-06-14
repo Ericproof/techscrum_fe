@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import NavBottom from './NavBottom/navBottom';
-import NavMain from './NavMain/navMain';
-import NavTop from './NavTop/navTop';
-import style from './nav.module.scss';
+import NavBottom from './NavBottom/NavBottom';
+import NavMain from './NavMain/NavMain';
+import NavTop from './NavTop/NavTop';
+import style from './Nav.module.scss';
 import Board from '../../pages/Board/index';
 
 export default function Nav() {

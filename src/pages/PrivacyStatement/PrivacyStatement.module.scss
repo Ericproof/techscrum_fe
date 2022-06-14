@@ -10,7 +10,7 @@
 }
 .privacyStatementContainer body,
 html {
-  background: #ffffff;
+  background: #f5f7fa;
   line-height: 1.6;
   font-size: 14px;
   font-weight: 400;
@@ -20,8 +20,8 @@ html {
   padding-right: 300px;
   padding-left: 50px;
   margin-right: auto;
-  margin-left: 100px;
-  padding-top: 10.5rem;
+  margin-left: 110px;
+  padding-top: 11rem;
   margin-bottom: 6rem;
   box-sizing: border-box;
   font-family: FaktSoft, Arial, Helvetica, sans-serif;
@@ -34,11 +34,12 @@ html {
   font-weight: 600;
   text-transform: uppercase;
   color: #a7acc5;
-  font-size: 1.286rem;
-  margin-bottom: 1.5rem;
+  font-size: 18px;
+  line-height: 3;
 }
 .privacyStatementTextCenter h1 {
   font-weight: 400;
+  font-size: 42px;
 }
 .privacyStatementTextCenter hr {
   background-color: var(--hrColor);
@@ -57,9 +58,10 @@ html {
   flex-direction: row;
   margin-left: -12px;
   margin-right: -12px;
+  margin-top: -20px;
 }
 .sidebar {
-  padding-left: 150px;
+  padding-left: 190px;
   padding-right: 30px;
   @media screen and (min-width: 768px) {
     flex: 0 0 100%;
@@ -106,7 +108,7 @@ html {
   flex: 0 0 75%;
   max-width: 75%;
   padding-left: 12px;
-  padding-right: 12px;
+  padding-right: 300px;
 }
 .privacyStatementContent h2 {
   font-size: 1.714rem;

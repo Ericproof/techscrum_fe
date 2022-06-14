@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './navTop.module.scss';
+import style from './NavTop.module.scss';
 
 export default function NavTop() {
   return (

@@ -7,7 +7,7 @@ export default function TermsOfService() {
     <div className={styles.container}>
       <div className={styles.containerHeader}>
         <div className={styles.containerLegal}>Legal</div>
-        <h1 className={styles.containerTerms}>Terms of service</h1>
+        <h1 className={styles.containerTerms}>Terms of Service</h1>
         <hr className={styles.containerUnderline} />
       </div>
       <div className={styles.termContent}>

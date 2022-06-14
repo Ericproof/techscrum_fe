@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import style from './navMain.module.scss';
+import style from './NavMain.module.scss';
 
 export default function NavMain() {
   return (

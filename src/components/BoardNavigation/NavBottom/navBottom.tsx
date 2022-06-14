@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './navBottom.module.scss';
+import style from './NavBottom.module.scss';
 
 export default function NavBottom() {
   return (

@@ -15,7 +15,7 @@ import ErrorPage from './pages/ErrorPage/ErrorPage';
 import Access from './pages/Access/Access';
 import Project from './pages/Project/Project';
 import './App.css';
-import Nav from './components/BoardNavigation/nav';
+import Nav from './components/BoardNavigation/Nav';
 
 function App() {
   return (
