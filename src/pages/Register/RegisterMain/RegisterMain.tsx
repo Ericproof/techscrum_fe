@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import emailCheck from '../../../api/register/emailCheck';
 import register from '../../../api/register/register';
 import styles from './RegisterMain.module.scss';
-import Icon from '../icon.png';
+import Icon from '../../../assets/logo.svg';
 import GoogleIcon from './google-logo.svg';
 import MicrosoftIcon from './microsoft-logo.svg';
 import AppleIcon from './apple-logo.svg';
