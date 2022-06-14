@@ -38,7 +38,6 @@ export default function Home() {
       <Header />
       <h1 className={styles.header}>Static Routes</h1>
       <p>Home</p>
-
       <div className={styles.homePage}>
         <section className={styles.jobDoneSection}>
           <div className={styles.jobDoneContainer}>

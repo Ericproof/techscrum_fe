@@ -6,11 +6,8 @@ function Search() {
   let timer: ReturnType<typeof setTimeout>;
 
   const handleChange = (value: string) => {
-    fetch('https://www.allaboutcookies.org')
-      .then((res) => res.json())
-      .then((json) => setSearch(json.data.items));
     console.log(value);
-    return true;
+    return value;
   };
   const debounce = (value: string) => {
     if (timer) clearTimeout(timer);
