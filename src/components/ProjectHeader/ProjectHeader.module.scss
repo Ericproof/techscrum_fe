@@ -1,118 +1,127 @@
 .projectHeader {
-  align-items: center;
-  box-sizing: border-box;
-  display: flex;
-  flex-shrink: 0;
-  justify-content: space-between;
-  padding-left: 12px;
-  padding-right: 12px;
-  height: 56px;
-  position: relative;
-  background-color: #ffffff;
-  color: #6b778c;
-  nav {
+  height: var(--topNavigationHeight, 0px);
+  position: fixed;
+  top: var(--bannerHeight, 0px);
+  left: var(--leftPanelWidth, 0px);
+  right: var(--rightPanelWidth, 0px);
+  z-index: 2;
+  header {
     align-items: center;
+    box-sizing: border-box;
     display: flex;
-    flex-grow: 1;
-    min-width: 0px;
-    height: inherit;
-    .menu {
-      button {
-        align-items: baseline;
-        box-sizing: border-box;
-        display: flex;
-        font-size: inherit;
-        font-style: normal;
-        font-family: inherit;
-        font-weight: 500;
-        max-width: 100%;
-        position: relative;
-        text-align: center;
-        white-space: nowrap;
-        color: #344563;
-        cursor: pointer;
-        height: auto;
-        line-height: 2.28571em;
-        vertical-align: middle;
-        width: auto;
-        justify-content: center;
-        background-color: transparent;
-        border-width: 0px;
-        border-radius: 100%;
-        text-decoration: none;
-        transition: background 0.1s ease-out 0s,
-          box-shadow 0.15s cubic-bezier(0.47, 0.03, 0.49, 1.38) 0s;
-        padding: 4px;
-        outline: none;
-        margin: 0px 2px;
-        span {
-          margin: 0px;
-          transition: opacity 0.3s ease 0s;
-          opacity: 1;
-          align-self: center;
-          display: inline-block;
-          flex-grow: 0;
-          flex-shrink: 0;
-          line-height: 1;
-          font-size: 0px;
-          user-select: none;
-          svg {
-            overflow: hidden;
-            pointer-events: none;
-            max-width: 100%;
-            max-height: 100%;
-            color: rgb(52, 69, 99);
-            fill: rgb(255, 255, 255);
-            vertical-align: bottom;
-            width: 24;
-            height: 24;
-          }
-        }
-      }
-    }
-    a {
-      .logo {
-        span {
-          img {
-          }
-        }
-      }
-    }
-    .options {
-      .yourWork {
+    flex-shrink: 0;
+    justify-content: space-between;
+    padding-left: 12px;
+    padding-right: 12px;
+    height: 56px;
+    position: relative;
+    background-color: #ffffff;
+    color: #6b778c;
+    nav {
+      align-items: center;
+      display: flex;
+      flex-grow: 1;
+      min-width: 0px;
+      height: inherit;
+      .menu {
+        flex-shrink: 0;
         button {
-          .title {
-          }
-          .btn {
-            span {
-              svg {
-              }
+          align-items: baseline;
+          box-sizing: border-box;
+          display: flex;
+          font-size: inherit;
+          font-style: normal;
+          font-family: inherit;
+          font-weight: 500;
+          max-width: 100%;
+          position: relative;
+          text-align: center;
+          white-space: nowrap;
+          color: #344563;
+          cursor: pointer;
+          height: auto;
+          line-height: 2.28571em;
+          vertical-align: middle;
+          width: auto;
+          justify-content: center;
+          background-color: transparent;
+          border-width: 0px;
+          border-radius: 100%;
+          text-decoration: none;
+          transition: background 0.1s ease-out 0s,
+            box-shadow 0.15s cubic-bezier(0.47, 0.03, 0.49, 1.38) 0s;
+          padding: 4px;
+          outline: none;
+          margin: 0px 2px;
+          width: 24;
+          height: 24;
+          span {
+            margin: 0px;
+            transition: opacity 0.3s ease 0s;
+            opacity: 1;
+            align-self: center;
+            display: inline-block;
+            flex-grow: 0;
+            flex-shrink: 0;
+            line-height: 1;
+            font-size: 0px;
+            user-select: none;
+            svg {
+              overflow: hidden;
+              pointer-events: none;
+              max-width: 100%;
+              max-height: 100%;
+              color: rgb(52, 69, 99);
+              fill: rgb(255, 255, 255);
+              vertical-align: bottom;
             }
           }
         }
       }
-    }
-    .projectDetails {
-      .projects {
-        button {
-          .title {
-          }
-          .btn {
-            span {
-              svg {
-              }
+      a {
+        .logo {
+          span {
+            img {
             }
           }
         }
       }
-      .dropdownSection {
-        .dropdownContainer {
-          .top {
-            .topContent {
+      .options {
+        .yourWork {
+          button {
+            .title {
+            }
+            .btn {
               span {
+                svg {
+                }
               }
-              ul {
-                li {
+            }
+          }
+        }
+      }
+      .projectDetails {
+        .projects {
+          button {
+            .title {
+            }
+            .btn {
+              span {
+                svg {
+                }
+              }
+            }
+          }
+        }
+        .dropdownSection {
+          .dropdownContainer {
+            .top {
+              .topContent {
+                span {
+                }
+                ul {
+                  li {
+                  }
                 }
               }
             }
