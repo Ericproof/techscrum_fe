@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import Register from './pages/Register/Register';
+import Login from './pages/Login/Login';
 import Setting from './pages/Setting/Setting';
 import Gdpr from './pages/GDPR/GDPR';
 import CookiePolicy from './pages/CookiePolicy/CookiePolicy';
@@ -12,6 +13,8 @@ import PrivacyStatement from './pages/PrivacyStatement/PrivacyStatement';
 import UserPage from './pages/SettingPage/UserPage/UserPage';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import Access from './pages/Access/Access';
+import Project from './pages/Project/Project';
+import Board from './pages/Board';
 import './App.css';
 
 function App() {
@@ -19,6 +22,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/login" element={<Login />} />
       <Route path="/settings" element={<Setting />} />
       <Route path="/cookie-policy" element={<CookiePolicy />} />
       <Route path="/gdpr" element={<Gdpr />} />
@@ -28,6 +32,8 @@ function App() {
       <Route path="/privacy-policy" element={<PrivacyPolicy />} />
       <Route path="/user-page" element={<UserPage />} />
       <Route path="/access" element={<Access />} />
+      <Route path="/projects" element={<Project />} />
+      <Route path="/board" element={<Board />} />
       <Route path="*" element={<ErrorPage />} />
     </Routes>
   );
