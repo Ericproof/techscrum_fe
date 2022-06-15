@@ -1,8 +1,9 @@
 import React, { useState, createRef } from 'react';
-import { AiOutlineStar, AiFillStar, AiOutlinePlus } from 'react-icons/ai';
+import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
+import { BiPlus } from 'react-icons/bi';
 import { BsBoxArrowUpRight } from 'react-icons/bs';
 import { CgMenuGridR } from 'react-icons/cg';
-import { IoIosArrowDown } from 'react-icons/io';
+import { RiArrowDropDownLine } from 'react-icons/ri';
 import styles from './ProjectHeader.module.scss';
 
 const projects = [
@@ -60,40 +61,33 @@ export default function ProjectHeader() {
         <nav>
           <div className={styles.menu}>
             <button type="button">
-              <span>
-                <CgMenuGridR />
-              </span>
+              <CgMenuGridR />
             </button>
           </div>
           <a href="/#">
             <div className={styles.logo}>
-              <span>
-                <img
-                  src="http://localhost:3000/static/media/logo.b93a2db84df580f82fcc33ce76cb76e5.svg"
-                  alt="icon"
-                />
-              </span>
+              <svg />
             </div>
           </a>
           <div className={styles.options}>
-            <div className={styles.yourWork}>
+            <div className={styles.option}>
               <button type="button">
                 <span className={styles.title}>Your work</span>
                 <div className={styles.btn}>
                   <span>
-                    <IoIosArrowDown />
+                    <RiArrowDropDownLine />
                   </span>
                 </div>
               </button>
             </div>
             {projectDropdown ? (
-              <div className={styles.projectDetails}>
-                <div className={styles.projects}>
+              <>
+                <div className={styles.optionProjects}>
                   <button type="button" onClick={() => setProjectDropdown(false)}>
                     <span className={styles.title}>Projects</span>
                     <div className={styles.btn}>
                       <span>
-                        <IoIosArrowDown />
+                        <RiArrowDropDownLine />
                       </span>
                     </div>
                   </button>
@@ -187,45 +181,45 @@ export default function ProjectHeader() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </>
             ) : (
-              <div className={styles.projects}>
+              <div className={styles.option}>
                 <button type="button" onClick={() => setProjectDropdown(true)}>
                   <span className={styles.title}>Projects</span>
                   <div className={styles.btn}>
                     <span>
-                      <IoIosArrowDown />
+                      <RiArrowDropDownLine />
                     </span>
                   </div>
                 </button>
               </div>
             )}
-            <div className={styles.filters}>
+            <div className={styles.option}>
               <button type="button">
                 <span className={styles.title}>Filters</span>
                 <div className={styles.btn}>
                   <span>
-                    <IoIosArrowDown />
+                    <RiArrowDropDownLine />
                   </span>
                 </div>
               </button>
             </div>
-            <div className={styles.dashBoards}>
+            <div className={styles.option}>
               <button type="button">
                 <span className={styles.title}>Dashboards</span>
                 <div className={styles.btn}>
                   <span>
-                    <IoIosArrowDown />
+                    <RiArrowDropDownLine />
                   </span>
                 </div>
               </button>
             </div>
-            <div className={styles.people}>
+            <div className={styles.option}>
               <button type="button">
                 <span className={styles.title}>People</span>
                 <div className={styles.btn}>
                   <span>
-                    <IoIosArrowDown />
+                    <RiArrowDropDownLine />
                   </span>
                 </div>
               </button>
@@ -235,11 +229,9 @@ export default function ProjectHeader() {
                 <span>Create</span>
               </button>
               <button type="button" className={styles.createIcon}>
-                <div className={styles.icon}>
-                  <span>
-                    <AiOutlinePlus />
-                  </span>
-                </div>
+                <span>
+                  <BiPlus />
+                </span>
               </button>
             </div>
             <div className={styles.spaceSection}>
@@ -252,17 +244,13 @@ export default function ProjectHeader() {
             {settingList ? (
               <>
                 <div className={styles.avatarSection}>
-                  <div className={styles.avatarContainer}>
-                    <button type="button" onClick={() => setSettingList(false)}>
+                  <button type="button" onClick={() => setSettingList(false)}>
+                    <div className={styles.avatarContent}>
                       <span>
-                        <div className={styles.avatarContent}>
-                          <span>
-                            <img src={user.avatar} alt="avatar" />
-                          </span>
-                        </div>
+                        <img src={user.avatar} alt="avatar" />
                       </span>
-                    </button>
-                  </div>
+                    </div>
+                  </button>
                 </div>
                 <div className={styles.settingDropdown}>
                   <div className={styles.settingContainer}>
@@ -307,17 +295,15 @@ export default function ProjectHeader() {
               </>
             ) : (
               <div className={styles.avatarSection}>
-                <div className={styles.avatarContainer}>
-                  <button type="button" onClick={() => setSettingList(false)}>
-                    <span>
-                      <div className={styles.avatarContent}>
-                        <span>
-                          <img src={user.avatar} alt="avatar" />
-                        </span>
-                      </div>
-                    </span>
-                  </button>
-                </div>
+                <button type="button" onClick={() => setSettingList(false)}>
+                  <span>
+                    <div className={styles.avatarContent}>
+                      <span>
+                        <img src={user.avatar} alt="avatar" />
+                      </span>
+                    </div>
+                  </span>
+                </button>
               </div>
             )}
           </div>
