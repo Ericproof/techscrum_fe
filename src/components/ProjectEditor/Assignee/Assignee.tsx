@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import styles from './Assignee.module.scss';
-import UseOutsideAlerter from '../../../components/OutsideAlerter/OutsideAlerter';
+import UseOutsideAlerter from '../../OutsideAlerter/OutsideAlerter';
 
 export default function Assignee() {
   const assignees = [

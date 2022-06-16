@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { RiMoreFill } from 'react-icons/ri';
+import ProjectLead from '../../components/ProjectEditor/ProjectLead/ProjectLead';
+import Assignee from '../../components/ProjectEditor/Assignee/Assignee';
+import ChangeIcon from '../../components/ProjectEditor/ChangeIcon/ChangeIcon';
+import ChangeName from '../../components/ProjectEditor/ChangeName/ChangeName';
+import ChangeKey from '../../components/ProjectEditor/ChangeKey/ChangeKey';
 import styles from './Setting.module.scss';
-import defaultIcon from '../../assets/defaultIcon.png';
-import ProjectLead from './ProjectLead/ProjectLead';
-import Assignee from './Assignee/Assignee';
-import Modal from './Modal/Modal';
 
 export default function Setting() {
   const [toggle, setToggle] = useState(false);
-  const [modalShown, toggleModal] = useState(false);
+
   return (
     <div className={styles.settingPage}>
       <div className={styles.settingContent}>
@@ -52,36 +53,10 @@ export default function Setting() {
         </header>
         <div className={styles.editSection}>
           <div className={styles.editContainer}>
-            <div className={styles.icon}>
-              <img src={defaultIcon} alt="project icon" />
-              <button
-                type="button"
-                onClick={() => {
-                  toggleModal(!modalShown);
-                }}
-              >
-                Change icon
-              </button>
-              <Modal
-                shown={modalShown}
-                close={() => {
-                  toggleModal(false);
-                }}
-              />
-            </div>
             <form>
-              <div className={styles.nameInputSection}>
-                <label htmlFor="Name">
-                  <span>Name</span>
-                  <input type="text" id="Name" name="Name" />
-                </label>
-              </div>
-              <div className={styles.keyInputSection}>
-                <label htmlFor="key">
-                  <span>Key</span>
-                  <input type="text" id="key" name="Key" />
-                </label>
-              </div>
+              <ChangeIcon />
+              <ChangeName />
+              <ChangeKey />
               <ProjectLead />
               <Assignee />
               <button className={styles.saveBtn} type="submit">

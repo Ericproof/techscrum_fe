@@ -347,9 +347,6 @@
                   Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
                 font-weight: 700;
               }
-              //   ul {
-              //     list-style: none;
-              //     li {
               a {
                 display: flex;
                 box-sizing: border-box;
@@ -370,32 +367,6 @@
                 &:hover {
                   background-color: #f4f5f7;
                   color: rgb(23, 43, 77);
-                  .titleContent {
-                    .starSection {
-                      .starContainer {
-                        .starBtn {
-                          .starContent {
-                            .isStar {
-                              svg {
-                                color: rgb(255, 171, 0);
-                                fill: rgb(255, 171, 0);
-                              }
-                            }
-                          }
-                        }
-                        .unStarBtn {
-                          opacity: 1 !important;
-                          .starContent {
-                            .unStar {
-                              svg {
-                                color: rgb(23, 43, 77);
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
                 }
                 .iconSection {
                   display: flex;
@@ -504,7 +475,6 @@
                     margin: 1px;
                     color: rgb(23, 43, 77);
                     .unStarBtn {
-                      //   opacity: 0;
                       align-items: baseline;
                       border-width: 0px;
                       border-radius: 3px;
@@ -537,11 +507,11 @@
                       }
                       .starContent {
                         transition: opacity 0.3s ease 0s;
-                        opacity: 1;
-                        margin: 0px;
                         overflow: hidden;
                         text-overflow: ellipsis;
-                        white-space: nowrap;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
                         width: 24px;
                         height: 24px;
                         .unStar {
@@ -557,12 +527,12 @@
                             display: block;
                             position: fixed;
                             z-index: 600;
-                            top: 157px;
-                            left: 40px;
+                            top: 151px;
+                            left: 431px;
                             background-color: #172b4d;
                             color: #ffffff;
                             font-family: inherit;
-                            font-size: 14px;
+                            font-size: 12px;
                             font-weight: 400;
                             line-height: 1.43;
                             padding: 1px 6px;
@@ -575,7 +545,7 @@
                             pointer-events: none;
                             max-width: 100%;
                             max-height: 100%;
-                            color: rgb(223, 225, 230);
+                            color: rgb(255, 255, 255);
                             vertical-align: bottom;
                           }
                           .notification {
@@ -629,14 +599,10 @@
                           justify-content: center;
                           color: rgb(255, 171, 0);
                           display: inline-block;
+                          flex-shrink: 0;
                           line-height: 1;
                           width: 16px;
                           height: 16px;
-                          &:hover {
-                            svg {
-                              color: rgb(255, 196, 0);
-                            }
-                          }
                           &:hover .notification {
                             display: block;
                             position: fixed;
@@ -646,7 +612,7 @@
                             background-color: #172b4d;
                             color: #ffffff;
                             font-family: inherit;
-                            font-size: 14px;
+                            font-size: 12px;
                             font-weight: 400;
                             line-height: 1.43;
                             padding: 1px 6px;
@@ -671,8 +637,6 @@
                   }
                 }
               }
-              //     }
-              //   }
             }
             .bottom {
               flex-shrink: 0;

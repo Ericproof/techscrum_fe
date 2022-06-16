@@ -29,6 +29,7 @@ export default function ProjectHeader() {
   const [value, setValue] = useState(0);
   const { visible, setVisible, myRef } = UseOutsideAlerter(false);
   const handleClickOutside = () => setVisible(true);
+  //   const handleClickEvent = () => {};
   const refStar = projectList.map(() => createRef<HTMLDivElement>());
 
   const setProjectStar = (id: number) => {
@@ -92,6 +93,7 @@ export default function ProjectHeader() {
                     <div className={styles.top}>
                       <div className={styles.recent}>RECENT</div>
                       {projectList.map((project) => (
+                        // <a onClick={handleClickEvent} target="_self" key={project.id}>
                         <a href="/#" target="_self" key={project.id}>
                           <span className={styles.iconSection}>
                             <div className={styles.iconContainer}>
