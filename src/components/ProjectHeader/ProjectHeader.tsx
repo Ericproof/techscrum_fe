@@ -25,10 +25,8 @@ const projects = [
 ];
 
 export default function ProjectHeader() {
-  const [projectDropdown, setProjectDropdown] = useState(false);
   const [projectList, setProjectList] = useState(projects);
   const [value, setValue] = useState(0);
-
   const { visible, setVisible, myRef } = UseOutsideAlerter(false);
   const handleClickOutside = () => setVisible(true);
   const refStar = projectList.map(() => createRef<HTMLDivElement>());
@@ -48,7 +46,7 @@ export default function ProjectHeader() {
     const { current } = refStar[id];
     if (current !== null) {
       current.style.top = `${starPosition.y - 24}px`;
-      current.style.left = `${starPosition.x - 235}px`;
+      current.style.left = `${starPosition.x - 292}px`;
     }
   };
 
@@ -77,10 +75,10 @@ export default function ProjectHeader() {
                 </div>
               </button>
             </div>
-            {projectDropdown ? (
+            {visible ? (
               <>
                 <div className={styles.optionProjects}>
-                  <button type="button" onClick={() => setProjectDropdown(false)}>
+                  <button type="button" onClick={handleClickOutside}>
                     <span className={styles.title}>Projects</span>
                     <div className={styles.btn}>
                       <span>
@@ -177,7 +175,7 @@ export default function ProjectHeader() {
               </>
             ) : (
               <div className={styles.option}>
-                <button type="button" onClick={() => setProjectDropdown(true)}>
+                <button type="button" onClick={handleClickOutside}>
                   <span className={styles.title}>Projects</span>
                   <div className={styles.btn}>
                     <span>

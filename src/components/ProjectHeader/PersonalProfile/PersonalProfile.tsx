@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BsBoxArrowUpRight } from 'react-icons/bs';
 import styles from './PersonalProfile.module.scss';
+import UseOutsideAlerter from '../../OutsideAlerter/OutsideAlerter';
 
 const users = [
   {
@@ -11,15 +12,16 @@ const users = [
   }
 ];
 export default function PersonalProfile() {
-  const [settingList, setSettingList] = useState(false);
+  const { visible, setVisible, myRef } = UseOutsideAlerter(false);
+  const handleClickOutside = () => setVisible(true);
   return (
-    <>
+    <div ref={myRef}>
       {users.map((user) => (
         <div className={styles.rightSection} key={user.id}>
-          {settingList ? (
+          {visible ? (
             <>
               <div className={styles.avatarSection}>
-                <button type="button" onClick={() => setSettingList(false)}>
+                <button type="button" onClick={handleClickOutside}>
                   <div className={styles.avatarContent}>
                     <span>
                       <img src={user.avatar} alt="avatar" />
@@ -72,7 +74,7 @@ export default function PersonalProfile() {
             </>
           ) : (
             <div className={styles.avatarSection}>
-              <button type="button" onClick={() => setSettingList(true)}>
+              <button type="button" onClick={handleClickOutside}>
                 <div className={styles.avatarContent}>
                   <span>
                     <img src={user.avatar} alt="avatar" />
@@ -83,6 +85,6 @@ export default function PersonalProfile() {
           )}
         </div>
       ))}
-    </>
+    </div>
   );
 }
