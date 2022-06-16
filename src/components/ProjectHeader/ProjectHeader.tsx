@@ -1,10 +1,11 @@
 import React, { useState, createRef } from 'react';
 import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 import { BiPlus } from 'react-icons/bi';
-import { BsBoxArrowUpRight } from 'react-icons/bs';
 import { CgMenuGridR } from 'react-icons/cg';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import styles from './ProjectHeader.module.scss';
+import UseOutsideAlerter from '../OutsideAlerter/OutsideAlerter';
+import PersonalProfile from './PersonalProfile/PersonalProfile';
 
 const projects = [
   {
@@ -22,20 +23,15 @@ const projects = [
     star: false
   }
 ];
-const users = [
-  {
-    name: 'Yiu Kitman',
-    avatar:
-      'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/YK-3.png?ssl=1'
-  }
-];
+
 export default function ProjectHeader() {
   const [projectDropdown, setProjectDropdown] = useState(false);
   const [projectList, setProjectList] = useState(projects);
   const [value, setValue] = useState(0);
-  const [settingList, setSettingList] = useState(false);
+
+  const { visible, setVisible, myRef } = UseOutsideAlerter(false);
+  const handleClickOutside = () => setVisible(true);
   const refStar = projectList.map(() => createRef<HTMLDivElement>());
-  const refProject = projectList.map(() => createRef<HTMLDivElement>());
 
   const setProjectStar = (id: number) => {
     const index = projectList.findIndex((project) => project.id === id);
@@ -59,7 +55,7 @@ export default function ProjectHeader() {
   return (
     <div className={styles.projectHeader}>
       <header>
-        <nav>
+        <nav ref={myRef}>
           <div className={styles.menu}>
             <button type="button">
               <CgMenuGridR />
@@ -236,75 +232,7 @@ export default function ProjectHeader() {
             </div>
           </div>
         </nav>
-        {users.map((user) => (
-          <div className={styles.rightSection}>
-            {settingList ? (
-              <>
-                <div className={styles.avatarSection}>
-                  <button type="button" onClick={() => setSettingList(false)}>
-                    <div className={styles.avatarContent}>
-                      <span>
-                        <img src={user.avatar} alt="avatar" />
-                      </span>
-                    </div>
-                  </button>
-                </div>
-                <div className={styles.settingDropdown}>
-                  <div className={styles.settingContainer}>
-                    <div className={styles.settingContent}>
-                      <div className={styles.settingTop} />
-                      <div className={styles.settingDetails}>
-                        <div className={styles.detail}>
-                          <div className={styles.name}>TECHSCRUM</div>
-                          <a href="/#">
-                            <div className={styles.title}>
-                              <span>Personal settings</span>
-                            </div>
-                          </a>
-                        </div>
-                        <div className={styles.detail}>
-                          <div className={styles.name}>{user.name}</div>
-                          <a href="/#">
-                            <div className={styles.title}>
-                              <span>Profile</span>
-                            </div>
-                          </a>
-                          <a href="/#">
-                            <div className={styles.title}>
-                              <span>Accounting settings</span>
-                            </div>
-                            <div className={styles.iconSection}>
-                              <div className={styles.icon}>
-                                <BsBoxArrowUpRight />
-                              </div>
-                            </div>
-                          </a>
-                        </div>
-                      </div>
-                      <div className={styles.settingBottom}>
-                        <a href="/#" className={styles.logOutSection}>
-                          <div className={styles.logOutContainer}>
-                            <span>Log out</span>
-                          </div>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </>
-            ) : (
-              <div className={styles.avatarSection}>
-                <button type="button" onClick={() => setSettingList(true)}>
-                  <div className={styles.avatarContent}>
-                    <span>
-                      <img src={user.avatar} alt="avatar" />
-                    </span>
-                  </div>
-                </button>
-              </div>
-            )}
-          </div>
-        ))}
+        <PersonalProfile />
       </header>
     </div>
   );
