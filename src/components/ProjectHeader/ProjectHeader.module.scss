@@ -809,6 +809,10 @@
             padding: 0px 10px;
             outline: none;
             margin: 0px;
+            &:hover {
+              color: #ffffff;
+              background-color: rgba(0, 82, 204, 0.9);
+            }
             span {
               transition: opacity 0.3s ease 0s;
               opacity: 1;
@@ -818,6 +822,7 @@
               overflow: hidden;
               text-overflow: ellipsis;
               white-space: nowrap;
+              font-weight: 700;
             }
             @media (max-width: 1129px) {
               display: none;
@@ -851,6 +856,10 @@
             padding: 0px 2px;
             outline: none;
             margin: 0px;
+            &:hover {
+              color: #ffffff;
+              background-color: rgba(0, 82, 204, 0.9);
+            }
             span {
               transition: opacity 0.3s ease 0s;
               opacity: 1;

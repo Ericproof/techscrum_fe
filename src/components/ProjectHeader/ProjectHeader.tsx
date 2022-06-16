@@ -91,9 +91,7 @@ export default function ProjectHeader() {
                   <div className={styles.dropdownContainer}>
                     <div className={styles.top}>
                       <div className={styles.recent}>RECENT</div>
-                      {/* <ul> */}
                       {projectList.map((project) => (
-                        //   <li key={project.id}>
                         <a href="/#" target="_self" key={project.id}>
                           <span className={styles.iconSection}>
                             <div className={styles.iconContainer}>
@@ -154,9 +152,7 @@ export default function ProjectHeader() {
                             </div>
                           </div>
                         </a>
-                        //   </li>
                       ))}
-                      {/* </ul> */}
                     </div>
                     <div className={styles.bottom}>
                       <span className={styles.viewSection}>
