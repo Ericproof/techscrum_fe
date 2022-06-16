@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import userAvatar from '../../../assets/userAvatar.png';
 import styles from './ProjectLead.module.scss';
-import UseOutsideAlerter from '../OutsideAlerter';
+import UseOutsideAlerter from '../../../components/OutsideAlerter/OutsideAlerter';
 
 export default function ProjectLead() {
   const users = [
