@@ -85,7 +85,9 @@ export default function Project() {
             <div className={styles.header}>
               <div className={styles.title}>
                 <h1>Projects</h1>
-                <button type="button">Create project</button>
+                <a href="/create-projects">
+                  <button type="button">Create project</button>
+                </a>
               </div>
               <div className={styles.searchBar}>
                 <input />
