@@ -9,14 +9,14 @@ import styles from './ProjectHeader.module.scss';
 const projects = [
   {
     id: 0,
-    name: 'TECHSCRUM(TEC)',
+    name: 'TECHSCRUM (TEC)',
     icon: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10411?size=medium',
     type: 'Software project',
     star: false
   },
   {
     id: 1,
-    name: 'example(EX)',
+    name: 'example (EX)',
     icon: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10418?size=medium',
     type: 'Software project',
     star: false
@@ -35,6 +35,7 @@ export default function ProjectHeader() {
   const [value, setValue] = useState(0);
   const [settingList, setSettingList] = useState(false);
   const refStar = projectList.map(() => createRef<HTMLDivElement>());
+  const refProject = projectList.map(() => createRef<HTMLDivElement>());
 
   const setProjectStar = (id: number) => {
     const index = projectList.findIndex((project) => project.id === id);
@@ -50,8 +51,8 @@ export default function ProjectHeader() {
     };
     const { current } = refStar[id];
     if (current !== null) {
-      current.style.top = `${starPosition.y + 45}px`;
-      current.style.left = `${starPosition.x - 33}px`;
+      current.style.top = `${starPosition.y - 24}px`;
+      current.style.left = `${starPosition.x - 235}px`;
     }
   };
 
@@ -95,77 +96,73 @@ export default function ProjectHeader() {
                 <div className={styles.dropdownSection}>
                   <div className={styles.dropdownContainer}>
                     <div className={styles.top}>
-                      <div className={styles.topContent}>
-                        <span>RECENT</span>
-                        <ul>
-                          {projectList.map((project) => (
-                            <li key={project.id}>
-                              <a href="/#" target="_self">
-                                <div className={styles.left}>
-                                  <span className={styles.iconSection}>
-                                    <div className={styles.iconContainer}>
-                                      <span className={styles.icon}>
-                                        <span />
-                                      </span>
-                                    </div>
-                                  </span>
-                                  <span className={styles.titleContent}>
-                                    <span className={styles.name}>{project.name}</span>
-                                    <span className={styles.type}>{project.type}</span>
-                                  </span>
-                                  <div
-                                    className={styles.starSection}
-                                    onMouseOver={(e: React.MouseEvent<HTMLDivElement>) =>
-                                      getStarPosition(e, project.id)
-                                    }
-                                    onFocus={() => undefined}
-                                  >
-                                    <div className={styles.starContainer}>
-                                      {project.star ? (
-                                        <button
-                                          type="button"
-                                          className={styles.star}
-                                          onClick={() => setProjectStar(project.id)}
-                                        >
-                                          <div className={styles.starContent}>
-                                            <span>
-                                              <AiFillStar />
-                                              <div
-                                                className={styles.notification}
-                                                ref={refStar[project.id]}
-                                              >
-                                                Remove from Starred
-                                              </div>
-                                            </span>
-                                          </div>
-                                        </button>
-                                      ) : (
-                                        <button
-                                          type="button"
-                                          className={styles.star}
-                                          onClick={() => setProjectStar(project.id)}
-                                        >
-                                          <div className={styles.starContent}>
-                                            <span>
-                                              <AiOutlineStar />
-                                              <div
-                                                className={styles.notification}
-                                                ref={refStar[project.id]}
-                                              >
-                                                Add to Starred
-                                              </div>
-                                            </span>
-                                          </div>
-                                        </button>
-                                      )}
-                                    </div>
+                      <div className={styles.recent}>RECENT</div>
+                      {/* <ul> */}
+                      {projectList.map((project) => (
+                        //   <li key={project.id}>
+                        <a href="/#" target="_self" key={project.id}>
+                          <span className={styles.iconSection}>
+                            <div className={styles.iconContainer}>
+                              <span className={styles.icon}>
+                                <img src={project.icon} alt="icon" />
+                              </span>
+                            </div>
+                          </span>
+                          <span className={styles.titleContent}>
+                            <span className={styles.name}>{project.name}</span>
+                            <span className={styles.type}>{project.type}</span>
+                          </span>
+                          <div
+                            className={styles.starSection}
+                            onMouseOver={(e: React.MouseEvent<HTMLDivElement>) =>
+                              getStarPosition(e, project.id)
+                            }
+                            onFocus={() => undefined}
+                          >
+                            <div className={styles.starContainer}>
+                              {project.star ? (
+                                <button
+                                  type="button"
+                                  className={styles.starBtn}
+                                  onClick={() => setProjectStar(project.id)}
+                                >
+                                  <div className={styles.starContent}>
+                                    <span className={styles.isStar}>
+                                      <AiFillStar />
+                                      <div
+                                        className={styles.notification}
+                                        ref={refStar[project.id]}
+                                      >
+                                        Remove from Starred
+                                      </div>
+                                    </span>
                                   </div>
-                                </div>
-                              </a>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                                </button>
+                              ) : (
+                                <button
+                                  type="button"
+                                  className={styles.unStarBtn}
+                                  onClick={() => setProjectStar(project.id)}
+                                >
+                                  <div className={styles.starContent}>
+                                    <span className={styles.unStar}>
+                                      <AiOutlineStar />
+                                      <div
+                                        className={styles.notification}
+                                        ref={refStar[project.id]}
+                                      >
+                                        Add to Starred
+                                      </div>
+                                    </span>
+                                  </div>
+                                </button>
+                              )}
+                            </div>
+                          </div>
+                        </a>
+                        //   </li>
+                      ))}
+                      {/* </ul> */}
                     </div>
                     <div className={styles.bottom}>
                       <span className={styles.viewSection}>
@@ -257,16 +254,16 @@ export default function ProjectHeader() {
                     <div className={styles.settingContent}>
                       <div className={styles.settingTop} />
                       <div className={styles.settingDetails}>
-                        <div className={styles.personal}>
-                          <span>TECHSCRUM</span>
+                        <div className={styles.detail}>
+                          <div className={styles.name}>TECHSCRUM</div>
                           <a href="/#">
                             <div className={styles.title}>
                               <span>Personal settings</span>
                             </div>
                           </a>
                         </div>
-                        <div className={styles.account}>
-                          <span>{user.name}</span>
+                        <div className={styles.detail}>
+                          <div className={styles.name}>{user.name}</div>
                           <a href="/#">
                             <div className={styles.title}>
                               <span>Profile</span>
@@ -285,9 +282,11 @@ export default function ProjectHeader() {
                         </div>
                       </div>
                       <div className={styles.settingBottom}>
-                        <div className={styles.logOutSection}>
-                          <svg />
-                        </div>
+                        <a href="/#" className={styles.logOutSection}>
+                          <div className={styles.logOutContainer}>
+                            <span>Log out</span>
+                          </div>
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -295,14 +294,12 @@ export default function ProjectHeader() {
               </>
             ) : (
               <div className={styles.avatarSection}>
-                <button type="button" onClick={() => setSettingList(false)}>
-                  <span>
-                    <div className={styles.avatarContent}>
-                      <span>
-                        <img src={user.avatar} alt="avatar" />
-                      </span>
-                    </div>
-                  </span>
+                <button type="button" onClick={() => setSettingList(true)}>
+                  <div className={styles.avatarContent}>
+                    <span>
+                      <img src={user.avatar} alt="avatar" />
+                    </span>
+                  </div>
                 </button>
               </div>
             )}
