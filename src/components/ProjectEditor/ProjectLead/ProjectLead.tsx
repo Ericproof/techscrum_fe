@@ -5,10 +5,30 @@ import styles from './ProjectLead.module.scss';
 
 export default function ProjectLead() {
   const users = [
-    { id: 1, avatar: 'https://picsum.photos/50', name: 'Yiu Kitman' },
-    { id: 2, avatar: 'https://picsum.photos/50', name: 'Emil' },
-    { id: 3, avatar: 'https://picsum.photos/50', name: 'Belinda Wang' },
-    { id: 4, avatar: 'https://picsum.photos/50', name: 'Andy' }
+    {
+      id: 1,
+      avatar:
+        'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/YK-3.png?ssl=1',
+      name: 'Yiu Kitman'
+    },
+    {
+      id: 2,
+      avatar:
+        'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/E-0.png?ssl=1',
+      name: 'Emil'
+    },
+    {
+      id: 3,
+      avatar:
+        'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/BW-1.png?ssl=1',
+      name: 'Belinda Wang'
+    },
+    {
+      id: 4,
+      avatar:
+        'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/EL-3.png?ssl=1',
+      name: 'Evan Lin'
+    }
   ];
   const [userInfo, setUserInfo] = useState(users[0]);
   const { visible, setVisible, myRef } = UseOutsideAlerter(false);
