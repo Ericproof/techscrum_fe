@@ -3,6 +3,7 @@ import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 import { BiPlus } from 'react-icons/bi';
 import { CgMenuGridR } from 'react-icons/cg';
 import { RiArrowDropDownLine } from 'react-icons/ri';
+import { useNavigate } from 'react-router-dom';
 import styles from './ProjectHeader.module.scss';
 import UseOutsideAlerter from '../OutsideAlerter/OutsideAlerter';
 import PersonalProfile from './PersonalProfile/PersonalProfile';
@@ -29,7 +30,18 @@ export default function ProjectHeader() {
   const [value, setValue] = useState(0);
   const { visible, setVisible, myRef } = UseOutsideAlerter(false);
   const handleClickOutside = () => setVisible(true);
-  //   const handleClickEvent = () => {};
+  const navigate = useNavigate();
+  const handleClickEvent = (e: React.MouseEvent<HTMLSpanElement>) => {
+    e.preventDefault();
+    const clickStartEventFlag = (e.target as Element).className.includes('Star');
+    if (!clickStartEventFlag) {
+      navigate(`/#`);
+    }
+    // eslint-disable-next-line no-console
+    console.log(e.target);
+    // eslint-disable-next-line no-console
+    console.log(clickStartEventFlag === false);
+  };
   const refStar = projectList.map(() => createRef<HTMLDivElement>());
 
   const setProjectStar = (id: number) => {
@@ -93,8 +105,7 @@ export default function ProjectHeader() {
                     <div className={styles.top}>
                       <div className={styles.recent}>RECENT</div>
                       {projectList.map((project) => (
-                        // <a onClick={handleClickEvent} target="_self" key={project.id}>
-                        <a href="/#" target="_self" key={project.id}>
+                        <a href="/projects" onClick={handleClickEvent} key={project.id}>
                           <span className={styles.iconSection}>
                             <div className={styles.iconContainer}>
                               <span className={styles.icon}>

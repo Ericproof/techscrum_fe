@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import { RiMoreFill } from 'react-icons/ri';
-import ProjectLead from '../../components/ProjectEditor/ProjectLead/ProjectLead';
-import Assignee from '../../components/ProjectEditor/Assignee/Assignee';
-import ChangeIcon from '../../components/ProjectEditor/ChangeIcon/ChangeIcon';
-import ChangeName from '../../components/ProjectEditor/ChangeName/ChangeName';
-import ChangeKey from '../../components/ProjectEditor/ChangeKey/ChangeKey';
+import ProjectEditor from '../../components/ProjectEditor/ProjectEditor';
 import styles from './Setting.module.scss';
 
 export default function Setting() {
@@ -51,20 +47,7 @@ export default function Setting() {
             </div>
           )}
         </header>
-        <div className={styles.editSection}>
-          <div className={styles.editContainer}>
-            <form>
-              <ChangeIcon />
-              <ChangeName />
-              <ChangeKey />
-              <ProjectLead />
-              <Assignee />
-              <button className={styles.saveBtn} type="submit">
-                Save
-              </button>
-            </form>
-          </div>
-        </div>
+        <ProjectEditor />
       </div>
     </div>
   );
