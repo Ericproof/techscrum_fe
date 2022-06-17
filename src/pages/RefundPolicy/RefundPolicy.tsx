@@ -7,7 +7,6 @@ export default function RefundPolicy() {
     <div className={styles.refundContainer}>
       <div className={styles.legalTitle}>
         <h1 className={styles.containerLegal}>legal</h1>
-
         <h1 className={styles.titleRefund}>Refund Policy</h1>
         <hr />
       </div>

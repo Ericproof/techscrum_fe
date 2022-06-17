@@ -7,7 +7,7 @@ export default function Gdpr() {
     <div className={styles.gdprContainer}>
       <div className={styles.gdprTitle}>
         <h4>LEGAL</h4>
-        <h1>GDPR compliance</h1>
+        <h1>GDPR Compliance</h1>
         <hr />
       </div>
       <div className={styles.gdprContent}>
