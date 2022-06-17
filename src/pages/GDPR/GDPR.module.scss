@@ -1,13 +1,11 @@
 .gdprContainer {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
-  background: #f5f7fa;
   display: block;
   background: #f5f7fa;
   box-sizing: border-box;
-  margin-right: auto;
-  margin-left: auto;
+  padding-top: 150px;
+  padding-right: 100px;
+
 
   @media (max-width: 1380px) {
     .content {
@@ -34,6 +32,7 @@
   .gdprContent {
     display: flex;
     flex-direction: row;
+    padding-top: 10px;
   }
 
   .gdprTitle {
@@ -43,14 +42,15 @@
     font-size: 18px;
     color: #a7acc5;
     text-align: center;
-    text-transform: uppercase;
     margin-bottom: 21px;
+    margin-left: 50px;
   }
 
   .gdprTitle h4 {
     color: #a7acc5;
-    font-size: 16.002px;
+    font-size: 18px;
     margin: 0px 0px 21px;
+    text-transform: uppercase;
   }
 
   .gdprTitle h1 {
@@ -67,10 +67,11 @@
     border: 0px;
     height: 4px;
     width: 100px;
-    margin: 42px auto;
+    margin-bottom: 100px;
+    margin-top: 50px;
   }
   .sidebar {
-    padding-left: 200px;
+    padding-left: 300px;
     @media screen and (min-width: 768px) {
       flex: 0 0 100%;
       max-width: 100%;
@@ -112,14 +113,13 @@
     }
   }
   .gdprText {
-    padding-right: 250px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 70%;
+    
+    margin-left: -200px;
+    width: 100%;
+    margin-top: -15px;
   }
 
   .gdprText h2 {
-    margin: 0 0 21px;
     font-size: 23.996px;
     font-weight: 500;
     height: 21px;

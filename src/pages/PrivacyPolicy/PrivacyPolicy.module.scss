@@ -20,7 +20,7 @@
   flex-direction: row;
 }
 .sidebar {
-  padding-left: 250px;
+  padding-left: 320px;
   @media screen and (min-width: 768px) {
     flex: 0 0 100%;
     max-width: 100%;
@@ -64,18 +64,18 @@
 }
 
 .privacyPolicyHeader1 {
-  font-weight: 600;
-  font-size: 1.186rem;
+  font-weight: 700;
+  font-size: 18px;
   color: #a7acc5 !important;
   margin: 0 auto;
   text-align: center;
-  margin-bottom: 2rem !important;
-  margin-top: 4rem;
+  margin-bottom: 1rem;
+  margin-top: 6rem;
 }
 
 .privacyPolicyHeader2 {
   font-weight: 400;
-  font-size: 2.6rem;
+  font-size: 3rem;
   margin: 0 auto;
   margin-top: 0.9rem;
   text-align: center;
@@ -91,8 +91,9 @@
 }
 
 .privacyPolicySection {
-  padding-right: 100px;
-  
+  padding-right: 400px;
+  margin-left: -270px;
+  margin-top: -20px;
 }
 
 .privacyPolicyH4 {

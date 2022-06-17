@@ -17,6 +17,7 @@ import Project from './pages/Project/Project';
 import CreateProject from './pages/CreateProject/CreateProject';
 import Board from './pages/Board';
 import './App.css';
+import Nav from './components/BoardNavigation/Nav';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
       <Route path="/privacy-policy" element={<PrivacyPolicy />} />
       <Route path="/user-page" element={<UserPage />} />
       <Route path="/access" element={<Access />} />
+      <Route path="/nav/*" element={<Nav />} />
       <Route path="/projects" element={<Project />} />
       <Route path="/create-projects" element={<CreateProject />} />
       <Route path="/board" element={<Board />} />

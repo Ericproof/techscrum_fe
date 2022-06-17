@@ -1,0 +1,55 @@
+$font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+  'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+
+.container {
+  margin-top: 50px;
+  position: relative;
+  padding: 8px 8px 14px;
+  box-sizing: border-box;
+  font-size: 12px;
+  text-decoration: none;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  min-height: 24px;
+  font-style: normal;
+  font-weight: 500;
+  font-family: $font-family-base;
+
+  .containerSpan {
+    display: inline-block;
+    margin: 6px;
+    margin-top: 3px;
+    color: var(--ds-text-subtlest, #6b778c);
+    font-size: 12px;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    button {
+      margin-top: 5px;
+      border-width: 0px;
+      border-radius: 3px;
+      box-sizing: border-box;
+      display: inline-flex;
+      font-size: inherit;
+      font-style: normal;
+      font-family: inherit;
+      font-weight: 600;
+      transition: background 0.1s ease-out 0s,
+        box-shadow 0.15s cubic-bezier(0.47, 0.03, 0.49, 1.38) 0s;
+      background: none;
+      cursor: pointer;
+      line-height: inherit;
+      color: var(--ds-text-subtle, #6b778c) !important;
+      transition: opacity 0.3s ease 0s;
+      opacity: 1;
+
+      &:hover {
+        opacity: 0.8;
+        text-decoration: underline;
+      }
+    }
+  }
+}
