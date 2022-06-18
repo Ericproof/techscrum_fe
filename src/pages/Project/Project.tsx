@@ -14,7 +14,8 @@ const projects = [
     type: 'Team-managed software',
     lead: 'Evan Lin',
     avatar:
-      'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/EL-3.png?ssl=1'
+      'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/EL-3.png?ssl=1',
+    lastEditTime: new Date('2021-05-10')
   },
   {
     id: 1,
@@ -25,7 +26,8 @@ const projects = [
     type: 'Team-managed software',
     lead: 'Yiu Kitman',
     avatar:
-      'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/YK-3.png?ssl=1'
+      'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/YK-3.png?ssl=1',
+    lastEditTime: new Date('2021-05-11')
   },
   {
     id: 2,
@@ -36,19 +38,25 @@ const projects = [
     type: 'Company-managed software',
     lead: 'Yiu Kitman',
     avatar:
-      'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/YK-3.png?ssl=1'
+      'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/YK-3.png?ssl=1',
+    lastEditTime: new Date('2021-05-8')
   }
 ];
 export default function Project() {
-  const [projectList, setProjectList] = useState(projects);
+  const projectsOrderbyDate = projects.sort((a, b) => {
+    return a.lastEditTime < b.lastEditTime ? 1 : -1;
+  });
+  const [projectList] = useState(projectsOrderbyDate);
   const [value, setValue] = useState(0);
   const refStar = projectList.map(() => createRef<HTMLDivElement>());
   const refProfile = projectList.map(() => createRef<HTMLDivElement>());
-
+  const getProjectFromChildren = (index: number) => {
+    projectList[index].star = !projectList[index].star;
+    setValue(value + 1);
+  };
   const setProjectStar = (id: number) => {
     const index = projectList.findIndex((project) => project.id === id);
     projectList[index].star = !projectList[index].star;
-    setProjectList(projectList);
     setValue(value + 1);
   };
   const getStarPosition = (e: React.MouseEvent<HTMLDivElement>, id: number) => {
@@ -78,7 +86,7 @@ export default function Project() {
 
   return (
     <>
-      <ProjectHeader />
+      <ProjectHeader projects={projects} updateProject={getProjectFromChildren} />
       <div className={styles.projectPage}>
         <div className={styles.projectContainer}>
           <div className={styles.projectContent}>

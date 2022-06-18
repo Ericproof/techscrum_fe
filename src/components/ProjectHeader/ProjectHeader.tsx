@@ -8,26 +8,21 @@ import styles from './ProjectHeader.module.scss';
 import UseOutsideAlerter from '../OutsideAlerter/OutsideAlerter';
 import PersonalProfile from './PersonalProfile/PersonalProfile';
 
-const projects = [
-  {
-    id: 0,
-    name: 'TECHSCRUM (TEC)',
-    icon: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10411?size=medium',
-    type: 'Software project',
-    star: false
-  },
-  {
-    id: 1,
-    name: 'example (EX)',
-    icon: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10418?size=medium',
-    type: 'Software project',
-    star: false
-  }
-];
+interface Props {
+  projects: {
+    id: number;
+    name: string;
+    icon: string;
+    type: string;
+    star: boolean;
+    lastEditTime: Date;
+  }[];
+  updateProject: (index: number) => void;
+}
 
-export default function ProjectHeader() {
-  const [projectList, setProjectList] = useState(projects);
-  const [value, setValue] = useState(0);
+export default function ProjectHeader({ projects, updateProject }: Props) {
+  const latestTwoProjects = projects.slice(0, 2);
+  const [projectList] = useState(latestTwoProjects);
   const { visible, setVisible, myRef } = UseOutsideAlerter(false);
   const handleClickOutside = () => setVisible(true);
   const navigate = useNavigate();
@@ -39,12 +34,9 @@ export default function ProjectHeader() {
     }
   };
   const refStar = projectList.map(() => createRef<HTMLDivElement>());
-
   const setProjectStar = (id: number) => {
-    const index = projectList.findIndex((project) => project.id === id);
-    projectList[index].star = !projectList[index].star;
-    setProjectList(projectList);
-    setValue(value + 1);
+    const index = projects.findIndex((project) => project.id === id);
+    updateProject(index);
   };
   const getStarPosition = (e: React.MouseEvent<HTMLDivElement>, id: number) => {
     const mouseStarPosition = e.currentTarget.getBoundingClientRect();
