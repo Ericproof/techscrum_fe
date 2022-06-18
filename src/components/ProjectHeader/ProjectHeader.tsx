@@ -37,10 +37,6 @@ export default function ProjectHeader() {
     if (!clickStartEventFlag) {
       navigate(`/#`);
     }
-    // eslint-disable-next-line no-console
-    console.log(e.target);
-    // eslint-disable-next-line no-console
-    console.log(clickStartEventFlag === false);
   };
   const refStar = projectList.map(() => createRef<HTMLDivElement>());
 
