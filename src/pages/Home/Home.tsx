@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BsSuitHeartFill } from 'react-icons/bs';
 import axios from 'axios';
+import { autoLogin } from '../../api/login/login';
 import styles from './Home.module.scss';
 import call from '../../assets/call.svg';
 import cover from '../../assets/cover.png';
@@ -32,6 +33,14 @@ export default function Home() {
       }
     });
   }, []);
+
+  useEffect(() => {
+    async function tokenCheck() {
+      const tokenValidationFlag = await autoLogin();
+      if (tokenValidationFlag.result) navigate('/project');
+    }
+    tokenCheck();
+  });
 
   return (
     <div>

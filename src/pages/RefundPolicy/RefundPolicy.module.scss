@@ -1,8 +1,8 @@
 .refundContainer {
   font-family: FaktSoft, Arial, Helvetica, sans-serif;
-  padding-top: 147px;
+  padding-top: 160px;
   padding-right: 28px;
-  padding-left: 28px;
+  padding-left: 20px;
   margin: 0 98px 98px;
   border: o;
   @media (max-width: 992px) {
@@ -35,7 +35,7 @@
     font-weight: 600;
     font-size: 18px;
     color: #a7acc5;
-    padding-bottom: 8rem;
+    padding-bottom: 7rem;
   }
   .titleRefund {
     margin: 0 !important;
@@ -50,7 +50,6 @@
     margin: 0 0 21px;
     font-weight: 600;
     text-transform: uppercase !important;
-    padding-bottom: 1rem;
   }
   hr {
     background-color: #6a84ed;
@@ -62,8 +61,11 @@
   .refundContent {
     display: flex;
     flex-direction: row;
+    margin-top: -20px;
+    margin-left: 70px;
   }
   .sidebar {
+ 
     @media screen and (min-width: 768px) {
       flex: 0 0 100%;
       max-width: 100%;
@@ -114,8 +116,8 @@
     line-height: 22.4px;
     text-size-adjust: 100%;
     width: 893px;
+    margin-left: -16px;
 
-    padding-right: 12px;
   }
   .refundText p {
     margin-bottom: 1.5rem;
