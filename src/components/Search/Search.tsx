@@ -21,10 +21,10 @@ function Search() {
     debounce(value);
   };
   return (
-    <div className={styles.SearchBar}>
+    <div className={styles.searchBar}>
       <input
         type="text"
-        name="Search"
+        name="search"
         placeholder="Search"
         onChange={(e) => optimizedFn(e.target.value)}
       />
