@@ -14,6 +14,8 @@ import UserPage from './pages/SettingPage/UserPage/UserPage';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import Access from './pages/Access/Access';
 import Project from './pages/Project/Project';
+import CreateProject from './pages/CreateProject/CreateProject';
+import Board from './pages/Board';
 import './App.css';
 import Nav from './components/BoardNavigation/Nav';
 
@@ -34,6 +36,8 @@ function App() {
       <Route path="/access" element={<Access />} />
       <Route path="/nav/*" element={<Nav />} />
       <Route path="/projects" element={<Project />} />
+      <Route path="/create-projects" element={<CreateProject />} />
+      <Route path="/board" element={<Board />} />
       <Route path="*" element={<ErrorPage />} />
     </Routes>
   );

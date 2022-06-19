@@ -2,42 +2,90 @@ import React, { useState } from 'react';
 import { FiArrowLeft } from 'react-icons/fi';
 import { RiMoreFill } from 'react-icons/ri';
 import styles from './Modal.module.scss';
-import icon2 from '../../../assets/icon2.png';
-import icon3 from '../../../assets/icon3.png';
-import icon4 from '../../../assets/icon4.png';
-import icon5 from '../../../assets/icon5.png';
-import icon6 from '../../../assets/icon6.png';
-import icon7 from '../../../assets/icon7.png';
-import icon8 from '../../../assets/icon8.png';
-import icon9 from '../../../assets/icon9.png';
-import icon10 from '../../../assets/icon10.png';
-import icon11 from '../../../assets/icon11.png';
-import icon12 from '../../../assets/icon12.png';
-import icon13 from '../../../assets/icon13.png';
-import icon14 from '../../../assets/icon14.png';
-import icon15 from '../../../assets/icon15.png';
-import icon16 from '../../../assets/icon16.png';
-import defaultIcon from '../../../assets/defaultIcon.png';
-import uploadImage from '../../../assets/uploadImage.png';
+import uploadImage from '../../../../assets/uploadImage.png';
 
 export default function Modal({ shown, close }: { shown: boolean; close: () => void }) {
   const icons = [
-    { id: 1, photo: defaultIcon },
-    { id: 2, photo: icon2 },
-    { id: 3, photo: icon3 },
-    { id: 4, photo: icon4 },
-    { id: 5, photo: icon5 },
-    { id: 6, photo: icon6 },
-    { id: 7, photo: icon7 },
-    { id: 8, photo: icon8 },
-    { id: 9, photo: icon9 },
-    { id: 10, photo: icon10 },
-    { id: 11, photo: icon11 },
-    { id: 12, photo: icon12 },
-    { id: 13, photo: icon13 },
-    { id: 14, photo: icon14 },
-    { id: 15, photo: icon15 },
-    { id: 16, photo: icon16 }
+    {
+      id: 1,
+      photo:
+        'https://010001.atlassian.net/secure/viewavatar?size=xxxlarge@2x&avatarId=10411&avatarType=project'
+    },
+    {
+      id: 2,
+      photo:
+        'https://010001.atlassian.net/secure/viewavatar?size=xxxlarge@2x&avatarId=10400&avatarType=project'
+    },
+    {
+      id: 3,
+      photo:
+        'https://010001.atlassian.net/secure/viewavatar?size=xxxlarge@2x&avatarId=10401&avatarType=project'
+    },
+    {
+      id: 4,
+      photo:
+        'https://010001.atlassian.net/secure/viewavatar?size=xxxlarge@2x&avatarId=10402&avatarType=project'
+    },
+    {
+      id: 5,
+      photo:
+        'https://010001.atlassian.net/secure/viewavatar?size=xxxlarge@2x&avatarId=10403&avatarType=project'
+    },
+    {
+      id: 6,
+      photo:
+        'https://010001.atlassian.net/secure/viewavatar?size=xxxlarge@2x&avatarId=10404&avatarType=project'
+    },
+    {
+      id: 7,
+      photo:
+        'https://010001.atlassian.net/secure/viewavatar?size=xxxlarge@2x&avatarId=10405&avatarType=project'
+    },
+    {
+      id: 8,
+      photo:
+        'https://010001.atlassian.net/secure/viewavatar?size=xxxlarge@2x&avatarId=10406&avatarType=project'
+    },
+    {
+      id: 9,
+      photo:
+        'https://010001.atlassian.net/secure/viewavatar?size=xxxlarge@2x&avatarId=10407&avatarType=project'
+    },
+    {
+      id: 10,
+      photo:
+        'https://010001.atlassian.net/secure/viewavatar?size=xxxlarge@2x&avatarId=10408&avatarType=project'
+    },
+    {
+      id: 11,
+      photo:
+        'https://010001.atlassian.net/secure/viewavatar?size=xxxlarge@2x&avatarId=10409&avatarType=project'
+    },
+    {
+      id: 12,
+      photo:
+        'https://010001.atlassian.net/secure/viewavatar?size=xxxlarge@2x&avatarId=10410&avatarType=project'
+    },
+    {
+      id: 13,
+      photo:
+        'https://010001.atlassian.net/secure/viewavatar?size=xxxlarge@2x&avatarId=10415&avatarType=project'
+    },
+    {
+      id: 14,
+      photo:
+        'https://010001.atlassian.net/secure/viewavatar?size=xxxlarge@2x&avatarId=10412&avatarType=project'
+    },
+    {
+      id: 15,
+      photo:
+        'https://010001.atlassian.net/secure/viewavatar?size=xxxlarge@2x&avatarId=10413&avatarType=project'
+    },
+    {
+      id: 16,
+      photo:
+        'https://010001.atlassian.net/secure/viewavatar?size=xxxlarge@2x&avatarId=10414&avatarType=project'
+    }
   ];
   const firstFiveIcons = icons.slice(0, 5);
   const fiveIcons = firstFiveIcons.map((firstFiveIcon) => (
