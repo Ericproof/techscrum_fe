@@ -53,10 +53,12 @@ export default function Board() {
     setValue(value + 1);
   };
   return (
-    <div className={style.container}>
+    <>
       <ProjectHeader projects={projects} updateProject={getProjectFromChildren} />
-      <BoardSearch />
-      <BoardMain />
-    </div>
+      <div className={style.container}>
+        <BoardSearch />
+        <BoardMain />
+      </div>
+    </>
   );
 }
