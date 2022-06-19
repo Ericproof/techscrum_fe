@@ -5,10 +5,7 @@ function Search() {
   const [search, setSearch] = useState(Array<{ entityId: string; name: string }>());
   let timer: ReturnType<typeof setTimeout>;
 
-  const handleChange = (value: string) => {
-    console.log(value);
-    return value;
-  };
+  const handleChange = (value: string) => {};
   const debounce = (value: string) => {
     if (timer) clearTimeout(timer);
     timer = setTimeout(() => {
@@ -20,6 +17,7 @@ function Search() {
   const optimizedFn = (value: string) => {
     debounce(value);
   };
+  
   return (
     <div className={styles.searchBar}>
       <input
