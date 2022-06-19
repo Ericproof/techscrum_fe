@@ -28,6 +28,8 @@
   padding-top: 5%;
   margin-bottom: 2%;
   margin-left: 11%;
+  z-index: 1;
+  margin-top: 2%;
 }
 
 .inputContainer {
@@ -207,7 +209,7 @@
 }
 
 .roleLayout button span {
-  border-radius: 50%;;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
