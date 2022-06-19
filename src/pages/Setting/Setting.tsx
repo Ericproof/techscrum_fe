@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
 import { RiMoreFill } from 'react-icons/ri';
+import ProjectEditor from '../../components/ProjectEditor/ProjectEditor';
 import styles from './Setting.module.scss';
-import defaultIcon from '../../assets/defaultIcon.png';
-import ProjectLead from './ProjectLead/ProjectLead';
-import Assignee from './Assignee/Assignee';
-import Modal from './Modal/Modal';
 
 export default function Setting() {
   const [toggle, setToggle] = useState(false);
-  const [modalShown, toggleModal] = useState(false);
+
   return (
     <div className={styles.settingPage}>
       <div className={styles.settingContent}>
@@ -50,46 +47,7 @@ export default function Setting() {
             </div>
           )}
         </header>
-        <div className={styles.editSection}>
-          <div className={styles.editContainer}>
-            <div className={styles.icon}>
-              <img src={defaultIcon} alt="project icon" />
-              <button
-                type="button"
-                onClick={() => {
-                  toggleModal(!modalShown);
-                }}
-              >
-                Change icon
-              </button>
-              <Modal
-                shown={modalShown}
-                close={() => {
-                  toggleModal(false);
-                }}
-              />
-            </div>
-            <form>
-              <div className={styles.nameInputSection}>
-                <label htmlFor="Name">
-                  <span>Name</span>
-                  <input type="text" id="Name" name="Name" />
-                </label>
-              </div>
-              <div className={styles.keyInputSection}>
-                <label htmlFor="key">
-                  <span>Key</span>
-                  <input type="text" id="key" name="Key" />
-                </label>
-              </div>
-              <ProjectLead />
-              <Assignee />
-              <button className={styles.saveBtn} type="submit">
-                Save
-              </button>
-            </form>
-          </div>
-        </div>
+        <ProjectEditor />
       </div>
     </div>
   );
