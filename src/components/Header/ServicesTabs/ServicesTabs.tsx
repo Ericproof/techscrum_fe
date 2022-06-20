@@ -368,9 +368,6 @@ export default function ServicesTabs({ show }: Props) {
         <TwoColumnsMenu servicesInfo={solutions} active={solutionActive} />
       </div>
       <div>
-        <a href="/#">Pricing</a>
-      </div>
-      <div>
         <a href="/#" onClick={() => activeMenu('resource')}>
           Resources
           <MdOutlineKeyboardArrowDown />
