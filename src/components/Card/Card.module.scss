@@ -2,7 +2,6 @@ p.cardStar:after {
   content: '*';
   color: red;
 }
-
 .cardStar {
   font-size: 12px;
   margin-top: 0;
@@ -10,7 +9,6 @@ p.cardStar:after {
   text-align: left;
   font-weight: 600;
 }
-
 .cardContainer {
   width: 720px;
   height: 780px;
@@ -27,11 +25,9 @@ p.cardStar:after {
   font-weight: 550;
   color: rgb(107, 119, 140);
 }
-
 .cardContent {
   overflow: auto;
 }
-
 .cardTitle {
   font-size: 14px;
   margin-top: 1.5rem;
@@ -41,11 +37,9 @@ p.cardStar:after {
   line-height: 20px;
   color: rgb(23, 43, 77);
 }
-
 .titleContent h2 {
   margin-bottom: 2rem;
 }
-
 .titleButton {
   margin-left: 540px;
   margin-bottom: 3rem;
@@ -54,7 +48,6 @@ p.cardStar:after {
   background-color: white;
   border: none;
 }
-
 .cardLabel {
   font-size: 12px;
   margin-top: 0;
@@ -62,7 +55,6 @@ p.cardStar:after {
   text-align: left;
   font-weight: 600;
 }
-
 .cardSelect {
   width: 47%;
   padding: 10px 20px;
@@ -75,12 +67,10 @@ p.cardStar:after {
   line-height: 20px;
   border-radius: 4px;
 }
-
 .cardSelect:hover {
   background-color: rgb(214, 217, 221);
   transition: 0.3s;
 }
-
 .cardInput {
   width: 97%;
   padding: 10px 20px;
@@ -98,12 +88,10 @@ p.cardStar:after {
   border-left-color: lightgray;
   border-radius: 4px;
 }
-
 .cardInput:hover {
   background-color: rgb(214, 217, 221);
   transition: 0.3s;
 }
-
 .cardAssignee {
   width: 97%;
   padding: 10px 20px;
@@ -124,7 +112,6 @@ p.cardStar:after {
   background-size: 27px;
   padding-left: 45px;
 }
-
 .cardButton {
   display: flex;
   flex-direction: row;
@@ -132,7 +119,6 @@ p.cardStar:after {
   padding-top: 22px;
   padding-bottom: 24px;
 }
-
 .cancelButton {
   width: 45px;
   height: 33px;
@@ -146,7 +132,6 @@ p.cardStar:after {
   border-radius: 3px;
   appearance: auto;
 }
-
 .createButton {
   width: 65px;
   height: 33px;
