@@ -11,34 +11,43 @@ p.cardStar:after {
   font-weight: 600;
 }
 .cardContainer {
-    width:800px;
-    height: 500px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 35px;
-    padding-right: 10px;
-    padding-bottom: 20px;
-    display:flex;
-    flex-direction: column;
-    font-family: FaktSoft, Arial, Helvetica, sans-serif;
-    box-shadow: 0px 0px 15px -5px;
-    font-size: 14px;
-    line-height: 20px;
-    font-weight: 600;
-    color: rgb(107, 119, 140);
+  width:720px;
+  height: 780px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 35px;
+  padding-right: 10px;
+  display:flex;
+  flex-direction: column;
+  font-family: FaktSoft, Arial, Helvetica, sans-serif;
+  box-shadow: 0px 0px 15px -5px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 550;
+  color: rgb(107, 119, 140);
 }
 .cardContent{
-    overflow:auto;
+  overflow:auto;
 }
-.cardTitle h2 {
-  font-size: 20px;
-  margin-bottom: 2rem;
-  margin-top: 2.3rem;
-  text-align: left;
-  align-items: center;
-  font-weight: 600;
+.cardTitle {
+  font-size: 14px;
+  margin-top: 1.5rem;
+  display:flex;
+  flex-direction:row;
+  font-weight: 550;
   line-height:20px;
   color:rgb(23, 43, 77);
+}
+.titleContent h2{
+  margin-bottom: 2rem;
+}
+.titleButton{
+  margin-left: 540px;
+  margin-bottom: 3rem;
+  font-size: 27px;
+  font-weight: 600;
+  background-color: white;
+  border:none;
 }
 .cardLabel {
   font-size: 12px;
@@ -48,7 +57,7 @@ p.cardStar:after {
   font-weight: 600;
 }
 .cardSelect {
-  width: 50%;
+  width: 47%;
   padding:10px 20px;
   margin-bottom:20px;
   display: block;
@@ -59,6 +68,9 @@ p.cardStar:after {
   line-height: 20px;
   border-radius: 4px;
 }
+.cardSelect:hover { 
+ background-color:rgb(214, 217, 221);
+ transition:0.3s;}
 .cardInput {
   width: 97%;
   padding: 10px 20px;
@@ -76,21 +88,23 @@ p.cardStar:after {
   border-left-color:lightgray;
   border-radius: 4px;
 }
-
+.cardInput:hover { 
+  background-color:rgb(214, 217, 221);
+  transition:0.3s;}
 .cardAssignee {
-    width: 97%;
-    padding: 10px 20px;
-    margin-top: 0;
-    margin-bottom:20px;
-    background-color: #f7f8fbf0;
-    box-sizing: border-box;
-    font-family: FaktSoft, Arial, Helvetica, sans-serif;
-    border-style: solid;
+  width: 97%;
+  padding: 10px 20px;
+  margin-top: 0;
+  margin-bottom:20px;
+  background-color: #f7f8fbf0;
+  box-sizing: border-box;
+  font-family: FaktSoft, Arial, Helvetica, sans-serif;
+  border-style: solid;
   border-color:#dfe1e6;
-    display: block;
-    text-align: left;
-    line-height: 20px;
-    border-radius: 4px;
+  display: block;
+  text-align: left;
+  line-height: 20px;
+  border-radius: 4px;
   background-image: url(https://avatar-management.services.atlassian.com/default/48);
   background-position: 10px 7px;
   background-repeat: no-repeat;
@@ -98,30 +112,30 @@ p.cardStar:after {
   padding-left: 45px;
 }
 .cardButton{
-    display:flex;
-    flex-direction:row;
-    overflow: hidden;
-    padding-top:22px;
-    padding-bottom: 24px;
+  display:flex;
+  flex-direction:row;
+  overflow: hidden;
+  padding-top:22px;
+  padding-bottom: 24px;
 }
 .cancelButton {
-    width:45px;
-    height:20px;
-    line-height:32px;
+  width:45px;
+  height:33px;
   background-color: white;
   cursor: pointer;
   border: 2px;
-  font-size: 12px;
+  font-size: 14px;
   color:rgb(107, 119, 140);
-  margin-left:645px;
+  margin-left:568px;
   font-weight: 500;
   border-radius: 3px;
   appearance: auto;
 }
 .createButton {
-    width:65px;
-    height:33px;
+  width:65px;
+  height:33px;
   font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
   text-decoration: none;
   outline: none;
@@ -129,4 +143,5 @@ p.cardStar:after {
   background-color: #0052cc;
   border: none;
   margin-left: 20px;
+  border-radius: 4px;
 }
