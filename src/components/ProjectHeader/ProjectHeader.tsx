@@ -30,7 +30,7 @@ export default function ProjectHeader({ projects, updateProject }: Props) {
     e.preventDefault();
     const clickStartEventFlag = (e.target as Element).className.includes('Star');
     if (!clickStartEventFlag) {
-      navigate(`/#`);
+      navigate(`/board`);
     }
   };
   const refStar = projectList.map(() => createRef<HTMLDivElement>());
@@ -93,7 +93,7 @@ export default function ProjectHeader({ projects, updateProject }: Props) {
                     <div className={styles.top}>
                       <div className={styles.recent}>RECENT</div>
                       {projectList.map((project) => (
-                        <a href="/projects" onClick={handleClickEvent} key={project.id}>
+                        <a href="/board" onClick={handleClickEvent} key={project.id}>
                           <span className={styles.iconSection}>
                             <div className={styles.iconContainer}>
                               <span className={styles.icon}>
@@ -157,7 +157,7 @@ export default function ProjectHeader({ projects, updateProject }: Props) {
                     </div>
                     <div className={styles.bottom}>
                       <span className={styles.viewSection}>
-                        <a href="/#">
+                        <a href="/projects">
                           <span className={styles.view}>
                             <span>View all projects</span>
                           </span>

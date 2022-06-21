@@ -179,7 +179,7 @@ export default function Project() {
                         </div>
                       </td>
                       <td className={styles.name}>
-                        <a href="/#">
+                        <a href="/board">
                           <div className={styles.nameContent}>
                             <img src={project.icon} alt="icon" />
                             <span>{project.name}</span>
