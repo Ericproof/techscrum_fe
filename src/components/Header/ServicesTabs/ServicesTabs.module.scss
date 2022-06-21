@@ -1,50 +1,52 @@
 $max_size: 1201px;
 $small_size: 1000px;
 
-.serviceListTabs{
-    display: flex;
-    flex-direction: row;
-    gap: 14px;
-    margin-left: 42px;
+.serviceListTabs {
+  display: flex;
+  flex-direction: row;
+  gap: 14px;
+  margin-left: 42px;
+  @media (max-width: $max_size) {
+    display: none;
+    flex-direction: column;
+    margin-left: 0;
+  }
+  div {
+    align-self: center;
     @media (max-width: $max_size) {
-        display: none;
-        flex-direction: column;
-        margin-left: 0;
+      width: 100%;
     }
-    div{
-        align-self: center;
+    a {
+      text-decoration: none;
+      color: black;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      @media (max-width: $max_size) {
+        border-radius: 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.058823529411764705);
+        width: 100%;
+        padding: 15px 5px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 15px;
+      }
+      svg {
+        margin-left: 5px;
+        min-width: 10px;
+        min-height: 10px;
         @media (max-width: $max_size) {
-            width: 100%;
+          margin-right: 50px;
+          min-width: 7.5px;
+          min-height: 7.5px;
         }
-        a{
-            text-decoration: none;
-            color: black;
-            cursor: pointer;
-            @media (max-width: $max_size) {
-                border-radius: 0;
-                border-bottom: 1px solid rgba(0,0,0,.058823529411764705);
-                width: 100%;
-                padding: 15px 5px;
-                display: flex;
-                justify-content: space-between;
-                font-size: 15px;
-            }
-            svg{
-                margin-left:5px;
-                min-width: 10px;
-                min-height: 10px;
-                @media (max-width: $max_size) {
-                    margin-right: 50px;
-                    min-width: 7.5px;
-                    min-height: 7.5px;
-                }
-            }
-        }
+      }
     }
+  }
 }
 
-.serviceListTabsActive{
-    @media (max-width: $max_size) {
-        display: flex;
-    }
+.serviceListTabsActive {
+  @media (max-width: $max_size) {
+    display: flex;
+  }
 }
