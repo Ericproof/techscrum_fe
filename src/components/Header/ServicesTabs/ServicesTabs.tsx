@@ -21,9 +21,9 @@ import {
   AiFillVideoCamera,
   AiFillRedditCircle,
   AiOutlineRocket,
-  AiTwotoneExperiment,
-  AiOutlineDown
+  AiTwotoneExperiment
 } from 'react-icons/ai';
+import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import styles from './ServicesTabs.module.scss';
 import ThreeColumnsMenu from './ThreeColumnsMenu/ThreeColumnsMenu';
 import TwoColumnsMenu from './TwoColumnsMenu/TwoColumnsMenu';
@@ -356,24 +356,21 @@ export default function ServicesTabs({ show }: Props) {
       <div>
         <a href="/#" onClick={() => activeMenu('platform')}>
           Platform
-          <AiOutlineDown />
+          <MdOutlineKeyboardArrowDown />
         </a>
         <ThreeColumnsMenu servicesInfo={platform} active={platformActive} />
       </div>
       <div>
         <a href="/#" onClick={() => activeMenu('solution')}>
           Solutions
-          <AiOutlineDown />
+          <MdOutlineKeyboardArrowDown />
         </a>
         <TwoColumnsMenu servicesInfo={solutions} active={solutionActive} />
       </div>
       <div>
-        <a href="/#">Pricing</a>
-      </div>
-      <div>
         <a href="/#" onClick={() => activeMenu('resource')}>
           Resources
-          <AiOutlineDown />
+          <MdOutlineKeyboardArrowDown />
         </a>
         <TwoColumnsMenu servicesInfo={resources} active={resourcesActive} />
       </div>

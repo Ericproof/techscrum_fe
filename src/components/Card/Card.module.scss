@@ -1,8 +1,8 @@
-
 p.cardStar:after {
   content: '*';
   color: red;
 }
+
 .cardStar {
   font-size: 12px;
   margin-top: 0;
@@ -10,14 +10,15 @@ p.cardStar:after {
   text-align: left;
   font-weight: 600;
 }
+
 .cardContainer {
-  width:720px;
+  width: 720px;
   height: 780px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 35px;
   padding-right: 10px;
-  display:flex;
+  display: flex;
   flex-direction: column;
   font-family: FaktSoft, Arial, Helvetica, sans-serif;
   box-shadow: 0px 0px 15px -5px;
@@ -26,29 +27,34 @@ p.cardStar:after {
   font-weight: 550;
   color: rgb(107, 119, 140);
 }
-.cardContent{
-  overflow:auto;
+
+.cardContent {
+  overflow: auto;
 }
+
 .cardTitle {
   font-size: 14px;
   margin-top: 1.5rem;
-  display:flex;
-  flex-direction:row;
+  display: flex;
+  flex-direction: row;
   font-weight: 550;
-  line-height:20px;
-  color:rgb(23, 43, 77);
+  line-height: 20px;
+  color: rgb(23, 43, 77);
 }
-.titleContent h2{
+
+.titleContent h2 {
   margin-bottom: 2rem;
 }
-.titleButton{
+
+.titleButton {
   margin-left: 540px;
   margin-bottom: 3rem;
   font-size: 27px;
   font-weight: 600;
   background-color: white;
-  border:none;
+  border: none;
 }
+
 .cardLabel {
   font-size: 12px;
   margin-top: 0;
@@ -56,10 +62,11 @@ p.cardStar:after {
   text-align: left;
   font-weight: 600;
 }
+
 .cardSelect {
   width: 47%;
-  padding:10px 20px;
-  margin-bottom:20px;
+  padding: 10px 20px;
+  margin-bottom: 20px;
   display: block;
   background-color: #f7f8fbf0;
   border: 0;
@@ -68,14 +75,17 @@ p.cardStar:after {
   line-height: 20px;
   border-radius: 4px;
 }
-.cardSelect:hover { 
- background-color:rgb(214, 217, 221);
- transition:0.3s;}
+
+.cardSelect:hover {
+  background-color: rgb(214, 217, 221);
+  transition: 0.3s;
+}
+
 .cardInput {
   width: 97%;
   padding: 10px 20px;
   margin-top: 0;
-  margin-bottom:20px;
+  margin-bottom: 20px;
   background-color: #f7f8fbf0;
   box-sizing: border-box;
   font-family: FaktSoft, Arial, Helvetica, sans-serif;
@@ -83,24 +93,27 @@ p.cardStar:after {
   text-align: left;
   line-height: 20px;
   border-style: solid;
-  border-color:#dfe1e6;
-  border-right-color:lightgray;
-  border-left-color:lightgray;
+  border-color: #dfe1e6;
+  border-right-color: lightgray;
+  border-left-color: lightgray;
   border-radius: 4px;
 }
-.cardInput:hover { 
-  background-color:rgb(214, 217, 221);
-  transition:0.3s;}
+
+.cardInput:hover {
+  background-color: rgb(214, 217, 221);
+  transition: 0.3s;
+}
+
 .cardAssignee {
   width: 97%;
   padding: 10px 20px;
   margin-top: 0;
-  margin-bottom:20px;
+  margin-bottom: 20px;
   background-color: #f7f8fbf0;
   box-sizing: border-box;
   font-family: FaktSoft, Arial, Helvetica, sans-serif;
   border-style: solid;
-  border-color:#dfe1e6;
+  border-color: #dfe1e6;
   display: block;
   text-align: left;
   line-height: 20px;
@@ -108,32 +121,35 @@ p.cardStar:after {
   background-image: url(https://avatar-management.services.atlassian.com/default/48);
   background-position: 10px 7px;
   background-repeat: no-repeat;
-  background-size:27px;
+  background-size: 27px;
   padding-left: 45px;
 }
-.cardButton{
-  display:flex;
-  flex-direction:row;
+
+.cardButton {
+  display: flex;
+  flex-direction: row;
   overflow: hidden;
-  padding-top:22px;
+  padding-top: 22px;
   padding-bottom: 24px;
 }
+
 .cancelButton {
-  width:45px;
-  height:33px;
+  width: 45px;
+  height: 33px;
   background-color: white;
   cursor: pointer;
   border: 2px;
   font-size: 14px;
-  color:rgb(107, 119, 140);
-  margin-left:568px;
+  color: rgb(107, 119, 140);
+  margin-left: 568px;
   font-weight: 500;
   border-radius: 3px;
   appearance: auto;
 }
+
 .createButton {
-  width:65px;
-  height:33px;
+  width: 65px;
+  height: 33px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
