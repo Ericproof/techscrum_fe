@@ -14,9 +14,10 @@ div.right {
   .rightServicesLists {
     display: flex;
     flex-direction: column;
-    justify-content:space-between;
+    justify-content: space-between;
     flex-wrap: wrap;
     align-items: flex-start;
+    margin-bottom: 20px;
     a {
       position: relative;
       display: flex;
@@ -39,12 +40,13 @@ div.right {
         margin-left: 5px;
       }
 
-      @media(max-width: $max_size){
+      @media (max-width: $max_size) {
         border-bottom: 0;
+        justify-content: flex-start;
       }
     }
   }
-  .space{
+  .space {
     flex: 1;
   }
   a.blueBtn {
@@ -59,9 +61,9 @@ div.right {
     color: #4461d7;
     background: #edf1fe;
     text-decoration: none;
-
-    @media(max-width: $max_size){
-      width: 300px;
+    @media (max-width: $max_size) {
+      width: 213px;
+      margin-left: 10px;
     }
   }
 }
