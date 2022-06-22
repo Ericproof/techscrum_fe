@@ -1,62 +1,38 @@
-import React, { useState, createRef } from 'react';
+import React, { useState, createRef, useEffect } from 'react';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { FiSearch } from 'react-icons/fi';
 import styles from './Project.module.scss';
 import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
+import { getProjects } from '../../api/projects/projects';
 
-const projects = [
-  {
-    id: 0,
-    star: false,
-    icon: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10418?size=small',
-    name: 'example',
-    key: 'EX',
-    type: 'Team-managed software',
-    lead: 'Evan Lin',
-    avatar:
-      'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/EL-3.png?ssl=1',
-    lastEditTime: new Date('2021-05-10')
-  },
-  {
-    id: 1,
-    star: false,
-    icon: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10411?size=small',
-    name: 'TECHSCRUM',
-    key: 'TEC',
-    type: 'Team-managed software',
-    lead: 'Yiu Kitman',
-    avatar:
-      'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/YK-3.png?ssl=1',
-    lastEditTime: new Date('2021-05-11')
-  },
-  {
-    id: 2,
-    star: false,
-    icon: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10412?size=small',
-    name: 'Template',
-    key: 'TEM',
-    type: 'Company-managed software',
-    lead: 'Yiu Kitman',
-    avatar:
-      'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/YK-3.png?ssl=1',
-    lastEditTime: new Date('2021-05-8')
-  }
-];
 export default function Project() {
-  const projectsOrderbyDate = projects.sort((a, b) => {
-    return a.lastEditTime < b.lastEditTime ? 1 : -1;
-  });
-  const [projectList] = useState(projectsOrderbyDate);
+  const [projectList, setProjectList] = useState<any>([]);
   const [value, setValue] = useState(0);
   const refStar = projectList.map(() => createRef<HTMLDivElement>());
   const refProfile = projectList.map(() => createRef<HTMLDivElement>());
-  const getProjectFromChildren = (index: number) => {
-    projectList[index].star = !projectList[index].star;
+
+  useEffect(() => {
+    const fetchProjects = () => {
+      // index().then((res: any) => {
+      //   setProjectList(res.data);
+      // })
+
+      const res = getProjects();
+      const sortedResult = res.data.sort((a, b) => {
+        return a.lastEditTime < b.lastEditTime ? 1 : -1;
+      });
+      setProjectList(sortedResult);
+    };
+    fetchProjects();
+  }, []);
+
+  const getProjectFromChildren = (id: number) => {
+    projectList[id].star = !projectList[id].star;
     setValue(value + 1);
   };
   const setProjectStar = (id: number) => {
-    const index = projectList.findIndex((project) => project.id === id);
-    projectList[index].star = !projectList[index].star;
+    const projectIndex = projectList.findIndex((project: any) => project.id === id);
+    projectList[projectIndex].star = !projectList[projectIndex].star;
     setValue(value + 1);
   };
   const getStarPosition = (e: React.MouseEvent<HTMLDivElement>, id: number) => {
@@ -86,7 +62,7 @@ export default function Project() {
 
   return (
     <>
-      <ProjectHeader projects={projects} updateProject={getProjectFromChildren} />
+      <ProjectHeader projects={projectList} updateProject={getProjectFromChildren} />
       <div className={styles.projectPage}>
         <div className={styles.projectContainer}>
           <div className={styles.projectContent}>
@@ -133,7 +109,7 @@ export default function Project() {
                   </tr>
                 </thead>
                 <tbody>
-                  {projectList.map((project) => (
+                  {projectList.map((project: any) => (
                     <tr key={project.id}>
                       <td className={styles.star}>
                         <div
