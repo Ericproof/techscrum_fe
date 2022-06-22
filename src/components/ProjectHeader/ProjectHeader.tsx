@@ -157,14 +157,16 @@ export default function ProjectHeader({ projects, updateProject }: Props) {
                     </div>
                     <div className={styles.bottom}>
                       <span className={styles.viewSection}>
-                        <a href="/#">
-                          <span className={styles.view}>
+                        <a href="/projects">
+                          <span className={styles.link}>
                             <span>View all projects</span>
                           </span>
                         </a>
-                        <button type="button">
-                          <span>Create project</span>
-                        </button>
+                        <a href="/create-projects">
+                          <span className={styles.link}>
+                            <span>Create project</span>
+                          </span>
+                        </a>
                       </span>
                     </div>
                   </div>
