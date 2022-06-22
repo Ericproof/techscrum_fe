@@ -61,6 +61,7 @@ div.right {
     color: #4461d7;
     background: #edf1fe;
     text-decoration: none;
+    border: none;
     @media (max-width: $max_size) {
       width: 213px;
       margin-left: 10px;
