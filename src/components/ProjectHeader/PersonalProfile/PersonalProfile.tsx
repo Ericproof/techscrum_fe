@@ -35,16 +35,8 @@ export default function PersonalProfile() {
                     <div className={styles.settingTop} />
                     <div className={styles.settingDetails}>
                       <div className={styles.detail}>
-                        <div className={styles.name}>TECHSCRUM</div>
-                        <a href="/#">
-                          <div className={styles.title}>
-                            <span>Personal settings</span>
-                          </div>
-                        </a>
-                      </div>
-                      <div className={styles.detail}>
                         <div className={styles.name}>{user.name}</div>
-                        <a href="/#">
+                        <a href="/user-page">
                           <div className={styles.title}>
                             <span>Profile</span>
                           </div>
