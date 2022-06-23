@@ -12,7 +12,6 @@ export default function LeftBottom() {
           <button type="button">Comments</button>
         </div>
       </div>
-
       <div className={style.commentInputField}>
         <span role="img" className={style.avatar} />
         <input type="text" placeholder="Add a comment..." />

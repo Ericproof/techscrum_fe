@@ -31,7 +31,6 @@ export default function CardRightContent() {
           />
         </svg>
       </button>
-
       <div className={style.box}>
         <div className={style.detail}>
           <span>Detail</span>
@@ -45,27 +44,22 @@ export default function CardRightContent() {
             </svg>
           </button>
         </div>
-
         <div className={style.boxBody}>
           <div className={style.checkList}>
             <div>Develop CheckList</div>
             <div>None</div>
           </div>
-
           <div className={style.assignee}>
             <div>Assignee</div>
-
             <div>
               <span className={style.icon} />
               <div className={style.roleName}>Evan Lin</div>
             </div>
           </div>
-
           <div className={style.labels}>
             <div>Labels</div>
             <div>None</div>
           </div>
-
           <div className={style.sprint}>
             <div>Sprint</div>
             <div>TEC Sprint 6</div>
@@ -74,7 +68,6 @@ export default function CardRightContent() {
             <div>Story Point estimate</div>
             <div>None</div>
           </div>
-
           <div className={style.dueDate}>
             <div>Due date</div>
             <div>
@@ -86,7 +79,6 @@ export default function CardRightContent() {
               {!dateButtonShow && <DatePicker ref={calendar} />}
             </div>
           </div>
-
           <div className={style.reporter}>
             <div>Reporter</div>
             <div>
@@ -96,7 +88,6 @@ export default function CardRightContent() {
           </div>
         </div>
       </div>
-
       <div className={style.createAndUpdateDate}>
         <span>Created 23 hours ago</span>
         <span>Updated 33 minutes ago</span>

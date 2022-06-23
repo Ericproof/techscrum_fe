@@ -10,7 +10,6 @@ export default function CommentItem() {
           <span>Evan Lin</span>
           <span>57 minutes ago</span>
         </div>
-
         <div className={style.commentBody}>
           <span>Comment 1</span>
         </div>
