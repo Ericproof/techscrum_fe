@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import styles from './Assignee.module.scss';
-import UseOutsideAlerter from '../../OutsideAlerter/OutsideAlerter';
+import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 
 export default function Assignee(props: any) {
   const { value, onChange } = props;
@@ -10,7 +10,7 @@ export default function Assignee(props: any) {
     { id: 2, state: 'Unassigned' }
   ];
   const [assignState, setAssignState] = useState(assignees[0]);
-  const { visible, setVisible, myRef } = UseOutsideAlerter(false);
+  const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const handleClickOutside = () => setVisible(true);
   return (
     <div ref={myRef} className={styles.assigneeDropdownMenu}>

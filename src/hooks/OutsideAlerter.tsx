@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 
-export default function UseOutsideAlerter(initialValue: boolean) {
+export default function useOutsideAlerter(initialValue: boolean) {
   const myRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState<boolean>(initialValue);
   const handleClickInside = (e: MouseEvent) => {

@@ -5,24 +5,21 @@ import { FiSearch } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import styles from './Project.module.scss';
 import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
-import { getProjects } from '../../api/projects/projects';
+import { getProjects, deleteProject } from '../../api/projects/projects';
 import ProjectEditor from '../../components/ProjectEditor/ProjectEditor';
+import useOutsideAlerter from '../../hooks/OutsideAlerter';
 
 export default function Project() {
   const [projectList, setProjectList] = useState<any>([]);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [showProjectDetails, setShowProjectDetails] = useState(false);
+  const [showProjectDetails, setShowProjectDetails] = useState(-1);
   const [value, setValue] = useState(0);
   const refStar = projectList.map(() => createRef<HTMLDivElement>());
   const refProfile = projectList.map(() => createRef<HTMLDivElement>());
-  const refView = projectList.map(() => createRef<HTMLDivElement>());
+  const refShowMore = projectList.map(() => createRef<HTMLDivElement>());
+  const { visible, setVisible, myRef } = useOutsideAlerter(false);
 
   useEffect(() => {
     const fetchProjects = () => {
-      // index().then((res: any) => {
-      //   setProjectList(res.data);
-      // })
-
       const res = getProjects();
       const sortedResult = res.data.sort((a, b) => {
         return a.lastEditTime < b.lastEditTime ? 1 : -1;
@@ -67,12 +64,11 @@ export default function Project() {
   };
 
   const onCompletedSubmit = () => {
-    setIsModalOpen(false);
+    setVisible(false);
   };
 
-  const deleteProject = (id: string) => {
-    // eslint-disable-next-line no-useless-return
-    return;
+  const removeProject = (id: string) => {
+    deleteProject(id);
   };
 
   const viewDetailPosition = (e: React.MouseEvent<HTMLDivElement>, id: number) => {
@@ -89,11 +85,29 @@ export default function Project() {
     }
   };
 
+  const handleClickInside = (e: MouseEvent) => {
+    const target = e.target as HTMLDivElement;
+    let hasClickShowMore = false;
+    for (let i = 0; i < refShowMore.length; i += 1) {
+      if (refShowMore[i].current !== null && refShowMore[i].current.contains(target)) {
+        hasClickShowMore = true;
+      }
+    }
+    if (hasClickShowMore === false) {
+      setShowProjectDetails(-1);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickInside);
+    return () => document.removeEventListener('mousedown', handleClickInside);
+  });
+
   return (
     <>
       <ProjectHeader projects={projectList} updateProject={getProjectFromChildren} />
-      {isModalOpen && (
-        <div className={styles.modalContainer}>
+      {visible && (
+        <div className={styles.modalContainer} ref={myRef}>
           <div className={styles.modal}>
             <ProjectEditor onCompletedSubmit={onCompletedSubmit} />
           </div>
@@ -109,7 +123,7 @@ export default function Project() {
                   type="button"
                   className={styles.createButton}
                   onClick={() => {
-                    setIsModalOpen(true);
+                    setVisible(true);
                   }}
                 >
                   Create project
@@ -197,12 +211,12 @@ export default function Project() {
                         </div>
                       </td>
                       <td className={styles.name}>
-                        <a href="/#">
+                        <Link to="/board">
                           <div className={styles.nameContent}>
                             <img src={project.icon} alt="icon" />
                             <span>{project.name}</span>
                           </div>
-                        </a>
+                        </Link>
                       </td>
                       <td className={styles.key}>
                         <span className={styles.keyName}>{project.key}</span>
@@ -240,7 +254,9 @@ export default function Project() {
                                       <span>{project.lead}</span>
                                     </div>
                                     <div className={styles.viewProfile}>
-                                      <button type="button">View profile</button>
+                                      <Link to="/user-page">
+                                        <button type="button">View profile</button>
+                                      </Link>
                                     </div>
                                   </div>
                                 </div>
@@ -257,11 +273,11 @@ export default function Project() {
                         onFocus={() => undefined}
                       >
                         {showProjectDetails === project.id && (
-                          <div className={styles.viewDetail} ref={refView[index]}>
+                          <div className={styles.viewDetail} ref={refShowMore[index]}>
                             <Link to="/settings">
                               <button type="button">View Detail</button>
                             </Link>
-                            <button type="button" onClick={() => deleteProject(project.id)}>
+                            <button type="button" onClick={() => removeProject(project.id)}>
                               Delete Project
                             </button>
                           </div>
