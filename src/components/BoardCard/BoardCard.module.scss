@@ -1,0 +1,32 @@
+.background {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  background-color: rgba(9, 30, 66, 0.54);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 119px);
+  max-width: calc(100% - 120px);
+  width: 1280px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 3px;
+  box-shadow: rgb(9 30 66 / 8%) 0px 0px 0px 1px, rgb(9 30 66 / 8%) 0px 2px 1px,
+    rgb(9 30 66 / 31%) 0px 0px 20px -6px;
+  color: rgb(9, 30, 66);
+  max-height: 100%;
+
+  .cardContent {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
