@@ -3,7 +3,8 @@ import { MdKeyboardArrowDown } from 'react-icons/md';
 import styles from './Assignee.module.scss';
 import UseOutsideAlerter from '../../OutsideAlerter/OutsideAlerter';
 
-export default function Assignee() {
+export default function Assignee(props: any) {
+  const { value, onChange } = props;
   const assignees = [
     { id: 1, state: 'Project lead' },
     { id: 2, state: 'Unassigned' }
@@ -24,9 +25,11 @@ export default function Assignee() {
                     <li key={assignee.id}>
                       <button
                         type="button"
+                        name="assignee"
                         className={styles.assigneeOptions}
                         onClick={() => {
                           setAssignState({ id: assignee.id, state: assignee.state });
+                          onChange({ target: { value: assignee.id, name: 'assignee_id' } });
                           setVisible(false);
                         }}
                       >

@@ -1,15 +1,21 @@
 import React, { useState, createRef, useEffect } from 'react';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
+import { HiDotsHorizontal } from 'react-icons/hi';
 import { FiSearch } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 import styles from './Project.module.scss';
 import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
 import { getProjects } from '../../api/projects/projects';
+import ProjectEditor from '../../components/ProjectEditor/ProjectEditor';
 
 export default function Project() {
   const [projectList, setProjectList] = useState<any>([]);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [showProjectDetails, setShowProjectDetails] = useState(false);
   const [value, setValue] = useState(0);
   const refStar = projectList.map(() => createRef<HTMLDivElement>());
   const refProfile = projectList.map(() => createRef<HTMLDivElement>());
+  const refView = projectList.map(() => createRef<HTMLDivElement>());
 
   useEffect(() => {
     const fetchProjects = () => {
@@ -60,18 +66,54 @@ export default function Project() {
     }
   };
 
+  const onCompletedSubmit = () => {
+    setIsModalOpen(false);
+  };
+
+  const deleteProject = (id: string) => {
+    // eslint-disable-next-line no-useless-return
+    return;
+  };
+
+  const viewDetailPosition = (e: React.MouseEvent<HTMLDivElement>, id: number) => {
+    const mouseDetailPosition = e.currentTarget.getBoundingClientRect();
+
+    const viewPosition = {
+      x: mouseDetailPosition.left + window.scrollX,
+      y: mouseDetailPosition.top + window.scrollY
+    };
+    const { current } = refProfile[id];
+    if (current !== null) {
+      current.style.top = `${viewPosition.y - 170}px`;
+      current.style.left = `${viewPosition.x + 50}px`;
+    }
+  };
+
   return (
     <>
       <ProjectHeader projects={projectList} updateProject={getProjectFromChildren} />
+      {isModalOpen && (
+        <div className={styles.modalContainer}>
+          <div className={styles.modal}>
+            <ProjectEditor onCompletedSubmit={onCompletedSubmit} />
+          </div>
+        </div>
+      )}
       <div className={styles.projectPage}>
         <div className={styles.projectContainer}>
           <div className={styles.projectContent}>
             <div className={styles.header}>
               <div className={styles.title}>
                 <h1>Projects</h1>
-                <a href="/create-projects">
-                  <button type="button">Create project</button>
-                </a>
+                <button
+                  type="button"
+                  className={styles.createButton}
+                  onClick={() => {
+                    setIsModalOpen(true);
+                  }}
+                >
+                  Create project
+                </button>
               </div>
               <div className={styles.searchBar}>
                 <input />
@@ -109,7 +151,7 @@ export default function Project() {
                   </tr>
                 </thead>
                 <tbody>
-                  {projectList.map((project: any) => (
+                  {projectList.map((project: any, index: number) => (
                     <tr key={project.id}>
                       <td className={styles.star}>
                         <div
@@ -207,7 +249,30 @@ export default function Project() {
                           </div>
                         </div>
                       </td>
-                      <td className={styles.button} />
+                      <td
+                        className={styles.changeView}
+                        onMouseOver={(e: React.MouseEvent<HTMLDivElement>) =>
+                          viewDetailPosition(e, index)
+                        }
+                        onFocus={() => undefined}
+                      >
+                        {showProjectDetails === project.id && (
+                          <div className={styles.viewDetail} ref={refView[index]}>
+                            <Link to="/settings">
+                              <button type="button">View Detail</button>
+                            </Link>
+                            <button type="button" onClick={() => deleteProject(project.id)}>
+                              Delete Project
+                            </button>
+                          </div>
+                        )}
+                        <HiDotsHorizontal
+                          onClick={() => {
+                            setShowProjectDetails(project.id);
+                          }}
+                          className={styles.verticalMiddle}
+                        />
+                      </td>
                     </tr>
                   ))}
                 </tbody>

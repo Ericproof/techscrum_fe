@@ -51,6 +51,10 @@ export function show(id: string) {
   return axios.get(`${config.apiAddress}/projects/${id}`);
 }
 
-export function store(data: any) {
+export function createProject(data: any) {
   return axios.post(`${config.apiAddress}/projects`, data);
+}
+
+export function deleteProject(id: any) {
+  return axios.delete(`${config.apiAddress}/projects/${id}`);
 }
