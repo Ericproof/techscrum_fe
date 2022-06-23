@@ -6,7 +6,6 @@ import UseOutsideAlerter from '../../OutsideAlerter/OutsideAlerter';
 const users = [
   {
     id: 0,
-    name: 'Yiu Kitman',
     avatar:
       'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/YK-3.png?ssl=1'
   }
@@ -35,7 +34,6 @@ export default function PersonalProfile() {
                     <div className={styles.settingTop} />
                     <div className={styles.settingDetails}>
                       <div className={styles.detail}>
-                        <div className={styles.name}>{user.name}</div>
                         <a href="/user-page">
                           <div className={styles.title}>
                             <span>Profile</span>
