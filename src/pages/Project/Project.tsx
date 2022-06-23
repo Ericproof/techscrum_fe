@@ -19,12 +19,12 @@ export default function Project() {
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
 
   useEffect(() => {
-    const fetchProjects = () => {
-      const res = getProjects();
-      const sortedResult = res.data.sort((a, b) => {
-        return a.lastEditTime < b.lastEditTime ? 1 : -1;
-      });
-      setProjectList(sortedResult);
+    const fetchProjects = async () => {
+      const res = await getProjects();
+      // const sortedResult = res.data.sort((a, b) => {
+      //   return a.lastEditTime < b.lastEditTime ? 1 : -1;
+      // });
+      setProjectList(res.data);
     };
     fetchProjects();
   }, []);
@@ -66,8 +66,11 @@ export default function Project() {
     }
   };
 
-  const onCompletedSubmit = () => {
+  const onCompletedSubmit = (res: any) => {
     setVisible(false);
+    const updateProjectList = [...projectList, ...[res.data]];
+    console.log('o', updateProjectList);
+    setProjectList(updateProjectList);
   };
 
   const removeProject = (id: string) => {
@@ -173,9 +176,9 @@ export default function Project() {
                       <td className={styles.star}>
                         <div
                           className={styles.changeStar}
-                          onMouseOver={(e: React.MouseEvent<HTMLDivElement>) =>
-                            getStarPosition(e, project.id)
-                          }
+                          // onMouseOver={(e: React.MouseEvent<HTMLDivElement>) =>
+                          //   getStarPosition(e, project.id)
+                          // }
                           onFocus={() => undefined}
                         >
                           <span>
@@ -216,7 +219,13 @@ export default function Project() {
                       <td className={styles.name}>
                         <Link to="/board">
                           <div className={styles.nameContent}>
-                            <img src={project.icon} alt="icon" />
+                            <img
+                              src={
+                                project.icon ||
+                                'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10418?size=small'
+                              }
+                              alt="icon"
+                            />
                             <span>{project.name}</span>
                           </div>
                         </Link>
@@ -232,9 +241,9 @@ export default function Project() {
                       <td className={styles.lead}>
                         <div
                           className={styles.leadContainer}
-                          onMouseOver={(e: React.MouseEvent<HTMLDivElement>) =>
-                            getProfilePosition(e, project.id)
-                          }
+                          // onMouseOver={(e: React.MouseEvent<HTMLDivElement>) =>
+                          //   getProfilePosition(e, project.id)
+                          // }
                           onFocus={() => undefined}
                         >
                           <div className={styles.leadContent}>
@@ -247,7 +256,7 @@ export default function Project() {
                                 </div>
                                 <span>{project.lead}</span>
                               </div>
-                              <div className={styles.profileSection} ref={refProfile[project.id]}>
+                              <div className={styles.profileSection}>
                                 <div className={styles.profileContainer}>
                                   <div className={styles.profileContent}>
                                     <div className={styles.avatar}>

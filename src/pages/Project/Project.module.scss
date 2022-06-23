@@ -16,14 +16,11 @@
 
 .modalContainer::-webkit-scrollbar {
   width: 5px;
-
-
 }
 
 /* Track */
 .modalContainer::-webkit-scrollbar-track {
   background: #f1f1f1; 
-
 }
  
 /* Handle */
@@ -51,7 +48,6 @@
   flex-grow: 1;
   min-width: 0px;
   transition: width 300ms cubic-bezier(0.2, 0, 0, 1) 0s;
-
 
   .projectContainer {
     min-width: 800px;
@@ -917,9 +913,11 @@
     .detailIcon {
       padding-top: 12px;
     }
+
     .verticalMiddle{
       vertical-align: -webkit-baseline-middle;
     }
+
     .viewDetail {
       position: absolute;
       width: 125px;
@@ -932,7 +930,6 @@
           cursor: pointer;
         }
       }
-      
     }
   }
 }

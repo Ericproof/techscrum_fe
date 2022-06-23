@@ -8,7 +8,7 @@ import ProjectLead from './ProjectLead/ProjectLead';
 import { createProject } from '../../api/projects/projects';
 
 interface ProjectEditorProps {
-  onCompletedSubmit?: () => void;
+  onCompletedSubmit?: (res: any) => void;
 }
 
 function ProjectEditor(props: ProjectEditorProps) {
@@ -37,7 +37,7 @@ function ProjectEditor(props: ProjectEditorProps) {
         }
         setError(false);
         if (onCompletedSubmit) {
-          onCompletedSubmit();
+          onCompletedSubmit(res);
         }
       })
       .catch(() => {
