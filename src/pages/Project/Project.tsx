@@ -179,7 +179,7 @@ export default function Project() {
                         </div>
                       </td>
                       <td className={styles.name}>
-                        <a href="/#">
+                        <a href="/user-page">
                           <div className={styles.nameContent}>
                             <img src={project.icon} alt="icon" />
                             <span>{project.name}</span>
@@ -203,7 +203,7 @@ export default function Project() {
                           onFocus={() => undefined}
                         >
                           <div className={styles.leadContent}>
-                            <a href="/#">
+                            <a href="/user-page">
                               <div className={styles.leadInfo}>
                                 <div className={styles.avatar}>
                                   <span>
