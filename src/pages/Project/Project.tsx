@@ -33,11 +33,13 @@ export default function Project() {
     projectList[id].star = !projectList[id].star;
     setValue(value + 1);
   };
+
   const setProjectStar = (id: number) => {
     const projectIndex = projectList.findIndex((project: any) => project.id === id);
     projectList[projectIndex].star = !projectList[projectIndex].star;
     setValue(value + 1);
   };
+
   const getStarPosition = (e: React.MouseEvent<HTMLDivElement>, id: number) => {
     const mouseStarPosition = e.currentTarget.getBoundingClientRect();
     const starPosition = {
@@ -50,6 +52,7 @@ export default function Project() {
       current.style.left = `${starPosition.x - 33}px`;
     }
   };
+
   const getProfilePosition = (e: React.MouseEvent<HTMLDivElement>, id: number) => {
     const mouseProfilePosition = e.currentTarget.getBoundingClientRect();
     const profilePosition = {
