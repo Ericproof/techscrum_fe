@@ -1,7 +1,12 @@
 import React from 'react';
 import styles from './ChangeKey.module.scss';
 
-export default function ChangeKey(props: any) {
+interface ChangeKeyProps {
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export default function ChangeKey(props: ChangeKeyProps) {
   const { value, onChange } = props;
   return (
     <div className={styles.keyInputSection}>

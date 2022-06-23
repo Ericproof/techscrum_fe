@@ -1,7 +1,12 @@
 import React from 'react';
 import styles from './ChangeName.module.scss';
 
-export default function ChangeName(props: any) {
+interface ChangeNameProps {
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export default function ChangeName(props: ChangeNameProps) {
   const { value, onChange } = props;
   return (
     <div className={styles.nameInputSection}>

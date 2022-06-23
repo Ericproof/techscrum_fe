@@ -7,15 +7,19 @@ import styles from './ProjectEditor.module.scss';
 import ProjectLead from './ProjectLead/ProjectLead';
 import { createProject } from '../../api/projects/projects';
 
-export default function ProjectEditor(props: any) {
+interface ProjectEditorProps {
+  onCompletedSubmit?: () => void;
+}
+
+function ProjectEditor(props: ProjectEditorProps) {
   const [data, setData] = useState<any>({ name: '', key: '', project_lead_id: 1, assignee_id: 1 });
   const [hasError, setError] = useState(false);
-  const { onCompletedSubmit } = props;
+  const { onCompletedSubmit = null } = props;
   const onChange = (e: any) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
-  const onChangeName = (e: any) => {
+  const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const updateData = {
       [e.target.name]: e.target.value,
       key: e.target.value.substring(0, 3).toUpperCase()
@@ -24,15 +28,16 @@ export default function ProjectEditor(props: any) {
     setData({ ...data, ...updateData });
   };
 
-  const onSave = (e: any) => {
+  const onSave = (e: React.SyntheticEvent) => {
     e.preventDefault();
     createProject(data)
       .then((res: any) => {
-        if (res.data) {
-          setError(false);
-          if (onCompletedSubmit) {
-            onCompletedSubmit();
-          }
+        if (!res.data) {
+          return;
+        }
+        setError(false);
+        if (onCompletedSubmit) {
+          onCompletedSubmit();
         }
       })
       .catch(() => {
@@ -58,3 +63,9 @@ export default function ProjectEditor(props: any) {
     </div>
   );
 }
+
+ProjectEditor.defaultProps = {
+  onCompletedSubmit: null
+};
+
+export default ProjectEditor;
