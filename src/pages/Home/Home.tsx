@@ -27,7 +27,6 @@ export default function Home() {
   const isLogin = false;
   const navigate = useNavigate();
   useEffect(() => {
-    // eslint-disable-next-line
     axios.get('http://localhost:8000/api/v1/tenants?domain=d&name=dsf').then((res) => {
       if (isLogin) {
         navigate('/404');
