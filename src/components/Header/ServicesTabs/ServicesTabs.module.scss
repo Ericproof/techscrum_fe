@@ -22,13 +22,12 @@ $small_size: 1000px;
       cursor: pointer;
       display: flex;
       align-items: center;
+      justify-content: space-between;
       @media (max-width: $max_size) {
         border-radius: 0;
         border-bottom: 1px solid rgba(0, 0, 0, 0.058823529411764705);
-        width: 100%;
+        width: 104%;
         padding: 15px 5px;
-        display: flex;
-        justify-content: space-between;
         font-size: 15px;
       }
       svg {
@@ -37,7 +36,7 @@ $small_size: 1000px;
         min-height: 10px;
         @media (max-width: $max_size) {
           margin-right: 50px;
-          min-width: 7.5px;
+          min-width: 30.5px;
           min-height: 7.5px;
         }
       }
