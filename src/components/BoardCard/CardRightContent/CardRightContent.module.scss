@@ -27,6 +27,11 @@ $padding-left: 10px;
     font-weight: 700;
     align-items: center;
 
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+
     &:hover {
       background: #c1c4cc;
     }
@@ -63,6 +68,11 @@ $padding-left: 10px;
       button {
         border: none;
         background: transparent;
+
+        svg {
+          width: 24px;
+          height: 24px;
+        }
       }
 
       &:hover {
@@ -347,10 +357,6 @@ $padding-left: 10px;
           height: inherit;
           text-align: left;
           padding: 9px 2px 9px 12px;
-
-          // &:active {
-          //   display: none;
-          // }
         }
         &:hover {
           background: rgba(9, 30, 66, 0.08);

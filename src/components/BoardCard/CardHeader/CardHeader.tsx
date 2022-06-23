@@ -8,8 +8,6 @@ export default function CardHeader() {
         <button className={style.storyIcon} type="button">
           <img
             src="https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium"
-            width="18px"
-            height="18px"
             alt="Story"
           />
         </button>
@@ -17,7 +15,7 @@ export default function CardHeader() {
       </div>
       <div className={style.headerRight}>
         <button type="button">
-          <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
+          <svg viewBox="0 0 24 24" role="presentation">
             <path
               d="M12 10.586L6.707 5.293a1 1 0 00-1.414 1.414L10.586 12l-5.293 5.293a1 1 0 001.414 1.414L12 13.414l5.293 5.293a1 1 0 001.414-1.414L13.414 12l5.293-5.293a1 1 0 10-1.414-1.414L12 10.586z"
               fill="currentColor"

@@ -14,7 +14,7 @@ export default function CardLeftContent() {
         <label htmlFor="uploadPhoto">
           <img src={AttachIcon} alt="AttachIcon" />
           <span>Attach</span>
-          <input id="uploadPhoto" type="file" name="Upload a photo" style={{ display: 'none' }} />
+          <input id="uploadPhoto" type="file" name="Upload a photo" />
         </label>
       </div>
       <Description />
