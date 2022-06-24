@@ -406,10 +406,10 @@
                           color: rgb(223, 225, 230);
                           &:hover .notification {
                             display: block;
-                            position: fixed;
+                            position: absolute;
                             z-index: 600;
-                            top: 157px;
-                            left: 40px;
+                            top: 30px;
+                            left: -30px;
                             background-color: #172b4d;
                             color: #ffffff;
                             font-family: inherit;
@@ -485,10 +485,10 @@
                           }
                           &:hover .notification {
                             display: block;
-                            position: fixed;
+                            position: absolute;
                             z-index: 600;
-                            top: 157px;
-                            left: 40px;
+                            top: 33px;
+                            left: -30px;
                             background-color: #172b4d;
                             color: #ffffff;
                             font-family: inherit;
@@ -645,13 +645,93 @@
                         color: #0065ff;
                         text-decoration: underline;
                       }
+                      
+                      
+
+                      &:hover .profileV2{
+                        display: block;
+                        min-width: 280px;
+                        width: 100%;
+                        overflow: hidden;
+                        background: white;
+                        box-shadow: rgb(9 30 66 / 25%) 0px 4px 8px -2px, rgb(9 30 66 / 31%) 0px 0px 1px;
+                        z-index: 100;
+                        padding: 24px;
+                        top: -200px;
+                        &::before{
+                          position: absolute;
+                          content:' ';
+                          top:0;
+                          left:0%;
+                          background: #0052CC;
+                          width: 100%;
+                          height: 50%;
+                          z-index: -1;
+                        }
+                        p{
+                          font-size: 18px;
+                          color:white;
+                          margin:0 0 0 15px;
+                        }
+                        .profileV2Image{
+                          max-width: 100px;
+                          width: 100%;
+                          height: auto;
+                          border-radius: 50%;
+                        }
+                        
+                        .profileV2Header{
+                          display : flex;
+                          align-items: center;
+                        }
+                        
+                        .profileV2Link{
+                          margin-top: 16px;
+                        }
+
+                        button {
+                          text-align: right;
+                          margin-left: 0;
+                          align-items: baseline;
+                          border-width: 0;
+                          border-radius: 3px;
+                          box-sizing: border-box;
+                          display: inline-flex;
+                          font-size: inherit;
+                          font-family: inherit;
+                          font-weight: 500;
+                          max-width: 100%;
+                          position: relative;
+                          text-align: center;
+                          text-decoration: none;
+                          background: rgba(9, 30, 66, 0.04);
+                          line-height: 2.28em;
+                          height: 2.28em;
+                          padding: 0 10px;
+                          vertical-align: center;
+                          cursor: pointer;
+                          margin: 0 2px;
+                          flex-grow: 1;
+                          font-weight: 500;
+                          color: #5e6c84;
+                          &:hover {
+                            white-space: nowrap;
+                            background: rgba(9, 30, 66, 0.08);
+                          }
+                        }
+                      }
+
+                      .profileV2{
+                        display: none;
+                      }
+
                       &:hover .profileSection {
                         display: block;
-                        position: fixed;
-                        width: 25%;
+                        position: absolute;
+                        width: 100%;
                         height: 23%;
                         z-index: 800;
-                        left: 841px;
+                        left: 0px;
                         top: -13px;
                         .profileContainer {
                           background-color: rgb(255, 255, 255);
@@ -669,12 +749,12 @@
                             flex-direction: column;
                             min-height: 136px;
                             .avatar {
-                              width: 100px;
-                              height: 100px;
+                              // width: 100px;
+                              // height: 100px;
                               position: relative;
                               display: inline-block;
                               outline: 0;
-                              background-color: #ffffff;
+                              // background-color: #ffffff;
                               border-radius: 50%;
                               display: flex;
                               align-items: center;
@@ -942,7 +1022,19 @@
   }
 }
 
-// .star{
-//   position: absolute;
-//   top:10px;
-// }
+.overflowVisible{
+  overflow: visible!important;
+}
+
+.relative{
+  position: relative;
+}
+
+.absolute{
+  position: absolute;
+}
+
+.textRight{
+  text-align: right;
+}
+

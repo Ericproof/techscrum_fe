@@ -36,7 +36,7 @@ export default function Project() {
   };
 
   const setProjectStar = (id: number) => {
-    const projectIndex = projectList.findIndex((project: any) => project.id === id);
+    const projectIndex = projectList.findIndex((project: any) => project._id === id);
     projectList[projectIndex].star = !projectList[projectIndex].star;
     setValue(value + 1);
   };
@@ -70,7 +70,6 @@ export default function Project() {
   const onCompletedSubmit = (res: any) => {
     setVisible(false);
     const updateProjectList = [...projectList, ...[res.data]];
-    console.log('o', updateProjectList);
     setProjectList(updateProjectList);
   };
 
@@ -78,7 +77,6 @@ export default function Project() {
     deleteProject(id).then((res: any) => {
       if (res.status === 204) {
         const updateProjectList = projectList.filter((item: any) => item._id !== id);
-        console.log(updateProjectList);
         setProjectList(updateProjectList);
       }
     });
@@ -179,10 +177,10 @@ export default function Project() {
                 </thead>
                 <tbody>
                   {projectList.map((project: any, index: number) => (
-                    <tr key={project._id}>
-                      <td className={styles.star}>
+                    <tr key={project._id} className={styles.overflowVisible}>
+                      <td className={[styles.star, styles.overflowVisible].join(' ')}>
                         <div
-                          className={styles.changeStar}
+                          className={[styles.changeStar, styles.overflowVisible].join(' ')}
                           // onMouseOver={(e: React.MouseEvent<HTMLDivElement>) =>
                           //   getStarPosition(e, project.id)
                           // }
@@ -192,30 +190,30 @@ export default function Project() {
                             {project.star ? (
                               <button
                                 type="button"
-                                className={styles.starBtn}
-                                onClick={() => setProjectStar(project.id)}
+                                className={[styles.starBtn, styles.overflowVisible].join(' ')}
+                                onClick={() => setProjectStar(project._id)}
                               >
-                                <div className={styles.starStyle}>
+                                <div
+                                  className={[styles.starStyle, styles.overflowVisible].join(' ')}
+                                >
                                   <span className={styles.isStar}>
                                     <AiFillStar />
-                                    <div className={styles.notification} ref={refStar[project.id]}>
-                                      Remove from Starred
-                                    </div>
+                                    <div className={styles.notification}>Remove from Starred</div>
                                   </span>
                                 </div>
                               </button>
                             ) : (
                               <button
                                 type="button"
-                                className={styles.unStarBtn}
-                                onClick={() => setProjectStar(project.id)}
+                                className={[styles.unStarBtn, styles.overflowVisible].join(' ')}
+                                onClick={() => setProjectStar(project._id)}
                               >
-                                <div className={styles.starStyle}>
+                                <div
+                                  className={[styles.starStyle, styles.overflowVisible].join(' ')}
+                                >
                                   <span className={styles.unStar}>
                                     <AiOutlineStar />
-                                    <div className={styles.notification} ref={refStar[project.id]}>
-                                      Add to Starred
-                                    </div>
+                                    <div className={styles.notification}>Add to Starred</div>
                                   </span>
                                 </div>
                               </button>
@@ -245,7 +243,7 @@ export default function Project() {
                           <span>{project.type}</span>
                         </div>
                       </td>
-                      <td className={styles.lead}>
+                      <td className={[styles.lead, styles.overflowVisible].join(' ')}>
                         <div
                           className={styles.leadContainer}
                           // onMouseOver={(e: React.MouseEvent<HTMLDivElement>) =>
@@ -254,7 +252,10 @@ export default function Project() {
                           onFocus={() => undefined}
                         >
                           <div className={styles.leadContent}>
-                            <a href="/#">
+                            <a
+                              href="/#"
+                              className={[styles.overflowVisible, styles.relative].join(' ')}
+                            >
                               <div className={styles.leadInfo}>
                                 <div className={styles.avatar}>
                                   <span>
@@ -263,14 +264,38 @@ export default function Project() {
                                 </div>
                                 <span>{project.lead}</span>
                               </div>
-                              <div className={styles.profileSection}>
+                              <div className={[styles.absolute, styles.profileV2].join(' ')}>
+                                <div className={styles.profileV2Header}>
+                                  <img
+                                    className={styles.profileV2Image}
+                                    src={
+                                      project.avatar ||
+                                      'https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png'
+                                    }
+                                    alt="avatar"
+                                  />
+                                  <p>{project.lead || 'hi'}</p>
+                                </div>
+                                <div className={[styles.profileV2Link, styles.textRight].join(' ')}>
+                                  <Link to="/user-page">
+                                    <button type="button">View profile</button>
+                                  </Link>
+                                </div>
+                              </div>
+                              {/* <div className={styles.profileSection}>
                                 <div className={styles.profileContainer}>
                                   <div className={styles.profileContent}>
                                     <div className={styles.avatar}>
-                                      <img src={project.avatar} alt="avatar" />
+                                      <img
+                                        src={
+                                          project.avatar ||
+                                          'https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png'
+                                        }
+                                        alt="avatar"
+                                      />
                                     </div>
                                     <div className={styles.name}>
-                                      <span>{project.lead}</span>
+                                      <span>{project.lead || 'hi'}</span>
                                     </div>
                                     <div className={styles.viewProfile}>
                                       <Link to="/user-page">
@@ -279,7 +304,7 @@ export default function Project() {
                                     </div>
                                   </div>
                                 </div>
-                              </div>
+                              </div> */}
                             </a>
                           </div>
                         </div>
