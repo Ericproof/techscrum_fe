@@ -8,26 +8,30 @@
     overflow-wrap: break-word;
   }
 
-  .form textarea {
-    border-radius: 3px;
-    border-width: 2px;
-    text-decoration: none;
-    border-color: rgb(9 30 66 / 10%);
+  .form {
+    textarea {
+      border-radius: 3px;
+      border-width: 2px;
+      text-decoration: none;
+      border-color: rgb(9 30 66 / 10%);
+      box-sizing: border-box;
+      width: 100%;
 
-    &::placeholder {
-      color: #565e6f;
-      opacity: 1;
-      font-size: 16px;
-    }
+      &::placeholder {
+        color: #565e6f;
+        opacity: 1;
+        font-size: 16px;
+      }
 
-    &:hover {
-      border-color: transparent;
-      background-color: rgb(9 30 66 / 10%);
-    }
+      &:hover {
+        border-color: transparent;
+        background-color: rgb(9 30 66 / 10%);
+      }
 
-    &:focus {
-      border-color: transparent;
-      background-color: white;
+      &:focus {
+        border-color: transparent;
+        background-color: white;
+      }
     }
   }
 

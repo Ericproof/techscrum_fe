@@ -2,7 +2,8 @@
   display: flex;
   margin-top: 1rem;
   flex-direction: column;
-
+  overflow: hidden;
+  margin-bottom: 1rem;
   .activity {
     font-family: inherit;
     font-size: 0.8em;

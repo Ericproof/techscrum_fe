@@ -1,13 +1,12 @@
 $padding-right: 10px;
 $margin-left: 20px;
+$margin-right: 20px;
 $padding-left: 10px;
 
 .container {
   box-sizing: border-box;
-  flex: 0 1 calc(36.0195% + 12px);
-  min-width: 255px;
-  margin-right: 0;
-  padding: 0px 20px 32px 8px;
+  flex: 0 1 calc(36.0195% + 18px);
+  padding: 0px 30px 32px 0px;
 
   .toDoButton {
     background: #dfe1e6;
@@ -47,6 +46,7 @@ $padding-left: 10px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    width: 100%;
 
     .detail {
       display: flex;
@@ -89,6 +89,7 @@ $padding-left: 10px;
       border-bottom-left-radius: 4px;
       padding: 10px 12px;
       border-top: 0px;
+      position: relative;
     }
 
     .checkList {
@@ -126,7 +127,6 @@ $padding-left: 10px;
         color: var(--ds-text-subtlest, #5e6c84);
         font-weight: 500;
         padding-left: $padding-left;
-
         &:hover {
           background: rgba(9, 30, 66, 0.08);
         }
