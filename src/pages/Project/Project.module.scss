@@ -177,6 +177,7 @@
               text-indent: initial;
               border-spacing: 2px;
               .stars {
+                position: relative;
                 width: 2.85%;
                 color: #5e6c84;
                 padding: 4px 8px 4px 0;
@@ -892,7 +893,7 @@
     }
   }
   .changeView {
-
+    position: relative;
     &:hover {
       background-color: #fafbfc;
     }
@@ -921,15 +922,27 @@
     .viewDetail {
       position: absolute;
       width: 125px;
-      top: 55px;
+      top: 25px;
       right: 0;
       border-radius: 3px;
       box-shadow: rgb(9 30 66 / 25%) 0px 4px 8px -2px, rgb(9 30 66 / 31%) 0px 0px 1px;
+      z-index: 100;
       Link {
         &:hover {
           cursor: pointer;
         }
       }
+
+      button{
+        &:hover{
+          background: #dddddd;
+        }
+      }
     }
   }
 }
+
+// .star{
+//   position: absolute;
+//   top:10px;
+// }

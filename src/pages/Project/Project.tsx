@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useState, createRef, useEffect } from 'react';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { HiDotsHorizontal } from 'react-icons/hi';
@@ -74,7 +75,13 @@ export default function Project() {
   };
 
   const removeProject = (id: string) => {
-    deleteProject(id);
+    deleteProject(id).then((res: any) => {
+      if (res.status === 204) {
+        const updateProjectList = projectList.filter((item: any) => item._id !== id);
+        console.log(updateProjectList);
+        setProjectList(updateProjectList);
+      }
+    });
   };
 
   const viewDetailPosition = (e: React.MouseEvent<HTMLDivElement>, id: number) => {
@@ -172,7 +179,7 @@ export default function Project() {
                 </thead>
                 <tbody>
                   {projectList.map((project: any, index: number) => (
-                    <tr key={project.id}>
+                    <tr key={project._id}>
                       <td className={styles.star}>
                         <div
                           className={styles.changeStar}
@@ -284,19 +291,19 @@ export default function Project() {
                         }
                         onFocus={() => undefined}
                       >
-                        {showProjectDetails === project.id && (
+                        {showProjectDetails === project._id && (
                           <div className={styles.viewDetail} ref={refShowMore[index]}>
                             <Link to="/settings">
                               <button type="button">View Detail</button>
                             </Link>
-                            <button type="button" onClick={() => removeProject(project.id)}>
+                            <button type="button" onClick={() => removeProject(project._id)}>
                               Delete Project
                             </button>
                           </div>
                         )}
                         <HiDotsHorizontal
                           onClick={() => {
-                            setShowProjectDetails(project.id);
+                            setShowProjectDetails(project._id);
                           }}
                           className={styles.verticalMiddle}
                         />
