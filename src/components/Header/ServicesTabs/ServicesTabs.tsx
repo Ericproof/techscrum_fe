@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   AiOutlineFieldTime,
   AiFillCopy,
@@ -21,12 +21,16 @@ import {
   AiFillVideoCamera,
   AiFillRedditCircle,
   AiOutlineRocket,
-  AiTwotoneExperiment,
-  AiOutlineDown
+  AiTwotoneExperiment
 } from 'react-icons/ai';
+import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import styles from './ServicesTabs.module.scss';
 import ThreeColumnsMenu from './ThreeColumnsMenu/ThreeColumnsMenu';
 import TwoColumnsMenu from './TwoColumnsMenu/TwoColumnsMenu';
+
+interface Props {
+  show: boolean;
+}
 
 const platform = {
   leftContent: {
@@ -329,32 +333,46 @@ const resources = {
   }
 };
 
-export default function servicesTabs() {
+export default function ServicesTabs({ show }: Props) {
+  const [platformActive, setPlatformActive] = useState(false);
+  const [solutionActive, setSolutionActive] = useState(false);
+  const [resourcesActive, setResourcesActive] = useState(false);
+
+  const initial = () => {
+    setPlatformActive(false);
+    setSolutionActive(false);
+    setResourcesActive(false);
+  };
+
+  const activeMenu = (menu: string) => {
+    initial();
+    if (menu === 'platform') setPlatformActive(!platformActive);
+    if (menu === 'solution') setSolutionActive(!solutionActive);
+    if (menu === 'resource') setResourcesActive(!resourcesActive);
+  };
+
   return (
-    <div className={styles.serviceListTabs}>
+    <div className={`${styles.serviceListTabs} ${show ? styles.serviceListTabsActive : ''}`}>
       <div>
-        <a href="/#">
+        <a href="/#" onClick={() => activeMenu('platform')}>
           Platform
-          <AiOutlineDown />
+          <MdOutlineKeyboardArrowDown />
         </a>
-        <ThreeColumnsMenu servicesInfo={platform} />
+        <ThreeColumnsMenu servicesInfo={platform} active={platformActive} />
       </div>
       <div>
-        <a href="/#">
+        <a href="/#" onClick={() => activeMenu('solution')}>
           Solutions
-          <AiOutlineDown />
+          <MdOutlineKeyboardArrowDown />
         </a>
-        <TwoColumnsMenu servicesInfo={solutions} />
+        <TwoColumnsMenu servicesInfo={solutions} active={solutionActive} />
       </div>
       <div>
-        <a href="/#">Pricing</a>
-      </div>
-      <div>
-        <a href="/#">
+        <a href="/#" onClick={() => activeMenu('resource')}>
           Resources
-          <AiOutlineDown />
+          <MdOutlineKeyboardArrowDown />
         </a>
-        <TwoColumnsMenu servicesInfo={resources} />
+        <TwoColumnsMenu servicesInfo={resources} active={resourcesActive} />
       </div>
     </div>
   );

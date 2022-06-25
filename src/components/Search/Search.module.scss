@@ -1,0 +1,21 @@
+.searchBar{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    font-family: "FaktSoft",Arial,Helvetica,"sans-serif";
+}
+.searchBar input{
+    margin-top:20px;
+    width: 100px;
+    height: 40px;
+    font-size: 20px;
+    padding-top:10px;
+}
+.autocompleteItems {
+    border-bottom: 1px solid;
+    padding: 10px 5px;
+    cursor: pointer;
+    color: lightblue;
+    font-weight: bold;
+}

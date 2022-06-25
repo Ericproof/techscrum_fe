@@ -1,0 +1,117 @@
+.container {
+  position: relative;
+  margin-left: 5%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.columnsContainer {
+  display: flex;
+  justify-content: space-between;
+  margin: 7px;
+}
+
+.column {
+  position: relative;
+  padding-top: 50px;
+  width: 270px;
+  min-height: 800px;
+  background: #ebecf0;
+  border-radius: 5px;
+}
+
+.name {
+  top: 2%;
+  left: 5%;
+  position: absolute;
+  font-style: inherit;
+  line-height: 1.14286;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--ds-text-subtlest, #5e6c84);
+  font-size: 13px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+.card {
+  user-select: 'none';
+  margin: '10px 5px 1px 5px';
+  min-height: '50px';
+  box-sizing: border-box;
+  padding: 12px;
+  max-width: 270px;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin: 5px 5px;
+  border-radius: 3px;
+  box-shadow: var(
+    --ds-shadow-raised,
+    0 1px 1px rgba(23, 43, 77, 0.2),
+    0 0 1px rgba(23, 43, 77, 0.2)
+  );
+  transition: background-color 140ms ease-in-out 0s, color 140ms ease-in-out 0s;
+  background-color: var(--ds-surface-raised, #ffffff);
+  color: var(--ds-text, #172b4d);
+  filter: none;
+
+  span {
+    margin-bottom: 8px;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    padding-right: 32px;
+  }
+
+  .cardFooter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 28px;
+
+    .cardFooterLeft {
+      min-width: 0px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-right: 4px;
+
+      img {
+        width: 16px;
+        height: 16px;
+        vertical-align: text-bottom;
+      }
+
+      span {
+        margin-top: 7px;
+        margin-left: 3px;
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--ds-text-subtle, #7a869a);
+      }
+    }
+
+    .cardFooterRight {
+      height: 24px;
+      width: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      transition: transform 200ms ease 0s, opacity 200ms ease 0s;
+      margin: 2px;
+    }
+  }
+
+  &:hover {
+    background: #ebecf0;
+  }
+}

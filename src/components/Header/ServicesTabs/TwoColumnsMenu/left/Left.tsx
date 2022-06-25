@@ -26,7 +26,7 @@ export default function left({ leftContent }: Props) {
       <div className={styles.leftServicesLists}>
         {leftContent.content.map((service) => {
           return (
-            <div>
+            <div key={service.title}>
               <a href={service.href}>
                 <service.icon />
                 <div>
