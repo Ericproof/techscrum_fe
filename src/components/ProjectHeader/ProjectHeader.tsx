@@ -5,7 +5,7 @@ import { CgMenuGridR } from 'react-icons/cg';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 import styles from './ProjectHeader.module.scss';
-import UseOutsideAlerter from '../OutsideAlerter/OutsideAlerter';
+import useOutsideAlerter from '../../hooks/OutsideAlerter';
 import PersonalProfile from './PersonalProfile/PersonalProfile';
 
 interface Props {
@@ -23,7 +23,7 @@ interface Props {
 export default function ProjectHeader({ projects, updateProject }: Props) {
   const latestTwoProjects = projects.slice(0, 2);
   const [projectList] = useState(latestTwoProjects);
-  const { visible, setVisible, myRef } = UseOutsideAlerter(false);
+  const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const handleClickOutside = () => setVisible(true);
   const navigate = useNavigate();
   const handleClickEvent = (e: React.MouseEvent<HTMLSpanElement>) => {

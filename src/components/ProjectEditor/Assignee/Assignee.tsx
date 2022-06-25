@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import styles from './Assignee.module.scss';
-import UseOutsideAlerter from '../../OutsideAlerter/OutsideAlerter';
+import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 
-export default function Assignee() {
+interface AssigneeProps {
+  value: string;
+  onChange: (e: any) => void;
+}
+
+export default function Assignee(props: AssigneeProps) {
+  const { value, onChange } = props;
   const assignees = [
     { id: 1, state: 'Project lead' },
     { id: 2, state: 'Unassigned' }
   ];
   const [assignState, setAssignState] = useState(assignees[0]);
-  const { visible, setVisible, myRef } = UseOutsideAlerter(false);
+  const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const handleClickOutside = () => setVisible(true);
   return (
     <div ref={myRef} className={styles.assigneeDropdownMenu}>
@@ -24,9 +30,13 @@ export default function Assignee() {
                     <li key={assignee.id}>
                       <button
                         type="button"
+                        name="assignee"
                         className={styles.assigneeOptions}
                         onClick={() => {
                           setAssignState({ id: assignee.id, state: assignee.state });
+                          onChange({
+                            target: { value: assignee.id.toString(), name: 'assignee_id' }
+                          });
                           setVisible(false);
                         }}
                       >

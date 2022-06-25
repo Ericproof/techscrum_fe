@@ -1,7 +1,7 @@
 import React from 'react';
 import { BsBoxArrowUpRight } from 'react-icons/bs';
 import styles from './PersonalProfile.module.scss';
-import UseOutsideAlerter from '../../OutsideAlerter/OutsideAlerter';
+import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 
 const users = [
   {
@@ -11,7 +11,7 @@ const users = [
   }
 ];
 export default function PersonalProfile() {
-  const { visible, setVisible, myRef } = UseOutsideAlerter(false);
+  const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const handleClickOutside = () => setVisible(true);
   return (
     <div ref={myRef}>

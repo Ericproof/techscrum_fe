@@ -1,101 +1,120 @@
-import React, { useState, createRef } from 'react';
+/* eslint-disable no-underscore-dangle */
+import React, { useState, createRef, useEffect } from 'react';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
+import { HiDotsHorizontal } from 'react-icons/hi';
 import { FiSearch } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 import styles from './Project.module.scss';
 import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
+import { getProjects, deleteProject } from '../../api/projects/projects';
+import ProjectEditor from '../../components/ProjectEditor/ProjectEditor';
+import useOutsideAlerter from '../../hooks/OutsideAlerter';
 
-const projects = [
-  {
-    id: 0,
-    star: false,
-    icon: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10418?size=small',
-    name: 'example',
-    key: 'EX',
-    type: 'Team-managed software',
-    lead: 'Evan Lin',
-    avatar:
-      'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/EL-3.png?ssl=1',
-    lastEditTime: new Date('2021-05-10')
-  },
-  {
-    id: 1,
-    star: false,
-    icon: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10411?size=small',
-    name: 'TECHSCRUM',
-    key: 'TEC',
-    type: 'Team-managed software',
-    lead: 'Yiu Kitman',
-    avatar:
-      'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/YK-3.png?ssl=1',
-    lastEditTime: new Date('2021-05-11')
-  },
-  {
-    id: 2,
-    star: false,
-    icon: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10412?size=small',
-    name: 'Template',
-    key: 'TEM',
-    type: 'Company-managed software',
-    lead: 'Yiu Kitman',
-    avatar:
-      'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/YK-3.png?ssl=1',
-    lastEditTime: new Date('2021-05-8')
-  }
-];
 export default function Project() {
-  const projectsOrderbyDate = projects.sort((a, b) => {
-    return a.lastEditTime < b.lastEditTime ? 1 : -1;
-  });
-  const [projectList] = useState(projectsOrderbyDate);
+  const [projectList, setProjectList] = useState<any>([]);
+  const [showProjectDetails, setShowProjectDetails] = useState(-1);
   const [value, setValue] = useState(0);
-  const refStar = projectList.map(() => createRef<HTMLDivElement>());
   const refProfile = projectList.map(() => createRef<HTMLDivElement>());
-  const getProjectFromChildren = (index: number) => {
-    projectList[index].star = !projectList[index].star;
-    setValue(value + 1);
-  };
-  const setProjectStar = (id: number) => {
-    const index = projectList.findIndex((project) => project.id === id);
-    projectList[index].star = !projectList[index].star;
-    setValue(value + 1);
-  };
-  const getStarPosition = (e: React.MouseEvent<HTMLDivElement>, id: number) => {
-    const mouseStarPosition = e.currentTarget.getBoundingClientRect();
-    const starPosition = {
-      x: mouseStarPosition.left + window.scrollX,
-      y: mouseStarPosition.top + window.scrollY
+  const refShowMore = projectList.map(() => createRef<HTMLDivElement>());
+  const { visible, setVisible, myRef } = useOutsideAlerter(false);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      const res = await getProjects();
+      // const sortedResult = res.data.sort((a, b) => {
+      //   return a.lastEditTime < b.lastEditTime ? 1 : -1;
+      // });
+      if (!res.data) {
+        return;
+      }
+      setProjectList(res.data);
     };
-    const { current } = refStar[id];
-    if (current !== null) {
-      current.style.top = `${starPosition.y + 45}px`;
-      current.style.left = `${starPosition.x - 33}px`;
-    }
+    fetchProjects();
+  }, []);
+
+  const getProjectFromChildren = (id: number) => {
+    projectList[id].star = !projectList[id].star;
+    setValue(value + 1);
   };
-  const getProfilePosition = (e: React.MouseEvent<HTMLDivElement>, id: number) => {
-    const mouseProfilePosition = e.currentTarget.getBoundingClientRect();
-    const profilePosition = {
-      x: mouseProfilePosition.left + window.scrollX,
-      y: mouseProfilePosition.top + window.scrollY
+
+  const setProjectStar = (id: number) => {
+    const projectIndex = projectList.findIndex((project: any) => project._id === id);
+    projectList[projectIndex].star = !projectList[projectIndex].star;
+    setValue(value + 1);
+  };
+
+  const onCompletedSubmit = (res: any) => {
+    setVisible(false);
+    const updateProjectList = [...projectList, ...[res.data]];
+    setProjectList(updateProjectList);
+  };
+
+  const removeProject = (id: string) => {
+    deleteProject(id).then((res: any) => {
+      if (res.status === 204) {
+        const updateProjectList = projectList.filter((item: any) => item._id !== id);
+        setProjectList(updateProjectList);
+      }
+    });
+  };
+
+  const viewDetailPosition = (e: React.MouseEvent<HTMLDivElement>, id: number) => {
+    const mouseDetailPosition = e.currentTarget.getBoundingClientRect();
+
+    const viewPosition = {
+      x: mouseDetailPosition.left + window.scrollX,
+      y: mouseDetailPosition.top + window.scrollY
     };
     const { current } = refProfile[id];
     if (current !== null) {
-      current.style.top = `${profilePosition.y - 170}px`;
-      current.style.left = `${profilePosition.x + 1}px`;
+      current.style.top = `${viewPosition.y - 170}px`;
+      current.style.left = `${viewPosition.x + 50}px`;
     }
   };
 
+  const handleClickInside = (e: MouseEvent) => {
+    const target = e.target as HTMLDivElement;
+    let hasClickShowMore = false;
+    for (let i = 0; i < refShowMore.length; i += 1) {
+      if (refShowMore[i].current !== null && refShowMore[i].current.contains(target)) {
+        hasClickShowMore = true;
+      }
+    }
+    if (hasClickShowMore === false) {
+      setShowProjectDetails(-1);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickInside);
+    return () => document.removeEventListener('mousedown', handleClickInside);
+  });
+
   return (
     <>
-      <ProjectHeader projects={projects} updateProject={getProjectFromChildren} />
+      <ProjectHeader projects={projectList} updateProject={getProjectFromChildren} />
+      {visible && (
+        <div className={styles.modalContainer} ref={myRef}>
+          <div className={styles.modal}>
+            <ProjectEditor onCompletedSubmit={onCompletedSubmit} />
+          </div>
+        </div>
+      )}
       <div className={styles.projectPage}>
         <div className={styles.projectContainer}>
           <div className={styles.projectContent}>
             <div className={styles.header}>
               <div className={styles.title}>
                 <h1>Projects</h1>
-                <a href="/create-projects">
-                  <button type="button">Create project</button>
-                </a>
+                <button
+                  type="button"
+                  className={styles.createButton}
+                  onClick={() => {
+                    setVisible(true);
+                  }}
+                >
+                  Create project
+                </button>
               </div>
               <div className={styles.searchBar}>
                 <input />
@@ -133,44 +152,41 @@ export default function Project() {
                   </tr>
                 </thead>
                 <tbody>
-                  {projectList.map((project) => (
-                    <tr key={project.id}>
-                      <td className={styles.star}>
+                  {projectList.map((project: any, index: number) => (
+                    <tr key={project._id} className={styles.overflowVisible}>
+                      <td className={[styles.star, styles.overflowVisible].join(' ')}>
                         <div
-                          className={styles.changeStar}
-                          onMouseOver={(e: React.MouseEvent<HTMLDivElement>) =>
-                            getStarPosition(e, project.id)
-                          }
+                          className={[styles.changeStar, styles.overflowVisible].join(' ')}
                           onFocus={() => undefined}
                         >
                           <span>
                             {project.star ? (
                               <button
                                 type="button"
-                                className={styles.starBtn}
-                                onClick={() => setProjectStar(project.id)}
+                                className={[styles.starBtn, styles.overflowVisible].join(' ')}
+                                onClick={() => setProjectStar(project._id)}
                               >
-                                <div className={styles.starStyle}>
+                                <div
+                                  className={[styles.starStyle, styles.overflowVisible].join(' ')}
+                                >
                                   <span className={styles.isStar}>
                                     <AiFillStar />
-                                    <div className={styles.notification} ref={refStar[project.id]}>
-                                      Remove from Starred
-                                    </div>
+                                    <div className={styles.notification}>Remove from Starred</div>
                                   </span>
                                 </div>
                               </button>
                             ) : (
                               <button
                                 type="button"
-                                className={styles.unStarBtn}
-                                onClick={() => setProjectStar(project.id)}
+                                className={[styles.unStarBtn, styles.overflowVisible].join(' ')}
+                                onClick={() => setProjectStar(project._id)}
                               >
-                                <div className={styles.starStyle}>
+                                <div
+                                  className={[styles.starStyle, styles.overflowVisible].join(' ')}
+                                >
                                   <span className={styles.unStar}>
                                     <AiOutlineStar />
-                                    <div className={styles.notification} ref={refStar[project.id]}>
-                                      Add to Starred
-                                    </div>
+                                    <div className={styles.notification}>Add to Starred</div>
                                   </span>
                                 </div>
                               </button>
@@ -179,12 +195,18 @@ export default function Project() {
                         </div>
                       </td>
                       <td className={styles.name}>
-                        <a href="/user-page">
+                        <Link to="/board">
                           <div className={styles.nameContent}>
-                            <img src={project.icon} alt="icon" />
+                            <img
+                              src={
+                                project.icon ||
+                                'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10418?size=small'
+                              }
+                              alt="icon"
+                            />
                             <span>{project.name}</span>
                           </div>
-                        </a>
+                        </Link>
                       </td>
                       <td className={styles.key}>
                         <span className={styles.keyName}>{project.key}</span>
@@ -194,16 +216,13 @@ export default function Project() {
                           <span>{project.type}</span>
                         </div>
                       </td>
-                      <td className={styles.lead}>
-                        <div
-                          className={styles.leadContainer}
-                          onMouseOver={(e: React.MouseEvent<HTMLDivElement>) =>
-                            getProfilePosition(e, project.id)
-                          }
-                          onFocus={() => undefined}
-                        >
+                      <td className={[styles.lead, styles.overflowVisible].join(' ')}>
+                        <div className={styles.leadContainer} onFocus={() => undefined}>
                           <div className={styles.leadContent}>
-                            <a href="/user-page">
+                            <a
+                              href="/#"
+                              className={[styles.overflowVisible, styles.relative].join(' ')}
+                            >
                               <div className={styles.leadInfo}>
                                 <div className={styles.avatar}>
                                   <span>
@@ -212,26 +231,52 @@ export default function Project() {
                                 </div>
                                 <span>{project.lead}</span>
                               </div>
-                              <div className={styles.profileSection} ref={refProfile[project.id]}>
-                                <div className={styles.profileContainer}>
-                                  <div className={styles.profileContent}>
-                                    <div className={styles.avatar}>
-                                      <img src={project.avatar} alt="avatar" />
-                                    </div>
-                                    <div className={styles.name}>
-                                      <span>{project.lead}</span>
-                                    </div>
-                                    <div className={styles.viewProfile}>
-                                      <button type="button">View profile</button>
-                                    </div>
-                                  </div>
+                              <div className={[styles.absolute, styles.profileV2].join(' ')}>
+                                <div className={styles.profileV2Header}>
+                                  <img
+                                    className={styles.profileV2Image}
+                                    src={
+                                      project.avatar ||
+                                      'https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png'
+                                    }
+                                    alt="avatar"
+                                  />
+                                  <p>{project.lead || 'hi'}</p>
+                                </div>
+                                <div className={[styles.profileV2Link, styles.textRight].join(' ')}>
+                                  <Link to="/user-page">
+                                    <button type="button">View profile</button>
+                                  </Link>
                                 </div>
                               </div>
                             </a>
                           </div>
                         </div>
                       </td>
-                      <td className={styles.button} />
+                      <td
+                        className={styles.changeView}
+                        onMouseOver={(e: React.MouseEvent<HTMLDivElement>) =>
+                          viewDetailPosition(e, index)
+                        }
+                        onFocus={() => undefined}
+                      >
+                        {showProjectDetails === project._id && (
+                          <div className={styles.viewDetail} ref={refShowMore[index]}>
+                            <Link to="/settings">
+                              <button type="button">View Detail</button>
+                            </Link>
+                            <button type="button" onClick={() => removeProject(project._id)}>
+                              Delete Project
+                            </button>
+                          </div>
+                        )}
+                        <HiDotsHorizontal
+                          onClick={() => {
+                            setShowProjectDetails(project._id);
+                          }}
+                          className={styles.verticalMiddle}
+                        />
+                      </td>
                     </tr>
                   ))}
                 </tbody>
