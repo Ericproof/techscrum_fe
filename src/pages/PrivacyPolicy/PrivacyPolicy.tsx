@@ -12,8 +12,8 @@ export default function PrivacyPolicy() {
           <hr />
         </div>
         <div className={styles.privacyPolicyRow}>
-          <div className={styles.sidebar}>
-            <ul className={styles.stickySidebar}>
+          <div className={styles.legalSidebar}>
+            <ul className={styles.legalStickySidebar}>
               <li id={styles.RemoveBorder}>
                 <Link to="/" style={{ padding: '0 0 7px 0' }}>
                   Our Legal Documents

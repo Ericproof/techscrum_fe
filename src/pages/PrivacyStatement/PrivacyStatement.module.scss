@@ -126,7 +126,7 @@
 
 .privacyStatementContent {
   margin-left: -50px;
-  margin-top: -20px;
+  margin-top: -25px;
 
   @media screen and (max-width: 992px) {
     flex: 0 0 100%;
@@ -137,7 +137,7 @@
     flex: 0 0 66.6666666667%;
     max-width: 66.6666666667%;
   }
-}
+
 
 p {
   font-family: FaktSoft, Arial, Helvetica, sans-serif;
@@ -184,4 +184,5 @@ ul {
   margin-inline-start: 0px;
   margin-inline-end: 0px;
   padding-inline-start: 40px;
+}
 }
