@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import userAvatar from '../../../assets/userAvatar.png';
-import UseOutsideAlerter from '../../OutsideAlerter/OutsideAlerter';
+import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import styles from './ProjectLead.module.scss';
 
-export default function ProjectLead() {
+export default function ProjectLead(props: any) {
+  const { value, onChange } = props;
   const users = [
     {
       id: 1,
@@ -31,7 +32,7 @@ export default function ProjectLead() {
     }
   ];
   const [userInfo, setUserInfo] = useState(users[0]);
-  const { visible, setVisible, myRef } = UseOutsideAlerter(false);
+  const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const handleClickOutside = () => setVisible(true);
   return (
     <div ref={myRef} className={styles.leadDropdownMenu}>
@@ -55,6 +56,7 @@ export default function ProjectLead() {
                         type="button"
                         onClick={() => {
                           setUserInfo({ id: user.id, avatar: user.avatar, name: user.name });
+                          onChange({ target: { name: 'project_lead_id', value: user.id } });
                           setVisible(false);
                         }}
                       >

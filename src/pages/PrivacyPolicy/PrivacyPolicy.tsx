@@ -5,13 +5,15 @@ import styles from './PrivacyPolicy.module.scss';
 export default function PrivacyPolicy() {
   return (
     <div className={styles.privacyPolicyMain}>
-      <div className={styles.privacyPolicyContent}>
-        <h3 className={styles.privacyPolicyHeader1}>LEGAL</h3>
-        <h1 className={styles.privacyPolicyHeader2}>Privacy Policy</h1>
-        <hr className={styles.privacyPolicyHr} />
-        <div className={styles.privacyPolicySmallScreen}>
-          <div className={styles.sidebar}>
-            <ul className={styles.stickySidebar}>
+      <div className={styles.privacyPolicyContainer}>
+        <div className={styles.privacyPolicyTextCenter}>
+          <p>LEGAL</p>
+          <h1>Privacy Policy</h1>
+          <hr />
+        </div>
+        <div className={styles.privacyPolicyRow}>
+          <div className={styles.legalSidebar}>
+            <ul className={styles.legalStickySidebar}>
               <li id={styles.RemoveBorder}>
                 <Link to="/" style={{ padding: '0 0 7px 0' }}>
                   Our Legal Documents
@@ -38,7 +40,7 @@ export default function PrivacyPolicy() {
             </ul>
             <Outlet />
           </div>
-          <section className={styles.privacyPolicySection}>
+          <div className={styles.privacyPolicyText}>
             <h4 className={styles.privacyPolicyH4}>Business Privacy Policy</h4>
             <p className={styles.privacyPolicyP}>
               This privacy policy sets out how TechScrum.com and any related products, services,
@@ -203,7 +205,7 @@ export default function PrivacyPolicy() {
               write to or email us as soon as possible, at privacyTechScrum.com. We will promptly
               correct any information found to be incorrect.
             </p>
-          </section>
+          </div>
         </div>
       </div>
     </div>
