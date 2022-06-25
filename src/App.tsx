@@ -18,6 +18,7 @@ import CreateProject from './pages/CreateProject/CreateProject';
 import './App.css';
 import Nav from './components/BoardNavigation/Nav';
 import BoardCard from './components/BoardCard/BoardCard';
+import Board from './pages/Board';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
       <Route path="/nav/*" element={<Nav />} />
       <Route path="/projects" element={<Project />} />
       <Route path="/create-projects" element={<CreateProject />} />
+      <Route path="/board" element={<Board />} />
       <Route path="/card" element={<BoardCard />} />
       <Route path="*" element={<ErrorPage />} />
     </Routes>
