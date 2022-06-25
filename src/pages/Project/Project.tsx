@@ -24,6 +24,9 @@ export default function Project() {
       // const sortedResult = res.data.sort((a, b) => {
       //   return a.lastEditTime < b.lastEditTime ? 1 : -1;
       // });
+      if (!res.data) {
+        return;
+      }
       setProjectList(res.data);
     };
     fetchProjects();
