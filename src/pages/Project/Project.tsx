@@ -14,7 +14,6 @@ export default function Project() {
   const [projectList, setProjectList] = useState<any>([]);
   const [showProjectDetails, setShowProjectDetails] = useState(-1);
   const [value, setValue] = useState(0);
-  const refStar = projectList.map(() => createRef<HTMLDivElement>());
   const refProfile = projectList.map(() => createRef<HTMLDivElement>());
   const refShowMore = projectList.map(() => createRef<HTMLDivElement>());
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
@@ -39,32 +38,6 @@ export default function Project() {
     const projectIndex = projectList.findIndex((project: any) => project._id === id);
     projectList[projectIndex].star = !projectList[projectIndex].star;
     setValue(value + 1);
-  };
-
-  const getStarPosition = (e: React.MouseEvent<HTMLDivElement>, id: number) => {
-    const mouseStarPosition = e.currentTarget.getBoundingClientRect();
-    const starPosition = {
-      x: mouseStarPosition.left + window.scrollX,
-      y: mouseStarPosition.top + window.scrollY
-    };
-    const { current } = refStar[id];
-    if (current !== null) {
-      current.style.top = `${starPosition.y + 45}px`;
-      current.style.left = `${starPosition.x - 33}px`;
-    }
-  };
-
-  const getProfilePosition = (e: React.MouseEvent<HTMLDivElement>, id: number) => {
-    const mouseProfilePosition = e.currentTarget.getBoundingClientRect();
-    const profilePosition = {
-      x: mouseProfilePosition.left + window.scrollX,
-      y: mouseProfilePosition.top + window.scrollY
-    };
-    const { current } = refProfile[id];
-    if (current !== null) {
-      current.style.top = `${profilePosition.y - 170}px`;
-      current.style.left = `${profilePosition.x + 1}px`;
-    }
   };
 
   const onCompletedSubmit = (res: any) => {
@@ -181,9 +154,6 @@ export default function Project() {
                       <td className={[styles.star, styles.overflowVisible].join(' ')}>
                         <div
                           className={[styles.changeStar, styles.overflowVisible].join(' ')}
-                          // onMouseOver={(e: React.MouseEvent<HTMLDivElement>) =>
-                          //   getStarPosition(e, project.id)
-                          // }
                           onFocus={() => undefined}
                         >
                           <span>
@@ -244,13 +214,7 @@ export default function Project() {
                         </div>
                       </td>
                       <td className={[styles.lead, styles.overflowVisible].join(' ')}>
-                        <div
-                          className={styles.leadContainer}
-                          // onMouseOver={(e: React.MouseEvent<HTMLDivElement>) =>
-                          //   getProfilePosition(e, project.id)
-                          // }
-                          onFocus={() => undefined}
-                        >
+                        <div className={styles.leadContainer} onFocus={() => undefined}>
                           <div className={styles.leadContent}>
                             <a
                               href="/#"
@@ -282,29 +246,6 @@ export default function Project() {
                                   </Link>
                                 </div>
                               </div>
-                              {/* <div className={styles.profileSection}>
-                                <div className={styles.profileContainer}>
-                                  <div className={styles.profileContent}>
-                                    <div className={styles.avatar}>
-                                      <img
-                                        src={
-                                          project.avatar ||
-                                          'https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png'
-                                        }
-                                        alt="avatar"
-                                      />
-                                    </div>
-                                    <div className={styles.name}>
-                                      <span>{project.lead || 'hi'}</span>
-                                    </div>
-                                    <div className={styles.viewProfile}>
-                                      <Link to="/user-page">
-                                        <button type="button">View profile</button>
-                                      </Link>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div> */}
                             </a>
                           </div>
                         </div>
