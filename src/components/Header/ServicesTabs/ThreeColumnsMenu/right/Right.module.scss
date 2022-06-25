@@ -31,6 +31,8 @@ div.right {
       background: transparent;
       @media (max-width: $max_size) {
         margin-left: 0px;
+        padding: 0;
+        border: none;
       }
       svg {
         width: 55px;
@@ -82,10 +84,22 @@ div.right {
     background: #edf1fe;
     align-self: center;
     text-decoration: none;
-
+    border: none;
     @media (max-width: $max_size) {
-      width: 300px;
-      margin-left: -50px;
+      width: 217px;
+      margin-left: -141px;
+    }
+    @media (max-width: 400px) {
+      width: 217px;
+      margin-left: -141px;
+    }
+    @media (max-width: 320px) {
+      width: 217px;
+      margin-left: -19%;
+    }
+    @media (max-width: 280px) {
+      width: 214px;
+      margin-left: -11%;
     }
   }
 }

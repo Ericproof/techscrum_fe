@@ -616,6 +616,9 @@
           text-decoration: none;
           color: #373753;
           cursor: pointer;
+          @media (max-width: 280px) {
+            margin-right: 0;
+          }
           picture {
             display: block;
             max-width: 100%;
@@ -657,6 +660,9 @@
                   margin-right: 16px;
                   fill: #ff22b1;
                   color: #ff22b1;
+                  @media (max-width: 280px) {
+                    margin-right: 9px;
+                  }
                 }
                 span {
                   font-size: 16px;
@@ -685,6 +691,9 @@
                 border: none;
                 cursor: pointer;
                 transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+                @media (max-width: 280px) {
+                  padding: 9px 12px;
+                }
                 &:hover {
                   outline: none;
                   background: #1d1c39;
