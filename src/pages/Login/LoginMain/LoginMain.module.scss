@@ -3,7 +3,9 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-
+  @media (max-width: 280px) {
+    margin-top: 22%;
+  }
   a {
     text-decoration: none;
     color: rgb(0, 82, 204);
@@ -11,7 +13,7 @@
 
   img {
     margin: 40px 0 10px 0;
-    width: 40%;
+    width: 50%;
     height: 10%;
     align-self: center;
   }
@@ -54,6 +56,7 @@
 
     input.email {
       display: block;
+      width: 95%;
     }
 
     input.password {
@@ -77,10 +80,10 @@
         width: 95%;
         margin-top: 0;
         @media (max-width: 375px) {
-          width: 93%;
+          width: 95%;
         }
         @media (max-width: 280px) {
-          width: 90%;
+          width: 95%;
         }
       }
       a {
@@ -156,8 +159,11 @@
         }
         span {
           width: 100%;
-          @media (max-width: 300px) {
-            font-size: 13px;
+          @media (max-width: 450px) {
+            font-size: 12px;
+          }
+          @media (max-width: 280px) {
+            font-size: 10px;
           }
         }
       }
@@ -180,6 +186,9 @@
       }
       span {
         margin: 0px 8px;
+        @media (max-width: 280px) {
+          display: none;
+        }
       }
     }
   }
@@ -193,5 +202,9 @@
     width: 80%;
     text-align: center;
     font-size: 14px;
+    @media (max-width: 280px) {
+      width: 100%;
+      font-size: 12px;
+    }
   }
 }

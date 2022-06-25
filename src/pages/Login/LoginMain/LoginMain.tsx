@@ -1,7 +1,7 @@
+/* eslint-disable no-console */
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { MdOutlineVisibility, MdVisibility } from 'react-icons/md';
-// import emailCheck from '../../../api/register/emailCheck';
 import { login } from '../../../api/login/login';
 import styles from './LoginMain.module.scss';
 import Icon from '../../../assets/logo.svg';
@@ -11,11 +11,10 @@ import AppleIcon from './apple-logo.svg';
 
 export default function LoginMain() {
   const navigate = useNavigate();
-  /* eslint-disable no-useless-escape */
   const illegalCharacter = /[%&]/;
   const [passwordInvisible, setPasswordInvisible] = useState(true);
-  let emailRecorder = '';
-  let passwordRecorder = '';
+  const [emailRecorder, setEmailRecorder] = useState('');
+  const [passwordRecorder, setPasswordRecorder] = useState('');
 
   const tip = (error: string) => {
     const tipLabel = document.getElementById('tip') as HTMLInputElement;
@@ -42,12 +41,12 @@ export default function LoginMain() {
   };
 
   const setEmail = (email: string) => {
-    emailRecorder = email;
+    setEmailRecorder(email);
   };
 
   const setPassword = (password: string) => {
     if (!illegalCharacter.test(password)) {
-      passwordRecorder = password;
+      setPasswordRecorder(password);
       tip('');
     } else tip('Illegal Character Detected');
   };
@@ -66,44 +65,33 @@ export default function LoginMain() {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-        {passwordInvisible ? (
-          <div className={styles.inputContainer}>
-            <input
-              className={styles.password}
-              type="password"
-              placeholder="Input Your Password"
-              name="password"
-              minLength={8}
-              maxLength={16}
-              defaultValue={passwordRecorder}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+        <div className={styles.inputContainer}>
+          <input
+            className={styles.password}
+            id="password"
+            type={passwordInvisible ? 'password' : 'text'}
+            placeholder="Input Your Password"
+            name="password"
+            minLength={8}
+            maxLength={16}
+            defaultValue={passwordRecorder}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          {passwordInvisible ? (
             <MdOutlineVisibility
               onClick={() => {
-                setPasswordInvisible(false);
+                setPasswordInvisible(!passwordInvisible);
               }}
             />
-          </div>
-        ) : (
-          <div className={styles.inputContainer}>
-            <input
-              className={styles.password}
-              type="text"
-              placeholder="Input Your Password"
-              name="password"
-              minLength={8}
-              maxLength={16}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+          ) : (
             <MdVisibility
               onClick={() => {
-                setPasswordInvisible(true);
+                setPasswordInvisible(!passwordInvisible);
               }}
             />
-          </div>
-        )}
+          )}
+        </div>
         <span id="tip" className={styles.tip} />
         <button type="submit" className={styles.btnMargin} onSubmit={handleSubmit}>
           Login
