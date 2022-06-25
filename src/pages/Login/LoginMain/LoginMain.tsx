@@ -54,7 +54,7 @@ export default function LoginMain() {
     <div className={styles.registerMain}>
       <img src={Icon} alt="TechScrum Icon" />
       <form onSubmit={handleSubmit}>
-        <h1>Your team&apos;s site</h1>
+        <h1>Log in to your account</h1>
         <input
           className={styles.email}
           type="email"
