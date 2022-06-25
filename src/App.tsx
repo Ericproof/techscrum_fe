@@ -18,6 +18,7 @@ import CreateProject from './pages/CreateProject/CreateProject';
 import Board from './pages/Board';
 import './App.css';
 import Nav from './components/BoardNavigation/Nav';
+import ResetPassword from './pages/ResetPassword/ResetPassword';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
+      <Route path="reset-password" element={<ResetPassword />} />
       <Route path="/settings" element={<Setting />} />
       <Route path="/cookie-policy" element={<CookiePolicy />} />
       <Route path="/gdpr" element={<Gdpr />} />

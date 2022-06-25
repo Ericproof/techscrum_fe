@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import emailCheck from '../../../api/register/emailCheck';
-import register from '../../../api/register/register';
+import { MdOutlineVisibility, MdVisibility } from 'react-icons/md';
+// import emailCheck from '../../../api/register/emailCheck';
+import { login } from '../../../api/login/login';
 import styles from './LoginMain.module.scss';
 import Icon from '../../../assets/logo.svg';
 import GoogleIcon from './google-logo.svg';
@@ -9,21 +10,12 @@ import MicrosoftIcon from './microsoft-logo.svg';
 import AppleIcon from './apple-logo.svg';
 
 export default function LoginMain() {
-  const queryString = window.location.href.toString().split('?')[1];
-  const query = new URLSearchParams(queryString);
   const navigate = useNavigate();
   /* eslint-disable no-useless-escape */
   const illegalCharacter = /[%&]/;
-
-  let emailRecorder =
-    query.has('email') && query.get('email') !== null ? query.get('email') ?? '' : '';
-  let nameRecorder = '';
+  const [passwordInvisible, setPasswordInvisible] = useState(true);
+  let emailRecorder = '';
   let passwordRecorder = '';
-
-  let emailCheckProcess: boolean =
-    query.has('emailCheckProcess') && query.get('emailCheckProcess') !== null
-      ? Boolean(query.get('emailCheckProcess')) ?? false
-      : false;
 
   const tip = (error: string) => {
     const tipLabel = document.getElementById('tip') as HTMLInputElement;
@@ -32,29 +24,20 @@ export default function LoginMain() {
 
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
-    if (!emailCheckProcess) {
-      const result = await emailCheck(emailRecorder);
-      if (result.result) {
-        emailCheckProcess = true;
-        navigate(`/register?email=${emailRecorder}&emailCheckProcess=${emailCheckProcess}`);
+    try {
+      const resResult = await login({
+        email: emailRecorder,
+        password: passwordRecorder
+      });
+      const { token } = resResult;
+      if (token !== undefined && token !== null) {
+        localStorage.setItem('token', token);
+        navigate(`/`);
       } else {
-        tip('The email already exists. Please try again');
+        tip('*Incorrect email or password, please try again.');
       }
-      return;
-    }
-
-    const resResult = await register({
-      email: emailRecorder,
-      name: nameRecorder,
-      password: passwordRecorder
-    });
-
-    const { token } = resResult;
-    if (token === undefined) {
+    } catch (error) {
       tip('Something Go Wrong, Please contact staff!');
-    } else {
-      localStorage.setItem('token', token);
-      navigate(`/`);
     }
   };
 
@@ -62,12 +45,8 @@ export default function LoginMain() {
     emailRecorder = email;
   };
 
-  const setName = (name: string) => {
-    nameRecorder = name;
-  };
-
   const setPassword = (password: string) => {
-    if (!illegalCharacter.test(password) || password === '') {
+    if (!illegalCharacter.test(password)) {
       passwordRecorder = password;
       tip('');
     } else tip('Illegal Character Detected');
@@ -78,7 +57,6 @@ export default function LoginMain() {
       <img src={Icon} alt="TechScrum Icon" />
       <form onSubmit={handleSubmit}>
         <h1>Your team&apos;s site</h1>
-        <p id="tip" />
         <input
           className={styles.email}
           type="email"
@@ -86,19 +64,10 @@ export default function LoginMain() {
           name="email"
           defaultValue={emailRecorder}
           onChange={(e) => setEmail(e.target.value)}
-          disabled={emailCheckProcess}
           required
         />
-        {emailCheckProcess && (
-          <>
-            <input
-              className={styles.password}
-              type="text"
-              placeholder="Input Your Name"
-              name="name"
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
+        {passwordInvisible ? (
+          <div className={styles.inputContainer}>
             <input
               className={styles.password}
               type="password"
@@ -106,15 +75,41 @@ export default function LoginMain() {
               name="password"
               minLength={8}
               maxLength={16}
+              defaultValue={passwordRecorder}
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
-          </>
+            <MdOutlineVisibility
+              onClick={() => {
+                setPasswordInvisible(false);
+              }}
+            />
+          </div>
+        ) : (
+          <div className={styles.inputContainer}>
+            <input
+              className={styles.password}
+              type="text"
+              placeholder="Input Your Password"
+              name="password"
+              minLength={8}
+              maxLength={16}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <MdVisibility
+              onClick={() => {
+                setPasswordInvisible(true);
+              }}
+            />
+          </div>
         )}
-        <button type="submit" className={styles.btnMargin}>
+        <span id="tip" className={styles.tip} />
+        <button type="submit" className={styles.btnMargin} onSubmit={handleSubmit}>
           Login
         </button>
-        <p style={{ display: 'none' }}>or</p>
-        <div className={styles.btnList} style={{ display: 'none' }}>
+        <p>or</p>
+        <div className={styles.btnList}>
           <a href="/#">
             <img src={GoogleIcon} alt="" />
             <span>Keep Using Google</span>
@@ -130,10 +125,11 @@ export default function LoginMain() {
         </div>
         <div className={styles.formFooter}>
           <Link to="/register">Register</Link>
+          <span>•</span>
+          <Link to="/reset-password">Forgot password</Link>
         </div>
       </form>
       <p className={styles.registerMainFooter}>
-        This page is protected by reCAPTCHA and complies with Google&apos;s &nbsp;
         <Link to="/privacy-policy">Privacy Policy</Link> &nbsp;and &nbsp;
         <Link to="/terms-of-service">Terms of Service</Link>
       </p>

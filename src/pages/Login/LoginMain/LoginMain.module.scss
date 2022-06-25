@@ -1,10 +1,8 @@
-$small_size: 704px;
-
 .registerMain {
   align-self: center;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
 
   a {
     text-decoration: none;
@@ -13,7 +11,7 @@ $small_size: 704px;
 
   img {
     margin: 40px 0 10px 0;
-    width: 80%;
+    width: 40%;
     height: 10%;
     align-self: center;
   }
@@ -29,7 +27,9 @@ $small_size: 704px;
     box-shadow: rgb(0 0 0 / 10%) 0px 0px 10px;
     box-sizing: border-box;
     color: rgb(94, 108, 132);
-
+    @media (max-width: 450px) {
+      width: 90%;
+    }
     h1 {
       font-size: 16px;
       align-self: center;
@@ -39,6 +39,12 @@ $small_size: 704px;
       }
     }
 
+    .tip {
+      color: red;
+      margin-top: 10px;
+      font-size: 12px;
+    }
+
     input {
       padding: 8px 6px;
       height: 36px;
@@ -46,12 +52,12 @@ $small_size: 704px;
       margin-top: 16px;
     }
 
-    input.email{
-        display: block;
+    input.email {
+      display: block;
     }
 
-    input.password{
-        display:block;
+    input.password {
+      display: block;
     }
 
     p {
@@ -63,8 +69,28 @@ $small_size: 704px;
         font-size: 15px;
       }
     }
-
-    .btnMargin{
+    .inputContainer {
+      display: flex;
+      align-items: center;
+      margin-top: 16px;
+      input {
+        width: 95%;
+        margin-top: 0;
+        @media (max-width: 375px) {
+          width: 93%;
+        }
+        @media (max-width: 280px) {
+          width: 90%;
+        }
+      }
+      a {
+        color: #42526e;
+      }
+      svg {
+        margin-left: -26px;
+      }
+    }
+    .btnMargin {
       margin-top: 28px;
     }
 
@@ -127,10 +153,12 @@ $small_size: 704px;
           width: 18px;
           margin: auto 0 auto 8px;
           align-self: flex-start;
-          
         }
-        span{
-            width: 100%;
+        span {
+          width: 100%;
+          @media (max-width: 300px) {
+            font-size: 13px;
+          }
         }
       }
     }
@@ -146,6 +174,12 @@ $small_size: 704px;
 
       a {
         color: rgb(0, 82, 204);
+        @media (max-width: 280px) {
+          font-size: 12px;
+        }
+      }
+      span {
+        margin: 0px 8px;
       }
     }
   }
@@ -153,13 +187,11 @@ $small_size: 704px;
   p {
     color: rgb(107, 119, 140);
     align-self: center;
-    
   }
 
-  .registerMainFooter{
+  .registerMainFooter {
     width: 80%;
-    @media (max-width: $small_size){
-        width: 60%;
-    }
+    text-align: center;
+    font-size: 14px;
   }
 }
