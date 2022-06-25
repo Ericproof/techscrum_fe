@@ -1,160 +1,175 @@
-.container {
-  width: 100%;
-  padding-top: 147px;
-  box-sizing: border-box;
+.termMain {
   background: #f5f7fa;
   font-family: 'FaktSoft', Arial, Helvetica, 'sans-serif';
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+  box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
-  position: relative;
+}
 
-  .containerHeader {
-    padding-bottom: 6rem;
-    text-align: center;
+.termContainer {
+  padding-top: 147px;
+  padding-right: 20px;
+  padding-left: 12px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 84px;
+
+  @media screen and (min-width: 768px) {
+    max-width: 744px;
+  }
+  @media screen and(min-width: 992px) {
+    max-width: 992px;
+  }
+  @media screen and (min-width: 1280px) {
+    max-width: 1164px;
+  }
+  @media screen and (min-width: 1440px) {
+    max-width: 1224px;
   }
 
-  .containerLegal {
-    color: #a7acc5;
+  .pb_5 {
+    padding-bottom: 6rem !important;
+  }
+}
+
+.termTextCenter {
+  width: 100%;
+  text-align: center !important;
+  p {
     font-weight: 600;
     font-size: 18px;
-    margin-bottom: 1.5rem;
+    color: #a7acc5;
+    text-align: center;
     text-transform: uppercase;
+    margin-bottom: 21px;
   }
-
-  .containerTerms {
-    margin: 0;
-    display: block;
+  h1 {
     font-size: 42px;
     font-weight: 400;
-    margin-block-start: 0.67em;
-    margin-block-end: 0.67em;
+    color: rgb(33, 37, 41);
+    margin: 0;
+    padding: 0;
     line-height: 1;
-    color: inherit;
-    display: block;
-    font-family: FaktSoft, Arial, Helvetica, sans-serif;
   }
-
-  .containerUnderline {
-    border: 0;
-    height: 4px;
-    margin-right: auto;
-    width: 100px;
+  hr {
     background-color: #6a84ed;
-    margin-bottom: 3rem;
-    margin-top: 3rem;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    overflow: visible;
+    border: 0px;
+    height: 4px;
+    width: 100px;
+    margin: 42px auto;
+    margin-bottom: 7rem;
   }
-  .termContent {
-    display: flex;
-    flex-direction: row;
-    margin-left: 40px;
-    margin-top: -10px;
+}
+
+.termRow {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -12px;
+  margin-left: -12px;
+  padding-top:10px ;
+}
+
+.sidebar {
+  @media screen and (min-width: 768px) {
+    flex: 0 0 100%;
+    max-width: 100%;
   }
-  .sidebar {
-    @media screen and (min-width: 768px) {
-      flex: 0 0 100%;
-      max-width: 100%;
-    }
-    @media screen and (min-width: 992px) {
-      flex: 0 0 33.3333333333%;
-      max-width: 33.3333333333%;
-    }
+  @media screen and (min-width: 992px) {
+    flex: 0 0 33.3333333333%;
+    max-width: 33.3333333333%;
   }
+}
 
-  .stickySidebar {
-    padding-left: 300px;
-    position: sticky;
-    transition: height 0.3s ease;
-    #RemoveBorder {
-      border: 0;
-    }
-    li {
-      color: #494e6a;
-      border-left: 2px solid #e7ebf1;
-      font-weight: 500;
-      list-style-type: none;
-      position: relative;
-      display: list-item;
-      text-align: -webkit-match-parent;
-
-      a {
-        line-height: 1.3;
-        text-decoration: none;
-        font-weight: 600;
-        font-size: 18px;
-        display: block;
-        padding: 7px 14px;
-        color: #373753;
-      }
-    }
-    li:hover {
-      border-left: 2px solid #4461d7;
-    }
+.stickySidebar {
+  padding-left: 0;
+  position: sticky;
+  top: 100px;
+  transition: height 0.3s ease;
+  #RemoveBorder {
+    border: 0;
   }
+  li {
+    color: #494e6a;
+    border-left: 2px solid #e7ebf1;
+    font-weight: 500;
+    list-style-type: none;
+    position: relative;
+    display: list-item;
+    text-align: -webkit-match-parent;
 
-  .containerContent {
-    width: 100%;
-    display: block;
-    min-height: 1px;
-    margin: 18px 300px 0 10px;
-
-    @media (max-width: 0px) {
-      padding-right: 12vw;
-      padding-left: 0vw;
-    }
-
-    @media (max-width: 768px) {
-      padding-right: 9vw;
-      padding-left: 10vw;
-    }
-
-    @media screen and(max-width: 992px) {
-      padding-right: 12vw;
-      padding-left: 15vw;
+    a {
+      line-height: 1.3;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 18px;
+      display: block;
+      padding: 7px 14px;
+      color: #373753;
     }
   }
+  li:hover {
+    border-left: 2px solid #4461d7;
+  }
+}
 
-
-  #containerText h2 {
+.termText {
+  margin-top: -25px;
+  margin-left: -50px;
+  @media screen and (max-width: 992px) {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  @media screen and (min-width: 992px) {
+    flex: 0 0 66.6666666667%;
+    max-width: 66.6666666667%;
+  }
+  p {
+    font-family: FaktSoft, Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 16px;
+    color: #494e6a !important;
+  }
+  h2 {
     -webkit-tap-highlight-color: rgb(0 0 0/0);
     text-align: left;
     box-sizing: border-box;
-    font-variant-ligatures: common-ligatures;
     -webkit-font-smoothing: antialiased;
-    -webkit-font-feature-settings: 'liga', 'clig';
     font-feature-settings: 'liga', 'clig';
-    line-height: 1rem;
-    margin-top: 2rem;
-    margin-bottom: 1.5rem;
-    font-family: sans-serif;
-    font-size: 1.6rem;
+    font-variant-ligatures: common-ligatures;
+    line-height: 1.5rem;
+    margin-top: 2rem !important;
+    margin-bottom: 1.5rem !important;
+    font-size: 24px;
     font-weight: 500;
-    color: #212529;
-
-    @media (max-width: 748px) {
-      line-height: 2rem;
-    }
   }
-
-  #containerText h2:first-child {
-    margin-top: 0;
+  h3 {
+    font-family: inherit;
+    color: inherit;
+    -webkit-font-smoothing: antialiased;
+    font-variant-ligatures: common-ligatures;
+    line-height: 1;
+    margin-top: 1.5rem !important;
+    margin-bottom: 1rem !important;
+    font-size: 20.5px;
+    font-weight: 500;
   }
-
-  #containerText p {
-    text-align: left;
-    box-sizing: border-box;
-    font-family: FaktSoft, Arial, Helvetica, sans-serif;
-    font-weight: 400;
-    line-height: 1.7;
-    margin-top: 0;
-    margin-bottom: 1.5rem;
-    font-size: 1.1rem;
-    color: #494e6a;
+  a {
+    color: #4da2f8 !important;
+    text-decoration: none;
   }
-
-  #containerText a {
-    color: #4da2f8;
+  ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
   }
 }
+
