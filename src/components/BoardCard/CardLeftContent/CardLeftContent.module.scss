@@ -61,12 +61,6 @@
     &:active {
       color: #0052cc;
       background: rgba(179, 212, 255, 0.6);
-
-      img {
-        filter: drop-shadow(#0052cc 2000px 0);
-        left: -2000px;
-        position: relative;
-      }
     }
   }
 }

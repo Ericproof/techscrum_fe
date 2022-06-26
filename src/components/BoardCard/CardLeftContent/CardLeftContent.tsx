@@ -1,8 +1,8 @@
 import React from 'react';
+import { ImAttachment } from 'react-icons/im';
 import style from './CardLeftContent.module.scss';
 import Description from './components/Description/Description';
 import LeftBottom from './components/LeftBottom/LeftBottom';
-import AttachIcon from './svg/AttachIcon.svg';
 
 export default function CardLeftContent() {
   return (
@@ -12,7 +12,7 @@ export default function CardLeftContent() {
       </div>
       <div className={style.attachButton}>
         <label htmlFor="uploadPhoto">
-          <img src={AttachIcon} alt="AttachIcon" />
+          <ImAttachment className={style.attachIcon} />
           <span>Attach</span>
           <input id="uploadPhoto" type="file" name="Upload a photo" />
         </label>
