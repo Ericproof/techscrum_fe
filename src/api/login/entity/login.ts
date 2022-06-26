@@ -3,6 +3,4 @@ export interface TokenList {
   refreshToken: string | null;
 }
 
-// export interface login{
-
-// }
+export interface login {}
