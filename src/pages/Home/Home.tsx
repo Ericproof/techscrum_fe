@@ -32,7 +32,7 @@ export default function Home() {
         navigate('/404');
       }
     });
-  }, []);
+  }, [isLogin, navigate]);
 
   useEffect(() => {
     async function tokenCheck() {

@@ -17,7 +17,7 @@ function Search() {
   const optimizedFn = (value: string) => {
     debounce(value);
   };
-  
+
   return (
     <div className={styles.searchBar}>
       <input
