@@ -44,7 +44,6 @@ export default function NavMain() {
               </svg>
               <p>Backlog</p>
             </NavLink>
-
             <NavLink to="/board">
               <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
                 <g fill="currentColor">
