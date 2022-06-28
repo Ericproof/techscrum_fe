@@ -12,8 +12,9 @@ p.cardStar:after {
 .cardContainer {
   width: 720px;
   height: 780px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
+  left: 0;
+  right: 0;
   padding-left: 35px;
   padding-right: 10px;
   display: flex;
@@ -24,6 +25,10 @@ p.cardStar:after {
   line-height: 20px;
   font-weight: 550;
   color: rgb(107, 119, 140);
+  background-color: #fff;
+  position: fixed;
+  top: 7%;
+  z-index: 2;
 }
 .cardContent {
   overflow: auto;
