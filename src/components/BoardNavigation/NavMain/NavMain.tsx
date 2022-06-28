@@ -1,23 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import style from './NavMain.module.scss';
 
 export default function NavMain() {
+  const [collapseToggle, setCollapseToggle] = useState(true);
+
+  const handleCollapseToggle = () => {
+    setCollapseToggle(!collapseToggle);
+  };
   return (
     <div className={style.container}>
       <div className={style.containerTop}>
         <div className={style.containerItem}>
           <div className={style.containerItemTitle}>
-            <span>
-              <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
-                <path
-                  d="M8.292 10.293a1.009 1.009 0 000 1.419l2.939 2.965c.218.215.5.322.779.322s.556-.107.769-.322l2.93-2.955a1.01 1.01 0 000-1.419.987.987 0 00-1.406 0l-2.298 2.317-2.307-2.327a.99.99 0 00-1.406 0z"
-                  fill="currentColor"
-                  fillRule="evenodd"
-                />
-              </svg>
-            </span>
+            <button type="button" onClick={handleCollapseToggle}>
+              {collapseToggle ? (
+                <span>
+                  <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
+                    <path
+                      d="M8.292 10.293a1.009 1.009 0 000 1.419l2.939 2.965c.218.215.5.322.779.322s.556-.107.769-.322l2.93-2.955a1.01 1.01 0 000-1.419.987.987 0 00-1.406 0l-2.298 2.317-2.307-2.327a.99.99 0 00-1.406 0z"
+                      fill="currentColor"
+                      fillRule="evenodd"
+                    />
+                  </svg>
+                </span>
+              ) : (
+                <span className={style.span1}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
+                    <path
+                      d="M8.292 10.293a1.009 1.009 0 000 1.419l2.939 2.965c.218.215.5.322.779.322s.556-.107.769-.322l2.93-2.955a1.01 1.01 0 000-1.419.987.987 0 00-1.406 0l-2.298 2.317-2.307-2.327a.99.99 0 00-1.406 0z"
+                      fill="currentColor"
+                      fillRule="evenodd"
+                    />
+                  </svg>
+                </span>
+              )}
+            </button>
+
             <h3>PLANNING</h3>
           </div>
 
@@ -58,15 +78,17 @@ export default function NavMain() {
 
         <div className={style.containerItem}>
           <div className={style.containerItemTitle}>
-            <span>
-              <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
-                <path
-                  d="M8.292 10.293a1.009 1.009 0 000 1.419l2.939 2.965c.218.215.5.322.779.322s.556-.107.769-.322l2.93-2.955a1.01 1.01 0 000-1.419.987.987 0 00-1.406 0l-2.298 2.317-2.307-2.327a.99.99 0 00-1.406 0z"
-                  fill="currentColor"
-                  fillRule="evenodd"
-                />
-              </svg>
-            </span>
+            <button type="button">
+              <span>
+                <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
+                  <path
+                    d="M8.292 10.293a1.009 1.009 0 000 1.419l2.939 2.965c.218.215.5.322.779.322s.556-.107.769-.322l2.93-2.955a1.01 1.01 0 000-1.419.987.987 0 00-1.406 0l-2.298 2.317-2.307-2.327a.99.99 0 00-1.406 0z"
+                    fill="currentColor"
+                    fillRule="evenodd"
+                  />
+                </svg>
+              </span>
+            </button>
             <h3>DEVELOPMENT</h3>
           </div>
           <div className={style.items}>
@@ -103,15 +125,17 @@ export default function NavMain() {
         <div className={style.containerItem}>
           <div className={style.items}>
             <div className={style.containerItemTitle}>
-              <span>
-                <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
-                  <path
-                    d="M8.292 10.293a1.009 1.009 0 000 1.419l2.939 2.965c.218.215.5.322.779.322s.556-.107.769-.322l2.93-2.955a1.01 1.01 0 000-1.419.987.987 0 00-1.406 0l-2.298 2.317-2.307-2.327a.99.99 0 00-1.406 0z"
-                    fill="currentColor"
-                    fillRule="evenodd"
-                  />
-                </svg>
-              </span>
+              <button type="button">
+                <span>
+                  <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
+                    <path
+                      d="M8.292 10.293a1.009 1.009 0 000 1.419l2.939 2.965c.218.215.5.322.779.322s.556-.107.769-.322l2.93-2.955a1.01 1.01 0 000-1.419.987.987 0 00-1.406 0l-2.298 2.317-2.307-2.327a.99.99 0 00-1.406 0z"
+                      fill="currentColor"
+                      fillRule="evenodd"
+                    />
+                  </svg>
+                </span>
+              </button>
               <h3>OPERATIONS</h3>
             </div>
             <NavLink to="/nav">

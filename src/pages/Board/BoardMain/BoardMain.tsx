@@ -131,7 +131,10 @@ export default function BoardMain() {
                       {...provided.droppableProps}
                       className={style.column}
                     >
-                      <div className={style.name}>{column.name}</div>
+                      <div className={style.name}>
+                        {column.name} {column.items.length}{' '}
+                        {column.items.length > 1 ? 'issues' : 'issue'}
+                      </div>
                       {column.items.map((item, index) => {
                         return (
                           <Draggable key={item.id} draggableId={item.id} index={index}>
