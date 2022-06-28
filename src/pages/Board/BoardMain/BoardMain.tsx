@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
 import { v4 as uuid } from 'uuid';
 import style from './BoardMain.module.scss';
 import EL from './img/EL-3.png';
 import universalAvatar from './img/10315.svg';
+import boardAPI from '../../../api/board/board';
+import Board from '../../../api/board/entity/board';
 
+interface Assign {
+  id?: string;
+  email?: string;
+  name?: string;
+}
 interface ItemFromBackend {
   id: string;
-  content: string;
+  tag: string;
+  title: string;
+  statusId: number;
+  assignInfo?: Assign;
 }
 
 interface ColumnsFromBackend {
@@ -15,10 +25,10 @@ interface ColumnsFromBackend {
 }
 
 const itemFromBackend: ItemFromBackend[] = [
-  { id: uuid(), content: 'First task' },
-  { id: uuid(), content: 'Second task' },
-  { id: uuid(), content: 'Third task' },
-  { id: uuid(), content: 'Fourth task' }
+  { id: '0', tag: uuid(), title: 'First task', statusId: 0, assignInfo: {} },
+  { id: '1', tag: uuid(), title: 'Second task', statusId: 0, assignInfo: {} },
+  { id: '2', tag: uuid(), title: 'Third task', statusId: 0, assignInfo: {} },
+  { id: '3', tag: uuid(), title: 'Fourth task', statusId: 0, assignInfo: {} }
 ];
 
 const columnsFromBackend: ColumnsFromBackend = {
@@ -87,6 +97,25 @@ const onDragEnd = (
 
 export default function BoardMain() {
   const [columns, setColumns] = useState(columnsFromBackend);
+  useEffect(() => {
+    const fetchColumnsData = (boardInfo: Board) => {
+      let columnsInfo: ColumnsFromBackend = {};
+      boardInfo.taskStatus.forEach((status, index) => {
+        const tasks: ItemFromBackend[] = boardInfo.taskList.filter(
+          (task) => task.statusId === index
+        );
+        columnsInfo = { ...columnsInfo, [index.toString()]: { name: status, items: tasks } };
+      });
+      setColumns(columnsInfo);
+    };
+
+    const fetchBoardInfo = async () => {
+      const boardInfo = await boardAPI();
+      fetchColumnsData(boardInfo);
+    };
+    fetchBoardInfo();
+  }, []);
+
   return (
     <div className={style.container}>
       <DragDropContext
@@ -118,11 +147,11 @@ export default function BoardMain() {
                                   {...provided2.dragHandleProps}
                                   {...provided2.draggableProps}
                                 >
-                                  <span> {item.content}</span>
+                                  <span> {item.title}</span>
                                   <div className={style.cardFooter}>
                                     <div className={style.cardFooterLeft}>
                                       <img src={universalAvatar} alt="Story" />
-                                      <span>TEC-66</span>
+                                      <span>{item.tag}</span>
                                     </div>
                                     <div className={style.cardFooterRight}>
                                       <img src={EL} alt="avatar" />
