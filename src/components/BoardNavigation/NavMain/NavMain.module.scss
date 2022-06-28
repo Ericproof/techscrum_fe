@@ -8,7 +8,6 @@ $base-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxy
   display: flex;
   box-sizing: border-box;
   flex-direction: column;
-  margin-left: 8px;
   align-self: flex-start;
 }
 
@@ -22,9 +21,9 @@ $base-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxy
     display: flex;
     flex-direction: column;
     position: relative;
-
+    
     &:hover {
-      .containerItemTitle span {
+      .containerItemTitle span svg {
         display: block;
       }
     }
@@ -42,9 +41,9 @@ $base-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxy
         height: 24px;
         cursor: pointer;
         margin-top: 12px;
-        margin-left: -22px;
-        position: fixed;
-        display: none;
+        svg{
+          display: none;
+        } 
       }
 
       h3 {
@@ -81,7 +80,7 @@ $base-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxy
         line-height: 1.42857142857143;
         text-decoration-skip-ink: auto;
         font-family: $base-font-family;
-        padding: 8px 0px 0px 10px;
+        padding: 0px 0px 0px 20px;
         color: var(--ds-text-subtle, #42526e);
         width: 220px;
         margin-left: -10px;
@@ -169,3 +168,5 @@ $base-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxy
     }
   }
 }
+
+

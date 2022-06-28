@@ -195,7 +195,7 @@ export default function Project() {
                         </div>
                       </td>
                       <td className={styles.name}>
-                        <Link to="/board">
+                        <Link to={`/board/${project.board_id}`}>
                           <div className={styles.nameContent}>
                             <img
                               src={
