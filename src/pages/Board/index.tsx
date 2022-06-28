@@ -3,6 +3,7 @@ import style from './index.module.scss';
 import BoardSearch from './BoardSearch/BoardSearch';
 import BoardMain from './BoardMain/BoardMain';
 import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
+import Card from '../../components/Card/Card';
 
 const projects = [
   {
@@ -58,6 +59,7 @@ export default function Board() {
       <div className={style.container}>
         <BoardSearch />
         <BoardMain />
+        <Card />
       </div>
     </>
   );
