@@ -22,6 +22,7 @@ $base-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxy
     display: flex;
     flex-direction: column;
     position: relative;
+    margin-left: 10px;
 
     &:hover {
       .containerItemTitle span {
@@ -33,6 +34,7 @@ $base-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxy
       display: flex;
       flex-direction: row;
       justify-items: flex-start;
+      position: relative;
 
       span {
         display: inline-block;
@@ -43,8 +45,8 @@ $base-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxy
         cursor: pointer;
         margin-top: 12px;
         margin-left: -22px;
-        position: fixed;
         display: none;
+        position: absolute;
       }
 
       h3 {
@@ -85,7 +87,7 @@ $base-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxy
         color: var(--ds-text-subtle, #42526e);
         width: 220px;
         margin-left: -10px;
-        
+
         svg {
           display: flex;
           height: 24px;

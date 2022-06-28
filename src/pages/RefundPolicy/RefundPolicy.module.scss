@@ -1,71 +1,79 @@
-.refundContainer {
-  font-family: FaktSoft, Arial, Helvetica, sans-serif;
-  padding-top: 160px;
-  padding-right: 28px;
-  padding-left: 20px;
-  margin: 0 98px 98px;
-  border: o;
-  @media (max-width: 992px) {
-    .refundContent {
-      display: flex;
-      flex-direction: column;
+.refundMain {
+  background: #f5f7fa;
+  font-family: 'FaktSoft', Arial, Helvetica, 'sans-serif';
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+
+  .refundContainer {
+    padding-top: 147px;
+    padding-right: 20px;
+    padding-left: 12px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 84px;
+
+    @media screen and (min-width: 280px) {
+      max-width: 240px;
     }
-  }
-  @media (max-width: 1280px) {
-    .refundText {
-      width: 688px;
+    @media screen and (min-width: 768px) {
+      max-width: 744px;
     }
-  }
-  @media screen and (min-width: 768px) {
-    max-width: 30%;
-  }
-  @media screen and(min-width: 992px) {
-    max-width: 50%;
-  }
-  @media screen and (min-width: 1280px) {
-    max-width: 70%;
-  }
-  @media screen and (min-width: 1440px) {
-    max-width: 100%;
+    @media screen and(min-width: 992px) {
+      max-width: 992px;
+    }
+    @media screen and (min-width: 1280px) {
+      max-width: 1164px;
+    }
+    @media screen and (min-width: 1440px) {
+      max-width: 1224px;
+    }
+
+    .pb_5 {
+      padding-bottom: 6rem !important;
+    }
   }
 
-  .legalTitle {
+  .refundTextCenter {
     width: 100%;
     text-align: center !important;
-    font-weight: 600;
-    font-size: 18px;
-    color: #a7acc5;
-    padding-bottom: 7rem;
+    p {
+      font-weight: 600;
+      font-size: 18px;
+      color: #a7acc5;
+      text-align: center;
+      text-transform: uppercase;
+      margin-bottom: 21px;
+    }
+    h1 {
+      font-size: 42px;
+      font-weight: 400;
+      color: rgb(33, 37, 41);
+      margin: 0;
+      padding: 0;
+      line-height: 1;
+    }
+    hr {
+      background-color: #6a84ed;
+      border: 0px;
+      height: 4px;
+      width: 100px;
+      margin: 42px auto;
+      margin-bottom: 7rem;
+    }
   }
-  .titleRefund {
-    margin: 0 !important;
-    font-weight: 400;
-    font-size: 42px;
-    color: #212529;
-    padding-bottom: 1rem;
-  }
-  .containerLegal {
-    color: #a7acc5;
-    font-size: 16px;
-    margin: 0 0 21px;
-    font-weight: 600;
-    text-transform: uppercase !important;
-  }
-  hr {
-    background-color: #6a84ed;
-    border: 0;
-    height: 4px;
-    width: 100px;
-    margin: 21px auto;
-  }
-  .refundContent {
+
+  .refundRow {
     display: flex;
-    flex-direction: row;
-    margin-top: -20px;
-    margin-left: 70px;
+    flex-wrap: wrap;
+    margin-right: -12px;
+    margin-left: -12px;
+    padding-top: 10px;
   }
+
   .sidebar {
- 
     @media screen and (min-width: 768px) {
       flex: 0 0 100%;
       max-width: 100%;
@@ -77,7 +85,7 @@
   }
 
   .stickySidebar {
-    padding-left: 150px;
+    padding-left: 0;
     position: sticky;
     top: 100px;
     transition: height 0.3s ease;
@@ -107,19 +115,28 @@
       border-left: 2px solid #4461d7;
     }
   }
-  .refundText {
-    text-align: left;
-    box-sizing: border-box;
-    color: #494e6a;
-    font-size: 1.143rem;
-    font-weight: 400;
-    line-height: 22.4px;
-    text-size-adjust: 100%;
-    width: 893px;
-    margin-left: -16px;
 
-  }
-  .refundText p {
-    margin-bottom: 1.5rem;
+  .refundText {
+    @media screen and (max-width: 992px) {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+    @media screen and (min-width: 992px) {
+      flex: 0 0 66.6666666667%;
+      max-width: 66.6666666667%;
+    }
+    @media screen and (max-width: 400px) {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+    p {
+      font-family: FaktSoft, Arial, Helvetica, sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+      font-size: 16px;
+      color: #494e6a !important;
+    }
   }
 }

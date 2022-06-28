@@ -6,12 +6,12 @@ export default function Gdpr() {
   return (
     <div className={styles.gdprMain}>
       <div className={styles.gdprContainer}>
-        <div className={styles.gdprTitle}>
+        <div className={styles.gdprTextCenter}>
           <p>LEGAL</p>
           <h1>GDPR Compliance</h1>
           <hr />
         </div>
-        <div className={styles.gdprContent}>
+        <div className={styles.gdprRow}>
           <div className={styles.sidebar}>
             <ul className={styles.stickySidebar}>
               <li id={styles.RemoveBorder}>
