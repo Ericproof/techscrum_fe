@@ -50,7 +50,7 @@ export default function Board() {
   const [projectList] = useState(projectsOrderbyDate);
   const [value, setValue] = useState(0);
   const [isCreateNewCard, setIsCreateNewCard] = useState(false);
-  
+
   const getProjectFromChildren = (index: number) => {
     projectList[index].star = !projectList[index].star;
     setValue(value + 1);
