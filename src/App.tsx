@@ -15,7 +15,6 @@ import ErrorPage from './pages/ErrorPage/ErrorPage';
 import Access from './pages/Access/Access';
 import Project from './pages/Project/Project';
 import CreateProject from './pages/CreateProject/CreateProject';
-import Nav from './components/BoardNavigation/Nav';
 import ResetPassword from './pages/ResetPassword/ResetPassword';
 import BoardPage from './pages/BoardPage/BoardPage';
 import BoardCard from './components/BoardCard/BoardCard';
