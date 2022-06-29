@@ -15,16 +15,21 @@ $base-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxy
 .containerBottom {
   display: flex;
   flex-direction: column;
-  margin-left: 8px;
 
   .containerItem {
     display: flex;
     flex-direction: column;
     position: relative;
+    padding-left: 18px;
+
     &:hover {
-      .containerItemTitle span svg {
+      .containerItemTitle button span {
         display: block;
       }
+    }
+
+    .operations {
+      margin-bottom: 16px;
     }
 
     .containerItemTitle {
@@ -33,17 +38,35 @@ $base-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxy
       justify-items: flex-start;
       position: relative;
 
-      span {
-        display: inline-block;
-        flex-shrink: 0;
-        line-height: 1;
-        width: 24px;
-        height: 24px;
-        cursor: pointer;
-        margin-top: 12px;
-        svg{
+      button {
+        position: absolute;
+        background: none;
+        border-width: 0;
+        padding: 0;
+        span {
+          display: inline-block;
+          flex-shrink: 0;
+          line-height: 1;
+          width: 24px;
+          height: 24px;
+          cursor: pointer;
+          margin-top: 12px;
+          margin-left: -22px;
           display: none;
-        } 
+        }
+      }
+
+      .planningButton .collapseICon {
+        display: block;
+        transform: rotate(270deg);
+      }
+      .developmentButton .collapseICon {
+        display: block;
+        transform: rotate(270deg);
+      }
+      .operationsButton .collapseICon {
+        display: block;
+        transform: rotate(270deg);
       }
 
       h3 {
@@ -111,6 +134,9 @@ $base-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxy
           background-color: var(--ds-background-selected, #e6effc);
           color: var(--ds-text-selected, #0052cc);
         }
+      }
+      .deployments {
+        margin-bottom: 24px;
       }
     }
   }
