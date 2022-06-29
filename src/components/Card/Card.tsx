@@ -2,42 +2,48 @@ import React, { useState } from 'react';
 import styles from './Card.module.scss';
 import { createNewTask } from '../../api/task/task';
 
-interface CreateCardProps {
-  onCompletedSubmit?: (res: any) => void;
+interface Props {
+  updateIsCreateNewCard: () => void;
 }
 
-const Cancel = () => {
-  window.opener = null;
-  window.open('', '_self');
-  window.close();
-};
+function Card({ updateIsCreateNewCard }: Props) {
+  const [description, setDescription] = useState('');
+  const [title, setTitle] = useState('');
+  const [hasError, setError] = useState(false);
 
-function Card(props: CreateCardProps) {
-  const [data, setData] = useState<any>({
+  const data = useState<any>({
     title: '',
     description: '',
     cardType: '',
-    assign: { userId: '', userName: '', userIcon: '' },
+    assign: '629c17f49c0a43d2a090515e',
     label: '',
     sprint: '',
     storyPointEstimate: '',
     pullRequestNumber: 0,
-    reporter: { userId: '', userName: '', userIcon: '' }
+    reporter: { userId: '', userName: '', userIcon: '' },
+    tag: 'abc',
+    board_id: '62b0b2c4814630be771dd8b8',
+    project_id: '62bad502cc89e64e8d695ef2'
   });
-  const [hasError, setError] = useState(false);
-  const { onCompletedSubmit = null } = props;
+
+  const changeDescriptionHandler = async (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setDescription(e.target.value);
+  };
+
+  const changeTitleHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
+  };
 
   const onSave = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    createNewTask(data)
+    updateIsCreateNewCard();
+    const newCard = { ...data, description, title };
+    createNewTask(newCard)
       .then((res: any) => {
-        if (!res.data) {
+        if (res.status === '201') {
           return;
         }
         setError(false);
-        if (onCompletedSubmit) {
-          onCompletedSubmit(res);
-        }
       })
       .catch(() => {
         setError(true);
@@ -62,7 +68,12 @@ function Card(props: CreateCardProps) {
             <option value="bug">Bug</option>
           </select>
           <p className={styles.cardStar}>Summary</p>
-          <input className={styles.cardInput} type="text" />
+          <input
+            className={styles.cardInput}
+            type="text"
+            value={title}
+            onChange={changeTitleHandler}
+          />
           <p className={styles.cardLabel}>Attachment</p>
           <input
             className={styles.cardInput}
@@ -71,7 +82,11 @@ function Card(props: CreateCardProps) {
             placeholder="Drop files to attach or browse"
           />
           <p className={styles.cardLabel}>Description</p>
-          <textarea className={styles.cardTextarea} />
+          <textarea
+            className={styles.cardTextarea}
+            value={description}
+            onChange={changeDescriptionHandler}
+          />
           <p className={styles.cardLabel}>Assignee</p>
           <input className={styles.cardAssignee} placeholder="Automatic" />
           <p className={styles.cardLabel} style={{ display: 'none' }}>
@@ -96,7 +111,12 @@ function Card(props: CreateCardProps) {
         </div>
         {hasError && <p className={styles.error}>Error</p>}
         <div className={styles.cardButton}>
-          <button type="button" className={styles.cancelButton} name="close" onClick={Cancel}>
+          <button
+            type="button"
+            className={styles.cancelButton}
+            name="close"
+            onClick={updateIsCreateNewCard}
+          >
             Cancel
           </button>
           <button type="submit" className={styles.createButton} onClick={onSave}>
@@ -107,9 +127,5 @@ function Card(props: CreateCardProps) {
     </div>
   );
 }
-
-Card.defaultProps = {
-  onCompletedSubmit: null
-};
 
 export default Card;
