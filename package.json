@@ -34,7 +34,7 @@
     "lint": "eslint src/",
     "lint-fix": "eslint src --quiet --fix",
     "deploy": "aws s3 sync build s3://techscrumapp.com",
-    "cdn" : "aws cloudfront create-invalidation --distribution-id E1V3T62UIWQDQ2 --paths './'"
+    "cdn" : "aws cloudfront create-invalidation --distribution-id E1V3T62UIWQDQ2 --paths /*"
   },
   "eslintConfig": {
     "extends": [
