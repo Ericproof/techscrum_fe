@@ -6,6 +6,7 @@ import EL from './img/EL-3.png';
 import universalAvatar from './img/10315.svg';
 import boardAPI from '../../../api/board/board';
 import Board from '../../../api/board/entity/board';
+import { updateTaskStatus } from '../../../api/task/task';
 
 interface Assign {
   id?: string;
@@ -24,17 +25,10 @@ interface ColumnsFromBackend {
   [x: string]: { name: string; items: ItemFromBackend[] };
 }
 
-const itemFromBackend: ItemFromBackend[] = [
-  { id: '0', tag: uuid(), title: 'First task', statusId: 0, assignInfo: {} },
-  { id: '1', tag: uuid(), title: 'Second task', statusId: 0, assignInfo: {} },
-  { id: '2', tag: uuid(), title: 'Third task', statusId: 0, assignInfo: {} },
-  { id: '3', tag: uuid(), title: 'Fourth task', statusId: 0, assignInfo: {} }
-];
-
 const columnsFromBackend: ColumnsFromBackend = {
   [uuid()]: {
     name: 'TO DO',
-    items: itemFromBackend
+    items: []
   },
   [uuid()]: {
     name: 'IN PROGRESS',
@@ -69,7 +63,8 @@ const onDragEnd = (
     const destItems = [...destColumn.items];
     const [removed] = sourceItems.splice(source.index, 1);
     destItems.splice(destination.index, 0, removed);
-    return setColumns({
+    updateTaskStatus(result.draggableId, parseInt(result.destination.droppableId, 10));
+    setColumns({
       ...columns,
       [source.droppableId]: {
         ...sourceColumn,
@@ -80,6 +75,7 @@ const onDragEnd = (
         items: destItems
       }
     });
+    return true;
   }
 
   const column = columns[source.droppableId];
