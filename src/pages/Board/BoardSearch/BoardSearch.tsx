@@ -6,7 +6,10 @@ import avatar2 from './img/image/RL-2.png';
 import avatar3 from './img/image/EL-3.png';
 import avatar4 from './img/image/SQ-4.png';
 
-export default function BoardSearch() {
+interface Props {
+  updateIsCreateNewCard: () => void;
+}
+export default function BoardSearch({ updateIsCreateNewCard }: Props) {
   const avatars = [
     { id: 1, name: 'avatar1', url: avatar1 },
     { id: 2, name: 'avatar2', url: avatar2 },
@@ -103,7 +106,7 @@ export default function BoardSearch() {
           </ul>
         </fieldset>
       </div>
-      <button type="button" className={style.createButton}>
+      <button type="button" className={style.createButton} onClick={updateIsCreateNewCard}>
         Create card
       </button>
     </div>

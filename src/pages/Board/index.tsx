@@ -3,7 +3,7 @@ import style from './index.module.scss';
 import BoardSearch from './BoardSearch/BoardSearch';
 import BoardMain from './BoardMain/BoardMain';
 import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
-import Card from '../../components/Card/Card';
+import CreateNewCard from '../../components/Card/Card';
 
 const projects = [
   {
@@ -49,17 +49,26 @@ export default function Board() {
   });
   const [projectList] = useState(projectsOrderbyDate);
   const [value, setValue] = useState(0);
+  const [isCreateNewCard, setIsCreateNewCard] = useState(false);
+  
   const getProjectFromChildren = (index: number) => {
     projectList[index].star = !projectList[index].star;
     setValue(value + 1);
   };
+
+  const getCreateNewCardStateFromChildren = () => {
+    setIsCreateNewCard(!isCreateNewCard);
+  };
+
   return (
     <>
       <ProjectHeader projects={projects} updateProject={getProjectFromChildren} />
       <div className={style.container}>
-        <BoardSearch />
+        <BoardSearch updateIsCreateNewCard={getCreateNewCardStateFromChildren} />
         <BoardMain />
-        <Card />
+        {isCreateNewCard && (
+          <CreateNewCard updateIsCreateNewCard={getCreateNewCardStateFromChildren} />
+        )}
       </div>
     </>
   );
