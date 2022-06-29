@@ -3,6 +3,7 @@ import style from './index.module.scss';
 import BoardSearch from './BoardSearch/BoardSearch';
 import BoardMain from './BoardMain/BoardMain';
 import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
+import HeaderNav from './HeaderNav/HeaderNav';
 
 const projects = [
   {
@@ -56,6 +57,7 @@ export default function Board() {
     <>
       <ProjectHeader projects={projects} updateProject={getProjectFromChildren} />
       <div className={style.container}>
+        <HeaderNav />
         <BoardSearch />
         <BoardMain />
       </div>
