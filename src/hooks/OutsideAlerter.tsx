@@ -3,15 +3,14 @@ import { useRef, useState, useEffect } from 'react';
 export default function useOutsideAlerter(initialValue: boolean) {
   const myRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState<boolean>(initialValue);
-  const handleClickInside = (e: MouseEvent) => {
-    const target = e.target as HTMLDivElement;
-    if (myRef.current !== null && !myRef.current.contains(target)) {
+  const handleClickOutsideDropDown = (e: any) => {
+    if (visible && !myRef.current?.contains(e.target as Node)) {
       setVisible(false);
     }
   };
   useEffect(() => {
-    document.addEventListener('mousedown', handleClickInside);
-    return () => document.removeEventListener('mousedown', handleClickInside);
+    document.addEventListener('mousedown', handleClickOutsideDropDown);
+    return () => document.removeEventListener('mousedown', handleClickOutsideDropDown);
   });
   return { visible, setVisible, myRef };
 }

@@ -14,7 +14,9 @@
   margin-right: auto;
   margin-left: auto;
   margin-bottom: 84px;
-
+  @media screen and (min-width: 280px) {
+    max-width: 240px;
+  }
   @media screen and (min-width: 768px) {
     max-width: 744px;
   }
@@ -65,7 +67,7 @@
   flex-wrap: wrap;
   margin-right: -12px;
   margin-left: -12px;
-  padding-top:10px ;
+  padding-top: 10px;
 }
 .sidebar {
   @media screen and (min-width: 768px) {
@@ -110,7 +112,7 @@
 }
 .gdprText {
   margin-top: -25px;
-  margin-left: -50px;
+
   @media screen and (max-width: 992px) {
     flex: 0 0 100%;
     max-width: 100%;
@@ -119,6 +121,11 @@
     flex: 0 0 66.6666666667%;
     max-width: 66.6666666667%;
   }
+  @media screen and (max-width: 400px) {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
   p {
     font-family: FaktSoft, Arial, Helvetica, sans-serif;
     font-weight: 400;
