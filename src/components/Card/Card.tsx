@@ -37,7 +37,7 @@ function Card({ updateIsCreateNewCard }: Props) {
   const onSave = (e: React.SyntheticEvent) => {
     e.preventDefault();
     updateIsCreateNewCard();
-    const newCard = { ...data, description, title };
+    const newCard = { ...data[0], description, title };
     createNewTask(newCard)
       .then((res: any) => {
         if (res.status === '201') {
