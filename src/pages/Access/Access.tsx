@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import style from './Access.module.scss';
+import styles from './Access.module.scss';
 import Header from './AccessHeader/AccessHeader';
 import SearchBar from './AccessSearchBar/AccessSearchBar';
 import Main from './AccessMain/AccessMain';
@@ -29,7 +29,7 @@ export default function AccessPage() {
   return (
     <>
       {modal && <Modal cancelClick={modalStateClick} addClick={addClick} memberList={memberList} />}
-      <div className={style.container}>
+      <div className={styles.container}>
         <Header modalStateClick={modalStateClick} />
         <br />
         <br />

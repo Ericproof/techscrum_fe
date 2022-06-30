@@ -4,6 +4,7 @@ import BoardSearch from './BoardSearch/BoardSearch';
 import BoardMain from './BoardMain/BoardMain';
 import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
 import CreateNewCard from '../../components/Card/Card';
+import HeaderNav from './HeaderNav/HeaderNav';
 
 const projects = [
   {
@@ -68,6 +69,7 @@ export default function Board() {
         updateIsCreateNewCard={getCreateNewCardStateFromChildren}
       />
       <div className={style.container}>
+        <HeaderNav />
         <BoardSearch updateIsCreateNewCard={getCreateNewCardStateFromChildren} />
         <BoardMain />
         {isCreateNewCard && (

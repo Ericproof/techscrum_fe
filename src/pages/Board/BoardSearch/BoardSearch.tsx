@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import style from './BoardSearch.module.scss';
+import styles from './BoardSearch.module.scss';
 import search from './img/search-line.svg';
 import avatar1 from './img/image/E-0.png';
 import avatar2 from './img/image/RL-2.png';
@@ -39,13 +39,13 @@ export default function BoardSearch({ updateIsCreateNewCard }: Props) {
   });
 
   return (
-    <div className={style.boardSearchSection}>
-      <div className={style.container}>
+    <div className={styles.boardSearchSection}>
+      <div className={styles.container}>
         <div
           className={
             inputState
-              ? `${style.inputContainer} ${style.inputContainerPlus}`
-              : style.inputContainer
+              ? `${styles.inputContainer} ${styles.inputContainerPlus}`
+              : styles.inputContainer
           }
         >
           <input
@@ -58,11 +58,11 @@ export default function BoardSearch({ updateIsCreateNewCard }: Props) {
             }}
           />
           <span>
-            <img className={style.inputImg} src={search} alt="search" />
+            <img className={styles.inputImg} src={search} alt="search" />
           </span>
         </div>
         <fieldset>
-          <ul className={style.avatarContainer} id="myList">
+          <ul className={styles.avatarContainer} id="myList">
             {avatars.map((avatar) => (
               <li
                 onClick={() => {
@@ -77,19 +77,19 @@ export default function BoardSearch({ updateIsCreateNewCard }: Props) {
                   alt={avatar.name}
                   className={
                     activeAvatarsID === avatar.id
-                      ? (activeAvatars && `${style[avatar.name]} ${style.active}`) ||
-                        style[avatar.name]
-                      : style[avatar.name]
+                      ? (activeAvatars && `${styles[avatar.name]} ${styles.active}`) ||
+                        styles[avatar.name]
+                      : styles[avatar.name]
                   }
                 />
               </li>
             ))}
             <li>
-              <button className={style.avatarButton} type="button">
+              <button className={styles.avatarButton} type="button">
                 <div>+3</div>
               </button>
             </li>
-            <li className={style.roleLayout}>
+            <li className={styles.roleLayout}>
               <button type="button">
                 <span>
                   <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
@@ -106,7 +106,7 @@ export default function BoardSearch({ updateIsCreateNewCard }: Props) {
           </ul>
         </fieldset>
       </div>
-      <button type="button" className={style.createButton} onClick={updateIsCreateNewCard}>
+      <button type="button" className={styles.createButton} onClick={updateIsCreateNewCard}>
         Create card
       </button>
     </div>
