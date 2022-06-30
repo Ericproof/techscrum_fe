@@ -24,7 +24,7 @@ export default function ProjectHeader({ projects, updateProject }: Props) {
   const latestTwoProjects = projects.slice(0, 2);
   const [projectList] = useState(latestTwoProjects);
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
-  const handleClickOutside = () => setVisible(true);
+  const handleClickOutside = (state: boolean) => setVisible(!state);
   const navigate = useNavigate();
   const handleClickEvent = (e: React.MouseEvent<HTMLSpanElement>) => {
     e.preventDefault();
@@ -79,7 +79,7 @@ export default function ProjectHeader({ projects, updateProject }: Props) {
             {visible ? (
               <>
                 <div className={styles.optionProjects}>
-                  <button type="button" onClick={handleClickOutside}>
+                  <button type="button" onClick={() => handleClickOutside(true)}>
                     <span className={styles.title}>Projects</span>
                     <div className={styles.btn}>
                       <span>
@@ -174,7 +174,7 @@ export default function ProjectHeader({ projects, updateProject }: Props) {
               </>
             ) : (
               <div className={styles.option}>
-                <button type="button" onClick={handleClickOutside}>
+                <button type="button" onClick={() => handleClickOutside(false)}>
                   <span className={styles.title}>Projects</span>
                   <div className={styles.btn}>
                     <span>
