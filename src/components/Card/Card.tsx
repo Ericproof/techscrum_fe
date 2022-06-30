@@ -38,14 +38,15 @@ function Card({ updateIsCreateNewCard }: Props) {
 
   const onSave = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    updateIsCreateNewCard();
     const newCard = { ...data[0], description, title };
     createNewTask(newCard)
       .then((res: any) => {
         if (res.status === '201') {
+          setError(false);
+          updateIsCreateNewCard();
           return;
         }
-        setError(false);
+        setError(true);
       })
       .catch(() => {
         setError(true);
@@ -59,7 +60,7 @@ function Card({ updateIsCreateNewCard }: Props) {
           ...
         </button>
       </div>
-      <form>
+      <form onSubmit={onSave}>
         <div className={styles.cardContent}>
           <p className={styles.cardStar}>Project</p>
           <input className={styles.cardInput} disabled defaultValue="TECHSCRUM(TEC)" />
@@ -74,6 +75,7 @@ function Card({ updateIsCreateNewCard }: Props) {
             type="text"
             value={title}
             onChange={changeTitleHandler}
+            required
           />
           <p className={styles.cardLabel}>Attachment</p>
           <input
@@ -120,7 +122,7 @@ function Card({ updateIsCreateNewCard }: Props) {
           >
             Cancel
           </button>
-          <button type="submit" className={styles.createButton} onClick={onSave}>
+          <button type="submit" className={styles.createButton}>
             Create
           </button>
         </div>
