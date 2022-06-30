@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { TokenList } from './entity/login';
+import { TokenList, Login } from './entity/login';
 import config from '../../config/config';
 
 const autoLogin = async () => {
@@ -23,6 +23,23 @@ const autoLogin = async () => {
   }
 };
 
-const login = () => {};
+const login = (loginForm: Login) => {
+  const tokenList: TokenList = {
+    token: '123abc',
+    refreshToken: '123abc'
+  };
+
+  const database: Login = {
+    email: 'user1@example.com',
+    password: 'user1abc'
+  };
+  if (JSON.stringify(database) === JSON.stringify(loginForm)) {
+    return tokenList;
+  }
+  return {
+    token: undefined,
+    refreshToken: undefined
+  };
+};
 
 export { autoLogin, login };
