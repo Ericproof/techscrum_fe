@@ -41,21 +41,21 @@ export default function PrivacyPolicy() {
             <Outlet />
           </div>
           <div className={styles.privacyPolicyText}>
-            <h4 className={styles.privacyPolicyH4}>Business Privacy Policy</h4>
-            <p className={styles.privacyPolicyP}>
+            <h2>Business Privacy Policy</h2>
+            <p>
               This privacy policy sets out how TechScrum.com and any related products, services,
               apps or integrations uses and protects any information that you provide when you use
               our products TechScrum, Desk, Spaces, CRM, any of our mobile or desktop app offerings
               and our integrations with third party apps and services.
             </p>
-            <p className={styles.privacyPolicyP}>
+            <p>
               TechScrum.com is committed to ensuring that your privacy is protected. Should we ask
               you to provide certain information by which you can be identified when using our
               products, then you can be assured that it will only be used in accordance with this
               privacy statement. This policy is effective from 25th May 2018.
             </p>
-            <h4 className={styles.privacyPolicyH4}>What we collect</h4>
-            <p className={styles.privacyPolicyP}>
+            <h2>What we collect</h2>
+            <p>
               We may collect certain information that we need in order to provide you with the
               business service and products that you receive from us. The information may include
               the following:
@@ -68,8 +68,8 @@ export default function PrivacyPolicy() {
               <li className={styles.privacyPolicyLi}>IP-address</li>
               <li className={styles.privacyPolicyLi}>Location data</li>
             </ul>
-            <h4 className={styles.privacyPolicyH4}>What we do with the information we gather</h4>
-            <p className={styles.privacyPolicyP}>
+            <h2>What we do with the information we gather</h2>
+            <p>
               We require this information to understand your needs and provide you with a better
               service, and in particular for the following reasons:
             </p>
@@ -145,13 +145,13 @@ export default function PrivacyPolicy() {
                 , including the Limited Use requirements.
               </li>
             </ul>
-            <h4 className={styles.privacyPolicyH4}>Security</h4>
+            <h2>Security</h2>
             <p className={styles.privacyPolicyP}>
               We are committed to ensuring that your information is secure. In order to prevent
               unauthorised access or disclosure, we have put in place suitable physical, electronic
               and managerial procedures to safeguard and secure the information we collect online.
             </p>
-            <h4 className={styles.privacyPolicyH4}>How we use cookies</h4>
+            <h2>How we use cookies</h2>
             <p className={styles.privacyPolicyP}>
               Cookies allow web applications to respond to you as an individual. The web application
               can tailor its operations to your needs, likes and dislikes by gathering and
@@ -167,7 +167,7 @@ export default function PrivacyPolicy() {
               </a>
               .
             </p>
-            <h4 className={styles.privacyPolicyH4}>Links to other websites</h4>
+            <h2>Links to other websites</h2>
             <p className={styles.privacyPolicyP}>
               Our website may contain links to other websites of interest. However, once you have
               used these links to leave our site, you should note that we do not have any control
@@ -176,7 +176,7 @@ export default function PrivacyPolicy() {
               are not governed by this privacy statement. You should exercise caution and look at
               the privacy statement applicable to the website in question.
             </p>
-            <h4 className={styles.privacyPolicyH4}>Controlling your personal information</h4>
+            <h2>Controlling your personal information</h2>
             <p className={styles.privacyPolicyP}>
               You may choose to restrict the collection or use of your personal information in the
               following ways:
