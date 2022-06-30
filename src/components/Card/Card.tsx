@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import styles from './Card.module.scss';
 import { createNewTask } from '../../api/task/task';
 
@@ -10,6 +11,7 @@ function Card({ updateIsCreateNewCard }: Props) {
   const [description, setDescription] = useState('');
   const [title, setTitle] = useState('');
   const [hasError, setError] = useState(false);
+  const { boardId = '', projectId = '' } = useParams();
 
   const data = useState<any>({
     title: '',
@@ -22,8 +24,8 @@ function Card({ updateIsCreateNewCard }: Props) {
     pullRequestNumber: 0,
     reporter: { userId: '', userName: '', userIcon: '' },
     tag: 'abc',
-    board_id: '62b0b2c4814630be771dd8b8',
-    project_id: '62bad502cc89e64e8d695ef2'
+    board_id: boardId,
+    project_id: projectId
   });
 
   const changeDescriptionHandler = async (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -49,7 +51,6 @@ function Card({ updateIsCreateNewCard }: Props) {
         setError(true);
       });
   };
-
   return (
     <div className={styles.cardContainer}>
       <div className={styles.cardTitle}>
