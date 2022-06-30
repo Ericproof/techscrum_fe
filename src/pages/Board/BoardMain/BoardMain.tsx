@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
 import { v4 as uuid } from 'uuid';
+import { useParams } from 'react-router-dom';
 import style from './BoardMain.module.scss';
 import EL from './img/EL-3.png';
 import universalAvatar from './img/10315.svg';
@@ -93,6 +94,7 @@ const onDragEnd = (
 
 export default function BoardMain() {
   const [columns, setColumns] = useState(columnsFromBackend);
+  const { boardId = '' } = useParams();
   useEffect(() => {
     const fetchColumnsData = (boardInfo: Board) => {
       let columnsInfo: ColumnsFromBackend = {};
@@ -106,7 +108,7 @@ export default function BoardMain() {
     };
 
     const fetchBoardInfo = async () => {
-      const boardInfo = await boardAPI();
+      const boardInfo = await boardAPI(boardId);
       fetchColumnsData(boardInfo);
     };
     fetchBoardInfo();
