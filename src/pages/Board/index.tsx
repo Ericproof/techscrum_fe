@@ -62,7 +62,11 @@ export default function Board() {
 
   return (
     <>
-      <ProjectHeader projects={projects} updateProject={getProjectFromChildren} />
+      <ProjectHeader
+        projects={projects}
+        updateProject={getProjectFromChildren}
+        updateIsCreateNewCard={getCreateNewCardStateFromChildren}
+      />
       <div className={style.container}>
         <BoardSearch updateIsCreateNewCard={getCreateNewCardStateFromChildren} />
         <BoardMain />

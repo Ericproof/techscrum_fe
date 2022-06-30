@@ -17,6 +17,7 @@ export default function Project() {
   const refProfile = projectList.map(() => createRef<HTMLDivElement>());
   const refShowMore = projectList.map(() => createRef<HTMLDivElement>());
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
+  const [isCreateNewCard, setIsCreateNewCard] = useState(false);
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -85,6 +86,10 @@ export default function Project() {
     }
   };
 
+  const getCreateNewCardStateFromChildren = () => {
+    setIsCreateNewCard(!isCreateNewCard);
+  };
+
   useEffect(() => {
     document.addEventListener('mousedown', handleClickInside);
     return () => document.removeEventListener('mousedown', handleClickInside);
@@ -92,7 +97,11 @@ export default function Project() {
 
   return (
     <>
-      <ProjectHeader projects={projectList} updateProject={getProjectFromChildren} />
+      <ProjectHeader
+        projects={projectList}
+        updateProject={getProjectFromChildren}
+        updateIsCreateNewCard={getCreateNewCardStateFromChildren}
+      />
       {visible && (
         <div className={styles.modalContainer} ref={myRef}>
           <div className={styles.modal}>
