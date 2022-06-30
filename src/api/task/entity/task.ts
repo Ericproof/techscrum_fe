@@ -1,4 +1,4 @@
-export default interface task {
+export default interface Task {
   title: string;
   description: string;
   cardType: string;
