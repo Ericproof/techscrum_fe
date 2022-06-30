@@ -216,10 +216,20 @@ export default function ProjectHeader({ projects, updateProject, updateIsCreateN
               </button>
             </div>
             <div className={styles.createIssue}>
-              <button type="button" className={styles.createBtn} onClick={updateIsCreateNewCard}>
+              <button
+                type="button"
+                className={styles.createBtn}
+                onClick={updateIsCreateNewCard}
+                style={{ display: 'none' }}
+              >
                 <span>Create</span>
               </button>
-              <button type="button" className={styles.createIcon} onClick={updateIsCreateNewCard}>
+              <button
+                type="button"
+                className={styles.createIcon}
+                onClick={updateIsCreateNewCard}
+                style={{ display: 'none' }}
+              >
                 <span>
                   <BiPlus />
                 </span>
