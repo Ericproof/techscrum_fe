@@ -9,4 +9,4 @@ const getBoard = async (id: string) => {
   return result;
 };
 
-export default getBoard;
+export { getBoard };
