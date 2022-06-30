@@ -17,6 +17,10 @@ export function deleteTask(id: any) {
   return axios.delete(`${config.apiAddress}/projects/${id}`);
 }
 
+export function createNewTask(data: any) {
+  return axios.post(`${config.apiAddress}/tasks`, data);
+}
+
 export function updateTask(taskId: string, data: any) {
   return axios.put(`${config.apiAddress}/tasks/${taskId}`, data);
 }

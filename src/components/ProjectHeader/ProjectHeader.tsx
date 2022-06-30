@@ -18,9 +18,10 @@ interface Props {
     lastEditTime: Date;
   }[];
   updateProject: (index: number) => void;
+  updateIsCreateNewCard: () => void;
 }
 
-export default function ProjectHeader({ projects, updateProject }: Props) {
+export default function ProjectHeader({ projects, updateProject, updateIsCreateNewCard }: Props) {
   const latestTwoProjects = projects.slice(0, 2);
   const [projectList] = useState(latestTwoProjects);
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
@@ -215,10 +216,20 @@ export default function ProjectHeader({ projects, updateProject }: Props) {
               </button>
             </div>
             <div className={styles.createIssue}>
-              <button type="button" className={styles.createBtn}>
+              <button
+                type="button"
+                className={styles.createBtn}
+                onClick={updateIsCreateNewCard}
+                style={{ display: 'none' }}
+              >
                 <span>Create</span>
               </button>
-              <button type="button" className={styles.createIcon}>
+              <button
+                type="button"
+                className={styles.createIcon}
+                onClick={updateIsCreateNewCard}
+                style={{ display: 'none' }}
+              >
                 <span>
                   <BiPlus />
                 </span>
