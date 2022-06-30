@@ -9,6 +9,7 @@ import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
 import { getProjects, deleteProject } from '../../api/projects/projects';
 import ProjectEditor from '../../components/ProjectEditor/ProjectEditor';
 import useOutsideAlerter from '../../hooks/OutsideAlerter';
+import CreateNewCard from '../../components/Card/Card';
 
 export default function Project() {
   const [projectList, setProjectList] = useState<any>([]);
@@ -108,6 +109,9 @@ export default function Project() {
             <ProjectEditor onCompletedSubmit={onCompletedSubmit} />
           </div>
         </div>
+      )}
+      {isCreateNewCard && (
+        <CreateNewCard updateIsCreateNewCard={getCreateNewCardStateFromChildren} />
       )}
       <div className={styles.projectPage}>
         <div className={styles.projectContainer}>
