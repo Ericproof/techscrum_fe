@@ -41,7 +41,6 @@ function Card({ updateIsCreateNewCard }: Props) {
     const newCard = { ...data[0], description, title };
     createNewTask(newCard)
       .then((res: any) => {
-        console.log(res);
         if (res.status === 201) {
           setError(false);
           updateIsCreateNewCard();
