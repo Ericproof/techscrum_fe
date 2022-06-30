@@ -15,6 +15,7 @@ import ErrorPage from './pages/ErrorPage/ErrorPage';
 import Access from './pages/Access/Access';
 import Project from './pages/Project/Project';
 import CreateProject from './pages/CreateProject/CreateProject';
+import ResetPassword from './pages/ResetPassword/ResetPassword';
 import BoardPage from './pages/BoardPage/BoardPage';
 import BoardCard from './components/BoardCard/BoardCard';
 import './App.css';
@@ -25,6 +26,7 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/settings" element={<Setting />} />
       <Route path="/cookie-policy" element={<CookiePolicy />} />
       <Route path="/gdpr" element={<Gdpr />} />
