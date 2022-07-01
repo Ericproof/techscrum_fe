@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, Dispatch } from 'react';
 import styles from './BoardSearch.module.scss';
 import search from './img/search-line.svg';
 import avatar1 from './img/image/E-0.png';
@@ -8,8 +8,9 @@ import avatar4 from './img/image/SQ-4.png';
 
 interface Props {
   updateIsCreateNewCard: () => void;
+  setInputQuery: Dispatch<string>;
 }
-export default function BoardSearch({ updateIsCreateNewCard }: Props) {
+export default function BoardSearch({ updateIsCreateNewCard, setInputQuery }: Props) {
   const avatars = [
     { id: 1, name: 'avatar1', url: avatar1 },
     { id: 2, name: 'avatar2', url: avatar2 },
@@ -56,6 +57,7 @@ export default function BoardSearch({ updateIsCreateNewCard }: Props) {
             onClick={() => {
               setInputState(true);
             }}
+            onChange={(event) => setInputQuery(event.target.value)}
           />
           <span>
             <img className={styles.inputImg} src={search} alt="search" />

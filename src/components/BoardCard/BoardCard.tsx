@@ -4,7 +4,7 @@ import CardLeftContent from './CardLeftContent/CardLeftContent';
 import CardRightContent from './CardRightContent/CardRightContent';
 import styles from './BoardCard.module.scss';
 
-export default function Card() {
+export default function BoardCard() {
   return (
     <div className={styles.background}>
       <div className={styles.container}>
