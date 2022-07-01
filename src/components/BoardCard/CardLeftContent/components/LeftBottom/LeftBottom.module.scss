@@ -1,0 +1,81 @@
+.container {
+  display: flex;
+  margin-top: 1rem;
+  flex-direction: column;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  .activity {
+    font-family: inherit;
+    font-size: 0.8em;
+    font-style: inherit;
+    margin-top: 20px;
+    line-height: 10px;
+    color: var(--ds-text, #172b4d);
+    overflow-wrap: break-word;
+  }
+
+  .showCommentButton {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+
+    span {
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1.42857142857143;
+    }
+
+    button {
+      margin-left: 10px;
+      font-weight: 600;
+      max-width: 100%;
+      cursor: pointer;
+      height: 1.9em;
+      background-color: var(--ds-background-selected, #505f79);
+      color: var(--ds-text-selected, #f4f5f7) !important;
+      border-width: 0px;
+      border-radius: 3px;
+      padding: 0px 4px;
+      outline: none;
+    }
+  }
+}
+.commentInputField {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  padding-right: 20px;
+  margin-top: 8px;
+  margin-left: 3px;
+  .avatar {
+    background-image: url('https://secure.gravatar.com/avatar/6bae91566240c3f5cdccb4cdc5afb2c5?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FEL-3.png');
+    border-radius: 50%;
+    background-position: center center;
+    background-size: cover;
+    height: 32px;
+    width: 32px;
+  }
+  input {
+    background-color: white;
+    border: 1px solid rgb(223, 225, 230);
+    border-radius: 3px;
+    box-sizing: border-box;
+    height: 40px;
+    padding-left: 20px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    font-size: 0.875rem;
+    width: 100%;
+    font-weight: 400;
+    line-height: 1.42857;
+    color: rgb(94, 108, 132);
+    margin-left: 10px;
+
+    &:hover {
+      border-color: rgb(118, 118, 118);
+    }
+  }
+}

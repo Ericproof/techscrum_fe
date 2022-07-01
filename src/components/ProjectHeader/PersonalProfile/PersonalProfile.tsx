@@ -12,7 +12,7 @@ const users = [
 ];
 export default function PersonalProfile() {
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
-  const handleClickOutside = () => setVisible(true);
+  const handleClickOutside = (state: boolean) => setVisible(!state);
   return (
     <div ref={myRef}>
       {users.map((user) => (
@@ -20,7 +20,7 @@ export default function PersonalProfile() {
           {visible ? (
             <>
               <div className={styles.avatarSection}>
-                <button type="button" onClick={handleClickOutside}>
+                <button type="button" onClick={() => handleClickOutside(true)}>
                   <div className={styles.avatarContent}>
                     <span>
                       <img src={user.avatar} alt="avatar" />
@@ -64,7 +64,7 @@ export default function PersonalProfile() {
             </>
           ) : (
             <div className={styles.avatarSection}>
-              <button type="button" onClick={handleClickOutside}>
+              <button type="button" onClick={() => handleClickOutside(false)}>
                 <div className={styles.avatarContent}>
                   <span>
                     <img src={user.avatar} alt="avatar" />

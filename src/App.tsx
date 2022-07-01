@@ -15,10 +15,11 @@ import ErrorPage from './pages/ErrorPage/ErrorPage';
 import Access from './pages/Access/Access';
 import Project from './pages/Project/Project';
 import CreateProject from './pages/CreateProject/CreateProject';
-import Board from './pages/Board';
 import AccountSettings from './pages/AccountSetting/AccountSetting';
+import ResetPassword from './pages/ResetPassword/ResetPassword';
+import BoardPage from './pages/BoardPage/BoardPage';
+import BoardCard from './components/BoardCard/BoardCard';
 import './App.css';
-import Nav from './components/BoardNavigation/Nav';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/settings" element={<Setting />} />
       <Route path="/cookie-policy" element={<CookiePolicy />} />
       <Route path="/gdpr" element={<Gdpr />} />
@@ -35,11 +37,11 @@ function App() {
       <Route path="/privacy-policy" element={<PrivacyPolicy />} />
       <Route path="/user-page" element={<UserPage />} />
       <Route path="/access" element={<Access />} />
-      <Route path="/nav/*" element={<Nav />} />
+      <Route path="/projects/:projectId/board/:boardId" element={<BoardPage />} />
       <Route path="/projects" element={<Project />} />
       <Route path="/create-projects" element={<CreateProject />} />
-      <Route path="/board" element={<Board />} />
       <Route path="/account-settings" element={<AccountSettings />} />
+      <Route path="/card" element={<BoardCard />} />
       <Route path="*" element={<ErrorPage />} />
     </Routes>
   );

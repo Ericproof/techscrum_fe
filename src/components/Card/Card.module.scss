@@ -1,3 +1,7 @@
+.error {
+  color: red;
+  font-size: 25px;
+}
 p.cardStar:after {
   content: '*';
   color: red;
@@ -10,12 +14,11 @@ p.cardStar:after {
   font-weight: 600;
 }
 .cardContainer {
-  width: 720px;
-  height: 780px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 35px;
-  padding-right: 10px;
+  width: 51%;
+  height: 75vh;
+  margin: auto;
+  left: 0;
+  right: 0;
   display: flex;
   flex-direction: column;
   font-family: FaktSoft, Arial, Helvetica, sans-serif;
@@ -24,15 +27,26 @@ p.cardStar:after {
   line-height: 20px;
   font-weight: 550;
   color: rgb(107, 119, 140);
+  background-color: #fff;
+  position: fixed;
+  top: 7%;
+  z-index: 2;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: 24px 24px 22px;
+  @media (max-width: 280px) {
+    width: 58%;
+  }
 }
 .cardContent {
   overflow: auto;
 }
 .cardTitle {
   font-size: 14px;
-  margin-top: 1.5rem;
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
   font-weight: 550;
   line-height: 20px;
   color: rgb(23, 43, 77);
@@ -41,8 +55,7 @@ p.cardStar:after {
   margin-bottom: 2rem;
 }
 .titleButton {
-  margin-left: 540px;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
   font-size: 27px;
   font-weight: 600;
   background-color: white;
@@ -72,7 +85,7 @@ p.cardStar:after {
   transition: 0.3s;
 }
 .cardInput {
-  width: 97%;
+  width: 100%;
   padding: 10px 20px;
   margin-top: 0;
   margin-bottom: 20px;
@@ -92,8 +105,26 @@ p.cardStar:after {
   background-color: rgb(214, 217, 221);
   transition: 0.3s;
 }
+.cardTextarea {
+  width: 100%;
+  padding: 10px 20px;
+  margin-top: 0;
+  margin-bottom: 20px;
+  background-color: #f7f8fbf0;
+  box-sizing: border-box;
+  font-family: FaktSoft, Arial, Helvetica, sans-serif;
+  display: block;
+  text-align: left;
+  line-height: 20px;
+  border-style: solid;
+  border-color: #dfe1e6;
+  border-right-color: lightgray;
+  border-left-color: lightgray;
+  border-radius: 4px;
+  min-height: 126px;
+}
 .cardAssignee {
-  width: 97%;
+  width: 100%;
   padding: 10px 20px;
   margin-top: 0;
   margin-bottom: 20px;
@@ -115,6 +146,7 @@ p.cardStar:after {
 .cardButton {
   display: flex;
   flex-direction: row;
+  justify-content: flex-end;
   overflow: hidden;
   padding-top: 22px;
   padding-bottom: 24px;

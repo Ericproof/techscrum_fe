@@ -18,13 +18,14 @@ interface Props {
     lastEditTime: Date;
   }[];
   updateProject: (index: number) => void;
+  updateIsCreateNewCard: () => void;
 }
 
-export default function ProjectHeader({ projects, updateProject }: Props) {
+export default function ProjectHeader({ projects, updateProject, updateIsCreateNewCard }: Props) {
   const latestTwoProjects = projects.slice(0, 2);
   const [projectList] = useState(latestTwoProjects);
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
-  const handleClickOutside = () => setVisible(true);
+  const handleClickOutside = (state: boolean) => setVisible(!state);
   const navigate = useNavigate();
   const handleClickEvent = (e: React.MouseEvent<HTMLSpanElement>) => {
     e.preventDefault();
@@ -79,7 +80,7 @@ export default function ProjectHeader({ projects, updateProject }: Props) {
             {visible ? (
               <>
                 <div className={styles.optionProjects}>
-                  <button type="button" onClick={handleClickOutside}>
+                  <button type="button" onClick={() => handleClickOutside(true)}>
                     <span className={styles.title}>Projects</span>
                     <div className={styles.btn}>
                       <span>
@@ -174,7 +175,7 @@ export default function ProjectHeader({ projects, updateProject }: Props) {
               </>
             ) : (
               <div className={styles.option}>
-                <button type="button" onClick={handleClickOutside}>
+                <button type="button" onClick={() => handleClickOutside(false)}>
                   <span className={styles.title}>Projects</span>
                   <div className={styles.btn}>
                     <span>
@@ -215,10 +216,20 @@ export default function ProjectHeader({ projects, updateProject }: Props) {
               </button>
             </div>
             <div className={styles.createIssue}>
-              <button type="button" className={styles.createBtn}>
+              <button
+                type="button"
+                className={styles.createBtn}
+                onClick={updateIsCreateNewCard}
+                style={{ display: 'none' }}
+              >
                 <span>Create</span>
               </button>
-              <button type="button" className={styles.createIcon}>
+              <button
+                type="button"
+                className={styles.createIcon}
+                onClick={updateIsCreateNewCard}
+                style={{ display: 'none' }}
+              >
                 <span>
                   <BiPlus />
                 </span>

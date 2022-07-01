@@ -9,6 +9,7 @@ import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
 import { getProjects, deleteProject } from '../../api/projects/projects';
 import ProjectEditor from '../../components/ProjectEditor/ProjectEditor';
 import useOutsideAlerter from '../../hooks/OutsideAlerter';
+import CreateNewCard from '../../components/Card/Card';
 
 export default function Project() {
   const [projectList, setProjectList] = useState<any>([]);
@@ -17,6 +18,7 @@ export default function Project() {
   const refProfile = projectList.map(() => createRef<HTMLDivElement>());
   const refShowMore = projectList.map(() => createRef<HTMLDivElement>());
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
+  const [isCreateNewCard, setIsCreateNewCard] = useState(false);
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -85,6 +87,10 @@ export default function Project() {
     }
   };
 
+  const getCreateNewCardStateFromChildren = () => {
+    setIsCreateNewCard(!isCreateNewCard);
+  };
+
   useEffect(() => {
     document.addEventListener('mousedown', handleClickInside);
     return () => document.removeEventListener('mousedown', handleClickInside);
@@ -92,13 +98,20 @@ export default function Project() {
 
   return (
     <>
-      <ProjectHeader projects={projectList} updateProject={getProjectFromChildren} />
+      <ProjectHeader
+        projects={projectList}
+        updateProject={getProjectFromChildren}
+        updateIsCreateNewCard={getCreateNewCardStateFromChildren}
+      />
       {visible && (
         <div className={styles.modalContainer} ref={myRef}>
           <div className={styles.modal}>
             <ProjectEditor onCompletedSubmit={onCompletedSubmit} />
           </div>
         </div>
+      )}
+      {isCreateNewCard && (
+        <CreateNewCard updateIsCreateNewCard={getCreateNewCardStateFromChildren} />
       )}
       <div className={styles.projectPage}>
         <div className={styles.projectContainer}>
@@ -195,7 +208,7 @@ export default function Project() {
                         </div>
                       </td>
                       <td className={styles.name}>
-                        <Link to="/board">
+                        <Link to={`/projects/${project._id}/board/${project.board_id}`}>
                           <div className={styles.nameContent}>
                             <img
                               src={

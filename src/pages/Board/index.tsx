@@ -3,6 +3,8 @@ import style from './index.module.scss';
 import BoardSearch from './BoardSearch/BoardSearch';
 import BoardMain from './BoardMain/BoardMain';
 import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
+import CreateNewCard from '../../components/Card/Card';
+import HeaderNav from './HeaderNav/HeaderNav';
 
 const projects = [
   {
@@ -43,21 +45,43 @@ const projects = [
   }
 ];
 export default function Board() {
+  const [inputQuery, setInputQuery] = useState<string>('');
+
   const projectsOrderbyDate = projects.sort((a, b) => {
     return a.lastEditTime < b.lastEditTime ? 1 : -1;
   });
   const [projectList] = useState(projectsOrderbyDate);
   const [value, setValue] = useState(0);
+  const [isCreateNewCard, setIsCreateNewCard] = useState(false);
+
   const getProjectFromChildren = (index: number) => {
     projectList[index].star = !projectList[index].star;
     setValue(value + 1);
   };
+
+  const getCreateNewCardStateFromChildren = () => {
+    setIsCreateNewCard(!isCreateNewCard);
+
+    //setTaskList([...taskList, ...newTask])
+  };
+
   return (
     <>
-      <ProjectHeader projects={projects} updateProject={getProjectFromChildren} />
+      <ProjectHeader
+        projects={projects}
+        updateProject={getProjectFromChildren}
+        updateIsCreateNewCard={getCreateNewCardStateFromChildren}
+      />
       <div className={style.container}>
-        <BoardSearch />
-        <BoardMain />
+        <HeaderNav />
+        <BoardSearch
+          updateIsCreateNewCard={getCreateNewCardStateFromChildren}
+          setInputQuery={setInputQuery}
+        />
+        <BoardMain inputQuery={inputQuery} />
+        {isCreateNewCard && (
+          <CreateNewCard updateIsCreateNewCard={getCreateNewCardStateFromChildren} />
+        )}
       </div>
     </>
   );

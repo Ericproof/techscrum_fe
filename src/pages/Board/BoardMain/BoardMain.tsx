@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
 import { v4 as uuid } from 'uuid';
+import { useParams } from 'react-router-dom';
 import style from './BoardMain.module.scss';
 import EL from './img/EL-3.png';
 import universalAvatar from './img/10315.svg';
-import boardAPI from '../../../api/board/board';
+import getBoard from '../../../api/board/board';
 import Board from '../../../api/board/entity/board';
+import { updateTaskStatus } from '../../../api/task/task';
 
 interface Assign {
   id?: string;
@@ -24,17 +26,10 @@ interface ColumnsFromBackend {
   [x: string]: { name: string; items: ItemFromBackend[] };
 }
 
-const itemFromBackend: ItemFromBackend[] = [
-  { id: '0', tag: uuid(), title: 'First task', statusId: 0, assignInfo: {} },
-  { id: '1', tag: uuid(), title: 'Second task', statusId: 0, assignInfo: {} },
-  { id: '2', tag: uuid(), title: 'Third task', statusId: 0, assignInfo: {} },
-  { id: '3', tag: uuid(), title: 'Fourth task', statusId: 0, assignInfo: {} }
-];
-
 const columnsFromBackend: ColumnsFromBackend = {
   [uuid()]: {
     name: 'TO DO',
-    items: itemFromBackend
+    items: []
   },
   [uuid()]: {
     name: 'IN PROGRESS',
@@ -69,7 +64,8 @@ const onDragEnd = (
     const destItems = [...destColumn.items];
     const [removed] = sourceItems.splice(source.index, 1);
     destItems.splice(destination.index, 0, removed);
-    return setColumns({
+    updateTaskStatus(result.draggableId, parseInt(result.destination.droppableId, 10));
+    setColumns({
       ...columns,
       [source.droppableId]: {
         ...sourceColumn,
@@ -80,6 +76,7 @@ const onDragEnd = (
         items: destItems
       }
     });
+    return true;
   }
 
   const column = columns[source.droppableId];
@@ -95,14 +92,16 @@ const onDragEnd = (
   });
 };
 
-export default function BoardMain() {
+export default function BoardMain({ inputQuery }: { inputQuery: string }) {
   const [columns, setColumns] = useState(columnsFromBackend);
+  const { boardId = '' } = useParams();
   useEffect(() => {
     const fetchColumnsData = (boardInfo: Board) => {
       let columnsInfo: ColumnsFromBackend = {};
       boardInfo.taskStatus.forEach((status, index) => {
         const tasks: ItemFromBackend[] = boardInfo.taskList.filter(
-          (task) => task.statusId === index
+          (task) =>
+            task.statusId === index && task.title.toLowerCase().includes(inputQuery.toLowerCase())
         );
         columnsInfo = { ...columnsInfo, [index.toString()]: { name: status, items: tasks } };
       });
@@ -110,11 +109,11 @@ export default function BoardMain() {
     };
 
     const fetchBoardInfo = async () => {
-      const boardInfo = await boardAPI();
+      const boardInfo = await getBoard(boardId);
       fetchColumnsData(boardInfo);
     };
     fetchBoardInfo();
-  }, []);
+  }, [inputQuery]);
 
   return (
     <div className={style.container}>
@@ -135,7 +134,10 @@ export default function BoardMain() {
                       {...provided.droppableProps}
                       className={style.column}
                     >
-                      <div className={style.name}>{column.name}</div>
+                      <div className={style.name}>
+                        {column.name} {column.items.length}{' '}
+                        {column.items.length > 1 ? 'issues' : 'issue'}
+                      </div>
                       {column.items.map((item, index) => {
                         return (
                           <Draggable key={item.id} draggableId={item.id} index={index}>

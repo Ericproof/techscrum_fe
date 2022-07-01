@@ -11,3 +11,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.active{
+  position: relative;
+  background-color: #e6effc!important;
+  color: #0052cc!important;
+}
+
+.active::before {
+  content: "";
+  position: absolute;
+  height: 20px;
+  width: 6px;
+  left: 0px;
+  top: 13px;
+  background: #0052CC;
+  border-radius: 0px 1.998px 1.998px 0px;
+
+}
