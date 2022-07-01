@@ -4,7 +4,18 @@ import config from '../../config/config';
 
 const changePassword = async (accountSettingFrom: AccountSettingForm) => {
   const path = `${config.apiAddress}/account`;
-  const result = await axios.patch(path, { ...accountSettingFrom });
+
+  const configHeader = {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token') ?? ''}`
+    }
+  };
+
+  const data = {
+    ...accountSettingFrom
+  };
+
+  const result = await axios.patch(path, data, configHeader);
   return result;
 };
 

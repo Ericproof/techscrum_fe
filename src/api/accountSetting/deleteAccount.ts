@@ -4,7 +4,20 @@ import config from '../../config/config';
 
 const deleteAccount = async (deleteAccountForm: DeleteAccountForm) => {
   const path = `${config.apiAddress}/account`;
-  const result = await axios.delete(path, { data: { ...deleteAccountForm } });
+
+  const configHeader = {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token') ?? ''}`
+    }
+  };
+
+  const body = {
+    data: {
+      ...deleteAccountForm
+    }
+  };
+
+  const result = await axios.delete(path, { ...configHeader, ...body });
   return result;
 };
 

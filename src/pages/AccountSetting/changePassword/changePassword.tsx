@@ -19,8 +19,11 @@ export default function ChangePassword({ changePasswordTipHandler }: Props) {
   };
 
   const fetchConfirmPassword = (input: string, e: React.ChangeEvent<HTMLInputElement>) => {
+    // eslint-disable-next-line no-console
+    console.log(input !== newPassword);
     if (input !== newPassword) {
       e.target.setCustomValidity('Password Difference.');
+      return;
     }
     e.target.setCustomValidity('');
     setConfirmPassword(input);
@@ -37,9 +40,6 @@ export default function ChangePassword({ changePasswordTipHandler }: Props) {
         oldPassword,
         newPassword
       });
-
-      // eslint-disable-next-line no-console
-      console.log(result);
 
       if (result.status === 204) {
         changePasswordTipHandler('Password Change Success', 0);
