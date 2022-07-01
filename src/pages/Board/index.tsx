@@ -45,6 +45,10 @@ const projects = [
   }
 ];
 export default function Board() {
+  const [inputQuery, setInputQuery] = useState<string>('');
+  // eslint-disable-next-line no-console
+  console.log(inputQuery);
+
   const projectsOrderbyDate = projects.sort((a, b) => {
     return a.lastEditTime < b.lastEditTime ? 1 : -1;
   });
@@ -70,8 +74,11 @@ export default function Board() {
       />
       <div className={style.container}>
         <HeaderNav />
-        <BoardSearch updateIsCreateNewCard={getCreateNewCardStateFromChildren} />
-        <BoardMain />
+        <BoardSearch
+          updateIsCreateNewCard={getCreateNewCardStateFromChildren}
+          setInputQuery={setInputQuery}
+        />
+        <BoardMain inputQuery={inputQuery} />
         {isCreateNewCard && (
           <CreateNewCard updateIsCreateNewCard={getCreateNewCardStateFromChildren} />
         )}
