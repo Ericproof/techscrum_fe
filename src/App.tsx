@@ -16,6 +16,7 @@ import Access from './pages/Access/Access';
 import Project from './pages/Project/Project';
 import CreateProject from './pages/CreateProject/CreateProject';
 import Board from './pages/Board';
+import AccountSettings from './pages/AccountSetting/AccountSetting';
 import './App.css';
 import Nav from './components/BoardNavigation/Nav';
 
@@ -38,6 +39,7 @@ function App() {
       <Route path="/projects" element={<Project />} />
       <Route path="/create-projects" element={<CreateProject />} />
       <Route path="/board" element={<Board />} />
+      <Route path="/account-settings" element={<AccountSettings />} />
       <Route path="*" element={<ErrorPage />} />
     </Routes>
   );
