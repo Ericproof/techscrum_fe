@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { DropResult } from 'react-beautiful-dnd';
 import style from './index.module.scss';
 import BoardSearch from './BoardSearch/BoardSearch';
 import BoardMain from './BoardMain/BoardMain';
 import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
 import CreateNewCard from '../../components/Card/Card';
 import HeaderNav from './HeaderNav/HeaderNav';
+import { getBoard } from '../../api/board/board';
+import { ColumnsFromBackend, ItemFromBackend } from './entity';
+import BoardEntity from '../../api/board/entity/board';
+import { updateTaskStatus } from '../../api/task/task';
 
 const projects = [
   {
@@ -44,8 +50,54 @@ const projects = [
     lastEditTime: new Date('2021-05-8')
   }
 ];
+
+const onDragEnd = (
+  result: DropResult,
+  columns: ColumnsFromBackend,
+  setColumns: (arg0: ColumnsFromBackend) => void
+) => {
+  if (!result.destination) return null;
+  const { source, destination } = result;
+
+  if (source.droppableId !== destination.droppableId) {
+    const sourceColumn = columns[source.droppableId];
+    const destColumn = columns[destination.droppableId];
+    const sourceItems = [...sourceColumn.items];
+    const destItems = [...destColumn.items];
+    const [removed] = sourceItems.splice(source.index, 1);
+    destItems.splice(destination.index, 0, removed);
+    updateTaskStatus(result.draggableId, parseInt(result.destination.droppableId, 10));
+    setColumns({
+      ...columns,
+      [source.droppableId]: {
+        ...sourceColumn,
+        items: sourceItems
+      },
+      [destination.droppableId]: {
+        ...destColumn,
+        items: destItems
+      }
+    });
+    return true;
+  }
+
+  const column = columns[source.droppableId];
+  const copiedItems = [...column.items];
+  const [removed] = copiedItems.splice(source.index, 1);
+  copiedItems.splice(destination.index, 0, removed);
+  return setColumns({
+    ...columns,
+    [source.droppableId]: {
+      ...column,
+      items: copiedItems
+    }
+  });
+};
+
 export default function Board() {
   const [inputQuery, setInputQuery] = useState<string>('');
+  const [columnsInfo, setColumnsInfo] = useState<ColumnsFromBackend>({});
+  const { boardId = '' } = useParams();
 
   const projectsOrderbyDate = projects.sort((a, b) => {
     return a.lastEditTime < b.lastEditTime ? 1 : -1;
@@ -65,6 +117,44 @@ export default function Board() {
     // setTaskList([...taskList, ...newTask])
   };
 
+  const fetchNewCard = (newCard: any) => {
+    getCreateNewCardStateFromChildren();
+    const newItem: ItemFromBackend = {
+      // eslint-disable-next-line no-underscore-dangle
+      id: newCard._id,
+      tag: newCard.tag,
+      title: newCard.title,
+      statusId: newCard.statusId
+    };
+    const columns = columnsInfo;
+    columns[0].items.push(newItem);
+    setColumnsInfo(columns);
+  };
+
+  const dragEventHandler = (result: DropResult) => {
+    return onDragEnd(result, columnsInfo, setColumnsInfo);
+  };
+
+  useEffect(() => {
+    const fetchColumnsData = (boardInfo: BoardEntity) => {
+      let columnInfoData: ColumnsFromBackend = {};
+      boardInfo.taskStatus.forEach((status, index) => {
+        const tasks: ItemFromBackend[] = boardInfo.taskList.filter(
+          (task) =>
+            task.statusId === index && task.title.toLowerCase().includes(inputQuery.toLowerCase())
+        );
+        columnInfoData = { ...columnInfoData, [index.toString()]: { name: status, items: tasks } };
+      });
+      setColumnsInfo(columnInfoData);
+    };
+
+    const fetchBoardInfo = async () => {
+      const boardInfo = await getBoard(boardId);
+      fetchColumnsData(boardInfo);
+    };
+    fetchBoardInfo();
+  }, [inputQuery, boardId]);
+
   return (
     <>
       <ProjectHeader
@@ -78,9 +168,12 @@ export default function Board() {
           updateIsCreateNewCard={getCreateNewCardStateFromChildren}
           setInputQuery={setInputQuery}
         />
-        <BoardMain inputQuery={inputQuery} />
+        <BoardMain columnsInfo={columnsInfo} onDragEventHandler={dragEventHandler} />
         {isCreateNewCard && (
-          <CreateNewCard updateIsCreateNewCard={getCreateNewCardStateFromChildren} />
+          <CreateNewCard
+            fetchNewCard={fetchNewCard}
+            updateIsCreateNewCard={getCreateNewCardStateFromChildren}
+          />
         )}
       </div>
     </>
