@@ -128,10 +128,10 @@ nav.navNormal {
 
 nav.navActive {
   @media(max-width: $max-size) {
-  max-width: 400px;
-  min-height: none;
-  max-height: none;
-  height: 100vh;
-  overflow-y: auto;
+    max-width: 400px;
+    min-height: none;
+    max-height: none;
+    height: 100vh;
+    overflow-y: auto;
   }
 }
