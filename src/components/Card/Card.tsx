@@ -4,10 +4,11 @@ import styles from './Card.module.scss';
 import { createNewTask } from '../../api/task/task';
 
 interface Props {
+  fetchNewCard: (newCard: any) => void;
   updateIsCreateNewCard: () => void;
 }
 
-function Card({ updateIsCreateNewCard }: Props) {
+function Card({ fetchNewCard, updateIsCreateNewCard }: Props) {
   const [description, setDescription] = useState('');
   const [title, setTitle] = useState('');
   const [hasError, setError] = useState(false);
@@ -39,18 +40,19 @@ function Card({ updateIsCreateNewCard }: Props) {
   const onSave = (e: React.SyntheticEvent) => {
     e.preventDefault();
     const newCard = { ...data[0], description, title };
-    createNewTask(newCard)
-      .then((res: any) => {
-        if (res.status === 201) {
-          setError(false);
-          updateIsCreateNewCard();
-          return;
-        }
-        setError(true);
-      })
-      .catch(() => {
-        setError(true);
-      });
+    fetchNewCard(newCard);
+    // createNewTask(newCard)
+    //   .then((res: any) => {
+    //     if (res.status === 201) {
+    //       setError(false);
+    //       fetchNewCard(newCard);
+    //       return;
+    //     }
+    //     setError(true);
+    //   })
+    //   .catch(() => {
+    //     setError(true);
+    //   });
   };
   return (
     <div className={styles.cardContainer}>
