@@ -9,17 +9,17 @@ import Alert from '../../components/Alert/Alert';
 export default function AccountSetting() {
   const [statusCode, setStateCode] = useState(0);
   const [tipContent, setTipContent] = useState('');
-  const [displayAlert, setDiaplayAlert] = useState(false);
+  const [displayAlert, setDisplayAlert] = useState(false);
   const navigation = useNavigate();
 
-  const alertDiaplayHandler = () => {
-    setDiaplayAlert(!displayAlert);
+  const alertDisplayHandler = () => {
+    setDisplayAlert(!displayAlert);
   };
 
   const eventHandler = (tip: string, status: number) => {
     setStateCode(status);
     setTipContent(tip);
-    setDiaplayAlert(true);
+    setDisplayAlert(true);
     if (status === 0) {
       navigation(`/`);
     }
@@ -29,7 +29,7 @@ export default function AccountSetting() {
     <>
       <AccountSettingHeader />
       {displayAlert && (
-        <Alert statusCode={statusCode} tipContent={tipContent} confirmAlert={alertDiaplayHandler} />
+        <Alert statusCode={statusCode} tipContent={tipContent} confirmAlert={alertDisplayHandler} />
       )}
       <div className={styles.cards}>
         <ChangePassword changePasswordTipHandler={eventHandler} />
