@@ -4,7 +4,7 @@ import styles from './AccountSetting.module.scss';
 import AccountSettingHeader from './accountSettingHeader/accountSettingHeader';
 import ChangePassword from './changePassword/changePassword';
 import DeleteAccount from './deleteAccount/deleteAccount';
-import Alert from '../../components/Alert/alert';
+import Alert from '../../components/Alert/Alert';
 
 export default function AccountSetting() {
   const [statusCode, setStateCode] = useState(0);
