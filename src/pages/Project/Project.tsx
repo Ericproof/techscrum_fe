@@ -91,7 +91,7 @@ export default function Project() {
     setIsCreateNewCard(!isCreateNewCard);
   };
 
-  const fetchNewCard = (newCard: any) => {
+  const fetchNewCard = () => {
     getCreateNewCardStateFromChildren();
   };
 

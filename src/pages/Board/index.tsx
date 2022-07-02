@@ -153,7 +153,7 @@ export default function Board() {
       fetchColumnsData(boardInfo);
     };
     fetchBoardInfo();
-  }, [inputQuery]);
+  }, [inputQuery, boardId]);
 
   return (
     <>
