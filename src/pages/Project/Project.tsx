@@ -208,7 +208,7 @@ export default function Project() {
                         </div>
                       </td>
                       <td className={styles.name}>
-                        <Link to={`/project/${project._id}/board/${project.board_id}`}>
+                        <Link to={`/projects/${project._id}/board/${project.board_id}`}>
                           <div className={styles.nameContent}>
                             <img
                               src={

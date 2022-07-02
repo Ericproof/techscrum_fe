@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import style from './BoardMain.module.scss';
 import EL from './img/EL-3.png';
 import universalAvatar from './img/10315.svg';
-import { getBoard } from '../../../api/board/board';
+import getBoard from '../../../api/board/board';
 import Board from '../../../api/board/entity/board';
 import { updateTaskStatus } from '../../../api/task/task';
 
@@ -92,7 +92,7 @@ const onDragEnd = (
   });
 };
 
-export default function BoardMain() {
+export default function BoardMain({ inputQuery }: { inputQuery: string }) {
   const [columns, setColumns] = useState(columnsFromBackend);
   const { boardId = '' } = useParams();
   useEffect(() => {
@@ -100,7 +100,8 @@ export default function BoardMain() {
       let columnsInfo: ColumnsFromBackend = {};
       boardInfo.taskStatus.forEach((status, index) => {
         const tasks: ItemFromBackend[] = boardInfo.taskList.filter(
-          (task) => task.statusId === index
+          (task) =>
+            task.statusId === index && task.title.toLowerCase().includes(inputQuery.toLowerCase())
         );
         columnsInfo = { ...columnsInfo, [index.toString()]: { name: status, items: tasks } };
       });
@@ -112,7 +113,7 @@ export default function BoardMain() {
       fetchColumnsData(boardInfo);
     };
     fetchBoardInfo();
-  }, []);
+  }, [inputQuery]);
 
   return (
     <div className={style.container}>
