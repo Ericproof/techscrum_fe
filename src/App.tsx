@@ -15,6 +15,7 @@ import ErrorPage from './pages/ErrorPage/ErrorPage';
 import Access from './pages/Access/Access';
 import Project from './pages/Project/Project';
 import CreateProject from './pages/CreateProject/CreateProject';
+import AccountSettings from './pages/AccountSetting/AccountSetting';
 import ResetPassword from './pages/ResetPassword/ResetPassword';
 import BoardPage from './pages/BoardPage/BoardPage';
 import BoardCard from './components/BoardCard/BoardCard';
@@ -39,6 +40,7 @@ function App() {
       <Route path="/projects/:projectId/board/:boardId" element={<BoardPage />} />
       <Route path="/projects" element={<Project />} />
       <Route path="/create-projects" element={<CreateProject />} />
+      <Route path="/account-settings" element={<AccountSettings />} />
       <Route path="/card" element={<BoardCard />} />
       <Route path="*" element={<ErrorPage />} />
     </Routes>
