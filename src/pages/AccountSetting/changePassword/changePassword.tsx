@@ -19,8 +19,6 @@ export default function ChangePassword({ changePasswordTipHandler }: Props) {
   };
 
   const fetchConfirmPassword = (input: string, e: React.ChangeEvent<HTMLInputElement>) => {
-    // eslint-disable-next-line no-console
-    console.log(input !== newPassword);
     if (input !== newPassword) {
       e.target.setCustomValidity('Password Difference.');
       return;
