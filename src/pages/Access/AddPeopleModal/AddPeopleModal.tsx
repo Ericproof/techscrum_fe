@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import style from './AddPeopleModal.module.scss';
-import search from '../AccessSearchBar/img/search-line.svg';
-import dropDownArrow from './svg/arrow-drop-down-line.svg';
+import search from '../../../assets/search-line.svg';
+import dropDownArrow from '../../../assets/arrow-drop-down-line.svg';
 import { IProps } from '../Typings/Typings';
 
 export default function AddPeopleModal({ cancelClick, addClick, memberList }: IProps) {

@@ -1,10 +1,6 @@
 import React, { useEffect, useRef, useState, Dispatch } from 'react';
 import styles from './BoardSearch.module.scss';
-import search from './img/search-line.svg';
-import avatar1 from './img/image/E-0.png';
-import avatar2 from './img/image/RL-2.png';
-import avatar3 from './img/image/EL-3.png';
-import avatar4 from './img/image/SQ-4.png';
+import search from '../../../assets/search-line.svg';
 
 interface Props {
   updateIsCreateNewCard: () => void;
@@ -12,10 +8,10 @@ interface Props {
 }
 export default function BoardSearch({ updateIsCreateNewCard, setInputQuery }: Props) {
   const avatars = [
-    { id: 1, name: 'avatar1', url: avatar1 },
-    { id: 2, name: 'avatar2', url: avatar2 },
-    { id: 3, name: 'avatar3', url: avatar3 },
-    { id: 4, name: 'avatar4', url: avatar4 }
+    { id: 1, name: 'avatar1', url: '' },
+    { id: 2, name: 'avatar2', url: '' },
+    { id: 3, name: 'avatar3', url: '' },
+    { id: 4, name: 'avatar4', url: '' }
   ];
 
   const [activeAvatarsID, setActiveAvatarsID] = useState<number>();

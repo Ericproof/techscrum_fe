@@ -1,8 +1,6 @@
 import React from 'react';
 import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
 import style from './BoardMain.module.scss';
-import EL from './img/EL-3.png';
-import universalAvatar from './img/10315.svg';
 import { ColumnsFromBackend } from '../entity';
 
 interface Props {
@@ -48,11 +46,11 @@ export default function BoardMain({ columnsInfo, onDragEventHandler }: Props) {
                                   <span> {item.title}</span>
                                   <div className={style.cardFooter}>
                                     <div className={style.cardFooterLeft}>
-                                      <img src={universalAvatar} alt="Story" />
+                                      <img src="universalAvatar" alt="Story" />
                                       <span>{item.tag}</span>
                                     </div>
                                     <div className={style.cardFooterRight}>
-                                      <img src={EL} alt="avatar" />
+                                      <img src="EL" alt="avatar" />
                                     </div>
                                   </div>
                                 </div>
