@@ -11,6 +11,7 @@ import { getBoard } from '../../api/board/board';
 import { ColumnsFromBackend, ItemFromBackend } from './entity';
 import BoardEntity from '../../api/board/entity/board';
 import { updateTaskStatus } from '../../api/task/task';
+import { ICardData } from '../../types';
 
 const projects = [
   {
@@ -117,7 +118,7 @@ export default function Board() {
     // setTaskList([...taskList, ...newTask])
   };
 
-  const fetchNewCard = (newCard: any) => {
+  const fetchNewCard = (newCard: ICardData) => {
     getCreateNewCardStateFromChildren();
     const newItem: ItemFromBackend = {
       // eslint-disable-next-line no-underscore-dangle

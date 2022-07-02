@@ -15,7 +15,7 @@ function ProjectEditor(props: ProjectEditorProps) {
   const [data, setData] = useState<any>({ name: '', key: '', project_lead_id: 1, assignee_id: 1 });
   const [hasError, setError] = useState(false);
   const { onCompletedSubmit = null } = props;
-  const onChange = (e: any) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 

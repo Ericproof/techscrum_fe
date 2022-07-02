@@ -6,11 +6,11 @@ import {
   AiFillYoutube,
   AiFillInstagram
 } from 'react-icons/ai';
-import styles from './index.module.scss';
+import styles from './PolicyMediaTabs.module.scss';
 import IOS from './download-app-iOS.svg';
 import Android from './download-app-google.svg';
 
-export default function policyMediaTabs() {
+export default function PolicyMediaTabs() {
   return (
     <div className={styles.policiesMediaDownloadPlatform}>
       <div className={styles.leftItem}>

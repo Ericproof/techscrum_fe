@@ -4,7 +4,7 @@ import styles from './Card.module.scss';
 import { createNewTask } from '../../api/task/task';
 
 interface Props {
-  fetchNewCard: (newCard: any) => void;
+  fetchNewCard: (newCard: ICardData) => void;
   updateIsCreateNewCard: () => void;
 }
 

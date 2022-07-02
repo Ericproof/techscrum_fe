@@ -6,9 +6,9 @@ export interface Assign {
 
 export interface ItemFromBackend {
   id: string;
-  tag: string;
-  title: string;
-  statusId: number;
+  tag?: string;
+  title?: string;
+  statusId?: number;
   assignInfo?: Assign;
 }
 
