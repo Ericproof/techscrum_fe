@@ -52,8 +52,8 @@ function ProjectEditor(props: ProjectEditorProps) {
           <ChangeIcon />
           <ChangeName value={data.name} onChange={onChangeName} />
           <ChangeKey value={data.key} onChange={onChange} />
-          <ProjectLead value={data.projectLead} onChange={onChange} />
-          <Assignee value={data.assignee} onChange={onChange} />
+          <ProjectLead onChange={onChange} />
+          <Assignee onChange={onChange} />
           {hasError && <p className={styles.error}>Error</p>}
           <button className={styles.saveBtn} type="submit" onClick={onSave}>
             Save

@@ -4,7 +4,7 @@ import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import styles from './ProjectLead.module.scss';
 
 interface IProjectLead {
-  onChange: () => void;
+  onChange: (e: any) => void;
 }
 
 export default function ProjectLead(props: IProjectLead) {
