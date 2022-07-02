@@ -5,17 +5,15 @@ function Search() {
   const [search, setSearch] = useState(Array<{ entityId: string; name: string }>());
   let timer: ReturnType<typeof setTimeout>;
 
-  const handleChange = (value: string) => {};
-  const debounce = (value: string) => {
+  const debounce = () => {
     if (timer) clearTimeout(timer);
     timer = setTimeout(() => {
-      handleChange(value);
       clearTimeout(timer);
     }, 2000);
   };
 
-  const optimizedFn = (value: string) => {
-    debounce(value);
+  const optimizedFn = () => {
+    debounce();
   };
 
   return (

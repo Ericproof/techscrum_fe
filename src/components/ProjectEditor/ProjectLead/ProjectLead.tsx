@@ -3,8 +3,12 @@ import userAvatar from '../../../assets/userAvatar.png';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import styles from './ProjectLead.module.scss';
 
-export default function ProjectLead(props: any) {
-  const { value, onChange } = props;
+interface IProjectLead {
+  onChange: () => void;
+}
+
+export default function ProjectLead(props: IProjectLead) {
+  const { onChange } = props;
   const users = [
     {
       id: 1,

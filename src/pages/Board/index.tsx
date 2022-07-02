@@ -62,7 +62,7 @@ export default function Board() {
   const getCreateNewCardStateFromChildren = () => {
     setIsCreateNewCard(!isCreateNewCard);
 
-    //setTaskList([...taskList, ...newTask])
+    // setTaskList([...taskList, ...newTask])
   };
 
   return (

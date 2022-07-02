@@ -4,12 +4,11 @@ import styles from './Assignee.module.scss';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 
 interface AssigneeProps {
-  value: string;
   onChange: (e: any) => void;
 }
 
 export default function Assignee(props: AssigneeProps) {
-  const { value, onChange } = props;
+  const { onChange } = props;
   const assignees = [
     { id: 1, state: 'Project lead' },
     { id: 2, state: 'Unassigned' }

@@ -113,7 +113,7 @@ export default function BoardMain({ inputQuery }: { inputQuery: string }) {
       fetchColumnsData(boardInfo);
     };
     fetchBoardInfo();
-  }, [inputQuery]);
+  }, [inputQuery, boardId]);
 
   return (
     <div className={style.container}>
