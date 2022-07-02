@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { DropResult } from 'react-beautiful-dnd';
-import style from './index.module.scss';
+import style from './Board.module.scss';
 import BoardSearch from './BoardSearch/BoardSearch';
 import BoardMain from './BoardMain/BoardMain';
-import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
-import CreateNewCard from '../../components/Card/Card';
+import ProjectHeader from '../ProjectHeader/ProjectHeader';
+import CreateNewCard from '../Card/Card';
 import HeaderNav from './HeaderNav/HeaderNav';
 import { getBoard } from '../../api/board/board';
 import { ColumnsFromBackend, ItemFromBackend } from './entity';
