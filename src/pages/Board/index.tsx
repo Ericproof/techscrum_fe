@@ -7,7 +7,7 @@ import BoardMain from './BoardMain/BoardMain';
 import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
 import CreateNewCard from '../../components/Card/Card';
 import HeaderNav from './HeaderNav/HeaderNav';
-import getBoard from '../../api/board/board';
+import { getBoard } from '../../api/board/board';
 import { ColumnsFromBackend, ItemFromBackend } from './entity';
 import BoardEntity from '../../api/board/entity/board';
 import { updateTaskStatus } from '../../api/task/task';
