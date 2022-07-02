@@ -1,7 +1,7 @@
 import React from 'react';
 import { TiTick } from 'react-icons/ti';
 import { ImCross } from 'react-icons/im';
-import styles from './alert.module.scss';
+import styles from './Alert.module.scss';
 
 interface Props {
   statusCode: number;
