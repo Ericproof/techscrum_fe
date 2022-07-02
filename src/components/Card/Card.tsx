@@ -40,19 +40,18 @@ function Card({ fetchNewCard, updateIsCreateNewCard }: Props) {
   const onSave = (e: React.SyntheticEvent) => {
     e.preventDefault();
     const newCard = { ...data[0], description, title };
-    fetchNewCard(newCard);
-    // createNewTask(newCard)
-    //   .then((res: any) => {
-    //     if (res.status === 201) {
-    //       setError(false);
-    //       fetchNewCard(newCard);
-    //       return;
-    //     }
-    //     setError(true);
-    //   })
-    //   .catch(() => {
-    //     setError(true);
-    //   });
+    createNewTask(newCard)
+      .then((res) => {
+        if (res.status === 201) {
+          setError(false);
+          fetchNewCard(res.data);
+          return;
+        }
+        setError(true);
+      })
+      .catch(() => {
+        setError(true);
+      });
   };
   return (
     <div className={styles.cardContainer}>
