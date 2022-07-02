@@ -91,6 +91,10 @@ export default function Project() {
     setIsCreateNewCard(!isCreateNewCard);
   };
 
+  const fetchNewCard = (newCard: any) => {
+    getCreateNewCardStateFromChildren();
+  };
+
   useEffect(() => {
     document.addEventListener('mousedown', handleClickInside);
     return () => document.removeEventListener('mousedown', handleClickInside);
@@ -111,7 +115,10 @@ export default function Project() {
         </div>
       )}
       {isCreateNewCard && (
-        <CreateNewCard updateIsCreateNewCard={getCreateNewCardStateFromChildren} />
+        <CreateNewCard
+          updateIsCreateNewCard={getCreateNewCardStateFromChildren}
+          fetchNewCard={fetchNewCard}
+        />
       )}
       <div className={styles.projectPage}>
         <div className={styles.projectContainer}>

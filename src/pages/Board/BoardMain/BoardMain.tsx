@@ -1,29 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
 import { v4 as uuid } from 'uuid';
-import { useParams } from 'react-router-dom';
 import style from './BoardMain.module.scss';
 import EL from './img/EL-3.png';
 import universalAvatar from './img/10315.svg';
-import getBoard from '../../../api/board/board';
-import Board from '../../../api/board/entity/board';
 import { updateTaskStatus } from '../../../api/task/task';
+import { ColumnsFromBackend } from '../entity';
 
-interface Assign {
-  id?: string;
-  email?: string;
-  name?: string;
-}
-interface ItemFromBackend {
-  id: string;
-  tag: string;
-  title: string;
-  statusId: number;
-  assignInfo?: Assign;
-}
-
-interface ColumnsFromBackend {
-  [x: string]: { name: string; items: ItemFromBackend[] };
+interface Props {
+  columnsInfo: ColumnsFromBackend;
 }
 
 const columnsFromBackend: ColumnsFromBackend = {
@@ -92,28 +77,62 @@ const onDragEnd = (
   });
 };
 
-export default function BoardMain({ inputQuery }: { inputQuery: string }) {
-  const [columns, setColumns] = useState(columnsFromBackend);
-  const { boardId = '' } = useParams();
-  useEffect(() => {
-    const fetchColumnsData = (boardInfo: Board) => {
-      let columnsInfo: ColumnsFromBackend = {};
-      boardInfo.taskStatus.forEach((status, index) => {
-        const tasks: ItemFromBackend[] = boardInfo.taskList.filter(
-          (task) =>
-            task.statusId === index && task.title.toLowerCase().includes(inputQuery.toLowerCase())
-        );
-        columnsInfo = { ...columnsInfo, [index.toString()]: { name: status, items: tasks } };
-      });
-      setColumns(columnsInfo);
-    };
-
-    const fetchBoardInfo = async () => {
-      const boardInfo = await getBoard(boardId);
-      fetchColumnsData(boardInfo);
-    };
-    fetchBoardInfo();
-  }, [inputQuery]);
+export default function BoardMain({ columnsInfo }: Props) {
+  console.log(columnsInfo);
+  const [columns, setColumns] = useState<ColumnsFromBackend>({
+    '0': {
+      name: 'To Do',
+      items: []
+    },
+    '1': {
+      name: 'Programming',
+      items: [
+        {
+          id: '62bedf68d7bfe0aa5b180afe',
+          tag: 'abc',
+          title: 'test',
+          statusId: 1,
+          assignInfo: {
+            id: '629c17f49c0a43d2a090515e',
+            email: '350383@qq.com',
+            name: '321'
+          }
+        }
+      ]
+    },
+    '2': {
+      name: 'Review',
+      items: [
+        {
+          id: '62beda262da1f1488b5cfe5c',
+          tag: 'abc',
+          title: 'card2',
+          statusId: 2,
+          assignInfo: {
+            id: '629c17f49c0a43d2a090515e',
+            email: '350383@qq.com',
+            name: '321'
+          }
+        }
+      ]
+    },
+    '3': {
+      name: 'Done',
+      items: [
+        {
+          id: '62bed9d72da1f1488b5cfe58',
+          tag: 'abc',
+          title: 'test1',
+          statusId: 3,
+          assignInfo: {
+            id: '629c17f49c0a43d2a090515e',
+            email: '350383@qq.com',
+            name: '321'
+          }
+        }
+      ]
+    }
+  });
 
   return (
     <div className={style.container}>

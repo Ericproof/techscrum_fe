@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import style from './index.module.scss';
 import BoardSearch from './BoardSearch/BoardSearch';
 import BoardMain from './BoardMain/BoardMain';
 import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
 import CreateNewCard from '../../components/Card/Card';
 import HeaderNav from './HeaderNav/HeaderNav';
+import getBoard from '../../api/board/board';
+import { ColumnsFromBackend, ItemFromBackend } from './entity';
+import BoardEntity from '../../api/board/entity/board';
 
 const projects = [
   {
@@ -46,6 +50,8 @@ const projects = [
 ];
 export default function Board() {
   const [inputQuery, setInputQuery] = useState<string>('');
+  const [columnInfo, setColumnInfo] = useState<ColumnsFromBackend>({});
+  const { boardId = '' } = useParams();
 
   const projectsOrderbyDate = projects.sort((a, b) => {
     return a.lastEditTime < b.lastEditTime ? 1 : -1;
@@ -59,11 +65,37 @@ export default function Board() {
     setValue(value + 1);
   };
 
+  const fetchNewCard = (newCard: any) => {
+    getCreateNewCardStateFromChildren();
+    console.log(newCard);
+  };
+  // const updateTaskList = (res: object) => [...,res.data.];
+
   const getCreateNewCardStateFromChildren = () => {
     setIsCreateNewCard(!isCreateNewCard);
 
     //setTaskList([...taskList, ...newTask])
   };
+
+  useEffect(() => {
+    const fetchColumnsData = (boardInfo: BoardEntity) => {
+      let columnInfoData: ColumnsFromBackend = {};
+      boardInfo.taskStatus.forEach((status, index) => {
+        const tasks: ItemFromBackend[] = boardInfo.taskList.filter(
+          (task) =>
+            task.statusId === index && task.title.toLowerCase().includes(inputQuery.toLowerCase())
+        );
+        columnInfoData = { ...columnInfoData, [index.toString()]: { name: status, items: tasks } };
+      });
+      setColumnInfo(columnInfoData);
+    };
+
+    const fetchBoardInfo = async () => {
+      const boardInfo = await getBoard(boardId);
+      fetchColumnsData(boardInfo);
+    };
+    fetchBoardInfo();
+  }, [inputQuery]);
 
   return (
     <>
@@ -78,9 +110,12 @@ export default function Board() {
           updateIsCreateNewCard={getCreateNewCardStateFromChildren}
           setInputQuery={setInputQuery}
         />
-        <BoardMain inputQuery={inputQuery} />
+        <BoardMain columnsInfo={columnInfo} />
         {isCreateNewCard && (
-          <CreateNewCard updateIsCreateNewCard={getCreateNewCardStateFromChildren} />
+          <CreateNewCard
+            fetchNewCard={fetchNewCard}
+            updateIsCreateNewCard={getCreateNewCardStateFromChildren}
+          />
         )}
       </div>
     </>
