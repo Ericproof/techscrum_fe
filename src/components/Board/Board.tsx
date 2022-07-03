@@ -8,10 +8,8 @@ import ProjectHeader from '../ProjectHeader/ProjectHeader';
 import CreateNewCard from '../Card/Card';
 import HeaderNav from './HeaderNav/HeaderNav';
 import { getBoard } from '../../api/board/board';
-import { ColumnsFromBackend, ItemFromBackend } from './entity';
-import BoardEntity from '../../api/board/entity/board';
 import { updateTaskStatus } from '../../api/task/task';
-import { ICardData } from '../../types';
+import IBoardEntity, { IColumnsFromBackend, ICardData, IItemFromBackend } from '../../types';
 
 const projects = [
   {
@@ -54,8 +52,8 @@ const projects = [
 
 const onDragEnd = (
   result: DropResult,
-  columns: ColumnsFromBackend,
-  setColumns: (arg0: ColumnsFromBackend) => void
+  columns: IColumnsFromBackend,
+  setColumns: (arg0: IColumnsFromBackend) => void
 ) => {
   if (!result.destination) return null;
   const { source, destination } = result;
@@ -97,7 +95,7 @@ const onDragEnd = (
 
 export default function Board() {
   const [inputQuery, setInputQuery] = useState<string>('');
-  const [columnsInfo, setColumnsInfo] = useState<ColumnsFromBackend>({});
+  const [columnsInfo, setColumnsInfo] = useState<IColumnsFromBackend>({});
   const { boardId = '' } = useParams();
 
   const projectsOrderbyDate = projects.sort((a, b) => {
@@ -120,7 +118,7 @@ export default function Board() {
 
   const fetchNewCard = (newCard: ICardData) => {
     getCreateNewCardStateFromChildren();
-    const newItem: ItemFromBackend = {
+    const newItem: IItemFromBackend = {
       // eslint-disable-next-line no-underscore-dangle
       id: newCard._id,
       tag: newCard.tag,
@@ -137,10 +135,10 @@ export default function Board() {
   };
 
   useEffect(() => {
-    const fetchColumnsData = (boardInfo: BoardEntity) => {
-      let columnInfoData: ColumnsFromBackend = {};
+    const fetchColumnsData = (boardInfo: IBoardEntity) => {
+      let columnInfoData: IColumnsFromBackend = {};
       boardInfo.taskStatus.forEach((status, index) => {
-        const tasks: ItemFromBackend[] = boardInfo.taskList.filter(
+        const tasks: IItemFromBackend[] = boardInfo.taskList.filter(
           (task) =>
             task.statusId === index && task.title.toLowerCase().includes(inputQuery.toLowerCase())
         );

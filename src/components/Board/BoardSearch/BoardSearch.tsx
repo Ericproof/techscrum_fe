@@ -56,7 +56,14 @@ export default function BoardSearch({ updateIsCreateNewCard, setInputQuery }: Pr
             onChange={(event) => setInputQuery(event.target.value)}
           />
           <span>
-            <img className={styles.inputImg} src={search} alt="search" />
+            <img
+              className={
+                styles.inputImg ||
+                'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'
+              }
+              src={search}
+              alt="search"
+            />
           </span>
         </div>
         <fieldset>
@@ -71,7 +78,10 @@ export default function BoardSearch({ updateIsCreateNewCard, setInputQuery }: Pr
                 key={avatar.id}
               >
                 <img
-                  src={avatar.url}
+                  src={
+                    avatar.url ||
+                    'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'
+                  }
                   alt={avatar.name}
                   className={
                     activeAvatarsID === avatar.id

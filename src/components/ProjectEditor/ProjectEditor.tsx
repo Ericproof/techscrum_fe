@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { AxiosResponse } from 'axios';
 import Assignee from './Assignee/Assignee';
 import ChangeIcon from './ChangeIcon/ChangeIcon';
 import ChangeKey from './ChangeKey/ChangeKey';
@@ -6,16 +7,22 @@ import ChangeName from './ChangeName/ChangeName';
 import styles from './ProjectEditor.module.scss';
 import ProjectLead from './ProjectLead/ProjectLead';
 import { createProject } from '../../api/projects/projects';
+import { IOnChangeProjectLead, IProjectEditor } from '../../types';
 
 interface ProjectEditorProps {
-  onCompletedSubmit?: (res: any) => void;
+  onCompletedSubmit?: (res: AxiosResponse) => void;
 }
 
 function ProjectEditor(props: ProjectEditorProps) {
-  const [data, setData] = useState<any>({ name: '', key: '', project_lead_id: 1, assignee_id: 1 });
+  const [data, setData] = useState<IProjectEditor>({
+    name: '',
+    key: '',
+    project_lead_id: 1,
+    assignee_id: 1
+  });
   const [hasError, setError] = useState(false);
   const { onCompletedSubmit = null } = props;
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (e: IOnChangeProjectLead) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
@@ -31,7 +38,7 @@ function ProjectEditor(props: ProjectEditorProps) {
   const onSave = (e: React.SyntheticEvent) => {
     e.preventDefault();
     createProject(data)
-      .then((res: any) => {
+      .then((res: AxiosResponse) => {
         if (!res.data) {
           return;
         }

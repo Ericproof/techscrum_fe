@@ -4,15 +4,17 @@ import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { HiDotsHorizontal } from 'react-icons/hi';
 import { FiSearch } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+import { AxiosResponse } from 'axios';
 import styles from './Project.module.scss';
 import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
 import { getProjects, deleteProject } from '../../api/projects/projects';
 import ProjectEditor from '../../components/ProjectEditor/ProjectEditor';
 import useOutsideAlerter from '../../hooks/OutsideAlerter';
 import CreateNewCard from '../../components/Card/Card';
+import { IProject, IProjectData } from '../../types';
 
 export default function Project() {
-  const [projectList, setProjectList] = useState<any>([]);
+  const [projectList, setProjectList] = useState<IProject[]>([]);
   const [showProjectDetails, setShowProjectDetails] = useState(-1);
   const [value, setValue] = useState(0);
   const refProfile = projectList.map(() => createRef<HTMLDivElement>());
@@ -40,21 +42,21 @@ export default function Project() {
   };
 
   const setProjectStar = (id: number) => {
-    const projectIndex = projectList.findIndex((project: any) => project._id === id);
+    const projectIndex = projectList.findIndex((project: IProjectData) => project._id === id);
     projectList[projectIndex].star = !projectList[projectIndex].star;
     setValue(value + 1);
   };
 
-  const onCompletedSubmit = (res: any) => {
+  const onCompletedSubmit = (res: AxiosResponse) => {
     setVisible(false);
     const updateProjectList = [...projectList, ...[res.data]];
     setProjectList(updateProjectList);
   };
 
   const removeProject = (id: string) => {
-    deleteProject(id).then((res: any) => {
+    deleteProject(id).then((res: AxiosResponse) => {
       if (res.status === 204) {
-        const updateProjectList = projectList.filter((item: any) => item._id !== id);
+        const updateProjectList = projectList.filter((item: IProjectData) => item._id !== id);
         setProjectList(updateProjectList);
       }
     });
@@ -77,8 +79,10 @@ export default function Project() {
   const handleClickInside = (e: MouseEvent) => {
     const target = e.target as HTMLDivElement;
     let hasClickShowMore = false;
+
     for (let i = 0; i < refShowMore.length; i += 1) {
-      if (refShowMore[i].current !== null && refShowMore[i].current.contains(target)) {
+      const ref = refShowMore[i].current;
+      if (ref !== null && ref.contains(target)) {
         hasClickShowMore = true;
       }
     }
@@ -172,7 +176,7 @@ export default function Project() {
                   </tr>
                 </thead>
                 <tbody>
-                  {projectList.map((project: any, index: number) => (
+                  {projectList.map((project: IProjectData, index: number) => (
                     <tr key={project._id} className={styles.overflowVisible}>
                       <td className={[styles.star, styles.overflowVisible].join(' ')}>
                         <div
