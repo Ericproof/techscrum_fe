@@ -17,8 +17,8 @@ function ProjectEditor(props: ProjectEditorProps) {
   const [data, setData] = useState<IProjectEditor>({
     name: '',
     key: '',
-    project_lead_id: 1,
-    assignee_id: 1
+    projectLeadId: 1,
+    assigneeId: 1
   });
   const [hasError, setError] = useState(false);
   const { onCompletedSubmit = null } = props;

@@ -27,5 +27,5 @@ export function updateTask(taskId: string, data: ITaskData) {
 }
 
 export function updateTaskStatus(taskId: string, statusId: number) {
-  return axios.put(`${config.apiAddress}/tasks/${taskId}`, { status_id: statusId });
+  return axios.put(`${config.apiAddress}/tasks/${taskId}`, { statusId });
 }

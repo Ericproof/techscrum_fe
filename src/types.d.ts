@@ -64,3 +64,10 @@ export interface IOnChangeProjectLead {
     value: string;
   };
 }
+
+export interface IOnChangeAssignee {
+  target: {
+    name: string;
+    value: string;
+  };
+}

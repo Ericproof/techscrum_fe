@@ -26,8 +26,8 @@ function Card({ fetchNewCard, updateIsCreateNewCard }: Props) {
     pullRequestNumber: 0,
     reporter: { userId: '', userName: '', userIcon: '' },
     tag: 'abc',
-    board_id: boardId,
-    project_id: projectId
+    boardId,
+    projectId
   });
 
   const changeDescriptionHandler = async (e: React.ChangeEvent<HTMLTextAreaElement>) => {

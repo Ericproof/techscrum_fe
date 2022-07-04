@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import React, { useState, createRef, useEffect } from 'react';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { HiDotsHorizontal } from 'react-icons/hi';
@@ -42,7 +41,7 @@ export default function Project() {
   };
 
   const setProjectStar = (id: number) => {
-    const projectIndex = projectList.findIndex((project: IProjectData) => project._id === id);
+    const projectIndex = projectList.findIndex((project: IProjectData) => project.id === id);
     projectList[projectIndex].star = !projectList[projectIndex].star;
     setValue(value + 1);
   };
@@ -56,7 +55,7 @@ export default function Project() {
   const removeProject = (id: string) => {
     deleteProject(id).then((res: AxiosResponse) => {
       if (res.status === 204) {
-        const updateProjectList = projectList.filter((item: IProjectData) => item._id !== id);
+        const updateProjectList = projectList.filter((item: IProjectData) => item.id !== id);
         setProjectList(updateProjectList);
       }
     });
@@ -177,7 +176,7 @@ export default function Project() {
                 </thead>
                 <tbody>
                   {projectList.map((project: IProjectData, index: number) => (
-                    <tr key={project._id} className={styles.overflowVisible}>
+                    <tr key={project.id} className={styles.overflowVisible}>
                       <td className={[styles.star, styles.overflowVisible].join(' ')}>
                         <div
                           className={[styles.changeStar, styles.overflowVisible].join(' ')}
@@ -188,7 +187,7 @@ export default function Project() {
                               <button
                                 type="button"
                                 className={[styles.starBtn, styles.overflowVisible].join(' ')}
-                                onClick={() => setProjectStar(project._id)}
+                                onClick={() => setProjectStar(project.id)}
                               >
                                 <div
                                   className={[styles.starStyle, styles.overflowVisible].join(' ')}
@@ -203,7 +202,7 @@ export default function Project() {
                               <button
                                 type="button"
                                 className={[styles.unStarBtn, styles.overflowVisible].join(' ')}
-                                onClick={() => setProjectStar(project._id)}
+                                onClick={() => setProjectStar(project.id)}
                               >
                                 <div
                                   className={[styles.starStyle, styles.overflowVisible].join(' ')}
@@ -219,7 +218,7 @@ export default function Project() {
                         </div>
                       </td>
                       <td className={styles.name}>
-                        <Link to={`/projects/${project._id}/board/${project.board_id}`}>
+                        <Link to={`/projects/${project.id}/board/${project.boardId}`}>
                           <div className={styles.nameContent}>
                             <img
                               src={
@@ -284,19 +283,19 @@ export default function Project() {
                         }
                         onFocus={() => undefined}
                       >
-                        {showProjectDetails === project._id && (
+                        {showProjectDetails === project.id && (
                           <div className={styles.viewDetail} ref={refShowMore[index]}>
                             <Link to="/settings">
                               <button type="button">View Detail</button>
                             </Link>
-                            <button type="button" onClick={() => removeProject(project._id)}>
+                            <button type="button" onClick={() => removeProject(project.id)}>
                               Delete Project
                             </button>
                           </div>
                         )}
                         <HiDotsHorizontal
                           onClick={() => {
-                            setShowProjectDetails(project._id);
+                            setShowProjectDetails(project.id);
                           }}
                           className={styles.verticalMiddle}
                         />

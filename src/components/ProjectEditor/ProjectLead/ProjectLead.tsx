@@ -61,7 +61,7 @@ export default function ProjectLead(props: IProjectLead) {
                         type="button"
                         onClick={() => {
                           setUserInfo({ id: user.id, avatar: user.avatar, name: user.name });
-                          onChange({ target: { name: 'project_lead_id', value: user.id } });
+                          onChange({ target: { name: 'projectLeadId', value: user.id } });
                           setVisible(false);
                         }}
                       >

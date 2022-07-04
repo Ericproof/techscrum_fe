@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import styles from './Assignee.module.scss';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
+import { IOnChangeAssignee } from '../../../types';
 
 interface AssigneeProps {
-  onChange: (e: any) => void;
+  onChange: (e: IOnChangeAssignee) => void;
 }
 
 export default function Assignee(props: AssigneeProps) {
@@ -34,7 +35,7 @@ export default function Assignee(props: AssigneeProps) {
                         onClick={() => {
                           setAssignState({ id: assignee.id, state: assignee.state });
                           onChange({
-                            target: { value: assignee.id.toString(), name: 'assignee_id' }
+                            target: { value: assignee.id.toString(), name: 'assigneeId' }
                           });
                           setVisible(false);
                         }}

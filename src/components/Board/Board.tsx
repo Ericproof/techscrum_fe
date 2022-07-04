@@ -119,8 +119,7 @@ export default function Board() {
   const fetchNewCard = (newCard: ICardData) => {
     getCreateNewCardStateFromChildren();
     const newItem: IItemFromBackend = {
-      // eslint-disable-next-line no-underscore-dangle
-      id: newCard._id,
+      id: newCard.id,
       tag: newCard.tag,
       title: newCard.title,
       statusId: newCard.statusId
