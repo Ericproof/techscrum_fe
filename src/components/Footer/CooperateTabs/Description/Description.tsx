@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './index.module.scss';
+import styles from './Description.module.scss';
 
-export default function description() {
+export default function Description() {
   return (
     <div className={styles.content}>
       <h1>Get Started with Teamwork</h1>

@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './index.module.scss';
+import styles from './BtnList.module.scss';
 
-export default function btnList() {
+export default function BtnList() {
   return (
     <div className={styles.buttonList}>
       <a className={styles.white} href="/#">

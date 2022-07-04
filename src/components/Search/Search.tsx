@@ -18,7 +18,7 @@ function Search() {
 
   return (
     <div className={styles.searchBar}>
-      <input type="text" name="search" placeholder="Search" onChange={(e) => optimizedFn()} />
+      <input type="text" name="search" placeholder="Search" onChange={() => optimizedFn()} />
       {setSearch.length > 0 && (
         <div className={styles.autocomplete}>
           {search.map((notice) => (

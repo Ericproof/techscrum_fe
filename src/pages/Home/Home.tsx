@@ -21,7 +21,7 @@ import projectManagement from '../../assets/projectManagement.png';
 import increaseProfitability from '../../assets/increaseProfitability.png';
 import realTimeCollaboration from '../../assets/realTimeCollaboration.png';
 import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/index';
+import Footer from '../../components/Footer/Footer';
 
 export default function Home() {
   const isLogin = false;

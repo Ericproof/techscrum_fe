@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './Card.module.scss';
 import { createNewTask } from '../../api/task/task';
+import { ICardData } from '../../types';
 
 interface Props {
-  fetchNewCard: (newCard: any) => void;
+  fetchNewCard: (newCard: ICardData) => void;
   updateIsCreateNewCard: () => void;
 }
 
@@ -14,7 +15,7 @@ function Card({ fetchNewCard, updateIsCreateNewCard }: Props) {
   const [hasError, setError] = useState(false);
   const { boardId = '', projectId = '' } = useParams();
 
-  const data = useState<any>({
+  const data = useState<ICardData>({
     title: '',
     description: '',
     cardType: '',
@@ -25,8 +26,8 @@ function Card({ fetchNewCard, updateIsCreateNewCard }: Props) {
     pullRequestNumber: 0,
     reporter: { userId: '', userName: '', userIcon: '' },
     tag: 'abc',
-    board_id: boardId,
-    project_id: projectId
+    boardId,
+    projectId
   });
 
   const changeDescriptionHandler = async (e: React.ChangeEvent<HTMLTextAreaElement>) => {
