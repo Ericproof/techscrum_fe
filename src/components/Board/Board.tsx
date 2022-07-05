@@ -154,26 +154,24 @@ export default function Board() {
   }, [inputQuery, boardId]);
 
   return (
-    <>
+    <div className={style.container}>
       <ProjectHeader
         projects={projects}
         updateProject={getProjectFromChildren}
         updateIsCreateNewCard={getCreateNewCardStateFromChildren}
       />
-      <div className={style.container}>
-        <HeaderNav />
-        <BoardSearch
+      <HeaderNav />
+      <BoardSearch
+        updateIsCreateNewCard={getCreateNewCardStateFromChildren}
+        setInputQuery={setInputQuery}
+      />
+      <BoardMain columnsInfo={columnsInfo} onDragEventHandler={dragEventHandler} />
+      {isCreateNewCard && (
+        <CreateNewCard
+          fetchNewCard={fetchNewCard}
           updateIsCreateNewCard={getCreateNewCardStateFromChildren}
-          setInputQuery={setInputQuery}
         />
-        <BoardMain columnsInfo={columnsInfo} onDragEventHandler={dragEventHandler} />
-        {isCreateNewCard && (
-          <CreateNewCard
-            fetchNewCard={fetchNewCard}
-            updateIsCreateNewCard={getCreateNewCardStateFromChildren}
-          />
-        )}
-      </div>
-    </>
+      )}
+    </div>
   );
 }
