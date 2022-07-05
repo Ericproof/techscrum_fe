@@ -1,35 +1,36 @@
 import React, { useState } from 'react';
 import userAvatar from '../../../assets/userAvatar.png';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
+import { IOnChangeProjectLead } from '../../../types';
 import styles from './ProjectLead.module.scss';
 
 interface IProjectLead {
-  onChange: (e: any) => void;
+  onChange: (e: IOnChangeProjectLead) => void;
 }
 
 export default function ProjectLead(props: IProjectLead) {
   const { onChange } = props;
   const users = [
     {
-      id: 1,
+      id: '1',
       avatar:
         'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/YK-3.png?ssl=1',
       name: 'Yiu Kitman'
     },
     {
-      id: 2,
+      id: '2',
       avatar:
         'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/E-0.png?ssl=1',
       name: 'Emil'
     },
     {
-      id: 3,
+      id: '3',
       avatar:
         'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/BW-1.png?ssl=1',
       name: 'Belinda Wang'
     },
     {
-      id: 4,
+      id: '4',
       avatar:
         'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/EL-3.png?ssl=1',
       name: 'Evan Lin'
@@ -60,7 +61,7 @@ export default function ProjectLead(props: IProjectLead) {
                         type="button"
                         onClick={() => {
                           setUserInfo({ id: user.id, avatar: user.avatar, name: user.name });
-                          onChange({ target: { name: 'project_lead_id', value: user.id } });
+                          onChange({ target: { name: 'projectLeadId', value: user.id } });
                           setVisible(false);
                         }}
                       >

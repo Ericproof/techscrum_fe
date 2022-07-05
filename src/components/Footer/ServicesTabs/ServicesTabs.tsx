@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from './index.module.scss';
-import Tab from './Tabs';
+import styles from './ServicesTabs.module.scss';
+import Tab from './Tabs/Tab';
 
 const company = {
   title: 'company',

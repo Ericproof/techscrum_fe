@@ -7,16 +7,10 @@ import { useNavigate } from 'react-router-dom';
 import styles from './ProjectHeader.module.scss';
 import useOutsideAlerter from '../../hooks/OutsideAlerter';
 import PersonalProfile from './PersonalProfile/PersonalProfile';
+import { IProject } from '../../types';
 
 interface Props {
-  projects: {
-    id: number;
-    name: string;
-    icon: string;
-    type: string;
-    star: boolean;
-    lastEditTime: Date;
-  }[];
+  projects: IProject[];
   updateProject: (index: number) => void;
   updateIsCreateNewCard: () => void;
 }
