@@ -8,8 +8,10 @@ import ProjectHeader from '../ProjectHeader/ProjectHeader';
 import CreateNewCard from '../CreateNewCard/CreateNewCard';
 import HeaderNav from './HeaderNav/HeaderNav';
 import { getBoard } from '../../api/board/board';
-import { updateTaskStatus } from '../../api/task/task';
+import { updateTaskStatus, fetchTask } from '../../api/task/task';
 import IBoardEntity, { IColumnsFromBackend, ICardData, IItemFromBackend } from '../../types';
+import BoardCard from '../BoardCard/BoardCard';
+import { TaskEntity } from '../../api/task/entity/task';
 
 const projects = [
   {
@@ -104,6 +106,8 @@ export default function Board() {
   const [projectList] = useState(projectsOrderbyDate);
   const [value, setValue] = useState(0);
   const [isCreateNewCard, setIsCreateNewCard] = useState(false);
+  const [isViewTask, setIsViewTask] = useState(false);
+  const [taskData, setTaskData] = useState<TaskEntity>({});
 
   const getProjectFromChildren = (index: number) => {
     projectList[index].star = !projectList[index].star;
@@ -114,6 +118,20 @@ export default function Board() {
     setIsCreateNewCard(!isCreateNewCard);
 
     // setTaskList([...taskList, ...newTask])
+  };
+
+  const getViewTaskStateFromChildren = () => {
+    setIsViewTask(!isViewTask);
+  };
+
+  const getTaskId = async (itemId: string) => {
+    getViewTaskStateFromChildren();
+    const res = await fetchTask(itemId);
+    if (res.status !== 200) {
+      getViewTaskStateFromChildren();
+      return;
+    }
+    setTaskData(res.data);
   };
 
   const fetchNewCard = (newCard: ICardData) => {
@@ -166,12 +184,19 @@ export default function Board() {
           updateIsCreateNewCard={getCreateNewCardStateFromChildren}
           setInputQuery={setInputQuery}
         />
-        <BoardMain columnsInfo={columnsInfo} onDragEventHandler={dragEventHandler} />
+        <BoardMain
+          columnsInfo={columnsInfo}
+          onDragEventHandler={dragEventHandler}
+          passTaskId={getTaskId}
+        />
         {isCreateNewCard && (
           <CreateNewCard
             fetchNewCard={fetchNewCard}
             updateIsCreateNewCard={getCreateNewCardStateFromChildren}
           />
+        )}
+        {isViewTask && (
+          <BoardCard updateIsViewTask={getViewTaskStateFromChildren} taskData={taskData} />
         )}
       </div>
     </>

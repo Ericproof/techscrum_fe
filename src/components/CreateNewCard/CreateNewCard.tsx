@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import styles from './Card.module.scss';
+import styles from './CreateNewCard.module.scss';
 import { createNewTask } from '../../api/task/task';
 import { ICardData } from '../../types';
 

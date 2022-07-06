@@ -1,8 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { DatePicker } from '@atlaskit/datetime-picker';
+import { TaskEntity } from '../../../api/task/entity/task';
 import style from './CardRightContent.module.scss';
 
-export default function CardRightContent() {
+interface Props {
+  taskInfo: TaskEntity;
+}
+
+export default function CardRightContent({ taskInfo }: Props) {
   const [dateButtonShow, setDateButtonShow] = useState(true);
 
   const calendar = useRef<HTMLElement>();
@@ -66,14 +71,14 @@ export default function CardRightContent() {
           </div>
           <div className={style.storyPoint}>
             <div>Story Point estimate</div>
-            <div>None</div>
+            <div>{taskInfo.storyPoint}</div>
           </div>
           <div className={style.dueDate}>
             <div>Due date</div>
             <div>
               {dateButtonShow && (
                 <button type="button" className={style.button} onClick={handleDateButtonShow}>
-                  None
+                  {taskInfo.dueAt?.toString().slice(0, 10)}
                 </button>
               )}
               {!dateButtonShow && <DatePicker ref={calendar} />}
@@ -89,8 +94,8 @@ export default function CardRightContent() {
         </div>
       </div>
       <div className={style.createAndUpdateDate}>
-        <span>Created 23 hours ago</span>
-        <span>Updated 33 minutes ago</span>
+        <span>Created {taskInfo.createdAt?.toString()}</span>
+        <span>Updated {taskInfo.updatedAt?.toString().slice(0, 10)}</span>
       </div>
     </div>
   );
