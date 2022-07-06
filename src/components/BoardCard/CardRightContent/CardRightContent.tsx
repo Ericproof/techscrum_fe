@@ -48,7 +48,7 @@ export default function CardRightContent({ taskInfo }: Props) {
       const period = hour < 12 ? 'AM' : 'PM';
       return `${monthShortNames[Number(dateDataArray[1]) - 1]} ${dateDataArray[2]}, ${
         dateDataArray[0]
-      } at ${hour}:${time[1]} ${period}`;
+      } at ${time[0]}:${time[1]} ${period}`;
     }
     return '';
   };
