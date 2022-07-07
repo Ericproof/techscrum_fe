@@ -30,21 +30,6 @@ $small_size: 1000px;
       align-self: normal;
     }
   }
-  a.btn {
-    border-radius: 32px;
-    background: #6a84ed;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 150%;
-    letter-spacing: 0.75px;
-    padding: 16px 24px;
-    color: #fff;
-    @media (max-width: $max_size) {
-      display: flex;
-      justify-content: center;
-      margin-right: 32px;
-    }
-  }
 }
 
 .functionLoginTabsActive {
