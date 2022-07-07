@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import styles from './Card.module.scss';
+import styles from './CreateNewCard.module.scss';
 import { createNewTask } from '../../api/task/task';
 import { ICardData } from '../../types';
 
@@ -9,7 +9,7 @@ interface Props {
   updateIsCreateNewCard: () => void;
 }
 
-function Card({ fetchNewCard, updateIsCreateNewCard }: Props) {
+function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
   const [description, setDescription] = useState('');
   const [title, setTitle] = useState('');
   const [hasError, setError] = useState(false);
@@ -133,4 +133,4 @@ function Card({ fetchNewCard, updateIsCreateNewCard }: Props) {
   );
 }
 
-export default Card;
+export default CreateNewCard;

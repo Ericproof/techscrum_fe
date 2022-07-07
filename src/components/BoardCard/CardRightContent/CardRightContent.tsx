@@ -1,11 +1,57 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { DatePicker } from '@atlaskit/datetime-picker';
+import { TaskEntity } from '../../../api/task/entity/task';
 import style from './CardRightContent.module.scss';
 
-export default function CardRightContent() {
+interface Props {
+  taskInfo: TaskEntity;
+}
+
+export default function CardRightContent({ taskInfo }: Props) {
   const [dateButtonShow, setDateButtonShow] = useState(true);
 
   const calendar = useRef<HTMLElement>();
+
+  const monthShortNames = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec'
+  ];
+
+  const dateWithDay = (d: Date | null) => {
+    if (d != null) {
+      const date = d.toString().split('T')[0];
+      const dateDataArray = date.split('-');
+      return `${monthShortNames[Number(dateDataArray[1]) - 1]} ${dateDataArray[2]}, ${
+        dateDataArray[0]
+      }`;
+    }
+    return '';
+  };
+
+  const dateWithTimestamp = (d: Date | null) => {
+    if (d != null) {
+      const date = d.toString().split('T')[0];
+      const dateDataArray = date.split('-');
+      const time = d.toString().split('T')[1].split(':');
+      const hour = Number(time[0]);
+      time[0] = hour > 12 ? `${hour - 12}` : `${hour}`;
+      const period = hour < 12 ? 'AM' : 'PM';
+      return `${monthShortNames[Number(dateDataArray[1]) - 1]} ${dateDataArray[2]}, ${
+        dateDataArray[0]
+      } at ${time[0]}:${time[1]} ${period}`;
+    }
+    return '';
+  };
 
   const handleCalendar = () => {};
 
@@ -66,14 +112,14 @@ export default function CardRightContent() {
           </div>
           <div className={style.storyPoint}>
             <div>Story Point estimate</div>
-            <div>None</div>
+            <div>{taskInfo.storyPoint}</div>
           </div>
           <div className={style.dueDate}>
             <div>Due date</div>
             <div>
               {dateButtonShow && (
                 <button type="button" className={style.button} onClick={handleDateButtonShow}>
-                  None
+                  {dateWithDay(taskInfo.dueAt ?? null)}
                 </button>
               )}
               {!dateButtonShow && <DatePicker ref={calendar} />}
@@ -89,8 +135,8 @@ export default function CardRightContent() {
         </div>
       </div>
       <div className={style.createAndUpdateDate}>
-        <span>Created 23 hours ago</span>
-        <span>Updated 33 minutes ago</span>
+        <span>Created {dateWithTimestamp(taskInfo.createdAt ?? null)}</span>
+        <span>Updated {dateWithTimestamp(taskInfo.updatedAt ?? null)}</span>
       </div>
     </div>
   );
