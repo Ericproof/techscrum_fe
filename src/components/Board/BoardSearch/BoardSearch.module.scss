@@ -19,7 +19,6 @@
 .boardSearchSection {
   display: flex;
   align-items: center;
-  flex-wrap: nowrap;
 }
 .createButton {
   align-items: baseline;
@@ -62,9 +61,8 @@
   align-items: center;
   align-self: center;
   justify-content: left;
-  width: 100%;
   margin-bottom: 1%;
-  margin-left: 5.5%;
+  padding-left: 3%;
   z-index: 1;
 }
 
