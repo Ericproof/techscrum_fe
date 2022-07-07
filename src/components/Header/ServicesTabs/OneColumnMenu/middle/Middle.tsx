@@ -1,9 +1,9 @@
 import React from 'react';
 import { IconType } from 'react-icons';
-import styles from './Right.module.scss';
+import styles from './Middle.module.scss';
 
 interface Props {
-  rightContent: {
+  content: {
     title: string;
     content: Array<{
       icon: IconType;
@@ -11,19 +11,15 @@ interface Props {
       description: string;
       href: string;
     }>;
-    btnContent: {
-      content: string;
-      href: string;
-    };
   };
 }
 
-export default function threeColumnsRight({ rightContent }: Props) {
+export default function OneColumnMiddle({ content }: Props) {
   return (
-    <div className={styles.right}>
-      <h1>{rightContent.title}</h1>
+    <div className={styles.middle}>
+      <h1>{content.title}</h1>
       <div>
-        {rightContent.content.map((service) => {
+        {content.content.map((service) => {
           return (
             <div key={service.title}>
               <a href={service.href}>
@@ -37,10 +33,6 @@ export default function threeColumnsRight({ rightContent }: Props) {
           );
         })}
       </div>
-      <div className={styles.space} />
-      <a className={styles.blueBtn} href={rightContent.btnContent.href}>
-        {rightContent.btnContent.content}
-      </a>
     </div>
   );
 }

@@ -22,7 +22,6 @@ $small_size: 1000px;
       cursor: pointer;
       display: flex;
       align-items: center;
-      justify-content: space-between;
       @media (max-width: $max_size) {
         border-radius: 0;
         border-bottom: 1px solid rgba(0, 0, 0, 0.058823529411764705);

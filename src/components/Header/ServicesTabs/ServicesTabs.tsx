@@ -1,15 +1,9 @@
 import React, { useState } from 'react';
 import {
   AiOutlineFieldTime,
-  AiFillCopy,
   AiOutlineBarChart,
   AiOutlineLaptop,
   AiOutlineUserAdd,
-  AiFillFund,
-  AiOutlineDesktop,
-  AiOutlineWechat,
-  AiFillAliwangwang,
-  AiFillMediumCircle,
   AiOutlineDisconnect,
   AiOutlineTeam,
   AiOutlineFundProjectionScreen,
@@ -25,40 +19,21 @@ import {
 } from 'react-icons/ai';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import styles from './ServicesTabs.module.scss';
-import ThreeColumnsMenu from './ThreeColumnsMenu/ThreeColumnsMenu';
+import OneColumnsMenu from './OneColumnMenu/OneColumnMenu';
 import TwoColumnsMenu from './TwoColumnsMenu/TwoColumnsMenu';
 
 interface Props {
   show: boolean;
 }
 
-const platform = {
-  leftContent: {
-    title: 'Overview',
-    content: [
-      {
-        title: 'Product Tour',
-        description: 'Designed for your entire team',
-        href: '/#'
-      },
-      { title: 'Integrations', description: 'Connect to your essential tools', href: '/#' },
-      { title: 'Customers', description: 'See how teams leverage Teamwork', href: '/#' },
-      { title: 'Comparisions', description: 'How Teamwork Compares to the rest', href: '/#' }
-    ]
-  },
-  middleContent: {
+const features = {
+  content: {
     title: 'Features',
     content: [
       {
         icon: AiOutlineFieldTime,
         title: 'Resource Management',
         description: 'Manage your team&apos;s short team and long term resources',
-        href: '/#'
-      },
-      {
-        icon: AiFillCopy,
-        title: 'Templates',
-        description: 'Scale high-performance processes with tempaltes',
         href: '/#'
       },
       {
@@ -78,76 +53,34 @@ const platform = {
         title: 'Unlimited client users',
         description: 'Deliver a more collaborative client experience',
         href: '/#'
-      },
-      {
-        icon: AiFillFund,
-        title: 'Profitability',
-        description: 'Manage your budget and track profitability',
-        href: '/#'
       }
-    ],
-    btnContent: {
-      content: 'see all features >',
-      href: '/#'
-    }
-  },
-  rightContent: {
-    title: 'platform add-one',
-    content: [
-      {
-        icon: AiOutlineDesktop,
-        title: 'Desk',
-        description: 'Helpdesk software',
-        href: '/#'
-      },
-      {
-        icon: AiOutlineWechat,
-        title: 'Chat',
-        description: 'Video Chat software',
-        href: '/#'
-      },
-      {
-        icon: AiFillAliwangwang,
-        title: 'CRM',
-        description: 'Sales CRM software',
-        href: '/#'
-      },
-      {
-        icon: AiFillMediumCircle,
-        title: 'Spaces',
-        description: 'Document management',
-        href: '/#'
-      }
-    ],
-    btnContent: {
-      content: 'see all products >',
-      href: '/#'
-    }
+    ]
   }
 };
 
 const solutions = {
-  leftContent: {
+  content: {
     title: 'For',
     content: [
       {
         icon: AiOutlineDisconnect,
         title: 'Agencies',
-        description: 'Manage clients projects seamlessly with Teamwork',
+        description: 'Manage clients projects seamlessly with Techscrum',
         href: '/#',
         hot: false
       },
       {
         icon: AiOutlineTeam,
         title: 'Creative Teams',
-        description: 'Manage creative Projects smoothly with Teamwork',
+        description: 'Manage creative Projects smoothly with Techscrum',
         href: '/#',
         hot: false
       },
       {
         icon: AiOutlineFundProjectionScreen,
-        title: 'Professional services',
-        description: 'Deliver better outcomes for your clients with Teamwork',
+        title: 'Startups',
+        description:
+          'From hitting revenue goals to managing workflows, small businesses thrive with Techscrum.',
         href: '/#',
         hot: false
       },
@@ -167,55 +100,13 @@ const solutions = {
       },
       {
         icon: AiOutlineAliwangwang,
-        title: 'PMO teams',
-        description: 'Everything you need to deliver projects on time and on budget',
+        title: 'Remote teams',
+        description:
+          'Keep your remote team connected and motivated, no matter where they&acute;re located around the world.',
         href: '/#',
         hot: false
       }
-    ],
-    btnContent: {
-      content: 'see all teams >',
-      href: '/#'
-    }
-  },
-  rightContent: {
-    title: 'Use Cases',
-    content: [
-      {
-        title: 'Remote Work',
-        href: '/#',
-        hot: true
-      },
-      {
-        title: 'Task management',
-        href: '/#',
-        hot: false
-      },
-      {
-        title: 'Client work',
-        href: '/#',
-        hot: false
-      },
-      {
-        title: 'Project planning',
-        href: '/#',
-        hot: false
-      },
-      {
-        title: 'Resource management',
-        href: '/#',
-        hot: false
-      },
-      {
-        title: 'Project collaboration',
-        href: '/#',
-        hot: false
-      }
-    ],
-    btnContent: {
-      content: 'see all cases >',
-      href: '/#'
-    }
+    ]
   }
 };
 
@@ -334,19 +225,19 @@ const resources = {
 };
 
 export default function ServicesTabs({ show }: Props) {
-  const [platformActive, setPlatformActive] = useState(false);
+  const [featuresActive, setFeaturesActive] = useState(false);
   const [solutionActive, setSolutionActive] = useState(false);
   const [resourcesActive, setResourcesActive] = useState(false);
 
   const initial = () => {
-    setPlatformActive(false);
+    setFeaturesActive(false);
     setSolutionActive(false);
     setResourcesActive(false);
   };
 
   const activeMenu = (menu: string) => {
     initial();
-    if (menu === 'platform') setPlatformActive(!platformActive);
+    if (menu === 'features') setFeaturesActive(!featuresActive);
     if (menu === 'solution') setSolutionActive(!solutionActive);
     if (menu === 'resource') setResourcesActive(!resourcesActive);
   };
@@ -354,18 +245,18 @@ export default function ServicesTabs({ show }: Props) {
   return (
     <div className={`${styles.serviceListTabs} ${show ? styles.serviceListTabsActive : ''}`}>
       <div>
-        <a href="/#" onClick={() => activeMenu('platform')}>
-          Platform
+        <a href="/#" onClick={() => activeMenu('features')}>
+          Features
           <MdOutlineKeyboardArrowDown />
         </a>
-        <ThreeColumnsMenu servicesInfo={platform} active={platformActive} />
+        <OneColumnsMenu servicesInfo={features} active={featuresActive} />
       </div>
       <div>
         <a href="/#" onClick={() => activeMenu('solution')}>
           Solutions
           <MdOutlineKeyboardArrowDown />
         </a>
-        <TwoColumnsMenu servicesInfo={solutions} active={solutionActive} />
+        <OneColumnsMenu servicesInfo={solutions} active={solutionActive} />
       </div>
       <div>
         <a href="/#" onClick={() => activeMenu('resource')}>

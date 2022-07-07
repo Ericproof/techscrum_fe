@@ -9,11 +9,8 @@ interface Props {
 export default function loginTabs({ show }: Props) {
   return (
     <div className={`${styles.functionsLoginTabs} ${show ? styles.functionLoginTabsActive : ''}`}>
-      <a href="/#">Book a Demo</a>
       <Link to="/login">Login</Link>
-      <Link className={styles.btn} to="/register">
-        Try it to free
-      </Link>
+      <Link to="/register">Register</Link>
     </div>
   );
 }
