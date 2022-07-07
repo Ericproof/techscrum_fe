@@ -3,7 +3,7 @@ import { IconType } from 'react-icons';
 import styles from './Middle.module.scss';
 
 interface Props {
-  Content: {
+  content: {
     title: string;
     content: Array<{
       icon: IconType;
@@ -14,12 +14,12 @@ interface Props {
   };
 }
 
-export default function OneColumnMiddle({ Content }: Props) {
+export default function OneColumnMiddle({ content }: Props) {
   return (
     <div className={styles.middle}>
-      <h1>{Content.title}</h1>
+      <h1>{content.title}</h1>
       <div>
-        {Content.content.map((service) => {
+        {content.content.map((service) => {
           return (
             <div key={service.title}>
               <a href={service.href}>

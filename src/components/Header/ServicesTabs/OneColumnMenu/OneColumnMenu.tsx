@@ -5,7 +5,7 @@ import Middle from './middle/Middle';
 
 interface Props {
   servicesInfo: {
-    Content: {
+    content: {
       title: string;
       content: Array<{
         icon: IconType;
@@ -23,7 +23,7 @@ export default function OneColumnMenu({ servicesInfo, active = false }: Props) {
     <div className={active ? styles.subNavOneColumn : styles.oneColumnMenuNotActive}>
       {active && (
         <div className={styles.serviceContainerOneColumn}>
-          <Middle Content={servicesInfo.Content} />
+          <Middle content={servicesInfo.content} />
         </div>
       )}
     </div>
