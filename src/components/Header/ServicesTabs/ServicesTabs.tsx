@@ -27,7 +27,7 @@ interface Props {
 }
 
 const features = {
-  Content: {
+  content: {
     title: 'Features',
     content: [
       {
@@ -59,7 +59,7 @@ const features = {
 };
 
 const solutions = {
-  Content: {
+  content: {
     title: 'For',
     content: [
       {
