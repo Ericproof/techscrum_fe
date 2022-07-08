@@ -18,7 +18,6 @@ import CreateProject from './pages/CreateProject/CreateProject';
 import AccountSettings from './pages/AccountSetting/AccountSetting';
 import ResetPassword from './pages/ResetPassword/ResetPassword';
 import BoardPage from './pages/BoardPage/BoardPage';
-import BoardCard from './components/BoardCard/BoardCard';
 import './App.css';
 
 function App() {
@@ -41,7 +40,6 @@ function App() {
       <Route path="/projects" element={<Project />} />
       <Route path="/create-projects" element={<CreateProject />} />
       <Route path="/account-settings" element={<AccountSettings />} />
-      <Route path="/card" element={<BoardCard />} />
       <Route path="*" element={<ErrorPage />} />
     </Routes>
   );

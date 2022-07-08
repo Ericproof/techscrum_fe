@@ -1,4 +1,4 @@
-export default interface Task {
+export interface Task {
   title: string;
   description: string;
   cardType: string;
@@ -8,4 +8,20 @@ export default interface Task {
   storyPointEstimate: string;
   pullRequestNumber: number;
   reporter: { userId: string; userName: string; userIcon: string };
+}
+
+export interface TaskEntity {
+  id?: string;
+  title?: string;
+  tag?: string;
+  statusId?: number;
+  projectId?: string;
+  boardId?: string;
+  typeId?: string;
+  description?: string;
+  storyPoint?: number;
+  dueAt?: Date;
+  assign?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
