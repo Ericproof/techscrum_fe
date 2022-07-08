@@ -1,44 +1,54 @@
 .userPage {
-  box-sizing: border-box;
-  width: 50%;
-  height: 50%;
+  margin: 70px;
+  @media screen and (min-width: 280px) {
+    max-width: 50%;
+  }
+  @media screen and (min-width: 1440px) {
+    max-width: 100%;
+  }
 
   .userBar h2 {
-    font-size: 25px;
-    color: rgb(129, 125, 125);
-    margin-top: 13px;
-    margin-left: 20px;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    font-size: 1.71429em;
+    font-style: inherit;
+    color: #172b4d;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    margin-top: 80px;
   }
-  .line {
-    margin-left: 15px;
-    width: 800px;
-    margin-bottom: 50px;
-    background-color: rgba(189, 188, 188, 0.314);
-    height: 2px;
+
+  .userForm {
+    margin: 0px auto;
+    width:800px;
+    padding: 32px 40px;
+    background: rgb(255, 255, 255);
+    border-radius: 3px;
+    box-shadow: rgb(0 0 0 / 10%) 0px 0px 10px;
+    box-sizing: border-box;
+    color: rgb(94, 108, 132);
+    display: flex;
+    flex-direction: row;
   }
   .userInfo {
-    display: flex;
-    flex-direction: row;
-  }
-  .userForm {
-    width: 500px;
-    margin-left: 15px;
-    display: flex;
-    flex-direction: row;
+    width:60%;
   }
   .userForm label {
-    font-size: 18px;
-    margin-bottom: 15px;
+    font-size: 15px;
+  
   }
   .public {
     color: rgb(149, 145, 145);
+   font-size: 12px;
     float: right;
     margin-right: 8px;
+
   }
 
   input {
-    width: 500px;
-    height: 40px;
+    width: 450px;
+    height: 35px;
     font-size: 20px;
     background-color: rgba(0, 0, 0, 0.025);
     border: 2px solid rgba(189, 188, 188, 0.314);
@@ -49,8 +59,8 @@
     background-repeat: no-repeat;
   }
   textarea {
-    min-width: 500px;
-    max-width: 500px;
+    min-width: 450px;
+    max-width: 450px;
     height: 100px;
     margin-bottom: 50px;
     background-color: rgba(0, 0, 0, 0.025);
@@ -62,22 +72,26 @@
     border: none;
     color: white;
     font-size: 18px;
-    width: 500px;
+    width: 450px;
   }
   .userIcon {
-    margin-left: 80px;
+    padding-left:150px;
   }
   .userIcon h2 {
     font-size: 20px;
-    padding-left: 40px;
+    padding-left: 25px;
+    color: #172b4d;
   }
   .userIcon img {
     border-radius: 50%;
     margin-top: 20px;
+    width:80%;
+
   }
   .iconPublic {
     padding-top: 10px;
-    padding-left: 40px;
+    padding-left: 25px;
     color: rgb(149, 145, 145);
+    font-size: 12px;
   }
 }
