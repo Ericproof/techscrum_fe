@@ -39,7 +39,7 @@ export default function PersonalProfile() {
                             <span>Profile</span>
                           </div>
                         </a>
-                        <a href="/#">
+                        <a href="/account-settings">
                           <div className={styles.title}>
                             <span>Accounting settings</span>
                           </div>
