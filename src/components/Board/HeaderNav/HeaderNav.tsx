@@ -1,20 +1,25 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import styles from './HeaderNav.module.scss';
 
-export default function HeaderNav() {
+interface IHeaderProps {
+  name: string;
+}
+
+export default function HeaderNav(props: IHeaderProps) {
+  const { name } = props;
   return (
     <div>
       <nav className={styles.navLayout}>
         <ol>
           <li>
-            <a href="/" target="_self">
+            <NavLink to="/projects" className={({ isActive }) => (isActive ? 'none' : 'none')}>
               <span>Projects</span>
-            </a>
+            </NavLink>
           </li>
           <li>
-            <a href="/" target="_self">
-              <span>TECHSCRUM</span>
-            </a>
+            {' '}
+            <span>{name}</span>
           </li>
         </ol>
         <h1>TEC Sprint 7</h1>
