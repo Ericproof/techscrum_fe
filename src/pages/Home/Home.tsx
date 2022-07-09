@@ -50,13 +50,13 @@ export default function Home() {
           <div className={styles.jobDoneContainer}>
             <div className={styles.jobDoneHeader}>
               <h3>
-                Ship
-                <span className={styles.headerPink}> faster </span> and
-                <span className={styles.headerIndigo}> reliably </span>
+                Manage your project from
+                <span className={styles.headerPink}> start</span> to
+                <span className={styles.headerIndigo}> finish </span>
                 with TechScrum
               </h3>
               <p className={styles.jobDoneText}>
-                TechScrum delivers them all so you can reach every milestone
+                Techscrum provides an efficient way of working together.
               </p>
             </div>
             <div className={styles.jobDoneRows}>
@@ -64,22 +64,12 @@ export default function Home() {
                 <img src={increaseProfitability} alt="business" />
               </div>
               <div className={styles.businessContent}>
-                <h3>Increase profitability and grow your business</h3>
+                <h3>Plan projects and boost efficiency</h3>
                 <div className={styles.jobDoneParagraph}>
                   <p>
-                    TechScrum gives you the tools and reports you need to maximize resources and
-                    never miss a billable minute again. Get a bird&apos;s eye view of every project,
-                    from milestones to
-                    <a href="https://www.teamwork.com/solutions/project-planning/">
-                      {' '}
-                      project planning
-                    </a>
-                    , budgeting,
-                    <a href="https://www.teamwork.com/project-management-software/project-time-tracking-software/">
-                      {' '}
-                      time tracking
-                    </a>
-                    , and more.
+                    Plan projects and break down each step to getting things done. Instantly see the
+                    status of every task and feel a sense of accomplishment. Project management has
+                    never been so efficient.
                   </p>
                 </div>
                 <div className={styles.jobDoneQuote} style={{ display: 'none' }}>
@@ -99,16 +89,6 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                <div className={styles.jobDoneCta}>
-                  <a
-                    className={styles.ctaButton}
-                    href="https://www.teamwork.com/signup/"
-                    target="_self"
-                  >
-                    Start Your Free Trial
-                  </a>
-                  <p className={styles.ctaText}>No credit card required</p>
-                </div>
               </div>
             </div>
             <div className={styles.collaborationRows}>
@@ -116,12 +96,13 @@ export default function Home() {
                 <img src={realTimeCollaboration} alt="realTimeCollaboration" />
               </picture>
               <div className={styles.collaborationContent}>
-                <h3>Features to help your team succeed</h3>
+                <h3>Start with a Techscrum board</h3>
                 <div className={styles.jobDoneParagraph}>
                   <p>
-                    Log activities such as delay time and daily scrum meeting notes. Which can help
-                    you find why projects delays so that and ensure delivers them on time and on
-                    budget
+                    Techscrum board is the easiest way to go from idea to action. View lists and
+                    cards in a Kanban board. Customize and expand with more features as your
+                    teamwork grows. Manage projects, organize tasks, and build team spirit—all in
+                    one place.
                   </p>
                 </div>
                 <div className={styles.jobDoneQuote}>
@@ -142,63 +123,18 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                <div className={styles.jobDoneCta}>
-                  <a
-                    className={styles.ctaButton}
-                    href="https://www.teamwork.com/signup/"
-                    target="_self"
-                  >
-                    Start Your Free Trial
-                  </a>
-                  <p className={styles.ctaText}>No credit card required</p>
-                </div>
               </div>
             </div>
             <div className={styles.projectManagementRow}>
               <div className={styles.projectManagementContent}>
-                <h3>The last project management tool you&apos;ll ever use</h3>
+                <h3>Create cards that contain every detail</h3>
                 <div className={styles.jobDoneParagraph}>
                   <p>
-                    From PM essentials like project templates,
-                    <a href="https://www.teamwork.com/solutions/task-management-software/">
-                      {' '}
-                      task management
-                    </a>
-                    , and custom fields to wishlist favorites like time tracking, billing,
-                    <a href="https://www.teamwork.com/project-management-software/gantt-chart/">
-                      {' '}
-                      gantt chart
-                    </a>
-                    , and assigning cards to multiple team members, TechScrum has you covered.
+                    TechScrum card is a place where you can organize your work. Each section of your
+                    tasks allows you to manage, track and share with your team. When opening each
+                    card, you can unlock an array of functions such as checklists, due dates,
+                    attachments, comments, and more.
                   </p>
-                </div>
-                <div className={styles.jobDoneQuote}>
-                  <div className={styles.quoteAvatar}>
-                    <picture>
-                      <img src={reneeR} alt="avatar" />
-                    </picture>
-                  </div>
-                  <div className={styles.quoteWrap} style={{ display: 'none' }}>
-                    <p className={styles.quoteText}>
-                      “TechScrum is the first thing I open and the last thing I close: it tells me
-                      what happened when I was asleep, what I need to do that day, and it helps me
-                      plan for the future.”
-                    </p>
-                    <div className={styles.quoteAuthor}>
-                      <span className={styles.authorName}>Renee R</span>
-                      <span className={styles.authorRole}>Project manager</span>
-                    </div>
-                  </div>
-                </div>
-                <div className={styles.jobDoneCta}>
-                  <a
-                    className={styles.ctaButton}
-                    href="https://www.teamwork.com/signup/"
-                    target="_self"
-                  >
-                    Start Your Free Trial
-                  </a>
-                  <p className={styles.ctaText}>No credit card required</p>
                 </div>
               </div>
               <picture>

@@ -9,7 +9,7 @@ import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
 import { getProjects, deleteProject } from '../../api/projects/projects';
 import ProjectEditor from '../../components/ProjectEditor/ProjectEditor';
 import useOutsideAlerter from '../../hooks/OutsideAlerter';
-import CreateNewCard from '../../components/Card/Card';
+import CreateNewCard from '../../components/CreateNewCard/CreateNewCard';
 import { IProject, IProjectData } from '../../types';
 
 export default function Project() {
