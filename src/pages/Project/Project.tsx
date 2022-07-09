@@ -14,6 +14,7 @@ import { IProject, IProjectData } from '../../types';
 
 export default function Project() {
   const [projectList, setProjectList] = useState<IProject[]>([]);
+  const [filteredProjectList, setFilteredProjectList] = useState<IProject[]>([]);
   const [showProjectDetails, setShowProjectDetails] = useState(-1);
   const [value, setValue] = useState(0);
   const refProfile = projectList.map(() => createRef<HTMLDivElement>());
@@ -31,9 +32,22 @@ export default function Project() {
         return;
       }
       setProjectList(res.data);
+      setFilteredProjectList(res.data);
     };
     fetchProjects();
   }, []);
+
+  const onChangeFilterProject = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.value) {
+      setFilteredProjectList(projectList);
+      return;
+    }
+    setFilteredProjectList(
+      projectList.filter((item) => {
+        return item.name?.includes(e.target.value);
+      })
+    );
+  };
 
   const getProjectFromChildren = (id: number) => {
     projectList[id].star = !projectList[id].star;
@@ -57,6 +71,7 @@ export default function Project() {
       if (res.status === 204) {
         const updateProjectList = projectList.filter((item: IProjectData) => item.id !== id);
         setProjectList(updateProjectList);
+        setFilteredProjectList(updateProjectList);
       }
     });
   };
@@ -140,7 +155,7 @@ export default function Project() {
                 </button>
               </div>
               <div className={styles.searchBar}>
-                <input />
+                <input onChange={onChangeFilterProject} name="filterProject" />
                 <div className={styles.searchIcon}>
                   <span>
                     <FiSearch />
@@ -175,7 +190,7 @@ export default function Project() {
                   </tr>
                 </thead>
                 <tbody>
-                  {projectList.map((project: IProjectData, index: number) => (
+                  {filteredProjectList.map((project: IProjectData, index: number) => (
                     <tr key={project.id} className={styles.overflowVisible}>
                       <td className={[styles.star, styles.overflowVisible].join(' ')}>
                         <div
