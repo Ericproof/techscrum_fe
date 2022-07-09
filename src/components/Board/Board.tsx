@@ -8,7 +8,7 @@ import ProjectHeader from '../ProjectHeader/ProjectHeader';
 import CreateNewCard from '../CreateNewCard/CreateNewCard';
 import HeaderNav from './HeaderNav/HeaderNav';
 import { getBoard } from '../../api/board/board';
-import { updateTaskStatus, fetchTask } from '../../api/task/task';
+import { updateTaskStatus, fetchTask, updateTask } from '../../api/task/task';
 import IBoardEntity, { IColumnsFromBackend, ICardData, IItemFromBackend } from '../../types';
 import BoardCard from '../BoardCard/BoardCard';
 import { TaskEntity } from '../../api/task/entity/task';
@@ -151,6 +151,40 @@ export default function Board() {
     return onDragEnd(result, columnsInfo, setColumnsInfo);
   };
 
+  const updateTaskInfo = async (updatedTaskInfo: TaskEntity) => {
+    try {
+      if (updatedTaskInfo.id !== undefined) {
+        await updateTask(updatedTaskInfo.id, updatedTaskInfo);
+        const updatedColumns = { ...columnsInfo };
+        if (updatedTaskInfo.statusId !== undefined && taskData.statusId !== undefined) {
+          columnsInfo[taskData.statusId].items.forEach((item, index) => {
+            if (
+              item.id === updatedTaskInfo.id &&
+              updatedTaskInfo.title !== undefined &&
+              updatedTaskInfo.title != null &&
+              item.statusId !== undefined &&
+              updatedTaskInfo.statusId !== undefined
+            ) {
+              const updatedTitle = updatedTaskInfo.title;
+              const updatedStatusId = updatedTaskInfo.statusId;
+              const updatedItem = { ...item, title: updatedTitle, statusId: updatedStatusId };
+              if (updatedStatusId === item.statusId) {
+                updatedColumns[item.statusId].items[index] = updatedItem;
+                return;
+              }
+              updatedColumns[item.statusId].items.splice(index, 1);
+              updatedColumns[updatedStatusId].items.push(updatedItem);
+            }
+          });
+        }
+        setColumnsInfo(updatedColumns);
+        setTaskData(updatedTaskInfo);
+      }
+    } catch (e) {
+      getViewTaskStateFromChildren();
+    }
+  };
+
   useEffect(() => {
     const fetchColumnsData = (boardInfo: IBoardEntity) => {
       let columnInfoData: IColumnsFromBackend = {};
@@ -195,7 +229,12 @@ export default function Board() {
         />
       )}
       {isViewTask && (
-        <BoardCard updateIsViewTask={getViewTaskStateFromChildren} taskData={taskData} />
+        <BoardCard
+          updateIsViewTask={getViewTaskStateFromChildren}
+          taskData={taskData}
+          onSave={updateTaskInfo}
+          columnsInfo={columnsInfo}
+        />
       )}
     </div>
   );
