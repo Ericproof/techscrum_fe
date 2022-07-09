@@ -8,8 +8,8 @@ $padding-left: 10px;
     min-width: 35%;
     max-width: 35%;
     .toDoButton {
-      background: #dfe1e6;
-      color: var(--ds-text, #313e54);
+      background: #0052cc;
+      color: #ffffff;
       border-width: 0px;
       border-radius: 3px;
       box-sizing: border-box;
@@ -24,14 +24,13 @@ $padding-left: 10px;
       padding: 0px 10px;
       font-weight: 700;
       align-items: center;
+      &:hover {
+        background: #0747a6;
+      }
 
       svg {
         width: 24px;
         height: 24px;
-      }
-
-      &:hover {
-        background: #c1c4cc;
       }
 
       svg {
@@ -89,8 +88,24 @@ $padding-left: 10px;
               padding: 3px 5px;
               border-radius: 3px;
               box-sizing: border-box;
-              color: #42526e;
-              background-color: #dfe1e6;
+              background-color: rgb(222, 235, 255);
+              color: rgb(7, 71, 166);
+            }
+          }
+          &:first-child {
+            .statusOptions {
+              span {
+                color: #42526e;
+                background-color: #dfe1e6;
+              }
+            }
+          }
+          &:last-child {
+            .statusOptions {
+              span {
+                background-color: rgb(227, 252, 239);
+                color: rgb(0, 102, 68);
+              }
             }
           }
         }
