@@ -25,6 +25,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/register/:token" element={<Register />} />
       <Route path="/login" element={<Login />} />
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/settings" element={<Setting />} />

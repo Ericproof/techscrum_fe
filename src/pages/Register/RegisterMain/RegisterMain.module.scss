@@ -46,12 +46,12 @@ $small_size: 704px;
       margin-top: 16px;
     }
 
-    input.email{
-        display: block;
+    input.email {
+      display: block;
     }
 
-    input.password{
-        display:block;
+    input.password {
+      display: block;
     }
 
     p {
@@ -123,10 +123,9 @@ $small_size: 704px;
           width: 18px;
           margin: auto 0 auto 8px;
           align-self: flex-start;
-          
         }
-        span{
-            width: 100%;
+        span {
+          width: 100%;
         }
       }
     }
@@ -144,18 +143,31 @@ $small_size: 704px;
         color: rgb(0, 82, 204);
       }
     }
+
+    .emailTip{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      img{
+        width: 80%;
+        height: 80%;
+        align-self: center;
+      }
+      h1{
+        align-self: center;
+      }
+    }
   }
 
   p {
     color: rgb(107, 119, 140);
     align-self: center;
-    
   }
 
-  .registerMainFooter{
+  .registerMainFooter {
     width: 80%;
-    @media (max-width: $small_size){
-        width: 60%;
+    @media (max-width: $small_size) {
+      width: 60%;
     }
   }
 }
