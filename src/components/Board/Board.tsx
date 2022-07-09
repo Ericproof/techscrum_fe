@@ -212,7 +212,7 @@ export default function Board() {
         updateProject={getProjectFromChildren}
         updateIsCreateNewCard={getCreateNewCardStateFromChildren}
       />
-      <HeaderNav />
+      <HeaderNav name="projects" />
       <BoardSearch
         updateIsCreateNewCard={getCreateNewCardStateFromChildren}
         setInputQuery={setInputQuery}
