@@ -6,9 +6,10 @@ import style from './BoardMain.module.scss';
 interface Props {
   columnsInfo: IColumnsFromBackend;
   onDragEventHandler: (result: DropResult) => boolean | void | null;
+  passTaskId: (itemId: string) => void;
 }
 
-export default function BoardMain({ columnsInfo, onDragEventHandler }: Props) {
+export default function BoardMain({ columnsInfo, onDragEventHandler, passTaskId }: Props) {
   return (
     <div className={style.container}>
       <DragDropContext
@@ -42,6 +43,10 @@ export default function BoardMain({ columnsInfo, onDragEventHandler }: Props) {
                                   ref={provided2.innerRef}
                                   {...provided2.dragHandleProps}
                                   {...provided2.draggableProps}
+                                  aria-hidden="true"
+                                  onClick={() => {
+                                    passTaskId(item.id);
+                                  }}
                                 >
                                   <span> {item.title}</span>
                                   <div className={style.cardFooter}>

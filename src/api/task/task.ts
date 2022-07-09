@@ -22,6 +22,10 @@ export function createNewTask(data: ITaskData) {
   return axios.post(`${config.apiAddress}/tasks`, data);
 }
 
+export function fetchTask(taskId: string) {
+  return axios.get(`${config.apiAddress}/tasks/${taskId}`);
+}
+
 export function updateTask(taskId: string, data: ITaskData) {
   return axios.put(`${config.apiAddress}/tasks/${taskId}`, data);
 }

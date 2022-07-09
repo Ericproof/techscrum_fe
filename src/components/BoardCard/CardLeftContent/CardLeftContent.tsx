@@ -1,14 +1,19 @@
 import React from 'react';
 import { ImAttachment } from 'react-icons/im';
+import { TaskEntity } from '../../../api/task/entity/task';
 import style from './CardLeftContent.module.scss';
 import Description from './components/Description/Description';
 import LeftBottom from './components/LeftBottom/LeftBottom';
 
-export default function CardLeftContent() {
+interface Props {
+  taskInfo: TaskEntity;
+}
+
+export default function CardLeftContent({ taskInfo }: Props) {
   return (
     <div className={style.container}>
       <div className={style.cardTitle}>
-        <h1>Card UI and function</h1>
+        <h1>{taskInfo.title}</h1>
       </div>
       <div className={style.attachButton}>
         <label htmlFor="uploadPhoto">
@@ -17,7 +22,7 @@ export default function CardLeftContent() {
           <input id="uploadPhoto" type="file" name="Upload a photo" />
         </label>
       </div>
-      <Description />
+      <Description taskInfo={taskInfo} />
       <LeftBottom />
     </div>
   );
