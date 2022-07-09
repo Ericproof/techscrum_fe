@@ -1,17 +1,14 @@
 import axios from 'axios';
 import config from '../../config/config';
 
-export default async function emailCheck(email: string) {
+export async function emailCheck(email: string) {
   const path = `${config.apiAddress}/register/${email}`;
-  try {
-    const result = await axios.get(path).then((res) => {
-      return res.data;
-    });
-    return result;
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      return error.message;
-    }
-    return 'An unexpected error occurred';
-  }
+  const result = await axios.post(path);
+  return result;
+}
+
+export async function emailVerifyCheck(emalToken: string) {
+  const path = `${config.apiAddress}/register/${emalToken}`;
+  const result = await axios.get(path);
+  return result;
 }
