@@ -1,9 +1,10 @@
 .container {
   position: relative;
-  margin-left: 5%;
+  margin-left: 3%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-direction: row;
+  max-width: 1920px;
 }
 
 .columnsContainer {
