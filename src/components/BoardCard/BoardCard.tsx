@@ -11,9 +11,16 @@ interface Props {
   taskData: TaskEntity;
   columnsInfo: IColumnsFromBackend;
   onSave: (updatedTaskInfo: TaskEntity) => void;
+  deleteTask: () => void;
 }
 
-export default function BoardCard({ updateIsViewTask, taskData, onSave, columnsInfo }: Props) {
+export default function BoardCard({
+  updateIsViewTask,
+  taskData,
+  onSave,
+  columnsInfo,
+  deleteTask
+}: Props) {
   const [taskInfo, setTaskInfo] = useState({});
   useEffect(() => {
     setTaskInfo(taskData);
@@ -21,7 +28,11 @@ export default function BoardCard({ updateIsViewTask, taskData, onSave, columnsI
   return (
     <div className={styles.background}>
       <div className={styles.container}>
-        <CardHeader updateIsViewTask={updateIsViewTask} taskInfo={taskInfo} />
+        <CardHeader
+          updateIsViewTask={updateIsViewTask}
+          taskInfo={taskInfo}
+          deleteTask={deleteTask}
+        />
         <div className={styles.cardContent}>
           <CardLeftContent taskInfo={taskInfo} onSave={onSave} />
           <CardRightContent
