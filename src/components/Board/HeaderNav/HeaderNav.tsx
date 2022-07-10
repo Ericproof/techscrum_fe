@@ -17,10 +17,6 @@ export default function HeaderNav(props: IHeaderProps) {
               <span>Projects</span>
             </NavLink>
           </li>
-          <li>
-            {' '}
-            <span>{name}</span>
-          </li>
         </ol>
         <h1>TEC Sprint 7</h1>
       </nav>
