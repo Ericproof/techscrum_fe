@@ -33,3 +33,7 @@ export function updateTask(taskId: string, data: ITaskData) {
 export function updateTaskStatus(taskId: string, statusId: number) {
   return axios.put(`${config.apiAddress}/tasks/${taskId}`, { statusId });
 }
+
+export function removeTask(taskId: string) {
+  return axios.delete(`${config.apiAddress}/tasks/${taskId}`);
+}

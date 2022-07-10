@@ -8,7 +8,7 @@ import ProjectHeader from '../ProjectHeader/ProjectHeader';
 import CreateNewCard from '../CreateNewCard/CreateNewCard';
 import HeaderNav from './HeaderNav/HeaderNav';
 import { getBoard } from '../../api/board/board';
-import { updateTaskStatus, fetchTask, updateTask } from '../../api/task/task';
+import { updateTaskStatus, fetchTask, updateTask, removeTask } from '../../api/task/task';
 import IBoardEntity, { IColumnsFromBackend, ICardData, IItemFromBackend } from '../../types';
 import BoardCard from '../BoardCard/BoardCard';
 import { TaskEntity } from '../../api/task/entity/task';
@@ -66,8 +66,8 @@ const onDragEnd = (
     const sourceItems = [...sourceColumn.items];
     const destItems = [...destColumn.items];
     const [removed] = sourceItems.splice(source.index, 1);
+    removed.statusId = Number(destination.droppableId);
     destItems.splice(destination.index, 0, removed);
-    updateTaskStatus(result.draggableId, parseInt(result.destination.droppableId, 10));
     setColumns({
       ...columns,
       [source.droppableId]: {
@@ -79,6 +79,7 @@ const onDragEnd = (
         items: destItems
       }
     });
+    updateTaskStatus(result.draggableId, parseInt(result.destination.droppableId, 10));
     return true;
   }
 
@@ -185,6 +186,25 @@ export default function Board() {
     }
   };
 
+  const deleteTask = async () => {
+    if (taskData.id !== undefined && taskData.id != null) {
+      try {
+        await removeTask(taskData.id);
+      } finally {
+        getViewTaskStateFromChildren();
+        const updatedColumns = { ...columnsInfo };
+        if (taskData.statusId !== undefined) {
+          columnsInfo[taskData.statusId].items.forEach((item, index) => {
+            if (item.statusId !== undefined && item.id === taskData.id) {
+              updatedColumns[item.statusId].items.splice(index, 1);
+            }
+          });
+        }
+        setColumnsInfo(updatedColumns);
+        setTaskData({});
+      }
+    }
+  };
   useEffect(() => {
     const fetchColumnsData = (boardInfo: IBoardEntity) => {
       let columnInfoData: IColumnsFromBackend = {};
@@ -234,6 +254,7 @@ export default function Board() {
           taskData={taskData}
           onSave={updateTaskInfo}
           columnsInfo={columnsInfo}
+          deleteTask={deleteTask}
         />
       )}
     </div>
