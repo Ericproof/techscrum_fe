@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { AxiosResponse } from 'axios';
+import { useNavigate } from 'react-router-dom';
 import Assignee from './Assignee/Assignee';
 import ChangeIcon from './ChangeIcon/ChangeIcon';
 import ChangeKey from './ChangeKey/ChangeKey';
@@ -11,6 +12,7 @@ import { IOnChangeProjectLead, IProjectEditor } from '../../types';
 
 interface ProjectEditorProps {
   onCompletedSubmit?: (res: AxiosResponse) => void;
+  showCancelBtn?: boolean;
 }
 
 function ProjectEditor(props: ProjectEditorProps) {
@@ -21,7 +23,8 @@ function ProjectEditor(props: ProjectEditorProps) {
     assigneeId: 1
   });
   const [hasError, setError] = useState(false);
-  const { onCompletedSubmit = null } = props;
+  const navigate = useNavigate();
+  const { onCompletedSubmit = null, showCancelBtn = false } = props;
   const onChange = (e: IOnChangeProjectLead) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
@@ -65,6 +68,17 @@ function ProjectEditor(props: ProjectEditorProps) {
           <button className={styles.saveBtn} type="submit" onClick={onSave}>
             Save
           </button>
+          {showCancelBtn && (
+            <button
+              className={styles.cancelBtn}
+              type="button"
+              onClick={() => {
+                navigate(-1);
+              }}
+            >
+              Cancel
+            </button>
+          )}
         </form>
       </div>
     </div>
@@ -72,7 +86,8 @@ function ProjectEditor(props: ProjectEditorProps) {
 }
 
 ProjectEditor.defaultProps = {
-  onCompletedSubmit: null
+  onCompletedSubmit: null,
+  showCancelBtn: false
 };
 
 export default ProjectEditor;
