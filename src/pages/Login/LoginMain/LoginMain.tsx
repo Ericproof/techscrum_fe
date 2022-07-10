@@ -23,13 +23,14 @@ export default function LoginMain() {
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
     try {
-      const resResult = await login({
+      const result = await login({
         email: emailRecorder,
         password: passwordRecorder
       });
-      const { token } = resResult;
+      const { token, refreshToken } = result.data;
       if (token !== undefined && token !== null) {
         localStorage.setItem('token', token);
+        localStorage.setItem('refreshToken', refreshToken);
         navigate(`/`);
       } else {
         tip('*Incorrect email or password, please try again.');
