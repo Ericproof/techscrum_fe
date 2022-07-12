@@ -32,7 +32,6 @@ export default function HeaderNav(props: IHeaderProps) {
             </NavLink>
           </li>
         </ol>
-        <h1>{currentProject[0].name}</h1>
       </nav>
     </div>
   );
