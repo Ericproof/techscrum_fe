@@ -10,11 +10,7 @@ import ProjectLead from './ProjectLead/ProjectLead';
 import { createProject } from '../../api/projects/projects';
 import { IOnChangeProjectLead, IProjectEditor } from '../../types';
 
-interface ProjectEditorProps {
-  showCancelBtn?: boolean;
-}
-
-function ProjectEditor(props: ProjectEditorProps) {
+function ProjectEditor() {
   const [data, setData] = useState<IProjectEditor>({
     name: '',
     key: '',
@@ -23,7 +19,6 @@ function ProjectEditor(props: ProjectEditorProps) {
   });
   const [hasError, setError] = useState(false);
   const navigate = useNavigate();
-  const { showCancelBtn = false } = props;
   const onChange = (e: IOnChangeProjectLead) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
@@ -65,25 +60,19 @@ function ProjectEditor(props: ProjectEditorProps) {
           <button className={styles.saveBtn} type="submit" onClick={onSave}>
             Save
           </button>
-          {showCancelBtn && (
-            <button
-              className={styles.cancelBtn}
-              type="button"
-              onClick={() => {
-                navigate(-1);
-              }}
-            >
-              Cancel
-            </button>
-          )}
+          <button
+            className={styles.cancelBtn}
+            type="button"
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
+            Cancel
+          </button>
         </form>
       </div>
     </div>
   );
 }
-
-ProjectEditor.defaultProps = {
-  showCancelBtn: false
-};
 
 export default ProjectEditor;
