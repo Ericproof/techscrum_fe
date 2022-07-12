@@ -2,22 +2,24 @@ import React, { useState, createRef, useEffect } from 'react';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { HiDotsHorizontal } from 'react-icons/hi';
 import { FiSearch } from 'react-icons/fi';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
 import styles from './Project.module.scss';
 import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
 import { getProjects, deleteProject } from '../../api/projects/projects';
+import ProjectEditor from '../../components/ProjectEditor/ProjectEditor';
+import useOutsideAlerter from '../../hooks/OutsideAlerter';
 import CreateNewCard from '../../components/CreateNewCard/CreateNewCard';
 import { IProject, IProjectData } from '../../types';
 
 export default function Project() {
-  const navigate = useNavigate();
   const [projectList, setProjectList] = useState<IProject[]>([]);
   const [filteredProjectList, setFilteredProjectList] = useState<IProject[]>([]);
   const [showProjectDetails, setShowProjectDetails] = useState(-1);
   const [value, setValue] = useState(0);
   const refProfile = projectList.map(() => createRef<HTMLDivElement>());
   const refShowMore = projectList.map(() => createRef<HTMLDivElement>());
+  const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const [isCreateNewCard, setIsCreateNewCard] = useState(false);
 
   useEffect(() => {
@@ -56,6 +58,12 @@ export default function Project() {
     const projectIndex = projectList.findIndex((project: IProjectData) => project.id === id);
     projectList[projectIndex].star = !projectList[projectIndex].star;
     setValue(value + 1);
+  };
+
+  const onCompletedSubmit = (res: AxiosResponse) => {
+    setVisible(false);
+    const updateProjectList = [...projectList, ...[res.data]];
+    setProjectList(updateProjectList);
   };
 
   const removeProject = (id: string) => {
@@ -117,6 +125,13 @@ export default function Project() {
         updateProject={getProjectFromChildren}
         updateIsCreateNewCard={getCreateNewCardStateFromChildren}
       />
+      {visible && (
+        <div className={styles.modalContainer} ref={myRef}>
+          <div className={styles.modal}>
+            <ProjectEditor onCompletedSubmit={onCompletedSubmit} />
+          </div>
+        </div>
+      )}
       {isCreateNewCard && (
         <CreateNewCard
           updateIsCreateNewCard={getCreateNewCardStateFromChildren}
@@ -132,7 +147,9 @@ export default function Project() {
                 <button
                   type="button"
                   className={styles.createButton}
-                  onClick={() => navigate('/create-projects')}
+                  onClick={() => {
+                    setVisible(true);
+                  }}
                 >
                   Create project
                 </button>

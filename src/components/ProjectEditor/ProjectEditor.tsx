@@ -10,7 +10,12 @@ import ProjectLead from './ProjectLead/ProjectLead';
 import { createProject } from '../../api/projects/projects';
 import { IOnChangeProjectLead, IProjectEditor } from '../../types';
 
-function ProjectEditor() {
+interface ProjectEditorProps {
+  onCompletedSubmit?: (res: AxiosResponse) => void;
+  showCancelBtn?: boolean;
+}
+
+function ProjectEditor(props: ProjectEditorProps) {
   const [data, setData] = useState<IProjectEditor>({
     name: '',
     key: '',
@@ -19,6 +24,7 @@ function ProjectEditor() {
   });
   const [hasError, setError] = useState(false);
   const navigate = useNavigate();
+  const { onCompletedSubmit = null, showCancelBtn = false } = props;
   const onChange = (e: IOnChangeProjectLead) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
@@ -40,7 +46,9 @@ function ProjectEditor() {
           return;
         }
         setError(false);
-        navigate('/projects');
+        if (onCompletedSubmit) {
+          onCompletedSubmit(res);
+        }
       })
       .catch(() => {
         setError(true);
@@ -60,19 +68,26 @@ function ProjectEditor() {
           <button className={styles.saveBtn} type="submit" onClick={onSave}>
             Save
           </button>
-          <button
-            className={styles.cancelBtn}
-            type="button"
-            onClick={() => {
-              navigate(-1);
-            }}
-          >
-            Cancel
-          </button>
+          {showCancelBtn && (
+            <button
+              className={styles.cancelBtn}
+              type="button"
+              onClick={() => {
+                navigate(-1);
+              }}
+            >
+              Cancel
+            </button>
+          )}
         </form>
       </div>
     </div>
   );
 }
+
+ProjectEditor.defaultProps = {
+  onCompletedSubmit: null,
+  showCancelBtn: false
+};
 
 export default ProjectEditor;
