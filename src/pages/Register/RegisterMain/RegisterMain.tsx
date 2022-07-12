@@ -9,6 +9,7 @@ import GoogleIcon from './google-logo.svg';
 import MicrosoftIcon from './microsoft-logo.svg';
 import AppleIcon from './apple-logo.svg';
 import Email from '../../../assets/email.png';
+import Error from '../../../assets/error.png';
 
 export default function RegisterMain() {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ export default function RegisterMain() {
   const [verifyEmail, setVerifyEmail] = useState('');
   const [emailRegisterProcess, setEmailRegisterProcess] = useState(false);
   const [emailCheckProcess, setEmailCheckProcess] = useState(false);
+  const [invalidateStatus, setInvalidateStatus] = useState(false);
   let emailRecorder = '';
   let nameRecorder = '';
   let passwordRecorder = '';
@@ -26,12 +28,16 @@ export default function RegisterMain() {
   useEffect(() => {
     const fetchEmailByToken = async () => {
       if (emailToken !== undefined && emailToken != null) {
-        const result = await emailVerifyCheck(emailToken);
-        if (result.status !== 200) {
-          navigate('./register');
+        try {
+          const result = await emailVerifyCheck(emailToken);
+          setVerifyEmail(result.data.email);
+          setEmailCheckProcess(true);
+        } catch (e) {
+          setEmailRegisterProcess(true);
+          setInvalidateStatus(true);
         }
-        setVerifyEmail(result.data.email);
-        setEmailCheckProcess(true);
+      } else {
+        navigate('/register');
       }
     };
     fetchEmailByToken();
@@ -95,8 +101,17 @@ export default function RegisterMain() {
       <form onSubmit={handleSubmit}>
         {emailRegisterProcess ? (
           <div className={styles.emailTip}>
-            <img src={Email} alt="Email Icon" />
-            <h1>Email have Sent, Please check your email</h1>
+            {invalidateStatus ? (
+              <>
+                <img src={Error} alt="Error Icon" />
+                <h1>The link is invalidate, please contact the administrator</h1>
+              </>
+            ) : (
+              <>
+                <img src={Email} alt="Email Icon" />
+                <h1>Email have Sent, Please check your email</h1>
+              </>
+            )}
           </div>
         ) : (
           <>
