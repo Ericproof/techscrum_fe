@@ -77,3 +77,12 @@ export interface IOnChangeAssignee {
     value: string;
   };
 }
+
+export interface IUserInfo {
+  id?: string;
+  email?: string;
+  name?: string;
+  avatarIcon?: string;
+  token?: string;
+  refreshToken?: string;
+}
