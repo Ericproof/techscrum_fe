@@ -50,27 +50,12 @@ export default function ProjectHeader({ projects, updateProject, updateIsCreateN
     <div className={styles.projectHeader}>
       <header>
         <nav ref={myRef}>
-          <div className={styles.menu}>
-            <button type="button">
-              <CgMenuGridR />
-            </button>
-          </div>
           <a href="/#">
             <div className={styles.logo}>
               <svg />
             </div>
           </a>
           <div className={styles.options}>
-            <div className={styles.option}>
-              <button type="button">
-                <span className={styles.title}>Your work</span>
-                <div className={styles.btn}>
-                  <span>
-                    <RiArrowDropDownLine />
-                  </span>
-                </div>
-              </button>
-            </div>
             {visible ? (
               <>
                 <div className={styles.optionProjects}>
@@ -189,26 +174,6 @@ export default function ProjectHeader({ projects, updateProject, updateIsCreateN
                 </button>
               </div>
             )}
-            <div className={styles.option}>
-              <button type="button">
-                <span className={styles.title}>Filters</span>
-                <div className={styles.btn}>
-                  <span>
-                    <RiArrowDropDownLine />
-                  </span>
-                </div>
-              </button>
-            </div>
-            <div className={styles.option}>
-              <button type="button">
-                <span className={styles.title}>Dashboards</span>
-                <div className={styles.btn}>
-                  <span>
-                    <RiArrowDropDownLine />
-                  </span>
-                </div>
-              </button>
-            </div>
             <div className={styles.option}>
               <button type="button">
                 <span className={styles.title}>People</span>

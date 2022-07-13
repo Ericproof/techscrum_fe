@@ -1,10 +1,9 @@
 .container {
   padding: 0px 32px 32px 32px;
-  position: flex;
+  display: flex;
   flex-direction: column;
   overflow: scroll;
-  height: 77vh;
-  width: 35vw;
+  width: 50%;
   .footerContent {
     margin-top: 10px;
     width: 100%;
