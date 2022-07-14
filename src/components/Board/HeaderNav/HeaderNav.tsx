@@ -17,6 +17,10 @@ export default function HeaderNav(props: IHeaderProps) {
   );
 
   const currentUrl = window.location.pathname;
+
+  if (!currentProject || !currentProject[0]) {
+    return null;
+  }
   return (
     <div>
       <nav className={styles.navLayout}>
