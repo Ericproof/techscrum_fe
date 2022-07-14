@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { DatePicker } from '@atlaskit/datetime-picker';
 import { TaskEntity } from '../../../api/task/entity/task';
 import { IColumnsFromBackend } from '../../../types';
@@ -139,7 +139,7 @@ export default function CardRightContent({ columnsInfo, taskInfo, taskStatusOnch
             <div>
               <DatePicker
                 dateFormat="MM-DD-YYYY"
-                defaultValue={taskInfo.dueAt?.toString() ?? undefined}
+                value={taskInfo.dueAt?.toString() ?? undefined}
                 onChange={(date) => {
                   const updatedTaskInfo = { ...taskInfo };
                   updatedTaskInfo.dueAt = new Date(date);
