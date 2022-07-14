@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { DatePicker } from '@atlaskit/datetime-picker';
 import { TaskEntity } from '../../../api/task/entity/task';
 import { IColumnsFromBackend } from '../../../types';
