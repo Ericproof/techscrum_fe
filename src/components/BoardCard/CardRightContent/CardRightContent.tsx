@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { DatePicker } from '@atlaskit/datetime-picker';
 import { TaskEntity } from '../../../api/task/entity/task';
-import { IColumnsFromBackend, IOnChangeTag } from '../../../types';
+import { IColumnsFromBackend } from '../../../types';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import style from './CardRightContent.module.scss';
 import Reporter from './Reporter/Reporter';
