@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate, Link, useParams } from 'react-router-dom';
 import { AxiosError } from 'axios';
 import { emailCheck, emailVerifyCheck } from '../../../api/register/emailCheck';
+import { IUserInfo } from '../../../types';
+import { UserDispatchContext } from '../../../context/UserInfoProvider';
 import register from '../../../api/register/register';
 import styles from './RegisterMain.module.scss';
 import Icon from '../../../assets/logo.svg';
@@ -17,6 +19,7 @@ export default function RegisterMain() {
   const illegalCharacter = /[%&]/;
 
   const { token: emailToken } = useParams();
+  const setUserInfo = useContext(UserDispatchContext);
   const [verifyEmail, setVerifyEmail] = useState('');
   const [emailRegisterProcess, setEmailRegisterProcess] = useState(false);
   const [emailCheckProcess, setEmailCheckProcess] = useState(false);
@@ -68,13 +71,28 @@ export default function RegisterMain() {
     }
 
     try {
-      await register(emailToken ?? 'undefined', {
+      const result = await register(emailToken ?? 'undefined', {
         email: verifyEmail,
         name: nameRecorder,
         password: passwordRecorder
       });
-
-      navigate(`/login`);
+      const { user, userProfile, token, refreshToken } = result.data;
+      if (user && userProfile) {
+        const userLoginInfo: IUserInfo = {
+          id: user.id,
+          email: user.email,
+          name: userProfile.name,
+          avatarIcon: userProfile.avatarIcon,
+          token,
+          refreshToken
+        };
+        setUserInfo(userLoginInfo);
+        localStorage.setItem('token', token);
+        localStorage.setItem('refreshToken', refreshToken);
+        navigate(`/projects`);
+      } else {
+        tip('*Incorrect email or password, please try again.');
+      }
     } catch (e) {
       tip('Something go wrong, please contact staff');
     }

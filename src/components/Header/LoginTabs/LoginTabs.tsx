@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './LoginTabs.module.scss';
 import { UserContext } from '../../../context/UserInfoProvider';
+import PersonalProfile from '../../ProjectHeader/PersonalProfile/PersonalProfile';
 
 interface Props {
   show: boolean;
@@ -17,10 +18,7 @@ export default function LoginTabs({ show }: Props) {
           <Link to="/register">Register</Link>
         </>
       ) : (
-        <>
-          <Link to="/#">Hi {userInfo.name}</Link>
-          <Link to="/#">Logout</Link>
-        </>
+        <PersonalProfile userInfo={userInfo} />
       )}
     </div>
   );

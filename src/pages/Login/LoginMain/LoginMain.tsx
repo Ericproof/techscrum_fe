@@ -43,7 +43,7 @@ export default function LoginMain() {
         setUserInfo(userLoginInfo);
         localStorage.setItem('token', token);
         localStorage.setItem('refreshToken', refreshToken);
-        navigate(`/`);
+        navigate(`/projects`);
       } else {
         tip('*Incorrect email or password, please try again.');
       }

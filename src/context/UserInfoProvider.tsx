@@ -16,7 +16,8 @@ function UserProvider({ children }: ILoginInfoProvider) {
     const fetchUserInfo = async (token: string, refreshToken: string) => {
       try {
         const result = await getUserInfo(token, refreshToken);
-        setUserInfo(result.data.userInfo);
+        const { user, userInfo: userProfile } = result.data;
+        setUserInfo({ ...userProfile, email: user.email });
         localStorage.setItem('token', result.data.token ?? token);
         localStorage.setItem('refreshToken', result.data.refreshToken ?? refreshToken);
       } catch (e) {
