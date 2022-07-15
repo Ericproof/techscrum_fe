@@ -30,9 +30,9 @@
   "rules": {
     "react/button-has-type": [
       {
-        "button": true,
-        "submit": true,
-        "reset": true
+        "button": 0,
+        "submit": 0,
+        "reset": 0
       }
     ],
     "linebreak-style": "off",
