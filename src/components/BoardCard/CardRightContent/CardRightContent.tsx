@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { DatePicker } from '@atlaskit/datetime-picker';
 import { TaskEntity } from '../../../api/task/entity/task';
-import { IColumnsFromBackend } from '../../../types';
+import { IColumnsFromBackend, IOnChangeTag } from '../../../types';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import style from './CardRightContent.module.scss';
+import Reporter from './Reporter/Reporter';
+import Assignee from './Assignee/Assignee';
 
 interface Props {
   taskInfo: TaskEntity;
@@ -11,8 +13,15 @@ interface Props {
   taskStatusOnchange: (taskInfo: TaskEntity) => void;
 }
 
+const tags = [
+  { id: 0, tag: 'Frontend' },
+  { id: 1, tag: 'Backend' }
+];
+
 export default function CardRightContent({ columnsInfo, taskInfo, taskStatusOnchange }: Props) {
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
+  const [isLabelsVisible, setIsLabelsVisible] = useState(false);
+  const [tagState, setTagState] = useState(tags[0]);
   const handleClickOutside = () => setVisible(true);
 
   const monthShortNames = [
@@ -111,28 +120,34 @@ export default function CardRightContent({ columnsInfo, taskInfo, taskStatusOnch
           </button>
         </div>
         <div className={style.boxBody}>
-          <div className={style.checkList}>
-            <div>Develop CheckList</div>
-            <div>None</div>
-          </div>
-          <div className={style.assignee}>
-            <div>Assignee</div>
-            <div>
-              <span className={style.icon} />
-              <div className={style.roleName}>Evan Lin</div>
-            </div>
-          </div>
+          <Assignee />
           <div className={style.labels}>
             <div>Labels</div>
-            <div>None</div>
-          </div>
-          <div className={style.sprint}>
-            <div>Sprint</div>
-            <div>TEC Sprint 6</div>
-          </div>
-          <div className={style.storyPoint}>
-            <div>Story Point estimate</div>
-            <div>{taskInfo.storyPoint}</div>
+            <button onClick={() => setIsLabelsVisible(true)} type="button">
+              None
+            </button>
+            {isLabelsVisible && (
+              <div className={style.labelDropdown}>
+                <ul>
+                  {tags.map((tag) => (
+                    <li key={tag.id}>
+                      <button
+                        type="button"
+                        name="tag"
+                        className={style.tagBtn}
+                        onClick={() => {
+                          setTagState({ id: tag.id, tag: tag.tag });
+
+                          setIsLabelsVisible(false);
+                        }}
+                      >
+                        {tag.tag}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
           <div className={style.dueDate}>
             <div>Due date</div>
@@ -148,13 +163,7 @@ export default function CardRightContent({ columnsInfo, taskInfo, taskStatusOnch
               />
             </div>
           </div>
-          <div className={style.reporter}>
-            <div>Reporter</div>
-            <div>
-              <span className={style.icon} />
-              <div className={style.roleName}>Evan Lin</div>
-            </div>
-          </div>
+          <Reporter />
         </div>
       </div>
       <div className={style.createAndUpdateDate}>
