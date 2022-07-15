@@ -41,7 +41,7 @@ export default function PersonalProfile() {
                         </a>
                         <a href="/#">
                           <div className={styles.title}>
-                            <span>Accounting settings</span>
+                            <span>Account settings</span>
                           </div>
                           <div className={styles.iconSection}>
                             <div className={styles.icon}>
