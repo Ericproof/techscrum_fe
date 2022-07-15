@@ -14,12 +14,7 @@ export default function Shortcut({ operation, setAddLinkToggle, addLinkToggle }:
   const [webValue, setWebValue] = useState('');
   const [nameValue, setNameValue] = useState('');
 
-  useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log('webValue:', webValue);
-    // eslint-disable-next-line no-console
-    console.log('nameValue:', nameValue);
-  }, [webValue, nameValue]);
+  useEffect(() => {}, [webValue, nameValue]);
 
   return (
     <div className={styles.background}>
