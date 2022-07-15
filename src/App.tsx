@@ -27,10 +27,10 @@ function App() {
     <UserProvider>
       <ProjectProvider>
         <Routes>
-          <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
           <Route path="/register/:token" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Home />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/settings" element={<Setting />} />
           <Route path="/cookie-policy" element={<CookiePolicy />} />

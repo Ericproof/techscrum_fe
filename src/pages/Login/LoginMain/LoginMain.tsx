@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { MdOutlineVisibility, MdVisibility } from 'react-icons/md';
-import { login } from '../../../api/login/login';
+import login from '../../../api/login/login';
 import { IUserInfo } from '../../../types';
 import { UserDispatchContext } from '../../../context/UserInfoProvider';
 import styles from './LoginMain.module.scss';

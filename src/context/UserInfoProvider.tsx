@@ -1,5 +1,6 @@
-import React, { createContext, Dispatch, SetStateAction, useState } from 'react';
+import React, { createContext, Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { IUserInfo } from '../types';
+import { getUserInfo } from '../api/userProfile/userProfile';
 
 const UserContext = createContext<IUserInfo>({});
 const UserDispatchContext = createContext<Dispatch<SetStateAction<IUserInfo>>>(() => {});
@@ -10,6 +11,30 @@ interface ILoginInfoProvider {
 
 function UserProvider({ children }: ILoginInfoProvider) {
   const [userInfo, setUserInfo] = useState<IUserInfo>({});
+
+  useEffect(() => {
+    const fetchUserInfo = async (token: string, refreshToken: string) => {
+      try {
+        const result = await getUserInfo(token, refreshToken);
+        setUserInfo(result.data.userInfo);
+        localStorage.setItem('token', result.data.token ?? token);
+        localStorage.setItem('refreshToken', result.data.refreshToken ?? refreshToken);
+      } catch (e) {
+        setUserInfo({});
+      }
+    };
+
+    const token = localStorage.getItem('token');
+    const refreshToken = localStorage.getItem('refreshToken');
+    if (
+      token !== undefined &&
+      token != null &&
+      refreshToken !== undefined &&
+      refreshToken !== null
+    ) {
+      fetchUserInfo(token, refreshToken);
+    }
+  }, []);
 
   return (
     <UserContext.Provider value={userInfo}>
