@@ -30,6 +30,15 @@ export default function CardRightContent({ columnsInfo, taskInfo, taskStatusOnch
     'Dec'
   ];
 
+  const dateWithDay = (d: Date | null) => {
+    if (d != null) {
+      const date = d.toString().split('T')[0];
+      const dateDataArray = date.split('-');
+      return `${dateDataArray[1]}-${dateDataArray[2]}-${dateDataArray[0]}`;
+    }
+    return '';
+  };
+
   const dateWithTimestamp = (d: Date | null) => {
     if (d != null) {
       const date = d.toString().split('T')[0];
@@ -139,7 +148,8 @@ export default function CardRightContent({ columnsInfo, taskInfo, taskStatusOnch
             <div>
               <DatePicker
                 dateFormat="MM-DD-YYYY"
-                defaultValue={taskInfo.dueAt?.toString() ?? undefined}
+                placeholder={dateWithDay(taskInfo.dueAt ?? null)}
+                defaultValue={dateWithDay(taskInfo.dueAt ?? null)}
                 onChange={(date) => {
                   const updatedTaskInfo = { ...taskInfo };
                   updatedTaskInfo.dueAt = new Date(date);
