@@ -7,7 +7,7 @@ interface Props {
   focusEventHandler: () => void;
 }
 
-export default function Description({ taskInfo, focusEventHandler }: Props) {
+export default function Title({ taskInfo, focusEventHandler }: Props) {
   return (
     <div className={styles.cardTitle}>
       <label htmlFor="title">
