@@ -120,10 +120,6 @@ export default function CardRightContent({ columnsInfo, taskInfo, taskStatusOnch
           </button>
         </div>
         <div className={style.boxBody}>
-          <div className={style.checkList}>
-            <div>Develop CheckList</div>
-            <div>None</div>
-          </div>
           <div className={style.assignee}>
             <div>Assignee</div>
             <div>
@@ -135,14 +131,7 @@ export default function CardRightContent({ columnsInfo, taskInfo, taskStatusOnch
             <div>Labels</div>
             <div>None</div>
           </div>
-          <div className={style.sprint}>
-            <div>Sprint</div>
-            <div>TEC Sprint 6</div>
-          </div>
-          <div className={style.storyPoint}>
-            <div>Story Point estimate</div>
-            <div>{taskInfo.storyPoint}</div>
-          </div>
+
           <div className={style.dueDate}>
             <div>Due date</div>
             <div>

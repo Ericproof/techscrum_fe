@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TaskEntity } from '../../../api/task/entity/task';
 import style from './CardLeftContent.module.scss';
 import Attach from './components/Attach/Attach';
@@ -12,6 +12,9 @@ interface Props {
 }
 
 export default function CardLeftContent({ taskInfo, onSave }: Props) {
+  const [visible, setVisible] = useState(false);
+
+  const onFocusEventHandler = () => setVisible(true);
   const onSaveProcessing = (e: React.FormEvent) => {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
@@ -19,21 +22,26 @@ export default function CardLeftContent({ taskInfo, onSave }: Props) {
     const description = (form[2] as HTMLTextAreaElement).value;
     const updatedTaskInfo = { ...taskInfo, title, description };
     onSave(updatedTaskInfo);
+    setVisible(false);
   };
+  const onResetHandler = () => setVisible(false);
+
   return (
     <div className={style.container}>
-      <form onSubmit={onSaveProcessing} id="task-form">
-        <Title taskInfo={taskInfo} />
+      <form onSubmit={onSaveProcessing} onReset={onResetHandler} id="task-form">
+        <Title taskInfo={taskInfo} focusEventHandler={onFocusEventHandler} />
         <Attach />
-        <Description taskInfo={taskInfo} />
-        <div className={style.footerContent}>
-          <button className={style.saveButton} type="submit">
-            <span>Save</span>
-          </button>
-          <button className={style.cancelButton} type="button">
-            <span>Cancel</span>
-          </button>
-        </div>
+        <Description taskInfo={taskInfo} focusEventHandler={onFocusEventHandler} />
+        {visible && (
+          <div className={style.footerContent}>
+            <button className={style.saveButton} type="submit">
+              <span>Save</span>
+            </button>
+            <button className={style.cancelButton} type="reset">
+              <span>Cancel</span>
+            </button>
+          </div>
+        )}
         <LeftBottom />
       </form>
     </div>
