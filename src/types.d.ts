@@ -38,7 +38,7 @@ export interface IItemFromBackend {
 }
 
 export interface IColumnsFromBackend {
-  [x: string]: { name: string; items: IItemFromBackend[] };
+  [statusId: string]: { name: string; items: IItemFromBackend[] };
 }
 
 export default interface IBoardEntity {
@@ -58,6 +58,12 @@ export default interface IBoardEntity {
   }[];
 }
 
+export interface IOnChangeTaskStatus {
+  target: {
+    status: string;
+  };
+}
+
 export interface IOnChangeProjectLead {
   target: {
     name: string;
@@ -70,4 +76,13 @@ export interface IOnChangeAssignee {
     name: string;
     value: string;
   };
+}
+
+export interface IUserInfo {
+  id?: string;
+  email?: string;
+  name?: string;
+  avatarIcon?: string;
+  token?: string;
+  refreshToken?: string;
 }

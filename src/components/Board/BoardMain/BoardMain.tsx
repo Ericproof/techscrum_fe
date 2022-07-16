@@ -1,6 +1,8 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import React from 'react';
 import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
 import { IColumnsFromBackend } from '../../../types';
+import Loading from '../../Loading/Loading';
 import style from './BoardMain.module.scss';
 
 interface Props {
@@ -10,6 +12,9 @@ interface Props {
 }
 
 export default function BoardMain({ columnsInfo, onDragEventHandler, passTaskId }: Props) {
+  if (!columnsInfo || Object.keys(columnsInfo).length === 0) {
+    return <Loading />;
+  }
   return (
     <div className={style.container}>
       <DragDropContext

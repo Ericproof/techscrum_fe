@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { MdOutlineVisibility, MdVisibility } from 'react-icons/md';
-import { login } from '../../../api/login/login';
+import login from '../../../api/login/login';
+import { IUserInfo } from '../../../types';
+import { UserDispatchContext } from '../../../context/UserInfoProvider';
 import styles from './LoginMain.module.scss';
 import Icon from '../../../assets/logo.svg';
 import GoogleIcon from './google-logo.svg';
@@ -10,6 +12,7 @@ import AppleIcon from './apple-logo.svg';
 
 export default function LoginMain() {
   const navigate = useNavigate();
+  const setUserInfo = useContext(UserDispatchContext);
   const illegalCharacter = /[%&]/;
   const [passwordInvisible, setPasswordInvisible] = useState(true);
   const [emailRecorder, setEmailRecorder] = useState('');
@@ -23,14 +26,24 @@ export default function LoginMain() {
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
     try {
-      const resResult = await login({
+      const result = await login({
         email: emailRecorder,
         password: passwordRecorder
       });
-      const { token } = resResult;
-      if (token !== undefined && token !== null) {
+      const { user, userProfile, token, refreshToken } = result.data;
+      if (user && userProfile) {
+        const userLoginInfo: IUserInfo = {
+          id: user.id,
+          email: user.email,
+          name: userProfile.name,
+          avatarIcon: userProfile.avatarIcon,
+          token,
+          refreshToken
+        };
+        setUserInfo(userLoginInfo);
         localStorage.setItem('token', token);
-        navigate(`/`);
+        localStorage.setItem('refreshToken', refreshToken);
+        navigate(`/projects`);
       } else {
         tip('*Incorrect email or password, please try again.');
       }

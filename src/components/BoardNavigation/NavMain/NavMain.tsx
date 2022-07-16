@@ -1,24 +1,29 @@
 import React, { useState } from 'react';
+import { RiPencilFill, RiPencilLine } from 'react-icons/ri';
 import { NavLink, useParams } from 'react-router-dom';
-
-import style from './NavMain.module.scss';
+import addShortcut from '../../../assets/addShortcut.svg';
+import Shortcut from '../../AddShortcut/Shortcut';
+import styles from './NavMain.module.scss';
 
 export default function NavMain() {
   const [planningToggle, setPlanningToggle] = useState(true);
   const [developmentToggle, setDevelopmentToggle] = useState(true);
   const [operationsToggle, setOperationsToggle] = useState(true);
+  const [operation, setOperation] = useState('');
+
+  const [addLinkToggle, setAddLinkToggle] = useState(false);
   const { boardId = '', projectId = '' } = useParams();
   return (
-    <div className={style.container}>
-      <div className={style.containerTop}>
-        <div className={style.containerItem}>
-          <div className={style.containerItemTitle}>
+    <div className={styles.container}>
+      <div className={styles.containerTop}>
+        <div className={styles.containerItem}>
+          <div className={styles.containerItemTitle}>
             <button
               type="button"
               onClick={() => {
                 setPlanningToggle(!planningToggle);
               }}
-              className={style.planningButton}
+              className={styles.planningButton}
             >
               {planningToggle ? (
                 <span>
@@ -31,7 +36,7 @@ export default function NavMain() {
                   </svg>
                 </span>
               ) : (
-                <span className={style.collapseICon}>
+                <span className={styles.collapseICon}>
                   <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
                     <path
                       d="M8.292 10.293a1.009 1.009 0 000 1.419l2.939 2.965c.218.215.5.322.779.322s.556-.107.769-.322l2.93-2.955a1.01 1.01 0 000-1.419.987.987 0 00-1.406 0l-2.298 2.317-2.307-2.327a.99.99 0 00-1.406 0z"
@@ -47,8 +52,8 @@ export default function NavMain() {
           </div>
 
           {planningToggle && (
-            <div className={style.items}>
-              <NavLink to="/nav">
+            <div className={styles.items}>
+              <NavLink to="/nav" style={{ display: 'none' }}>
                 <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
                   <path
                     d="M6 2h10a3 3 0 010 6H6a3 3 0 110-6zm0 2a1 1 0 100 2h10a1 1 0 000-2H6zm4 5h8a3 3 0 010 6h-8a3 3 0 010-6zm0 2a1 1 0 000 2h8a1 1 0 000-2h-8zm-4 5h6a3 3 0 010 6H6a3 3 0 010-6zm0 2a1 1 0 000 2h6a1 1 0 000-2H6z"
@@ -59,7 +64,7 @@ export default function NavMain() {
                 <p>Roadmap</p>
               </NavLink>
 
-              <NavLink to="/nav">
+              <NavLink to="/nav" style={{ display: 'none' }}>
                 <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
                   <g fill="currentColor">
                     <path d="M5 19.002C5 19 17 19 17 19v-2.002C17 17 5 17 5 17v2.002zm-2-2.004C3 15.894 3.895 15 4.994 15h12.012c1.101 0 1.994.898 1.994 1.998v2.004A1.997 1.997 0 0117.006 21H4.994A1.998 1.998 0 013 19.002v-2.004z" />
@@ -83,14 +88,14 @@ export default function NavMain() {
           )}
         </div>
 
-        <div className={style.containerItem}>
-          <div className={style.containerItemTitle}>
+        <div className={styles.containerItem} style={{ display: 'none' }}>
+          <div className={styles.containerItemTitle}>
             <button
               type="button"
               onClick={() => {
                 setDevelopmentToggle(!developmentToggle);
               }}
-              className={style.developmentButton}
+              className={styles.developmentButton}
             >
               {developmentToggle ? (
                 <span>
@@ -103,7 +108,7 @@ export default function NavMain() {
                   </svg>
                 </span>
               ) : (
-                <span className={style.collapseICon}>
+                <span className={styles.collapseICon}>
                   <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
                     <path
                       d="M8.292 10.293a1.009 1.009 0 000 1.419l2.939 2.965c.218.215.5.322.779.322s.556-.107.769-.322l2.93-2.955a1.01 1.01 0 000-1.419.987.987 0 00-1.406 0l-2.298 2.317-2.307-2.327a.99.99 0 00-1.406 0z"
@@ -118,7 +123,7 @@ export default function NavMain() {
           </div>
 
           {developmentToggle && (
-            <div className={style.items}>
+            <div className={styles.items}>
               <NavLink to="/nav">
                 <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
                   <path
@@ -150,13 +155,13 @@ export default function NavMain() {
           )}
         </div>
 
-        <div className={style.containerItem}>
-          <div className={style.items}>
+        <div className={styles.containerItem} style={{ display: 'none' }}>
+          <div className={styles.items}>
             <div
               className={
                 operationsToggle
-                  ? style.containerItemTitle
-                  : `${style.containerItemTitle} ${style.operations}`
+                  ? styles.containerItemTitle
+                  : `${styles.containerItemTitle} ${styles.operations}`
               }
             >
               <button
@@ -164,7 +169,7 @@ export default function NavMain() {
                 onClick={() => {
                   setOperationsToggle(!operationsToggle);
                 }}
-                className={style.operationsButton}
+                className={styles.operationsButton}
               >
                 {operationsToggle ? (
                   <span>
@@ -177,7 +182,7 @@ export default function NavMain() {
                     </svg>
                   </span>
                 ) : (
-                  <span className={style.collapseICon}>
+                  <span className={styles.collapseICon}>
                     <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
                       <path
                         d="M8.292 10.293a1.009 1.009 0 000 1.419l2.939 2.965c.218.215.5.322.779.322s.556-.107.769-.322l2.93-2.955a1.01 1.01 0 000-1.419.987.987 0 00-1.406 0l-2.298 2.317-2.307-2.327a.99.99 0 00-1.406 0z"
@@ -199,7 +204,7 @@ export default function NavMain() {
                     <path d="M7.938 5.481a4.8 4.8 0 00-.777-.063C4.356 5.419 2 7.62 2 10.499 2 13.408 4.385 16 7.1 16h2.881v-1.993H7.1c-1.657 0-3.115-1.663-3.115-3.508 0-1.778 1.469-3.087 3.104-3.087h.012c.389 0 .686.051.97.15l.17.063c.605.248.875-.246.875-.246l.15-.267c.73-1.347 2.201-2.096 3.716-2.119a4.14 4.14 0 014.069 3.644l.046.34s.071.525.665.525c.013 0 .012.005.023.005h.254c1.136 0 1.976.959 1.976 2.158 0 1.207-.987 2.342-2.07 2.342h-3.964V16h3.964C20.105 16 22 13.955 22 11.665c0-1.999-1.312-3.663-3.138-4.074-.707-2.707-3.053-4.552-5.886-4.591-1.975.021-3.901.901-5.038 2.481z" />
                   </g>
                 </svg>
-                <p className={style.deployments}>Deployments</p>
+                <p className={styles.deployments}>Deployments</p>
               </NavLink>
             )}
           </div>
@@ -209,7 +214,7 @@ export default function NavMain() {
       <br />
       <br />
 
-      <div className={style.containerBottom}>
+      <div className={styles.containerBottom}>
         <NavLink to="/nav">
           <svg
             viewBox="0 0 32 32"
@@ -235,6 +240,18 @@ export default function NavMain() {
             </g>
           </svg>
           <span>fe.techscrum</span>
+          <button
+            type="button"
+            className={styles.pencil}
+            onClick={(e) => {
+              e.preventDefault();
+              setAddLinkToggle(!addLinkToggle);
+              setOperation('Edit');
+            }}
+          >
+            <RiPencilLine className={styles.pencilLine} />
+            <RiPencilFill className={styles.pencilFill} />
+          </button>
         </NavLink>
         <br />
         <NavLink to="/nav">
@@ -262,6 +279,18 @@ export default function NavMain() {
             </g>
           </svg>
           <span>be.techscrum</span>
+          <button
+            type="button"
+            className={styles.pencil}
+            onClick={(e) => {
+              e.preventDefault();
+              setAddLinkToggle(!addLinkToggle);
+              setOperation('Edit');
+            }}
+          >
+            <RiPencilLine className={styles.pencilLine} />
+            <RiPencilFill className={styles.pencilFill} />
+          </button>
         </NavLink>
         <br />
         <NavLink to="/nav">
@@ -272,6 +301,18 @@ export default function NavMain() {
             </g>
           </svg>
           <span>drive.google.com</span>
+          <button
+            type="button"
+            className={styles.pencil}
+            onClick={(e) => {
+              e.preventDefault();
+              setAddLinkToggle(!addLinkToggle);
+              setOperation('Edit');
+            }}
+          >
+            <RiPencilLine className={styles.pencilLine} />
+            <RiPencilFill className={styles.pencilFill} />
+          </button>
         </NavLink>
         <br />
         <NavLink to="/settings">
@@ -282,7 +323,39 @@ export default function NavMain() {
             </g>
           </svg>
           <span>Project Settings</span>
+          <button
+            type="button"
+            className={styles.pencil}
+            onClick={(e) => {
+              e.preventDefault();
+              setAddLinkToggle(!addLinkToggle);
+              setOperation('Edit');
+            }}
+          >
+            <RiPencilLine className={styles.pencilLine} />
+            <RiPencilFill className={styles.pencilFill} />
+          </button>
         </NavLink>
+        <br />
+
+        <button
+          className={styles.addShortcut}
+          type="button"
+          onClick={() => {
+            setAddLinkToggle(!addLinkToggle);
+            setOperation('Add');
+          }}
+        >
+          <img src={addShortcut} alt="addShortcut" />
+          <span>Add shortcut</span>
+        </button>
+        {addLinkToggle && (
+          <Shortcut
+            operation={operation}
+            setAddLinkToggle={setAddLinkToggle}
+            addLinkToggle={addLinkToggle}
+          />
+        )}
       </div>
     </div>
   );

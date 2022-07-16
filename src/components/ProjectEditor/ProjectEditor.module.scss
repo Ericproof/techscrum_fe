@@ -10,7 +10,10 @@
     align-items: center;
     form {
       margin-top: 7px;
-      .saveBtn {
+      .cancelBtn{
+        margin-left: 15px;
+      }
+      .saveBtn, .cancelBtn {
         margin-top: 16px;
         border-width: 0px;
         border-radius: 3px;

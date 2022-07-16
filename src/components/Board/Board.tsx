@@ -8,7 +8,7 @@ import ProjectHeader from '../ProjectHeader/ProjectHeader';
 import CreateNewCard from '../CreateNewCard/CreateNewCard';
 import HeaderNav from './HeaderNav/HeaderNav';
 import { getBoard } from '../../api/board/board';
-import { updateTaskStatus, fetchTask } from '../../api/task/task';
+import { updateTaskStatus, fetchTask, updateTask, removeTask } from '../../api/task/task';
 import IBoardEntity, { IColumnsFromBackend, ICardData, IItemFromBackend } from '../../types';
 import BoardCard from '../BoardCard/BoardCard';
 import { TaskEntity } from '../../api/task/entity/task';
@@ -66,8 +66,8 @@ const onDragEnd = (
     const sourceItems = [...sourceColumn.items];
     const destItems = [...destColumn.items];
     const [removed] = sourceItems.splice(source.index, 1);
+    removed.statusId = Number(destination.droppableId);
     destItems.splice(destination.index, 0, removed);
-    updateTaskStatus(result.draggableId, parseInt(result.destination.droppableId, 10));
     setColumns({
       ...columns,
       [source.droppableId]: {
@@ -79,6 +79,7 @@ const onDragEnd = (
         items: destItems
       }
     });
+    updateTaskStatus(result.draggableId, parseInt(result.destination.droppableId, 10));
     return true;
   }
 
@@ -125,13 +126,12 @@ export default function Board() {
   };
 
   const getTaskId = async (itemId: string) => {
-    getViewTaskStateFromChildren();
     const res = await fetchTask(itemId);
     if (res.status !== 200) {
-      getViewTaskStateFromChildren();
       return;
     }
     setTaskData(res.data);
+    getViewTaskStateFromChildren();
   };
 
   const fetchNewCard = (newCard: ICardData) => {
@@ -151,6 +151,60 @@ export default function Board() {
     return onDragEnd(result, columnsInfo, setColumnsInfo);
   };
 
+  const updateTaskInfo = async (newTaskInfo: TaskEntity) => {
+    try {
+      if (newTaskInfo.id !== undefined) {
+        const req = await updateTask(newTaskInfo.id, newTaskInfo);
+        const updatedTaskInfo = req.data;
+        const updatedColumns = { ...columnsInfo };
+        if (updatedTaskInfo.statusId !== undefined && taskData.statusId !== undefined) {
+          columnsInfo[taskData.statusId].items.forEach((item, index) => {
+            if (
+              item.id === updatedTaskInfo.id &&
+              updatedTaskInfo.title !== undefined &&
+              updatedTaskInfo.title != null &&
+              item.statusId !== undefined &&
+              updatedTaskInfo.statusId !== undefined
+            ) {
+              const updatedTitle = updatedTaskInfo.title;
+              const updatedStatusId = updatedTaskInfo.statusId;
+              const updatedItem = { ...item, title: updatedTitle, statusId: updatedStatusId };
+              if (updatedStatusId === item.statusId) {
+                updatedColumns[item.statusId].items[index] = updatedItem;
+                return;
+              }
+              updatedColumns[item.statusId].items.splice(index, 1);
+              updatedColumns[updatedStatusId].items.push(updatedItem);
+            }
+          });
+        }
+        setColumnsInfo(updatedColumns);
+        setTaskData(updatedTaskInfo);
+      }
+    } catch (e) {
+      getViewTaskStateFromChildren();
+    }
+  };
+
+  const deleteTask = async () => {
+    if (taskData.id !== undefined && taskData.id != null) {
+      try {
+        await removeTask(taskData.id);
+      } finally {
+        getViewTaskStateFromChildren();
+        const updatedColumns = { ...columnsInfo };
+        if (taskData.statusId !== undefined) {
+          columnsInfo[taskData.statusId].items.forEach((item, index) => {
+            if (item.statusId !== undefined && item.id === taskData.id) {
+              updatedColumns[item.statusId].items.splice(index, 1);
+            }
+          });
+        }
+        setColumnsInfo(updatedColumns);
+        setTaskData({});
+      }
+    }
+  };
   useEffect(() => {
     const fetchColumnsData = (boardInfo: IBoardEntity) => {
       let columnInfoData: IColumnsFromBackend = {};
@@ -170,7 +224,6 @@ export default function Board() {
     };
     fetchBoardInfo();
   }, [inputQuery, boardId]);
-
   return (
     <div className={style.container}>
       <ProjectHeader
@@ -178,7 +231,7 @@ export default function Board() {
         updateProject={getProjectFromChildren}
         updateIsCreateNewCard={getCreateNewCardStateFromChildren}
       />
-      <HeaderNav />
+      <HeaderNav name="projects" />
       <BoardSearch
         updateIsCreateNewCard={getCreateNewCardStateFromChildren}
         setInputQuery={setInputQuery}
@@ -195,7 +248,13 @@ export default function Board() {
         />
       )}
       {isViewTask && (
-        <BoardCard updateIsViewTask={getViewTaskStateFromChildren} taskData={taskData} />
+        <BoardCard
+          updateIsViewTask={getViewTaskStateFromChildren}
+          taskData={taskData}
+          onSave={updateTaskInfo}
+          columnsInfo={columnsInfo}
+          deleteTask={deleteTask}
+        />
       )}
     </div>
   );

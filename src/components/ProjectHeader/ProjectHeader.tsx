@@ -1,4 +1,4 @@
-import React, { useState, createRef } from 'react';
+import React, { createRef, useContext } from 'react';
 import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 import { BiPlus } from 'react-icons/bi';
 import { CgMenuGridR } from 'react-icons/cg';
@@ -7,7 +7,10 @@ import { useNavigate } from 'react-router-dom';
 import styles from './ProjectHeader.module.scss';
 import useOutsideAlerter from '../../hooks/OutsideAlerter';
 import PersonalProfile from './PersonalProfile/PersonalProfile';
-import { IProject } from '../../types';
+import { IProject, IProjectData } from '../../types';
+import { ProjectContext } from '../../context/ProjectProvider';
+import { UserContext } from '../../context/UserInfoProvider';
+import Icon from '../Header/IconTab/IconTab';
 
 interface Props {
   projects: IProject[];
@@ -16,16 +19,16 @@ interface Props {
 }
 
 export default function ProjectHeader({ projects, updateProject, updateIsCreateNewCard }: Props) {
-  const latestTwoProjects = projects.slice(0, 2);
-  const [projectList] = useState(latestTwoProjects);
+  const projectList = useContext(ProjectContext);
+  const userInfo = useContext(UserContext);
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const handleClickOutside = (state: boolean) => setVisible(!state);
   const navigate = useNavigate();
-  const handleClickEvent = (e: React.MouseEvent<HTMLSpanElement>) => {
+  const handleClickEvent = (e: React.MouseEvent<HTMLSpanElement>, project: IProjectData) => {
     e.preventDefault();
     const clickStartEventFlag = (e.target as Element).className.includes('Star');
     if (!clickStartEventFlag) {
-      navigate(`/#`);
+      navigate(`/projects/${project.id}/board/${project.boardId}`);
     }
   };
   const refStar = projectList.map(() => createRef<HTMLDivElement>());
@@ -50,27 +53,12 @@ export default function ProjectHeader({ projects, updateProject, updateIsCreateN
     <div className={styles.projectHeader}>
       <header>
         <nav ref={myRef}>
-          <div className={styles.menu}>
-            <button type="button">
-              <CgMenuGridR />
-            </button>
-          </div>
           <a href="/#">
             <div className={styles.logo}>
-              <svg />
+              <Icon />
             </div>
           </a>
           <div className={styles.options}>
-            <div className={styles.option}>
-              <button type="button">
-                <span className={styles.title}>Your work</span>
-                <div className={styles.btn}>
-                  <span>
-                    <RiArrowDropDownLine />
-                  </span>
-                </div>
-              </button>
-            </div>
             {visible ? (
               <>
                 <div className={styles.optionProjects}>
@@ -87,12 +75,22 @@ export default function ProjectHeader({ projects, updateProject, updateIsCreateN
                   <div className={styles.dropdownContainer}>
                     <div className={styles.top}>
                       <div className={styles.recent}>RECENT</div>
-                      {projectList.map((project) => (
-                        <a href="/projects" onClick={handleClickEvent} key={project.id}>
+                      {projectList.slice(0, 2).map((project) => (
+                        <a
+                          href="/projects/"
+                          onClick={(e) => handleClickEvent(e, project)}
+                          key={project.id}
+                        >
                           <span className={styles.iconSection}>
                             <div className={styles.iconContainer}>
                               <span className={styles.icon}>
-                                <img src={project.icon} alt="icon" />
+                                <img
+                                  src={
+                                    project.icon ||
+                                    'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10418?size=small'
+                                  }
+                                  alt="icon"
+                                />
                               </span>
                             </div>
                           </span>
@@ -181,26 +179,6 @@ export default function ProjectHeader({ projects, updateProject, updateIsCreateN
             )}
             <div className={styles.option}>
               <button type="button">
-                <span className={styles.title}>Filters</span>
-                <div className={styles.btn}>
-                  <span>
-                    <RiArrowDropDownLine />
-                  </span>
-                </div>
-              </button>
-            </div>
-            <div className={styles.option}>
-              <button type="button">
-                <span className={styles.title}>Dashboards</span>
-                <div className={styles.btn}>
-                  <span>
-                    <RiArrowDropDownLine />
-                  </span>
-                </div>
-              </button>
-            </div>
-            <div className={styles.option}>
-              <button type="button">
                 <span className={styles.title}>People</span>
                 <div className={styles.btn}>
                   <span>
@@ -234,7 +212,7 @@ export default function ProjectHeader({ projects, updateProject, updateIsCreateN
             </div>
           </div>
         </nav>
-        <PersonalProfile />
+        <PersonalProfile userInfo={userInfo} />
       </header>
     </div>
   );
