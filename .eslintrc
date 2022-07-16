@@ -29,6 +29,7 @@
   },
   "rules": {
     "react/button-has-type": [
+      0,
       {
         "button": 0,
         "submit": 0,
