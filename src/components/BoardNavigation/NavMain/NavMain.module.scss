@@ -148,7 +148,8 @@ $base-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxy
   border-top: 2px solid var(--ds-menu-seperator-color, var(--ds-border, rgba(9, 30, 66, 0.08)));
   padding-top: 30px;
 
-  a {
+  a,
+  .addShortcut {
     display: flex;
     flex-direction: row;
     border-radius: 4px;
@@ -163,13 +164,14 @@ $base-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxy
     line-height: 1.42857142857143;
     text-decoration-skip-ink: auto;
     font-family: $base-font-family;
-    padding: 8px 10px 8px 20px;
+    padding: 8px 10px 8px 10px;
     color: var(--ds-text-subtle, #42526e);
-    width: 220px;
-    margin-left: -10px;
     margin-top: -20px;
+    position: relative;
+    margin-right: 10px;
 
-    svg {
+    svg,
+    img {
       display: flex;
       height: 24px;
       width: 24px;
@@ -189,8 +191,50 @@ $base-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxy
       font-family: $base-font-family;
     }
 
+    .pencil {
+      right: 0;
+      position: absolute;
+      border-width: 0px;
+      border-radius: 3px;
+      box-sizing: border-box;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.1s ease-out 0s,
+        box-shadow 0.15s cubic-bezier(0.47, 0.03, 0.49, 1.38) 0s;
+      white-space: nowrap;
+      background: none;
+      cursor: pointer;
+      padding: 0px;
+      color: var(--ds-text-subtle, #798395);
+
+      .pencilLine {
+        width: 22px;
+        height: 22px;
+        display: none;
+      }
+
+      .pencilFill {
+        width: 22px;
+        height: 22px;
+        display: none;
+      }
+
+      &:hover {
+        .pencilLine {
+          display: none;
+        }
+
+        .pencilFill {
+          display: block;
+        }
+      }
+    }
+
     &:hover {
       background-color: var(--ds-background-selected, #e6effc);
+      .pencilLine {
+        display: block;
+      }
     }
   }
 }

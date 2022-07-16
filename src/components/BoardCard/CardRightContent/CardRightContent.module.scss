@@ -6,7 +6,6 @@ $padding-left: 10px;
   padding: 0px 30px 32px 0px;
   .statusSection {
     min-width: 35%;
-    max-width: 35%;
     .toDoButton {
       background: #0052cc;
       color: #ffffff;
@@ -164,43 +163,6 @@ $padding-left: 10px;
       position: relative;
     }
 
-    .checkList {
-      display: flex;
-      flex-direction: row;
-      margin-bottom: 12px;
-      align-items: center;
-
-      & > div:nth-of-type(1) {
-        box-sizing: border-box;
-        width: 100%;
-        padding-top: 8px;
-        line-height: 1;
-        color: var(--ds-text-subtle, #38465e);
-        font-size: 14px;
-        font-weight: 500;
-      }
-
-      & > div:nth-of-type(2) {
-        font-size: 14px;
-        margin-top: 6px;
-        line-height: 1;
-        padding: 7px 0px;
-        width: 100%;
-        display: inline-block;
-        box-sizing: border-box;
-        max-width: 100%;
-        border: 2px solid transparent;
-        border-radius: 3px;
-        transition: background 0.2s ease 0s;
-        color: var(--ds-text-subtlest, #5e6c84);
-        font-weight: 500;
-        padding-left: $padding-left;
-        &:hover {
-          background: rgba(9, 30, 66, 0.08);
-        }
-      }
-    }
-
     .assignee {
       display: flex;
       flex-direction: row;
@@ -260,79 +222,6 @@ $padding-left: 10px;
       flex-direction: row;
       margin-bottom: 12px;
       align-items: center;
-      & > div:nth-of-type(1) {
-        box-sizing: border-box;
-        width: 100%;
-        padding-top: 8px;
-        line-height: 1;
-        color: var(--ds-text-subtle, #38465e);
-        font-size: 14px;
-        font-weight: 500;
-      }
-
-      & > div:nth-of-type(2) {
-        font-size: 14px;
-        margin-top: 6px;
-        line-height: 1;
-        padding: 7px 0px;
-        width: 100%;
-        display: inline-block;
-        box-sizing: border-box;
-        max-width: 100%;
-        border: 2px solid transparent;
-        border-radius: 3px;
-        transition: background 0.2s ease 0s;
-        color: var(--ds-text-subtlest, #5e6c84);
-        font-weight: 500;
-        padding-left: $padding-left;
-
-        &:hover {
-          background: rgba(9, 30, 66, 0.08);
-        }
-      }
-    }
-    .sprint {
-      display: flex;
-      flex-direction: row;
-      margin-bottom: 12px;
-      align-items: center;
-      & > div:nth-of-type(1) {
-        box-sizing: border-box;
-        width: 100%;
-        padding-top: 8px;
-        line-height: 1;
-        color: var(--ds-text-subtle, #38465e);
-        font-size: 14px;
-        font-weight: 500;
-      }
-
-      & > div:nth-of-type(2) {
-        font-size: 14px;
-        margin-top: 6px;
-        line-height: 1;
-        padding: 7px 0px;
-        width: 100%;
-        display: inline-block;
-        box-sizing: border-box;
-        max-width: 100%;
-        border: 2px solid transparent;
-        border-radius: 3px;
-        transition: background 0.2s ease 0s;
-        color: var(--ds-text-subtlest, #5e6c84);
-        font-weight: 500;
-        padding-left: $padding-left;
-
-        &:hover {
-          background: rgba(9, 30, 66, 0.08);
-        }
-      }
-    }
-    .storyPoint {
-      display: flex;
-      flex-direction: row;
-      margin-bottom: 12px;
-      align-items: center;
-
       & > div:nth-of-type(1) {
         box-sizing: border-box;
         width: 100%;

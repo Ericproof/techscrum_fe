@@ -126,13 +126,12 @@ export default function Board() {
   };
 
   const getTaskId = async (itemId: string) => {
-    getViewTaskStateFromChildren();
     const res = await fetchTask(itemId);
     if (res.status !== 200) {
-      getViewTaskStateFromChildren();
       return;
     }
     setTaskData(res.data);
+    getViewTaskStateFromChildren();
   };
 
   const fetchNewCard = (newCard: ICardData) => {
@@ -152,10 +151,11 @@ export default function Board() {
     return onDragEnd(result, columnsInfo, setColumnsInfo);
   };
 
-  const updateTaskInfo = async (updatedTaskInfo: TaskEntity) => {
+  const updateTaskInfo = async (newTaskInfo: TaskEntity) => {
     try {
-      if (updatedTaskInfo.id !== undefined) {
-        await updateTask(updatedTaskInfo.id, updatedTaskInfo);
+      if (newTaskInfo.id !== undefined) {
+        const req = await updateTask(newTaskInfo.id, newTaskInfo);
+        const updatedTaskInfo = req.data;
         const updatedColumns = { ...columnsInfo };
         if (updatedTaskInfo.statusId !== undefined && taskData.statusId !== undefined) {
           columnsInfo[taskData.statusId].items.forEach((item, index) => {
@@ -224,7 +224,6 @@ export default function Board() {
     };
     fetchBoardInfo();
   }, [inputQuery, boardId]);
-
   return (
     <div className={style.container}>
       <ProjectHeader
