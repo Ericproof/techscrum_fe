@@ -1,4 +1,4 @@
-import React, { useState, createRef, useContext } from 'react';
+import React, { createRef, useContext } from 'react';
 import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 import { BiPlus } from 'react-icons/bi';
 import { CgMenuGridR } from 'react-icons/cg';
@@ -9,6 +9,7 @@ import useOutsideAlerter from '../../hooks/OutsideAlerter';
 import PersonalProfile from './PersonalProfile/PersonalProfile';
 import { IProject, IProjectData } from '../../types';
 import { ProjectContext } from '../../context/ProjectProvider';
+import { UserContext } from '../../context/UserInfoProvider';
 import Icon from '../Header/IconTab/IconTab';
 
 interface Props {
@@ -19,6 +20,7 @@ interface Props {
 
 export default function ProjectHeader({ projects, updateProject, updateIsCreateNewCard }: Props) {
   const projectList = useContext(ProjectContext);
+  const userInfo = useContext(UserContext);
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const handleClickOutside = (state: boolean) => setVisible(!state);
   const navigate = useNavigate();
@@ -210,7 +212,7 @@ export default function ProjectHeader({ projects, updateProject, updateIsCreateN
             </div>
           </div>
         </nav>
-        <PersonalProfile />
+        <PersonalProfile userInfo={userInfo} />
       </header>
     </div>
   );
