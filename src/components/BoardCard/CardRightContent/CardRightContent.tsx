@@ -30,6 +30,15 @@ export default function CardRightContent({ columnsInfo, taskInfo, taskStatusOnch
     'Dec'
   ];
 
+  const dateWithDay = (d: Date | null) => {
+    if (d != null) {
+      const date = d.toString().split('T')[0];
+      const dateDataArray = date.split('-');
+      return `${dateDataArray[1]}-${dateDataArray[2]}-${dateDataArray[0]}`;
+    }
+    return '';
+  };
+
   const dateWithTimestamp = (d: Date | null) => {
     if (d != null) {
       const date = d.toString().split('T')[0];
@@ -111,10 +120,6 @@ export default function CardRightContent({ columnsInfo, taskInfo, taskStatusOnch
           </button>
         </div>
         <div className={style.boxBody}>
-          <div className={style.checkList}>
-            <div>Develop CheckList</div>
-            <div>None</div>
-          </div>
           <div className={style.assignee}>
             <div>Assignee</div>
             <div>
@@ -126,20 +131,14 @@ export default function CardRightContent({ columnsInfo, taskInfo, taskStatusOnch
             <div>Labels</div>
             <div>None</div>
           </div>
-          <div className={style.sprint}>
-            <div>Sprint</div>
-            <div>TEC Sprint 6</div>
-          </div>
-          <div className={style.storyPoint}>
-            <div>Story Point estimate</div>
-            <div>{taskInfo.storyPoint}</div>
-          </div>
+
           <div className={style.dueDate}>
             <div>Due date</div>
             <div>
               <DatePicker
                 dateFormat="MM-DD-YYYY"
-                defaultValue={taskInfo.dueAt?.toString() ?? undefined}
+                placeholder={dateWithDay(taskInfo.dueAt ?? null)}
+                defaultValue={dateWithDay(taskInfo.dueAt ?? null)}
                 onChange={(date) => {
                   const updatedTaskInfo = { ...taskInfo };
                   updatedTaskInfo.dueAt = new Date(date);

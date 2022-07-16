@@ -9,7 +9,11 @@ import useOutsideAlerter from '../../hooks/OutsideAlerter';
 import PersonalProfile from './PersonalProfile/PersonalProfile';
 import { IProject, IProjectData } from '../../types';
 import { ProjectContext } from '../../context/ProjectProvider';
+<<<<<<< HEAD
 import { UserContext } from '../../context/UserInfoProvider';
+=======
+import Icon from '../Header/IconTab/IconTab';
+>>>>>>> 7bc8a65629609e128dea1ec932c35be2a3c2ce3a
 
 interface Props {
   projects: IProject[];
@@ -54,7 +58,7 @@ export default function ProjectHeader({ projects, updateProject, updateIsCreateN
         <nav ref={myRef}>
           <a href="/#">
             <div className={styles.logo}>
-              <svg />
+              <Icon />
             </div>
           </a>
           <div className={styles.options}>

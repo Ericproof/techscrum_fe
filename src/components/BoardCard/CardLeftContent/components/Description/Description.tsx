@@ -4,9 +4,10 @@ import style from './Description.module.scss';
 
 interface Props {
   taskInfo: TaskEntity;
+  focusEventHandler: () => void;
 }
 
-export default function Description({ taskInfo }: Props) {
+export default function Description({ taskInfo, focusEventHandler }: Props) {
   return (
     <div className={style.container}>
       <h2 className={style.description}>Description</h2>
@@ -17,6 +18,7 @@ export default function Description({ taskInfo }: Props) {
         rows={23}
         placeholder="Add a description..."
         defaultValue={taskInfo.description}
+        onFocus={focusEventHandler}
       />
     </div>
   );
