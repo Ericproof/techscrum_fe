@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { DatePicker } from '@atlaskit/datetime-picker';
 import { TaskEntity } from '../../../api/task/entity/task';
-import { IColumnsFromBackend } from '../../../types';
+import { IColumnsFromBackend, IOnChangeTaskReporter } from '../../../types';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import style from './CardRightContent.module.scss';
 import Reporter from './Reporter/Reporter';
 import Assignee from './Assignee/Assignee';
+import Label from './Label/Label';
 
 interface Props {
   taskInfo: TaskEntity;
@@ -13,16 +14,15 @@ interface Props {
   taskStatusOnchange: (taskInfo: TaskEntity) => void;
 }
 
-const tags = [
-  { id: 0, tag: 'Frontend' },
-  { id: 1, tag: 'Backend' }
-];
-
 export default function CardRightContent({ columnsInfo, taskInfo, taskStatusOnchange }: Props) {
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
-  const [isLabelsVisible, setIsLabelsVisible] = useState(false);
-  const [tagState, setTagState] = useState(tags[0]);
   const handleClickOutside = () => setVisible(true);
+
+  const reporterOnchangeEventHandler = (e: IOnChangeTaskReporter) => {
+    const updatedTaskInfo = { ...taskInfo };
+    updatedTaskInfo.reporterId = e.target.id;
+    taskStatusOnchange(updatedTaskInfo);
+  };
 
   const monthShortNames = [
     'Jan',
@@ -130,34 +130,7 @@ export default function CardRightContent({ columnsInfo, taskInfo, taskStatusOnch
         </div>
         <div className={style.boxBody}>
           <Assignee />
-          <div className={style.labels}>
-            <div>Labels</div>
-            <button onClick={() => setIsLabelsVisible(true)} type="button">
-              None
-            </button>
-            {isLabelsVisible && (
-              <div className={style.labelDropdown}>
-                <ul>
-                  {tags.map((tag) => (
-                    <li key={tag.id}>
-                      <button
-                        type="button"
-                        name="tag"
-                        className={style.tagBtn}
-                        onClick={() => {
-                          setTagState({ id: tag.id, tag: tag.tag });
-
-                          setIsLabelsVisible(false);
-                        }}
-                      >
-                        {tag.tag}
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
+          <Label />
           <div className={style.dueDate}>
             <div>Due date</div>
             <div>
@@ -173,7 +146,7 @@ export default function CardRightContent({ columnsInfo, taskInfo, taskStatusOnch
               />
             </div>
           </div>
-          <Reporter />
+          <Reporter reporterOnchangeEventHandler={reporterOnchangeEventHandler} />
         </div>
       </div>
       <div className={style.createAndUpdateDate}>

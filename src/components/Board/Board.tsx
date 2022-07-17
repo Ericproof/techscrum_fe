@@ -152,6 +152,7 @@ export default function Board() {
   };
 
   const updateTaskInfo = async (newTaskInfo: TaskEntity) => {
+    console.log(newTaskInfo);
     try {
       if (newTaskInfo.id !== undefined) {
         const req = await updateTask(newTaskInfo.id, newTaskInfo);

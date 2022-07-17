@@ -21,7 +21,8 @@ export interface TaskEntity {
   description?: string;
   storyPoint?: number;
   dueAt?: Date;
-  assign?: string;
+  assignId?: string;
+  reporterId?: string;
   createdAt?: Date;
   updatedAt?: Date;
 }

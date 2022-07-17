@@ -29,6 +29,12 @@ export interface IAssign {
   name?: string;
 }
 
+export interface ITaskRelator {
+  id?: string;
+  avatar?: string;
+  name?: string;
+}
+
 export interface IItemFromBackend {
   id: string;
   tag?: string;
@@ -75,5 +81,17 @@ export interface IOnChangeAssignee {
   target: {
     name: string;
     value: string;
+  };
+}
+
+export interface IOnChangeTaskReporter {
+  target: {
+    id: string;
+  };
+}
+
+export interface IOnChangeTaskAssignee {
+  target: {
+    id: string;
   };
 }
