@@ -32,7 +32,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
           <Route path="/reset-password" element={<ResetPassword />} />
-          <Route path="/settings" element={<Setting />} />
+          <Route path="/settings/:projectId" element={<Setting />} />
           <Route path="/cookie-policy" element={<CookiePolicy />} />
           <Route path="/gdpr" element={<Gdpr />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
