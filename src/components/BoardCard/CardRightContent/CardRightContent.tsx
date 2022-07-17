@@ -24,6 +24,12 @@ export default function CardRightContent({ columnsInfo, taskInfo, taskStatusOnch
     taskStatusOnchange(updatedTaskInfo);
   };
 
+  const assigneeOnchangeEventHandler = (e: IOnChangeTaskReporter) => {
+    const updatedTaskInfo = { ...taskInfo };
+    updatedTaskInfo.assignId = e.target.id;
+    taskStatusOnchange(updatedTaskInfo);
+  };
+
   const monthShortNames = [
     'Jan',
     'Feb',
@@ -129,7 +135,7 @@ export default function CardRightContent({ columnsInfo, taskInfo, taskStatusOnch
           </button>
         </div>
         <div className={style.boxBody}>
-          <Assignee />
+          <Assignee assigneeOnchangeEventHandler={assigneeOnchangeEventHandler} />
           <Label />
           <div className={style.dueDate}>
             <div>Due date</div>

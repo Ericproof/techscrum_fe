@@ -5,7 +5,7 @@ import { IOnChangeTaskAssignee } from '../../../../types';
 import styles from './Assignee.module.scss';
 
 interface ITaskRelator {
-  onChange: (e: IOnChangeTaskAssignee) => void;
+  assigneeOnchangeEventHandler: (e: IOnChangeTaskAssignee) => void;
 }
 
 const users = [
@@ -46,7 +46,7 @@ const users = [
 ];
 
 export default function Assignee(props: ITaskRelator) {
-  const { onChange } = props;
+  const { assigneeOnchangeEventHandler } = props;
   const [userInfo, setUserInfo] = useState(users[0]);
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const handleClickOutside = () => setVisible(true);
@@ -71,7 +71,7 @@ export default function Assignee(props: ITaskRelator) {
                       type="button"
                       onClick={() => {
                         setUserInfo({ id: user.id, avatar: user.avatar, name: user.name });
-                        onChange({ target: { id: user.id } });
+                        assigneeOnchangeEventHandler({ target: { id: user.id } });
                         setVisible(false);
                       }}
                     >
