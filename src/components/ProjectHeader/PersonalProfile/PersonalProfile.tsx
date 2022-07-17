@@ -46,7 +46,7 @@ export default function PersonalProfile({ userInfo }: Props) {
                           <span>Profile</span>
                         </div>
                       </a>
-                      <a href="/#">
+                      <a href="/account-settings">
                         <div className={styles.title}>
                           <span>Account settings</span>
                         </div>
