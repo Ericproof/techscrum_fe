@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { createShortcut, updateShortcut } from '../../api/shortcut/shortcut';
+import { IShortcutData } from '../../types';
 import AddShortcutFooter from './components/AddShortcutFooter/AddShortcutFooter';
 import EditShortcutFooter from './components/EditShortcutFooter/EditShortcutFooter';
 import ShortcutBody from './components/ShortcutBody/ShortcutBody';
@@ -8,13 +10,67 @@ interface IOperation {
   operation: string;
   addLinkToggle: boolean;
   setAddLinkToggle: (addLinkToggle: boolean) => void;
+  shortCutAdded: (data: IShortcutData) => void;
+  shortCutRemoved: () => void;
+  shortCutUpdated: () => void;
+  selectedLink: IShortcutData | null;
+  currentProjectId: string;
 }
 
-export default function Shortcut({ operation, setAddLinkToggle, addLinkToggle }: IOperation) {
+export default function Shortcut({
+  operation,
+  setAddLinkToggle,
+  addLinkToggle,
+  selectedLink,
+  currentProjectId,
+  shortCutAdded,
+  shortCutRemoved,
+  shortCutUpdated
+}: IOperation) {
   const [webValue, setWebValue] = useState('');
   const [nameValue, setNameValue] = useState('');
+  const [isUrlValid, setIsUrlValid] = useState(true);
+
+  function validURL(str: string) {
+    const pattern = new RegExp(
+      '^(https?:\\/\\/)?' + // protocol
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+        '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+        '(\\#[-a-z\\d_]*)?$',
+      'i'
+    ); // fragment locator
+    return !!pattern.test(str);
+  }
+
+  useEffect(() => {
+    setIsUrlValid(!validURL(webValue));
+  }, [webValue]);
+
+  useEffect(() => {
+    setWebValue(selectedLink?.shortcutLink);
+    setNameValue(selectedLink?.name);
+  }, [selectedLink]);
 
   useEffect(() => {}, [webValue, nameValue]);
+
+  const onClickAddShortcut = () => {
+    createShortcut(currentProjectId, { shortcutName: nameValue, webAddress: webValue }).then(
+      (res) => {
+        shortCutAdded(res.data);
+      }
+    );
+  };
+
+  const onClickUpdateShortcut = () => {
+    updateShortcut(currentProjectId, selectedLink?.id, {
+      shortcutName: nameValue,
+      webAddress: webValue
+    }).then(() => {
+      shortCutUpdated();
+    });
+  };
 
   return (
     <div className={styles.background}>
@@ -33,6 +89,9 @@ export default function Shortcut({ operation, setAddLinkToggle, addLinkToggle }:
             operation={operation}
             setWebValue={setWebValue}
             setNameValue={setNameValue}
+            webValue={webValue}
+            value={nameValue}
+            isUrlValid={isUrlValid}
           />
           {
             {
@@ -42,12 +101,17 @@ export default function Shortcut({ operation, setAddLinkToggle, addLinkToggle }:
                   addLinkToggle={addLinkToggle}
                   webValue={webValue}
                   nameValue={nameValue}
+                  onClickAddShortcut={onClickAddShortcut}
                 />
               ),
               Edit: (
                 <EditShortcutFooter
                   setAddLinkToggle={setAddLinkToggle}
                   addLinkToggle={addLinkToggle}
+                  shortCutRemoved={shortCutRemoved}
+                  currentProjectId={currentProjectId}
+                  shortcutId={selectedLink?.id}
+                  onClickUpdateShortcut={onClickUpdateShortcut}
                 />
               )
             }[operation]

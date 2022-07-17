@@ -2,17 +2,27 @@ import React, { useState } from 'react';
 import { RiPencilFill, RiPencilLine } from 'react-icons/ri';
 import { NavLink, useParams } from 'react-router-dom';
 import addShortcut from '../../../assets/addShortcut.svg';
+import { IProjectData, IShortcutData } from '../../../types';
 import Shortcut from '../../AddShortcut/Shortcut';
 import styles from './NavMain.module.scss';
 
-export default function NavMain() {
+interface IPropsNavMain {
+  currentProject: IProjectData;
+  shortCutAdded: () => void;
+  shortCutRemoved: () => void;
+  shortCutUpdated: () => void;
+}
+
+export default function NavMain(props: IPropsNavMain) {
   const [planningToggle, setPlanningToggle] = useState(true);
   const [developmentToggle, setDevelopmentToggle] = useState(true);
   const [operationsToggle, setOperationsToggle] = useState(true);
   const [operation, setOperation] = useState('');
+  const [selectedLink, setSelectedLink] = useState<IShortcutData | null>(null);
 
   const [addLinkToggle, setAddLinkToggle] = useState(false);
   const { boardId = '', projectId = '' } = useParams();
+  const { currentProject, shortCutAdded, shortCutRemoved, shortCutUpdated } = props;
   return (
     <div className={styles.container}>
       <div className={styles.containerTop}>
@@ -215,106 +225,35 @@ export default function NavMain() {
       <br />
 
       <div className={styles.containerBottom}>
-        <NavLink to="/nav">
-          <svg
-            viewBox="0 0 32 32"
-            xmlns="http://www.w3.org/2000/svg"
-            focusable="false"
-            aria-hidden="true"
-          >
-            <defs>
-              <linearGradient x1="100%" x2="45.339%" y1="29.23%" y2="75.038%" id="uid11">
-                <stop stopColor="inherit" stopOpacity="0.4" offset="0%" />
-                <stop stopColor="inherit" offset="100%" />
-              </linearGradient>
-            </defs>
-            <g stroke="none" strokeWidth="1" fillRule="nonzero">
-              <path
-                d="M4.78580435,5 C4.55423538,4.99701333 4.33319771,5.09657765 4.18198458,5.27198488 C4.03077145,5.44739211 3.96486141,5.68068714 4.00193478,5.9092887 L7.32946109,26.1096074 C7.3703589,26.355373 7.49665951,26.578828 7.68612174,26.7406224 C7.87680866,26.9055104 8.11992598,26.9972003 8.37200761,26.9992993 L14.5488998,19.5995707 L13.6827239,19.5995707 L12.3227102,12.3958093 L27.3886833,12.3958093 L28.4469072,5.91712739 C28.4862006,5.68935393 28.4229655,5.45584955 28.2741046,5.27903 C28.1252437,5.10221045 27.9059335,5.00010264 27.6747957,5 L4.78580435,5 Z"
-                fill="currentColor"
-              />
-              <path
-                fill="url(#uid11)"
-                d="M27.3886833,12.3958093 L20.0320674,12.3958093 L18.7974728,19.5995707 L13.7023207,19.5995707 L7.68612174,26.7445417 C7.87680866,26.9094297 8.11992598,27.0011197 8.37200761,27.0032187 L24.3394307,27.0032187 C24.727754,27.0082167 25.0611955,26.7281258 25.1233002,26.3447683 L27.3886833,12.3958093 Z"
-              />
-            </g>
-          </svg>
-          <span>fe.techscrum</span>
-          <button
-            type="button"
-            className={styles.pencil}
-            onClick={(e) => {
-              e.preventDefault();
-              setAddLinkToggle(!addLinkToggle);
-              setOperation('Edit');
-            }}
-          >
-            <RiPencilLine className={styles.pencilLine} />
-            <RiPencilFill className={styles.pencilFill} />
-          </button>
-        </NavLink>
-        <br />
-        <NavLink to="/nav">
-          <svg
-            viewBox="0 0 32 32"
-            xmlns="http://www.w3.org/2000/svg"
-            focusable="false"
-            aria-hidden="true"
-          >
-            <defs>
-              <linearGradient x1="100%" x2="45.339%" y1="29.23%" y2="75.038%" id="uid11">
-                <stop stopColor="inherit" stopOpacity="0.4" offset="0%" />
-                <stop stopColor="inherit" offset="100%" />
-              </linearGradient>
-            </defs>
-            <g stroke="none" strokeWidth="1" fillRule="nonzero">
-              <path
-                d="M4.78580435,5 C4.55423538,4.99701333 4.33319771,5.09657765 4.18198458,5.27198488 C4.03077145,5.44739211 3.96486141,5.68068714 4.00193478,5.9092887 L7.32946109,26.1096074 C7.3703589,26.355373 7.49665951,26.578828 7.68612174,26.7406224 C7.87680866,26.9055104 8.11992598,26.9972003 8.37200761,26.9992993 L14.5488998,19.5995707 L13.6827239,19.5995707 L12.3227102,12.3958093 L27.3886833,12.3958093 L28.4469072,5.91712739 C28.4862006,5.68935393 28.4229655,5.45584955 28.2741046,5.27903 C28.1252437,5.10221045 27.9059335,5.00010264 27.6747957,5 L4.78580435,5 Z"
-                fill="currentColor"
-              />
-              <path
-                fill="url(#uid11)"
-                d="M27.3886833,12.3958093 L20.0320674,12.3958093 L18.7974728,19.5995707 L13.7023207,19.5995707 L7.68612174,26.7445417 C7.87680866,26.9094297 8.11992598,27.0011197 8.37200761,27.0032187 L24.3394307,27.0032187 C24.727754,27.0082167 25.0611955,26.7281258 25.1233002,26.3447683 L27.3886833,12.3958093 Z"
-              />
-            </g>
-          </svg>
-          <span>be.techscrum</span>
-          <button
-            type="button"
-            className={styles.pencil}
-            onClick={(e) => {
-              e.preventDefault();
-              setAddLinkToggle(!addLinkToggle);
-              setOperation('Edit');
-            }}
-          >
-            <RiPencilLine className={styles.pencilLine} />
-            <RiPencilFill className={styles.pencilFill} />
-          </button>
-        </NavLink>
-        <br />
-        <NavLink to="/nav">
-          <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
-            <g fill="currentColor">
-              <path d="M19.005 19c-.003 0-.005.002-.005.002l.005-.002zM5 19.006c0-.004-.002-.006-.005-.006H5v.006zM5 4.994V5v-.006zM19 19v-6h2v6.002A1.996 1.996 0 0119.005 21H4.995A1.996 1.996 0 013 19.006V4.994C3 3.893 3.896 3 4.997 3H11v2H5v14h14zM5 4.994V5v-.006zm0 14.012c0-.004-.002-.006-.005-.006H5v.006zM11 5H5v14h14v-6h2v6.002A1.996 1.996 0 0119.005 21H4.995A1.996 1.996 0 013 19.006V4.994C3 3.893 3.896 3 4.997 3H11v2zm8 0v3a1 1 0 002 0V4a1 1 0 00-1-1h-4a1 1 0 000 2h3z" />
-              <path d="M12.707 12.707l8-8a1 1 0 10-1.414-1.414l-8 8a1 1 0 001.414 1.414z" />
-            </g>
-          </svg>
-          <span>drive.google.com</span>
-          <button
-            type="button"
-            className={styles.pencil}
-            onClick={(e) => {
-              e.preventDefault();
-              setAddLinkToggle(!addLinkToggle);
-              setOperation('Edit');
-            }}
-          >
-            <RiPencilLine className={styles.pencilLine} />
-            <RiPencilFill className={styles.pencilFill} />
-          </button>
-        </NavLink>
-        <br />
+        {currentProject?.shortcut.map((shortcutData: IShortcutData, index: number) => {
+          return (
+            <React.Fragment key={shortcutData.id}>
+              <a href={shortcutData.shortcutLink} target="_blank" rel="noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
+                  <g fill="currentColor">
+                    <path d="M19.005 19c-.003 0-.005.002-.005.002l.005-.002zM5 19.006c0-.004-.002-.006-.005-.006H5v.006zM5 4.994V5v-.006zM19 19v-6h2v6.002A1.996 1.996 0 0119.005 21H4.995A1.996 1.996 0 013 19.006V4.994C3 3.893 3.896 3 4.997 3H11v2H5v14h14zM5 4.994V5v-.006zm0 14.012c0-.004-.002-.006-.005-.006H5v.006zM11 5H5v14h14v-6h2v6.002A1.996 1.996 0 0119.005 21H4.995A1.996 1.996 0 013 19.006V4.994C3 3.893 3.896 3 4.997 3H11v2zm8 0v3a1 1 0 002 0V4a1 1 0 00-1-1h-4a1 1 0 000 2h3z" />
+                    <path d="M12.707 12.707l8-8a1 1 0 10-1.414-1.414l-8 8a1 1 0 001.414 1.414z" />
+                  </g>
+                </svg>
+                <span>{shortcutData.name}</span>
+                <button
+                  type="button"
+                  className={styles.pencil}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setAddLinkToggle(!addLinkToggle);
+                    setOperation('Edit');
+                    setSelectedLink(shortcutData);
+                  }}
+                >
+                  <RiPencilLine className={styles.pencilLine} />
+                  <RiPencilFill className={styles.pencilFill} />
+                </button>
+              </a>
+              {currentProject?.shortcut.length !== index - 1 && <br />}
+            </React.Fragment>
+          );
+        })}
         <NavLink to="/settings">
           <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
             <g fill="currentColor">
@@ -323,18 +262,6 @@ export default function NavMain() {
             </g>
           </svg>
           <span>Project Settings</span>
-          <button
-            type="button"
-            className={styles.pencil}
-            onClick={(e) => {
-              e.preventDefault();
-              setAddLinkToggle(!addLinkToggle);
-              setOperation('Edit');
-            }}
-          >
-            <RiPencilLine className={styles.pencilLine} />
-            <RiPencilFill className={styles.pencilFill} />
-          </button>
         </NavLink>
         <br />
 
@@ -344,6 +271,7 @@ export default function NavMain() {
           onClick={() => {
             setAddLinkToggle(!addLinkToggle);
             setOperation('Add');
+            setSelectedLink(null);
           }}
         >
           <img src={addShortcut} alt="addShortcut" />
@@ -354,6 +282,14 @@ export default function NavMain() {
             operation={operation}
             setAddLinkToggle={setAddLinkToggle}
             addLinkToggle={addLinkToggle}
+            selectedLink={selectedLink}
+            currentProjectId={currentProject?.id}
+            shortCutAdded={shortCutAdded}
+            shortCutUpdated={shortCutUpdated}
+            shortCutRemoved={() => {
+              setAddLinkToggle(false);
+              shortCutRemoved();
+            }}
           />
         )}
       </div>
