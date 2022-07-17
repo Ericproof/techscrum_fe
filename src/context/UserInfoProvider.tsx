@@ -6,7 +6,7 @@ const UserContext = createContext<IUserInfo>({});
 const UserDispatchContext = createContext<Dispatch<SetStateAction<IUserInfo>>>(() => {});
 
 interface ILoginInfoProvider {
-  children: any;
+  children?: React.ReactNode;
 }
 
 function UserProvider({ children }: ILoginInfoProvider) {
@@ -43,5 +43,9 @@ function UserProvider({ children }: ILoginInfoProvider) {
     </UserContext.Provider>
   );
 }
+
+UserProvider.defaultProps = {
+  children: null
+};
 
 export { UserDispatchContext, UserContext, UserProvider };

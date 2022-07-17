@@ -4,6 +4,7 @@ import styles from './AddShortcutFooter.module.scss';
 interface IProps {
   addLinkToggle: boolean;
   setAddLinkToggle: (addLinkToggle: boolean) => void;
+  onClickAddShortcut: (e: React.MouseEvent<HTMLSpanElement>) => void;
   webValue: string;
   nameValue: string;
 }
@@ -11,8 +12,11 @@ export default function AddShortcutFooter({
   addLinkToggle,
   setAddLinkToggle,
   webValue,
-  nameValue
+  nameValue,
+  onClickAddShortcut
 }: IProps) {
+  const hasData = webValue && nameValue;
+
   return (
     <footer>
       <div className={styles.footerContent}>
@@ -24,15 +28,13 @@ export default function AddShortcutFooter({
           <span>Cancel</span>
         </button>
 
-        {webValue.length > 0 && nameValue.length > 0 ? (
-          <button className={styles.activeAddButton} type="button">
-            <span>Add</span>
-          </button>
-        ) : (
-          <button className={styles.addButton} type="button" disabled>
-            <span>Add</span>
-          </button>
-        )}
+        <button
+          className={hasData ? styles.activeAddButton : styles.addButton}
+          type="button"
+          onClick={onClickAddShortcut}
+        >
+          <span>Add</span>
+        </button>
       </div>
     </footer>
   );

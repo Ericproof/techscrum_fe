@@ -11,6 +11,10 @@ export interface IProjectData {
   [x: string]: any;
 }
 
+export interface IShortcutData {
+  [x: string]: any;
+}
+
 export interface ITaskData {
   [x: string]: any;
 }

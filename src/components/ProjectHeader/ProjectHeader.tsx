@@ -1,7 +1,6 @@
 import React, { createRef, useContext } from 'react';
 import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 import { BiPlus } from 'react-icons/bi';
-import { CgMenuGridR } from 'react-icons/cg';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 import styles from './ProjectHeader.module.scss';
