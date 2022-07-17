@@ -284,7 +284,10 @@ export default function NavMain(props: IPropsNavMain) {
             addLinkToggle={addLinkToggle}
             selectedLink={selectedLink}
             currentProjectId={currentProject?.id}
-            shortCutAdded={shortCutAdded}
+            shortCutAdded={() => {
+              setAddLinkToggle(false);
+              shortCutAdded();
+            }}
             shortCutUpdated={shortCutUpdated}
             shortCutRemoved={() => {
               setAddLinkToggle(false);
