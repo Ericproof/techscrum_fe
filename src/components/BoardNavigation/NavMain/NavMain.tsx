@@ -262,18 +262,6 @@ export default function NavMain(props: IPropsNavMain) {
             </g>
           </svg>
           <span>Project Settings</span>
-          <button
-            type="button"
-            className={styles.pencil}
-            onClick={(e) => {
-              e.preventDefault();
-              setAddLinkToggle(!addLinkToggle);
-              setOperation('Edit');
-            }}
-          >
-            <RiPencilLine className={styles.pencilLine} />
-            <RiPencilFill className={styles.pencilFill} />
-          </button>
         </NavLink>
         <br />
 
