@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import AuthenticationRoute from './config/AuthenticationRoute';
 import Home from './pages/Home/Home';
 import Register from './pages/Register/Register';
 import Login from './pages/Login/Login';
@@ -27,6 +28,7 @@ function App() {
     <UserProvider>
       <ProjectProvider>
         <Routes>
+          <Route path="*" element={<ErrorPage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/register/:token" element={<Register />} />
           <Route path="/login" element={<Login />} />
@@ -45,7 +47,6 @@ function App() {
           <Route path="/projects" element={<Project />} />
           <Route path="/create-projects" element={<CreateProject />} />
           <Route path="/account-settings" element={<AccountSettings />} />
-          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </ProjectProvider>
     </UserProvider>
