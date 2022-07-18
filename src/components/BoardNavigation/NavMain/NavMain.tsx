@@ -1,24 +1,39 @@
 import React, { useState } from 'react';
+import { RiPencilFill, RiPencilLine } from 'react-icons/ri';
 import { NavLink, useParams } from 'react-router-dom';
+import addShortcut from '../../../assets/addShortcut.svg';
+import { IProjectData, IShortcutData } from '../../../types';
+import Shortcut from '../../AddShortcut/Shortcut';
+import styles from './NavMain.module.scss';
 
-import style from './NavMain.module.scss';
+interface IPropsNavMain {
+  currentProject: IProjectData;
+  shortCutAdded: () => void;
+  shortCutRemoved: () => void;
+  shortCutUpdated: () => void;
+}
 
-export default function NavMain() {
+export default function NavMain(props: IPropsNavMain) {
   const [planningToggle, setPlanningToggle] = useState(true);
   const [developmentToggle, setDevelopmentToggle] = useState(true);
   const [operationsToggle, setOperationsToggle] = useState(true);
+  const [operation, setOperation] = useState('');
+  const [selectedLink, setSelectedLink] = useState<IShortcutData | null>(null);
+
+  const [addLinkToggle, setAddLinkToggle] = useState(false);
   const { boardId = '', projectId = '' } = useParams();
+  const { currentProject, shortCutAdded, shortCutRemoved, shortCutUpdated } = props;
   return (
-    <div className={style.container}>
-      <div className={style.containerTop}>
-        <div className={style.containerItem}>
-          <div className={style.containerItemTitle}>
+    <div className={styles.container}>
+      <div className={styles.containerTop}>
+        <div className={styles.containerItem}>
+          <div className={styles.containerItemTitle}>
             <button
               type="button"
               onClick={() => {
                 setPlanningToggle(!planningToggle);
               }}
-              className={style.planningButton}
+              className={styles.planningButton}
             >
               {planningToggle ? (
                 <span>
@@ -31,7 +46,7 @@ export default function NavMain() {
                   </svg>
                 </span>
               ) : (
-                <span className={style.collapseICon}>
+                <span className={styles.collapseICon}>
                   <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
                     <path
                       d="M8.292 10.293a1.009 1.009 0 000 1.419l2.939 2.965c.218.215.5.322.779.322s.556-.107.769-.322l2.93-2.955a1.01 1.01 0 000-1.419.987.987 0 00-1.406 0l-2.298 2.317-2.307-2.327a.99.99 0 00-1.406 0z"
@@ -47,7 +62,7 @@ export default function NavMain() {
           </div>
 
           {planningToggle && (
-            <div className={style.items}>
+            <div className={styles.items}>
               <NavLink to="/nav" style={{ display: 'none' }}>
                 <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
                   <path
@@ -83,14 +98,14 @@ export default function NavMain() {
           )}
         </div>
 
-        <div className={style.containerItem} style={{ display: 'none' }}>
-          <div className={style.containerItemTitle}>
+        <div className={styles.containerItem} style={{ display: 'none' }}>
+          <div className={styles.containerItemTitle}>
             <button
               type="button"
               onClick={() => {
                 setDevelopmentToggle(!developmentToggle);
               }}
-              className={style.developmentButton}
+              className={styles.developmentButton}
             >
               {developmentToggle ? (
                 <span>
@@ -103,7 +118,7 @@ export default function NavMain() {
                   </svg>
                 </span>
               ) : (
-                <span className={style.collapseICon}>
+                <span className={styles.collapseICon}>
                   <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
                     <path
                       d="M8.292 10.293a1.009 1.009 0 000 1.419l2.939 2.965c.218.215.5.322.779.322s.556-.107.769-.322l2.93-2.955a1.01 1.01 0 000-1.419.987.987 0 00-1.406 0l-2.298 2.317-2.307-2.327a.99.99 0 00-1.406 0z"
@@ -118,7 +133,7 @@ export default function NavMain() {
           </div>
 
           {developmentToggle && (
-            <div className={style.items}>
+            <div className={styles.items}>
               <NavLink to="/nav">
                 <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
                   <path
@@ -150,13 +165,13 @@ export default function NavMain() {
           )}
         </div>
 
-        <div className={style.containerItem} style={{ display: 'none' }}>
-          <div className={style.items}>
+        <div className={styles.containerItem} style={{ display: 'none' }}>
+          <div className={styles.items}>
             <div
               className={
                 operationsToggle
-                  ? style.containerItemTitle
-                  : `${style.containerItemTitle} ${style.operations}`
+                  ? styles.containerItemTitle
+                  : `${styles.containerItemTitle} ${styles.operations}`
               }
             >
               <button
@@ -164,7 +179,7 @@ export default function NavMain() {
                 onClick={() => {
                   setOperationsToggle(!operationsToggle);
                 }}
-                className={style.operationsButton}
+                className={styles.operationsButton}
               >
                 {operationsToggle ? (
                   <span>
@@ -177,7 +192,7 @@ export default function NavMain() {
                     </svg>
                   </span>
                 ) : (
-                  <span className={style.collapseICon}>
+                  <span className={styles.collapseICon}>
                     <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
                       <path
                         d="M8.292 10.293a1.009 1.009 0 000 1.419l2.939 2.965c.218.215.5.322.779.322s.556-.107.769-.322l2.93-2.955a1.01 1.01 0 000-1.419.987.987 0 00-1.406 0l-2.298 2.317-2.307-2.327a.99.99 0 00-1.406 0z"
@@ -199,7 +214,7 @@ export default function NavMain() {
                     <path d="M7.938 5.481a4.8 4.8 0 00-.777-.063C4.356 5.419 2 7.62 2 10.499 2 13.408 4.385 16 7.1 16h2.881v-1.993H7.1c-1.657 0-3.115-1.663-3.115-3.508 0-1.778 1.469-3.087 3.104-3.087h.012c.389 0 .686.051.97.15l.17.063c.605.248.875-.246.875-.246l.15-.267c.73-1.347 2.201-2.096 3.716-2.119a4.14 4.14 0 014.069 3.644l.046.34s.071.525.665.525c.013 0 .012.005.023.005h.254c1.136 0 1.976.959 1.976 2.158 0 1.207-.987 2.342-2.07 2.342h-3.964V16h3.964C20.105 16 22 13.955 22 11.665c0-1.999-1.312-3.663-3.138-4.074-.707-2.707-3.053-4.552-5.886-4.591-1.975.021-3.901.901-5.038 2.481z" />
                   </g>
                 </svg>
-                <p className={style.deployments}>Deployments</p>
+                <p className={styles.deployments}>Deployments</p>
               </NavLink>
             )}
           </div>
@@ -209,71 +224,36 @@ export default function NavMain() {
       <br />
       <br />
 
-      <div className={style.containerBottom}>
-        <NavLink to="/nav">
-          <svg
-            viewBox="0 0 32 32"
-            xmlns="http://www.w3.org/2000/svg"
-            focusable="false"
-            aria-hidden="true"
-          >
-            <defs>
-              <linearGradient x1="100%" x2="45.339%" y1="29.23%" y2="75.038%" id="uid11">
-                <stop stopColor="inherit" stopOpacity="0.4" offset="0%" />
-                <stop stopColor="inherit" offset="100%" />
-              </linearGradient>
-            </defs>
-            <g stroke="none" strokeWidth="1" fillRule="nonzero">
-              <path
-                d="M4.78580435,5 C4.55423538,4.99701333 4.33319771,5.09657765 4.18198458,5.27198488 C4.03077145,5.44739211 3.96486141,5.68068714 4.00193478,5.9092887 L7.32946109,26.1096074 C7.3703589,26.355373 7.49665951,26.578828 7.68612174,26.7406224 C7.87680866,26.9055104 8.11992598,26.9972003 8.37200761,26.9992993 L14.5488998,19.5995707 L13.6827239,19.5995707 L12.3227102,12.3958093 L27.3886833,12.3958093 L28.4469072,5.91712739 C28.4862006,5.68935393 28.4229655,5.45584955 28.2741046,5.27903 C28.1252437,5.10221045 27.9059335,5.00010264 27.6747957,5 L4.78580435,5 Z"
-                fill="currentColor"
-              />
-              <path
-                fill="url(#uid11)"
-                d="M27.3886833,12.3958093 L20.0320674,12.3958093 L18.7974728,19.5995707 L13.7023207,19.5995707 L7.68612174,26.7445417 C7.87680866,26.9094297 8.11992598,27.0011197 8.37200761,27.0032187 L24.3394307,27.0032187 C24.727754,27.0082167 25.0611955,26.7281258 25.1233002,26.3447683 L27.3886833,12.3958093 Z"
-              />
-            </g>
-          </svg>
-          <span>fe.techscrum</span>
-        </NavLink>
-        <br />
-        <NavLink to="/nav">
-          <svg
-            viewBox="0 0 32 32"
-            xmlns="http://www.w3.org/2000/svg"
-            focusable="false"
-            aria-hidden="true"
-          >
-            <defs>
-              <linearGradient x1="100%" x2="45.339%" y1="29.23%" y2="75.038%" id="uid11">
-                <stop stopColor="inherit" stopOpacity="0.4" offset="0%" />
-                <stop stopColor="inherit" offset="100%" />
-              </linearGradient>
-            </defs>
-            <g stroke="none" strokeWidth="1" fillRule="nonzero">
-              <path
-                d="M4.78580435,5 C4.55423538,4.99701333 4.33319771,5.09657765 4.18198458,5.27198488 C4.03077145,5.44739211 3.96486141,5.68068714 4.00193478,5.9092887 L7.32946109,26.1096074 C7.3703589,26.355373 7.49665951,26.578828 7.68612174,26.7406224 C7.87680866,26.9055104 8.11992598,26.9972003 8.37200761,26.9992993 L14.5488998,19.5995707 L13.6827239,19.5995707 L12.3227102,12.3958093 L27.3886833,12.3958093 L28.4469072,5.91712739 C28.4862006,5.68935393 28.4229655,5.45584955 28.2741046,5.27903 C28.1252437,5.10221045 27.9059335,5.00010264 27.6747957,5 L4.78580435,5 Z"
-                fill="currentColor"
-              />
-              <path
-                fill="url(#uid11)"
-                d="M27.3886833,12.3958093 L20.0320674,12.3958093 L18.7974728,19.5995707 L13.7023207,19.5995707 L7.68612174,26.7445417 C7.87680866,26.9094297 8.11992598,27.0011197 8.37200761,27.0032187 L24.3394307,27.0032187 C24.727754,27.0082167 25.0611955,26.7281258 25.1233002,26.3447683 L27.3886833,12.3958093 Z"
-              />
-            </g>
-          </svg>
-          <span>be.techscrum</span>
-        </NavLink>
-        <br />
-        <NavLink to="/nav">
-          <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
-            <g fill="currentColor">
-              <path d="M19.005 19c-.003 0-.005.002-.005.002l.005-.002zM5 19.006c0-.004-.002-.006-.005-.006H5v.006zM5 4.994V5v-.006zM19 19v-6h2v6.002A1.996 1.996 0 0119.005 21H4.995A1.996 1.996 0 013 19.006V4.994C3 3.893 3.896 3 4.997 3H11v2H5v14h14zM5 4.994V5v-.006zm0 14.012c0-.004-.002-.006-.005-.006H5v.006zM11 5H5v14h14v-6h2v6.002A1.996 1.996 0 0119.005 21H4.995A1.996 1.996 0 013 19.006V4.994C3 3.893 3.896 3 4.997 3H11v2zm8 0v3a1 1 0 002 0V4a1 1 0 00-1-1h-4a1 1 0 000 2h3z" />
-              <path d="M12.707 12.707l8-8a1 1 0 10-1.414-1.414l-8 8a1 1 0 001.414 1.414z" />
-            </g>
-          </svg>
-          <span>drive.google.com</span>
-        </NavLink>
-        <br />
+      <div className={styles.containerBottom}>
+        {currentProject?.shortcut.map((shortcutData: IShortcutData, index: number) => {
+          return (
+            <React.Fragment key={shortcutData.id}>
+              <a href={shortcutData.shortcutLink} target="_blank" rel="noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
+                  <g fill="currentColor">
+                    <path d="M19.005 19c-.003 0-.005.002-.005.002l.005-.002zM5 19.006c0-.004-.002-.006-.005-.006H5v.006zM5 4.994V5v-.006zM19 19v-6h2v6.002A1.996 1.996 0 0119.005 21H4.995A1.996 1.996 0 013 19.006V4.994C3 3.893 3.896 3 4.997 3H11v2H5v14h14zM5 4.994V5v-.006zm0 14.012c0-.004-.002-.006-.005-.006H5v.006zM11 5H5v14h14v-6h2v6.002A1.996 1.996 0 0119.005 21H4.995A1.996 1.996 0 013 19.006V4.994C3 3.893 3.896 3 4.997 3H11v2zm8 0v3a1 1 0 002 0V4a1 1 0 00-1-1h-4a1 1 0 000 2h3z" />
+                    <path d="M12.707 12.707l8-8a1 1 0 10-1.414-1.414l-8 8a1 1 0 001.414 1.414z" />
+                  </g>
+                </svg>
+                <span>{shortcutData.name}</span>
+                <button
+                  type="button"
+                  className={styles.pencil}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setAddLinkToggle(!addLinkToggle);
+                    setOperation('Edit');
+                    setSelectedLink(shortcutData);
+                  }}
+                >
+                  <RiPencilLine className={styles.pencilLine} />
+                  <RiPencilFill className={styles.pencilFill} />
+                </button>
+              </a>
+              {currentProject?.shortcut.length !== index - 1 && <br />}
+            </React.Fragment>
+          );
+        })}
         <NavLink to="/settings">
           <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
             <g fill="currentColor">
@@ -283,6 +263,38 @@ export default function NavMain() {
           </svg>
           <span>Project Settings</span>
         </NavLink>
+        <br />
+
+        <button
+          className={styles.addShortcut}
+          type="button"
+          onClick={() => {
+            setAddLinkToggle(!addLinkToggle);
+            setOperation('Add');
+            setSelectedLink(null);
+          }}
+        >
+          <img src={addShortcut} alt="addShortcut" />
+          <span>Add shortcut</span>
+        </button>
+        {addLinkToggle && (
+          <Shortcut
+            operation={operation}
+            setAddLinkToggle={setAddLinkToggle}
+            addLinkToggle={addLinkToggle}
+            selectedLink={selectedLink}
+            currentProjectId={currentProject?.id}
+            shortCutAdded={() => {
+              setAddLinkToggle(false);
+              shortCutAdded();
+            }}
+            shortCutUpdated={shortCutUpdated}
+            shortCutRemoved={() => {
+              setAddLinkToggle(false);
+              shortCutRemoved();
+            }}
+          />
+        )}
       </div>
     </div>
   );

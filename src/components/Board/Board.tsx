@@ -225,7 +225,6 @@ export default function Board() {
     };
     fetchBoardInfo();
   }, [inputQuery, boardId]);
-
   return (
     <div className={style.container}>
       <ProjectHeader

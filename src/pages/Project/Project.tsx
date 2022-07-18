@@ -44,7 +44,7 @@ export default function Project() {
     }
     setFilteredProjectList(
       projectList.filter((item) => {
-        return item.name?.includes(e.target.value);
+        return item.name?.toLowerCase().includes(e.target.value.toLowerCase());
       })
     );
   };

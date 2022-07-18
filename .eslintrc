@@ -28,6 +28,14 @@
     "SharedArrayBuffer": "readonly"
   },
   "rules": {
+    "react/button-has-type": [
+      0,
+      {
+        "button": 0,
+        "submit": 0,
+        "reset": 0
+      }
+    ],
     "linebreak-style": "off",
     "no-console": "error",
     "react-hooks/rules-of-hooks": "error",

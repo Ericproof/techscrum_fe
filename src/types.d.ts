@@ -11,6 +11,10 @@ export interface IProjectData {
   [x: string]: any;
 }
 
+export interface IShortcutData {
+  [x: string]: any;
+}
+
 export interface ITaskData {
   [x: string]: any;
 }
@@ -94,4 +98,11 @@ export interface IOnChangeTaskAssignee {
   target: {
     id: string;
   };
+export interface IUserInfo {
+  id?: string;
+  email?: string;
+  name?: string;
+  avatarIcon?: string;
+  token?: string;
+  refreshToken?: string;
 }

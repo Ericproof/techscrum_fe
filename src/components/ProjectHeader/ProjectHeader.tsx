@@ -1,7 +1,6 @@
-import React, { useState, createRef, useContext } from 'react';
+import React, { createRef, useContext } from 'react';
 import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 import { BiPlus } from 'react-icons/bi';
-import { CgMenuGridR } from 'react-icons/cg';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 import styles from './ProjectHeader.module.scss';
@@ -9,6 +8,8 @@ import useOutsideAlerter from '../../hooks/OutsideAlerter';
 import PersonalProfile from './PersonalProfile/PersonalProfile';
 import { IProject, IProjectData } from '../../types';
 import { ProjectContext } from '../../context/ProjectProvider';
+import { UserContext } from '../../context/UserInfoProvider';
+import Icon from '../Header/IconTab/IconTab';
 
 interface Props {
   projects: IProject[];
@@ -18,6 +19,7 @@ interface Props {
 
 export default function ProjectHeader({ projects, updateProject, updateIsCreateNewCard }: Props) {
   const projectList = useContext(ProjectContext);
+  const userInfo = useContext(UserContext);
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const handleClickOutside = (state: boolean) => setVisible(!state);
   const navigate = useNavigate();
@@ -52,7 +54,7 @@ export default function ProjectHeader({ projects, updateProject, updateIsCreateN
         <nav ref={myRef}>
           <a href="/#">
             <div className={styles.logo}>
-              <svg />
+              <Icon />
             </div>
           </a>
           <div className={styles.options}>
@@ -209,7 +211,7 @@ export default function ProjectHeader({ projects, updateProject, updateIsCreateN
             </div>
           </div>
         </nav>
-        <PersonalProfile />
+        <PersonalProfile userInfo={userInfo} />
       </header>
     </div>
   );
