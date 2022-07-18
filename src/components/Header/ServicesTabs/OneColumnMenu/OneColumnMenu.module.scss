@@ -12,7 +12,7 @@ $small_size: 1000px;
   left: 0;
   right: 0;
   top: 80px;
-  max-height: calc(95vh - 78px);
+  max-height: calc(95vh - 40px);
   @media (max-width: $max_size) {
     top: 0px;
     position: relative;
@@ -55,7 +55,7 @@ $small_size: 1000px;
         text-transform: uppercase;
         margin-bottom: 25px;
         @media (max-width: $max_size) {
-          margin-bottom: 5px;
+          margin-bottom: 10px;
           padding: 0;
         }
       }

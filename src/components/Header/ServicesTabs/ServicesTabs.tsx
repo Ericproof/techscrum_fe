@@ -20,7 +20,6 @@ import {
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import styles from './ServicesTabs.module.scss';
 import OneColumnsMenu from './OneColumnMenu/OneColumnMenu';
-import TwoColumnsMenu from './TwoColumnsMenu/TwoColumnsMenu';
 
 interface Props {
   show: boolean;
@@ -110,136 +109,78 @@ const solutions = {
   }
 };
 
-const resources = {
-  leftContent: {
-    title: 'For',
+const about = {
+  content: {
+    title: 'Our Team',
     content: [
       {
-        icon: AiFillProfile,
-        title: 'Teamwork blog',
-        description: 'Browse the latest project management best practices',
-        href: '/#',
-        hot: true
+        icon: AiOutlineUserAdd,
+        title: 'Kitman',
+        description: 'Position: Developer Linkedin:https://www.linkedin.com/mynetwork/',
+        href: '/https://www.linkedin.com/feed/'
       },
       {
-        icon: AiOutlineApartment,
-        title: 'Webinars',
-        description: 'Join our experts for live Q&A, tops and best practices',
-        href: '/#',
-        hot: false
+        icon: AiOutlineUserAdd,
+        title: 'Emil',
+        description: 'Position: Developer Linkedin:https://www.linkedin.com/mynetwork/',
+        href: '/https://www.linkedin.com/feed/'
       },
       {
-        icon: AiOutlineApartment,
-        title: 'Resources Center',
-        description: 'Insights, tips, and features to help your team',
-        href: '/#',
-        hot: false
+        icon: AiOutlineUserAdd,
+        title: 'Hyna',
+        description: 'Position: Developer Linkedin:https://www.linkedin.com/mynetwork/',
+        href: '//https://www.linkedin.com/mynetwork/'
       },
       {
-        icon: AiFillVideoCamera,
-        title: 'Videos',
-        description: 'Watch our videos on our insights. tops and new features',
-        href: '/#',
-        hot: false
+        icon: AiOutlineUserAdd,
+        title: 'Regan',
+        description: 'Position: Developer Linkedin:https://www.linkedin.com/mynetwork/',
+        href: '/https://www.linkedin.com/mynetwork/'
       },
       {
-        icon: AiFillRedditCircle,
-        title: 'Support center',
-        description: 'Stuck on something with Teamwork? We&apos;re happy to help',
-        href: '/#',
-        hot: false
+        icon: AiOutlineUserAdd,
+        title: 'Belinda',
+        description: 'Position: BA Linkedin:https://www.linkedin.com/mynetwork/',
+        href: '/https://www.linkedin.com/feed/'
       },
       {
-        icon: AiOutlineApartment,
-        title: 'Partners',
-        description: 'Become a Teamwork partner or find one near you',
-        href: '/#',
-        hot: false
+        icon: AiOutlineUserAdd,
+        title: 'Vanny',
+        description: 'Position: Developer Linkedin:https://www.linkedin.com/mynetwork/',
+        href: '/https://www.linkedin.com/mynetwork/'
       },
       {
-        icon: AiOutlineDingding,
-        title: 'Affiliates',
-        description: 'Become a Teamwork affiliate today to grow your income',
-        href: '/#',
-        hot: false
+        icon: AiOutlineUserAdd,
+        title: 'Evan',
+        description: 'Position: Developer Linkedin:https://www.linkedin.com/mynetwork/',
+        href: '/https://www.linkedin.com/mynetwork/'
       },
       {
-        icon: AiOutlineRocket,
-        title: 'Success Center',
-        description: 'Set your team-and your clients-up for success',
-        href: '/#',
-        hot: false
-      },
-      {
-        icon: AiTwotoneExperiment,
-        title: 'Guilde',
-        description: 'The Teamwork guild to project management',
-        href: '/#',
-        hot: false
+        icon: AiOutlineUserAdd,
+        title: 'Talisa',
+        description: 'Position: Developer Linkedin:https://www.linkedin.com/mynetwork/',
+        href: '/https://www.linkedin.com/mynetwork/'
       }
-    ],
-    btnContent: {
-      content: 'view resource center >',
-      href: '/#'
-    }
-  },
-  rightContent: {
-    title: 'templates',
-    content: [
-      {
-        title: 'Client Onboarding',
-        href: '/#',
-        hot: false
-      },
-      {
-        title: 'Website Project Plan',
-        href: '/#',
-        hot: false
-      },
-      {
-        title: 'Marketing Campaign',
-        href: '/#',
-        hot: false
-      },
-      {
-        title: 'Content Plan',
-        href: '/#',
-        hot: false
-      },
-      {
-        title: 'Public Relations Plan',
-        href: '/#',
-        hot: false
-      },
-      {
-        title: 'Event Planning Template',
-        href: '/#',
-        hot: false
-      }
-    ],
-    btnContent: {
-      content: 'see all templates >',
-      href: '/#'
-    }
+    ]
   }
 };
 
 export default function ServicesTabs({ show }: Props) {
   const [featuresActive, setFeaturesActive] = useState(false);
   const [solutionActive, setSolutionActive] = useState(false);
-  const [resourcesActive, setResourcesActive] = useState(false);
+  const [aboutActive, setAboutActive] = useState(false);
 
   const initial = () => {
     setFeaturesActive(false);
     setSolutionActive(false);
-    setResourcesActive(false);
+    setAboutActive(false);
   };
 
   const activeMenu = (menu: string) => {
     initial();
     if (menu === 'features') setFeaturesActive(!featuresActive);
     if (menu === 'solution') setSolutionActive(!solutionActive);
-    if (menu === 'resource') setResourcesActive(!resourcesActive);
+    if (menu === 'about') setAboutActive(!aboutActive);
   };
 
   return (
@@ -259,11 +200,10 @@ export default function ServicesTabs({ show }: Props) {
         <OneColumnsMenu servicesInfo={solutions} active={solutionActive} />
       </div>
       <div>
-        <a href="/#" onClick={() => activeMenu('resource')}>
-          Resources
-          <MdOutlineKeyboardArrowDown />
+        <a href="/#" onClick={() => activeMenu('about')}>
+          About
         </a>
-        <TwoColumnsMenu servicesInfo={resources} active={resourcesActive} />
+        <OneColumnsMenu servicesInfo={about} active={aboutActive} />
       </div>
     </div>
   );
