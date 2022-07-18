@@ -1,4 +1,4 @@
-import React, { useState, createRef, useEffect } from 'react';
+import React, { useState, createRef, useEffect, useContext } from 'react';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { HiDotsHorizontal } from 'react-icons/hi';
 import { FiSearch } from 'react-icons/fi';
@@ -6,13 +6,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
 import styles from './Project.module.scss';
 import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
-import { getProjects, deleteProject } from '../../api/projects/projects';
+import { deleteProject } from '../../api/projects/projects';
 import CreateNewCard from '../../components/CreateNewCard/CreateNewCard';
 import { IProject, IProjectData } from '../../types';
+import { ProjectContext, ProjectDispatchContext } from '../../context/ProjectProvider';
 
 export default function Project() {
   const navigate = useNavigate();
-  const [projectList, setProjectList] = useState<IProject[]>([]);
+  const fetchProjects = useContext(ProjectDispatchContext);
+  const projectList = useContext<IProject[]>(ProjectContext);
   const [filteredProjectList, setFilteredProjectList] = useState<IProject[]>([]);
   const [showProjectDetails, setShowProjectDetails] = useState(-1);
   const [value, setValue] = useState(0);
@@ -21,19 +23,12 @@ export default function Project() {
   const [isCreateNewCard, setIsCreateNewCard] = useState(false);
 
   useEffect(() => {
-    const fetchProjects = async () => {
-      const res = await getProjects();
-      // const sortedResult = res.data.sort((a, b) => {
-      //   return a.lastEditTime < b.lastEditTime ? 1 : -1;
-      // });
-      if (!res.data) {
-        return;
-      }
-      setProjectList(res.data);
-      setFilteredProjectList(res.data);
-    };
     fetchProjects();
   }, []);
+
+  useEffect(() => {
+    setFilteredProjectList(projectList);
+  }, [projectList]);
 
   const onChangeFilterProject = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.value) {
@@ -62,7 +57,7 @@ export default function Project() {
     deleteProject(id).then((res: AxiosResponse) => {
       if (res.status === 204) {
         const updateProjectList = projectList.filter((item: IProjectData) => item.id !== id);
-        setProjectList(updateProjectList);
+        fetchProjects();
         setFilteredProjectList(updateProjectList);
       }
     });
