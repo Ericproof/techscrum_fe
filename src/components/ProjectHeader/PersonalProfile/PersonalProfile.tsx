@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { BsBoxArrowUpRight } from 'react-icons/bs';
 import styles from './PersonalProfile.module.scss';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
@@ -15,12 +15,10 @@ export default function PersonalProfile({ userInfo }: Props) {
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const handleClickOutside = (state: boolean) => setVisible(!state);
   const setUserInfo = useContext(UserDispatchContext);
-  const navigator = useNavigate();
 
   const logout = () => {
     localStorage.clear();
     setUserInfo({});
-    navigator('/');
   };
   return (
     <div ref={myRef}>
