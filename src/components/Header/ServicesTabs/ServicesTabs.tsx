@@ -109,78 +109,19 @@ const solutions = {
   }
 };
 
-const about = {
-  content: {
-    title: 'Our Team',
-    content: [
-      {
-        icon: AiOutlineUserAdd,
-        title: 'Kitman',
-        description: 'Position: Developer Linkedin:https://www.linkedin.com/mynetwork/',
-        href: '/https://www.linkedin.com/feed/'
-      },
-      {
-        icon: AiOutlineUserAdd,
-        title: 'Emil',
-        description: 'Position: Developer Linkedin:https://www.linkedin.com/mynetwork/',
-        href: '/https://www.linkedin.com/feed/'
-      },
-      {
-        icon: AiOutlineUserAdd,
-        title: 'Hyna',
-        description: 'Position: Developer Linkedin:https://www.linkedin.com/mynetwork/',
-        href: '//https://www.linkedin.com/mynetwork/'
-      },
-      {
-        icon: AiOutlineUserAdd,
-        title: 'Regan',
-        description: 'Position: Developer Linkedin:https://www.linkedin.com/mynetwork/',
-        href: '/https://www.linkedin.com/mynetwork/'
-      },
-      {
-        icon: AiOutlineUserAdd,
-        title: 'Belinda',
-        description: 'Position: BA Linkedin:https://www.linkedin.com/mynetwork/',
-        href: '/https://www.linkedin.com/feed/'
-      },
-      {
-        icon: AiOutlineUserAdd,
-        title: 'Vanny',
-        description: 'Position: Developer Linkedin:https://www.linkedin.com/mynetwork/',
-        href: '/https://www.linkedin.com/mynetwork/'
-      },
-      {
-        icon: AiOutlineUserAdd,
-        title: 'Evan',
-        description: 'Position: Developer Linkedin:https://www.linkedin.com/mynetwork/',
-        href: '/https://www.linkedin.com/mynetwork/'
-      },
-      {
-        icon: AiOutlineUserAdd,
-        title: 'Talisa',
-        description: 'Position: Developer Linkedin:https://www.linkedin.com/mynetwork/',
-        href: '/https://www.linkedin.com/mynetwork/'
-      }
-    ]
-  }
-};
-
 export default function ServicesTabs({ show }: Props) {
   const [featuresActive, setFeaturesActive] = useState(false);
   const [solutionActive, setSolutionActive] = useState(false);
-  const [aboutActive, setAboutActive] = useState(false);
 
   const initial = () => {
     setFeaturesActive(false);
     setSolutionActive(false);
-    setAboutActive(false);
   };
 
   const activeMenu = (menu: string) => {
     initial();
     if (menu === 'features') setFeaturesActive(!featuresActive);
     if (menu === 'solution') setSolutionActive(!solutionActive);
-    if (menu === 'about') setAboutActive(!aboutActive);
   };
 
   return (
@@ -200,10 +141,9 @@ export default function ServicesTabs({ show }: Props) {
         <OneColumnsMenu servicesInfo={solutions} active={solutionActive} />
       </div>
       <div>
-        <a href="/#" onClick={() => activeMenu('about')}>
+        <a href="/about" onClick={() => activeMenu('about')}>
           About
         </a>
-        <OneColumnsMenu servicesInfo={about} active={aboutActive} />
       </div>
     </div>
   );

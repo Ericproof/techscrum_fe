@@ -18,6 +18,7 @@ import CreateProject from './pages/CreateProject/CreateProject';
 import AccountSettings from './pages/AccountSetting/AccountSetting';
 import ResetPassword from './pages/ResetPassword/ResetPassword';
 import BoardPage from './pages/BoardPage/BoardPage';
+import About from './pages/About/About';
 import './App.css';
 import { ProjectProvider } from './context/ProjectProvider';
 import { UserProvider } from './context/UserInfoProvider';
@@ -45,6 +46,7 @@ function App() {
           <Route path="/projects" element={<Project />} />
           <Route path="/create-projects" element={<CreateProject />} />
           <Route path="/account-settings" element={<AccountSettings />} />
+          <Route path="/about" element={<About />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </ProjectProvider>
