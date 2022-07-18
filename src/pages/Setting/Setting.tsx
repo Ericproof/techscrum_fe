@@ -92,7 +92,12 @@ export default function Setting() {
             </div>
           )}
         </header>
-        <ProjectEditor projectData={data} onClickSave={onClickSave} hasError={hasError} />
+        <ProjectEditor
+          showCancelBtn
+          projectData={data}
+          onClickSave={onClickSave}
+          hasError={hasError}
+        />
       </div>
     </div>
   );
