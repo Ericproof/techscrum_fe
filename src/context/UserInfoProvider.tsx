@@ -1,4 +1,5 @@
 import React, { createContext, Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { IUserInfo } from '../types';
 import { getUserInfo } from '../api/userProfile/userProfile';
 
@@ -11,6 +12,7 @@ interface ILoginInfoProvider {
 
 function UserProvider({ children }: ILoginInfoProvider) {
   const [userInfo, setUserInfo] = useState<IUserInfo>({});
+  const navigator = useNavigate();
 
   useEffect(() => {
     const fetchUserInfo = async (token: string, refreshToken: string) => {
@@ -21,7 +23,9 @@ function UserProvider({ children }: ILoginInfoProvider) {
         localStorage.setItem('token', result.data.token ?? token);
         localStorage.setItem('refreshToken', result.data.refreshToken ?? refreshToken);
       } catch (e) {
+        localStorage.clear();
         setUserInfo({});
+        navigator('/login');
       }
     };
 
