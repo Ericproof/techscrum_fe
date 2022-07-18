@@ -98,6 +98,7 @@ export interface IOnChangeTaskAssignee {
   target: {
     id: string;
   };
+}
 export interface IUserInfo {
   id?: string;
   email?: string;
