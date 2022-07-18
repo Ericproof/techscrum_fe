@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { AxiosResponse } from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Assignee from './Assignee/Assignee';
 import ChangeIcon from './ChangeIcon/ChangeIcon';
@@ -9,6 +10,7 @@ import ProjectLead from './ProjectLead/ProjectLead';
 import { IOnChangeProjectLead, IProjectEditor } from '../../types';
 
 interface ProjectEditorProps {
+  onCompletedSubmit?: (res: AxiosResponse) => void;
   showCancelBtn?: boolean;
   projectData?: IProjectEditor;
   onClickSave: (data: any) => void;
@@ -23,7 +25,13 @@ function ProjectEditor(props: ProjectEditorProps) {
     assigneeId: 1
   });
   const navigate = useNavigate();
-  const { showCancelBtn = false, projectData, onClickSave, hasError } = props;
+  const {
+    onCompletedSubmit = null,
+    showCancelBtn = false,
+    projectData,
+    onClickSave,
+    hasError
+  } = props;
   const onChange = (e: IOnChangeProjectLead) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
@@ -80,6 +88,7 @@ function ProjectEditor(props: ProjectEditorProps) {
 }
 
 ProjectEditor.defaultProps = {
+  onCompletedSubmit: null,
   showCancelBtn: false,
   projectData: null
 };

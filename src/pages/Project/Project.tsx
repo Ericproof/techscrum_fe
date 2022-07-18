@@ -283,7 +283,7 @@ export default function Project() {
                       >
                         {showProjectDetails === project.id && (
                           <div className={styles.viewDetail} ref={refShowMore[index]}>
-                            <Link to="/settings">
+                            <Link to={`/settings/${project.id}`}>
                               <button type="button">View Detail</button>
                             </Link>
                             <button type="button" onClick={() => removeProject(project.id)}>
