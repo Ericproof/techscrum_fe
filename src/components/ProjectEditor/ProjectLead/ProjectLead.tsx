@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { getUsers } from '../../../api/user/user';
 import userAvatar from '../../../assets/userAvatar.png';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import { IOnChangeProjectLead } from '../../../types';
@@ -10,35 +11,20 @@ interface IProjectLead {
 
 export default function ProjectLead(props: IProjectLead) {
   const { onChange } = props;
-  const users = [
-    {
-      id: '1',
-      avatar:
-        'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/YK-3.png?ssl=1',
-      name: 'Yiu Kitman'
-    },
-    {
-      id: '2',
-      avatar:
-        'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/E-0.png?ssl=1',
-      name: 'Emil'
-    },
-    {
-      id: '3',
-      avatar:
-        'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/BW-1.png?ssl=1',
-      name: 'Belinda Wang'
-    },
-    {
-      id: '4',
-      avatar:
-        'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/EL-3.png?ssl=1',
-      name: 'Evan Lin'
-    }
-  ];
-  const [userInfo, setUserInfo] = useState(users[0]);
+  const [userList, setUserList] = useState<any>([]);
+  const [userInfo, setUserInfo] = useState<any>(null);
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const handleClickOutside = () => setVisible(true);
+
+  useEffect(() => {
+    const getUsersList = () => {
+      getUsers().then((res) => {
+        setUserList(res.data);
+      });
+    };
+    getUsersList();
+  }, []);
+
   return (
     <div ref={myRef} className={styles.leadDropdownMenu}>
       <label htmlFor="projectLead">
@@ -55,7 +41,7 @@ export default function ProjectLead(props: IProjectLead) {
               </div>
               <div className={styles.leadMenu}>
                 <ul>
-                  {users.map((user) => (
+                  {userList.map((user: any) => (
                     <li key={user.id}>
                       <button
                         type="button"
@@ -65,7 +51,13 @@ export default function ProjectLead(props: IProjectLead) {
                           setVisible(false);
                         }}
                       >
-                        <img src={user.avatar} alt="avatar" />
+                        <img
+                          src={
+                            user.avatar ||
+                            'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'
+                          }
+                          alt="avatar"
+                        />
                         <span>{user.name}</span>
                       </button>
                     </li>
@@ -75,8 +67,14 @@ export default function ProjectLead(props: IProjectLead) {
             </div>
           ) : (
             <button className={styles.leadInputClose} type="button" onClick={handleClickOutside}>
-              <img src={userInfo.avatar} alt="avatar" />
-              <span>{userInfo.name}</span>
+              <img
+                src={
+                  userInfo?.avatar ||
+                  'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'
+                }
+                alt="avatar"
+              />
+              <span>{userInfo?.name}</span>
             </button>
           )}
         </div>
