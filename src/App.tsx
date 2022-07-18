@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import AuthenticationRoute from './config/AuthenticationRoute';
 import Home from './pages/Home/Home';
 import Register from './pages/Register/Register';
 import Login from './pages/Login/Login';
@@ -33,7 +34,6 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
           <Route path="/reset-password" element={<ResetPassword />} />
-          <Route path="/settings/:projectId" element={<Setting />} />
           <Route path="/cookie-policy" element={<CookiePolicy />} />
           <Route path="/gdpr" element={<Gdpr />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />

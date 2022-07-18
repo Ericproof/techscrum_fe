@@ -3,6 +3,7 @@ import { FiArrowLeft } from 'react-icons/fi';
 import { RiMoreFill } from 'react-icons/ri';
 import styles from './Modal.module.scss';
 import uploadImage from '../../../../assets/uploadImage.png';
+import { upload } from '../../../../api/upload/upload';
 
 export default function Modal({ shown, close }: { shown: boolean; close: () => void }) {
   const icons = [
@@ -93,6 +94,13 @@ export default function Modal({ shown, close }: { shown: boolean; close: () => v
       <img src={firstFiveIcon.photo} alt="icon" />
     </li>
   ));
+
+  const uploadFile = (e: any) => {
+    const data = new FormData();
+    data.append('photos', e.target.files[0]);
+    upload(data);
+  };
+
   const listIcons = icons.map((icon) => (
     <li key={icon.id}>
       <img src={icon.photo} alt="icon" />
@@ -147,6 +155,7 @@ export default function Modal({ shown, close }: { shown: boolean; close: () => v
                             type="file"
                             name="Upload a photo"
                             style={{ display: 'none' }}
+                            onChange={uploadFile}
                           />
                         </label>
                       </div>
