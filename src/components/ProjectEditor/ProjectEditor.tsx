@@ -7,7 +7,6 @@ import ChangeKey from './ChangeKey/ChangeKey';
 import ChangeName from './ChangeName/ChangeName';
 import styles from './ProjectEditor.module.scss';
 import ProjectLead from './ProjectLead/ProjectLead';
-import { createProject } from '../../api/projects/projects';
 import { IOnChangeProjectLead, IProjectEditor } from '../../types';
 
 interface ProjectEditorProps {

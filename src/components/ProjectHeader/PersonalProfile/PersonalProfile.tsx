@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { BsBoxArrowUpRight } from 'react-icons/bs';
 import styles from './PersonalProfile.module.scss';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import { IUserInfo } from '../../../types';
 import avatarImg from '../../../assets/userAvatar.png';
+import { UserDispatchContext } from '../../../context/UserInfoProvider';
 
 interface Props {
   userInfo: IUserInfo;
@@ -12,6 +14,12 @@ interface Props {
 export default function PersonalProfile({ userInfo }: Props) {
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const handleClickOutside = (state: boolean) => setVisible(!state);
+  const setUserInfo = useContext(UserDispatchContext);
+
+  const logout = () => {
+    localStorage.clear();
+    setUserInfo({});
+  };
   return (
     <div ref={myRef}>
       <div className={styles.rightSection} key={userInfo.id}>
@@ -59,11 +67,11 @@ export default function PersonalProfile({ userInfo }: Props) {
                     </div>
                   </div>
                   <div className={styles.settingBottom}>
-                    <a href="/#" className={styles.logOutSection}>
+                    <Link to="/#" className={styles.logOutSection} onClick={logout}>
                       <div className={styles.logOutContainer}>
                         <span>Log out</span>
                       </div>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
