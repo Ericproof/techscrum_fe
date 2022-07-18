@@ -40,7 +40,7 @@ function App() {
           <Route path="/refund-policy" element={<RefundPolicy />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/errorPage" element={<ErrorPage />} />
-          <Route path="*" element={<AuthenticationRoute />}>
+          <Route path="" element={<AuthenticationRoute />}>
             <Route path="/settings/:projectId" element={<Setting />} />
             <Route path="/user-page" element={<UserPage />} />
             <Route path="/access" element={<Access />} />
