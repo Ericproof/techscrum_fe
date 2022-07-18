@@ -125,13 +125,6 @@ export default function Project() {
         updateProject={getProjectFromChildren}
         updateIsCreateNewCard={getCreateNewCardStateFromChildren}
       />
-      {visible && (
-        <div className={styles.modalContainer} ref={myRef}>
-          <div className={styles.modal}>
-            <ProjectEditor onCompletedSubmit={onCompletedSubmit} />
-          </div>
-        </div>
-      )}
       {isCreateNewCard && (
         <CreateNewCard
           updateIsCreateNewCard={getCreateNewCardStateFromChildren}
