@@ -8,9 +8,24 @@ interface IPropsLabel {
 
 export default function Label(props: IPropsLabel) {
   const { labels } = props;
-  const [selectedTaskLabelList, setSelectedTaskLabelList] = useState([labels[0], labels[1]]);
+  const [selectedTaskLabelList, setSelectedTaskLabelList] = useState([labels[0]]);
+  const [unselectedTaskList, setUnSelectedTaskLabelList] = useState([labels]);
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const handleClickOutside = () => setVisible(true);
+
+  const removeLabelFromSelectedTaskList = (e: any) => {
+    const removedTaskLabel = [e.innerHTML];
+    setSelectedTaskLabelList(
+      selectedTaskLabelList.filter((item) => item.name !== removedTaskLabel)
+    );
+    setUnSelectedTaskLabelList(unselectedTaskList.concat(removedTaskLabel));
+  };
+
+  const addLabelsSelectedTaskLabelList = (e: any) => {
+    const addedTaskLabel = [e.innerHTML];
+    setSelectedTaskLabelList(selectedTaskLabelList.concat(addedTaskLabel));
+    setUnSelectedTaskLabelList(unselectedTaskList.filter((item) => item.name !== addedTaskLabel));
+  };
 
   return (
     <div ref={myRef} className={styles.label}>
@@ -21,7 +36,16 @@ export default function Label(props: IPropsLabel) {
             <div className={styles.leadInputField}>
               {selectedTaskLabelList.map((item: any) => {
                 // show delete button, onClickRemove from selectedTaskLabelList;
-                return <span>{item.name}</span>;
+                return (
+                  <button
+                    id={item.id}
+                    onClick={(e) => {
+                      removeLabelFromSelectedTaskList(e);
+                    }}
+                  >
+                    {item.name}
+                  </button>
+                );
               })}
               <button className={styles.optionToggle} type="button" onClick={handleClickOutside}>
                 <i role="button" aria-label="openDropdown" tabIndex={0} />
@@ -29,18 +53,19 @@ export default function Label(props: IPropsLabel) {
             </div>
             <div className={styles.leadMenu}>
               <ul>
-                {labels
-                  .filter((item) => {
-                    return true;
-                  })
+                {unselectedTaskList
+                  // .filter((item: any) => {
+                  //   return true;
+                  // })
                   .map((tag: any) => (
                     <li key={tag.id}>
                       <button
                         type="button"
-                        onClick={() => {
+                        onClick={(e) => {
                           // get old  selectedTaskLabelList list
                           // newlist = append the item to old selectedTaskLabelList list
                           // setSelectedTaskLabelList
+                          addLabelsSelectedTaskLabelList(e);
                           setVisible(false);
                         }}
                       >
@@ -54,7 +79,7 @@ export default function Label(props: IPropsLabel) {
         ) : (
           <button className={styles.leadInputClose} type="button" onClick={handleClickOutside}>
             {selectedTaskLabelList.map((item: any) => {
-              return <span>{item.name}</span>;
+              return <span id={item.id}>{item.name}</span>;
             })}
           </button>
         )}
