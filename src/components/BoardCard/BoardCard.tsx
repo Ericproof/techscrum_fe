@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import React, { useEffect, useState } from 'react';
 import CardHeader from './CardHeader/CardHeader';
 import CardLeftContent from './CardLeftContent/CardLeftContent';
@@ -8,10 +9,11 @@ import styles from './BoardCard.module.scss';
 
 interface Props {
   updateIsViewTask: () => void;
-  taskData: TaskEntity;
+  taskData: TaskEntity | undefined;
   columnsInfo: IColumnsFromBackend;
   onSave: (updatedTaskInfo: TaskEntity) => void;
   deleteTask: () => void;
+  labels: any;
 }
 
 export default function BoardCard({
@@ -19,12 +21,22 @@ export default function BoardCard({
   taskData,
   onSave,
   columnsInfo,
-  deleteTask
+  deleteTask,
+  labels
 }: Props) {
-  const [taskInfo, setTaskInfo] = useState({});
+  const [taskInfo, setTaskInfo] = useState<TaskEntity | null>(null);
+
   useEffect(() => {
+    if (!taskData) {
+      return;
+    }
     setTaskInfo(taskData);
   }, [taskData]);
+
+  if (!taskInfo) {
+    return <></>;
+  }
+
   return (
     <div className={styles.background}>
       <div className={styles.container}>
@@ -39,6 +51,7 @@ export default function BoardCard({
             taskInfo={taskInfo}
             columnsInfo={columnsInfo}
             taskStatusOnchange={onSave}
+            labels={labels}
           />
         </div>
       </div>

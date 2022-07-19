@@ -11,18 +11,18 @@ export interface Task {
 }
 
 export interface TaskEntity {
-  id?: string;
-  title?: string;
-  tag?: string;
+  id: string;
+  title: string;
+  tag: string;
   statusId?: number;
   projectId?: string;
   boardId?: string;
   typeId?: string;
-  description?: string;
+  description: string;
   storyPoint?: number;
   dueAt?: Date;
   assignId?: string;
   reporterId?: string;
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt: Date;
+  updatedAt: Date;
 }

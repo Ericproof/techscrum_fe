@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import React, { useState } from 'react';
 import { DatePicker } from '@atlaskit/datetime-picker';
 import { TaskEntity } from '../../../api/task/entity/task';
@@ -12,9 +13,15 @@ interface Props {
   taskInfo: TaskEntity;
   columnsInfo: IColumnsFromBackend;
   taskStatusOnchange: (taskInfo: TaskEntity) => void;
+  labels: any;
 }
 
-export default function CardRightContent({ columnsInfo, taskInfo, taskStatusOnchange }: Props) {
+export default function CardRightContent({
+  columnsInfo,
+  taskInfo,
+  taskStatusOnchange,
+  labels
+}: Props) {
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const handleClickOutside = () => setVisible(true);
 
@@ -68,6 +75,10 @@ export default function CardRightContent({ columnsInfo, taskInfo, taskStatusOnch
     }
     return '';
   };
+
+  if (!taskInfo) {
+    return <></>;
+  }
 
   return (
     <div className={style.container}>
@@ -136,11 +147,11 @@ export default function CardRightContent({ columnsInfo, taskInfo, taskStatusOnch
         </div>
         <div className={style.boxBody}>
           <Assignee assigneeOnchangeEventHandler={assigneeOnchangeEventHandler} />
-          <Label />
+          <Label labels={labels} />
           <div className={style.dueDate}>
             <div>Due date</div>
             <div>
-              <DatePicker
+              {/* <DatePicker
                 dateFormat="MM-DD-YYYY"
                 placeholder={dateWithDay(taskInfo.dueAt ?? null)}
                 defaultValue={dateWithDay(taskInfo.dueAt ?? null)}
@@ -149,7 +160,7 @@ export default function CardRightContent({ columnsInfo, taskInfo, taskStatusOnch
                   updatedTaskInfo.dueAt = new Date(date);
                   taskStatusOnchange(updatedTaskInfo);
                 }}
-              />
+              /> */}
             </div>
           </div>
           <Reporter reporterOnchangeEventHandler={reporterOnchangeEventHandler} />

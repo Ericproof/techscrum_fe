@@ -2,25 +2,16 @@ import React, { useState } from 'react';
 import useOutsideAlerter from '../../../../hooks/OutsideAlerter';
 import styles from './Label.module.scss';
 
-const tags = [
-  {
-    id: '1',
-    tag: 'None'
-  },
-  {
-    id: '2',
-    tag: 'Frontend'
-  },
-  {
-    id: '3',
-    tag: 'Backend'
-  }
-];
+interface IPropsLabel {
+  labels: any;
+}
 
-export default function Label() {
-  const [userInfo, setUserInfo] = useState(tags[0]);
+export default function Label(props: IPropsLabel) {
+  const { labels } = props;
+  const [selectedTaskLabelList, setSelectedTaskLabelList] = useState([labels[0], labels[1]]);
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const handleClickOutside = () => setVisible(true);
+
   return (
     <div ref={myRef} className={styles.label}>
       <div>Labels</div>
@@ -28,33 +19,43 @@ export default function Label() {
         {visible ? (
           <div className={styles.leadDropdownOpen}>
             <div className={styles.leadInputField}>
-              <span>{userInfo.tag}</span>
+              {selectedTaskLabelList.map((item: any) => {
+                // show delete button, onClickRemove from selectedTaskLabelList;
+                return <span>{item.name}</span>;
+              })}
               <button className={styles.optionToggle} type="button" onClick={handleClickOutside}>
                 <i role="button" aria-label="openDropdown" tabIndex={0} />
               </button>
             </div>
             <div className={styles.leadMenu}>
               <ul>
-                {tags.map((tag) => (
-                  <li key={tag.id}>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setUserInfo({ id: tag.id, tag: tag.tag });
-                        //   onChange({ target: { name: 'projectLeadId', value: user.id } });
-                        setVisible(false);
-                      }}
-                    >
-                      <span>{tag.tag}</span>
-                    </button>
-                  </li>
-                ))}
+                {labels
+                  .filter((item) => {
+                    return true;
+                  })
+                  .map((tag: any) => (
+                    <li key={tag.id}>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          // get old  selectedTaskLabelList list
+                          // newlist = append the item to old selectedTaskLabelList list
+                          // setSelectedTaskLabelList
+                          setVisible(false);
+                        }}
+                      >
+                        <span>{tag.name}</span>
+                      </button>
+                    </li>
+                  ))}
               </ul>
             </div>
           </div>
         ) : (
           <button className={styles.leadInputClose} type="button" onClick={handleClickOutside}>
-            <span>{userInfo.tag}</span>
+            {selectedTaskLabelList.map((item: any) => {
+              return <span>{item.name}</span>;
+            })}
           </button>
         )}
       </div>
