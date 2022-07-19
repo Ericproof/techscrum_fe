@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useOutsideAlerter from '../../../../hooks/OutsideAlerter';
 import styles from './Label.module.scss';
 
@@ -9,22 +9,28 @@ interface IPropsLabel {
 export default function Label(props: IPropsLabel) {
   const { labels } = props;
   const [selectedTaskLabelList, setSelectedTaskLabelList] = useState([labels[0]]);
-  const [unselectedTaskList, setUnSelectedTaskLabelList] = useState([labels]);
+  const [dropDownTaskList, setDropDownTaskList] = useState(labels);
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const handleClickOutside = () => setVisible(true);
 
-  const removeLabelFromSelectedTaskList = (e: any) => {
-    const removedTaskLabel = [e.innerHTML];
-    setSelectedTaskLabelList(
-      selectedTaskLabelList.filter((item) => item.name !== removedTaskLabel)
+  useEffect(() => {
+    const labelNames = selectedTaskLabelList.map((item) => {
+      return item.name;
+    });
+
+    setDropDownTaskList(
+      labels.filter((item: any) => {
+        return !labelNames.includes(item.name);
+      })
     );
-    setUnSelectedTaskLabelList(unselectedTaskList.concat(removedTaskLabel));
+  }, [labels, selectedTaskLabelList]);
+
+  const removeLabelFromSelectedTaskList = (label: any) => {
+    setSelectedTaskLabelList(selectedTaskLabelList.filter((item) => item.name !== label.name));
   };
 
-  const addLabelsSelectedTaskLabelList = (e: any) => {
-    const addedTaskLabel = [e.innerHTML];
-    setSelectedTaskLabelList(selectedTaskLabelList.concat(addedTaskLabel));
-    setUnSelectedTaskLabelList(unselectedTaskList.filter((item) => item.name !== addedTaskLabel));
+  const addLabelsSelectedTaskLabelList = (label: any) => {
+    setSelectedTaskLabelList(selectedTaskLabelList.concat(label));
   };
 
   return (
@@ -35,12 +41,12 @@ export default function Label(props: IPropsLabel) {
           <div className={styles.leadDropdownOpen}>
             <div className={styles.leadInputField}>
               {selectedTaskLabelList.map((item: any) => {
-                // show delete button, onClickRemove from selectedTaskLabelList;
                 return (
                   <button
+                    key={item.id}
                     id={item.id}
-                    onClick={(e) => {
-                      removeLabelFromSelectedTaskList(e);
+                    onClick={() => {
+                      removeLabelFromSelectedTaskList(item);
                     }}
                   >
                     {item.name}
@@ -53,33 +59,29 @@ export default function Label(props: IPropsLabel) {
             </div>
             <div className={styles.leadMenu}>
               <ul>
-                {unselectedTaskList
-                  // .filter((item: any) => {
-                  //   return true;
-                  // })
-                  .map((tag: any) => (
-                    <li key={tag.id}>
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          // get old  selectedTaskLabelList list
-                          // newlist = append the item to old selectedTaskLabelList list
-                          // setSelectedTaskLabelList
-                          addLabelsSelectedTaskLabelList(e);
-                          setVisible(false);
-                        }}
-                      >
-                        <span>{tag.name}</span>
-                      </button>
-                    </li>
-                  ))}
+                {dropDownTaskList.map((label: any) => (
+                  <li key={label.id}>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        addLabelsSelectedTaskLabelList(label);
+                      }}
+                    >
+                      <span>{label.name}</span>
+                    </button>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
         ) : (
           <button className={styles.leadInputClose} type="button" onClick={handleClickOutside}>
             {selectedTaskLabelList.map((item: any) => {
-              return <span id={item.id}>{item.name}</span>;
+              return (
+                <span key={item.id} id={item.id}>
+                  {item.name}
+                </span>
+              );
             })}
           </button>
         )}
