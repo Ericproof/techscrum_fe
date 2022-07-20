@@ -9,16 +9,22 @@ $small_size: 1000px;
   background-color: white;
   position: fixed;
   z-index: 2000;
-  left: 0;
-  right: 0;
+  left: 10%;
+  right: 10%;
   top: 80px;
   max-height: calc(95vh - 78px);
+  border-radius: 3px;
+  border: grey;
+  box-shadow: rgb(9 30 66 / 8%) 0px 0px 0px 1px, rgb(9 30 66 / 8%) 0px 2px 1px,
+    rgb(9 30 66 / 31%) 0px 0px 20px -6px;
   @media (max-width: $max_size) {
     top: 0px;
     position: relative;
     top: none;
     max-height: none;
     width: 100%;
+    left: 0;
+    right: 0;
   }
   .serviceContainerTwoColumns {
     display: flex;
