@@ -18,7 +18,10 @@ export default function NavTop(props: IPropsNavTop) {
     <div className={styles.container}>
       <div className={styles.content}>
         <img
-          src="https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10411?size=xxlarge"
+          src={
+            currentProject.iconUrl ||
+            'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10411?size=xxlarge'
+          }
           alt="img"
         />
         <div className={styles.textContext}>

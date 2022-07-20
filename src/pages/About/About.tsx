@@ -1,5 +1,7 @@
 import React from 'react';
 import styles from './About.module.scss';
+import memberPicture from './MemberPicture/xiaowanzi.jpeg';
+import linkedinPicture from './MemberPicture/linkedin.png';
 
 export default function About() {
   return (
@@ -7,165 +9,177 @@ export default function About() {
       <div className={styles.aboutContainer}>
         <div className={styles.aboutTextCenter}>
           <p>our team</p>
-          <hr />
         </div>
         <div className={styles.aboutRow}>
-          <ul className={styles.aboutList}>
-            <li id={styles.listName}>Name:Kitman</li>
-            <li id={styles.listPosition}>Position:Manger</li>
-            <li id={styles.listImage}>
-              <picture>
-                <img src="yu.jpg" alt="Kitman" />
-              </picture>
-            </li>
-            <li>
-              <a href="https://www.linkedin.com/home">Linkdin</a>
-            </li>
-          </ul>
-          <ul className={styles.aboutList}>
-            <li id={styles.listName}>Name:Emil</li>
-            <li id={styles.listPosition}>Position:Team Leader</li>
-            <li id={styles.listImage}>
-              <picture>
-                <img src="yu.jpg" alt="Emil" />
-              </picture>
-            </li>
-            <li>
-              <a href="https://www.linkedin.com/home">Linkdin</a>
-            </li>
-          </ul>
-          <ul className={styles.aboutList}>
-            <li id={styles.listName}>Name:Belinda</li>
-            <li id={styles.listPosition}>Position:BA</li>
-            <li id={styles.listImage}>
-              <picture>
-                <img src="yu.jpg" alt="Belinda" />
-              </picture>
-            </li>
-            <li>
-              <a href="https://www.linkedin.com/home">Linkdin</a>
-            </li>
-          </ul>
-          <ul className={styles.aboutList}>
-            <li id={styles.listName}>Name:Hyna</li>
-            <li id={styles.listPosition}>Position:Developer</li>
-            <li id={styles.listImage}>
-              <picture>
-                <img src="yu.jpg" alt="Hyna" />
-              </picture>
-            </li>
-            <li>
-              <a href="https://www.linkedin.com/home">Linkdin</a>
-            </li>
-          </ul>
-          <ul className={styles.aboutList}>
-            <li id={styles.listName}>Name:Vanny</li>
-            <li id={styles.listPosition}>Position:Developer</li>
-            <li id={styles.listImage}>
-              <picture>
-                <img src="yu.jpg" alt="Vanny" />
-              </picture>
-            </li>
-            <li>
-              <a href="https://www.linkedin.com/home">Linkdin</a>
-            </li>
-          </ul>
-          <ul className={styles.aboutList}>
-            <li id={styles.listName}>Name:Talisa</li>
-            <li id={styles.listPosition}>Position:Developer</li>
-            <li id={styles.listImage}>
-              <picture>
-                <img src="yu.jpg" alt="Talisa" />
-              </picture>
-            </li>
-            <li>
-              <a href="https://www.linkedin.com/home">Linkdin</a>
-            </li>
-          </ul>
-          <ul className={styles.aboutList}>
-            <li id={styles.listName}>Name:Regan</li>
-            <li id={styles.listPosition}>Position:Developer</li>
-            <li id={styles.listImage}>
-              <picture>
-                <img src="yu.jpg" alt="Regan" />
-              </picture>
-            </li>
-            <li>
-              <a href="https://www.linkedin.com/home">Linkdin</a>
-            </li>
-          </ul>
-          <ul className={styles.aboutList}>
-            <li id={styles.listName}>Name:Evan</li>
-            <li id={styles.listPosition}>Position:Developer</li>
-            <li id={styles.listImage}>
-              <picture>
-                <img src="yu.jpg" alt="Evan" />
-              </picture>
-            </li>
-            <li>
-              <a href="https://www.linkedin.com/home">Linkdin</a>
-            </li>
-          </ul>
-          <ul className={styles.aboutList}>
-            <li id={styles.listName}>Name:Ryan</li>
-            <li id={styles.listPosition}>Position:DevOps</li>
-            <li id={styles.listImage}>
-              <picture>
-                <img src="yu.jpg" alt="Ryan" />
-              </picture>
-            </li>
-            <li>
-              <a href="https://www.linkedin.com/home">Linkdin</a>
-            </li>
-          </ul>
-          <ul className={styles.aboutList}>
-            <li id={styles.listName}>Name:Lois</li>
-            <li id={styles.listPosition}>Position:DevOps</li>
-            <li id={styles.listImage}>
-              <picture>
-                <img src="yu.jpg" alt="Lois" />
-              </picture>
-            </li>
-            <li>
-              <a href="https://www.linkedin.com/home">Linkdin</a>
-            </li>
-          </ul>
-          <ul className={styles.aboutList}>
-            <li id={styles.listName}>Name:Flynn</li>
-            <li id={styles.listPosition}>Position:DevOps</li>
-            <li id={styles.listImage}>
-              <picture>
-                <img src="yu.jpg" alt="Flynn" />
-              </picture>
-            </li>
-            <li>
-              <a href="https://www.linkedin.com/home">Linkdin</a>
-            </li>
-          </ul>
-          <ul className={styles.aboutList}>
-            <li id={styles.listName}>Name:Valerie</li>
-            <li id={styles.listPosition}>Position:DevOps</li>
-            <li id={styles.listImage}>
-              <picture>
-                <img src="yu.jpg" alt="Valerie" />
-              </picture>
-            </li>
-            <li>
-              <a href="https://www.linkedin.com/home">Linkdin</a>
-            </li>
-          </ul>
-          <ul className={styles.aboutList}>
-            <li id={styles.listName}>Name:Mingshan</li>
-            <li id={styles.listPosition}>Position:DevOps</li>
-            <li id={styles.listImage}>
-              <picture>
-                <img src="yu.jpg" alt="Mingshan" />
-              </picture>
-            </li>
-            <li>
-              <a href="https://www.linkedin.com/home">Linkdin</a>
-            </li>
-          </ul>
+          <p>Leader</p>
+          <div className={styles.leader}>
+            <ul className={styles.aboutList}>
+              <li id={styles.listImage}>
+                <img className={styles.memberImg} src={memberPicture} alt="Kitman" />
+              </li>
+              <li id={styles.listName}>Kitman</li>
+              <li id={styles.listPosition}>Manger</li>
+              <li>
+                <a href="https://www.linkedin.com/home">
+                  <img className={styles.inputImg} src={linkedinPicture} alt="linkedin" />
+                </a>
+              </li>
+            </ul>
+          </div>
+          <p>BA</p>
+          <div className={styles.ba}>
+            <ul className={styles.aboutList}>
+              <li id={styles.listImage}>
+                <img className={styles.memberImg} src={memberPicture} alt="Belinda" />
+              </li>
+              <li id={styles.listName}>Belinda</li>
+              <li id={styles.listPosition}>BA</li>
+              <li>
+                <a href="https://www.linkedin.com/home">
+                  <img className={styles.inputImg} src={linkedinPicture} alt="linkedin" />
+                </a>
+              </li>
+            </ul>
+          </div>
+          <p>Developer</p>
+          <div className={styles.developer}>
+            <ul className={styles.aboutList}>
+              <li id={styles.listImage}>
+                <img className={styles.memberImg} src={memberPicture} alt="Emil" />
+              </li>
+              <li id={styles.listName}>Emil</li>
+              <li id={styles.listPosition}>Team Leader</li>
+              <li>
+                <a href="https://www.linkedin.com/home">
+                  <img className={styles.inputImg} src={linkedinPicture} alt="linkedin" />
+                </a>
+              </li>
+            </ul>
+            <ul className={styles.aboutList}>
+              <li id={styles.listImage}>
+                <img className={styles.memberImg} src={memberPicture} alt="Hyna" />
+              </li>
+              <li id={styles.listName}>Hyna</li>
+              <li id={styles.listPosition}>Developer</li>
+              <li>
+                <a href="https://www.linkedin.com/home">
+                  <img className={styles.inputImg} src={linkedinPicture} alt="linkedin" />
+                </a>
+              </li>
+            </ul>
+            <ul className={styles.aboutList}>
+              <li id={styles.listImage}>
+                <img className={styles.memberImg} src={memberPicture} alt="Vanny" />
+
+                <li id={styles.listName}>Vanny</li>
+                <li id={styles.listPosition}>Developer</li>
+              </li>
+              <li>
+                <a href="https://www.linkedin.com/home">
+                  <img className={styles.inputImg} src={linkedinPicture} alt="linkedin" />
+                </a>
+              </li>
+            </ul>
+            <ul className={styles.aboutList}>
+              <li id={styles.listImage}>
+                <img className={styles.memberImg} src={memberPicture} alt="Talisa" />
+              </li>
+              <li id={styles.listName}>Talisa</li>
+              <li id={styles.listPosition}>Developer</li>
+              <li>
+                <a href="https://www.linkedin.com/home">
+                  <img className={styles.inputImg} src={linkedinPicture} alt="linkedin" />
+                </a>
+              </li>
+            </ul>
+            <ul className={styles.aboutList}>
+              <li id={styles.listImage}>
+                <img className={styles.memberImg} src={memberPicture} alt="Regan" />
+              </li>
+              <li id={styles.listName}>Regan</li>
+              <li id={styles.listPosition}>Developer</li>
+              <li>
+                <a href="https://www.linkedin.com/home">
+                  <img className={styles.inputImg} src={linkedinPicture} alt="linkedin" />
+                </a>
+              </li>
+            </ul>
+            <ul className={styles.aboutList}>
+              <li id={styles.listImage}>
+                <img className={styles.memberImg} src={memberPicture} alt="Evan" />
+              </li>
+              <li id={styles.listName}>Evan</li>
+              <li id={styles.listPosition}>Developer</li>
+              <li>
+                <a href="https://www.linkedin.com/home">
+                  <img className={styles.inputImg} src={linkedinPicture} alt="linkedin" />
+                </a>
+              </li>
+            </ul>
+          </div>
+          <p>DevOps</p>
+          <div className={styles.dev}>
+            <ul className={styles.aboutList}>
+              <li id={styles.listImage}>
+                <img className={styles.memberImg} src={memberPicture} alt="Ryan" />
+              </li>
+              <li id={styles.listName}>Ryan</li>
+              <li id={styles.listPosition}>DevOps</li>
+              <li>
+                <a href="https://www.linkedin.com/home">
+                  <img className={styles.inputImg} src={linkedinPicture} alt="linkedin" />
+                </a>
+              </li>
+            </ul>
+            <ul className={styles.aboutList}>
+              <li id={styles.listImage}>
+                <img className={styles.memberImg} src={memberPicture} alt="Lois" />
+              </li>
+              <li id={styles.listName}>Lois</li>
+              <li id={styles.listPosition}>DevOps</li>
+              <li>
+                <a href="https://www.linkedin.com/home">
+                  <img className={styles.inputImg} src={linkedinPicture} alt="linkedin" />
+                </a>
+              </li>
+            </ul>
+            <ul className={styles.aboutList}>
+              <li id={styles.listImage}>
+                <img className={styles.memberImg} src={memberPicture} alt="Flynn" />
+              </li>
+              <li id={styles.listName}>Flynn</li>
+              <li id={styles.listPosition}>DevOps</li>
+              <li>
+                <a href="https://www.linkedin.com/home">
+                  <img className={styles.inputImg} src={linkedinPicture} alt="linkedin" />
+                </a>
+              </li>
+            </ul>
+            <ul className={styles.aboutList}>
+              <li id={styles.listImage}>
+                <img className={styles.memberImg} src={memberPicture} alt="Valerie" />
+              </li>
+              <li id={styles.listName}>Valerie</li>
+              <li id={styles.listPosition}>DevOps</li>
+              <li>
+                <a href="https://www.linkedin.com/home">
+                  <img className={styles.inputImg} src={linkedinPicture} alt="linkedin" />
+                </a>
+              </li>
+            </ul>
+            <ul className={styles.aboutList}>
+              <li id={styles.listImage}>
+                <img className={styles.memberImg} src={memberPicture} alt="Mingshan" />
+              </li>
+              <li id={styles.listName}>Mingshan</li>
+              <li id={styles.listPosition}>DevOps</li>
+              <li>
+                <a href="https://www.linkedin.com/home">
+                  <img className={styles.inputImg} src={linkedinPicture} alt="linkedin" />
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>

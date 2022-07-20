@@ -1,12 +1,11 @@
 .aboutMain {
     background: #f5f7fa;
     font-family: 'FaktSoft', Arial, Helvetica, 'sans-serif';
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: 700;
     line-height: 1.4;
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
-  
     .aboutContainer {
       padding-top: 147px;
       margin-right: auto;
@@ -32,37 +31,38 @@
         padding-bottom: 6rem !important;
       }
     }
-  
     .aboutTextCenter {
       width: 100%;
       text-align: center !important;
       p {
         font-weight: 600;
-        font-size: 18px;
-        color: #a7acc5;
+        font-size: 20px;
+        color: #8a8fa5;
         text-align: center;
         text-transform: uppercase;
       }
-      hr {
-        background-color: #6a84ed;
-        border: 0px;
-        height: 4px;
-        width: 100px;
-        margin: 42px auto;
-        margin-bottom: 5rem;
-      }
     }
-  
     .aboutRow {
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
       margin-right: 12px;
       margin-left: 12px;
-      padding-top: 10px;
+      padding-top: 50px;
       padding-bottom: 30px;
       text-align: center;
+      p{
+        text-align: left;
+        color: #8a8fa5;
+      }
     }
-  
+   .developer{
+    display: flex;
+    flex-wrap: wrap;
+  }
+   .dev{
+    display: flex;
+    flex-wrap: wrap;
+  }
     .aboutList {
       @media screen and (min-width: 768px) {
         flex: 0 0 100%;
@@ -73,37 +73,37 @@
         max-width: 33.3333333333%;
       }
     }
-  
     .aboutList {
       padding-left: 0;
       top: 100px;
-      transition: height 0.3s ease;
-      #RemoveBorder {
-        border: 0;
-      }
       li {
         color: #494e6a;
-        border-left: 2px solid #e7ebf1;
-        font-size: 14px;
-        font-weight: 550;
         list-style-type: none;
         position: relative;
         display: list-item;
-  
         a {
-          line-height: 1.3;
-          text-decoration: none;
-          font-weight: 600;
-          font-size: 16px;
           display: block;
           padding: 7px 14px;
-          color: #466bd2;
         }
       }
-      li:hover {
-        border-left: 2px solid #4461d7;
-      }
     }
-  
+   .inputImg{
+    width: 20px;
+    height: 20px;
+  }
+   .memberImg {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+  }
+   #listName{
+    font-size:18px;
+    color: black;
+    font-weight:680;
+  }
+   #listPosition{
+    font-size:14px;
+    font-weight:450;
+  }
   }
   

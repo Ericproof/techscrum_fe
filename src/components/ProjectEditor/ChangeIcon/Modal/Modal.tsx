@@ -5,7 +5,13 @@ import styles from './Modal.module.scss';
 import uploadImage from '../../../../assets/uploadImage.png';
 import { upload } from '../../../../api/upload/upload';
 
-export default function Modal({ shown, close }: { shown: boolean; close: () => void }) {
+interface IModalProps {
+  shown: boolean;
+  close: () => void;
+  uploadSuccess: (data: any) => void;
+}
+
+export default function Modal({ shown, close, uploadSuccess }: IModalProps) {
   const icons = [
     {
       id: 1,
@@ -98,7 +104,9 @@ export default function Modal({ shown, close }: { shown: boolean; close: () => v
   const uploadFile = (e: any) => {
     const data = new FormData();
     data.append('photos', e.target.files[0]);
-    upload(data);
+    upload(data).then((res: any) => {
+      uploadSuccess(res.data);
+    });
   };
 
   const listIcons = icons.map((icon) => (
