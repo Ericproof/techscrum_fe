@@ -87,7 +87,6 @@
     }
   }
   .settingDropdown {
-    margin-top: 48%;
     position: absolute;
     inset: 0px auto auto 0px;
     transform: translate(-83%, 16%);
@@ -117,6 +116,43 @@
             display: block;
             height: 6px;
             content: '';
+          }
+          display: flex;
+          flex-direction: column;
+          h1 {
+            padding: 0 20px;
+            text-transform: uppercase;
+            font-size: 11px;
+            line-height: 1.45455;
+            font-weight: 700;
+          }
+          .accountContent {
+            padding: 8px 20px;
+            display: flex;
+            flex-direction: row;
+            img {
+              border-radius: 50%;
+              max-width: 36px;
+              max-height: 36px;
+              align-self: center;
+              margin-right: 8px;
+            }
+            .userContext {
+              display: flex;
+              flex-direction: column;
+              p {
+                font-size: 0.785714em;
+                font-style: inherit;
+                color: #6b778c;
+                margin: 2px;
+                font-weight: 400;
+                line-height: 1.45455;
+                &:first-child {
+                  font-weight: 600;
+                  line-height: 20px;
+                }
+              }
+            }
           }
         }
         .settingDetails {

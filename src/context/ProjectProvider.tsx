@@ -1,28 +1,40 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useCallback, useEffect, useState } from 'react';
 import { getProjects } from '../api/projects/projects';
 import { IProject } from '../types';
 
 const ProjectContext = createContext<IProject[]>([]);
+const ProjectDispatchContext = createContext<() => void>(() => {});
 
 interface IProjectProvider {
-  children: any;
+  children?: React.ReactNode;
 }
 
 function ProjectProvider({ children }: IProjectProvider) {
   const [projectList, setProjectList] = useState<IProject[]>([]);
 
-  useEffect(() => {
-    const fetchProjects = async () => {
-      const res = await getProjects();
-      if (!res.data) {
-        return;
-      }
-      setProjectList(res.data);
-    };
-    fetchProjects();
+  const fetchProjects = useCallback(async () => {
+    const res = await getProjects();
+    if (!res.data) {
+      return;
+    }
+    setProjectList(res.data);
   }, []);
 
-  return <ProjectContext.Provider value={projectList}>{children}</ProjectContext.Provider>;
+  useEffect(() => {
+    fetchProjects();
+  }, [fetchProjects]);
+
+  return (
+    <ProjectContext.Provider value={projectList}>
+      <ProjectDispatchContext.Provider value={fetchProjects}>
+        {children}
+      </ProjectDispatchContext.Provider>
+    </ProjectContext.Provider>
+  );
 }
 
-export { ProjectProvider, ProjectContext };
+ProjectProvider.defaultProps = {
+  children: null
+};
+
+export { ProjectProvider, ProjectContext, ProjectDispatchContext };

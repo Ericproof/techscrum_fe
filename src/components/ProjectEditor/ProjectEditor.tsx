@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AxiosResponse } from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Assignee from './Assignee/Assignee';
@@ -7,12 +7,14 @@ import ChangeKey from './ChangeKey/ChangeKey';
 import ChangeName from './ChangeName/ChangeName';
 import styles from './ProjectEditor.module.scss';
 import ProjectLead from './ProjectLead/ProjectLead';
-import { createProject } from '../../api/projects/projects';
 import { IOnChangeProjectLead, IProjectEditor } from '../../types';
 
 interface ProjectEditorProps {
   onCompletedSubmit?: (res: AxiosResponse) => void;
   showCancelBtn?: boolean;
+  projectData?: IProjectEditor;
+  onClickSave: (data: any) => void;
+  hasError: boolean;
 }
 
 function ProjectEditor(props: ProjectEditorProps) {
@@ -20,14 +22,28 @@ function ProjectEditor(props: ProjectEditorProps) {
     name: '',
     key: '',
     projectLeadId: 1,
-    assigneeId: 1
+    assigneeId: 1,
+    iconUrl: ''
   });
-  const [hasError, setError] = useState(false);
   const navigate = useNavigate();
-  const { onCompletedSubmit = null, showCancelBtn = false } = props;
+
+  const {
+    onCompletedSubmit = null,
+    showCancelBtn = false,
+    projectData,
+    onClickSave,
+    hasError
+  } = props;
   const onChange = (e: IOnChangeProjectLead) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
+
+  useEffect(() => {
+    if (!projectData) {
+      return;
+    }
+    setData(projectData);
+  }, [projectData]);
 
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const updateData = {
@@ -40,26 +56,20 @@ function ProjectEditor(props: ProjectEditorProps) {
 
   const onSave = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    createProject(data)
-      .then((res: AxiosResponse) => {
-        if (!res.data) {
-          return;
-        }
-        setError(false);
-        if (onCompletedSubmit) {
-          onCompletedSubmit(res);
-        }
-      })
-      .catch(() => {
-        setError(true);
-      });
+    onClickSave(data);
+  };
+
+  const uploadSuccess = (photoData: any) => {
+    const updateData = { ...data };
+    updateData.iconUrl = photoData[0].location;
+    setData(updateData);
   };
 
   return (
     <div className={styles.editSection}>
       <div className={styles.editContainer}>
         <form>
-          <ChangeIcon />
+          <ChangeIcon uploadSuccess={uploadSuccess} value={data.iconUrl} />
           <ChangeName value={data.name} onChange={onChangeName} />
           <ChangeKey value={data.key} onChange={onChange} />
           <ProjectLead onChange={onChange} />
@@ -87,7 +97,8 @@ function ProjectEditor(props: ProjectEditorProps) {
 
 ProjectEditor.defaultProps = {
   onCompletedSubmit: null,
-  showCancelBtn: false
+  showCancelBtn: false,
+  projectData: null
 };
 
 export default ProjectEditor;

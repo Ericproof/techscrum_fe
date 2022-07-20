@@ -87,19 +87,9 @@
           display: inline-block;
           position: relative;
           user-select: none;
-          height: 32px;
-          width: 134px;
+          height: 28px;
+          width: 115px;
           bottom: 5px;
-          svg {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0px;
-            left: 0px;
-            fill: inherit;
-            background-image: url('http://localhost:3000/static/media/logo.b93a2db84df580f82fcc33ce76cb76e5.svg');
-            background-repeat: no-repeat;
-          }
         }
       }
       .options {
@@ -200,7 +190,7 @@
             }
           }
         }
-        .option:nth-child(2)::after {
+        .option:nth-child(1)::after {
           position: absolute;
           bottom: 0px;
           left: 4px;
