@@ -14,7 +14,7 @@ export interface TaskEntity {
   id?: string;
   title?: string;
   tag?: string;
-  statusId?: number;
+  statusId?: string;
   projectId?: string;
   boardId?: string;
   typeId?: string;

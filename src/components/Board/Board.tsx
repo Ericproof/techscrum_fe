@@ -9,7 +9,7 @@ import CreateNewCard from '../CreateNewCard/CreateNewCard';
 import HeaderNav from './HeaderNav/HeaderNav';
 import { getBoard } from '../../api/board/board';
 import { updateTaskStatus, fetchTask, updateTask, removeTask } from '../../api/task/task';
-import IBoardEntity, { IColumnsFromBackend, ICardData, IItemFromBackend } from '../../types';
+import IBoardEntity, { IColumnsFromBackend, ICardData, ITaskCard } from '../../types';
 import BoardCard from '../BoardCard/BoardCard';
 import { TaskEntity } from '../../api/task/entity/task';
 
@@ -66,7 +66,7 @@ const onDragEnd = (
     const sourceItems = [...sourceColumn.items];
     const destItems = [...destColumn.items];
     const [removed] = sourceItems.splice(source.index, 1);
-    removed.statusId = Number(destination.droppableId);
+    removed.statusId = destination.droppableId;
     destItems.splice(destination.index, 0, removed);
     setColumns({
       ...columns,
@@ -79,7 +79,7 @@ const onDragEnd = (
         items: destItems
       }
     });
-    updateTaskStatus(result.draggableId, parseInt(result.destination.droppableId, 10));
+    updateTaskStatus(result.draggableId, result.destination.droppableId);
     return true;
   }
 
@@ -136,14 +136,14 @@ export default function Board() {
 
   const fetchNewCard = (newCard: ICardData) => {
     getCreateNewCardStateFromChildren();
-    const newItem: IItemFromBackend = {
+    const newItem: ITaskCard = {
       id: newCard.id,
       tag: newCard.tag,
       title: newCard.title,
       statusId: newCard.statusId
     };
     const columns = columnsInfo;
-    columns[0].items.push(newItem);
+    columns[newCard.statusId ?? ''].items.push(newItem);
     setColumnsInfo(columns);
   };
 
@@ -208,12 +208,13 @@ export default function Board() {
   useEffect(() => {
     const fetchColumnsData = (boardInfo: IBoardEntity) => {
       let columnInfoData: IColumnsFromBackend = {};
-      boardInfo.taskStatus.forEach((status, index) => {
-        const tasks: IItemFromBackend[] = boardInfo.taskList.filter(
+      boardInfo.taskStatus.forEach((status) => {
+        const tasks: ITaskCard[] = boardInfo.taskList.filter(
           (task) =>
-            task.statusId === index && task.title.toLowerCase().includes(inputQuery.toLowerCase())
+            task.statusId === status.id &&
+            task.title.toLowerCase().includes(inputQuery.toLowerCase())
         );
-        columnInfoData = { ...columnInfoData, [index.toString()]: { name: status, items: tasks } };
+        columnInfoData = { ...columnInfoData, [status.id]: { name: status.name, items: tasks } };
       });
       setColumnsInfo(columnInfoData);
     };

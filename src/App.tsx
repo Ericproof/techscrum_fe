@@ -20,8 +20,8 @@ import AccountSettings from './pages/AccountSetting/AccountSetting';
 import ResetPassword from './pages/ResetPassword/ResetPassword';
 import BoardPage from './pages/BoardPage/BoardPage';
 import './App.css';
-import { ProjectProvider } from './context/ProjectProvider';
 import { UserProvider } from './context/UserInfoProvider';
+import { ProjectProvider } from './context/ProjectProvider';
 
 function App() {
   return (

@@ -16,18 +16,7 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
   const { boardId = '', projectId = '' } = useParams();
 
   const data = useState<ICardData>({
-    title: '',
-    description: '',
-    cardType: '',
-    assign: '629c17f49c0a43d2a090515e',
-    label: '',
-    sprint: '',
-    storyPointEstimate: '',
-    pullRequestNumber: 0,
-    reporter: { userId: '', userName: '', userIcon: '' },
-    tag: 'abc',
-    boardId,
-    projectId
+    dueAt: new Date()
   });
 
   const changeDescriptionHandler = async (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -40,7 +29,7 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
 
   const onSave = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    const newCard = { ...data[0], description, title };
+    const newCard = { ...data[0], description, title, boardId, projectId, tag: 'abc' };
     createNewTask(newCard)
       .then((res) => {
         if (res.status === 201) {
