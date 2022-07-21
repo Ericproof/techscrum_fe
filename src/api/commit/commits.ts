@@ -1,13 +1,13 @@
 import axios from 'axios';
 import config from '../../config/config';
-import { CreateCommit } from './entity/commit';
+import { CreateComment } from './entity/commit';
 
-export function getCommit(senderId: string) {
+export function getCommit(senderId = 'abc') {
   return axios.get(`${config.apiAddress}/commits/${senderId}`);
 }
 
-export function createCommit(createCommit: CreateCommit) {
-  return axios.post(`${config.apiAddress}/commits`, { ...createCommit });
+export function createComment(data: CreateComment) {
+  return axios.post(`${config.apiAddress}/commits`, data);
 }
 
 export function updateCommit(id: string, content: string) {

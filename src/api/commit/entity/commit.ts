@@ -1,9 +1,9 @@
-export interface CreateCommit {
+export interface CreateComment {
   taskId: string;
   senderId: string;
   content: string;
 }
-export interface UpdateCommit {
+export interface UpdateComment {
   commitId: string;
   content: string;
 }
