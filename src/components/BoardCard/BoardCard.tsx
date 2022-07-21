@@ -7,18 +7,18 @@ import { IColumnsFromBackend } from '../../types';
 import styles from './BoardCard.module.scss';
 
 interface Props {
-  updateIsViewTask: () => void;
-  taskData: TaskEntity;
   columnsInfo: IColumnsFromBackend;
+  taskData: TaskEntity;
   onSave: (updatedTaskInfo: TaskEntity) => void;
+  updateIsViewTask: () => void;
   deleteTask: () => void;
 }
 
 export default function BoardCard({
-  updateIsViewTask,
+  columnsInfo,
   taskData,
   onSave,
-  columnsInfo,
+  updateIsViewTask,
   deleteTask
 }: Props) {
   const [taskInfo, setTaskInfo] = useState({});
