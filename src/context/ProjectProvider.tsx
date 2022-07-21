@@ -25,7 +25,6 @@ function ProjectProvider({ children }: IProjectProvider) {
   }, []);
 
   useEffect(() => {
-    console.log('object');
     fetchProjectData();
   }, []);
 
