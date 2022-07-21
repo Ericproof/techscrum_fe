@@ -30,13 +30,13 @@ export default function LoginMain() {
         email: emailRecorder,
         password: passwordRecorder
       });
-      const { user, userProfile, token, refreshToken } = result.data;
-      if (user && userProfile) {
+      const { user, token, refreshToken } = result.data;
+      if (user) {
         const userLoginInfo: IUserInfo = {
           id: user.id,
           email: user.email,
-          name: userProfile.name,
-          avatarIcon: userProfile.avatarIcon,
+          name: user.name,
+          avatarIcon: user.avatarIcon,
           token,
           refreshToken
         };

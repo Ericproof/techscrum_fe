@@ -22,12 +22,8 @@ import BoardPage from './pages/BoardPage/BoardPage';
 import About from './pages/About/About';
 import './App.css';
 import { UserProvider } from './context/UserInfoProvider';
-<<<<<<< Updated upstream
 import { ProjectProvider } from './context/ProjectProvider';
-||||||| constructed merge base
-=======
 import ProjectMembersPage from './pages/ProjectMembersPage/ProjectMembersPage';
->>>>>>> Stashed changes
 
 function App() {
   return (
