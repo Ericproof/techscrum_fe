@@ -19,7 +19,7 @@ function UserProvider({ children }: ILoginInfoProvider) {
       try {
         const result = await getUserInfo(token, refreshToken);
         const { user, userInfo: userProfile } = result.data;
-        setUserInfo({ ...userProfile, email: user.email });
+        setUserInfo({ ...userProfile, token: result.data.token, email: user.email });
         localStorage.setItem('token', result.data.token ?? token);
         localStorage.setItem('refreshToken', result.data.refreshToken ?? refreshToken);
       } catch (e) {

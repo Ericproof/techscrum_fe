@@ -22,7 +22,12 @@ import BoardPage from './pages/BoardPage/BoardPage';
 import About from './pages/About/About';
 import './App.css';
 import { UserProvider } from './context/UserInfoProvider';
+<<<<<<< Updated upstream
 import { ProjectProvider } from './context/ProjectProvider';
+||||||| constructed merge base
+=======
+import ProjectMembersPage from './pages/ProjectMembersPage/ProjectMembersPage';
+>>>>>>> Stashed changes
 
 function App() {
   return (
@@ -42,16 +47,17 @@ function App() {
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/about" element={<About />} />
           <Route path="/errorPage" element={<ErrorPage />} />
-          <Route path="" element={<AuthenticationRoute />}>
-            <Route path="/settings/:projectId" element={<Setting />} />
-            <Route path="/user-page" element={<UserPage />} />
-            <Route path="/access" element={<Access />} />
-            <Route path="/projects/:projectId/board/:boardId" element={<BoardPage />} />
-            <Route path="/projects" element={<Project />} />
-            <Route path="/create-projects" element={<CreateProject />} />
-            <Route path="/account-settings" element={<AccountSettings />} />
-            <Route path="*" element={<ErrorPage />} />
-          </Route>
+          {/* <Route path="" element={<AuthenticationRoute />}> */}
+          <Route path="/settings/:projectId" element={<Setting />} />
+          <Route path="/user-page" element={<UserPage />} />
+          <Route path="/access" element={<Access />} />
+          <Route path="/projects/:projectId/board/:boardId" element={<BoardPage />} />
+          <Route path="/projects" element={<Project />} />
+          <Route path="/create-projects" element={<CreateProject />} />
+          <Route path="/account-settings" element={<AccountSettings />} />
+          <Route path="/projects/:projectId/members" element={<ProjectMembersPage />} />
+          <Route path="*" element={<ErrorPage />} />
+          {/* </Route> */}
         </Routes>
       </ProjectProvider>
     </UserProvider>
