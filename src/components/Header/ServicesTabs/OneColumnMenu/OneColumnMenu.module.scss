@@ -33,6 +33,14 @@ $small_size: 1000px;
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
+    border: 1px solid;
+    border-top: none;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 3px;
+    border: grey;
+    box-shadow: rgb(9 30 66 / 8%) 0px 0px 0px 1px, rgb(9 30 66 / 8%) 0px 2px 1px,
+      rgb(9 30 66 / 31%) 0px 0px 20px -6px;
     @media (max-width: $max_size) {
       flex-direction: column;
       padding-top: 5px;
