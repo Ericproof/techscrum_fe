@@ -12,17 +12,22 @@ interface IProjectProvider {
 function ProjectProvider({ children }: IProjectProvider) {
   const [projectList, setProjectList] = useState<IProject[]>([]);
 
-  const fetchProjects = useCallback(async () => {
+  const fetchProjectData = async () => {
     const res = await getProjects();
     if (!res.data) {
       return;
     }
     setProjectList(res.data);
+  };
+
+  const fetchProjects = useCallback(() => {
+    fetchProjectData();
   }, []);
 
   useEffect(() => {
-    fetchProjects();
-  }, [fetchProjects]);
+    console.log('object');
+    fetchProjectData();
+  }, []);
 
   return (
     <ProjectContext.Provider value={projectList}>

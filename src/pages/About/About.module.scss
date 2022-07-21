@@ -1,0 +1,109 @@
+.aboutMain {
+    background: #f5f7fa;
+    font-family: 'FaktSoft', Arial, Helvetica, 'sans-serif';
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.4;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    .aboutContainer {
+      padding-top: 147px;
+      margin-right: auto;
+      margin-left: auto;
+      margin-bottom: 84px;
+      @media screen and (min-width: 280px) {
+        max-width: 240px;
+      }
+      @media screen and (min-width: 768px) {
+        max-width: 744px;
+      }
+      @media screen and(min-width: 992px) {
+        max-width: 992px;
+      }
+      @media screen and (min-width: 1280px) {
+        max-width: 1164px;
+      }
+      @media screen and (min-width: 1440px) {
+        max-width: 1224px;
+      }
+  
+      .pb_5 {
+        padding-bottom: 6rem !important;
+      }
+    }
+    .aboutTextCenter {
+      width: 100%;
+      text-align: center !important;
+      p {
+        font-weight: 600;
+        font-size: 20px;
+        color: #8a8fa5;
+        text-align: center;
+        text-transform: uppercase;
+      }
+    }
+    .aboutRow {
+      display: flex;
+      flex-direction: column;
+      margin-right: 12px;
+      margin-left: 12px;
+      padding-top: 50px;
+      padding-bottom: 30px;
+      text-align: center;
+      p{
+        text-align: left;
+        color: #8a8fa5;
+      }
+    }
+   .developer{
+    display: flex;
+    flex-wrap: wrap;
+  }
+   .dev{
+    display: flex;
+    flex-wrap: wrap;
+  }
+    .aboutList {
+      @media screen and (min-width: 768px) {
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+      @media screen and (min-width: 992px) {
+        flex: 0 0 33.3333333333%;
+        max-width: 33.3333333333%;
+      }
+    }
+    .aboutList {
+      padding-left: 0;
+      top: 100px;
+      li {
+        color: #494e6a;
+        list-style-type: none;
+        position: relative;
+        display: list-item;
+        a {
+          display: block;
+          padding: 7px 14px;
+        }
+      }
+    }
+   .inputImg{
+    width: 20px;
+    height: 20px;
+  }
+   .memberImg {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+  }
+   #listName{
+    font-size:18px;
+    color: black;
+    font-weight:680;
+  }
+   #listPosition{
+    font-size:14px;
+    font-weight:450;
+  }
+  }
+  

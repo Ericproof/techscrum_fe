@@ -102,6 +102,7 @@ export default function Shortcut({
                   webValue={webValue}
                   nameValue={nameValue}
                   onClickAddShortcut={onClickAddShortcut}
+                  isUrlValid={isUrlValid}
                 />
               ),
               Edit: (
