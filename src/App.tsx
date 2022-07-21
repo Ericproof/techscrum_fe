@@ -19,6 +19,7 @@ import CreateProject from './pages/CreateProject/CreateProject';
 import AccountSettings from './pages/AccountSetting/AccountSetting';
 import ResetPassword from './pages/ResetPassword/ResetPassword';
 import BoardPage from './pages/BoardPage/BoardPage';
+import About from './pages/About/About';
 import './App.css';
 import { UserProvider } from './context/UserInfoProvider';
 import { ProjectProvider } from './context/ProjectProvider';
@@ -39,6 +40,7 @@ function App() {
           <Route path="/privacy-statement" element={<PrivacyStatement />} />
           <Route path="/refund-policy" element={<RefundPolicy />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/about" element={<About />} />
           <Route path="/errorPage" element={<ErrorPage />} />
           <Route path="" element={<AuthenticationRoute />}>
             <Route path="/settings/:projectId" element={<Setting />} />
