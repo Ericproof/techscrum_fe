@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
-import { ImEarth } from 'react-icons/im';
+import React, { useContext, useState } from 'react';
+import { updateMe } from '../../../api/user/user';
+import ChangeIcon from '../../../components/ProjectEditor/ChangeIcon/ChangeIcon';
 import ProjectHeader from '../../../components/ProjectHeader/ProjectHeader';
+import { UserContext, UserDispatchContext } from '../../../context/UserInfoProvider';
 import { IProject } from '../../../types';
 // import icon from './pic.jpg';
 
@@ -10,6 +12,8 @@ export default function UserPage() {
   const [projectList, setProjectList] = useState<IProject[]>([]);
   const [value, setValue] = useState(0);
   const [isCreateNewCard, setIsCreateNewCard] = useState(false);
+  const userInfo = useContext(UserContext);
+  const setUserInfo = useContext(UserDispatchContext);
   const getProjectFromChildren = (id: number) => {
     projectList[id].star = !projectList[id].star;
     setValue(value + 1);
@@ -18,14 +22,28 @@ export default function UserPage() {
     setIsCreateNewCard(!isCreateNewCard);
   };
 
-  const fetchNewCard = () => {
-    getCreateNewCardStateFromChildren();
+  const onChangeUser = (e: any) => {
+    setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
+  };
+
+  const onSaveMe = () => {
+    if (!userInfo.token) {
+      return;
+    }
+    updateMe(
+      {
+        name: userInfo.name,
+        avatarIcon: userInfo?.avatarIcon,
+        userName: userInfo.userName,
+        abbreviation: userInfo.abbreviation
+      },
+      userInfo.token
+    );
   };
 
   return (
     <>
       <ProjectHeader
-        projects={projectList}
         updateProject={getProjectFromChildren}
         updateIsCreateNewCard={getCreateNewCardStateFromChildren}
       />
@@ -36,60 +54,58 @@ export default function UserPage() {
         <div className={styles.userForm}>
           <div className={styles.userInfo}>
             <form>
-              <p className={styles.public}>
-                <ImEarth /> &nbsp; Public
-              </p>
               <div className={styles.userInput}>
                 <label htmlFor="Name">
                   Full Name
                   <br />
-                  <input className={styles.proIcon} id="name" />
+                  <input
+                    className={styles.proIcon}
+                    name="name"
+                    value={userInfo.name}
+                    onChange={onChangeUser}
+                  />
                 </label>
               </div>
-              <p className={styles.public}>
-                <ImEarth /> &nbsp; Public
-              </p>
               <div className={styles.userInput}>
-                <label htmlFor="abbName">
+                <label htmlFor="abbreviation">
                   Abbreviation
                   <br />
-                  <input className={styles.proIcon} id="abbName" />
+                  <input
+                    className={styles.proIcon}
+                    name="abbreviation"
+                    value={userInfo.abbreviation}
+                    onChange={onChangeUser}
+                  />
                 </label>
               </div>
-              <p className={styles.public}>
-                <ImEarth /> &nbsp; Public
-              </p>
               <div className={styles.userInput}>
                 <label htmlFor="userName">
                   Username
                   <br />
-                  <input className={styles.proIcon} id="userName" />
+                  <input
+                    className={styles.proIcon}
+                    name="userName"
+                    value={userInfo.userName}
+                    onChange={onChangeUser}
+                  />
                 </label>
               </div>
-              <p className={styles.public}>
-                <ImEarth /> &nbsp; Public
-              </p>
-              <div className={styles.userInput}>
-                <label htmlFor="file">
-                  Personal File
-                  <br />
-                  <textarea name="subject" id="file" />
-                </label>
-              </div>
-              <input className={styles.submit} type="submit" value="Save" />
+              <input className={styles.submit} type="button" value="Save" onClick={onSaveMe} />
             </form>
           </div>
           <div className={styles.userIcon}>
-            <h2>Photo</h2>
             <div className={styles.picBorder}>
-              <img
-                src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png"
-                alt="icon"
+              <h2>Photo</h2>
+              <ChangeIcon
+                value={
+                  userInfo?.avatarIcon ||
+                  'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'
+                }
+                uploadSuccess={(photoData: any) => {
+                  onChangeUser({ target: { name: 'avatarIcon', value: photoData[0].location } });
+                }}
               />
             </div>
-            <p className={styles.iconPublic}>
-              <ImEarth /> &nbsp; Public
-            </p>
             <br />
           </div>
         </div>

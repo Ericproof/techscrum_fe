@@ -41,7 +41,7 @@ export default function ProjectMembersPage() {
   };
 
   const onClickAddMember = async () => {
-    const userId = '62d3b849741c5a203c16bdc4';
+    const userId = '62d9f7c1741c5a203ce312a4';
     const path = `${config.apiAddress}/projects/${projectId}/members/invite`;
     const res = await axios.post(path, { roleId: '62d7f009e4713aab33380392', userId });
     if (res.data) {

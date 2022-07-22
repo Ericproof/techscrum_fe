@@ -28,13 +28,14 @@ export default function Setting() {
     showProject(projectId, token).then((res) => {
       setData(res.data);
     });
-  }, [projectId, userInfo]);
+  }, [projectId, userInfo.token, userInfo]);
 
   const onClickSave = (projectData: IProjectEditor) => {
     if (!projectData) {
       return;
     }
-    updateProject(projectId, projectData)
+    const token = userInfo?.token || '';
+    updateProject(projectId, projectData, token)
       .then((res: AxiosResponse) => {
         if (!res.data) {
           return;

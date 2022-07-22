@@ -233,7 +233,6 @@ export default function Board() {
   return (
     <div className={style.container}>
       <ProjectHeader
-        projects={projects}
         updateProject={getProjectFromChildren}
         updateIsCreateNewCard={getCreateNewCardStateFromChildren}
       />

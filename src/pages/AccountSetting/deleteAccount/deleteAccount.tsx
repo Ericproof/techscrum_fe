@@ -20,7 +20,7 @@ export default function DeleteAccount({ deleteAccountTipHandler }: Props) {
       });
 
       if (result.status === 204) {
-        localStorage.removeItem('token');
+        localStorage.removeItem('access_token');
         deleteAccountTipHandler('Success', 0);
         return;
       }
@@ -36,9 +36,9 @@ export default function DeleteAccount({ deleteAccountTipHandler }: Props) {
         deleteAccountTipHandler('Wrong Password', 1);
         return;
       }
-      deleteAccountTipHandler('Unknow Error, Please contact administrator', 1);
+      deleteAccountTipHandler('Unknown Error, Please contact administrator', 1);
     } catch (e) {
-      deleteAccountTipHandler('Unknow Error, Please contact administrator', 1);
+      deleteAccountTipHandler('Unknown Error, Please contact administrator', 1);
     }
   };
 

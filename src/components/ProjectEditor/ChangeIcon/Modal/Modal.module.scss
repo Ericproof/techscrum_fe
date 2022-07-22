@@ -10,11 +10,12 @@
   justify-content: center;
   align-items: center;
   .modalContent {
+    position: relative;
+    top:25px;
     .popupPage {
       .popupSection {
         max-width: 100%;
         z-index: 510;
-        bottom: 100px;
         left: 0px;
         transition-duration: 350ms;
         transition-property: transform;

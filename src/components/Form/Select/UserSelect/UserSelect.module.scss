@@ -1,7 +1,6 @@
 .leadDropdownMenu {
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
   margin-bottom: 4px;
   label {
     display: flex;
@@ -10,7 +9,7 @@
     color: #172b4d;
   }
   span {
-    font-size: 12px;
+    font-size: 0.86em;
     color: #6b778c;
     font-weight: 700;
     display: inline-block;

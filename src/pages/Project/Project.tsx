@@ -108,7 +108,6 @@ export default function Project() {
   return (
     <>
       <ProjectHeader
-        projects={projectList}
         updateProject={getProjectFromChildren}
         updateIsCreateNewCard={getCreateNewCardStateFromChildren}
       />
@@ -215,7 +214,7 @@ export default function Project() {
                           <div className={styles.nameContent}>
                             <img
                               src={
-                                project.icon ||
+                                project.iconUrl ||
                                 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10418?size=small'
                               }
                               alt="icon"
@@ -242,7 +241,14 @@ export default function Project() {
                               <div className={styles.leadInfo}>
                                 <div className={styles.avatar}>
                                   <span>
-                                    <span className={styles.avatarImg} />
+                                    <img
+                                      className={styles.profileV2Image}
+                                      src={
+                                        project?.projectLeadId?.avatarIcon ||
+                                        'https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png'
+                                      }
+                                      alt="avatar"
+                                    />
                                   </span>
                                 </div>
                                 <span>{project.lead}</span>

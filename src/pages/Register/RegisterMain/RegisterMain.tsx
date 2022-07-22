@@ -82,13 +82,13 @@ export default function RegisterMain() {
           id: user.id,
           email: user.email,
           name: user.name,
-          avatarIcon: user.avatarIcon,
+          avatarIcon: user?.avatarIcon,
           token,
           refreshToken
         };
         setUserInfo(userLoginInfo);
-        localStorage.setItem('token', token);
-        localStorage.setItem('refreshToken', refreshToken);
+        localStorage.setItem('access_token', token);
+        localStorage.setItem('refresh_token', refreshToken);
         navigate(`/projects`);
       } else {
         tip('Register Failed, please try again');

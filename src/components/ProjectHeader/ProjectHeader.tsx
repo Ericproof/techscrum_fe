@@ -12,12 +12,11 @@ import { UserContext } from '../../context/UserInfoProvider';
 import Icon from '../Header/IconTab/IconTab';
 
 interface Props {
-  projects: IProject[];
   updateProject: (index: number) => void;
   updateIsCreateNewCard: () => void;
 }
 
-export default function ProjectHeader({ projects, updateProject, updateIsCreateNewCard }: Props) {
+export default function ProjectHeader({ updateProject, updateIsCreateNewCard }: Props) {
   const projectList = useContext(ProjectContext);
   const userInfo = useContext(UserContext);
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
@@ -32,7 +31,7 @@ export default function ProjectHeader({ projects, updateProject, updateIsCreateN
   };
   const refStar = projectList.map(() => createRef<HTMLDivElement>());
   const setProjectStar = (id: number) => {
-    const index = projects.findIndex((project) => project.id === id);
+    const index = projectList.findIndex((project) => project.id === id);
     updateProject(index);
   };
   const getStarPosition = (e: React.MouseEvent<HTMLDivElement>, id: number) => {

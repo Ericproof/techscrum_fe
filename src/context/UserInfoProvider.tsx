@@ -18,18 +18,11 @@ function UserProvider({ children }: ILoginInfoProvider) {
     const fetchUserInfo = async (token: string, refreshToken: string) => {
       try {
         const result = await getUserInfo(token, refreshToken);
-<<<<<<< HEAD
-        const { user, userInfo: userProfile } = result.data;
-        setUserInfo({ ...userProfile, token: result.data.token, email: user.email });
-||||||| 4292251
-        const { user, userInfo: userProfile } = result.data;
-        setUserInfo({ ...userProfile, email: user.email });
-=======
         const { user } = result.data;
-        setUserInfo({ ...user });
->>>>>>> 3be3879385aaf76a6b9908d74d65881c32894460
-        localStorage.setItem('token', result.data.token ?? token);
-        localStorage.setItem('refreshToken', result.data.refreshToken ?? refreshToken);
+        const t = token || user.token;
+        setUserInfo({ ...user, token: t });
+        localStorage.setItem('access_token', result.data.token ?? token);
+        localStorage.setItem('refresh_token', result.data.refreshToken ?? refreshToken);
       } catch (e) {
         localStorage.clear();
         setUserInfo({});
@@ -37,8 +30,8 @@ function UserProvider({ children }: ILoginInfoProvider) {
       }
     };
 
-    const token = localStorage.getItem('token');
-    const refreshToken = localStorage.getItem('refreshToken');
+    const token = localStorage.getItem('access_token');
+    const refreshToken = localStorage.getItem('refresh_token');
     if (
       token !== undefined &&
       token != null &&

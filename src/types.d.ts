@@ -99,4 +99,6 @@ export interface IUserInfo {
   avatarIcon?: string;
   token?: string;
   refreshToken?: string;
+  abbreviation?: string;
+  userName?: string;
 }
