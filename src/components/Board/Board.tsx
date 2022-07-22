@@ -13,11 +13,13 @@ import IBoardEntity, {
   IColumnsFromBackend,
   ICardData,
   IItemFromBackend,
-  IProjectData
+  IProjectData,
+  ILabel,
+  ILabelData
 } from '../../types';
 import BoardCard from '../BoardCard/BoardCard';
 import { TaskEntity } from '../../api/task/entity/task';
-import { getLabels } from '../../api/label/label';
+import { getLabels, createLabel } from '../../api/label/label';
 
 const projects = [
   {
@@ -111,7 +113,7 @@ export default function Board() {
   const [isCreateNewCard, setIsCreateNewCard] = useState(false);
   const [isViewTask, setIsViewTask] = useState(false);
   const [taskData, setTaskData] = useState<TaskEntity>();
-  const [labels, setLabels] = useState<any>([]);
+  const [labels, setLabels] = useState<ILabelData>([]);
 
   useEffect(() => {
     if (!projectId || projectId === '') {
@@ -121,6 +123,18 @@ export default function Board() {
       setLabels(res.data);
     });
   }, [projectId]);
+
+  const onClickSaveLabel = () => {
+    // const result = labels.includes(e.target.value);
+    // if (result || !e.target.value) {
+    //   return;
+    // }
+    // createLabel(setLabels(labels.concat(e.target.value)));
+  };
+
+  const onChangeFilterLabel = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const label = e.target.value;
+  };
 
   const getProjectFromChildren = (index: number) => {
     projectList[index].star = !projectList[index].star;
@@ -269,6 +283,8 @@ export default function Board() {
           columnsInfo={columnsInfo}
           deleteTask={deleteTask}
           labels={labels}
+          onChangeFilterLabel={onChangeFilterLabel}
+          onClickSaveLabel={onClickSaveLabel}
         />
       )}
     </div>

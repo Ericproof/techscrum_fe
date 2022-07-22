@@ -27,6 +27,15 @@ export interface IProjectEditor {
   [key: string]: any;
 }
 
+export interface ILabelData {
+  [key: string]: any;
+}
+
+export interface ILabel {
+  id: string;
+  name: string;
+}
+
 export interface IAssign {
   id?: string;
   email?: string;

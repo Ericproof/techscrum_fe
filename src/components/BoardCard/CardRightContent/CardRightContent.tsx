@@ -7,20 +7,24 @@ import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import style from './CardRightContent.module.scss';
 import Reporter from './Reporter/Reporter';
 import Assignee from './Assignee/Assignee';
-import Label from './Label/Label';
+import LabelFields from './LabelFields/LabelFields';
 
 interface Props {
   taskInfo: TaskEntity;
   columnsInfo: IColumnsFromBackend;
   taskStatusOnchange: (taskInfo: TaskEntity) => void;
   labels: any;
+  onChangeFilterLabel: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onClickSaveLabel: () => void;
 }
 
 export default function CardRightContent({
   columnsInfo,
   taskInfo,
   taskStatusOnchange,
-  labels
+  labels,
+  onChangeFilterLabel,
+  onClickSaveLabel
 }: Props) {
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const handleClickOutside = () => setVisible(true);
@@ -147,7 +151,11 @@ export default function CardRightContent({
         </div>
         <div className={style.boxBody}>
           <Assignee assigneeOnchangeEventHandler={assigneeOnchangeEventHandler} />
-          <Label labels={labels} />
+          <LabelFields
+            labels={labels}
+            onChangeFilterLabel={onChangeFilterLabel}
+            onClickSaveLabel={onClickSaveLabel}
+          />
           <div className={style.dueDate}>
             <div>Due date</div>
             <div>

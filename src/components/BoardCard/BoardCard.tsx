@@ -14,6 +14,8 @@ interface Props {
   onSave: (updatedTaskInfo: TaskEntity) => void;
   deleteTask: () => void;
   labels: any;
+  onChangeFilterLabel: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onClickSaveLabel: () => void;
 }
 
 export default function BoardCard({
@@ -22,7 +24,9 @@ export default function BoardCard({
   onSave,
   columnsInfo,
   deleteTask,
-  labels
+  labels,
+  onChangeFilterLabel,
+  onClickSaveLabel
 }: Props) {
   const [taskInfo, setTaskInfo] = useState<TaskEntity | null>(null);
 
@@ -52,6 +56,8 @@ export default function BoardCard({
             columnsInfo={columnsInfo}
             taskStatusOnchange={onSave}
             labels={labels}
+            onChangeFilterLabel={onChangeFilterLabel}
+            onClickSaveLabel={onClickSaveLabel}
           />
         </div>
       </div>
