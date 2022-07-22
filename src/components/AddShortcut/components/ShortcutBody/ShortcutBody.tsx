@@ -35,7 +35,7 @@ export default function ShortcutBody({
           }}
           value={webValue}
         />
-        {isUrlValid && <p className={styles.colorRed}>Invalid URL</p>}
+        {!!webValue && isUrlValid && <p className={styles.colorRed}>Invalid URL</p>}
       </div>
       <br />
       <div className={styles.inputContent}>

@@ -11,9 +11,9 @@ export interface Task {
 }
 
 export interface TaskEntity {
-  id: string;
-  title: string;
-  tag: string;
+  id?: string;
+  title?: string;
+  tag?: string;
   statusId?: number;
   projectId?: string;
   boardId?: string;

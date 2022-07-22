@@ -7,13 +7,15 @@ interface IProps {
   onClickAddShortcut: (e: React.MouseEvent<HTMLSpanElement>) => void;
   webValue: string;
   nameValue: string;
+  isUrlValid: boolean;
 }
 export default function AddShortcutFooter({
   addLinkToggle,
   setAddLinkToggle,
   webValue,
   nameValue,
-  onClickAddShortcut
+  onClickAddShortcut,
+  isUrlValid
 }: IProps) {
   const hasData = webValue && nameValue;
 
@@ -29,9 +31,10 @@ export default function AddShortcutFooter({
         </button>
 
         <button
-          className={hasData ? styles.activeAddButton : styles.addButton}
+          className={hasData && !isUrlValid ? styles.activeAddButton : styles.addButton}
           type="button"
           onClick={onClickAddShortcut}
+          disabled={isUrlValid || !hasData}
         >
           <span>Add</span>
         </button>

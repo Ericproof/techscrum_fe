@@ -76,13 +76,13 @@ export default function RegisterMain() {
         name: nameRecorder,
         password: passwordRecorder
       });
-      const { user, userProfile, token, refreshToken } = result.data;
-      if (user && userProfile) {
+      const { user, token, refreshToken } = result.data;
+      if (user) {
         const userLoginInfo: IUserInfo = {
           id: user.id,
           email: user.email,
-          name: userProfile.name,
-          avatarIcon: userProfile.avatarIcon,
+          name: user.name,
+          avatarIcon: user.avatarIcon,
           token,
           refreshToken
         };
@@ -91,7 +91,7 @@ export default function RegisterMain() {
         localStorage.setItem('refreshToken', refreshToken);
         navigate(`/projects`);
       } else {
-        tip('*Incorrect email or password, please try again.');
+        tip('Register Failed, please try again');
       }
     } catch (e) {
       tip('Something go wrong, please contact staff');

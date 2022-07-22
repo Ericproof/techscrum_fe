@@ -20,7 +20,17 @@ export interface ITaskData {
 }
 
 export interface ICardData {
-  [key: string]: any;
+  id?: string;
+  tag?: string;
+  title?: string;
+  description?: string;
+  poster?: string;
+  assign?: string;
+  dueAt?: Date;
+  statusId?: string;
+  label?: string;
+  boardId?: string;
+  projectId?: string;
 }
 
 export interface IProjectEditor {
@@ -41,25 +51,28 @@ export interface ITaskRelator {
 
 export interface IItemFromBackend {
   id: string;
+}
+export interface ITaskCard {
+  id?: string;
   tag?: string;
   title?: string;
-  statusId?: number;
+  statusId?: string;
   assignInfo?: IAssign;
 }
 
 export interface IColumnsFromBackend {
-  [statusId: string]: { name: string; items: IItemFromBackend[] };
+  [statusId: string]: { name: string; items: ITaskCard[] };
 }
 
 export default interface IBoardEntity {
   id: string;
   title: string;
-  taskStatus: [string];
+  taskStatus: [{ id: string; name: string }];
   taskList: {
     id: string;
     tag: string;
     title: string;
-    statusId: number;
+    statusId: string;
     assignInfo: {
       id: string;
       email: string;

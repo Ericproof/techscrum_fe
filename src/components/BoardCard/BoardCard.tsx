@@ -8,21 +8,21 @@ import { IColumnsFromBackend } from '../../types';
 import styles from './BoardCard.module.scss';
 
 interface Props {
-  updateIsViewTask: () => void;
-  taskData: TaskEntity | undefined;
   columnsInfo: IColumnsFromBackend;
+  taskData: TaskEntity | undefined;
   onSave: (updatedTaskInfo: TaskEntity) => void;
+  updateIsViewTask: () => void;
   deleteTask: () => void;
   labels: any;
 }
 
 export default function BoardCard({
-  updateIsViewTask,
+  columnsInfo,
   taskData,
   onSave,
-  columnsInfo,
   deleteTask,
-  labels
+  labels,
+  updateIsViewTask
 }: Props) {
   const [taskInfo, setTaskInfo] = useState<TaskEntity | null>(null);
 
