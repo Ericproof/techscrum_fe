@@ -111,7 +111,7 @@ export default function CardRightContent({
                         onClick={() => {
                           setVisible(false);
                           const updatedTaskInfo = { ...taskInfo };
-                          updatedTaskInfo.statusId = id;
+                          updatedTaskInfo?.statusId = id;
                           taskStatusOnchange(updatedTaskInfo);
                         }}
                       >

@@ -13,7 +13,8 @@ import IBoardEntity, {
   IColumnsFromBackend,
   ICardData,
   IProjectData,
-  ILabelData
+  ILabelData,
+  ITaskCard
 } from '../../types';
 import BoardCard from '../BoardCard/BoardCard';
 import { TaskEntity } from '../../api/task/entity/task';
@@ -112,6 +113,7 @@ export default function Board() {
   const [isViewTask, setIsViewTask] = useState(false);
   const [taskData, setTaskData] = useState<TaskEntity>();
   const [labels, setLabels] = useState<ILabelData>([]);
+  const [inputLabel, setInputLabel] = useState<string>('');
 
   useEffect(() => {
     if (!projectId || projectId === '') {
@@ -132,6 +134,7 @@ export default function Board() {
 
   const onChangeFilterLabel = (e: React.ChangeEvent<HTMLInputElement>) => {
     const label = e.target.value;
+    setInputLabel(label);
   };
 
   const getProjectFromChildren = (index: number) => {
@@ -283,6 +286,7 @@ export default function Board() {
           labels={labels}
           onChangeFilterLabel={onChangeFilterLabel}
           onClickSaveLabel={onClickSaveLabel}
+          inputLabel={inputLabel}
         />
       )}
     </div>
