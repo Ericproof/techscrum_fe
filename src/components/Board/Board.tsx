@@ -113,7 +113,6 @@ export default function Board() {
   const [isViewTask, setIsViewTask] = useState(false);
   const [taskData, setTaskData] = useState<TaskEntity>();
   const [labels, setLabels] = useState<ILabelData>([]);
-  const [inputLabel, setInputLabel] = useState<string>('');
 
   useEffect(() => {
     if (!projectId || projectId === '') {
@@ -134,7 +133,6 @@ export default function Board() {
 
   const onChangeFilterLabel = (e: React.ChangeEvent<HTMLInputElement>) => {
     const label = e.target.value;
-    setInputLabel(label);
   };
 
   const getProjectFromChildren = (index: number) => {
@@ -257,6 +255,7 @@ export default function Board() {
   return (
     <div className={style.container}>
       <ProjectHeader
+        projects={[]}
         updateProject={getProjectFromChildren}
         updateIsCreateNewCard={getCreateNewCardStateFromChildren}
       />
@@ -286,7 +285,6 @@ export default function Board() {
           labels={labels}
           onChangeFilterLabel={onChangeFilterLabel}
           onClickSaveLabel={onClickSaveLabel}
-          inputLabel={inputLabel}
         />
       )}
     </div>
