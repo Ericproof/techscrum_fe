@@ -1,13 +1,41 @@
 import React, { useEffect, useState } from 'react';
-import { deleteCommit } from '../../../../../../../api/commit/commits';
+import { deleteCommit, updateCommit } from '../../../../../../../api/commit/commits';
 import style from './CommentItem.module.scss';
 
 interface ICommentItem {
   content: string;
   id: string;
   senderId: any;
-  updatedAt: string;
+  updatedAt: Date;
 }
+const monthShortNames = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec'
+];
+const dateWithTimestamp = (d: Date | null) => {
+  if (d != null) {
+    const date = d.toString().split('T')[0];
+    const dateDataArray = date.split('-');
+    const time = d.toString().split('T')[1].split(':');
+    const hour = Number(time[0]);
+    time[0] = hour > 12 ? `${hour - 12}` : `${hour}`;
+    const period = hour < 12 ? 'AM' : 'PM';
+    return `${monthShortNames[Number(dateDataArray[1]) - 1]} ${dateDataArray[2]}, ${
+      dateDataArray[0]
+    } at ${time[0]}:${time[1]} ${period}`;
+  }
+  return '';
+};
 
 export default function CommentItem(props: ICommentItem) {
   const { content, id, senderId, updatedAt } = props;
@@ -15,6 +43,9 @@ export default function CommentItem(props: ICommentItem) {
   const [commentContent, setCommentContent] = useState('');
   const onClickDelete = () => {
     deleteCommit(id);
+  };
+  const onClickUpdate = () => {
+    updateCommit(id, commentContent);
   };
 
   useEffect(() => {
@@ -32,8 +63,8 @@ export default function CommentItem(props: ICommentItem) {
       <span role="img" className={style.avatar} />
       <div className={style.commentLayout}>
         <div className={style.commentTitle}>
-          <span>{senderId?.email}</span>
-          <span>{updatedAt}</span>
+          <span>{senderId?.name}</span>
+          <span>{dateWithTimestamp(updatedAt)}</span>
         </div>
         <div className={style.commentBody}>
           {isEditMode ? (
@@ -60,7 +91,7 @@ export default function CommentItem(props: ICommentItem) {
               className={style.edit}
               onClick={() => {
                 setIsEditMode(false);
-                // call api
+                onClickUpdate();
                 // update ui
               }}
             >

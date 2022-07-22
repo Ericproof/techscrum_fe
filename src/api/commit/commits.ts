@@ -11,7 +11,7 @@ export function createComment(data: CreateComment) {
 }
 
 export function updateCommit(id: string, content: string) {
-  return axios.put(`${config.apiAddress}/commits`);
+  return axios.put(`${config.apiAddress}/commits/${id}`, { content });
 }
 
 export function deleteCommit(id: string) {

@@ -57,6 +57,7 @@ export default function LeftBottom(props: ILeftBottom) {
       {comments.map((item: any) => {
         return (
           <CommentItem
+            key={item.id}
             content={item.content}
             id={item.id}
             senderId={item.senderId}
