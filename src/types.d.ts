@@ -101,4 +101,6 @@ export interface IUserInfo {
   refreshToken?: string;
   abbreviation?: string;
   userName?: string;
+  jobTitle?: string;
+  location?: string;
 }

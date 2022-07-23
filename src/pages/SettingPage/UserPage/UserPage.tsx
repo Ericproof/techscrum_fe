@@ -35,7 +35,9 @@ export default function UserPage() {
         name: userInfo.name,
         avatarIcon: userInfo?.avatarIcon,
         userName: userInfo.userName,
-        abbreviation: userInfo.abbreviation
+        abbreviation: userInfo.abbreviation,
+        jobTitle: userInfo.jobTitle,
+        location: userInfo.location
       },
       userInfo.token
     );
@@ -74,6 +76,30 @@ export default function UserPage() {
                     className={styles.proIcon}
                     name="abbreviation"
                     value={userInfo.abbreviation}
+                    onChange={onChangeUser}
+                  />
+                </label>
+              </div>
+              <div className={styles.userInput}>
+                <label htmlFor="jobTitle">
+                  Job Title
+                  <br />
+                  <input
+                    className={styles.proIcon}
+                    name="jobTitle"
+                    value={userInfo.jobTitle}
+                    onChange={onChangeUser}
+                  />
+                </label>
+              </div>
+              <div className={styles.userInput}>
+                <label htmlFor="location">
+                  Location
+                  <br />
+                  <input
+                    className={styles.proIcon}
+                    name="location"
+                    value={userInfo.location}
                     onChange={onChangeUser}
                   />
                 </label>

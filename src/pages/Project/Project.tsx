@@ -258,12 +258,12 @@ export default function Project() {
                                   <img
                                     className={styles.profileV2Image}
                                     src={
-                                      project.avatar ||
+                                      project?.projectLeadId?.avatarIcon ||
                                       'https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png'
                                     }
                                     alt="avatar"
                                   />
-                                  <p>{project.lead || 'hi'}</p>
+                                  <p>{project?.projectLeadId?.name || ''}</p>
                                 </div>
                                 <div className={[styles.profileV2Link, styles.textRight].join(' ')}>
                                   <Link to="/user-page">
