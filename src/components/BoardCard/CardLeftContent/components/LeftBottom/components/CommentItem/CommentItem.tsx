@@ -14,7 +14,7 @@ interface ICommentItem {
   updatedAt: Date;
   onClickDelete: (id: string) => void;
   onClickUpdate: (id: string, commentContent: string) => void;
-  userName: string;
+  userEmail: string;
 }
 const monthShortNames = [
   'Jan',
@@ -46,7 +46,7 @@ const dateWithTimestamp = (d: Date | null) => {
 };
 
 export default function CommentItem(props: ICommentItem) {
-  const { content, id, senderId, updatedAt, onClickDelete, onClickUpdate, userName } = props;
+  const { content, id, senderId, updatedAt, onClickDelete, onClickUpdate, userEmail } = props;
   const [isEditMode, setIsEditMode] = useState(false);
   const [commentContent, setCommentContent] = useState('');
 
@@ -88,7 +88,7 @@ export default function CommentItem(props: ICommentItem) {
         </div>
         <div
           className={
-            userName === senderId.name ? style.commentButtons : style.commentButtonsBlocked
+            userEmail === senderId.email ? style.commentButtons : style.commentButtonsBlocked
           }
         >
           {!isEditMode ? (

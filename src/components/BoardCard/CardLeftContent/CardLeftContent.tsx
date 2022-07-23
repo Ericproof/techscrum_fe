@@ -44,7 +44,7 @@ export default function CardLeftContent({ taskInfo, onSave }: Props) {
             </button>
           </div>
         )}
-        <LeftBottom taskId={taskInfo.id} userId={userInfo.id} userName={userInfo?.name} />
+        <LeftBottom taskId={taskInfo.id} userId={userInfo.id} userEmail={userInfo?.email} />
       </form>
     </div>
   );

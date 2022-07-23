@@ -12,13 +12,13 @@ import style from './LeftBottom.module.scss';
 interface ILeftBottom {
   userId?: string;
   taskId?: string;
-  userName?: string;
+  userEmail?: string;
 }
 
 export default function LeftBottom(props: ILeftBottom) {
   const [visible, setVisible] = useState(false);
   const [content, setContent] = useState('');
-  const { userId = '', taskId = '', userName = '' } = props;
+  const { userId = '', taskId = '', userEmail = '' } = props;
   const [comments, setComments] = useState([]);
   const [saveState, setSaveState] = useState(false);
   const [deleteState, setDeleteState] = useState(false);
@@ -120,7 +120,7 @@ export default function LeftBottom(props: ILeftBottom) {
               updatedAt={item.updatedAt}
               onClickDelete={onClickDelete}
               onClickUpdate={onClickUpdate}
-              userName={userName}
+              userEmail={userEmail}
             />
           );
         }
@@ -133,5 +133,5 @@ export default function LeftBottom(props: ILeftBottom) {
 LeftBottom.defaultProps = {
   taskId: undefined,
   userId: undefined,
-  userName: undefined
+  userEmail: undefined
 };
