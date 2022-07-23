@@ -12,6 +12,7 @@ import MicrosoftIcon from './microsoft-logo.svg';
 import AppleIcon from './apple-logo.svg';
 import Email from '../../../assets/email.png';
 import Error from '../../../assets/error.png';
+import Loading from '../../../components/Loading/Loading';
 
 export default function RegisterMain() {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ export default function RegisterMain() {
   const { token: emailToken } = useParams();
   const setUserInfo = useContext(UserDispatchContext);
   const [verifyEmail, setVerifyEmail] = useState('');
+  const [loading, setLoading] = useState(false);
   const [emailRegisterProcess, setEmailRegisterProcess] = useState(false);
   const [emailCheckProcess, setEmailCheckProcess] = useState(false);
   const [invalidateStatus, setInvalidateStatus] = useState(false);
@@ -55,10 +57,13 @@ export default function RegisterMain() {
     event.preventDefault();
     if (!emailCheckProcess) {
       try {
+        setLoading(true);
         await emailCheck(emailRecorder);
+        setLoading(false);
         tip('');
         setEmailRegisterProcess(true);
       } catch (e) {
+        setLoading(false);
         const err = e as AxiosError;
         const status = err.response?.status ?? 0;
         if (status === 302) {
@@ -112,7 +117,9 @@ export default function RegisterMain() {
       tip('');
     } else tip('Illegal Character Detected');
   };
-
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <div className={styles.registerMain}>
       <img src={Icon} alt="TechScrum Icon" />
@@ -174,6 +181,21 @@ export default function RegisterMain() {
               <Link to="/privacy-policy"> Privacy Policy.</Link>
             </p>
             <button type="submit">Register</button>
+            <p>or</p>
+            <div className={styles.btnList}>
+              <a href="/#">
+                <img src={GoogleIcon} alt="" />
+                <span>Keep Using Google</span>
+              </a>
+              <a href="/#">
+                <img src={MicrosoftIcon} alt="" />
+                <span>Keep Using Microsoft</span>
+              </a>
+              <a href="/#">
+                <img src={AppleIcon} alt="" />
+                <span>Keep Using Apple</span>
+              </a>
+            </div>
             <div className={styles.formFooter}>
               <Link to="/login">Already have TechScrum Account? Login</Link>
             </div>

@@ -9,6 +9,7 @@ import Icon from '../../../assets/logo.svg';
 import GoogleIcon from './google-logo.svg';
 import MicrosoftIcon from './microsoft-logo.svg';
 import AppleIcon from './apple-logo.svg';
+import Loading from '../../../components/Loading/Loading';
 
 export default function LoginMain() {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ export default function LoginMain() {
   const [passwordInvisible, setPasswordInvisible] = useState(true);
   const [emailRecorder, setEmailRecorder] = useState('');
   const [passwordRecorder, setPasswordRecorder] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const tip = (error: string) => {
     const tipLabel = document.getElementById('tip') as HTMLInputElement;
@@ -26,6 +28,7 @@ export default function LoginMain() {
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
     try {
+      setLoading(true);
       const result = await login({
         email: emailRecorder,
         password: passwordRecorder
@@ -45,9 +48,11 @@ export default function LoginMain() {
         localStorage.setItem('refreshToken', refreshToken);
         navigate(`/projects`);
       } else {
+        setLoading(false);
         tip('*Incorrect email or password, please try again.');
       }
     } catch (error) {
+      setLoading(false);
       tip('Something Go Wrong, Please contact staff!');
     }
   };
@@ -62,7 +67,9 @@ export default function LoginMain() {
       tip('');
     } else tip('Illegal Character Detected');
   };
-
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <div className={styles.registerMain}>
       <img src={Icon} alt="TechScrum Icon" />
