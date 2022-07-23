@@ -96,11 +96,3 @@ export interface IUserInfo {
   token?: string;
   refreshToken?: string;
 }
-
-export interface ICommentData {
-  [x: string]: any;
-}
-
-export interface ICommentItemData {
-  [x: string]: any;
-}

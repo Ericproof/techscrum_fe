@@ -1,6 +1,5 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { TaskEntity } from '../../../api/task/entity/task';
-import { UserContext } from '../../../context/UserInfoProvider';
 import style from './CardLeftContent.module.scss';
 import Attach from './components/Attach/Attach';
 import Description from './components/Description/Description';
@@ -14,7 +13,6 @@ interface Props {
 
 export default function CardLeftContent({ taskInfo, onSave }: Props) {
   const [visible, setVisible] = useState(false);
-  const userInfo = useContext(UserContext);
 
   const onFocusEventHandler = () => setVisible(true);
   const onSaveProcessing = (e: React.FormEvent) => {
@@ -44,7 +42,7 @@ export default function CardLeftContent({ taskInfo, onSave }: Props) {
             </button>
           </div>
         )}
-        <LeftBottom taskId={taskInfo.id} userId={userInfo.id} userEmail={userInfo?.email} />
+        <LeftBottom />
       </form>
     </div>
   );
