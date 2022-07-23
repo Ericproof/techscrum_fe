@@ -17,21 +17,18 @@ $base-font-size: 14px;
     height: 32px;
     width: 32px;
     align-self: flex-start;
-    min-width: 32px;
   }
 
   .commentLayout {
-    margin-left: 16px;
+    margin-left: 10px;
     margin-bottom: 8px;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
 
     .commentTitle {
       margin-bottom: 8px;
 
       span {
         color: var(--ds-text-mediumEmphasis, #42526e);
+        font-weight: 500;
         font-size: $base-font-size;
         font-style: normal;
         font-weight: 400;
@@ -46,6 +43,7 @@ $base-font-size: 14px;
         margin-left: 12px;
       }
     }
+
     .commentBody {
       font-size: $base-font-size;
       line-height: 1.714;
@@ -97,37 +95,6 @@ $base-font-size: 14px;
       color: var(--ds-text-mediumEmphasis, #42526e);
       content: '·';
       text-align: center;
-    }
-  }
-
-  .commentButtonsBlocked {
-    display: none;
-  }
-}
-
-.commentInputField {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  input {
-    background-color: white;
-    border: 1px solid rgb(223, 225, 230);
-    border-radius: 3px;
-    box-sizing: border-box;
-    height: 40px;
-    padding-left: 20px;
-    padding-top: 12px;
-    padding-bottom: 12px;
-    font-size: 0.875rem;
-    width: 100%;
-    font-weight: 400;
-    line-height: 1.42857;
-    color: rgb(94, 108, 132);
-
-    &:hover {
-      border-color: rgb(118, 118, 118);
     }
   }
 }
