@@ -174,21 +174,6 @@ export default function RegisterMain() {
               <Link to="/privacy-policy"> Privacy Policy.</Link>
             </p>
             <button type="submit">Register</button>
-            <p>or</p>
-            <div className={styles.btnList}>
-              <a href="/#">
-                <img src={GoogleIcon} alt="" />
-                <span>Keep Using Google</span>
-              </a>
-              <a href="/#">
-                <img src={MicrosoftIcon} alt="" />
-                <span>Keep Using Microsoft</span>
-              </a>
-              <a href="/#">
-                <img src={AppleIcon} alt="" />
-                <span>Keep Using Apple</span>
-              </a>
-            </div>
             <div className={styles.formFooter}>
               <Link to="/login">Already have TechScrum Account? Login</Link>
             </div>

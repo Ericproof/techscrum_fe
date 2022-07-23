@@ -48,6 +48,10 @@ export interface ITaskCard {
   tag?: string;
   title?: string;
   statusId?: string;
+  typeId?: string;
+  description?: string;
+  storyPoint?: number;
+  dueAt?: Date;
   assignInfo?: IAssign;
 }
 
@@ -58,18 +62,10 @@ export interface IColumnsFromBackend {
 export default interface IBoardEntity {
   id: string;
   title: string;
-  taskStatus: [{ id: string; name: string }];
-  taskList: {
-    id: string;
-    tag: string;
-    title: string;
-    statusId: string;
-    assignInfo: {
-      id: string;
-      email: string;
-      name: string;
-    };
-  }[];
+  taskStatus: [
+    { id: string; name: string; slug: string; items: [{ taskId: string; order: number }] }
+  ];
+  taskList: [ITaskCard[]];
 }
 
 export interface IOnChangeTaskStatus {
