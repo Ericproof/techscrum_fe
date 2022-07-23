@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { deleteCommit, updateCommit } from '../../../../../../../api/commit/commits';
 import style from './CommentItem.module.scss';
 
 interface ICommentItem {
   content: string;
   id: string;
-  senderId: any;
+  senderId: {
+    email: string;
+    createAt: string;
+    id: string;
+    updatedAt: string;
+    name: string;
+  };
   updatedAt: Date;
+  onClickDelete: (id: string) => void;
+  onClickUpdate: (id: string, commentContent: string) => void;
+  userName: string;
 }
 const monthShortNames = [
   'Jan',
@@ -38,14 +46,12 @@ const dateWithTimestamp = (d: Date | null) => {
 };
 
 export default function CommentItem(props: ICommentItem) {
-  const { content, id, senderId, updatedAt } = props;
+  const { content, id, senderId, updatedAt, onClickDelete, onClickUpdate, userName } = props;
   const [isEditMode, setIsEditMode] = useState(false);
   const [commentContent, setCommentContent] = useState('');
-  const onClickDelete = () => {
-    deleteCommit(id);
-  };
-  const onClickUpdate = () => {
-    updateCommit(id, commentContent);
+
+  const handelOnClickDelete = () => {
+    onClickDelete(id);
   };
 
   useEffect(() => {
@@ -54,7 +60,7 @@ export default function CommentItem(props: ICommentItem) {
     }
   }, [isEditMode, content]);
 
-  const onChangeComment = (e: any) => {
+  const onChangeComment = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCommentContent(e.target.value);
   };
 
@@ -68,13 +74,24 @@ export default function CommentItem(props: ICommentItem) {
         </div>
         <div className={style.commentBody}>
           {isEditMode ? (
-            <input type="text" value={commentContent} onChange={onChangeComment} />
+            <div className={style.commentInputField}>
+              <input
+                type="text"
+                value={commentContent}
+                onChange={onChangeComment}
+                placeholder="Add a comment..."
+              />
+            </div>
           ) : (
             <span>{content}</span>
           )}
         </div>
-        <div className={style.commentButtons}>
-          {!isEditMode && (
+        <div
+          className={
+            userName === senderId.name ? style.commentButtons : style.commentButtonsBlocked
+          }
+        >
+          {!isEditMode ? (
             <button
               type="button"
               className={style.edit}
@@ -84,21 +101,19 @@ export default function CommentItem(props: ICommentItem) {
             >
               Edit
             </button>
-          )}
-          {isEditMode && (
+          ) : (
             <button
               type="button"
               className={style.edit}
               onClick={() => {
                 setIsEditMode(false);
-                onClickUpdate();
-                // update ui
+                onClickUpdate(id, commentContent);
               }}
             >
               Save
             </button>
           )}
-          <button type="button" className={style.delete} onClick={onClickDelete}>
+          <button type="button" className={style.delete} onClick={handelOnClickDelete}>
             Delete
           </button>
         </div>

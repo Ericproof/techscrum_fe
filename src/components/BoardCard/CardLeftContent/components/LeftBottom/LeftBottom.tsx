@@ -1,27 +1,82 @@
-import React, { useState } from 'react';
-import { createComment } from '../../../../../api/commit/commits';
+import React, { useEffect, useState } from 'react';
+import {
+  createComment,
+  getCommit,
+  deleteCommit,
+  updateCommit
+} from '../../../../../api/commit/commits';
+import { ICommentData, ICommentItemData } from '../../../../../types';
 import CommentItem from './components/CommentItem/CommentItem';
 import style from './LeftBottom.module.scss';
 
 interface ILeftBottom {
   userId?: string;
   taskId?: string;
-  comments: any;
+  userName?: string;
 }
 
 export default function LeftBottom(props: ILeftBottom) {
   const [visible, setVisible] = useState(false);
   const [content, setContent] = useState('');
-  const { userId = '', taskId = '', comments = [] } = props;
+  const { userId = '', taskId = '', userName = '' } = props;
+  const [comments, setComments] = useState([]);
+  const [saveState, setSaveState] = useState(false);
+  const [deleteState, setDeleteState] = useState(false);
+  const [updateState, setUpdateState] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
   const onFocusEventHandler = () => setVisible(true);
-  const onClickSave = () => {
-    createComment({ taskId, senderId: userId, content });
-    setVisible(false);
+
+  const fetchCommentsData = () => {
+    async function fetchData() {
+      await getCommit().then((data: ICommentData) => {
+        const result = data.data.reverse();
+        setComments(result);
+      });
+    }
+    fetchData();
   };
 
-  const onChangeContent = (e: any) => {
+  const onChangeContent = (e: React.ChangeEvent<HTMLInputElement>) => {
     setContent(e.target.value);
   };
+
+  const onClickDelete = async (id: string) => {
+    await deleteCommit(id);
+    setDeleteState(true);
+  };
+
+  const onClickUpdate = async (id: string, commentContent: string) => {
+    await updateCommit(id, commentContent);
+    setUpdateState(true);
+  };
+
+  const onClickSave = async () => {
+    await createComment({ taskId, senderId: userId, content });
+    setSaveState(true);
+    setVisible(false);
+    setContent('');
+  };
+
+  useEffect(() => {
+    if (isLoading) {
+      fetchCommentsData();
+      setIsLoading(false);
+    }
+    if (saveState) {
+      fetchCommentsData();
+      setSaveState(false);
+    }
+
+    if (deleteState) {
+      fetchCommentsData();
+      setDeleteState(false);
+    }
+    if (updateState) {
+      fetchCommentsData();
+      setUpdateState(false);
+    }
+  }, [isLoading, saveState, deleteState, updateState]);
 
   const onResetHandler = () => setVisible(false);
   return (
@@ -54,16 +109,22 @@ export default function LeftBottom(props: ILeftBottom) {
           </div>
         )}
       </div>
-      {comments.map((item: any) => {
-        return (
-          <CommentItem
-            key={item.id}
-            content={item.content}
-            id={item.id}
-            senderId={item.senderId}
-            updatedAt={item.updatedAt}
-          />
-        );
+      {comments.map((item: ICommentItemData) => {
+        if (item.taskId === taskId) {
+          return (
+            <CommentItem
+              key={item.id}
+              content={item.content}
+              id={item.id}
+              senderId={item.senderId}
+              updatedAt={item.updatedAt}
+              onClickDelete={onClickDelete}
+              onClickUpdate={onClickUpdate}
+              userName={userName}
+            />
+          );
+        }
+        return null;
       })}
     </div>
   );
@@ -71,5 +132,6 @@ export default function LeftBottom(props: ILeftBottom) {
 
 LeftBottom.defaultProps = {
   taskId: undefined,
-  userId: undefined
+  userId: undefined,
+  userName: undefined
 };

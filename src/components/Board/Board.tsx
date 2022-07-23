@@ -12,7 +12,6 @@ import { updateTaskStatus, fetchTask, updateTask, removeTask } from '../../api/t
 import IBoardEntity, { IColumnsFromBackend, ICardData, ITaskCard } from '../../types';
 import BoardCard from '../BoardCard/BoardCard';
 import { TaskEntity } from '../../api/task/entity/task';
-import { getCommit } from '../../api/commit/commits';
 
 const projects = [
   {
@@ -131,11 +130,7 @@ export default function Board() {
     if (res.status !== 200) {
       return;
     }
-    getCommit().then((data: any) => {
-      res.data.comments = data.data;
-      setTaskData(res.data);
-    });
-
+    setTaskData(res.data);
     getViewTaskStateFromChildren();
   };
 
