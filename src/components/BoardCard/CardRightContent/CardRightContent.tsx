@@ -1,9 +1,8 @@
-/* eslint-disable no-console */
 /* eslint-disable react/jsx-no-useless-fragment */
-import React, { useState } from 'react';
+import React from 'react';
 import { DatePicker } from '@atlaskit/datetime-picker';
 import { TaskEntity } from '../../../api/task/entity/task';
-import { IColumnsFromBackend, IOnChangeTaskReporter } from '../../../types';
+import { IColumnsFromBackend, ILabelData, IOnChangeTaskReporter } from '../../../types';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import style from './CardRightContent.module.scss';
 import Reporter from './Reporter/Reporter';
@@ -14,22 +13,15 @@ interface Props {
   taskInfo: TaskEntity;
   columnsInfo: IColumnsFromBackend;
   taskStatusOnchange: (taskInfo: TaskEntity) => void;
-  labels: any;
-  onSave: (updatedTaskInfo: TaskEntity) => void;
-  // onChangeFilterLabel: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onClickSaveLabel: () => void;
+  labels: ILabelData[];
 }
 
 export default function CardRightContent({
   columnsInfo,
   taskInfo,
   taskStatusOnchange,
-  labels,
-  onSave,
-  // onChangeFilterLabel,
-  onClickSaveLabel
+  labels
 }: Props) {
-  console.log(taskInfo);
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const handleClickOutside = () => setVisible(true);
 
@@ -155,26 +147,19 @@ export default function CardRightContent({
         </div>
         <div className={style.boxBody}>
           <Assignee assigneeOnchangeEventHandler={assigneeOnchangeEventHandler} />
-          <LabelFields
-            labels={labels}
-            taskInfo={taskInfo}
-            onSave={onSave}
-            // onChangeFilterLabel={onChangeFilterLabel}
-            onClickSaveLabel={onClickSaveLabel}
-          />
+          <LabelFields labels={labels} taskInfo={taskInfo} />
           <div className={style.dueDate}>
             <div>Due date</div>
             <div>
-              {/* <DatePicker
+              <DatePicker
                 dateFormat="MM-DD-YYYY"
                 placeholder={dateWithDay(taskInfo.dueAt ?? null)}
-                defaultValue={dateWithDay(taskInfo.dueAt ?? null)}
                 onChange={(date) => {
                   const updatedTaskInfo = { ...taskInfo };
                   updatedTaskInfo.dueAt = new Date(date);
                   taskStatusOnchange(updatedTaskInfo);
                 }}
-              /> */}
+              />
             </div>
           </div>
           <Reporter reporterOnchangeEventHandler={reporterOnchangeEventHandler} />

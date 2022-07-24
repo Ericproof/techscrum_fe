@@ -114,7 +114,7 @@ export default function Board() {
   const [isCreateNewCard, setIsCreateNewCard] = useState(false);
   const [isViewTask, setIsViewTask] = useState(false);
   const [taskData, setTaskData] = useState<TaskEntity>();
-  const [labels, setLabels] = useState<ILabelData>([]);
+  const [labels, setLabels] = useState<ILabelData[]>([]);
 
   useEffect(() => {
     if (!projectId || projectId === '') {
@@ -124,25 +124,6 @@ export default function Board() {
       setLabels(res.data);
     });
   }, [projectId]);
-
-  const onClickSaveLabel = () => {
-    // const result = labels.includes(e.target.value);
-    // if (result || !e.target.value) {
-    //   return;
-    // }
-    // createLabel(setLabels(labels.concat(e.target.value)));
-  };
-
-  // const onChangeFilterLabel = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   if (!e.target.value) {
-  //     return;
-  //   }
-  //   setLabels(
-  //     labels.filter((label: any) => {
-  //       return label.name?.toLowerCase().includes(e.target.value.toLowerCase());
-  //     })
-  //   );
-  // };
 
   const getProjectFromChildren = (index: number) => {
     projectList[index].star = !projectList[index].star;
@@ -296,8 +277,6 @@ export default function Board() {
           columnsInfo={columnsInfo}
           deleteTask={deleteTask}
           labels={labels}
-          // onChangeFilterLabel={onChangeFilterLabel}
-          onClickSaveLabel={onClickSaveLabel}
         />
       )}
     </div>

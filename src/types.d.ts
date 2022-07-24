@@ -38,12 +38,9 @@ export interface IProjectEditor {
 }
 
 export interface ILabelData {
-  [key: string]: any;
-}
-
-export interface ILabel {
-  id: string;
-  name: string;
+  id?: string;
+  name?: string;
+  slug?: string;
 }
 
 export interface IAssign {
@@ -113,12 +110,6 @@ export interface IOnChangeTaskReporter {
 }
 
 export interface IOnChangeTaskAssignee {
-  target: {
-    id: string;
-  };
-}
-
-export interface IOnChangeLabel {
   target: {
     id: string;
   };

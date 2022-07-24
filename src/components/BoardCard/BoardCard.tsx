@@ -4,7 +4,7 @@ import CardHeader from './CardHeader/CardHeader';
 import CardLeftContent from './CardLeftContent/CardLeftContent';
 import CardRightContent from './CardRightContent/CardRightContent';
 import { TaskEntity } from '../../api/task/entity/task';
-import { IColumnsFromBackend } from '../../types';
+import { IColumnsFromBackend, ILabelData } from '../../types';
 import styles from './BoardCard.module.scss';
 
 interface Props {
@@ -13,9 +13,7 @@ interface Props {
   onSave: (updatedTaskInfo: TaskEntity) => void;
   updateIsViewTask: () => void;
   deleteTask: () => void;
-  labels: any;
-  // onChangeFilterLabel: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onClickSaveLabel: () => void;
+  labels: ILabelData[];
 }
 
 export default function BoardCard({
@@ -24,9 +22,7 @@ export default function BoardCard({
   onSave,
   deleteTask,
   updateIsViewTask,
-  labels,
-  // onChangeFilterLabel,
-  onClickSaveLabel
+  labels
 }: Props) {
   const [taskInfo, setTaskInfo] = useState<TaskEntity | null>(null);
 
@@ -44,11 +40,7 @@ export default function BoardCard({
   return (
     <div className={styles.background}>
       <div className={styles.container}>
-        <CardHeader
-          updateIsViewTask={updateIsViewTask}
-          taskInfo={taskInfo}
-          deleteTask={deleteTask}
-        />
+        <CardHeader updateIsViewTask={updateIsViewTask} deleteTask={deleteTask} />
         <div className={styles.cardContent}>
           <CardLeftContent taskInfo={taskInfo} onSave={onSave} />
           <CardRightContent
@@ -56,9 +48,6 @@ export default function BoardCard({
             columnsInfo={columnsInfo}
             taskStatusOnchange={onSave}
             labels={labels}
-            onSave={onSave}
-            // onChangeFilterLabel={onChangeFilterLabel}
-            onClickSaveLabel={onClickSaveLabel}
           />
         </div>
       </div>

@@ -1,25 +1,18 @@
-/* eslint-disable no-unsafe-finally */
-/* eslint-disable no-console */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useEffect, useState } from 'react';
 import { TiDelete } from 'react-icons/ti';
-import { createLabel, deleteLabel, removeLabel } from '../../../../api/label/label';
+import { createLabel, removeLabel } from '../../../../api/label/label';
 import useOutsideAlerter from '../../../../hooks/OutsideAlerter';
 import { TaskEntity } from '../../../../api/task/entity/task';
 import styles from './LabelFields.module.scss';
 import { ILabelData } from '../../../../types';
 
 interface IPropsLabel {
-  labels: any;
+  labels: ILabelData[];
   taskInfo: TaskEntity;
-  // taskStatusOnchange: (taskInfo: TaskEntity) => void;
-  onSave: (updatedTaskInfo: TaskEntity) => void;
-  // onChangeFilterLabel: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onClickSaveLabel: () => void;
 }
 
 export default function LabelFields(props: IPropsLabel) {
-  const { labels, onClickSaveLabel, taskInfo, onSave } = props;
+  const { labels, taskInfo } = props;
   const [selectedTaskLabelList, setSelectedTaskLabelList] = useState<ILabelData[] | undefined>(
     taskInfo.tags
   );
@@ -43,31 +36,29 @@ export default function LabelFields(props: IPropsLabel) {
           });
 
     setDropDownTaskList(
-      labels.filter((item: any) => {
-        return !labelNames.includes(item.name);
+      labels.filter((item: ILabelData) => {
+        if (item.name !== undefined) {
+          return !labelNames.includes(item.name);
+        }
+        return false;
       })
     );
   }, [labels, selectedTaskLabelList]);
 
-  const removeLabelFromSelectedTaskList = async (label: any) => {
+  const removeLabelFromSelectedTaskList = async (label: ILabelData) => {
     if (!taskInfo.id || !label.id) {
       return;
     }
     try {
       await removeLabel(taskInfo.id, label.id);
     } finally {
-      if (!selectedTaskLabelList) {
-        return;
+      if (selectedTaskLabelList !== undefined) {
+        setSelectedTaskLabelList(selectedTaskLabelList.filter((item) => item.name !== label.name));
       }
-      setSelectedTaskLabelList(selectedTaskLabelList.filter((item) => item.name !== label.name));
-      const tag = labels;
-      // const updatedTaskInfo = { ...taskInfo, tag };
-      // onSave(updatedTaskInfo);
     }
   };
 
-  const addLabelToSelectedTaskLabelList = (label: any) => {
-    // console.log(label);
+  const addLabelToSelectedTaskLabelList = (label: ILabelData) => {
     if (!selectedTaskLabelList) {
       return;
     }
@@ -79,7 +70,7 @@ export default function LabelFields(props: IPropsLabel) {
       return;
     }
     setDropDownTaskList(
-      dropDownTaskList.filter((label: any) => {
+      dropDownTaskList.filter((label: ILabelData) => {
         return label.name?.toLowerCase().includes(e.target.value.toLowerCase());
       })
     );
@@ -95,12 +86,7 @@ export default function LabelFields(props: IPropsLabel) {
     if (!res.data) {
       return;
     }
-    // console.log(res.data);
-
-    onClickSaveLabel();
     addLabelToSelectedTaskLabelList({ ...res.data });
-    // setSelectedTaskLabelList(label.concat(res.data));
-    console.log(selectedTaskLabelList);
     setInputLabel('');
   };
 
@@ -110,14 +96,14 @@ export default function LabelFields(props: IPropsLabel) {
   };
   const hasItem = dropDownTaskList.length > 0;
   return (
-    <div ref={myRef} className={styles.label}>
+    <div className={styles.label}>
       <div>Labels</div>
-      <div className={styles.labelDropdownContainer}>
+      <div ref={myRef} className={styles.labelDropdownContainer}>
         {visible ? (
           <div className={styles.labelDropdownOpen}>
             <div className={styles.labelOptions}>
               {selectedTaskLabelList !== undefined &&
-                selectedTaskLabelList.map((item: any) => {
+                selectedTaskLabelList.map((item: ILabelData) => {
                   return (
                     <div className={styles.labels} key={item.id}>
                       <span>{item.name}</span>
@@ -134,14 +120,14 @@ export default function LabelFields(props: IPropsLabel) {
             <div className={styles.labelMenu}>
               <ul>
                 {!hasItem && inputLabel === '' && <li className={styles.noResult}>No result</li>}
-                {dropDownTaskList.map((label: any) => (
+                {dropDownTaskList.map((label: ILabelData) => (
                   <li key={label.id}>
                     <button
                       type="button"
                       onClick={() => {
                         addLabelToSelectedTaskLabelList(label);
                         setInputLabel('');
-                        onClickSave(label.name);
+                        onClickSave(label.name ?? '');
                       }}
                     >
                       <span>{label.name}</span>
@@ -161,13 +147,10 @@ export default function LabelFields(props: IPropsLabel) {
         ) : (
           <button className={styles.labelInputClose} type="button" onClick={handleClickOutside}>
             {selectedTaskLabelList !== undefined &&
-              selectedTaskLabelList?.map((item: any) => {
-                return (
-                  <span key={item.id} id={item.id}>
-                    {item.name}
-                  </span>
-                );
+              selectedTaskLabelList?.map((item: ILabelData, index: number) => {
+                return <span key={item.id ?? index}>{item.name ?? ''}</span>;
               })}
+            {selectedTaskLabelList?.length === 0 && <span className={styles.noLabel}>None</span>}
           </button>
         )}
       </div>

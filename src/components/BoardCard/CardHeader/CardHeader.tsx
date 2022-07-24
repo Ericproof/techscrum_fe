@@ -1,16 +1,14 @@
 import React from 'react';
 import { RiMoreFill } from 'react-icons/ri';
-import { TaskEntity } from '../../../api/task/entity/task';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import style from './CardHeader.module.scss';
 
 interface Props {
   updateIsViewTask: () => void;
-  taskInfo: TaskEntity;
   deleteTask: () => void;
 }
 
-export default function CardHeader({ updateIsViewTask, taskInfo, deleteTask }: Props) {
+export default function CardHeader({ updateIsViewTask, deleteTask }: Props) {
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const handleClickOutside = () => setVisible(!visible);
   return (
@@ -22,7 +20,7 @@ export default function CardHeader({ updateIsViewTask, taskInfo, deleteTask }: P
             alt="Story"
           />
         </button>
-        {/* <span>{taskInfo.tag}</span> */}
+        <span>task</span>
       </div>
       <div className={style.headerRight}>
         <div ref={myRef} className={style.deleteSection}>

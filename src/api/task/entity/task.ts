@@ -15,7 +15,6 @@ export interface Task {
 export interface TaskEntity {
   id?: string;
   title?: string;
-  // tag?: string;
   tags?: ILabelData[];
   statusId?: string;
   projectId?: string;

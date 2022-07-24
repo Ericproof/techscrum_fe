@@ -101,6 +101,8 @@
           border-width: 1px;
           min-height: 40px;
           padding: 4px 0;
+          max-height: 139px;
+          overflow-y: scroll;
           box-shadow: rgb(9 30 66 / 8%) 0px 0px 0px 1px, rgb(9 30 66 / 8%) 0px 2px 1px,
             rgb(9 30 66 / 31%) 0px 0px 20px -6px;
           li {
@@ -162,10 +164,6 @@
       background-color: #fff;
       flex-wrap: wrap;
       gap: 5px;
-      &:hover {
-        background-color: rgb(235, 236, 240);
-        border-color: rgb(223, 225, 230);
-      }
       span {
         margin-left: 10px;
         display: inline-flex;
@@ -181,6 +179,15 @@
           color: #0065ff;
           background-color: #ebecf0;
           text-decoration: underline;
+        }
+      }
+      .noLabel {
+        color: #5e6c84;
+        background-color: #fff;
+        &:hover {
+          color: #5e6c84;
+          background-color: #f4f5f7;
+          text-decoration: none;
         }
       }
     }
