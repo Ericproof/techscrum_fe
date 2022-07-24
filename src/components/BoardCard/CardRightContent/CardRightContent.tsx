@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-useless-fragment */
 import React from 'react';
 import { DatePicker } from '@atlaskit/datetime-picker';
 import { TaskEntity } from '../../../api/task/entity/task';
@@ -77,7 +76,7 @@ export default function CardRightContent({
   };
 
   if (!taskInfo) {
-    return <></>;
+    return <div />;
   }
 
   return (
