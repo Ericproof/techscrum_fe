@@ -115,21 +115,6 @@ export default function LoginMain() {
         <button type="submit" className={styles.btnMargin} onSubmit={handleSubmit}>
           Login
         </button>
-        <p>or</p>
-        <div className={styles.btnList}>
-          <a href="/#">
-            <img src={GoogleIcon} alt="" />
-            <span>Keep Using Google</span>
-          </a>
-          <a href="/#">
-            <img src={MicrosoftIcon} alt="" />
-            <span>Keep Using Microsoft</span>
-          </a>
-          <a href="/#">
-            <img src={AppleIcon} alt="" />
-            <span>Keep Using Apple</span>
-          </a>
-        </div>
         <div className={styles.formFooter}>
           <Link to="/register">Register</Link>
           <span>•</span>
