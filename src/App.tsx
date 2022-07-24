@@ -42,16 +42,16 @@ function App() {
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/about" element={<About />} />
           <Route path="/errorPage" element={<ErrorPage />} />
-          {/* <Route path="" element={<AuthenticationRoute />}> */}
-          <Route path="/settings/:projectId" element={<Setting />} />
-          <Route path="/user-page" element={<UserPage />} />
-          <Route path="/access" element={<Access />} />
-          <Route path="/projects/:projectId/board/:boardId" element={<BoardPage />} />
-          <Route path="/projects" element={<Project />} />
-          <Route path="/create-projects" element={<CreateProject />} />
-          <Route path="/account-settings" element={<AccountSettings />} />
-          <Route path="*" element={<ErrorPage />} />
-          {/* </Route> */}
+          <Route path="" element={<AuthenticationRoute />}>
+            <Route path="/settings/:projectId" element={<Setting />} />
+            <Route path="/user-page" element={<UserPage />} />
+            <Route path="/access" element={<Access />} />
+            <Route path="/projects/:projectId/board/:boardId" element={<BoardPage />} />
+            <Route path="/projects" element={<Project />} />
+            <Route path="/create-projects" element={<CreateProject />} />
+            <Route path="/account-settings" element={<AccountSettings />} />
+            <Route path="*" element={<ErrorPage />} />
+          </Route>
         </Routes>
       </ProjectProvider>
     </UserProvider>

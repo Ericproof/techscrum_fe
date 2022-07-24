@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-useless-fragment */
 import React, { useEffect, useState } from 'react';
 import CardHeader from './CardHeader/CardHeader';
 import CardLeftContent from './CardLeftContent/CardLeftContent';
@@ -34,7 +33,7 @@ export default function BoardCard({
   }, [taskData]);
 
   if (!taskInfo) {
-    return <></>;
+    return <div />;
   }
 
   return (
