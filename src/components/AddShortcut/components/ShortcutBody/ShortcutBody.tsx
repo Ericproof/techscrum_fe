@@ -29,7 +29,7 @@ export default function ShortcutBody({
           type="text"
           name="input"
           className={styles.inputRight}
-          placeholder="e.g. http://www.atlassian.com"
+          placeholder="e.g. http://www.techscrumapp.com"
           onChange={(event) => {
             setWebValue(event.target.value);
           }}
@@ -46,7 +46,7 @@ export default function ShortcutBody({
           type="text"
           name="input"
           className={styles.inputRight}
-          placeholder="e.g. Atlassian website"
+          placeholder="e.g. TechScrum website"
           onChange={(event) => {
             setNameValue(event.target.value);
           }}
