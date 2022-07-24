@@ -1,3 +1,5 @@
+import { ILabelData } from '../../../types';
+
 export interface Task {
   title: string;
   description: string;
@@ -14,7 +16,7 @@ export interface TaskEntity {
   id?: string;
   title?: string;
   // tag?: string;
-  tag?: [{ id: string; name: string; slug: string }];
+  tags?: ILabelData[];
   statusId?: string;
   projectId?: string;
   boardId?: string;

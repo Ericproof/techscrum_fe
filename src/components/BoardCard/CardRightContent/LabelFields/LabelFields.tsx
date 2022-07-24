@@ -1,11 +1,13 @@
+/* eslint-disable no-unsafe-finally */
 /* eslint-disable no-console */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useEffect, useState } from 'react';
 import { TiDelete } from 'react-icons/ti';
-import { createLabel, deleteLabel } from '../../../../api/label/label';
+import { createLabel, deleteLabel, removeLabel } from '../../../../api/label/label';
 import useOutsideAlerter from '../../../../hooks/OutsideAlerter';
 import { TaskEntity } from '../../../../api/task/entity/task';
 import styles from './LabelFields.module.scss';
+import { ILabelData } from '../../../../types';
 
 interface IPropsLabel {
   labels: any;
@@ -18,7 +20,9 @@ interface IPropsLabel {
 
 export default function LabelFields(props: IPropsLabel) {
   const { labels, onClickSaveLabel, taskInfo, onSave } = props;
-  const [selectedTaskLabelList, setSelectedTaskLabelList] = useState(taskInfo.tag);
+  const [selectedTaskLabelList, setSelectedTaskLabelList] = useState<ILabelData[] | undefined>(
+    taskInfo.tags
+  );
   const [dropDownTaskList, setDropDownTaskList] = useState(labels);
   const [inputLabel, setInputLabel] = useState<string>('');
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
@@ -46,22 +50,28 @@ export default function LabelFields(props: IPropsLabel) {
   }, [labels, selectedTaskLabelList]);
 
   const removeLabelFromSelectedTaskList = async (label: any) => {
-    if (!label.id) {
-      try {
-        await deleteLabel(label.id);
-      } finally {
-        // setSelectedTaskLabelList(selectedTaskLabelList.filter((item) => item.name !== label.name));
-        const tag = labels;
-        const updatedTaskInfo = { ...taskInfo, tag };
-        onSave(updatedTaskInfo);
+  f  if (!taskInfo.id || !label.id) {
+      return;
+    }
+    try {
+      await removeLabel(taskInfo.id, label.id);
+    } finally {
+      if (!selectedTaskLabelList) {
+        return;
       }
+      setSelectedTaskLabelList(selectedTaskLabelList.filter((item) => item.name !== label.name));
+      const tag = labels;
+      // const updatedTaskInfo = { ...taskInfo, tag };
+      // onSave(updatedTaskInfo);
     }
   };
 
   const addLabelToSelectedTaskLabelList = (label: any) => {
-    console.log(label);
-
-    // setSelectedTaskLabelList(selectedTaskLabelList.concat(label));
+    // console.log(label);
+    if (!selectedTaskLabelList) {
+      return;
+    }
+    setSelectedTaskLabelList(selectedTaskLabelList.concat(label));
   };
 
   const onChangeFilterLabel = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -109,8 +119,8 @@ export default function LabelFields(props: IPropsLabel) {
               {selectedTaskLabelList !== undefined &&
                 selectedTaskLabelList.map((item: any) => {
                   return (
-                    <div className={styles.labels}>
-                      <span key={item.id}>{item.name}</span>
+                    <div className={styles.labels} key={item.id}>
+                      <span>{item.name}</span>
                       <TiDelete
                         onClick={() => {
                           removeLabelFromSelectedTaskList(item);
