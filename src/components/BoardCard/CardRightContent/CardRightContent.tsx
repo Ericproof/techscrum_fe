@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react/jsx-no-useless-fragment */
 import React, { useState } from 'react';
 import { DatePicker } from '@atlaskit/datetime-picker';
@@ -14,7 +15,8 @@ interface Props {
   columnsInfo: IColumnsFromBackend;
   taskStatusOnchange: (taskInfo: TaskEntity) => void;
   labels: any;
-  onChangeFilterLabel: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onSave: (updatedTaskInfo: TaskEntity) => void;
+  // onChangeFilterLabel: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onClickSaveLabel: () => void;
 }
 
@@ -23,9 +25,11 @@ export default function CardRightContent({
   taskInfo,
   taskStatusOnchange,
   labels,
-  onChangeFilterLabel,
+  onSave,
+  // onChangeFilterLabel,
   onClickSaveLabel
 }: Props) {
+  console.log(taskInfo);
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const handleClickOutside = () => setVisible(true);
 
@@ -153,7 +157,9 @@ export default function CardRightContent({
           <Assignee assigneeOnchangeEventHandler={assigneeOnchangeEventHandler} />
           <LabelFields
             labels={labels}
-            onChangeFilterLabel={onChangeFilterLabel}
+            taskInfo={taskInfo}
+            onSave={onSave}
+            // onChangeFilterLabel={onChangeFilterLabel}
             onClickSaveLabel={onClickSaveLabel}
           />
           <div className={style.dueDate}>

@@ -14,7 +14,7 @@ interface Props {
   updateIsViewTask: () => void;
   deleteTask: () => void;
   labels: any;
-  onChangeFilterLabel: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  // onChangeFilterLabel: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onClickSaveLabel: () => void;
 }
 
@@ -25,7 +25,7 @@ export default function BoardCard({
   deleteTask,
   updateIsViewTask,
   labels,
-  onChangeFilterLabel,
+  // onChangeFilterLabel,
   onClickSaveLabel
 }: Props) {
   const [taskInfo, setTaskInfo] = useState<TaskEntity | null>(null);
@@ -56,7 +56,8 @@ export default function BoardCard({
             columnsInfo={columnsInfo}
             taskStatusOnchange={onSave}
             labels={labels}
-            onChangeFilterLabel={onChangeFilterLabel}
+            onSave={onSave}
+            // onChangeFilterLabel={onChangeFilterLabel}
             onClickSaveLabel={onClickSaveLabel}
           />
         </div>

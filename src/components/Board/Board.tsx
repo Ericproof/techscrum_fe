@@ -131,9 +131,16 @@ export default function Board() {
     // createLabel(setLabels(labels.concat(e.target.value)));
   };
 
-  const onChangeFilterLabel = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const label = e.target.value;
-  };
+  // const onChangeFilterLabel = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   if (!e.target.value) {
+  //     return;
+  //   }
+  //   setLabels(
+  //     labels.filter((label: any) => {
+  //       return label.name?.toLowerCase().includes(e.target.value.toLowerCase());
+  //     })
+  //   );
+  // };
 
   const getProjectFromChildren = (index: number) => {
     projectList[index].star = !projectList[index].star;
@@ -193,6 +200,7 @@ export default function Board() {
             ) {
               const updatedTitle = updatedTaskInfo.title;
               const updatedStatusId = updatedTaskInfo.statusId;
+
               const updatedItem = { ...item, title: updatedTitle, statusId: updatedStatusId };
               if (updatedStatusId === item.statusId) {
                 updatedColumns[item.statusId].items[index] = updatedItem;
@@ -283,7 +291,7 @@ export default function Board() {
           columnsInfo={columnsInfo}
           deleteTask={deleteTask}
           labels={labels}
-          onChangeFilterLabel={onChangeFilterLabel}
+          // onChangeFilterLabel={onChangeFilterLabel}
           onClickSaveLabel={onClickSaveLabel}
         />
       )}

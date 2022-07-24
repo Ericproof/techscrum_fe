@@ -13,7 +13,8 @@ export interface Task {
 export interface TaskEntity {
   id?: string;
   title?: string;
-  tag?: string;
+  // tag?: string;
+  tag?: [{ id: string; name: string; slug: string }];
   statusId?: string;
   projectId?: string;
   boardId?: string;
