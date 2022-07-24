@@ -23,6 +23,8 @@ export interface TaskEntity {
   dueAt?: Date;
   assignId?: string;
   reporterId?: string;
-  createdAt: Date;
-  updatedAt: Date;
+  assign?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  comments?: any;
 }

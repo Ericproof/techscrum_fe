@@ -86,7 +86,7 @@ const onDragEnd = (
         items: destItems
       }
     });
-    updateTaskStatus(result.draggableId, result.destination.droppableId);
+    updateTaskStatus(result.draggableId, destination.droppableId, destination.index);
     return true;
   }
 
@@ -94,13 +94,15 @@ const onDragEnd = (
   const copiedItems = [...column.items];
   const [removed] = copiedItems.splice(source.index, 1);
   copiedItems.splice(destination.index, 0, removed);
-  return setColumns({
+  setColumns({
     ...columns,
     [source.droppableId]: {
       ...column,
       items: copiedItems
     }
   });
+  updateTaskStatus(result.draggableId, source.droppableId, destination.index);
+  return true;
 };
 
 export default function Board() {
@@ -234,12 +236,15 @@ export default function Board() {
   useEffect(() => {
     const fetchColumnsData = (boardInfo: IBoardEntity) => {
       let columnInfoData: IColumnsFromBackend = {};
-      boardInfo.taskStatus.forEach((status) => {
-        const tasks: ITaskCard[] = boardInfo.taskList.filter(
-          (task) =>
-            task.statusId === status.id &&
-            task.title.toLowerCase().includes(inputQuery.toLowerCase())
-        );
+      const { taskStatus, taskList } = boardInfo;
+      taskStatus.forEach((status, index) => {
+        const tasks: ITaskCard[] = [];
+        status.items.forEach((item) => {
+          const result = taskList[index].find((task) => {
+            return task.id === item.taskId;
+          });
+          if (result !== undefined) tasks.push(result);
+        });
         columnInfoData = { ...columnInfoData, [status.id]: { name: status.name, items: tasks } };
       });
       setColumnsInfo(columnInfoData);
