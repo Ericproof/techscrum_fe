@@ -100,3 +100,11 @@ export interface IUserInfo {
   jobTitle?: string;
   location?: string;
 }
+
+export interface ICommentData {
+  [x: string]: any;
+}
+
+export interface ICommentItemData {
+  [x: string]: any;
+}

@@ -24,4 +24,5 @@ export interface TaskEntity {
   assign?: string;
   createdAt?: Date;
   updatedAt?: Date;
+  comments?: any;
 }
