@@ -6,9 +6,6 @@ import { IUserInfo } from '../../../types';
 import { UserDispatchContext } from '../../../context/UserInfoProvider';
 import styles from './LoginMain.module.scss';
 import Icon from '../../../assets/logo.svg';
-import GoogleIcon from './google-logo.svg';
-import MicrosoftIcon from './microsoft-logo.svg';
-import AppleIcon from './apple-logo.svg';
 import Loading from '../../../components/Loading/Loading';
 
 export default function LoginMain() {
