@@ -5,8 +5,8 @@ import { TaskEntity } from '../../../api/task/entity/task';
 import { IColumnsFromBackend, ILabelData, IOnChangeTaskReporter } from '../../../types';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import style from './CardRightContent.module.scss';
-import Reporter from './Reporter/Reporter';
-import Assignee from './Assignee/Assignee';
+import ReporterFields from './ReporterFields/ReporterFields';
+import AssigneeFields from './AssigneeFields/AssigneeFields';
 import LabelFields from './LabelFields/LabelFields';
 
 interface Props {
@@ -146,7 +146,7 @@ export default function CardRightContent({
           </button>
         </div>
         <div className={style.boxBody}>
-          <Assignee assigneeOnchangeEventHandler={assigneeOnchangeEventHandler} />
+          <AssigneeFields assigneeOnchangeEventHandler={assigneeOnchangeEventHandler} />
           <LabelFields labels={labels} taskInfo={taskInfo} />
           <div className={style.dueDate}>
             <div>Due date</div>
@@ -162,7 +162,7 @@ export default function CardRightContent({
               />
             </div>
           </div>
-          <Reporter reporterOnchangeEventHandler={reporterOnchangeEventHandler} />
+          <ReporterFields reporterOnchangeEventHandler={reporterOnchangeEventHandler} />
         </div>
       </div>
       <div className={style.createAndUpdateDate}>

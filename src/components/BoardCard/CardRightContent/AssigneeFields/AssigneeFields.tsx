@@ -1,47 +1,58 @@
 import React, { useState } from 'react';
+import userAvatar from '../../../../assets/userAvatar.png';
 import useOutsideAlerter from '../../../../hooks/OutsideAlerter';
-import { IOnChangeTaskReporter } from '../../../../types';
-import styles from './Reporter.module.scss';
+import { IOnChangeTaskAssignee } from '../../../../types';
+import styles from './AssigneeFields.module.scss';
 
 interface ITaskRelator {
-  reporterOnchangeEventHandler: (e: IOnChangeTaskReporter) => void;
+  assigneeOnchangeEventHandler: (e: IOnChangeTaskAssignee) => void;
 }
 
 const users = [
   {
     id: '1',
+    avatar: userAvatar,
+    name: 'Unassigned'
+  },
+  {
+    id: '2',
+    avatar: userAvatar,
+    name: 'Automatic'
+  },
+  {
+    id: '3',
     avatar:
       'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/YK-3.png?ssl=1',
     name: 'Yiu Kitman'
   },
   {
-    id: '2',
-    avatar:
-      'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/BW-1.png?ssl=1',
-    name: 'Belinda Wang'
-  },
-  {
-    id: '3',
+    id: '4',
     avatar:
       'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/E-0.png?ssl=1',
     name: 'Emil'
   },
   {
-    id: '4',
+    id: '5',
+    avatar:
+      'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/BW-1.png?ssl=1',
+    name: 'Belinda Wang'
+  },
+  {
+    id: '6',
     avatar:
       'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/EL-3.png?ssl=1',
     name: 'Evan Lin'
   }
 ];
 
-export default function Reporter(props: ITaskRelator) {
-  const { reporterOnchangeEventHandler } = props;
+export default function AssigneeFields(props: ITaskRelator) {
+  const { assigneeOnchangeEventHandler } = props;
   const [userInfo, setUserInfo] = useState(users[0]);
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const handleClickOutside = () => setVisible(true);
   return (
-    <div ref={myRef} className={styles.reporter}>
-      <div>Reporter</div>
+    <div ref={myRef} className={styles.assignee}>
+      <div>Assignee</div>
       <div className={styles.leadDropdownContainer}>
         {visible ? (
           <div className={styles.leadDropdownOpen}>
@@ -60,7 +71,7 @@ export default function Reporter(props: ITaskRelator) {
                       type="button"
                       onClick={() => {
                         setUserInfo({ id: user.id, avatar: user.avatar, name: user.name });
-                        reporterOnchangeEventHandler({ target: { id: user.id } });
+                        assigneeOnchangeEventHandler({ target: { id: user.id } });
                         setVisible(false);
                       }}
                     >
