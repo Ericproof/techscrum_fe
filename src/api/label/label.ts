@@ -10,7 +10,6 @@ export function getLabels(projectId: string) {
 export function showLabel(projectId: string) {
   return axios.get(`${config.apiAddress}/projects/${projectId}/labels`);
 }
-/// /////////////////
 
 export function removeLabel(taskId: string, labelId: string) {
   return axios.delete(`${config.apiAddress}/tasks/${taskId}/labels/${labelId}`);
