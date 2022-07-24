@@ -28,11 +28,13 @@ export default function CardLeftContent({ taskInfo, onSave }: Props) {
   };
   const onResetHandler = () => setVisible(false);
 
+  const uploadFile = (e: any) => {};
+
   return (
     <div className={style.container}>
       <form onSubmit={onSaveProcessing} onReset={onResetHandler} id="task-form">
         <Title taskInfo={taskInfo} focusEventHandler={onFocusEventHandler} />
-        <Attach />
+        <Attach onChangeAttachment={uploadFile} />
         <Description taskInfo={taskInfo} focusEventHandler={onFocusEventHandler} />
         {visible && (
           <div className={style.footerContent}>

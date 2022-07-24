@@ -232,11 +232,7 @@ export default function Board() {
   }, [inputQuery, boardId]);
   return (
     <div className={style.container}>
-      <ProjectHeader
-        projects={projects}
-        updateProject={getProjectFromChildren}
-        updateIsCreateNewCard={getCreateNewCardStateFromChildren}
-      />
+      <ProjectHeader />
       <HeaderNav name="projects" />
       <BoardSearch
         updateIsCreateNewCard={getCreateNewCardStateFromChildren}

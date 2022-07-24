@@ -168,7 +168,7 @@ export default function Modal({ shown, close, uploadSuccess }: IModalProps) {
                         </label>
                       </div>
                     </div>
-                    <div className={styles.photoCollection}>
+                    <div className={styles.photoCollection} style={{ display: 'none' }}>
                       <div className={styles.iconList}>
                         <ul>{fiveIcons}</ul>
                       </div>
