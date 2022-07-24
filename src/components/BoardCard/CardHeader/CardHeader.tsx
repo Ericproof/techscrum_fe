@@ -22,7 +22,7 @@ export default function CardHeader({ updateIsViewTask, taskInfo, deleteTask }: P
             alt="Story"
           />
         </button>
-        <span>{taskInfo.tag}</span>
+        {/* <span>{taskInfo.tag}</span> */}
       </div>
       <div className={style.headerRight}>
         <div ref={myRef} className={style.deleteSection}>

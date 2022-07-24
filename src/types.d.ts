@@ -117,6 +117,13 @@ export interface IOnChangeTaskAssignee {
     id: string;
   };
 }
+
+export interface IOnChangeLabel {
+  target: {
+    id: string;
+  };
+}
+
 export interface IUserInfo {
   id?: string;
   email?: string;
