@@ -183,7 +183,6 @@ export default function Board() {
             ) {
               const updatedTitle = updatedTaskInfo.title;
               const updatedStatusId = updatedTaskInfo.statusId;
-
               const updatedItem = { ...item, title: updatedTitle, statusId: updatedStatusId };
               if (updatedStatusId === item.statusId) {
                 updatedColumns[item.statusId].items[index] = updatedItem;
