@@ -50,7 +50,7 @@ export default function LabelFields(props: IPropsLabel) {
   }, [labels, selectedTaskLabelList]);
 
   const removeLabelFromSelectedTaskList = async (label: any) => {
-  f  if (!taskInfo.id || !label.id) {
+    if (!taskInfo.id || !label.id) {
       return;
     }
     try {
