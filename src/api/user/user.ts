@@ -10,6 +10,10 @@ const getAuthHeader = (token: string) => {
   };
 };
 
+export function getUser(id: string) {
+  return axios.get(`${config.apiAddress}/users/${id}`);
+}
+
 export function getUsers() {
   return axios.get(`${config.apiAddress}/users`);
 }

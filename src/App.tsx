@@ -11,7 +11,8 @@ import TermsOfService from './pages/TermsOfService/TermsOfServices';
 import RefundPolicy from './pages/RefundPolicy/RefundPolicy';
 import PrivacyPolicy from './pages/PrivacyPolicy/PrivacyPolicy';
 import PrivacyStatement from './pages/PrivacyStatement/PrivacyStatement';
-import UserPage from './pages/SettingPage/UserPage/UserPage';
+import UserPage from './pages/UserPage/UserPage';
+import UserMePage from './pages/SettingPage/UserMePage/UserMePage';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import Access from './pages/Access/Access';
 import Project from './pages/Project/Project';
@@ -46,7 +47,8 @@ function App() {
           <Route path="/errorPage" element={<ErrorPage />} />
           {/* <Route path="" element={<AuthenticationRoute />}> */}
           <Route path="/settings/:projectId" element={<Setting />} />
-          <Route path="/user-page" element={<UserPage />} />
+          <Route path="/me" element={<UserMePage />} />
+          <Route path="/user/:id" element={<UserPage />} />
           <Route path="/access" element={<Access />} />
           <Route path="/projects/:projectId/board/:boardId" element={<BoardPage />} />
           <Route path="/projects" element={<Project />} />

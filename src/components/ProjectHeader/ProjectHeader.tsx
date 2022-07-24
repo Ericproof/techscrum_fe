@@ -11,12 +11,7 @@ import { ProjectContext } from '../../context/ProjectProvider';
 import { UserContext } from '../../context/UserInfoProvider';
 import Icon from '../Header/IconTab/IconTab';
 
-interface Props {
-  updateProject: (index: number) => void;
-  updateIsCreateNewCard: () => void;
-}
-
-export default function ProjectHeader({ updateProject, updateIsCreateNewCard }: Props) {
+export default function ProjectHeader() {
   const projectList = useContext(ProjectContext);
   const userInfo = useContext(UserContext);
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
@@ -32,7 +27,7 @@ export default function ProjectHeader({ updateProject, updateIsCreateNewCard }: 
   const refStar = projectList.map(() => createRef<HTMLDivElement>());
   const setProjectStar = (id: number) => {
     const index = projectList.findIndex((project) => project.id === id);
-    updateProject(index);
+    // updateProject(index);
   };
   const getStarPosition = (e: React.MouseEvent<HTMLDivElement>, id: number) => {
     const mouseStarPosition = e.currentTarget.getBoundingClientRect();
@@ -189,7 +184,7 @@ export default function ProjectHeader({ updateProject, updateIsCreateNewCard }: 
               <button
                 type="button"
                 className={styles.createBtn}
-                onClick={updateIsCreateNewCard}
+                onClick={() => {}}
                 style={{ display: 'none' }}
               >
                 <span>Create</span>
@@ -197,7 +192,7 @@ export default function ProjectHeader({ updateProject, updateIsCreateNewCard }: 
               <button
                 type="button"
                 className={styles.createIcon}
-                onClick={updateIsCreateNewCard}
+                onClick={() => {}}
                 style={{ display: 'none' }}
               >
                 <span>

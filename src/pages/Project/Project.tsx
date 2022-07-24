@@ -107,10 +107,7 @@ export default function Project() {
 
   return (
     <>
-      <ProjectHeader
-        updateProject={getProjectFromChildren}
-        updateIsCreateNewCard={getCreateNewCardStateFromChildren}
-      />
+      <ProjectHeader />
       {isCreateNewCard && (
         <CreateNewCard
           updateIsCreateNewCard={getCreateNewCardStateFromChildren}
@@ -266,7 +263,7 @@ export default function Project() {
                                   <p>{project?.projectLeadId?.name || ''}</p>
                                 </div>
                                 <div className={[styles.profileV2Link, styles.textRight].join(' ')}>
-                                  <Link to="/user-page">
+                                  <Link to={`/user/${project?.projectLeadId.id}`}>
                                     <button type="button">View profile</button>
                                   </Link>
                                 </div>

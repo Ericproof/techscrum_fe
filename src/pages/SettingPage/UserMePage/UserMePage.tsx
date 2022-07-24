@@ -6,9 +6,9 @@ import { UserContext, UserDispatchContext } from '../../../context/UserInfoProvi
 import { IProject } from '../../../types';
 // import icon from './pic.jpg';
 
-import styles from './UserPage.module.scss';
+import styles from './UserMePage.module.scss';
 
-export default function UserPage() {
+export default function UserMePage() {
   const [projectList, setProjectList] = useState<IProject[]>([]);
   const [value, setValue] = useState(0);
   const [isCreateNewCard, setIsCreateNewCard] = useState(false);
@@ -45,10 +45,7 @@ export default function UserPage() {
 
   return (
     <>
-      <ProjectHeader
-        updateProject={getProjectFromChildren}
-        updateIsCreateNewCard={getCreateNewCardStateFromChildren}
-      />
+      <ProjectHeader />
       <div className={styles.userPage}>
         <div className={styles.userBar}>
           <h2>About</h2>
@@ -64,18 +61,6 @@ export default function UserPage() {
                     className={styles.proIcon}
                     name="name"
                     value={userInfo.name}
-                    onChange={onChangeUser}
-                  />
-                </label>
-              </div>
-              <div className={styles.userInput}>
-                <label htmlFor="abbreviation">
-                  Abbreviation
-                  <br />
-                  <input
-                    className={styles.proIcon}
-                    name="abbreviation"
-                    value={userInfo.abbreviation}
                     onChange={onChangeUser}
                   />
                 </label>

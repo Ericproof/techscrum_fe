@@ -49,7 +49,12 @@ export default function PersonalProfile({ userInfo }: Props) {
                   </div>
                   <div className={styles.settingDetails}>
                     <div className={styles.detail}>
-                      <a href="/user-page">
+                      <Link to="/roles">
+                        <div className={styles.title}>
+                          <span>Roles</span>
+                        </div>
+                      </Link>
+                      <a href="/me">
                         <div className={styles.title}>
                           <span>Profile</span>
                         </div>
