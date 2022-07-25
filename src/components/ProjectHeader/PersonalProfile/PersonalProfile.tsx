@@ -40,7 +40,11 @@ export default function PersonalProfile({ userInfo }: Props) {
                   <div className={styles.settingTop}>
                     <h1>Account</h1>
                     <div className={styles.accountContent}>
-                      <img src={userInfo?.avatarIcon || avatarImg} alt="avatar" />
+                      <img
+                        src={userInfo?.avatarIcon || avatarImg}
+                        alt="avatar"
+                        className={styles.avatarIcon}
+                      />
                       <div className={styles.userContext}>
                         <p>{userInfo.name}</p>
                         <p>{userInfo.email}</p>
