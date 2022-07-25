@@ -225,10 +225,10 @@ export default function Board() {
     const fetchColumnsData = (boardInfo: IBoardEntity) => {
       let columnInfoData: IColumnsFromBackend = {};
       const { taskStatus, taskList } = boardInfo;
-      taskStatus.forEach((status, index) => {
+      taskStatus.forEach((status) => {
         const tasks: ITaskCard[] = [];
         status.items.forEach((item) => {
-          const result = taskList[index].find((task) => {
+          const result = taskList.find((task) => {
             return task.id === item.taskId;
           });
           if (result !== undefined) tasks.push(result);
