@@ -24,6 +24,7 @@ export default function RegisterMain() {
   const [emailRegisterProcess, setEmailRegisterProcess] = useState(false);
   const [emailCheckProcess, setEmailCheckProcess] = useState(false);
   const [invalidateStatus, setInvalidateStatus] = useState(false);
+  const [appName, setAppName] = useState('');
   let emailRecorder = '';
   let nameRecorder = '';
   let passwordRecorder = '';
@@ -55,7 +56,7 @@ export default function RegisterMain() {
     event.preventDefault();
     if (!emailCheckProcess) {
       try {
-        await emailCheck(emailRecorder);
+        await emailCheck(emailRecorder, { appName });
         tip('');
         setEmailRegisterProcess(true);
       } catch (e) {
@@ -106,6 +107,10 @@ export default function RegisterMain() {
     nameRecorder = name;
   };
 
+  const onChangeAppName = (e: any) => {
+    setAppName(e.target.value);
+  };
+
   const setPassword = (password: string) => {
     if (!illegalCharacter.test(password) || password === '') {
       passwordRecorder = password;
@@ -136,6 +141,17 @@ export default function RegisterMain() {
             <h1>Register to continue</h1>
             <h1>Your team&apos;s site</h1>
             <p id="tip" />
+            {!emailCheckProcess && (
+              <input
+                className={styles.domain}
+                type="app"
+                placeholder="Input App Name"
+                name="app"
+                defaultValue={appName}
+                onChange={onChangeAppName}
+                required
+              />
+            )}
             <input
               className={styles.email}
               type="email"
@@ -146,6 +162,7 @@ export default function RegisterMain() {
               disabled={emailCheckProcess}
               required
             />
+
             {emailCheckProcess && (
               <>
                 <input

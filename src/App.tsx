@@ -26,6 +26,7 @@ import { UserProvider } from './context/UserInfoProvider';
 import { ProjectProvider } from './context/ProjectProvider';
 import ProjectMembersPage from './pages/ProjectMembersPage/ProjectMembersPage';
 import RolePage from './pages/RolePage/RolePage';
+import UnauthorizePage from './pages/UnauthorizePage/UnauthorizePage';
 
 function App() {
   return (
@@ -56,8 +57,9 @@ function App() {
             <Route path="/account-settings" element={<AccountSettings />} />
             <Route path="/projects/:projectId/members" element={<ProjectMembersPage />} />
             <Route path="/roles" element={<RolePage />} />
-            <Route path="*" element={<ErrorPage />} />
           </Route>
+          <Route path="/unauthorize" element={<UnauthorizePage />} />
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </ProjectProvider>
     </UserProvider>
