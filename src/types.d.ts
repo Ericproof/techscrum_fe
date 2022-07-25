@@ -37,12 +37,27 @@ export interface IProjectEditor {
   [key: string]: any;
 }
 
+export interface ILabelData {
+  id?: string;
+  name?: string;
+  slug?: string;
+}
+
 export interface IAssign {
   id?: string;
   email?: string;
   name?: string;
 }
 
+export interface ITaskRelator {
+  id?: string;
+  avatar?: string;
+  name?: string;
+}
+
+export interface IItemFromBackend {
+  id: string;
+}
 export interface ITaskCard {
   id?: string;
   tag?: string;
@@ -85,6 +100,18 @@ export interface IOnChangeAssignee {
   target: {
     name: string;
     value: string;
+  };
+}
+
+export interface IOnChangeTaskReporter {
+  target: {
+    id: string;
+  };
+}
+
+export interface IOnChangeTaskAssignee {
+  target: {
+    id: string;
   };
 }
 
