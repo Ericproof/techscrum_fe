@@ -65,10 +65,8 @@ export default function BoardMain({ columnsInfo, onDragEventHandler, passTaskId 
                                     <div className={style.cardFooterRight}>
                                       <img
                                         src={
-                                          item !== undefined &&
-                                          item.assignInfo !== undefined &&
-                                          item.assignInfo.length > 0
-                                            ? item.assignInfo[0].avatarIcon ??
+                                          item !== undefined && item.assignInfo !== undefined
+                                            ? item.assignInfo.avatarIcon ??
                                               'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'
                                             : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'
                                         }

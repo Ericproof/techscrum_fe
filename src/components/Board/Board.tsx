@@ -224,18 +224,19 @@ export default function Board() {
   useEffect(() => {
     const fetchColumnsData = (boardInfo: IBoardEntity) => {
       let columnInfoData: IColumnsFromBackend = {};
+      if (boardInfo.taskStatus === undefined) return setColumnsInfo(columnInfoData);
       const { taskStatus, taskList } = boardInfo;
-      taskStatus.forEach((status) => {
+      taskStatus.forEach((status, index) => {
         const tasks: ITaskCard[] = [];
         status.items.forEach((item) => {
-          const result = taskList.find((task) => {
+          const result = taskList[index].find((task) => {
             return task.id === item.taskId;
           });
           if (result !== undefined) tasks.push(result);
         });
         columnInfoData = { ...columnInfoData, [status.id]: { name: status.name, items: tasks } };
       });
-      setColumnsInfo(columnInfoData);
+      return setColumnsInfo(columnInfoData);
     };
 
     const fetchBoardInfo = async () => {
