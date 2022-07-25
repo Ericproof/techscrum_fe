@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import {
   createComment,
-  getCommit,
-  deleteCommit,
-  updateCommit
-} from '../../../../../api/commit/commits';
+  getComment,
+  deleteComment,
+  updateComment
+} from '../../../../../api/comment/comment';
 import { ICommentData, ICommentItemData } from '../../../../../types';
 import CommentItem from './components/CommentItem/CommentItem';
 import style from './LeftBottom.module.scss';
@@ -29,7 +29,7 @@ export default function LeftBottom(props: ILeftBottom) {
 
   const fetchCommentsData = () => {
     async function fetchData() {
-      await getCommit().then((data: ICommentData) => {
+      await getComment().then((data: ICommentData) => {
         const result = data.data.reverse();
         setComments(result);
       });
@@ -42,12 +42,12 @@ export default function LeftBottom(props: ILeftBottom) {
   };
 
   const onClickDelete = async (id: string) => {
-    await deleteCommit(id);
+    await deleteComment(id);
     setDeleteState(true);
   };
 
   const onClickUpdate = async (id: string, commentContent: string) => {
-    await updateCommit(id, commentContent);
+    await updateComment(id, commentContent);
     setUpdateState(true);
   };
 
