@@ -247,11 +247,7 @@ export default function Board() {
 
   return (
     <div className={style.container}>
-      <ProjectHeader
-        projects={[]}
-        updateProject={getProjectFromChildren}
-        updateIsCreateNewCard={getCreateNewCardStateFromChildren}
-      />
+      <ProjectHeader />
       <HeaderNav name="projects" />
       <BoardSearch
         updateIsCreateNewCard={getCreateNewCardStateFromChildren}

@@ -7,7 +7,7 @@ const deleteAccount = async (deleteAccountForm: DeleteAccountForm) => {
 
   const configHeader = {
     headers: {
-      Authorization: `Bearer ${localStorage.getItem('token') ?? ''}`
+      Authorization: `Bearer ${localStorage.getItem('access_token') ?? ''}`
     }
   };
 

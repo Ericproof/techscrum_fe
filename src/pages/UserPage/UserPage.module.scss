@@ -43,7 +43,11 @@
    font-size: 12px;
     float: right;
     margin-right: 8px;
+  }
 
+  .avatarIcon{
+    width: 125px;
+    height: 125px;
   }
 
   input {
@@ -85,8 +89,6 @@
   .userIcon img {
     border-radius: 50%;
     margin-top: 20px;
-    width:80%;
-
   }
   .iconPublic {
     padding-top: 10px;

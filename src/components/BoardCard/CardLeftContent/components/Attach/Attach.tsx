@@ -2,14 +2,24 @@ import React from 'react';
 import { ImAttachment } from 'react-icons/im';
 import styles from './Attach.module.scss';
 
-export default function Attach() {
+interface IPropsAttach {
+  onChangeAttachment: (e: any) => void;
+  placeholder?: string;
+}
+
+export default function Attach(props: IPropsAttach) {
+  const { placeholder, onChangeAttachment } = props;
   return (
     <div className={styles.attachButton}>
       <label htmlFor="uploadPhoto">
         <ImAttachment className={styles.attachIcon} />
-        <span>Attach</span>
-        <input id="uploadPhoto" type="file" name="Upload a photo" />
+        <span>{placeholder}</span>
+        <input id="uploadPhoto" type="file" name="Upload a photo" onChange={onChangeAttachment} />
       </label>
     </div>
   );
 }
+
+Attach.defaultProps = {
+  placeholder: 'Attach'
+};

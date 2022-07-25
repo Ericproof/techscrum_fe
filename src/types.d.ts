@@ -122,6 +122,10 @@ export interface IUserInfo {
   avatarIcon?: string;
   token?: string;
   refreshToken?: string;
+  abbreviation?: string;
+  userName?: string;
+  jobTitle?: string;
+  location?: string;
 }
 
 export interface ICommentData {

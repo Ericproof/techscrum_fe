@@ -56,7 +56,9 @@ function ProjectEditor(props: ProjectEditorProps) {
 
   const onSave = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    onClickSave(data);
+    const apiData = { ...data };
+    apiData.projectLeadId = data.projectLeadId.id;
+    onClickSave(apiData);
   };
 
   const uploadSuccess = (photoData: any) => {
@@ -72,8 +74,7 @@ function ProjectEditor(props: ProjectEditorProps) {
           <ChangeIcon uploadSuccess={uploadSuccess} value={data.iconUrl} />
           <ChangeName value={data.name} onChange={onChangeName} />
           <ChangeKey value={data.key} onChange={onChange} />
-          <ProjectLead onChange={onChange} />
-          <Assignee onChange={onChange} />
+          <ProjectLead value={data.projectLeadId} onChange={onChange} />
           {hasError && <p className={styles.error}>Error</p>}
           <button className={styles.saveBtn} type="submit" onClick={onSave}>
             Save
