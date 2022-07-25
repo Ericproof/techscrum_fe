@@ -39,7 +39,11 @@ export default function BoardCard({
   return (
     <div className={styles.background}>
       <div className={styles.container}>
-        <CardHeader updateIsViewTask={updateIsViewTask} deleteTask={deleteTask} />
+        <CardHeader
+          updateIsViewTask={updateIsViewTask}
+          deleteTask={deleteTask}
+          taskInfo={taskInfo}
+        />
         <div className={styles.cardContent}>
           <CardLeftContent taskInfo={taskInfo} onSave={onSave} />
           <CardRightContent
