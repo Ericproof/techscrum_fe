@@ -231,9 +231,12 @@ export default function Project() {
                       <td className={[styles.lead, styles.overflowVisible].join(' ')}>
                         <div className={styles.leadContainer} onFocus={() => undefined}>
                           <div className={styles.leadContent}>
-                            <Link
-                              to={`/user/${project?.projectLeadId.id}`}
-                              className={[styles.overflowVisible, styles.relative].join(' ')}
+                            <div
+                              className={[
+                                styles.user,
+                                styles.overflowVisible,
+                                styles.relative
+                              ].join(' ')}
                             >
                               <div className={styles.leadInfo}>
                                 <div className={styles.avatar}>
@@ -268,7 +271,7 @@ export default function Project() {
                                   </Link>
                                 </div>
                               </div>
-                            </Link>
+                            </div>
                           </div>
                         </div>
                       </td>
