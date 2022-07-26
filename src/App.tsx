@@ -11,7 +11,8 @@ import TermsOfService from './pages/TermsOfService/TermsOfServices';
 import RefundPolicy from './pages/RefundPolicy/RefundPolicy';
 import PrivacyPolicy from './pages/PrivacyPolicy/PrivacyPolicy';
 import PrivacyStatement from './pages/PrivacyStatement/PrivacyStatement';
-import UserPage from './pages/SettingPage/UserPage/UserPage';
+import UserPage from './pages/UserPage/UserPage';
+import UserMePage from './pages/SettingPage/UserMePage/UserMePage';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import Access from './pages/Access/Access';
 import Project from './pages/Project/Project';
@@ -23,6 +24,9 @@ import About from './pages/About/About';
 import './App.css';
 import { UserProvider } from './context/UserInfoProvider';
 import { ProjectProvider } from './context/ProjectProvider';
+import ProjectMembersPage from './pages/ProjectMembersPage/ProjectMembersPage';
+import RolePage from './pages/RolePage/RolePage';
+import UnauthorizePage from './pages/UnauthorizePage/UnauthorizePage';
 
 function App() {
   return (
@@ -44,14 +48,18 @@ function App() {
           <Route path="/errorPage" element={<ErrorPage />} />
           <Route path="" element={<AuthenticationRoute />}>
             <Route path="/settings/:projectId" element={<Setting />} />
-            <Route path="/user-page" element={<UserPage />} />
+            <Route path="/me" element={<UserMePage />} />
+            <Route path="/user/:id" element={<UserPage />} />
             <Route path="/access" element={<Access />} />
             <Route path="/projects/:projectId/board/:boardId" element={<BoardPage />} />
             <Route path="/projects" element={<Project />} />
             <Route path="/create-projects" element={<CreateProject />} />
             <Route path="/account-settings" element={<AccountSettings />} />
-            <Route path="*" element={<ErrorPage />} />
+            <Route path="/projects/:projectId/members" element={<ProjectMembersPage />} />
+            <Route path="/roles" element={<RolePage />} />
           </Route>
+          <Route path="/unauthorize" element={<UnauthorizePage />} />
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </ProjectProvider>
     </UserProvider>

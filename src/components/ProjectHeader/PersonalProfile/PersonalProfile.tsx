@@ -29,7 +29,7 @@ export default function PersonalProfile({ userInfo }: Props) {
               <button type="button" onClick={() => handleClickOutside(true)}>
                 <div className={styles.avatarContent}>
                   <span>
-                    <img src={avatarImg} alt="avatar" />
+                    <img src={userInfo?.avatarIcon || avatarImg} alt="avatar" />
                   </span>
                 </div>
               </button>
@@ -40,7 +40,7 @@ export default function PersonalProfile({ userInfo }: Props) {
                   <div className={styles.settingTop}>
                     <h1>Account</h1>
                     <div className={styles.accountContent}>
-                      <img src={avatarImg} alt="avatar" />
+                      <img src={userInfo?.avatarIcon || avatarImg} alt="avatar" />
                       <div className={styles.userContext}>
                         <p>{userInfo.name}</p>
                         <p>{userInfo.email}</p>
@@ -49,7 +49,12 @@ export default function PersonalProfile({ userInfo }: Props) {
                   </div>
                   <div className={styles.settingDetails}>
                     <div className={styles.detail}>
-                      <a href="/user-page">
+                      <Link to="/roles">
+                        <div className={styles.title}>
+                          <span>Roles</span>
+                        </div>
+                      </Link>
+                      <a href="/me">
                         <div className={styles.title}>
                           <span>Profile</span>
                         </div>
@@ -82,7 +87,7 @@ export default function PersonalProfile({ userInfo }: Props) {
             <button type="button" onClick={() => handleClickOutside(false)}>
               <div className={styles.avatarContent}>
                 <span>
-                  <img src={avatarImg} alt="avatar" />
+                  <img src={userInfo?.avatarIcon || avatarImg} alt="avatar" />
                 </span>
               </div>
             </button>

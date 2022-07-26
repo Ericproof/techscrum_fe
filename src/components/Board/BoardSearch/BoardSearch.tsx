@@ -66,7 +66,7 @@ export default function BoardSearch({ updateIsCreateNewCard, setInputQuery }: Pr
             />
           </span>
         </div>
-        <fieldset>
+        <fieldset style={{ display: 'none' }}>
           <ul className={styles.avatarContainer} id="myList">
             {avatars.map((avatar) => (
               <li

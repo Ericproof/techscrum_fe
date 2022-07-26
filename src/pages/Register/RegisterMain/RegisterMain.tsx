@@ -23,6 +23,7 @@ export default function RegisterMain() {
   const [emailRegisterProcess, setEmailRegisterProcess] = useState(false);
   const [emailCheckProcess, setEmailCheckProcess] = useState(false);
   const [invalidateStatus, setInvalidateStatus] = useState(false);
+  const [appName, setAppName] = useState('');
   let emailRecorder = '';
   let nameRecorder = '';
   let passwordRecorder = '';
@@ -55,7 +56,7 @@ export default function RegisterMain() {
     if (!emailCheckProcess) {
       try {
         setLoading(true);
-        await emailCheck(emailRecorder);
+        await emailCheck(emailRecorder, { appName });
         setLoading(false);
         tip('');
         setEmailRegisterProcess(true);
@@ -84,13 +85,13 @@ export default function RegisterMain() {
           id: user.id,
           email: user.email,
           name: user.name,
-          avatarIcon: user.avatarIcon,
+          avatarIcon: user?.avatarIcon,
           token,
           refreshToken
         };
         setUserInfo(userLoginInfo);
-        localStorage.setItem('token', token);
-        localStorage.setItem('refreshToken', refreshToken);
+        localStorage.setItem('access_token', token);
+        localStorage.setItem('refresh_token', refreshToken);
         navigate(`/projects`);
       } else {
         tip('Register Failed, please try again');
@@ -106,6 +107,10 @@ export default function RegisterMain() {
 
   const setName = (name: string) => {
     nameRecorder = name;
+  };
+
+  const onChangeAppName = (e: any) => {
+    setAppName(e.target.value);
   };
 
   const setPassword = (password: string) => {
@@ -140,6 +145,17 @@ export default function RegisterMain() {
             <h1>Register to continue</h1>
             <h1>Your team&apos;s site</h1>
             <p id="tip" />
+            {!emailCheckProcess && (
+              <input
+                className={styles.domain}
+                type="app"
+                placeholder="Input App Name"
+                name="app"
+                defaultValue={appName}
+                onChange={onChangeAppName}
+                required
+              />
+            )}
             <input
               className={styles.email}
               type="email"
@@ -150,6 +166,7 @@ export default function RegisterMain() {
               disabled={emailCheckProcess}
               required
             />
+
             {emailCheckProcess && (
               <>
                 <input
