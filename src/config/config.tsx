@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable import/no-import-module-exports */
 import axios from 'axios';
 
@@ -9,6 +10,15 @@ const alphaApi = axios.create({
   headers: {
     Authorization: `Bearer ${localStorage.getItem('access_token')}`
   }
+});
+
+alphaApi.interceptors.request.use((config: any) => {
+  const token = localStorage.getItem('access_token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  config.headers['Content-Type'] = 'application/json';
+  return config;
 });
 
 export { alphaApi };

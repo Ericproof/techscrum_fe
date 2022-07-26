@@ -27,7 +27,9 @@ export function fetchTask(taskId: string) {
 }
 
 export function updateTask(taskId: string, data: ITaskData) {
-  return axios.put(`${config.apiAddress}/tasks/${taskId}`, data);
+  const copyData = { ...data };
+  copyData.assignId = data.assignId.id;
+  return axios.put(`${config.apiAddress}/tasks/${taskId}`, copyData);
 }
 
 export function updateTaskStatus(taskId: string, statusId: string, targetIndex: number) {
