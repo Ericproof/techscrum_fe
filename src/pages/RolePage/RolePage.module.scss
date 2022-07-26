@@ -1,0 +1,222 @@
+.projectPage {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  margin-top: 100px;
+  flex-grow: 1;
+  min-width: 0px;
+  transition: width 300ms cubic-bezier(0.2, 0, 0, 1) 0s;
+
+  .projectContainer {
+    min-width: 800px;
+    margin: 0px;
+    padding: 0px 40px;
+    .projectContent {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+        'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+      font-size: 14px;
+      height: inherit;
+      letter-spacing: normal;
+      .header {
+        margin: 24px 0px 16px;
+        .title {
+          display: flex;
+          align-items: flex-start;
+          flex-wrap: nowrap;
+          justify-content: space-between;
+          h1 {
+            font-size: 1.71429em;
+            font-style: inherit;
+            color: #172b4d;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+            margin-top: 0px;
+            line-height: 32px;
+            outline: none;
+            overflow-x: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            min-width: 0px;
+            max-width: 100%;
+            margin-bottom: 8px;
+            flex: 1 1 auto;
+          }
+          a {
+            text-decoration: none;
+          }
+        }
+      }
+      .mainContent {
+        position: relative;
+        margin: 0;
+        margin-bottom: 24px;
+        padding: 0;
+        table {
+          border-collapse: collapse;
+          width: 100%;
+          table-layout: fixed;
+          margin: 12px 0 0 0;
+          thead {
+            border-bottom: 2px solid #dfe1e6;
+            tr {
+              border-collapse: collapse;
+              text-indent: initial;
+              border-spacing: 2px;
+              .roles {
+                padding: 4px 8px;
+                border: none;
+                box-sizing: border-box;
+                font-size: 12px;
+                font-weight: 600;
+                position: relative;
+                text-align: left;
+                vertical-align: top;
+                color: #5e6c84;
+                width: 12%;
+                span {
+                  position: relative;
+                  white-space: nowrap;
+                  text-align: left;
+                  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+                    'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+                  font-size: 12px;
+                  font-weight: 600;
+                  color: rgb(94, 108, 132);
+                  line-height: 1.43;
+                }
+              }
+              .types {
+                padding: 4px 8px;
+                border: none;
+                box-sizing: border-box;
+                font-size: 12px;
+                font-weight: 600;
+                position: relative;
+                text-align: left;
+                vertical-align: top;
+                color: #5e6c84;
+                width: 20%;
+                span {
+                  display: flex;
+                  justify-content: center;
+                  position: relative;
+                  white-space: nowrap;
+                  text-align: left;
+                  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+                    'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+                  font-size: 12px;
+                  font-weight: 600;
+                  color: rgb(94, 108, 132);
+                  line-height: 1.43;
+                }
+              }
+            }
+          }
+          tbody {
+            vertical-align: top;
+            border-bottom: 2px solid #dfe1e6;
+            width: 100%;
+            tr {
+              width: 100%;
+              &:hover {
+                background-color: #fafbfc;
+              }
+              .key {
+                width: 12%;
+                overflow: hidden;
+                border: none;
+                padding: 0 8px;
+                text-align: left;
+                span {
+                  display: block;
+                  flex: 1 1 auto;
+                  flex-direction: row;
+                  width: 100%;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  padding: 10px 0;
+                  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+                    'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+                  font-size: 14px;
+                  font-weight: 400;
+                  line-height: 1.43;
+                  color: rgb(23, 43, 77);
+                  letter-spacing: normal;
+                }
+              }
+              .permissionOptionSection {
+                margin-top: 10px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                svg {
+                  color: #172b4d;
+                }
+                .permissionList {
+                  cursor: pointer;
+                  background-color: rgb(255, 255, 255);
+                  width: 100%;
+                  height: 165px;
+                  overflow-y: scroll;
+                  z-index: 999;
+                  ul {
+                    list-style: none;
+                    display: flex;
+                    flex-direction: column;
+                    padding-left: 0;
+                    border: rgb(202, 200, 200);
+                    border-style: solid;
+                    border-radius: 3px;
+                    border-width: 1px;
+                    li {
+                      width: 100%;
+                      button {
+                        display: flex;
+                        align-items: center;
+                        height: 49px;
+                        padding-left: 11px;
+                        border: none;
+                        background-color: rgb(255, 255, 255);
+                        width: 100%;
+                        cursor: pointer;
+                        &:hover {
+                          border-style: solid;
+                          border-left-color: #4c9aff;
+                          border-right: none;
+                          border-top: none;
+                          border-bottom: none;
+                          background-color: rgb(244, 245, 247);
+                        }
+                        img {
+                          width: 31px;
+                          border-radius: 50%;
+                        }
+                        span {
+                          margin-left: 10px;
+                          display: flex;
+                          font-size: 14px;
+                          font-weight: 400;
+                          font-style: normal;
+                          letter-spacing: normal;
+                          text-transform: none;
+                          flex: 1 1 100%;
+                          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+                            Ubuntu, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+                          color: rgb(23, 43, 77);
+                          white-space: nowrap;
+                        }
+                      }
+                    }
+                  }
+                }
+                .selectedPermissions {
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
