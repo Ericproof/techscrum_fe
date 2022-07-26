@@ -9,9 +9,16 @@ import CreateNewCard from '../CreateNewCard/CreateNewCard';
 import HeaderNav from './HeaderNav/HeaderNav';
 import { getBoard } from '../../api/board/board';
 import { updateTaskStatus, fetchTask, updateTask, removeTask } from '../../api/task/task';
-import IBoardEntity, { IColumnsFromBackend, ICardData, ITaskCard } from '../../types';
+import IBoardEntity, {
+  IColumnsFromBackend,
+  ICardData,
+  IProjectData,
+  ILabelData,
+  ITaskCard
+} from '../../types';
 import BoardCard from '../BoardCard/BoardCard';
 import { TaskEntity } from '../../api/task/entity/task';
+import { getLabels } from '../../api/label/label';
 
 const projects = [
   {
@@ -101,16 +108,22 @@ const onDragEnd = (
 export default function Board() {
   const [inputQuery, setInputQuery] = useState<string>('');
   const [columnsInfo, setColumnsInfo] = useState<IColumnsFromBackend>({});
-  const { boardId = '' } = useParams();
-
-  const projectsOrderbyDate = projects.sort((a, b) => {
-    return a.lastEditTime < b.lastEditTime ? 1 : -1;
-  });
-  const [projectList] = useState(projectsOrderbyDate);
+  const { boardId = '', projectId = '' } = useParams();
+  const [projectList] = useState<IProjectData[]>([]);
   const [value, setValue] = useState(0);
   const [isCreateNewCard, setIsCreateNewCard] = useState(false);
   const [isViewTask, setIsViewTask] = useState(false);
-  const [taskData, setTaskData] = useState<TaskEntity>({});
+  const [taskData, setTaskData] = useState<TaskEntity>();
+  const [labels, setLabels] = useState<ILabelData[]>([]);
+
+  useEffect(() => {
+    if (!projectId || projectId === '') {
+      return;
+    }
+    getLabels(projectId).then((res) => {
+      setLabels(res.data);
+    });
+  }, [projectId]);
 
   const getProjectFromChildren = (index: number) => {
     projectList[index].star = !projectList[index].star;
@@ -159,7 +172,7 @@ export default function Board() {
         const req = await updateTask(newTaskInfo.id, newTaskInfo);
         const updatedTaskInfo = req.data;
         const updatedColumns = { ...columnsInfo };
-        if (updatedTaskInfo.statusId !== undefined && taskData.statusId !== undefined) {
+        if (updatedTaskInfo?.statusId && taskData?.statusId) {
           columnsInfo[taskData.statusId].items.forEach((item, index) => {
             if (
               item.id === updatedTaskInfo.id &&
@@ -189,7 +202,7 @@ export default function Board() {
   };
 
   const deleteTask = async () => {
-    if (taskData.id !== undefined && taskData.id != null) {
+    if (taskData?.id && taskData?.id) {
       try {
         await removeTask(taskData.id);
       } finally {
@@ -203,13 +216,15 @@ export default function Board() {
           });
         }
         setColumnsInfo(updatedColumns);
-        setTaskData({});
+        setTaskData(undefined);
       }
     }
   };
+
   useEffect(() => {
     const fetchColumnsData = (boardInfo: IBoardEntity) => {
       let columnInfoData: IColumnsFromBackend = {};
+      if (boardInfo.taskStatus === undefined) return setColumnsInfo(columnInfoData);
       const { taskStatus, taskList } = boardInfo;
       taskStatus.forEach((status, index) => {
         const tasks: ITaskCard[] = [];
@@ -221,7 +236,7 @@ export default function Board() {
         });
         columnInfoData = { ...columnInfoData, [status.id]: { name: status.name, items: tasks } };
       });
-      setColumnsInfo(columnInfoData);
+      return setColumnsInfo(columnInfoData);
     };
 
     const fetchBoardInfo = async () => {
@@ -230,13 +245,10 @@ export default function Board() {
     };
     fetchBoardInfo();
   }, [inputQuery, boardId]);
+
   return (
     <div className={style.container}>
-      <ProjectHeader
-        projects={projects}
-        updateProject={getProjectFromChildren}
-        updateIsCreateNewCard={getCreateNewCardStateFromChildren}
-      />
+      <ProjectHeader />
       <HeaderNav name="projects" />
       <BoardSearch
         updateIsCreateNewCard={getCreateNewCardStateFromChildren}
@@ -260,6 +272,7 @@ export default function Board() {
           onSave={updateTaskInfo}
           columnsInfo={columnsInfo}
           deleteTask={deleteTask}
+          labels={labels}
         />
       )}
     </div>

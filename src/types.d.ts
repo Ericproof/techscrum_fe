@@ -25,7 +25,7 @@ export interface ICardData {
   title?: string;
   description?: string;
   poster?: string;
-  assign?: string;
+  assignId?: string;
   dueAt?: Date;
   statusId?: string;
   label?: string;
@@ -37,12 +37,28 @@ export interface IProjectEditor {
   [key: string]: any;
 }
 
+export interface ILabelData {
+  id?: string;
+  name?: string;
+  slug?: string;
+}
+
 export interface IAssign {
   id?: string;
   email?: string;
   name?: string;
+  avatarIcon?: string;
 }
 
+export interface ITaskRelator {
+  id?: string;
+  avatar?: string;
+  name?: string;
+}
+
+export interface IItemFromBackend {
+  id: string;
+}
 export interface ITaskCard {
   id?: string;
   tag?: string;
@@ -88,6 +104,18 @@ export interface IOnChangeAssignee {
   };
 }
 
+export interface IOnChangeTaskReporter {
+  target: {
+    id: string;
+  };
+}
+
+export interface IOnChangeTaskAssignee {
+  target: {
+    id: string;
+  };
+}
+
 export interface IUserInfo {
   id?: string;
   email?: string;
@@ -95,6 +123,10 @@ export interface IUserInfo {
   avatarIcon?: string;
   token?: string;
   refreshToken?: string;
+  abbreviation?: string;
+  userName?: string;
+  jobTitle?: string;
+  location?: string;
 }
 
 export interface ICommentData {

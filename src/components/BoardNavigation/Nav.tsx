@@ -28,7 +28,6 @@ export default function Nav() {
         shortCutRemoved={fetchProjectsList}
         shortCutUpdated={fetchProjectsList}
       />
-      <NavBottom />
     </nav>
   );
 }

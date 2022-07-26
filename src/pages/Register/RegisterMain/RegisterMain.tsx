@@ -7,11 +7,9 @@ import { UserDispatchContext } from '../../../context/UserInfoProvider';
 import register from '../../../api/register/register';
 import styles from './RegisterMain.module.scss';
 import Icon from '../../../assets/logo.svg';
-import GoogleIcon from './google-logo.svg';
-import MicrosoftIcon from './microsoft-logo.svg';
-import AppleIcon from './apple-logo.svg';
 import Email from '../../../assets/email.png';
 import Error from '../../../assets/error.png';
+import Loading from '../../../components/Loading/Loading';
 
 export default function RegisterMain() {
   const navigate = useNavigate();
@@ -21,9 +19,11 @@ export default function RegisterMain() {
   const { token: emailToken } = useParams();
   const setUserInfo = useContext(UserDispatchContext);
   const [verifyEmail, setVerifyEmail] = useState('');
+  const [loading, setLoading] = useState(false);
   const [emailRegisterProcess, setEmailRegisterProcess] = useState(false);
   const [emailCheckProcess, setEmailCheckProcess] = useState(false);
   const [invalidateStatus, setInvalidateStatus] = useState(false);
+  const [appName, setAppName] = useState('');
   let emailRecorder = '';
   let nameRecorder = '';
   let passwordRecorder = '';
@@ -55,10 +55,13 @@ export default function RegisterMain() {
     event.preventDefault();
     if (!emailCheckProcess) {
       try {
-        await emailCheck(emailRecorder);
+        setLoading(true);
+        await emailCheck(emailRecorder, { appName });
+        setLoading(false);
         tip('');
         setEmailRegisterProcess(true);
       } catch (e) {
+        setLoading(false);
         const err = e as AxiosError;
         const status = err.response?.status ?? 0;
         if (status === 302) {
@@ -82,13 +85,13 @@ export default function RegisterMain() {
           id: user.id,
           email: user.email,
           name: user.name,
-          avatarIcon: user.avatarIcon,
+          avatarIcon: user?.avatarIcon,
           token,
           refreshToken
         };
         setUserInfo(userLoginInfo);
-        localStorage.setItem('token', token);
-        localStorage.setItem('refreshToken', refreshToken);
+        localStorage.setItem('access_token', token);
+        localStorage.setItem('refresh_token', refreshToken);
         navigate(`/projects`);
       } else {
         tip('Register Failed, please try again');
@@ -106,13 +109,19 @@ export default function RegisterMain() {
     nameRecorder = name;
   };
 
+  const onChangeAppName = (e: any) => {
+    setAppName(e.target.value);
+  };
+
   const setPassword = (password: string) => {
     if (!illegalCharacter.test(password) || password === '') {
       passwordRecorder = password;
       tip('');
     } else tip('Illegal Character Detected');
   };
-
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <div className={styles.registerMain}>
       <img src={Icon} alt="TechScrum Icon" />
@@ -136,6 +145,17 @@ export default function RegisterMain() {
             <h1>Register to continue</h1>
             <h1>Your team&apos;s site</h1>
             <p id="tip" />
+            {!emailCheckProcess && (
+              <input
+                className={styles.domain}
+                type="app"
+                placeholder="Input App Name"
+                name="app"
+                defaultValue={appName}
+                onChange={onChangeAppName}
+                required
+              />
+            )}
             <input
               className={styles.email}
               type="email"
@@ -146,6 +166,7 @@ export default function RegisterMain() {
               disabled={emailCheckProcess}
               required
             />
+
             {emailCheckProcess && (
               <>
                 <input

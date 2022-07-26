@@ -1,8 +1,10 @@
+import { ILabelData } from '../../../types';
+
 export interface Task {
   title: string;
   description: string;
   cardType: string;
-  assign: { userId: string; userName: string; userIcon: string };
+  assignId: { userId: string; userName: string; userIcon: string };
   label: string;
   sprint: string;
   storyPointEstimate: string;
@@ -13,7 +15,7 @@ export interface Task {
 export interface TaskEntity {
   id?: string;
   title?: string;
-  tag?: string;
+  tags?: ILabelData[];
   statusId?: string;
   projectId?: string;
   boardId?: string;
@@ -21,8 +23,10 @@ export interface TaskEntity {
   description?: string;
   storyPoint?: number;
   dueAt?: Date;
-  assign?: string;
+  assignId?: string;
+  reporterId?: string;
   createdAt?: Date;
   updatedAt?: Date;
   comments?: any;
+  attachmentUrls?: any;
 }
