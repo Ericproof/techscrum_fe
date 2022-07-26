@@ -20,46 +20,68 @@ export interface ITaskData {
 }
 
 export interface ICardData {
-  [key: string]: any;
+  id?: string;
+  tag?: string;
+  title?: string;
+  description?: string;
+  poster?: string;
+  assignId?: string;
+  dueAt?: Date;
+  statusId?: string;
+  label?: string;
+  boardId?: string;
+  projectId?: string;
 }
 
 export interface IProjectEditor {
   [key: string]: any;
 }
 
+export interface ILabelData {
+  id?: string;
+  name?: string;
+  slug?: string;
+}
+
 export interface IAssign {
   id?: string;
   email?: string;
+  name?: string;
+  avatarIcon?: string;
+}
+
+export interface ITaskRelator {
+  id?: string;
+  avatar?: string;
   name?: string;
 }
 
 export interface IItemFromBackend {
   id: string;
+}
+export interface ITaskCard {
+  id?: string;
   tag?: string;
   title?: string;
-  statusId?: number;
+  statusId?: string;
+  typeId?: string;
+  description?: string;
+  storyPoint?: number;
+  dueAt?: Date;
   assignInfo?: IAssign;
 }
 
 export interface IColumnsFromBackend {
-  [statusId: string]: { name: string; items: IItemFromBackend[] };
+  [statusId: string]: { name: string; items: ITaskCard[] };
 }
 
 export default interface IBoardEntity {
   id: string;
   title: string;
-  taskStatus: [string];
-  taskList: {
-    id: string;
-    tag: string;
-    title: string;
-    statusId: number;
-    assignInfo: {
-      id: string;
-      email: string;
-      name: string;
-    };
-  }[];
+  taskStatus: [
+    { id: string; name: string; slug: string; items: [{ taskId: string; order: number }] }
+  ];
+  taskList: [ITaskCard[]];
 }
 
 export interface IOnChangeTaskStatus {
@@ -82,6 +104,18 @@ export interface IOnChangeAssignee {
   };
 }
 
+export interface IOnChangeTaskReporter {
+  target: {
+    id: string;
+  };
+}
+
+export interface IOnChangeTaskAssignee {
+  target: {
+    id: string;
+  };
+}
+
 export interface IUserInfo {
   id?: string;
   email?: string;
@@ -89,4 +123,16 @@ export interface IUserInfo {
   avatarIcon?: string;
   token?: string;
   refreshToken?: string;
+  abbreviation?: string;
+  userName?: string;
+  jobTitle?: string;
+  location?: string;
+}
+
+export interface ICommentData {
+  [x: string]: any;
+}
+
+export interface ICommentItemData {
+  [x: string]: any;
 }

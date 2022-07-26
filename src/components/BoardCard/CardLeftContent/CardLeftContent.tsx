@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { TaskEntity } from '../../../api/task/entity/task';
+import { UserContext } from '../../../context/UserInfoProvider';
+import PhotoGallery from '../../PhotoGallery/PhotoGallery';
 import style from './CardLeftContent.module.scss';
 import Attach from './components/Attach/Attach';
 import Description from './components/Description/Description';
@@ -9,10 +11,13 @@ import Title from './components/Title/Title';
 interface Props {
   taskInfo: TaskEntity;
   onSave: (updatedTaskInfo: TaskEntity) => void;
+  removeAttachment: (url: string) => void;
+  uploadFile: (e: any) => void;
 }
 
-export default function CardLeftContent({ taskInfo, onSave }: Props) {
+export default function CardLeftContent({ taskInfo, onSave, removeAttachment, uploadFile }: Props) {
   const [visible, setVisible] = useState(false);
+  const userInfo = useContext(UserContext);
 
   const onFocusEventHandler = () => setVisible(true);
   const onSaveProcessing = (e: React.FormEvent) => {
@@ -30,7 +35,8 @@ export default function CardLeftContent({ taskInfo, onSave }: Props) {
     <div className={style.container}>
       <form onSubmit={onSaveProcessing} onReset={onResetHandler} id="task-form">
         <Title taskInfo={taskInfo} focusEventHandler={onFocusEventHandler} />
-        <Attach />
+        <Attach onChangeAttachment={uploadFile} />
+        <PhotoGallery photoData={taskInfo.attachmentUrls} removeAttachment={removeAttachment} />
         <Description taskInfo={taskInfo} focusEventHandler={onFocusEventHandler} />
         {visible && (
           <div className={style.footerContent}>
@@ -42,7 +48,7 @@ export default function CardLeftContent({ taskInfo, onSave }: Props) {
             </button>
           </div>
         )}
-        <LeftBottom />
+        <LeftBottom taskId={taskInfo.id} userId={userInfo.id} userEmail={userInfo?.email} />
       </form>
     </div>
   );

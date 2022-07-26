@@ -40,7 +40,7 @@ export default function BoardMain({ columnsInfo, onDragEventHandler, passTaskId 
                       </div>
                       {column.items.map((item, index) => {
                         return (
-                          <Draggable key={item.id} draggableId={item.id} index={index}>
+                          <Draggable key={item.id} draggableId={item.id ?? ''} index={index}>
                             {(provided2) => {
                               return (
                                 <div
@@ -50,7 +50,7 @@ export default function BoardMain({ columnsInfo, onDragEventHandler, passTaskId 
                                   {...provided2.draggableProps}
                                   aria-hidden="true"
                                   onClick={() => {
-                                    passTaskId(item.id);
+                                    passTaskId(item.id ?? '');
                                   }}
                                 >
                                   <span> {item.title}</span>
@@ -64,8 +64,14 @@ export default function BoardMain({ columnsInfo, onDragEventHandler, passTaskId 
                                     </div>
                                     <div className={style.cardFooterRight}>
                                       <img
-                                        src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png"
+                                        src={
+                                          item !== undefined && item.assignInfo !== undefined
+                                            ? item.assignInfo.avatarIcon ??
+                                              'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'
+                                            : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'
+                                        }
                                         alt="avatar"
+                                        className={style.avatorIcon}
                                       />
                                     </div>
                                   </div>

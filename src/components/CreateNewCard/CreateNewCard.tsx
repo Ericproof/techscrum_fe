@@ -1,8 +1,14 @@
+/* eslint-disable react/no-array-index-key */
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
+
 import styles from './CreateNewCard.module.scss';
 import { createNewTask } from '../../api/task/task';
 import { ICardData } from '../../types';
+import UserSelect from '../Form/Select/UserSelect/UserSelect';
+import { upload } from '../../api/upload/upload';
+import Attach from '../BoardCard/CardLeftContent/components/Attach/Attach';
+import PhotoGallery from '../PhotoGallery/PhotoGallery';
 
 interface Props {
   fetchNewCard: (newCard: ICardData) => void;
@@ -12,23 +18,18 @@ interface Props {
 function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
   const [description, setDescription] = useState('');
   const [title, setTitle] = useState('');
+  const [assigneeId, setAssigneeId] = useState<any>();
   const [hasError, setError] = useState(false);
+  const [photoData, setPhotoData] = useState<any>([]);
   const { boardId = '', projectId = '' } = useParams();
 
   const data = useState<ICardData>({
-    title: '',
-    description: '',
-    cardType: '',
-    assign: '629c17f49c0a43d2a090515e',
-    label: '',
-    sprint: '',
-    storyPointEstimate: '',
-    pullRequestNumber: 0,
-    reporter: { userId: '', userName: '', userIcon: '' },
-    tag: 'abc',
-    boardId,
-    projectId
+    dueAt: new Date()
   });
+
+  const onChangeAssigneeId = (e: any) => {
+    setAssigneeId(e.target.value);
+  };
 
   const changeDescriptionHandler = async (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setDescription(e.target.value);
@@ -38,9 +39,32 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
     setTitle(e.target.value);
   };
 
+  const uploadSuccess = (newPhotoData: any) => {
+    const updatePhotoData = [...photoData, newPhotoData[0].location];
+    setPhotoData(updatePhotoData);
+  };
+
+  const uploadFile = (e: any) => {
+    const uploadData = new FormData();
+    uploadData.append('photos', e.target.files[0]);
+    upload(uploadData).then((res: any) => {
+      uploadSuccess(res.data);
+    });
+  };
+
   const onSave = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    const newCard = { ...data[0], description, title };
+    const newCard = {
+      ...data[0],
+      description,
+      title,
+      boardId,
+      projectId,
+      tag: [],
+      assignId: assigneeId.id,
+      attachmentUrls: photoData
+    };
+
     createNewTask(newCard)
       .then((res) => {
         if (res.status === 201) {
@@ -54,6 +78,14 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
         setError(true);
       });
   };
+
+  const removeAttachment = (url: string) => {
+    const updatePhotoData = photoData.filter((photoUrl: string) => {
+      return photoUrl !== url;
+    });
+    setPhotoData(updatePhotoData);
+  };
+
   return (
     <div className={styles.cardContainer}>
       <div className={styles.cardTitle}>
@@ -80,12 +112,8 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
             required
           />
           <p className={styles.cardLabel}>Attachment</p>
-          <input
-            className={styles.cardInput}
-            type="file multiple"
-            id="fileInput"
-            placeholder="Drop files to attach or browse"
-          />
+          <Attach onChangeAttachment={uploadFile} />
+          <PhotoGallery photoData={photoData} removeAttachment={removeAttachment} />
           <p className={styles.cardLabel}>Description</p>
           <textarea
             className={styles.cardTextarea}
@@ -93,7 +121,7 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
             onChange={changeDescriptionHandler}
           />
           <p className={styles.cardLabel}>Assignee</p>
-          <input className={styles.cardAssignee} placeholder="Automatic" />
+          <UserSelect onChange={onChangeAssigneeId} value={assigneeId} />
           <p className={styles.cardLabel} style={{ display: 'none' }}>
             Priority
           </p>

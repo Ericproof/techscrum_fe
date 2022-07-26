@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { BsBoxArrowUpRight } from 'react-icons/bs';
 import styles from './PersonalProfile.module.scss';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import { IUserInfo } from '../../../types';
 import avatarImg from '../../../assets/userAvatar.png';
+import { UserDispatchContext } from '../../../context/UserInfoProvider';
 
 interface Props {
   userInfo: IUserInfo;
@@ -12,6 +14,12 @@ interface Props {
 export default function PersonalProfile({ userInfo }: Props) {
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const handleClickOutside = (state: boolean) => setVisible(!state);
+  const setUserInfo = useContext(UserDispatchContext);
+
+  const logout = () => {
+    localStorage.clear();
+    setUserInfo({});
+  };
   return (
     <div ref={myRef}>
       <div className={styles.rightSection} key={userInfo.id}>
@@ -21,7 +29,7 @@ export default function PersonalProfile({ userInfo }: Props) {
               <button type="button" onClick={() => handleClickOutside(true)}>
                 <div className={styles.avatarContent}>
                   <span>
-                    <img src={avatarImg} alt="avatar" />
+                    <img src={userInfo?.avatarIcon || avatarImg} alt="avatar" />
                   </span>
                 </div>
               </button>
@@ -32,7 +40,11 @@ export default function PersonalProfile({ userInfo }: Props) {
                   <div className={styles.settingTop}>
                     <h1>Account</h1>
                     <div className={styles.accountContent}>
-                      <img src={avatarImg} alt="avatar" />
+                      <img
+                        src={userInfo?.avatarIcon || avatarImg}
+                        alt="avatar"
+                        className={styles.avatarIcon}
+                      />
                       <div className={styles.userContext}>
                         <p>{userInfo.name}</p>
                         <p>{userInfo.email}</p>
@@ -41,7 +53,12 @@ export default function PersonalProfile({ userInfo }: Props) {
                   </div>
                   <div className={styles.settingDetails}>
                     <div className={styles.detail}>
-                      <a href="/user-page">
+                      <Link to="/roles">
+                        <div className={styles.title}>
+                          <span>Roles</span>
+                        </div>
+                      </Link>
+                      <a href="/me">
                         <div className={styles.title}>
                           <span>Profile</span>
                         </div>
@@ -59,11 +76,11 @@ export default function PersonalProfile({ userInfo }: Props) {
                     </div>
                   </div>
                   <div className={styles.settingBottom}>
-                    <a href="/#" className={styles.logOutSection}>
+                    <Link to="/#" className={styles.logOutSection} onClick={logout}>
                       <div className={styles.logOutContainer}>
                         <span>Log out</span>
                       </div>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -74,7 +91,7 @@ export default function PersonalProfile({ userInfo }: Props) {
             <button type="button" onClick={() => handleClickOutside(false)}>
               <div className={styles.avatarContent}>
                 <span>
-                  <img src={avatarImg} alt="avatar" />
+                  <img src={userInfo?.avatarIcon || avatarImg} alt="avatar" />
                 </span>
               </div>
             </button>

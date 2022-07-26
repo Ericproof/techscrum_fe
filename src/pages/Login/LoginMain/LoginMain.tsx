@@ -6,9 +6,7 @@ import { IUserInfo } from '../../../types';
 import { UserDispatchContext } from '../../../context/UserInfoProvider';
 import styles from './LoginMain.module.scss';
 import Icon from '../../../assets/logo.svg';
-import GoogleIcon from './google-logo.svg';
-import MicrosoftIcon from './microsoft-logo.svg';
-import AppleIcon from './apple-logo.svg';
+import Loading from '../../../components/Loading/Loading';
 
 export default function LoginMain() {
   const navigate = useNavigate();
@@ -17,6 +15,7 @@ export default function LoginMain() {
   const [passwordInvisible, setPasswordInvisible] = useState(true);
   const [emailRecorder, setEmailRecorder] = useState('');
   const [passwordRecorder, setPasswordRecorder] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const tip = (error: string) => {
     const tipLabel = document.getElementById('tip') as HTMLInputElement;
@@ -26,28 +25,31 @@ export default function LoginMain() {
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
     try {
+      setLoading(true);
       const result = await login({
         email: emailRecorder,
         password: passwordRecorder
       });
-      const { user, userProfile, token, refreshToken } = result.data;
-      if (user && userProfile) {
+      const { user, token, refreshToken } = result.data;
+      if (user) {
         const userLoginInfo: IUserInfo = {
           id: user.id,
           email: user.email,
-          name: userProfile.name,
-          avatarIcon: userProfile.avatarIcon,
+          name: user.name,
+          avatarIcon: user?.avatarIcon,
           token,
           refreshToken
         };
         setUserInfo(userLoginInfo);
-        localStorage.setItem('token', token);
-        localStorage.setItem('refreshToken', refreshToken);
+        localStorage.setItem('access_token', token);
+        localStorage.setItem('refresh_token', refreshToken);
         navigate(`/projects`);
       } else {
+        setLoading(false);
         tip('*Incorrect email or password, please try again.');
       }
     } catch (error) {
+      setLoading(false);
       tip('Something Go Wrong, Please contact staff!');
     }
   };
@@ -62,7 +64,9 @@ export default function LoginMain() {
       tip('');
     } else tip('Illegal Character Detected');
   };
-
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <div className={styles.registerMain}>
       <img src={Icon} alt="TechScrum Icon" />
@@ -108,21 +112,6 @@ export default function LoginMain() {
         <button type="submit" className={styles.btnMargin} onSubmit={handleSubmit}>
           Login
         </button>
-        <p>or</p>
-        <div className={styles.btnList}>
-          <a href="/#">
-            <img src={GoogleIcon} alt="" />
-            <span>Keep Using Google</span>
-          </a>
-          <a href="/#">
-            <img src={MicrosoftIcon} alt="" />
-            <span>Keep Using Microsoft</span>
-          </a>
-          <a href="/#">
-            <img src={AppleIcon} alt="" />
-            <span>Keep Using Apple</span>
-          </a>
-        </div>
         <div className={styles.formFooter}>
           <Link to="/register">Register</Link>
           <span>•</span>

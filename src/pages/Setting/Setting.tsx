@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-useless-fragment */
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { RiMoreFill } from 'react-icons/ri';
 import { useNavigate, useParams, NavLink } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
@@ -7,6 +7,7 @@ import ProjectEditor from '../../components/ProjectEditor/ProjectEditor';
 import styles from './Setting.module.scss';
 import { deleteProject, showProject, updateProject } from '../../api/projects/projects';
 import { IProjectEditor } from '../../types';
+import { UserContext } from '../../context/UserInfoProvider';
 
 export default function Setting() {
   const [toggle, setToggle] = useState(false);
@@ -14,18 +15,27 @@ export default function Setting() {
   const { projectId = '' } = useParams();
   const [data, setData] = useState<IProjectEditor | null>(null);
   const [hasError, setError] = useState(false);
+  const userInfo = useContext(UserContext);
 
   useEffect(() => {
-    showProject(projectId).then((res) => {
+    if (Object.keys(userInfo).length === 0 || !userInfo) {
+      return;
+    }
+    const token = userInfo?.token;
+    if (!token) {
+      return;
+    }
+    showProject(projectId, token).then((res) => {
       setData(res.data);
     });
-  }, [projectId]);
+  }, [projectId, userInfo.token, userInfo]);
 
   const onClickSave = (projectData: IProjectEditor) => {
     if (!projectData) {
       return;
     }
-    updateProject(projectId, projectData)
+    const token = userInfo?.token || '';
+    updateProject(projectId, projectData, token)
       .then((res: AxiosResponse) => {
         if (!res.data) {
           return;
@@ -92,7 +102,12 @@ export default function Setting() {
             </div>
           )}
         </header>
-        <ProjectEditor projectData={data} onClickSave={onClickSave} hasError={hasError} />
+        <ProjectEditor
+          showCancelBtn
+          projectData={data}
+          onClickSave={onClickSave}
+          hasError={hasError}
+        />
       </div>
     </div>
   );

@@ -1,9 +1,9 @@
 import axios from 'axios';
 import config from '../../config/config';
 
-export async function emailCheck(email: string) {
+export async function emailCheck(email: string, data: any) {
   const path = `${config.apiAddress}/register/${email}`;
-  const result = await axios.post(path);
+  const result = await axios.post(path, data);
   return result;
 }
 

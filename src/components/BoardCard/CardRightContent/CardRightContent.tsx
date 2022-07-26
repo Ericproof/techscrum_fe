@@ -1,19 +1,42 @@
 import React from 'react';
 import { DatePicker } from '@atlaskit/datetime-picker';
 import { TaskEntity } from '../../../api/task/entity/task';
-import { IColumnsFromBackend } from '../../../types';
+import { IColumnsFromBackend, ILabelData, IOnChangeTaskReporter } from '../../../types';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import style from './CardRightContent.module.scss';
+import ReporterFields from './ReporterFields/ReporterFields';
+import AssigneeFields from './AssigneeFields/AssigneeFields';
+import LabelFields from './LabelFields/LabelFields';
+import UserSelect from '../../Form/Select/UserSelect/UserSelect';
+import Row from '../../Grid/Row/Row';
 
 interface Props {
   taskInfo: TaskEntity;
   columnsInfo: IColumnsFromBackend;
   taskStatusOnchange: (taskInfo: TaskEntity) => void;
+  labels: ILabelData[];
 }
 
-export default function CardRightContent({ columnsInfo, taskInfo, taskStatusOnchange }: Props) {
+export default function CardRightContent({
+  columnsInfo,
+  taskInfo,
+  taskStatusOnchange,
+  labels
+}: Props) {
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const handleClickOutside = () => setVisible(true);
+
+  const reporterOnchangeEventHandler = (e: IOnChangeTaskReporter) => {
+    const updatedTaskInfo = { ...taskInfo };
+    updatedTaskInfo.reporterId = e.target.id;
+    taskStatusOnchange(updatedTaskInfo);
+  };
+
+  const assigneeOnchangeEventHandler = (e: any) => {
+    const updatedTaskInfo = { ...taskInfo };
+    updatedTaskInfo.assignId = e.target.value.id;
+    taskStatusOnchange(updatedTaskInfo);
+  };
 
   const monthShortNames = [
     'Jan',
@@ -54,13 +77,17 @@ export default function CardRightContent({ columnsInfo, taskInfo, taskStatusOnch
     return '';
   };
 
+  if (!taskInfo) {
+    return <div />;
+  }
+
   return (
     <div className={style.container}>
       <div ref={myRef} className={style.statusSection}>
         {visible ? (
           <>
             <button type="button" className={style.toDoButton} onClick={handleClickOutside}>
-              <span>{columnsInfo[taskInfo.statusId?.toString() ?? '0'].name}</span>
+              <span>{columnsInfo[taskInfo.statusId ?? ''].name ?? ''}</span>
               <svg viewBox="0 0 24 24" role="presentation">
                 <path
                   d="M8.292 10.293a1.009 1.009 0 000 1.419l2.939 2.965c.218.215.5.322.779.322s.556-.107.769-.322l2.93-2.955a1.01 1.01 0 000-1.419.987.987 0 00-1.406 0l-2.298 2.317-2.307-2.327a.99.99 0 00-1.406 0z"
@@ -81,7 +108,7 @@ export default function CardRightContent({ columnsInfo, taskInfo, taskStatusOnch
                         onClick={() => {
                           setVisible(false);
                           const updatedTaskInfo = { ...taskInfo };
-                          updatedTaskInfo.statusId = Number(id);
+                          updatedTaskInfo.statusId = id;
                           taskStatusOnchange(updatedTaskInfo);
                         }}
                       >
@@ -95,7 +122,7 @@ export default function CardRightContent({ columnsInfo, taskInfo, taskStatusOnch
           </>
         ) : (
           <button type="button" className={style.toDoButton} onClick={handleClickOutside}>
-            <span>{columnsInfo[taskInfo.statusId?.toString() ?? '0'].name}</span>
+            <span>{columnsInfo[taskInfo.statusId ?? '']?.name ?? ''}</span>
             <svg viewBox="0 0 24 24" role="presentation">
               <path
                 d="M8.292 10.293a1.009 1.009 0 000 1.419l2.939 2.965c.218.215.5.322.779.322s.556-.107.769-.322l2.93-2.955a1.01 1.01 0 000-1.419.987.987 0 00-1.406 0l-2.298 2.317-2.307-2.327a.99.99 0 00-1.406 0z"
@@ -120,25 +147,17 @@ export default function CardRightContent({ columnsInfo, taskInfo, taskStatusOnch
           </button>
         </div>
         <div className={style.boxBody}>
-          <div className={style.assignee}>
-            <div>Assignee</div>
-            <div>
-              <span className={style.icon} />
-              <div className={style.roleName}>Evan Lin</div>
-            </div>
-          </div>
-          <div className={style.labels}>
-            <div>Labels</div>
-            <div>None</div>
-          </div>
-
+          <Row classesName={style.fieldMargin}>
+            <div className={['fullWidth', style.label].join(' ')}>Assignee</div>
+            <UserSelect onChange={assigneeOnchangeEventHandler} value={taskInfo.assignId} />
+          </Row>
+          <LabelFields labels={labels} taskInfo={taskInfo} />
           <div className={style.dueDate}>
             <div>Due date</div>
             <div>
               <DatePicker
                 dateFormat="MM-DD-YYYY"
                 placeholder={dateWithDay(taskInfo.dueAt ?? null)}
-                defaultValue={dateWithDay(taskInfo.dueAt ?? null)}
                 onChange={(date) => {
                   const updatedTaskInfo = { ...taskInfo };
                   updatedTaskInfo.dueAt = new Date(date);
@@ -147,13 +166,7 @@ export default function CardRightContent({ columnsInfo, taskInfo, taskStatusOnch
               />
             </div>
           </div>
-          <div className={style.reporter}>
-            <div>Reporter</div>
-            <div>
-              <span className={style.icon} />
-              <div className={style.roleName}>Evan Lin</div>
-            </div>
-          </div>
+          <ReporterFields reporterOnchangeEventHandler={reporterOnchangeEventHandler} />
         </div>
       </div>
       <div className={style.createAndUpdateDate}>
