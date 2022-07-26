@@ -15,8 +15,6 @@
     z-index: 999;
   }
 
-  
-
 
   .thumbnailImageContainer{
     position: relative;
@@ -104,4 +102,10 @@
 @keyframes color {
   0%   { opacity:  0; }
   100% { opacity: 1 }
+}
+
+.close{
+  position: absolute;
+  right: 5px;
+  top:5px;
 }

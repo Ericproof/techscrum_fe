@@ -61,7 +61,7 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
       boardId,
       projectId,
       tag: [],
-      assign: assigneeId.id,
+      assignId: assigneeId.id,
       attachmentUrls: photoData
     };
 
@@ -77,6 +77,13 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
       .catch(() => {
         setError(true);
       });
+  };
+
+  const removeAttachment = (url: string) => {
+    const updatePhotoData = photoData.filter((photoUrl: string) => {
+      return photoUrl !== url;
+    });
+    setPhotoData(updatePhotoData);
   };
 
   return (
@@ -106,7 +113,7 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
           />
           <p className={styles.cardLabel}>Attachment</p>
           <Attach onChangeAttachment={uploadFile} />
-          <PhotoGallery photoData={photoData} />
+          <PhotoGallery photoData={photoData} removeAttachment={removeAttachment} />
           <p className={styles.cardLabel}>Description</p>
           <textarea
             className={styles.cardTextarea}

@@ -25,7 +25,7 @@ export interface ICardData {
   title?: string;
   description?: string;
   poster?: string;
-  assign?: string;
+  assignId?: string;
   dueAt?: Date;
   statusId?: string;
   label?: string;

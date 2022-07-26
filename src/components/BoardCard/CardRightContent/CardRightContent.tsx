@@ -7,6 +7,8 @@ import style from './CardRightContent.module.scss';
 import ReporterFields from './ReporterFields/ReporterFields';
 import AssigneeFields from './AssigneeFields/AssigneeFields';
 import LabelFields from './LabelFields/LabelFields';
+import UserSelect from '../../Form/Select/UserSelect/UserSelect';
+import Row from '../../Grid/Row/Row';
 
 interface Props {
   taskInfo: TaskEntity;
@@ -30,9 +32,9 @@ export default function CardRightContent({
     taskStatusOnchange(updatedTaskInfo);
   };
 
-  const assigneeOnchangeEventHandler = (e: IOnChangeTaskReporter) => {
+  const assigneeOnchangeEventHandler = (e: any) => {
     const updatedTaskInfo = { ...taskInfo };
-    updatedTaskInfo.assignId = e.target.id;
+    updatedTaskInfo.assignId = e.target.value.id;
     taskStatusOnchange(updatedTaskInfo);
   };
 
@@ -145,7 +147,10 @@ export default function CardRightContent({
           </button>
         </div>
         <div className={style.boxBody}>
-          <AssigneeFields assigneeOnchangeEventHandler={assigneeOnchangeEventHandler} />
+          <Row classesName={style.fieldMargin}>
+            <div className={['fullWidth', style.label].join(' ')}>Assignee</div>
+            <UserSelect onChange={assigneeOnchangeEventHandler} value={taskInfo.assignId} />
+          </Row>
           <LabelFields labels={labels} taskInfo={taskInfo} />
           <div className={style.dueDate}>
             <div>Due date</div>
