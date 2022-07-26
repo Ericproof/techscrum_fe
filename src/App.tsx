@@ -24,6 +24,7 @@ import About from './pages/About/About';
 import './App.css';
 import { UserProvider } from './context/UserInfoProvider';
 import { ProjectProvider } from './context/ProjectProvider';
+import VerifyPage from './pages/VerifyPage/VerifyPage';
 import ProjectMembersPage from './pages/ProjectMembersPage/ProjectMembersPage';
 import RolePage from './pages/RolePage/RolePage';
 import UnauthorizePage from './pages/UnauthorizePage/UnauthorizePage';
@@ -34,7 +35,7 @@ function App() {
       <ProjectProvider>
         <Routes>
           <Route path="/register" element={<Register />} />
-          <Route path="/register/:token" element={<Register />} />
+          <Route path="/verify" element={<VerifyPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
           <Route path="/reset-password" element={<ResetPassword />} />
