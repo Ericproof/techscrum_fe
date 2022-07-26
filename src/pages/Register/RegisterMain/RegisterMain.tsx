@@ -186,8 +186,7 @@ export default function RegisterMain() {
       </form>
 
       <p className={styles.registerMainFooter}>
-        This page is protected by reCAPTCHA and complies with Google&apos;s
-        <Link to="/privacy-policy"> Privacy Policy</Link> and{' '}
+        <Link to="/privacy-policy"> Privacy Policy</Link> &nbsp;and &nbsp;
         <Link to="/terms-of-service">Terms of Service</Link>
       </p>
     </div>
