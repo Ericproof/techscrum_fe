@@ -37,3 +37,15 @@ export default function checkAccess(accessLevel: any, projectId: string) {
   const result = role.permission.filter((item: any) => item.slug === accessLevel);
   return result.length === 1;
 }
+
+export const projectRolesToObject = (projectsRoles: any) => {
+  const obj: any = {};
+  const keys = projectsRoles.map((item: any) => {
+    return item.projectId;
+  });
+
+  for (let i = 0; i < keys.length; i += 1) {
+    obj[keys[i]] = projectsRoles[i];
+  }
+  return obj;
+};

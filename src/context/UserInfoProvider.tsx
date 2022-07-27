@@ -2,6 +2,7 @@ import React, { createContext, Dispatch, SetStateAction, useEffect, useState } f
 import { useNavigate } from 'react-router-dom';
 import { IUserInfo } from '../types';
 import { getUserInfo } from '../api/userProfile/userProfile';
+import { projectRolesToObject } from '../utils/helpers';
 
 const UserContext = createContext<IUserInfo>({});
 const UserDispatchContext = createContext<Dispatch<SetStateAction<IUserInfo>>>(() => {});
@@ -9,18 +10,6 @@ const UserDispatchContext = createContext<Dispatch<SetStateAction<IUserInfo>>>((
 interface ILoginInfoProvider {
   children?: React.ReactNode;
 }
-
-const projectRolesToObject = (projectsRoles: any) => {
-  const obj: any = {};
-  const keys = projectsRoles.map((item: any) => {
-    return item.projectId;
-  });
-
-  for (let i = 0; i < keys.length; i += 1) {
-    obj[keys[i]] = projectsRoles[i];
-  }
-  return obj;
-};
 
 function UserProvider({ children }: ILoginInfoProvider) {
   const [userInfo, setUserInfo] = useState<IUserInfo>({});
