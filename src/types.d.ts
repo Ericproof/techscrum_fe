@@ -12,7 +12,9 @@ export interface IProjectData {
 }
 
 export interface IShortcutData {
-  [x: string]: any;
+  id?: string;
+  name?: string;
+  shortcutLink?: string;
 }
 
 export interface ITaskData {
