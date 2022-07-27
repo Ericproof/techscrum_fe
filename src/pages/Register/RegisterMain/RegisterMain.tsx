@@ -189,10 +189,14 @@ export default function RegisterMain() {
               </>
             )}
             <p>
-              By registering, I accept the{' '}
-              <Link to="/terms-of-service">TechScrum Terms of Service</Link> and confirm acceptance
-              of the
-              <Link to="/privacy-policy"> Privacy Policy.</Link>
+              By registering, I accept the
+              <Link to="/terms-of-service" target="_blank">
+                TechScrum Terms of Service
+              </Link>
+              and confirm acceptance of the
+              <Link to="/privacy-policy" target="_blank">
+                Privacy Policy.
+              </Link>
             </p>
             <button type="submit">Register</button>
             <div className={styles.formFooter}>
@@ -204,8 +208,13 @@ export default function RegisterMain() {
 
       <p className={styles.registerMainFooter}>
         This page is protected by reCAPTCHA and complies with Google&apos;s
-        <Link to="/privacy-policy"> Privacy Policy</Link> and{' '}
-        <Link to="/terms-of-service">Terms of Service</Link>
+        <Link to="/privacy-policy" target="_blank">
+          Privacy Policy
+        </Link>
+        and
+        <Link to="/terms-of-service" target="_blank">
+          Terms of Service
+        </Link>
       </p>
     </div>
   );
