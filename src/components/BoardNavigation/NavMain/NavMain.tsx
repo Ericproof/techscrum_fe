@@ -244,7 +244,7 @@ export default function NavMain(props: IPropsNavMain) {
                     <path d="M12.707 12.707l8-8a1 1 0 10-1.414-1.414l-8 8a1 1 0 001.414 1.414z" />
                   </g>
                 </svg>
-                <span>{shortcutData.name}</span>
+                <span className={styles.shortcutContent}>{shortcutData.name}</span>
                 {checkAccess('add:shortcut', projectId) && (
                   <button
                     type="button"
