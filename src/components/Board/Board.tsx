@@ -273,6 +273,7 @@ export default function Board() {
           columnsInfo={columnsInfo}
           deleteTask={deleteTask}
           labels={labels}
+          projectId={projectId}
         />
       )}
     </div>

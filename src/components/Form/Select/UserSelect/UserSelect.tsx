@@ -8,10 +8,11 @@ import styles from './UserSelect.module.scss';
 interface IUserSelect {
   onChange: (e: IOnChangeProjectLead) => void;
   value: any;
+  allowEdit: boolean;
 }
 
 export default function UserSelect(props: IUserSelect) {
-  const { onChange, value } = props;
+  const { onChange, value, allowEdit = true } = props;
   const [userList, setUserList] = useState<any>([]);
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const handleClickOutside = () => setVisible(true);
@@ -33,7 +34,7 @@ export default function UserSelect(props: IUserSelect) {
   return (
     <div ref={myRef} className={styles.leadDropdownMenu}>
       <div className={styles.leadDropdownContainer}>
-        {visible ? (
+        {visible && allowEdit ? (
           <div className={styles.leadDropdownOpen}>
             <div className={styles.leadInputField}>
               <img

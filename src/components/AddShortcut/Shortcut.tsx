@@ -49,27 +49,26 @@ export default function Shortcut({
   }, [webValue]);
 
   useEffect(() => {
-    setWebValue(selectedLink?.shortcutLink);
-    setNameValue(selectedLink?.name);
+    setWebValue(selectedLink?.shortcutLink ?? '');
+    setNameValue(selectedLink?.name ?? '');
   }, [selectedLink]);
 
   useEffect(() => {}, [webValue, nameValue]);
 
   const onClickAddShortcut = () => {
-    createShortcut(currentProjectId, { shortcutName: nameValue, webAddress: webValue }).then(
-      (res) => {
-        shortCutAdded(res.data);
-      }
-    );
+    createShortcut(currentProjectId, { name: nameValue, shortcutLink: webValue }).then((res) => {
+      shortCutAdded(res.data);
+    });
   };
 
   const onClickUpdateShortcut = () => {
-    updateShortcut(currentProjectId, selectedLink?.id, {
-      shortcutName: nameValue,
-      webAddress: webValue
-    }).then(() => {
-      shortCutUpdated();
-    });
+    if (selectedLink?.id !== undefined)
+      updateShortcut(currentProjectId, selectedLink?.id, {
+        name: nameValue,
+        shortcutLink: webValue
+      }).then(() => {
+        shortCutUpdated();
+      });
   };
 
   return (
@@ -111,7 +110,7 @@ export default function Shortcut({
                   addLinkToggle={addLinkToggle}
                   shortCutRemoved={shortCutRemoved}
                   currentProjectId={currentProjectId}
-                  shortcutId={selectedLink?.id}
+                  shortcutId={selectedLink?.id ?? ''}
                   onClickUpdateShortcut={onClickUpdateShortcut}
                 />
               )
