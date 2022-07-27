@@ -121,7 +121,7 @@ export default function LoginMain() {
       <p className={styles.registerMainFooter}>
         <Link to="/privacy-policy" target="_blank">
           Privacy Policy
-        </Link>{' '}
+        </Link>
         &nbsp;and &nbsp;
         <Link to="/terms-of-service" target="_blank">
           Terms of Service

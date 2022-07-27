@@ -189,13 +189,12 @@ export default function RegisterMain() {
               </>
             )}
             <p>
-              By registering, I accept the{' '}
+              By registering, I accept the
               <Link to="/terms-of-service" target="_blank">
                 TechScrum Terms of Service
-              </Link>{' '}
+              </Link>
               and confirm acceptance of the
               <Link to="/privacy-policy" target="_blank">
-                {' '}
                 Privacy Policy.
               </Link>
             </p>
@@ -212,7 +211,7 @@ export default function RegisterMain() {
         <Link to="/privacy-policy" target="_blank">
           Privacy Policy
         </Link>
-        and{' '}
+        and
         <Link to="/terms-of-service" target="_blank">
           Terms of Service
         </Link>
