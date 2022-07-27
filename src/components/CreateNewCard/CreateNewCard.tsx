@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import styles from './CreateNewCard.module.scss';
@@ -9,6 +9,7 @@ import UserSelect from '../Form/Select/UserSelect/UserSelect';
 import { upload } from '../../api/upload/upload';
 import Attach from '../BoardCard/CardLeftContent/components/Attach/Attach';
 import PhotoGallery from '../PhotoGallery/PhotoGallery';
+import { UserContext } from '../../context/UserInfoProvider';
 
 interface Props {
   fetchNewCard: (newCard: ICardData) => void;
@@ -22,6 +23,11 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
   const [hasError, setError] = useState(false);
   const [photoData, setPhotoData] = useState<any>([]);
   const { boardId = '', projectId = '' } = useParams();
+  const userInfo = useContext(UserContext);
+
+  useEffect(() => {
+    setAssigneeId(userInfo);
+  }, [userInfo]);
 
   const data = useState<ICardData>({
     dueAt: new Date()
