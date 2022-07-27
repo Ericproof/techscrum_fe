@@ -20,17 +20,12 @@ interface Props {
 function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
   const [description, setDescription] = useState('');
   const [title, setTitle] = useState('');
-  const [assigneeId, setAssigneeId] = useState<any>();
+  const [assigneeId, setAssigneeId] = useState<any>(null);
   const [hasError, setError] = useState(false);
   const [photoData, setPhotoData] = useState<any>([]);
   const [taskTypeId, setTaskTypeId] = useState<string>();
   const { boardId = '', projectId = '' } = useParams();
-  const userInfo = useContext(UserContext);
   const taskType = useContext(TaskTypesContext);
-
-  useEffect(() => {
-    setAssigneeId(userInfo);
-  }, [userInfo]);
 
   useEffect(() => {
     if (!taskType) {
@@ -82,7 +77,7 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
       projectId,
       tag: [],
       typeId: taskTypeId,
-      assignId: assigneeId.id,
+      assignId: assigneeId?.id,
       attachmentUrls: photoData
     };
 

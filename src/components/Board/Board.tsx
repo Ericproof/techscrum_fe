@@ -132,8 +132,6 @@ export default function Board() {
 
   const getCreateNewCardStateFromChildren = () => {
     setIsCreateNewCard(!isCreateNewCard);
-
-    // setTaskList([...taskList, ...newTask])
   };
 
   const getViewTaskStateFromChildren = () => {

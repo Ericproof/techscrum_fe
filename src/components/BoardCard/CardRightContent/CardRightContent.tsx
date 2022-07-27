@@ -36,7 +36,7 @@ export default function CardRightContent({
 
   const assigneeOnchangeEventHandler = (e: any) => {
     const updatedTaskInfo = { ...taskInfo };
-    updatedTaskInfo.assignId = e.target.value.id;
+    updatedTaskInfo.assignId = !e.target.value ? null : e.target.value.id;
     taskStatusOnchange(updatedTaskInfo);
   };
 

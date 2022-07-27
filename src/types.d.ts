@@ -90,14 +90,14 @@ export default interface IBoardEntity {
 
 export interface IOnChangeTaskStatus {
   target: {
-    status: string;
+    status: string | null;
   };
 }
 
 export interface IOnChangeProjectLead {
   target: {
     name: string;
-    value: string;
+    value: string | null;
   };
 }
 
