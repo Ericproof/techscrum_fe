@@ -10,6 +10,18 @@ interface ILoginInfoProvider {
   children?: React.ReactNode;
 }
 
+const projectRolesToObject = (projectsRoles: any) => {
+  const obj: any = {};
+  const keys = projectsRoles.map((item: any) => {
+    return item.projectId;
+  });
+
+  for (let i = 0; i < keys.length; i += 1) {
+    obj[keys[i]] = projectsRoles[i];
+  }
+  return obj;
+};
+
 function UserProvider({ children }: ILoginInfoProvider) {
   const [userInfo, setUserInfo] = useState<IUserInfo>({});
   const navigator = useNavigate();
@@ -20,9 +32,15 @@ function UserProvider({ children }: ILoginInfoProvider) {
         const result = await getUserInfo(token, refreshToken);
         const { user } = result.data;
         const t = token || user.token;
-        setUserInfo({ ...user, token: t });
+        const projectRoles = JSON.stringify(projectRolesToObject(user.projectsRoles));
+        setUserInfo({ ...user, token: t, projectRoles });
         localStorage.setItem('access_token', result.data.token ?? token);
         localStorage.setItem('refresh_token', result.data.refreshToken ?? refreshToken);
+        localStorage.setItem(
+          'user_project_roles',
+          JSON.stringify(projectRolesToObject(user.projectsRoles))
+        );
+        localStorage.setItem('is_admin', user.isAdmin);
       } catch (e) {
         localStorage.clear();
         setUserInfo({});

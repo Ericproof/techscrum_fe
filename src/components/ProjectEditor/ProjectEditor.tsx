@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AxiosResponse } from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Assignee from './Assignee/Assignee';
@@ -8,6 +8,7 @@ import ChangeName from './ChangeName/ChangeName';
 import styles from './ProjectEditor.module.scss';
 import ProjectLead from './ProjectLead/ProjectLead';
 import { IOnChangeProjectLead, IProjectEditor } from '../../types';
+import { UserContext } from '../../context/UserInfoProvider';
 
 interface ProjectEditorProps {
   onCompletedSubmit?: (res: AxiosResponse) => void;
@@ -26,6 +27,14 @@ function ProjectEditor(props: ProjectEditorProps) {
     iconUrl: ''
   });
   const navigate = useNavigate();
+  const userInfo = useContext(UserContext);
+
+  useEffect(() => {
+    if (!userInfo) {
+      return;
+    }
+    setData({ ...data, projectLeadId: userInfo });
+  }, [userInfo.id]);
 
   const {
     onCompletedSubmit = null,
