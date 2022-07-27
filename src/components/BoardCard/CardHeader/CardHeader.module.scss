@@ -9,7 +9,7 @@ $base-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxy
   .headerLeft {
     display: flex;
     align-items: center;
-
+    position: relative;
     .storyIcon {
       border-width: 0px;
       border-radius: 3px;
@@ -129,5 +129,43 @@ $base-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxy
         background-color: rgb(9 30 66 / 10%);
       }
     }
+  }
+}
+
+.taskTypeList{
+  position: absolute;
+  top:40px;
+  left:0;
+  box-shadow: var(--ds-shadow-overlay,0 4px 8px -2px rgba(9,30,66,0.25),0 0 1px rgba(9,30,66,0.31));
+  display: flex;
+  flex-wrap: wrap;
+ 
+  z-index: 9999;
+  border-radius: 3px;
+  background: white;
+  min-width: 150px;
+  box-sizing: border-box;
+  button{
+    width: 100%;
+    text-align: left;
+    font-size: 11px;
+    padding: 10px 20px;
+    &:hover{
+      background: #F4F5F7!important;
+    }
+    img{
+      vertical-align: middle;
+      margin-right: 10px;
+      width: 15px!important;
+    }
+  }
+  .header{
+    padding: 0px 20px;
+    margin: 14px 0 6px 0;
+    color: #5E6C84;
+    font-size: 9px;
+    font-weight: 700;
+    line-height: 1.45455;
+    text-transform: uppercase;
   }
 }

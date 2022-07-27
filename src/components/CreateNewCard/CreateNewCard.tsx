@@ -10,6 +10,7 @@ import { upload } from '../../api/upload/upload';
 import Attach from '../BoardCard/CardLeftContent/components/Attach/Attach';
 import PhotoGallery from '../PhotoGallery/PhotoGallery';
 import { UserContext } from '../../context/UserInfoProvider';
+import { TaskTypesContext } from '../../context/TaskTypeProvider';
 
 interface Props {
   fetchNewCard: (newCard: ICardData) => void;
@@ -22,12 +23,21 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
   const [assigneeId, setAssigneeId] = useState<any>();
   const [hasError, setError] = useState(false);
   const [photoData, setPhotoData] = useState<any>([]);
+  const [taskTypeId, setTaskTypeId] = useState<string>();
   const { boardId = '', projectId = '' } = useParams();
   const userInfo = useContext(UserContext);
+  const taskType = useContext(TaskTypesContext);
 
   useEffect(() => {
     setAssigneeId(userInfo);
   }, [userInfo]);
+
+  useEffect(() => {
+    if (!taskType) {
+      return;
+    }
+    setTaskTypeId(taskType[0].id);
+  }, [taskType]);
 
   const data = useState<ICardData>({
     dueAt: new Date()
@@ -35,6 +45,10 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
 
   const onChangeAssigneeId = (e: any) => {
     setAssigneeId(e.target.value);
+  };
+
+  const onChangeTaskType = (e: any) => {
+    setTaskTypeId(e.target.value);
   };
 
   const changeDescriptionHandler = async (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -67,6 +81,7 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
       boardId,
       projectId,
       tag: [],
+      typeId: taskTypeId,
       assignId: assigneeId.id,
       attachmentUrls: photoData
     };
@@ -105,9 +120,14 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
           <p className={styles.cardStar}>Project</p>
           <input className={styles.cardInput} disabled defaultValue="TECHSCRUM(TEC)" />
           <p className={styles.cardStar}>Card type</p>
-          <select className={styles.cardSelect}>
-            <option value="story">Story</option>
-            <option value="bug">Bug</option>
+          <select className={styles.cardSelect} onChange={onChangeTaskType}>
+            {taskType.map((item: any) => {
+              return (
+                <option key={item.id} value={item.id}>
+                  {item.name}
+                </option>
+              );
+            })}
           </select>
           <p className={styles.cardStar}>Summary</p>
           <input

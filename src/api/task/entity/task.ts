@@ -19,7 +19,7 @@ export interface TaskEntity {
   statusId?: string;
   projectId?: string;
   boardId?: string;
-  typeId?: string;
+  typeId?: any;
   description?: string;
   storyPoint?: number;
   dueAt?: Date;
