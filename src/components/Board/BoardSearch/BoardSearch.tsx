@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, Dispatch } from 'react';
 import styles from './BoardSearch.module.scss';
 import search from '../../../assets/search-line.svg';
+import checkAccess from '../../../utils/helpers';
 
 interface Props {
   updateIsCreateNewCard: () => void;
@@ -114,9 +115,11 @@ export default function BoardSearch({ updateIsCreateNewCard, setInputQuery }: Pr
           </ul>
         </fieldset>
       </div>
-      <button type="button" className={styles.createButton} onClick={updateIsCreateNewCard}>
-        Create card
-      </button>
+      {checkAccess('add:tasks', '62dfdaeca322ef2389f9895d') && (
+        <button type="button" className={styles.createButton} onClick={updateIsCreateNewCard}>
+          Create card
+        </button>
+      )}
     </div>
   );
 }

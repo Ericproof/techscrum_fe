@@ -121,7 +121,7 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
             onChange={changeDescriptionHandler}
           />
           <p className={styles.cardLabel}>Assignee</p>
-          <UserSelect onChange={onChangeAssigneeId} value={assigneeId} />
+          <UserSelect onChange={onChangeAssigneeId} value={assigneeId} allowEdit />
           <p className={styles.cardLabel} style={{ display: 'none' }}>
             Priority
           </p>

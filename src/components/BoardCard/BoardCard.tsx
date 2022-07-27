@@ -14,6 +14,7 @@ interface Props {
   updateIsViewTask: () => void;
   deleteTask: () => void;
   labels: ILabelData[];
+  projectId: string;
 }
 
 export default function BoardCard({
@@ -22,7 +23,8 @@ export default function BoardCard({
   onSave,
   deleteTask,
   updateIsViewTask,
-  labels
+  labels,
+  projectId
 }: Props) {
   const [taskInfo, setTaskInfo] = useState<TaskEntity | null>(null);
 
@@ -68,6 +70,7 @@ export default function BoardCard({
           updateIsViewTask={updateIsViewTask}
           deleteTask={deleteTask}
           taskInfo={taskInfo}
+          projectId={projectId}
         />
         <div className={styles.cardContent}>
           <CardLeftContent
@@ -75,12 +78,14 @@ export default function BoardCard({
             onSave={onSave}
             removeAttachment={removeAttachment}
             uploadFile={uploadFile}
+            projectId={projectId}
           />
           <CardRightContent
             taskInfo={taskInfo}
             columnsInfo={columnsInfo}
             taskStatusOnchange={onSave}
             labels={labels}
+            projectId={projectId}
           />
         </div>
       </div>

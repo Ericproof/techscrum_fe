@@ -3,15 +3,17 @@ import { RiMoreFill } from 'react-icons/ri';
 import { TaskEntity } from '../../../api/task/entity/task';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import { ILabelData } from '../../../types';
+import checkAccess from '../../../utils/helpers';
 import style from './CardHeader.module.scss';
 
 interface Props {
   updateIsViewTask: () => void;
   taskInfo: TaskEntity;
   deleteTask: () => void;
+  projectId: string;
 }
 
-export default function CardHeader({ updateIsViewTask, taskInfo, deleteTask }: Props) {
+export default function CardHeader({ updateIsViewTask, taskInfo, deleteTask, projectId }: Props) {
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const handleClickOutside = () => setVisible(!visible);
   const { tags } = taskInfo;
@@ -50,8 +52,10 @@ export default function CardHeader({ updateIsViewTask, taskInfo, deleteTask }: P
               </div>
             </div>
           ) : (
-            <div className={style.menuClose}>
-              <RiMoreFill onClick={handleClickOutside} />
+            <div className={checkAccess('delete:tasks', projectId) ? style.menuClose : ''}>
+              {checkAccess('delete:tasks', projectId) && (
+                <RiMoreFill onClick={handleClickOutside} />
+              )}
             </div>
           )}
         </div>
