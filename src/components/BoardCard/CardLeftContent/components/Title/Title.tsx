@@ -6,9 +6,17 @@ interface Props {
   taskInfo: TaskEntity;
   focusEventHandler: () => void;
   isDisabled: boolean;
+  onChangeTitle: (e: any) => void;
+  value: string | undefined;
 }
 
-export default function Title({ taskInfo, focusEventHandler, isDisabled }: Props) {
+export default function Title({
+  taskInfo,
+  focusEventHandler,
+  isDisabled,
+  onChangeTitle,
+  value
+}: Props) {
   return (
     <div className={styles.cardTitle}>
       <label htmlFor="title">
@@ -19,6 +27,8 @@ export default function Title({ taskInfo, focusEventHandler, isDisabled }: Props
           defaultValue={taskInfo.title}
           onFocus={focusEventHandler}
           disabled={isDisabled}
+          onChange={onChangeTitle}
+          value={value}
         />
       </label>
     </div>
