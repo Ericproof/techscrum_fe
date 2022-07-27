@@ -2,7 +2,7 @@ import React, { createRef, useContext } from 'react';
 import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 import { BiPlus } from 'react-icons/bi';
 import { RiArrowDropDownLine } from 'react-icons/ri';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './ProjectHeader.module.scss';
 import useOutsideAlerter from '../../hooks/OutsideAlerter';
 import PersonalProfile from './PersonalProfile/PersonalProfile';
@@ -46,11 +46,11 @@ export default function ProjectHeader() {
     <div className={styles.projectHeader}>
       <header>
         <nav ref={myRef}>
-          <a href="/#">
+          <Link to="/projects">
             <div className={styles.logo}>
               <Icon />
             </div>
-          </a>
+          </Link>
           <div className={styles.options}>
             {visible ? (
               <>
