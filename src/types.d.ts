@@ -140,7 +140,7 @@ export interface IUserInfo {
   projectsRoles?: [IProjectRole];
 }
 
-export interface IPromission {
+export interface IPermission {
   id?: string;
   slug?: string;
   description?: string;
@@ -150,7 +150,7 @@ export interface IRole {
   id?: string;
   name?: string;
   slug?: string;
-  promission?: IPromission[];
+  permission?: IPermission[];
 }
 
 export interface ICommentData {

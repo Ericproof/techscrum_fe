@@ -4,21 +4,15 @@ import { IRole } from '../../../types';
 
 interface Props {
   roles: IRole[];
-  inviteMember: (
-    email: string,
-    defaultPassword: string,
-    roleId: string,
-    onSubmit: boolean
-  ) => Promise<void>;
+  inviteMember: (email: string, roleId: string, onSubmit: boolean) => Promise<void>;
 }
 
 export default function InviteMemberFloatForm({ roles, inviteMember }: Props) {
   const [email, setEmail] = useState('');
-  const [defaultPassword, setDefaultPassword] = useState('');
   const [roleId, setRoleId] = useState(roles[2].id);
 
   const eventHandler = (eventType: boolean) => {
-    inviteMember(email, defaultPassword, roleId ?? '', eventType);
+    inviteMember(email, roleId ?? '', eventType);
   };
 
   return (
@@ -31,10 +25,6 @@ export default function InviteMemberFloatForm({ roles, inviteMember }: Props) {
             placeholder="e.g. www.example@gmail.com"
             onChange={(e) => setEmail(e.target.value)}
           />
-        </div>
-        <div className={styles.content}>
-          <p>Default Password</p>
-          <input onChange={(e) => setDefaultPassword(e.target.value)} />
         </div>
         <div className={styles.content}>
           <p>Role</p>

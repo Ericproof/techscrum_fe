@@ -69,15 +69,10 @@ export default function ProjectMembersPage() {
     }
   };
 
-  const InviteMember = async (
-    email: string,
-    defaultPassword: string,
-    roleId: string,
-    onSubmit: boolean
-  ) => {
+  const InviteMember = async (email: string, roleId: string, onSubmit: boolean) => {
     setInviteFormVisible(false);
     if (onSubmit) {
-      const res = await inviteMember(email, defaultPassword, roleId, projectId);
+      const res = await inviteMember(email, roleId, projectId);
       if (res.data) {
         await fetchMembers();
       }

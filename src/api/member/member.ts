@@ -7,14 +7,9 @@ export const getMembers = async (projectId: string) => {
   return res;
 };
 
-export const inviteMember = async (
-  email: string,
-  defaultPassword: string,
-  roleId: string,
-  projectId: string
-) => {
+export const inviteMember = async (email: string, roleId: string, projectId: string) => {
   const path = `${config.apiAddress}/projects/${projectId}/members/invite`;
-  const res = await axios.post(path, { roleId, email, defaultPassword });
+  const res = await axios.post(path, { roleId, email });
   return res;
 };
 
