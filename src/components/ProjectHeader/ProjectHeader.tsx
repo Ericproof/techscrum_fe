@@ -2,11 +2,11 @@ import React, { createRef, useContext } from 'react';
 import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 import { BiPlus } from 'react-icons/bi';
 import { RiArrowDropDownLine } from 'react-icons/ri';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './ProjectHeader.module.scss';
 import useOutsideAlerter from '../../hooks/OutsideAlerter';
 import PersonalProfile from './PersonalProfile/PersonalProfile';
-import { IProject, IProjectData } from '../../types';
+import { IProjectData } from '../../types';
 import { ProjectContext } from '../../context/ProjectProvider';
 import { UserContext } from '../../context/UserInfoProvider';
 import Icon from '../Header/IconTab/IconTab';
@@ -25,17 +25,18 @@ export default function ProjectHeader() {
     }
   };
   const refStar = projectList.map(() => createRef<HTMLDivElement>());
-  const setProjectStar = (id: number) => {
+  const setProjectStar = (id: string) => {
     const index = projectList.findIndex((project) => project.id === id);
     // updateProject(index);
   };
-  const getStarPosition = (e: React.MouseEvent<HTMLDivElement>, id: number) => {
+  const getStarPosition = (e: React.MouseEvent<HTMLDivElement>, id: string) => {
     const mouseStarPosition = e.currentTarget.getBoundingClientRect();
     const starPosition = {
       x: mouseStarPosition.left + window.scrollX,
       y: mouseStarPosition.top + window.scrollY
     };
-    const { current } = refStar[id];
+    const index = projectList.findIndex((project) => project.id === id);
+    const { current } = refStar[index];
     if (current !== null) {
       current.style.top = `${starPosition.y - 24}px`;
       current.style.left = `${starPosition.x - 292}px`;
@@ -46,11 +47,11 @@ export default function ProjectHeader() {
     <div className={styles.projectHeader}>
       <header>
         <nav ref={myRef}>
-          <a href="/#">
+          <Link to="/projects">
             <div className={styles.logo}>
               <Icon />
             </div>
-          </a>
+          </Link>
           <div className={styles.options}>
             {visible ? (
               <>
@@ -68,7 +69,7 @@ export default function ProjectHeader() {
                   <div className={styles.dropdownContainer}>
                     <div className={styles.top}>
                       <div className={styles.recent}>RECENT</div>
-                      {projectList.slice(0, 2).map((project) => (
+                      {projectList.slice(0, 2).map((project, index) => (
                         <a
                           href="/projects/"
                           onClick={(e) => handleClickEvent(e, project)}
@@ -79,7 +80,7 @@ export default function ProjectHeader() {
                               <span className={styles.icon}>
                                 <img
                                   src={
-                                    project.icon ||
+                                    project.iconUrl ||
                                     'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10418?size=small'
                                   }
                                   alt="icon"
@@ -108,10 +109,7 @@ export default function ProjectHeader() {
                                   <div className={styles.starContent}>
                                     <span className={styles.isStar}>
                                       <AiFillStar />
-                                      <div
-                                        className={styles.notification}
-                                        ref={refStar[project.id]}
-                                      >
+                                      <div className={styles.notification} ref={refStar[index]}>
                                         Remove from Starred
                                       </div>
                                     </span>
@@ -126,10 +124,7 @@ export default function ProjectHeader() {
                                   <div className={styles.starContent}>
                                     <span className={styles.unStar}>
                                       <AiOutlineStar />
-                                      <div
-                                        className={styles.notification}
-                                        ref={refStar[project.id]}
-                                      >
+                                      <div className={styles.notification} ref={refStar[index]}>
                                         Add to Starred
                                       </div>
                                     </span>
