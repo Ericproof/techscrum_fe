@@ -129,6 +129,19 @@ export interface IUserInfo {
   location?: string;
 }
 
+export interface IPermissions {
+  id?: string;
+  slug?: string;
+  description?: string;
+}
+
+export interface IRole {
+  id?: string;
+  name?: string;
+  slug?: string;
+  permission?: IPermissions[];
+}
+
 export interface ICommentData {
   [x: string]: any;
 }
