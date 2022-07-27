@@ -40,7 +40,7 @@ export default function CardHeader({
   const { tags } = taskInfo;
 
   useEffect(() => {
-    setSelectedType(TYPE[taskInfo.typeId.slug]);
+    setSelectedType(TYPE[taskInfo?.typeId?.slug]);
   }, [taskInfo.id]);
 
   const onClickIssueType = (task: any) => {
@@ -69,7 +69,7 @@ export default function CardHeader({
             {taskType.map((item: any) => {
               let src =
                 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium';
-              if (item.slug) {
+              if (item?.slug) {
                 const { slug } = item;
                 src = TYPE[slug];
               }

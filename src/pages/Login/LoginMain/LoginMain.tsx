@@ -119,8 +119,13 @@ export default function LoginMain() {
         </div>
       </form>
       <p className={styles.registerMainFooter}>
-        <Link to="/privacy-policy">Privacy Policy</Link> &nbsp;and &nbsp;
-        <Link to="/terms-of-service">Terms of Service</Link>
+        <Link to="/privacy-policy" target="_blank">
+          Privacy Policy
+        </Link>
+        &nbsp;and &nbsp;
+        <Link to="/terms-of-service" target="_blank">
+          Terms of Service
+        </Link>
       </p>
     </div>
   );

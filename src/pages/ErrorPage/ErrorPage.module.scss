@@ -1,0 +1,108 @@
+.errorMain {
+  width: 100%;
+  position: relative;
+  background: #f5f7fa;
+  font-family: 'FaktSoft', Arial, Helvetica, 'sans-serif';
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+
+  .errorContainer {
+    padding-top: 147px;
+    padding-bottom: 0px;
+    margin-bottom: 87px;
+
+    @media screen and (min-width: 240px) {
+      max-width: 360px;
+    }
+    @media screen and (min-width: 360px) {
+        max-width: 480px;
+      }
+    @media screen and (min-width: 480px) {
+        max-width: 680px;
+      }
+    @media screen and(min-width: 680x) {
+      max-width: 880px;
+    }
+    @media screen and(min-width: 1000x) {
+        max-width: 1200px;
+      }
+    @media screen and (min-width: 1200px) {
+      max-width: 1374px;
+    }
+    @media screen and (min-width: 1400px) {
+        max-width: 1600px;
+      }
+    @media screen and (min-width: 1600px) {
+        max-width: 1800px;
+      }
+    @media screen and (min-width: 1800px) {
+      max-width: 2500px;
+    }
+  }
+
+  .errorTitle {
+    position: absolute;
+    font-size: 120px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-align: center;
+  }
+  .picture1 {
+    height: auto;
+    border: none;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    text-align: right;
+  }
+  .picture2 {
+    position: absolute;
+    top: 20%;
+    left: 60%;
+    margin-bottom: 20%;
+    animation: fly 12s linear infinite;
+    transform: translate(-50%, -50%);
+    @keyframes fly {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
+  .picture3 {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    margin-top: 30%;
+    display: block;
+    animation: rotate 12s linear infinite;
+    transform: translate(-50%, -50%);
+    @keyframes rotate {
+      0% {
+        left: 0px;
+        top: 0px;
+        transform: rotate(0deg);
+      }
+      25% {
+        left: 200px;
+        top: 0px;
+      }
+      50% {
+        left: 900px;
+        top: 2px;
+      }
+      75% {
+        left: 0px;
+        top: 50px;
+      }
+      100% {
+        left: 0px;
+        top: 0px;
+        transform: rotate(360deg);
+      }
+    }
+  }
+}

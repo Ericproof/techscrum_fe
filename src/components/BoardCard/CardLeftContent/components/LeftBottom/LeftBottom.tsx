@@ -15,12 +15,13 @@ interface ILeftBottom {
   taskId?: string;
   userEmail?: string;
   projectId: string;
+  userInfo: any;
 }
 
 export default function LeftBottom(props: ILeftBottom) {
   const [visible, setVisible] = useState(false);
   const [content, setContent] = useState('');
-  const { userId = '', taskId = '', userEmail = '', projectId } = props;
+  const { userId = '', taskId = '', userEmail = '', projectId, userInfo } = props;
   const [comments, setComments] = useState([]);
   const [saveState, setSaveState] = useState(false);
   const [deleteState, setDeleteState] = useState(false);
@@ -93,7 +94,7 @@ export default function LeftBottom(props: ILeftBottom) {
       {checkAccess('edit:tasks', projectId) && (
         <div>
           <div className={style.commentInputField} onFocus={onFocusEventHandler}>
-            <span role="img" className={style.avatar} />
+            <img className={style.avatar} src={userInfo.avatarIcon} alt={userInfo.avatarIcon} />
             <input
               value={content}
               onChange={onChangeContent}

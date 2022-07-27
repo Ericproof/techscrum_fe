@@ -10,6 +10,7 @@ interface ICommentItem {
     id: string;
     updatedAt: string;
     name: string;
+    avatarIcon: string;
   };
   updatedAt: Date;
   onClickDelete: (id: string) => void;
@@ -66,7 +67,7 @@ export default function CommentItem(props: ICommentItem) {
 
   return (
     <div className={style.container}>
-      <span role="img" className={style.avatar} />
+      <img className={style.avatar} src={senderId.avatarIcon} alt={senderId.avatarIcon} />
       <div className={style.commentLayout}>
         <div className={style.commentTitle}>
           <span>{senderId?.name}</span>

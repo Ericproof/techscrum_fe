@@ -49,12 +49,11 @@
     margin-top: 8px;
     margin-left: 3px;
     .avatar {
-      background-image: url('https://secure.gravatar.com/avatar/6bae91566240c3f5cdccb4cdc5afb2c5?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FEL-3.png');
       border-radius: 50%;
       background-position: center center;
       background-size: cover;
       height: 32px;
-      min-width: 32px;
+      max-width: 32px;
     }
     input {
       background-color: white;

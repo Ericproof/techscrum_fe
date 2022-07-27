@@ -5,7 +5,10 @@ export default function checkAccess(accessLevel: any, projectId: string) {
   const data = localStorage.getItem('user_project_roles');
   const rolesData = localStorage.getItem('roles');
   const isAdmin = localStorage.getItem('is_admin');
-  if (isAdmin) {
+  if (!isAdmin) {
+    return false;
+  }
+  if (isAdmin.toString() === '1' || isAdmin.toString() === 'true') {
     return true;
   }
   if (!data || !rolesData) {
