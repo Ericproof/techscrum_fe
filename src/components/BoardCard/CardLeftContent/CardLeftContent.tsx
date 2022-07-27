@@ -91,6 +91,7 @@ export default function CardLeftContent({
           userId={userInfo.id}
           userEmail={userInfo?.email}
           projectId={projectId}
+          userInfo={userInfo}
         />
       </form>
     </div>
