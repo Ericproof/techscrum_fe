@@ -6,7 +6,7 @@ import BtnList from './BtnList/BtnList';
 
 export default function CooperateTabs() {
   return (
-    <div className={styles.teamworkLabel}>
+    <div className={styles.TechScrumLabel}>
       <Background />
       <Description />
       <BtnList />
