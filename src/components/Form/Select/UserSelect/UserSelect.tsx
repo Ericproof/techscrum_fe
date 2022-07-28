@@ -26,7 +26,10 @@ export default function UserSelect(props: IUserSelect) {
         setUserList(res.data);
       }
       if (Array.isArray(userList)) {
-        const filteredUsers = userList.filter((user) => user.name?.includes(query));
+        const filteredUsers = userList.filter((user) => {
+          const name = user.userName && user.userName !== '' ? user.userName : user.name;
+          return name?.toLowerCase().includes(query.toLowerCase());
+        });
         return setQueryUserList(filteredUsers);
       }
       return setQueryUserList(userList);
