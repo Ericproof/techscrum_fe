@@ -189,11 +189,11 @@ export default function RegisterMain() {
               </>
             )}
             <p>
-              By registering, I accept the
+              By registering, I accept the&nbsp;
               <Link to="/terms-of-service" target="_blank">
-                TechScrum Terms of Service
+                TechScrum Terms of Service&nbsp;
               </Link>
-              and confirm acceptance of the
+              and confirm acceptance of the&nbsp;
               <Link to="/privacy-policy" target="_blank">
                 Privacy Policy.
               </Link>
