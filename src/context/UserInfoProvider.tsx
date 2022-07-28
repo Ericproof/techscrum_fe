@@ -30,6 +30,7 @@ function UserProvider({ children }: ILoginInfoProvider) {
           JSON.stringify(projectRolesToObject(user.projectsRoles))
         );
         localStorage.setItem('is_admin', user.isAdmin);
+        localStorage.setItem('user_id', user.id);
       } catch (e) {
         localStorage.clear();
         setUserInfo({});

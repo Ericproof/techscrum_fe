@@ -49,6 +49,7 @@ export default function LoginMain() {
           JSON.stringify(projectRolesToObject(user.projectsRoles))
         );
         localStorage.setItem('is_admin', user.isAdmin);
+        localStorage.setItem('user_id', user.id);
         navigate(`/projects`);
       } else {
         setLoading(false);

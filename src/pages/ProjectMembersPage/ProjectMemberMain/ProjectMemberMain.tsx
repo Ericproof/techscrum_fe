@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './ProjectMemberMain.module.scss';
 import { IUserInfo, IRole } from '../../../types';
+import { getOwner } from '../../../utils/helpers';
 
 interface Props {
   members: IUserInfo[];
@@ -17,6 +18,7 @@ export default function ProjectMemberMain({
   onClickRemove
 }: Props) {
   const { projectId = '' } = useParams();
+  const owner = getOwner(projectId);
   return (
     <div className={styles.projectMemberMainContainer}>
       <table aria-label="Projects details">
@@ -37,6 +39,25 @@ export default function ProjectMemberMain({
           </tr>
         </thead>
         <tbody>
+          {owner && (
+            <tr>
+              <th className={styles.name}>
+                <img src={owner.avatarIcon} alt="avatar" />
+                <span>{owner.name}</span>
+              </th>
+              <th className={styles.email}>
+                <span>{owner.email ?? '-'}</span>
+              </th>
+              <th className={styles.role}>
+                <span>
+                  <select value="Owner" disabled>
+                    <option value={owner.id}>Owner</option>
+                    );
+                  </select>
+                </span>
+              </th>
+            </tr>
+          )}
           {members.map((member) => {
             return (
               <tr key={member.id}>

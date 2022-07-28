@@ -138,16 +138,16 @@ export default function ProjectHeader() {
                     </div>
                     <div className={styles.bottom}>
                       <span className={styles.viewSection}>
-                        <a href="/projects">
+                        <Link to="/projects">
                           <span className={styles.link}>
                             <span>View all projects</span>
                           </span>
-                        </a>
-                        <a href="/create-projects">
+                        </Link>
+                        <Link to="/create-projects">
                           <span className={styles.link}>
                             <span>Create project</span>
                           </span>
-                        </a>
+                        </Link>
                       </span>
                     </div>
                   </div>
