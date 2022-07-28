@@ -18,7 +18,7 @@ export default function ReporterFields({ reporterInfo }: ITaskRelator) {
             }
             alt="avatar"
           />
-          <span>{reporterInfo.name ?? 'Unknow User'}</span>
+          <span>{reporterInfo.name ?? ''}</span>
         </button>
       </div>
     </div>
