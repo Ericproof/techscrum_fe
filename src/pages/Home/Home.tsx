@@ -102,18 +102,25 @@ export default function Home() {
                   </div>
                 </div>
               </div>
+              <img
+                src="https://themexriver.com/appilo-theme/seo-agency/wp-content/uploads/sites/56/2021/11/ab-shape.png"
+                alt="https://themexriver.com/appilo-theme/seo-agency/wp-content/uploads/sites/56/2021/11/ab-shape.png"
+                className={styles.bgImg}
+              />
             </div>
             <div className={styles.collaborationRows}>
               <picture>
                 <img src={realTimeCollaboration} alt="realTimeCollaboration" />
               </picture>
               <div className={styles.collaborationContent}>
-                <h3>Start with a Techscrum board</h3>
+                <h3>
+                  Start with a <b className={styles.colorMainTheme}>Techscrum board</b>
+                </h3>
                 <div className={styles.jobDoneParagraph}>
                   <p>
                     Techscrum board is the easiest way to go from idea to action. View lists and
                     cards in a Kanban board. Customize and expand with more features as your
-                    teamwork grows. Manage projects, organize tasks, and build team spirit—all in
+                    TechScrum grows. Manage projects, organize tasks, and build team spirit—all in
                     one place.
                   </p>
                 </div>
@@ -163,7 +170,7 @@ export default function Home() {
               <div className={styles.switchingCta}>
                 <a
                   className={styles.ctaButton}
-                  href="https://www.teamwork.com/signup/"
+                  href="https://www.TechScrum.com/signup/"
                   target="_self"
                 >
                   Start Your Free Trial
@@ -178,75 +185,57 @@ export default function Home() {
         </section>
         <section className={styles.cardsSection}>
           <div className={styles.cardsContainer}>
-            <h3>
-              Skip the learning curve and start immediately with our pre-built{' '}
-              <span>templates</span>
-            </h3>
+            <h3>Why Choose TechScrum</h3>
             <div className={styles.cardsParagraph}>
               <p>
-                No matter the job, <span>TechScrum</span> has a template to get it done. Whether you
-                or your client is in marketing, operations, creative, engineering, or IT -
-                we&apos;ve got you covered.
+                No matter the job, <b className={styles.colorMainTheme}>TechScrum</b> has all the
+                tracking data you need
               </p>
             </div>
             <div className={styles.cardsCards}>
               <a
-                href="https://www.teamwork.com/templates/project-management/"
+                href="https://www.TechScrum.com/templates/client-onboarding-checklist/"
                 target="_self"
                 className={styles.eachCards}
               >
-                <picture>
-                  <img src={projectManagement} alt="project management" />
-                </picture>
                 <div className={styles.cardsWrap}>
-                  <span className={styles.cardsTag}>Project Management</span>
-                  <h4 className={styles.cardsName}>Project management</h4>
+                  <h4 className={styles.cardsName}>Tracking</h4>
                   <div className={styles.cardsCta}>
                     <div className={styles.cardsHeart}>
-                      <BsSuitHeartFill />
-                      <span>Popular</span>
+                      Techscrum has all the tracking for you so when you are doing review you can
+                      find out what happen in what time
                     </div>
-                    <button type="button">View template</button>
                   </div>
                 </div>
               </a>
               <a
-                href="https://www.teamwork.com/templates/website-project-plan/"
+                href="https://www.TechScrum.com/templates/client-onboarding-checklist/"
                 target="_self"
                 className={styles.eachCards}
               >
-                <picture>
-                  <img src={projectPlan} alt="project plan" />
-                </picture>
                 <div className={styles.cardsWrap}>
-                  <span className={styles.cardsTag}>IT</span>
-                  <h4 className={styles.cardsName}>Website project plan</h4>
+                  <h4 className={styles.cardsName}>Best practices </h4>
                   <div className={styles.cardsCta}>
                     <div className={styles.cardsHeart}>
-                      <BsSuitHeartFill />
-                      <span>Popular</span>
+                      We have system that designed to ensure that you can make sure it follows best
+                      practices for your PM methodology of choice.
                     </div>
-                    <button type="button">View template</button>
                   </div>
                 </div>
               </a>
               <a
-                href="https://www.teamwork.com/templates/client-onboarding-checklist/"
+                href="https://www.TechScrum.com/templates/client-onboarding-checklist/"
                 target="_self"
                 className={styles.eachCards}
               >
-                <picture>
-                  <img src={clientOnboarding} alt="client onboarding" />
-                </picture>
                 <div className={styles.cardsWrap}>
-                  <span className={styles.cardsTag}>Operations</span>
-                  <h4 className={styles.cardsName}>New Client Onboarding</h4>
+                  <h4 className={styles.cardsName}>Save time</h4>
                   <div className={styles.cardsCta}>
                     <div className={styles.cardsHeart}>
-                      <BsSuitHeartFill />
-                      <span>Popular</span>
+                      Reduce the time spent on manual admin without sacrificing on detail or
+                      efficiency. With our project plan, you can quickly create tried-and-trusted
+                      project management plans in seconds.
                     </div>
-                    <button type="button">View template</button>
                   </div>
                 </div>
               </a>
@@ -254,17 +243,10 @@ export default function Home() {
             <div className={styles.cardsButtons}>
               <a
                 className={styles.ctaButton}
-                href="https://www.teamwork.com/signup/"
+                href="https://www.TechScrum.com/signup/"
                 target="_self"
               >
                 Start Your Free Trial
-              </a>
-              <a
-                className={styles.viewTemplateButton}
-                href="https://www.teamwork.com/templates/"
-                target="_self"
-              >
-                View template library
               </a>
             </div>
           </div>
@@ -302,7 +284,7 @@ export default function Home() {
               <div className={styles.clientsCta}>
                 <a
                   className={styles.ctaButton}
-                  href="https://www.teamwork.com/signup/"
+                  href="https://www.TechScrum.com/signup/"
                   target="_self"
                 >
                   Start Your Free Trial
@@ -324,18 +306,7 @@ export default function Home() {
               </p>
               <div className={styles.supportButtons}>
                 <a
-                  href="https://www.teamwork.com/tel:+18448198453"
-                  target="_blank"
-                  className={styles.supportCall}
-                  rel="noreferrer"
-                >
-                  <picture>
-                    <img src={call} alt="phone" />
-                  </picture>
-                  <span>Call</span>
-                </a>
-                <a
-                  href="https://www.teamwork.com/contact/"
+                  href="https://www.TechScrum.com/contact/"
                   target="_blank"
                   className={styles.supportContact}
                   rel="noreferrer"
