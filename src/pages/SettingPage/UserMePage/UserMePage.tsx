@@ -50,7 +50,7 @@ export default function UserMePage() {
       );
 
       setStatusCode(0);
-      setTip('Already Saved');
+      setTip('Saved');
       setAlertVisible(true);
     } catch (e) {
       setStatusCode(1);

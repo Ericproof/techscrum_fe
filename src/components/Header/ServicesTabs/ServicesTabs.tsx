@@ -145,6 +145,11 @@ export default function ServicesTabs({ show }: Props) {
           About
         </a>
       </div>
+      <div>
+        <a href="/contact" onClick={() => activeMenu('contact')}>
+          Book a demo
+        </a>
+      </div>
     </div>
   );
 }

@@ -30,6 +30,7 @@ import RolePage from './pages/RolePage/RolePage';
 import UnauthorizePage from './pages/UnauthorizePage/UnauthorizePage';
 import { RolesProvider } from './context/UserPermissionProvider';
 import { TaskTypesProvider } from './context/TaskTypeProvider';
+import ContactPage from './pages/ContactPage/ContactPage';
 
 function App() {
   return (
@@ -62,6 +63,7 @@ function App() {
                 <Route path="/account-settings" element={<AccountSettings />} />
                 <Route path="/projects/:projectId/members" element={<ProjectMembersPage />} />
                 <Route path="/roles" element={<RolePage />} />
+                <Route path="/contact" element={<ContactPage />} />
               </Route>
               <Route path="/unauthorize" element={<UnauthorizePage />} />
               <Route path="*" element={<ErrorPage />} />
