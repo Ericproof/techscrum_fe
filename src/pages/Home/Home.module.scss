@@ -5,11 +5,7 @@
   overflow: hidden;
   font-family: FaktSoft, Arial, Helvetica, sans-serif;
   .jobDoneSection {
-    padding-bottom: 120px;
-    margin-top: 100px;
     .jobDoneContainer {
-      padding-right: 15px;
-      padding-left: 15px;
       margin-right: auto;
       margin-left: auto;
       .jobDoneHeader {
@@ -52,7 +48,6 @@
         justify-content: space-between;
         flex-direction: row-reverse;
         align-items: center;
-        margin-bottom: 100px;
         box-sizing: border-box;
         position: relative;
         .businessContent {
@@ -199,7 +194,6 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 100px;
         box-sizing: border-box;
         picture {
           max-width: 50%;
@@ -338,6 +332,7 @@
         justify-content: space-between;
         align-items: center;
         margin-bottom: 0;
+        background-color:#9021afd9;
         .projectManagementContent {
           min-width: 440px;
           max-width: 500px;
@@ -479,13 +474,11 @@
   }
   .switchingSection {
     background-color: #f5f7fa;
-    padding: 120px 0;
     .switchingContainer {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-right: 15px;
-      padding-left: 15px;
+
       margin-right: auto;
       margin-left: auto;
       .switchingContent {
@@ -554,8 +547,7 @@
     }
   }
   .cardsSection {
-    padding: 120px 0;
-    background-color: #fff;
+    position: relative;
     .cardsContainer {
       display: flex;
       flex-direction: column;
@@ -568,7 +560,7 @@
       h3 {
         max-width: 760px;
         margin-bottom: 25px;
-        font-size: 50px;
+        font-size: 36px;
         font-weight: 700;
         line-height: 112%;
         font-family: FaktSoft, Arial, Helvetica, sans-serif;
@@ -907,7 +899,7 @@
     }
   }
   .supportSection {
-    padding: 120px 0;
+
     .supportContainer {
       display: flex;
       justify-content: space-between;
@@ -917,11 +909,11 @@
       margin-right: auto;
       margin-left: auto;
       .supportContent {
-        font-size: 50px;
+        font-size: 36px;
         font-weight: 700;
         line-height: 112%;
         h3 {
-          font-size: 50px;
+          font-size: 36px;
           font-weight: 700;
           line-height: 112%;
           letter-spacing: 1px;
@@ -1093,7 +1085,7 @@
   .homePage {
     .jobDoneSection {
       .jobDoneContainer {
-        max-width: 1224px;
+
       }
     }
     .cardsSection {
@@ -1112,7 +1104,7 @@
   .homePage {
     .jobDoneSection {
       .jobDoneContainer {
-        max-width: 1164px;
+    
       }
     }
     .switchingSection {
@@ -1145,13 +1137,7 @@
     .switchingSection {
       padding: 100px 0;
     }
-    .cardsSection {
-      padding: 100px 0;
-    }
     .clientsSection {
-      padding: 100px 0;
-    }
-    .supportSection {
       padding: 100px 0;
     }
   }
@@ -1459,13 +1445,7 @@
     .switchingSection {
       padding: 80px 0;
     }
-    .cardsSection {
-      padding: 80px 0;
-    }
     .clientsSection {
-      padding: 80px 0;
-    }
-    .supportSection {
       padding: 80px 0;
     }
   }
@@ -1501,7 +1481,6 @@
         }
         .jobDoneRows {
           flex-direction: column;
-          margin-bottom: 40px;
           .businessContent {
             min-width: auto;
             width: 100%;
@@ -1514,7 +1493,6 @@
         }
         .collaborationRows {
           flex-direction: column;
-          margin-bottom: 40px;
           picture {
             max-width: 300px;
           }
@@ -1872,13 +1850,17 @@
 
 .textContainer{
     position: absolute;
-    top:200px;
-    left:50px;
+    top:50%;
+    left:20%;
     right: 0;
     bottom: 0;
     width: 500px;
     height: 500px;
     text-align: center;
+    @media (max-width: 1280px) {
+      top:40%;
+      left:10%
+    }
     // background-image: url('https://themexriver.com/appilo-theme/seo-agency/wp-content/uploads/sites/56/2021/11/box-shape.png');
     // background-repeat: no-repeat;
     // position: relative;
@@ -2001,8 +1983,47 @@
 .bgImg{
   position: absolute;
   bottom:-500px;
-  right:-60%;
+  right:0;
   z-index: -1;
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
 } 
+
+.bgImg2{
+  position: absolute;
+  bottom:-300px;
+  left:0;
+  z-index: -1;
+} 
+
+.bgImg3{
+  position: absolute;
+  bottom:-550px;
+  right:0;
+  z-index: -1;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+} 
+
+.container{
+  max-width: 1280px;
+  @media (max-width: 1280px) {
+    max-width: 1000px;
+  }
+}
+
+.row{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0;
+  margin:auto;
+}
+
+.projectManagement{
+  padding: 100px 0;
+}
+
+.colorWhite{
+  color: white !important;;
+}

@@ -25,6 +25,7 @@ export default function RegisterMain() {
   const [emailCheckProcess, setEmailCheckProcess] = useState(false);
   const [invalidateStatus, setInvalidateStatus] = useState(false);
   const [appName, setAppName] = useState('');
+  const [tips, setTips] = useState('');
   let emailRecorder = '';
   let nameRecorder = '';
   let passwordRecorder = '';
@@ -47,11 +48,6 @@ export default function RegisterMain() {
     fetchEmailByToken();
   }, [emailToken, navigate]);
 
-  const tip = (error: string) => {
-    const tipLabel = document.getElementById('tip') as HTMLInputElement;
-    tipLabel.textContent = error;
-  };
-
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
     if (!emailCheckProcess) {
@@ -59,17 +55,17 @@ export default function RegisterMain() {
         setLoading(true);
         await emailCheck(emailRecorder, { appName });
         setLoading(false);
-        tip('');
+        setTips('');
         setEmailRegisterProcess(true);
       } catch (e) {
         setLoading(false);
         const err = e as AxiosError;
         const status = err.response?.status ?? 0;
         if (status === 302) {
-          tip('The email already exists. Please try again');
+          setTips('The email already exists. Please try again');
           return;
         }
-        tip('Something go wrong, please try again');
+        setTips('Something go wrong, please try again');
       }
       return;
     }
@@ -94,10 +90,10 @@ export default function RegisterMain() {
         setLocalStorage(user);
         navigate(`/projects`);
       } else {
-        tip('Register Failed, please try again');
+        setTips('Register Failed, please try again');
       }
     } catch (e) {
-      tip('Something go wrong, please contact staff');
+      setTips('Something go wrong, please contact staff');
     }
   };
 
@@ -116,12 +112,13 @@ export default function RegisterMain() {
   const setPassword = (password: string) => {
     if (!illegalCharacter.test(password) || password === '') {
       passwordRecorder = password;
-      tip('');
-    } else tip('Illegal Character Detected');
+      setTips('');
+    } else setTips('Illegal Character Detected');
   };
   if (loading) {
     return <Loading />;
   }
+
   return (
     <div className={styles.registerMain}>
       <img src={Icon} alt="TechScrum Icon" />
@@ -144,7 +141,7 @@ export default function RegisterMain() {
           <>
             <h1>Register to continue</h1>
             <h1>Your team&apos;s site</h1>
-            <p id="tip" />
+            <p>{tips}</p>
             {!emailCheckProcess && (
               <input
                 className={styles.domain}
