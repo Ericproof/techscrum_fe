@@ -29,7 +29,7 @@ export function fetchTask(taskId: string) {
 export function updateTask(taskId: string, data: ITaskData) {
   const copyData = JSON.parse(JSON.stringify(data));
   if (typeof data.assignId !== 'string') {
-    copyData.assignId = data.assignId.id;
+    copyData.assignId = !data.assignId ? null : data.assignId.id;
   }
   if (typeof data.typeId !== 'string') {
     copyData.typeId = data.typeId.id;

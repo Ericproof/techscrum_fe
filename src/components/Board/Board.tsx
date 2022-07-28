@@ -132,8 +132,6 @@ export default function Board() {
 
   const getCreateNewCardStateFromChildren = () => {
     setIsCreateNewCard(!isCreateNewCard);
-
-    // setTaskList([...taskList, ...newTask])
   };
 
   const getViewTaskStateFromChildren = () => {
@@ -230,7 +228,7 @@ export default function Board() {
         const tasks: ITaskCard[] = [];
         status.items.forEach((item) => {
           const result = taskList[index].find((task) => {
-            return task.id === item.taskId;
+            return task.id === item.taskId && task.title?.includes(inputQuery);
           });
           if (result !== undefined) tasks.push(result);
         });

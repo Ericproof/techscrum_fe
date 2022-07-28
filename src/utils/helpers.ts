@@ -1,14 +1,19 @@
 let roleData: any = {};
 let userProjectRoles: any = {};
-
+let projectData: any = {};
 export default function checkAccess(accessLevel: any, projectId: string) {
   const data = localStorage.getItem('user_project_roles');
   const rolesData = localStorage.getItem('roles');
   const isAdmin = localStorage.getItem('is_admin');
-  if (isAdmin) {
+  const projects = localStorage.getItem('projects');
+  const userId = localStorage.getItem('user_id');
+  if (!isAdmin) {
+    return false;
+  }
+  if (isAdmin.toString() === '1' || isAdmin.toString() === 'true') {
     return true;
   }
-  if (!data || !rolesData) {
+  if (!data || !rolesData || !projects) {
     return false;
   }
 
@@ -18,7 +23,14 @@ export default function checkAccess(accessLevel: any, projectId: string) {
   if (Object.keys(roleData).length === 0) {
     roleData = JSON.parse(rolesData);
   }
+  if (Object.keys(projectData).length === 0) {
+    projectData = JSON.parse(projects);
+  }
+  // console.log(projectData, userId, projectData[projectId].ownerId, projectId);
 
+  if (projectData[projectId]?.ownerId?.id === userId) {
+    return true;
+  }
   const hasProjectAccess = Object.prototype.hasOwnProperty.call(userProjectRoles, projectId);
   if (!hasProjectAccess) {
     return false;
@@ -34,3 +46,38 @@ export default function checkAccess(accessLevel: any, projectId: string) {
   const result = role.permission.filter((item: any) => item.slug === accessLevel);
   return result.length === 1;
 }
+
+export const projectRolesToObject = (projectsRoles: any) => {
+  const obj: any = {};
+  const keys = projectsRoles.map((item: any) => {
+    return item.projectId;
+  });
+
+  for (let i = 0; i < keys.length; i += 1) {
+    obj[keys[i]] = projectsRoles[i];
+  }
+  return obj;
+};
+
+export const projectToObject = (projects: any) => {
+  const obj: any = {};
+  const keys = projects.map((item: any) => {
+    return item.id;
+  });
+
+  for (let i = 0; i < keys.length; i += 1) {
+    obj[keys[i]] = projects[i];
+  }
+  return obj;
+};
+
+export const getOwner = (projectId: string) => {
+  const projects = localStorage.getItem('projects');
+  if (!projects) {
+    return {};
+  }
+  if (Object.keys(projectData).length === 0) {
+    projectData = JSON.parse(projects);
+  }
+  return projectData[projectId]?.ownerId;
+};

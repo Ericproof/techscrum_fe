@@ -170,6 +170,13 @@ $base-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxy
     position: relative;
     margin-right: 10px;
 
+    .shortcutContent{
+      width: 150px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
     svg,
     img {
       display: flex;

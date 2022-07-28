@@ -66,7 +66,7 @@ function ProjectEditor(props: ProjectEditorProps) {
   const onSave = (e: React.SyntheticEvent) => {
     e.preventDefault();
     const apiData = { ...data };
-    apiData.projectLeadId = data.projectLeadId.id;
+    apiData.projectLeadId = data.projectLeadId?.id;
     onClickSave(apiData);
   };
 

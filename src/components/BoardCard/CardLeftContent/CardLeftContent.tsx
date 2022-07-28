@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { TaskEntity } from '../../../api/task/entity/task';
 import { UserContext } from '../../../context/UserInfoProvider';
 import checkAccess from '../../../utils/helpers';
@@ -26,18 +26,32 @@ export default function CardLeftContent({
 }: Props) {
   const [visible, setVisible] = useState(false);
   const userInfo = useContext(UserContext);
+  const [desc, setDesc] = useState<string | undefined>('');
+  const [title, setTitle] = useState<string | undefined>('');
+
+  useEffect(() => {
+    setTitle(taskInfo.title);
+    setDesc(taskInfo.description);
+  }, [taskInfo]);
 
   const onFocusEventHandler = () => setVisible(true);
   const onSaveProcessing = (e: React.FormEvent) => {
     e.preventDefault();
-    const form = e.target as HTMLFormElement;
-    const title = (form[0] as HTMLInputElement).value;
-    const description = (form[2] as HTMLTextAreaElement).value;
-    const updatedTaskInfo = { ...taskInfo, title, description };
+    const updatedTaskInfo = { ...taskInfo, title, description: desc };
     onSave(updatedTaskInfo);
     setVisible(false);
   };
   const onResetHandler = () => setVisible(false);
+
+  const onChangeDesc = (e: any) => {
+    setDesc(e.target.value);
+  };
+
+  const onChangeTitle = (e: any) => {
+    setTitle(e.target.value);
+    const updatedTaskInfo = { ...taskInfo, title: e.target.value, description: desc };
+    onSave(updatedTaskInfo);
+  };
 
   return (
     <div className={style.container}>
@@ -46,6 +60,8 @@ export default function CardLeftContent({
           taskInfo={taskInfo}
           focusEventHandler={onFocusEventHandler}
           isDisabled={!checkAccess('edit:tasks', projectId)}
+          onChangeTitle={onChangeTitle}
+          value={title}
         />
         {checkAccess('edit:tasks', projectId) && <Attach onChangeAttachment={uploadFile} />}
         <PhotoGallery
@@ -57,6 +73,8 @@ export default function CardLeftContent({
           taskInfo={taskInfo}
           focusEventHandler={onFocusEventHandler}
           isDisabled={!checkAccess('edit:tasks', projectId)}
+          onChangeDesc={onChangeDesc}
+          value={desc}
         />
         {visible && (
           <div className={style.footerContent}>
@@ -73,6 +91,7 @@ export default function CardLeftContent({
           userId={userInfo.id}
           userEmail={userInfo?.email}
           projectId={projectId}
+          userInfo={userInfo}
         />
       </form>
     </div>
