@@ -18,6 +18,7 @@ import {
   AiTwotoneExperiment
 } from 'react-icons/ai';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 import styles from './ServicesTabs.module.scss';
 import OneColumnsMenu from './OneColumnMenu/OneColumnMenu';
 
@@ -127,28 +128,28 @@ export default function ServicesTabs({ show }: Props) {
   return (
     <div className={`${styles.serviceListTabs} ${show ? styles.serviceListTabsActive : ''}`}>
       <div>
-        <a href="/#" onClick={() => activeMenu('features')}>
+        <Link to="/#" onClick={() => activeMenu('features')}>
           Features
           <MdOutlineKeyboardArrowDown />
-        </a>
+        </Link>
         <OneColumnsMenu servicesInfo={features} active={featuresActive} />
       </div>
       <div>
-        <a href="/#" onClick={() => activeMenu('solution')}>
+        <Link to="/#" onClick={() => activeMenu('solution')}>
           Solutions
           <MdOutlineKeyboardArrowDown />
-        </a>
+        </Link>
         <OneColumnsMenu servicesInfo={solutions} active={solutionActive} />
       </div>
       <div>
-        <a href="/about" onClick={() => activeMenu('about')}>
+        <Link to="/about" onClick={() => activeMenu('about')}>
           About
-        </a>
+        </Link>
       </div>
       <div>
-        <a href="/contact" onClick={() => activeMenu('contact')}>
+        <Link to="/contact" onClick={() => activeMenu('contact')}>
           Book a demo
-        </a>
+        </Link>
       </div>
     </div>
   );
