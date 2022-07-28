@@ -32,7 +32,7 @@ export function updateTask(taskId: string, data: ITaskData) {
     copyData.assignId = !data.assignId ? null : data.assignId.id;
   }
   if (typeof data.typeId !== 'string') {
-    copyData.typeId = data.typeId.id;
+    copyData.typeId = data?.typeId?.id;
   }
   return axios.put(`${config.apiAddress}/tasks/${taskId}`, copyData);
 }
