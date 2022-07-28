@@ -4,15 +4,16 @@ import { TiDelete } from 'react-icons/ti';
 import { updateRole, removePermission } from '../../api/role/role';
 import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
 import config from '../../config/config';
+import { IPermissions, IRole } from '../../types';
 import styles from './RolePage.module.scss';
 
 export default function ProjectMembersPage() {
-  const [roles, setRoles] = useState<any>([]);
-  const [permissions, setPermissions] = useState<any>([]);
-  const [selectedPermissions, setSelectedPermissions] = useState<any>([]);
+  const [roles, setRoles] = useState<IRole[]>([]);
+  const [permissions, setPermissions] = useState<IPermissions[]>([]);
+  const [selectedPermissions, setSelectedPermissions] = useState<IPermissions[]>([]);
   const [showPermissionOptions, setShowPermissionOptions] = useState(-1);
   const refRole = roles.map(() => createRef<HTMLDivElement>());
-  const refShowMore = permissions.map(() => createRef<HTMLDivElement>());
+  const refShowMore = roles.map(() => createRef<HTMLDivElement>());
 
   useEffect(() => {
     const getRoles = async () => {
@@ -35,19 +36,18 @@ export default function ProjectMembersPage() {
     updateRole(roleId, permissionId);
   };
 
-  const onChangeSelectedPermissions = (e: any) => {
-    setSelectedPermissions(e.target.value);
+  const onChangeSelectedPermissions = (item: IPermissions) => {
+    setSelectedPermissions(selectedPermissions.concat(item));
   };
 
   const removePermissionFromList = async (roleId: string, permissionId: string) => {
-    // if (!roleId || !permissionId) {
-    //   return;
-    // }
     try {
       await removePermission(roleId, permissionId);
     } finally {
       if (selectedPermissions !== undefined && Array.isArray(selectedPermissions)) {
-        setSelectedPermissions(selectedPermissions.filter((item: any) => item.id !== permissionId));
+        setSelectedPermissions(
+          selectedPermissions.filter((item: IPermissions) => item.id !== permissionId)
+        );
       }
     }
   };
@@ -103,7 +103,7 @@ export default function ProjectMembersPage() {
                       <th className={styles.roles}>
                         <span>Roles</span>
                       </th>
-                      {roles.map((role: any) => (
+                      {roles.map((role: IRole) => (
                         <th key={role.id} className={styles.types}>
                           <span>{role.name}</span>
                         </th>
@@ -135,13 +135,16 @@ export default function ProjectMembersPage() {
                             {showPermissionOptions === role.id && (
                               <div ref={refShowMore[index]} className={styles.permissionList}>
                                 <ul>
-                                  {permissions.map((item: any) => (
+                                  {permissions.map((item: IPermissions) => (
                                     <li key={item.id}>
                                       <button
                                         type="button"
-                                        onClick={(e: any) => {
+                                        onClick={() => {
+                                          if (!item.id) {
+                                            return;
+                                          }
                                           onClickAddPermission(role.id, item.id);
-                                          onChangeSelectedPermissions(e);
+                                          onChangeSelectedPermissions(item);
                                           setShowPermissionOptions(-1);
                                         }}
                                       >
@@ -153,11 +156,14 @@ export default function ProjectMembersPage() {
                               </div>
                             )}
                             <div className={styles.selectedPermissions}>
-                              {role.permission.map((item: any) => (
+                              {role.permission.map((item: IPermissions) => (
                                 <div key={item.id} className={styles.editSelectedSection}>
                                   <span>{item.slug}</span>
                                   <TiDelete
                                     onClick={() => {
+                                      if (!item.id) {
+                                        return;
+                                      }
                                       removePermissionFromList(role.id, item.id);
                                     }}
                                   />
