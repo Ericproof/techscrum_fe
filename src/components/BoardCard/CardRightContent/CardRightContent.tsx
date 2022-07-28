@@ -166,7 +166,7 @@ export default function CardRightContent({
               />
             </div>
           </div>
-          <ReporterFields reporterOnchangeEventHandler={reporterOnchangeEventHandler} />
+          <ReporterFields reporterInfo={taskInfo.reporterId ?? {}} />
         </div>
       </div>
       <div className={style.createAndUpdateDate}>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import config from '../../config/config';
+import config, { alphaApi } from '../../config/config';
 import { ITaskData } from '../../types';
 
 export function getTasks() {
@@ -19,7 +19,7 @@ export function deleteTask(id: string) {
 }
 
 export function createNewTask(data: ITaskData) {
-  return axios.post(`${config.apiAddress}/tasks`, data);
+  return alphaApi.post(`${config.apiAddress}/tasks`, data);
 }
 
 export function fetchTask(taskId: string) {
@@ -32,7 +32,7 @@ export function updateTask(taskId: string, data: ITaskData) {
     copyData.assignId = !data.assignId ? null : data.assignId.id;
   }
   if (typeof data.typeId !== 'string') {
-    copyData.typeId = data.typeId.id;
+    copyData.typeId = data?.typeId?.id;
   }
   return axios.put(`${config.apiAddress}/tasks/${taskId}`, copyData);
 }

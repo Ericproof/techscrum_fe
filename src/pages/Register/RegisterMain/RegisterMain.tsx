@@ -10,6 +10,7 @@ import Icon from '../../../assets/logo.svg';
 import Email from '../../../assets/email.png';
 import Error from '../../../assets/error.png';
 import Loading from '../../../components/Loading/Loading';
+import { setLocalStorage } from '../../../utils/helpers';
 
 export default function RegisterMain() {
   const navigate = useNavigate();
@@ -90,8 +91,7 @@ export default function RegisterMain() {
           refreshToken
         };
         setUserInfo(userLoginInfo);
-        localStorage.setItem('access_token', token);
-        localStorage.setItem('refresh_token', refreshToken);
+        setLocalStorage(user);
         navigate(`/projects`);
       } else {
         tip('Register Failed, please try again');
@@ -189,11 +189,11 @@ export default function RegisterMain() {
               </>
             )}
             <p>
-              By registering, I accept the
+              By registering, I accept the&nbsp;
               <Link to="/terms-of-service" target="_blank">
-                TechScrum Terms of Service
+                TechScrum Terms of Service&nbsp;
               </Link>
-              and confirm acceptance of the
+              and confirm acceptance of the&nbsp;
               <Link to="/privacy-policy" target="_blank">
                 Privacy Policy.
               </Link>

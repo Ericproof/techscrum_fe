@@ -1,3 +1,6 @@
+import axios from 'axios';
+import config from '../config/config';
+
 let roleData: any = {};
 let userProjectRoles: any = {};
 let projectData: any = {};
@@ -80,4 +83,37 @@ export const getOwner = (projectId: string) => {
     projectData = JSON.parse(projects);
   }
   return projectData[projectId]?.ownerId;
+};
+
+export const convertRolesArrayToObject = (roles: any) => {
+  const obj: any = {};
+  const keys = roles.map((item: any) => {
+    return item.id;
+  });
+
+  for (let i = 0; i < keys.length; i += 1) {
+    obj[keys[i]] = roles[i];
+  }
+  return obj;
+};
+
+export const getRoles = async () => {
+  const path = `${config.apiAddress}/roles`;
+  const res = await axios.get(path);
+  const obj = convertRolesArrayToObject(res.data);
+  localStorage.setItem('roles', JSON.stringify(obj));
+  return obj;
+};
+
+export const setLocalStorage = (user: any) => {
+  localStorage.setItem(
+    'user_project_roles',
+    JSON.stringify(projectRolesToObject(user.projectsRoles))
+  );
+  localStorage.setItem('is_admin', user.isAdmin);
+  localStorage.setItem('user_id', user.id);
+  const roles = localStorage.getItem('roles');
+  if (!roles) {
+    getRoles();
+  }
 };
