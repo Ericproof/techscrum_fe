@@ -28,5 +28,9 @@ export function deleteProject(id: string) {
 }
 
 export function updateProject(id: string, data: IProjectData, token: string) {
-  return alphaApi.put(`${config.apiAddress}/projects/${id}`, data, getAuthHeader(token));
+  const copyData = JSON.parse(JSON.stringify(data));
+  if (typeof data.ownerId !== 'string') {
+    copyData.ownerId = !data.ownerId ? null : data.ownerId.id;
+  }
+  return alphaApi.put(`${config.apiAddress}/projects/${id}`, copyData, getAuthHeader(token));
 }
