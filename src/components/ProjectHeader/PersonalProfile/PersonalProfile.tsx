@@ -47,7 +47,7 @@ export default function PersonalProfile({ userInfo }: Props) {
                         className={styles.avatarIcon}
                       />
                       <div className={styles.userContext}>
-                        <p>{userInfo.name}</p>
+                        <p className={styles.userName}>{userInfo.name}</p>
                         <p>{userInfo.email}</p>
                       </div>
                     </div>
