@@ -20,7 +20,7 @@ import CreateProject from './pages/CreateProject/CreateProject';
 import AccountSettings from './pages/AccountSetting/AccountSetting';
 import ResetPassword from './pages/ResetPassword/ResetPassword';
 import BoardPage from './pages/BoardPage/BoardPage';
-import About from './pages/About/About';
+import About from './pages/AboutPage/AboutPage';
 import './App.css';
 import { UserProvider } from './context/UserInfoProvider';
 import { ProjectProvider } from './context/ProjectProvider';
