@@ -8,10 +8,11 @@ import styles from './UserSelect.module.scss';
 interface IUserSelect {
   onChange: (e: IOnChangeProjectLead) => void;
   value: any;
+  allowEdit: boolean;
 }
 
 export default function UserSelect(props: IUserSelect) {
-  const { onChange, value } = props;
+  const { onChange, value, allowEdit = true } = props;
   const [userList, setUserList] = useState<any>([]);
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const handleClickOutside = () => setVisible(true);
@@ -25,7 +26,7 @@ export default function UserSelect(props: IUserSelect) {
     getUsersList();
   }, []);
 
-  const onClickUser = (user: string) => {
+  const onClickUser = (user: string | null) => {
     onChange({ target: { name: 'projectLeadId', value: user } });
     setVisible(false);
   };
@@ -33,7 +34,7 @@ export default function UserSelect(props: IUserSelect) {
   return (
     <div ref={myRef} className={styles.leadDropdownMenu}>
       <div className={styles.leadDropdownContainer}>
-        {visible ? (
+        {visible && allowEdit ? (
           <div className={styles.leadDropdownOpen}>
             <div className={styles.leadInputField}>
               <img
@@ -51,6 +52,20 @@ export default function UserSelect(props: IUserSelect) {
             </div>
             <div className={styles.leadMenu}>
               <ul>
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      onClickUser(null);
+                    }}
+                  >
+                    <img
+                      src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png"
+                      alt="avatar"
+                    />
+                    <span>Unassigned</span>
+                  </button>
+                </li>
                 {userList.map((user: any) => (
                   <li key={user.id}>
                     <button
@@ -82,7 +97,7 @@ export default function UserSelect(props: IUserSelect) {
               }
               alt="avatar"
             />
-            <span>{value?.name}</span>
+            <span>{value?.name || 'Unassigned'}</span>
           </button>
         )}
       </div>

@@ -35,26 +35,48 @@ export default function Home() {
   return (
     <div>
       <Header />
+      <div className={styles.unauthorizePageContainer}>
+        <span className={styles.shape2Container}>
+          <img
+            src="https://themexriver.com/appilo-theme/saas-classic-dark/wp-content/uploads/sites/19/2021/07/b-shape4.png"
+            alt=""
+          />
+        </span>
+        <div className={styles.circleContainer}>
+          <img
+            src="https://themexriver.com/appilo-theme/saas-classic-dark/wp-content/uploads/sites/19/2021/07/b-shape2.png"
+            alt=""
+          />
+        </div>
+        <span className={styles.shape3Container}>
+          <img
+            src="https://themexriver.com/appilo-theme/seo-agency/wp-content/uploads/sites/56/2021/11/slider-shape-3.png"
+            alt=""
+          />
+        </span>
+        <span className={styles.shape4Container}>
+          <img
+            src="https://themexriver.com/appilo-theme/saas-classic-dark/wp-content/uploads/sites/19/2021/07/b-shape3-1.png"
+            alt=""
+          />
+        </span>
+        <div className={styles.textContainer}>
+          <h1 className={styles.header}>Efficient way of working together</h1>
+          <p className={styles.text}>Manage your project from start to finish with TechScrum</p>
+          <p className={styles.text}>No credit required.</p>
+        </div>
+      </div>
       <div className={styles.homePage}>
         <section className={styles.jobDoneSection}>
           <div className={styles.jobDoneContainer}>
-            <div className={styles.jobDoneHeader}>
-              <h3>
-                Manage your project from
-                <span className={styles.headerPink}> start</span> to
-                <span className={styles.headerIndigo}> finish </span>
-                with TechScrum
-              </h3>
-              <p className={styles.jobDoneText}>
-                Techscrum provides an efficient way of working together.
-              </p>
-            </div>
-            <div className={styles.jobDoneRows}>
+            <div className={[styles.jobDoneRows, styles.maxWidth80].join(' ')}>
               <div className={styles.businessPicture}>
                 <img src={increaseProfitability} alt="business" />
               </div>
-              <div className={styles.businessContent}>
-                <h3>Plan projects and boost efficiency</h3>
+              <div className={[styles.businessContent].join(' ')}>
+                <h3>
+                  Plan projects and boost <b className={styles.colorMainTheme}>efficiency</b>
+                </h3>
                 <div className={styles.jobDoneParagraph}>
                   <p>
                     Plan projects and break down each step to getting things done. Instantly see the

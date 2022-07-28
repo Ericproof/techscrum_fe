@@ -1,10 +1,12 @@
 export interface IProject {
-  id: number;
+  id: string;
   name: string;
-  icon: string;
-  type: string;
+  iconUrl: string;
   star: boolean;
-  lastEditTime: Date;
+  type?: string;
+  boardId?: string;
+  projectLeadId?: IUserInfo;
+  updateAt: Date;
 }
 
 export interface IProjectData {
@@ -12,7 +14,9 @@ export interface IProjectData {
 }
 
 export interface IShortcutData {
-  [x: string]: any;
+  id?: string;
+  name?: string;
+  shortcutLink?: string;
 }
 
 export interface ITaskData {
@@ -86,14 +90,14 @@ export default interface IBoardEntity {
 
 export interface IOnChangeTaskStatus {
   target: {
-    status: string;
+    status: string | null;
   };
 }
 
 export interface IOnChangeProjectLead {
   target: {
     name: string;
-    value: string;
+    value: string | null;
   };
 }
 
@@ -116,6 +120,12 @@ export interface IOnChangeTaskAssignee {
   };
 }
 
+export interface IProjectRole {
+  id?: string;
+  projectId: string;
+  roleId: string;
+}
+
 export interface IUserInfo {
   id?: string;
   email?: string;
@@ -127,6 +137,20 @@ export interface IUserInfo {
   userName?: string;
   jobTitle?: string;
   location?: string;
+  projectsRoles?: [IProjectRole];
+}
+
+export interface IPermission {
+  id?: string;
+  slug?: string;
+  description?: string;
+}
+
+export interface IRole {
+  id?: string;
+  name?: string;
+  slug?: string;
+  permission?: IPermission[];
 }
 
 export interface IPermissions {

@@ -7,6 +7,7 @@ import { UserDispatchContext } from '../../../context/UserInfoProvider';
 import styles from './LoginMain.module.scss';
 import Icon from '../../../assets/logo.svg';
 import Loading from '../../../components/Loading/Loading';
+import { projectRolesToObject } from '../../../utils/helpers';
 
 export default function LoginMain() {
   const navigate = useNavigate();
@@ -43,6 +44,12 @@ export default function LoginMain() {
         setUserInfo(userLoginInfo);
         localStorage.setItem('access_token', token);
         localStorage.setItem('refresh_token', refreshToken);
+        localStorage.setItem(
+          'user_project_roles',
+          JSON.stringify(projectRolesToObject(user.projectsRoles))
+        );
+        localStorage.setItem('is_admin', user.isAdmin);
+        localStorage.setItem('user_id', user.id);
         navigate(`/projects`);
       } else {
         setLoading(false);
@@ -119,8 +126,13 @@ export default function LoginMain() {
         </div>
       </form>
       <p className={styles.registerMainFooter}>
-        <Link to="/privacy-policy">Privacy Policy</Link> &nbsp;and &nbsp;
-        <Link to="/terms-of-service">Terms of Service</Link>
+        <Link to="/privacy-policy" target="_blank">
+          Privacy Policy
+        </Link>
+        &nbsp;and &nbsp;
+        <Link to="/terms-of-service" target="_blank">
+          Terms of Service
+        </Link>
       </p>
     </div>
   );

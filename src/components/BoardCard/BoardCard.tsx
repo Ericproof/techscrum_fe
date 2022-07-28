@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import CardHeader from './CardHeader/CardHeader';
 import CardLeftContent from './CardLeftContent/CardLeftContent';
 import CardRightContent from './CardRightContent/CardRightContent';
@@ -6,6 +6,7 @@ import { TaskEntity } from '../../api/task/entity/task';
 import { IColumnsFromBackend, ILabelData } from '../../types';
 import styles from './BoardCard.module.scss';
 import { upload } from '../../api/upload/upload';
+import { TaskTypesContext } from '../../context/TaskTypeProvider';
 
 interface Props {
   columnsInfo: IColumnsFromBackend;
@@ -14,6 +15,7 @@ interface Props {
   updateIsViewTask: () => void;
   deleteTask: () => void;
   labels: ILabelData[];
+  projectId: string;
 }
 
 export default function BoardCard({
@@ -22,7 +24,8 @@ export default function BoardCard({
   onSave,
   deleteTask,
   updateIsViewTask,
-  labels
+  labels,
+  projectId
 }: Props) {
   const [taskInfo, setTaskInfo] = useState<TaskEntity | null>(null);
 
@@ -68,6 +71,8 @@ export default function BoardCard({
           updateIsViewTask={updateIsViewTask}
           deleteTask={deleteTask}
           taskInfo={taskInfo}
+          projectId={projectId}
+          onSave={onSave}
         />
         <div className={styles.cardContent}>
           <CardLeftContent
@@ -75,12 +80,14 @@ export default function BoardCard({
             onSave={onSave}
             removeAttachment={removeAttachment}
             uploadFile={uploadFile}
+            projectId={projectId}
           />
           <CardRightContent
             taskInfo={taskInfo}
             columnsInfo={columnsInfo}
             taskStatusOnchange={onSave}
             labels={labels}
+            projectId={projectId}
           />
         </div>
       </div>

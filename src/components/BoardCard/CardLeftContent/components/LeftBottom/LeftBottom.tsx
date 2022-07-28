@@ -6,6 +6,7 @@ import {
   updateCommit
 } from '../../../../../api/commit/commits';
 import { ICommentData, ICommentItemData } from '../../../../../types';
+import checkAccess from '../../../../../utils/helpers';
 import CommentItem from './components/CommentItem/CommentItem';
 import style from './LeftBottom.module.scss';
 
@@ -13,12 +14,14 @@ interface ILeftBottom {
   userId?: string;
   taskId?: string;
   userEmail?: string;
+  projectId: string;
+  userInfo: any;
 }
 
 export default function LeftBottom(props: ILeftBottom) {
   const [visible, setVisible] = useState(false);
   const [content, setContent] = useState('');
-  const { userId = '', taskId = '', userEmail = '' } = props;
+  const { userId = '', taskId = '', userEmail = '', projectId, userInfo } = props;
   const [comments, setComments] = useState([]);
   const [saveState, setSaveState] = useState(false);
   const [deleteState, setDeleteState] = useState(false);
@@ -88,27 +91,29 @@ export default function LeftBottom(props: ILeftBottom) {
           <button type="button">Comments</button>
         </div>
       </div>
-      <div>
-        <div className={style.commentInputField} onFocus={onFocusEventHandler}>
-          <span role="img" className={style.avatar} />
-          <input
-            value={content}
-            onChange={onChangeContent}
-            type="text"
-            placeholder="Add a comment..."
-          />
-        </div>
-        {visible && (
-          <div className={style.commentButton}>
-            <button className={style.saveButton} type="button" onClick={onClickSave}>
-              <span>Save</span>
-            </button>
-            <button className={style.cancelButton} type="reset" onClick={onResetHandler}>
-              <span>Cancel</span>
-            </button>
+      {checkAccess('edit:tasks', projectId) && (
+        <div>
+          <div className={style.commentInputField} onFocus={onFocusEventHandler}>
+            <img className={style.avatar} src={userInfo.avatarIcon} alt={userInfo.avatarIcon} />
+            <input
+              value={content}
+              onChange={onChangeContent}
+              type="text"
+              placeholder="Add a comment..."
+            />
           </div>
-        )}
-      </div>
+          {visible && (
+            <div className={style.commentButton}>
+              <button className={style.saveButton} type="button" onClick={onClickSave}>
+                <span>Save</span>
+              </button>
+              <button className={style.cancelButton} type="reset" onClick={onResetHandler}>
+                <span>Cancel</span>
+              </button>
+            </div>
+          )}
+        </div>
+      )}
       {comments.map((item: ICommentItemData) => {
         if (item.taskId === taskId) {
           return (

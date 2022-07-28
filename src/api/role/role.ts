@@ -8,3 +8,9 @@ export function updateRole(id: string, permissionId: string) {
 export function removePermission(id: string, permissionId: string) {
   return axios.delete(`${config.apiAddress}/roles/${id}/permissions/${permissionId}`);
 }
+
+export const getRole = async () => {
+  const path = `${config.apiAddress}/roles`;
+  const res = await axios.get(path);
+  return res;
+};
