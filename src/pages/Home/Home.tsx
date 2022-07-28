@@ -61,7 +61,7 @@ export default function Home() {
           />
         </span>
         <div className={styles.textContainer}>
-          <h1 className={styles.header}>Efficient way of working together</h1>
+          <h1 className={styles.header}>An Efficient way of working together</h1>
           <p className={styles.text}>Manage your project from start to finish with TechScrum</p>
           <p className={styles.text}>No credit required.</p>
         </div>
