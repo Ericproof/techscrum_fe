@@ -135,20 +135,6 @@ $padding-left: 10px;
         max-width: 60%;
         font-weight: 600;
       }
-
-      button {
-        border: none;
-        background: transparent;
-
-        svg {
-          width: 24px;
-          height: 24px;
-        }
-      }
-
-      &:hover {
-        background: rgba(9, 30, 66, 0.08);
-      }
     }
 
     .boxBody {
@@ -240,11 +226,11 @@ $padding-left: 10px;
     }
   }
 }
-.fieldMargin{
+.fieldMargin {
   margin-bottom: 12px;
 }
 
-.label{
+.label {
   box-sizing: border-box;
   width: 100%;
   padding-top: 8px;
