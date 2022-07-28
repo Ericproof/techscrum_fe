@@ -13,35 +13,6 @@ const users = [
     id: '1',
     avatar: userAvatar,
     name: 'Unassigned'
-  },
-  {
-    id: '2',
-    avatar: userAvatar,
-    name: 'Automatic'
-  },
-  {
-    id: '3',
-    avatar:
-      'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/YK-3.png?ssl=1',
-    name: 'Yiu Kitman'
-  },
-  {
-    id: '4',
-    avatar:
-      'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/E-0.png?ssl=1',
-    name: 'Emil'
-  },
-  {
-    id: '5',
-    avatar:
-      'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/BW-1.png?ssl=1',
-    name: 'Belinda Wang'
-  },
-  {
-    id: '6',
-    avatar:
-      'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/EL-3.png?ssl=1',
-    name: 'Evan Lin'
   }
 ];
 
