@@ -50,7 +50,7 @@ export default function UserMePage() {
       );
 
       setStatusCode(0);
-      setTip('Success');
+      setTip('Already Saved');
       setAlertVisible(true);
     } catch (e) {
       setStatusCode(1);
@@ -125,7 +125,9 @@ export default function UserMePage() {
                   />
                 </label>
               </div>
-              <input className={styles.submit} type="button" value="Save" onClick={onSaveMe} />
+              <button className={styles.submit} type="button" onClick={onSaveMe}>
+                Save
+              </button>
             </form>
           </div>
           <div className={styles.userIcon}>
