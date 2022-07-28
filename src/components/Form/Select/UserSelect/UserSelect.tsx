@@ -67,7 +67,7 @@ export default function UserSelect(props: IUserSelect) {
                         }
                         alt="avatar"
                       />
-                      <span>{user.name}</span>
+                      <span>{user.userName ?? user.name}</span>
                     </button>
                   </li>
                 ))}
