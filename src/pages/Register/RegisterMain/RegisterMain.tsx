@@ -10,6 +10,7 @@ import Icon from '../../../assets/logo.svg';
 import Email from '../../../assets/email.png';
 import Error from '../../../assets/error.png';
 import Loading from '../../../components/Loading/Loading';
+import { setLocalStorage } from '../../../utils/helpers';
 
 export default function RegisterMain() {
   const navigate = useNavigate();
@@ -90,8 +91,7 @@ export default function RegisterMain() {
           refreshToken
         };
         setUserInfo(userLoginInfo);
-        localStorage.setItem('access_token', token);
-        localStorage.setItem('refresh_token', refreshToken);
+        setLocalStorage(user);
         navigate(`/projects`);
       } else {
         tip('Register Failed, please try again');
