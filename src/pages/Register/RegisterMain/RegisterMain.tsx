@@ -149,7 +149,7 @@ export default function RegisterMain() {
               <input
                 className={styles.domain}
                 type="app"
-                placeholder="Input App Name"
+                placeholder="Enter your company name"
                 name="app"
                 defaultValue={appName}
                 onChange={onChangeAppName}
@@ -159,7 +159,7 @@ export default function RegisterMain() {
             <input
               className={styles.email}
               type="email"
-              placeholder="Input Email Address"
+              placeholder="Enter email address"
               name="email"
               defaultValue={verifyEmail}
               onChange={(e) => setEmail(e.target.value)}
