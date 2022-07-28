@@ -33,13 +33,16 @@ import { TaskTypesProvider } from './context/TaskTypeProvider';
 import ContactPage from './pages/ContactPage/ContactPage';
 
 function App() {
+  const shouldShowRegister =
+    window.location.origin === 'https://www.techscrumapp.com' ||
+    window.location.origin === 'http://localhost:3000';
   return (
     <UserProvider>
       <RolesProvider>
         <ProjectProvider>
           <TaskTypesProvider>
             <Routes>
-              <Route path="/register" element={<Register />} />
+              {shouldShowRegister && <Route path="/register" element={<Register />} />}
               <Route path="/verify" element={<VerifyPage />} />
               <Route path="/login" element={<Login />} />
               <Route path="/" element={<Home />} />

@@ -65,6 +65,10 @@ export default function RegisterMain() {
           setTips('The email already exists. Please try again');
           return;
         }
+        if (status === 409) {
+          setTips('App name already exists. Please try again');
+          return;
+        }
         setTips('Something go wrong, please try again');
       }
       return;
@@ -118,7 +122,6 @@ export default function RegisterMain() {
   if (loading) {
     return <Loading />;
   }
-
   return (
     <div className={styles.registerMain}>
       <img src={Icon} alt="TechScrum Icon" />
@@ -141,17 +144,20 @@ export default function RegisterMain() {
           <>
             <h1>Register to continue</h1>
             <h1>Your team&apos;s site</h1>
-            <p>{tips}</p>
+            <p className="colorRed">{tips}</p>
             {!emailCheckProcess && (
-              <input
-                className={styles.domain}
-                type="app"
-                placeholder="Enter your company name"
-                name="app"
-                defaultValue={appName}
-                onChange={onChangeAppName}
-                required
-              />
+              <div className={['flex', styles.domainField].join(' ')}>
+                <input
+                  className={styles.domain}
+                  type="app"
+                  placeholder="Enter your company name"
+                  name="app"
+                  defaultValue={appName}
+                  onChange={onChangeAppName}
+                  required
+                />
+                <p>.techscrumapp.com</p>
+              </div>
             )}
             <input
               className={styles.email}
