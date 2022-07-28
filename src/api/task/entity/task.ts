@@ -4,7 +4,7 @@ export interface Task {
   title: string;
   description: string;
   cardType: string;
-  assign: { userId: string; userName: string; userIcon: string };
+  assignId: { userId: string; userName: string; userIcon: string };
   label: string;
   sprint: string;
   storyPointEstimate: string;
@@ -19,14 +19,14 @@ export interface TaskEntity {
   statusId?: string;
   projectId?: string;
   boardId?: string;
-  typeId?: string;
-  description: string;
+  typeId?: any;
+  description?: string;
   storyPoint?: number;
   dueAt?: Date;
   assignId?: string;
   reporterId?: string;
-  assign?: string;
   createdAt?: Date;
   updatedAt?: Date;
   comments?: any;
+  attachmentUrls?: any;
 }

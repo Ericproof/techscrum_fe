@@ -10,6 +10,7 @@ import Icon from '../../../assets/logo.svg';
 import Email from '../../../assets/email.png';
 import Error from '../../../assets/error.png';
 import Loading from '../../../components/Loading/Loading';
+import { setLocalStorage } from '../../../utils/helpers';
 
 export default function RegisterMain() {
   const navigate = useNavigate();
@@ -90,8 +91,7 @@ export default function RegisterMain() {
           refreshToken
         };
         setUserInfo(userLoginInfo);
-        localStorage.setItem('access_token', token);
-        localStorage.setItem('refresh_token', refreshToken);
+        setLocalStorage(user);
         navigate(`/projects`);
       } else {
         tip('Register Failed, please try again');
@@ -149,7 +149,7 @@ export default function RegisterMain() {
               <input
                 className={styles.domain}
                 type="app"
-                placeholder="Input App Name"
+                placeholder="Enter your company name"
                 name="app"
                 defaultValue={appName}
                 onChange={onChangeAppName}
@@ -159,7 +159,7 @@ export default function RegisterMain() {
             <input
               className={styles.email}
               type="email"
-              placeholder="Input Email Address"
+              placeholder="Enter email address"
               name="email"
               defaultValue={verifyEmail}
               onChange={(e) => setEmail(e.target.value)}
@@ -189,10 +189,14 @@ export default function RegisterMain() {
               </>
             )}
             <p>
-              By registering, I accept the{' '}
-              <Link to="/terms-of-service">TechScrum Terms of Service</Link> and confirm acceptance
-              of the
-              <Link to="/privacy-policy"> Privacy Policy.</Link>
+              By registering, I accept the&nbsp;
+              <Link to="/terms-of-service" target="_blank">
+                TechScrum Terms of Service&nbsp;
+              </Link>
+              and confirm acceptance of the&nbsp;
+              <Link to="/privacy-policy" target="_blank">
+                Privacy Policy.
+              </Link>
             </p>
             <button type="submit">Register</button>
             <div className={styles.formFooter}>
@@ -204,8 +208,13 @@ export default function RegisterMain() {
 
       <p className={styles.registerMainFooter}>
         This page is protected by reCAPTCHA and complies with Google&apos;s
-        <Link to="/privacy-policy"> Privacy Policy</Link> and{' '}
-        <Link to="/terms-of-service">Terms of Service</Link>
+        <Link to="/privacy-policy" target="_blank">
+          Privacy Policy
+        </Link>
+        and
+        <Link to="/terms-of-service" target="_blank">
+          Terms of Service
+        </Link>
       </p>
     </div>
   );

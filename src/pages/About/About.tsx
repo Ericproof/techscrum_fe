@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './About.module.scss';
 import memberPicture from './MemberPicture/xiaowanzi.jpeg';
 import linkedinPicture from './MemberPicture/linkedin.png';
+import kitmanImg from '../../assets/kitman.jpg';
 
 export default function About() {
   return (
@@ -15,12 +16,12 @@ export default function About() {
           <div className={styles.leader}>
             <ul className={styles.aboutList}>
               <li id={styles.listImage}>
-                <img className={styles.memberImg} src={memberPicture} alt="Kitman" />
+                <img className={styles.memberImg} src={kitmanImg} alt="Kitman" />
               </li>
               <li id={styles.listName}>Kitman</li>
               <li id={styles.listPosition}>Manger</li>
               <li>
-                <a href="https://www.linkedin.com/home">
+                <a href="https://www.linkedin.com/in/kitman-yiu">
                   <img className={styles.inputImg} src={linkedinPicture} alt="linkedin" />
                 </a>
               </li>

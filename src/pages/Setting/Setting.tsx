@@ -25,9 +25,15 @@ export default function Setting() {
     if (!token) {
       return;
     }
-    showProject(projectId, token).then((res) => {
-      setData(res.data);
-    });
+    showProject(projectId, token)
+      .then((res) => {
+        setData(res.data);
+      })
+      .catch((e) => {
+        if (e.response.status === 403) {
+          navigate('/unauthorize');
+        }
+      });
   }, [projectId, userInfo.token, userInfo]);
 
   const onClickSave = (projectData: IProjectEditor) => {

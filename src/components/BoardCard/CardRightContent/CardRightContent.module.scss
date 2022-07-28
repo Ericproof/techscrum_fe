@@ -135,20 +135,6 @@ $padding-left: 10px;
         max-width: 60%;
         font-weight: 600;
       }
-
-      button {
-        border: none;
-        background: transparent;
-
-        svg {
-          width: 24px;
-          height: 24px;
-        }
-      }
-
-      &:hover {
-        background: rgba(9, 30, 66, 0.08);
-      }
     }
 
     .boxBody {
@@ -239,4 +225,17 @@ $padding-left: 10px;
       margin-top: 12px;
     }
   }
+}
+.fieldMargin {
+  margin-bottom: 12px;
+}
+
+.label {
+  box-sizing: border-box;
+  width: 100%;
+  padding-top: 8px;
+  line-height: 1;
+  color: #38465e;
+  font-size: 14px;
+  font-weight: 500;
 }

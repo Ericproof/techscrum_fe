@@ -6,12 +6,12 @@ $small_size: 1000px;
 }
 
 .subNavOneColumn {
-  background-color: white;
+
   position: fixed;
   z-index: 2000;
   left: 0;
   right: 0;
-  top: 80px;
+  top: 70px;
   max-height: calc(95vh - 40px);
   @media (max-width: $max_size) {
     top: 0px;

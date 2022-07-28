@@ -5,34 +5,38 @@ import { IColumnsFromBackend, ILabelData, IOnChangeTaskReporter } from '../../..
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import style from './CardRightContent.module.scss';
 import ReporterFields from './ReporterFields/ReporterFields';
-import AssigneeFields from './AssigneeFields/AssigneeFields';
 import LabelFields from './LabelFields/LabelFields';
+import UserSelect from '../../Form/Select/UserSelect/UserSelect';
+import Row from '../../Grid/Row/Row';
+import checkAccess from '../../../utils/helpers';
 
 interface Props {
   taskInfo: TaskEntity;
   columnsInfo: IColumnsFromBackend;
   taskStatusOnchange: (taskInfo: TaskEntity) => void;
   labels: ILabelData[];
+  projectId: string;
 }
 
 export default function CardRightContent({
   columnsInfo,
   taskInfo,
   taskStatusOnchange,
-  labels
+  labels,
+  projectId
 }: Props) {
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const handleClickOutside = () => setVisible(true);
-
+  const editAccess = checkAccess('edit:tasks', projectId);
   const reporterOnchangeEventHandler = (e: IOnChangeTaskReporter) => {
     const updatedTaskInfo = { ...taskInfo };
     updatedTaskInfo.reporterId = e.target.id;
     taskStatusOnchange(updatedTaskInfo);
   };
 
-  const assigneeOnchangeEventHandler = (e: IOnChangeTaskReporter) => {
+  const assigneeOnchangeEventHandler = (e: any) => {
     const updatedTaskInfo = { ...taskInfo };
-    updatedTaskInfo.assignId = e.target.id;
+    updatedTaskInfo.assignId = !e.target.value ? null : e.target.value.id;
     taskStatusOnchange(updatedTaskInfo);
   };
 
@@ -82,7 +86,7 @@ export default function CardRightContent({
   return (
     <div className={style.container}>
       <div ref={myRef} className={style.statusSection}>
-        {visible ? (
+        {visible && editAccess ? (
           <>
             <button type="button" className={style.toDoButton} onClick={handleClickOutside}>
               <span>{columnsInfo[taskInfo.statusId ?? ''].name ?? ''}</span>
@@ -121,32 +125,32 @@ export default function CardRightContent({
         ) : (
           <button type="button" className={style.toDoButton} onClick={handleClickOutside}>
             <span>{columnsInfo[taskInfo.statusId ?? '']?.name ?? ''}</span>
-            <svg viewBox="0 0 24 24" role="presentation">
-              <path
-                d="M8.292 10.293a1.009 1.009 0 000 1.419l2.939 2.965c.218.215.5.322.779.322s.556-.107.769-.322l2.93-2.955a1.01 1.01 0 000-1.419.987.987 0 00-1.406 0l-2.298 2.317-2.307-2.327a.99.99 0 00-1.406 0z"
-                fill="currentColor"
-                fillRule="evenodd"
-              />
-            </svg>
+            {editAccess && (
+              <svg viewBox="0 0 24 24" role="presentation">
+                <path
+                  d="M8.292 10.293a1.009 1.009 0 000 1.419l2.939 2.965c.218.215.5.322.779.322s.556-.107.769-.322l2.93-2.955a1.01 1.01 0 000-1.419.987.987 0 00-1.406 0l-2.298 2.317-2.307-2.327a.99.99 0 00-1.406 0z"
+                  fill="currentColor"
+                  fillRule="evenodd"
+                />
+              </svg>
+            )}
           </button>
         )}
       </div>
       <div className={style.box}>
         <div className={style.detail}>
           <span>Detail</span>
-          <button type="button">
-            <svg viewBox="0 0 24 24" role="presentation">
-              <path
-                d="M11.221 9.322l-2.929 2.955a1.009 1.009 0 000 1.419.986.986 0 001.405 0l2.298-2.317 2.307 2.327a.989.989 0 001.407 0 1.01 1.01 0 000-1.419l-2.94-2.965A1.106 1.106 0 0011.991 9c-.279 0-.557.107-.77.322z"
-                fill="currentColor"
-                fillRule="evenodd"
-              />
-            </svg>
-          </button>
         </div>
         <div className={style.boxBody}>
-          <AssigneeFields assigneeOnchangeEventHandler={assigneeOnchangeEventHandler} />
-          <LabelFields labels={labels} taskInfo={taskInfo} />
+          <Row classesName={style.fieldMargin}>
+            <div className={['fullWidth', style.label].join(' ')}>Assignee</div>
+            <UserSelect
+              onChange={assigneeOnchangeEventHandler}
+              value={taskInfo.assignId}
+              allowEdit={editAccess}
+            />
+          </Row>
+          <LabelFields labels={labels} taskInfo={taskInfo} isDisabled={!editAccess} />
           <div className={style.dueDate}>
             <div>Due date</div>
             <div>
@@ -158,10 +162,11 @@ export default function CardRightContent({
                   updatedTaskInfo.dueAt = new Date(date);
                   taskStatusOnchange(updatedTaskInfo);
                 }}
+                isDisabled={!editAccess}
               />
             </div>
           </div>
-          <ReporterFields reporterOnchangeEventHandler={reporterOnchangeEventHandler} />
+          <ReporterFields reporterInfo={taskInfo.reporterId ?? {}} />
         </div>
       </div>
       <div className={style.createAndUpdateDate}>

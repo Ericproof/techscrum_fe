@@ -9,10 +9,11 @@ import { ILabelData } from '../../../../types';
 interface IPropsLabel {
   labels: ILabelData[];
   taskInfo: TaskEntity;
+  isDisabled: boolean;
 }
 
 export default function LabelFields(props: IPropsLabel) {
-  const { labels, taskInfo } = props;
+  const { labels, taskInfo, isDisabled } = props;
   const [selectedTaskLabelList, setSelectedTaskLabelList] = useState<ILabelData[] | undefined>(
     taskInfo.tags
   );
@@ -99,7 +100,7 @@ export default function LabelFields(props: IPropsLabel) {
     <div className={styles.label}>
       <div>Labels</div>
       <div ref={myRef} className={styles.labelDropdownContainer}>
-        {visible ? (
+        {visible && !isDisabled ? (
           <div className={styles.labelDropdownOpen}>
             <div className={styles.labelOptions}>
               {selectedTaskLabelList !== undefined &&
