@@ -11,8 +11,14 @@ export default function ReporterFields({ reporterInfo }: ITaskRelator) {
       <div>Reporter</div>
       <div className={styles.leadDropdownContainer}>
         <button className={styles.leadInputClose} type="button">
-          <img src={reporterInfo.avatarIcon} alt="avatar" />
-          <span>{reporterInfo.name}</span>
+          <img
+            src={
+              reporterInfo.avatarIcon ??
+              'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'
+            }
+            alt="avatar"
+          />
+          <span>{reporterInfo.name ?? 'Unknow User'}</span>
         </button>
       </div>
     </div>
