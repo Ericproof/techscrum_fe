@@ -16,15 +16,23 @@ export default function UserSelect(props: IUserSelect) {
   const [userList, setUserList] = useState<any>([]);
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const handleClickOutside = () => setVisible(true);
+  const [query, setQuery] = useState('');
+  const [queryUserList, setQueryUserList] = useState<any>([]);
 
   useEffect(() => {
-    const getUsersList = () => {
-      getUsers().then((res) => {
+    const getUsersList = async () => {
+      if (userList.length === 0) {
+        const res = await getUsers();
         setUserList(res.data);
-      });
+      }
+      if (Array.isArray(userList)) {
+        const filteredUsers = userList.filter((user) => user.name?.includes(query));
+        return setQueryUserList(filteredUsers);
+      }
+      return setQueryUserList(userList);
     };
     getUsersList();
-  }, []);
+  }, [userList, query]);
 
   const onClickUser = (user: string) => {
     onChange({ target: { name: 'projectLeadId', value: user } });
@@ -45,14 +53,14 @@ export default function UserSelect(props: IUserSelect) {
                 }
                 alt="avatar"
               />
-              <input dir="auto" type="Text" />
+              <input dir="auto" type="Text" onChange={(e) => setQuery(e.target.value)} />
               <button className={styles.optionToggle} type="button" onClick={handleClickOutside}>
                 <i role="button" aria-label="openDropdown" tabIndex={0} />
               </button>
             </div>
             <div className={styles.leadMenu}>
               <ul>
-                {userList.map((user: any) => (
+                {queryUserList.map((user: any) => (
                   <li key={user.id}>
                     <button
                       type="button"
@@ -67,7 +75,9 @@ export default function UserSelect(props: IUserSelect) {
                         }
                         alt="avatar"
                       />
-                      <span>{user.name}</span>
+                      <span>
+                        {user.userName && user.userName !== '' ? user.userName : user.name}
+                      </span>
                     </button>
                   </li>
                 ))}
