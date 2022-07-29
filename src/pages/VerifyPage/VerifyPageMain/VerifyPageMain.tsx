@@ -94,7 +94,7 @@ export default function VerifyPageMain() {
 
   return (
     <div className={styles.registerMain}>
-      <img src={Icon} alt="TechScrum Icon" />
+      <img src={Icon} alt="TechScrum Icon" className={styles.logo} />
       <form onSubmit={handleSubmit}>
         {invalidateStatus && (
           <div className={styles.emailTip}>
@@ -149,7 +149,6 @@ export default function VerifyPageMain() {
           </>
         )}
       </form>
-      )
       <p className={styles.registerMainFooter}>
         This page is protected by reCAPTCHA and complies with Google&apos;s{' '}
         <Link to="/privacy-policy"> Privacy Policy</Link> and{' '}

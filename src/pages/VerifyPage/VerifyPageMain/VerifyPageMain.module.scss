@@ -4,8 +4,9 @@ $small_size: 704px;
   align-self: center;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-
+  justify-content: center;
+  height: 100%;
+  margin:auto;
   a {
     text-decoration: none;
     color: rgb(0, 82, 204);
@@ -167,6 +168,9 @@ $small_size: 704px;
 
   .registerMainFooter {
     width: 80%;
+    text-align: center;
+    max-width: 25%;
+    color:black;
     @media (max-width: $small_size) {
       width: 60%;
     }
@@ -198,4 +202,8 @@ $small_size: 704px;
 .errorMessage{
   margin-top: 120px!important;
   font-size: 25px!important;
+}
+
+.logo{
+  width: 15%!important;
 }
