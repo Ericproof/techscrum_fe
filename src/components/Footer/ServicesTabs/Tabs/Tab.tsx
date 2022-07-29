@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styles from './Tab.module.scss';
 
 interface Props {
@@ -18,7 +19,7 @@ export default function tab({ services }: Props) {
       <ul>
         {services.contents.map((serviceItem) => (
           <li>
-            <a href={serviceItem.href}>{serviceItem.item}</a>
+            <Link to={serviceItem.href}>{serviceItem.item}</Link>
           </li>
         ))}
       </ul>

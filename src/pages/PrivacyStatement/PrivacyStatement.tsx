@@ -85,7 +85,7 @@ export default function PrivacyStatement() {
             <h3>Cookies</h3>
             <p>
               For more information on our use of cookies, please read our{' '}
-              <a href="/cookies-ploicy">Cookie Policy</a>.
+              <Link to="/cookie-policy">Cookie Policy</Link>.
             </p>
             <p>
               We may also process other information, which is not personal data within the meaning
@@ -290,7 +290,7 @@ export default function PrivacyStatement() {
               We are committed to protecting the security of your personal data. We use a variety of
               security technologies and procedures to help protect your personal data from
               unauthorised access and use. For more detailed and technical information please see
-              our <a href="/security-page">Security Page</a>.
+              our <Link to="/security-page">Security Page</Link>.
             </p>
             <p>
               As effective as modern security practices are, no physical or electronic security
