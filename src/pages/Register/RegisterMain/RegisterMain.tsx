@@ -10,6 +10,7 @@ import Icon from '../../../assets/logo.svg';
 import Email from '../../../assets/email.png';
 import Error from '../../../assets/error.png';
 import Loading from '../../../components/Loading/Loading';
+import { setLocalStorage } from '../../../utils/helpers';
 
 export default function RegisterMain() {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ export default function RegisterMain() {
   const [emailCheckProcess, setEmailCheckProcess] = useState(false);
   const [invalidateStatus, setInvalidateStatus] = useState(false);
   const [appName, setAppName] = useState('');
+  const [tips, setTips] = useState('');
   let emailRecorder = '';
   let nameRecorder = '';
   let passwordRecorder = '';
@@ -46,11 +48,6 @@ export default function RegisterMain() {
     fetchEmailByToken();
   }, [emailToken, navigate]);
 
-  const tip = (error: string) => {
-    const tipLabel = document.getElementById('tip') as HTMLInputElement;
-    tipLabel.textContent = error;
-  };
-
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
     if (!emailCheckProcess) {
@@ -58,17 +55,21 @@ export default function RegisterMain() {
         setLoading(true);
         await emailCheck(emailRecorder, { appName });
         setLoading(false);
-        tip('');
+        setTips('');
         setEmailRegisterProcess(true);
       } catch (e) {
         setLoading(false);
         const err = e as AxiosError;
         const status = err.response?.status ?? 0;
         if (status === 302) {
-          tip('The email already exists. Please try again');
+          setTips('The email already exists. Please try again');
           return;
         }
-        tip('Something go wrong, please try again');
+        if (status === 409) {
+          setTips('App name already exists. Please try again');
+          return;
+        }
+        setTips('Something go wrong, please try again');
       }
       return;
     }
@@ -90,14 +91,13 @@ export default function RegisterMain() {
           refreshToken
         };
         setUserInfo(userLoginInfo);
-        localStorage.setItem('access_token', token);
-        localStorage.setItem('refresh_token', refreshToken);
+        setLocalStorage(user);
         navigate(`/projects`);
       } else {
-        tip('Register Failed, please try again');
+        setTips('Register Failed, please try again');
       }
     } catch (e) {
-      tip('Something go wrong, please contact staff');
+      setTips('Something go wrong, please contact staff');
     }
   };
 
@@ -116,8 +116,8 @@ export default function RegisterMain() {
   const setPassword = (password: string) => {
     if (!illegalCharacter.test(password) || password === '') {
       passwordRecorder = password;
-      tip('');
-    } else tip('Illegal Character Detected');
+      setTips('');
+    } else setTips('Illegal Character Detected');
   };
   if (loading) {
     return <Loading />;
@@ -144,22 +144,25 @@ export default function RegisterMain() {
           <>
             <h1>Register to continue</h1>
             <h1>Your team&apos;s site</h1>
-            <p id="tip" />
+            <p className="colorRed">{tips}</p>
             {!emailCheckProcess && (
-              <input
-                className={styles.domain}
-                type="app"
-                placeholder="Input App Name"
-                name="app"
-                defaultValue={appName}
-                onChange={onChangeAppName}
-                required
-              />
+              <div className={['flex', styles.domainField].join(' ')}>
+                <input
+                  className={styles.domain}
+                  type="app"
+                  placeholder="Enter your company name"
+                  name="app"
+                  defaultValue={appName}
+                  onChange={onChangeAppName}
+                  required
+                />
+                <p>.techscrumapp.com</p>
+              </div>
             )}
             <input
               className={styles.email}
               type="email"
-              placeholder="Input Email Address"
+              placeholder="Enter email address"
               name="email"
               defaultValue={verifyEmail}
               onChange={(e) => setEmail(e.target.value)}
@@ -189,11 +192,11 @@ export default function RegisterMain() {
               </>
             )}
             <p>
-              By registering, I accept the
+              By registering, I accept the&nbsp;
               <Link to="/terms-of-service" target="_blank">
-                TechScrum Terms of Service
+                TechScrum Terms of Service&nbsp;
               </Link>
-              and confirm acceptance of the
+              and confirm acceptance of the&nbsp;
               <Link to="/privacy-policy" target="_blank">
                 Privacy Policy.
               </Link>

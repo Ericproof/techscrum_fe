@@ -5,12 +5,7 @@
   overflow: hidden;
   font-family: FaktSoft, Arial, Helvetica, sans-serif;
   .jobDoneSection {
-    padding-bottom: 120px;
-    background-color: #fff;
-    margin-top: 100px;
     .jobDoneContainer {
-      padding-right: 15px;
-      padding-left: 15px;
       margin-right: auto;
       margin-left: auto;
       .jobDoneHeader {
@@ -33,7 +28,7 @@
             font-weight: bolder;
           }
           .headerIndigo {
-            color: #6a84ed;
+            color: #894bb5;
           }
         }
         .jobDoneText {
@@ -53,12 +48,13 @@
         justify-content: space-between;
         flex-direction: row-reverse;
         align-items: center;
-        margin-bottom: 100px;
         box-sizing: border-box;
+        position: relative;
         .businessContent {
           min-width: 440px;
           max-width: 500px;
           padding-right: 50px;
+       
           h3 {
             margin-bottom: 28px;
             margin-top: 8px;
@@ -151,7 +147,7 @@
             line-height: 1.6;
             .ctaButton {
               border-radius: 32px;
-              background: #6a84ed;
+              background: #894bb5;
               font-weight: 600;
               font-size: 16px;
               line-height: 150%;
@@ -198,7 +194,6 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 100px;
         box-sizing: border-box;
         picture {
           max-width: 50%;
@@ -303,7 +298,7 @@
             line-height: 1.6;
             .ctaButton {
               border-radius: 32px;
-              background: #6a84ed;
+              background: #894bb5;
               font-weight: 600;
               font-size: 16px;
               line-height: 150%;
@@ -337,6 +332,7 @@
         justify-content: space-between;
         align-items: center;
         margin-bottom: 0;
+        background-color:#9021afd9;
         .projectManagementContent {
           min-width: 440px;
           max-width: 500px;
@@ -434,7 +430,7 @@
             align-items: center;
             .ctaButton {
               border-radius: 32px;
-              background: #6a84ed;
+              background: #894bb5;
               font-weight: 600;
               font-size: 16px;
               line-height: 150%;
@@ -478,13 +474,11 @@
   }
   .switchingSection {
     background-color: #f5f7fa;
-    padding: 120px 0;
     .switchingContainer {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-right: 15px;
-      padding-left: 15px;
+
       margin-right: auto;
       margin-left: auto;
       .switchingContent {
@@ -514,7 +508,7 @@
           line-height: 1.6;
           .ctaButton {
             border-radius: 32px;
-            background: #6a84ed;
+            background: #894bb5;
             font-weight: 600;
             font-size: 16px;
             line-height: 150%;
@@ -553,8 +547,7 @@
     }
   }
   .cardsSection {
-    padding: 120px 0;
-    background-color: #fff;
+    position: relative;
     .cardsContainer {
       display: flex;
       flex-direction: column;
@@ -567,7 +560,7 @@
       h3 {
         max-width: 760px;
         margin-bottom: 25px;
-        font-size: 50px;
+        font-size: 36px;
         font-weight: 700;
         line-height: 112%;
         font-family: FaktSoft, Arial, Helvetica, sans-serif;
@@ -605,11 +598,12 @@
         gap: 40px;
         margin-top: 60px;
         .eachCards {
+          box-shadow:0px 15px 50px 0px rgb(11 11 11 / 8%);
           margin-right: 20px;
           max-width: 350px;
           width: 100%;
-          background: #eef1f6;
-          border-radius: 24px;
+          background: #efefef;
+          border-radius: 10px;
           overflow: hidden;
           text-align: left;
           transition: transform 0.2s ease-in-out;
@@ -644,7 +638,7 @@
             .cardsName {
               font-size: 21px;
               line-height: 145%;
-              color: #1d1c39;
+              color: #00163B;
               margin-top: 8px;
               font-weight: 700;
             }
@@ -656,6 +650,7 @@
               .cardsHeart {
                 display: flex;
                 align-items: center;
+                color:#00163B;
                 svg {
                   margin-right: 16px;
                   fill: #ff22b1;
@@ -717,8 +712,8 @@
         box-sizing: border-box;
         text-align: center;
         .ctaButton {
-          border-radius: 32px;
-          background: #6a84ed;
+          border-radius: 5px;
+          background: #894bb5;
           margin: 0 5px;
           font-weight: 600;
           font-size: 16px;
@@ -741,7 +736,7 @@
           }
         }
         .viewTemplateButton {
-          border-radius: 32px;
+          border-radius: 5px;
           background: transparent;
           box-shadow: inset 0 0 0 2px #1d1c39;
           color: #1d1c39;
@@ -873,8 +868,8 @@
           align-items: center;
           line-height: 1.6;
           .ctaButton {
-            border-radius: 32px;
-            background: #6a84ed;
+            border-radius: 5px;
+            background: #894bb5;
             font-weight: 600;
             font-size: 16px;
             line-height: 150%;
@@ -904,7 +899,7 @@
     }
   }
   .supportSection {
-    padding: 120px 0;
+
     .supportContainer {
       display: flex;
       justify-content: space-between;
@@ -914,11 +909,11 @@
       margin-right: auto;
       margin-left: auto;
       .supportContent {
-        font-size: 50px;
+        font-size: 36px;
         font-weight: 700;
         line-height: 112%;
         h3 {
-          font-size: 50px;
+          font-size: 36px;
           font-weight: 700;
           line-height: 112%;
           letter-spacing: 1px;
@@ -1090,7 +1085,7 @@
   .homePage {
     .jobDoneSection {
       .jobDoneContainer {
-        max-width: 1224px;
+
       }
     }
     .cardsSection {
@@ -1109,7 +1104,7 @@
   .homePage {
     .jobDoneSection {
       .jobDoneContainer {
-        max-width: 1164px;
+    
       }
     }
     .switchingSection {
@@ -1142,13 +1137,7 @@
     .switchingSection {
       padding: 100px 0;
     }
-    .cardsSection {
-      padding: 100px 0;
-    }
     .clientsSection {
-      padding: 100px 0;
-    }
-    .supportSection {
       padding: 100px 0;
     }
   }
@@ -1232,7 +1221,7 @@
       .clientsContainer {
         .clientsContent {
           h3 {
-            font-size: 32px;
+            font-size: 5px;
           }
           p {
             font-size: 14px;
@@ -1456,13 +1445,7 @@
     .switchingSection {
       padding: 80px 0;
     }
-    .cardsSection {
-      padding: 80px 0;
-    }
     .clientsSection {
-      padding: 80px 0;
-    }
-    .supportSection {
       padding: 80px 0;
     }
   }
@@ -1498,7 +1481,6 @@
         }
         .jobDoneRows {
           flex-direction: column;
-          margin-bottom: 40px;
           .businessContent {
             min-width: auto;
             width: 100%;
@@ -1511,7 +1493,6 @@
         }
         .collaborationRows {
           flex-direction: column;
-          margin-bottom: 40px;
           picture {
             max-width: 300px;
           }
@@ -1869,13 +1850,17 @@
 
 .textContainer{
     position: absolute;
-    top:200px;
-    left:50px;
+    top:50%;
+    left:20%;
     right: 0;
     bottom: 0;
     width: 500px;
     height: 500px;
     text-align: center;
+    @media (max-width: 1280px) {
+      top:40%;
+      left:10%
+    }
     // background-image: url('https://themexriver.com/appilo-theme/seo-agency/wp-content/uploads/sites/56/2021/11/box-shape.png');
     // background-repeat: no-repeat;
     // position: relative;
@@ -1993,4 +1978,52 @@
 .maxWidth80{
   max-width: 80%;
   margin: auto;
+}
+
+.bgImg{
+  position: absolute;
+  bottom:-500px;
+  right:0;
+  z-index: -1;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+} 
+
+.bgImg2{
+  position: absolute;
+  bottom:-300px;
+  left:0;
+  z-index: -1;
+} 
+
+.bgImg3{
+  position: absolute;
+  bottom:-550px;
+  right:0;
+  z-index: -1;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+} 
+
+.container{
+  max-width: 1280px;
+  @media (max-width: 1280px) {
+    max-width: 1000px;
+  }
+}
+
+.row{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0;
+  margin:auto;
+}
+
+.projectManagement{
+  padding: 100px 0;
+}
+
+.colorWhite{
+  color: white !important;;
 }

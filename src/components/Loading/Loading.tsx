@@ -1,9 +1,14 @@
 import React from 'react';
 import styles from './Loading.module.scss';
 
-export default function Loading() {
+interface ILoading {
+  height?: string;
+}
+
+export default function Loading(props: ILoading) {
+  const { height = '90vh' } = props;
   return (
-    <div className={styles.loadingContainer}>
+    <div className={styles.loadingContainer} style={{ height }}>
       <div className={styles.bounce}>
         <div />
         <div />
@@ -13,3 +18,7 @@ export default function Loading() {
     </div>
   );
 }
+
+Loading.defaultProps = {
+  height: '90vh'
+};

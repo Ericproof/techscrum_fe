@@ -8,6 +8,7 @@ import styles from './VerifyPageMain.module.scss';
 import Icon from '../../../assets/logo.svg';
 import Error from '../../../assets/error.png';
 import Loading from '../../../components/Loading/Loading';
+import { setLocalStorage } from '../../../utils/helpers';
 
 export default function VerifyPageMain() {
   const navigate = useNavigate();
@@ -16,9 +17,9 @@ export default function VerifyPageMain() {
   const [searchParams] = useSearchParams();
   const setUserInfo = useContext(UserDispatchContext);
   const [verifyEmail, setVerifyEmail] = useState('');
-  const [loading, setLoading] = useState(false);
   const [invalidateStatus, setInvalidateStatus] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   let nameRecorder = '';
   let passwordRecorder = '';
@@ -26,7 +27,7 @@ export default function VerifyPageMain() {
   const tip = (error: string) => {
     setInvalidateStatus(true);
     setErrorMessage(error);
-    setLoading(false);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -39,6 +40,7 @@ export default function VerifyPageMain() {
       try {
         const result = await emailVerifyCheck(token);
         setVerifyEmail(result.data.email);
+        setIsLoading(false);
       } catch (e) {
         tip('The link is invalidate, please contact the administrator');
       }
@@ -48,7 +50,7 @@ export default function VerifyPageMain() {
 
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
-    setLoading(true);
+    setIsLoading(true);
     const emailToken = searchParams.get('token');
     try {
       const result = await register(emailToken ?? 'undefined', {
@@ -61,7 +63,7 @@ export default function VerifyPageMain() {
         tip('Register Failed, please try again');
         return;
       }
-      setLoading(false);
+      setIsLoading(false);
       const userLoginInfo: IUserInfo = {
         id: user.id,
         email: user.email,
@@ -73,6 +75,7 @@ export default function VerifyPageMain() {
       setUserInfo(userLoginInfo);
       localStorage.setItem('access_token', token);
       localStorage.setItem('refresh_token', refreshToken);
+      setLocalStorage(user);
       navigate(`/projects`);
     } catch (e) {
       tip('Something go wrong, please contact staff');
@@ -89,10 +92,6 @@ export default function VerifyPageMain() {
     } else tip('Illegal Character Detected');
   };
 
-  if (loading) {
-    return <Loading />;
-  }
-
   return (
     <div className={styles.registerMain}>
       <img src={Icon} alt="TechScrum Icon" />
@@ -103,7 +102,13 @@ export default function VerifyPageMain() {
             <h1>{errorMessage}</h1>
           </div>
         )}
-        {!invalidateStatus && (
+        {isLoading && (
+          <div className={styles.loadingContainer}>
+            <Loading height="352px" />
+            <p>Hold on while we are setting up your environment</p>
+          </div>
+        )}
+        {!invalidateStatus && !isLoading && (
           <>
             <h1>Register to continue</h1>
             <h1>Your team&apos;s site</h1>
@@ -144,7 +149,7 @@ export default function VerifyPageMain() {
           </>
         )}
       </form>
-
+      )
       <p className={styles.registerMainFooter}>
         This page is protected by reCAPTCHA and complies with Google&apos;s
         <Link to="/privacy-policy"> Privacy Policy</Link> and{' '}

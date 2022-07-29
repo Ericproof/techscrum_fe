@@ -2,6 +2,7 @@ import React, { createContext, Dispatch, SetStateAction, useEffect, useState } f
 import { useNavigate } from 'react-router-dom';
 import { IUserInfo } from '../types';
 import { getUserInfo } from '../api/userProfile/userProfile';
+import { projectRolesToObject, setLocalStorage } from '../utils/helpers';
 
 const UserContext = createContext<IUserInfo>({});
 const UserDispatchContext = createContext<Dispatch<SetStateAction<IUserInfo>>>(() => {});
@@ -9,18 +10,6 @@ const UserDispatchContext = createContext<Dispatch<SetStateAction<IUserInfo>>>((
 interface ILoginInfoProvider {
   children?: React.ReactNode;
 }
-
-const projectRolesToObject = (projectsRoles: any) => {
-  const obj: any = {};
-  const keys = projectsRoles.map((item: any) => {
-    return item.projectId;
-  });
-
-  for (let i = 0; i < keys.length; i += 1) {
-    obj[keys[i]] = projectsRoles[i];
-  }
-  return obj;
-};
 
 function UserProvider({ children }: ILoginInfoProvider) {
   const [userInfo, setUserInfo] = useState<IUserInfo>({});
@@ -34,13 +23,7 @@ function UserProvider({ children }: ILoginInfoProvider) {
         const t = token || user.token;
         const projectRoles = JSON.stringify(projectRolesToObject(user.projectsRoles));
         setUserInfo({ ...user, token: t, projectRoles });
-        localStorage.setItem('access_token', result.data.token ?? token);
-        localStorage.setItem('refresh_token', result.data.refreshToken ?? refreshToken);
-        localStorage.setItem(
-          'user_project_roles',
-          JSON.stringify(projectRolesToObject(user.projectsRoles))
-        );
-        localStorage.setItem('is_admin', user.isAdmin);
+        setLocalStorage(user);
       } catch (e) {
         localStorage.clear();
         setUserInfo({});

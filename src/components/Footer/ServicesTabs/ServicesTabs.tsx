@@ -5,7 +5,7 @@ import Tab from './Tabs/Tab';
 const company = {
   title: 'company',
   contents: [
-    { href: '/#', item: 'About Teamwork' },
+    { href: '/#', item: 'About TechScrum' },
     { href: '/#', item: 'LeaderShip' },
     { href: '/#', item: 'Careers' },
     { href: '/#', item: 'Security' },
@@ -22,10 +22,10 @@ const company = {
 const product = {
   title: 'product',
   contents: [
-    { href: '/#', item: 'Teamwork Desk' },
-    { href: '/#', item: 'Teamwork Chat' },
-    { href: '/#', item: 'Teamwork Spaces' },
-    { href: '/#', item: 'Teamwork CRM' },
+    { href: '/#', item: 'TechScrum Desk' },
+    { href: '/#', item: 'TechScrum Chat' },
+    { href: '/#', item: 'TechScrum Spaces' },
+    { href: '/#', item: 'TechScrum CRM' },
     { href: '/#', item: 'View all products' },
     { href: '/#', item: 'Integrations' },
     { href: '/#', item: 'Roadmap' },
@@ -64,14 +64,14 @@ const resources = {
 const compare = {
   title: 'compare',
   contents: [
-    { href: '/#', item: 'Teamwork vs Asana' },
-    { href: '/#', item: 'Teamwork vs Monday' },
-    { href: '/#', item: 'Teamwork vs Wrike' },
-    { href: '/#', item: 'Teamwork vs Trello' },
-    { href: '/#', item: 'Teamwork vs Smartsheet' },
-    { href: '/#', item: 'Teamwork vs MS Planner' },
-    { href: '/#', item: 'Teamwork vs Basecamp' },
-    { href: '/#', item: 'Teamwork vs ClickUp' }
+    { href: '/#', item: 'TechScrum vs Asana' },
+    { href: '/#', item: 'TechScrum vs Monday' },
+    { href: '/#', item: 'TechScrum vs Wrike' },
+    { href: '/#', item: 'TechScrum vs Trello' },
+    { href: '/#', item: 'TechScrum vs Smartsheet' },
+    { href: '/#', item: 'TechScrum vs MS Planner' },
+    { href: '/#', item: 'TechScrum vs Basecamp' },
+    { href: '/#', item: 'TechScrum vs ClickUp' }
   ]
 };
 

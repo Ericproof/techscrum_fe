@@ -20,7 +20,7 @@ import CreateProject from './pages/CreateProject/CreateProject';
 import AccountSettings from './pages/AccountSetting/AccountSetting';
 import ResetPassword from './pages/ResetPassword/ResetPassword';
 import BoardPage from './pages/BoardPage/BoardPage';
-import About from './pages/About/About';
+import About from './pages/AboutPage/AboutPage';
 import './App.css';
 import { UserProvider } from './context/UserInfoProvider';
 import { ProjectProvider } from './context/ProjectProvider';
@@ -30,15 +30,19 @@ import RolePage from './pages/RolePage/RolePage';
 import UnauthorizePage from './pages/UnauthorizePage/UnauthorizePage';
 import { RolesProvider } from './context/UserPermissionProvider';
 import { TaskTypesProvider } from './context/TaskTypeProvider';
+import ContactPage from './pages/ContactPage/ContactPage';
 
 function App() {
+  const shouldShowRegister =
+    window.location.origin === 'https://www.techscrumapp.com' ||
+    window.location.origin === 'http://localhost:3000';
   return (
     <UserProvider>
       <RolesProvider>
         <ProjectProvider>
           <TaskTypesProvider>
             <Routes>
-              <Route path="/register" element={<Register />} />
+              {shouldShowRegister && <Route path="/register" element={<Register />} />}
               <Route path="/verify" element={<VerifyPage />} />
               <Route path="/login" element={<Login />} />
               <Route path="/" element={<Home />} />
@@ -62,6 +66,7 @@ function App() {
                 <Route path="/account-settings" element={<AccountSettings />} />
                 <Route path="/projects/:projectId/members" element={<ProjectMembersPage />} />
                 <Route path="/roles" element={<RolePage />} />
+                <Route path="/contact" element={<ContactPage />} />
               </Route>
               <Route path="/unauthorize" element={<UnauthorizePage />} />
               <Route path="*" element={<ErrorPage />} />

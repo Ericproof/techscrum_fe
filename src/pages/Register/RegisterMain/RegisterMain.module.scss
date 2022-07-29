@@ -43,7 +43,6 @@ $small_size: 704px;
       padding: 8px 6px;
       height: 36px;
       border: 2px solid #ccc;
-      margin-top: 16px;
     }
 
     input.email {
@@ -168,6 +167,14 @@ $small_size: 704px;
     width: 80%;
     @media (max-width: $small_size) {
       width: 60%;
+    }
+  }
+  .domainField{
+    align-items: flex-end;
+    margin-bottom: 20px;
+    p{
+      font-size: 14px;
+      font-weight: bold;
     }
   }
 }

@@ -153,6 +153,12 @@ export interface IRole {
   permission?: IPermission[];
 }
 
+export interface IPermissions {
+  id?: string;
+  slug?: string;
+  description?: string;
+}
+
 export interface ICommentData {
   [x: string]: any;
 }

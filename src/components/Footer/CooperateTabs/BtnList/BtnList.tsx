@@ -1,18 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styles from './BtnList.module.scss';
 
 export default function BtnList() {
   return (
     <div className={styles.buttonList}>
-      <a className={styles.white} href="/#">
-        Try Teamwork for Free
-      </a>
-      <a className={styles.black} href="/#">
-        Join a webinar
-      </a>
-      <a className={styles.black} href="/#">
+      <Link className={styles.white} to="/register">
+        Try TechScrum for Free
+      </Link>
+
+      <Link className={styles.black} to="/contact">
         Get in touch
-      </a>
+      </Link>
     </div>
   );
 }

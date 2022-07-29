@@ -37,6 +37,7 @@ export default function PhotoGallery(props: IPhotoGallery) {
                   onClick={() => {
                     removeAttachment(item);
                   }}
+                  className={styles.removeButton}
                 >
                   Remove
                 </button>

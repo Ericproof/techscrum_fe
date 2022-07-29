@@ -1,6 +1,7 @@
 import React, { createContext, useCallback, useEffect, useState } from 'react';
 import { getProjects } from '../api/projects/projects';
 import { IProject } from '../types';
+import { projectToObject } from '../utils/helpers';
 
 const ProjectContext = createContext<IProject[]>([]);
 const ProjectDispatchContext = createContext<() => void>(() => {});
@@ -18,6 +19,7 @@ function ProjectProvider({ children }: IProjectProvider) {
       return;
     }
     setProjectList(res.data);
+    localStorage.setItem('projects', JSON.stringify(projectToObject(res.data)));
   };
 
   const fetchProjects = useCallback(() => {

@@ -18,7 +18,7 @@ export default function HeaderNav() {
         <Link to={`/projects/${currentProject?.id ?? ''}/board/${currentProject?.boardId ?? ''}`}>
           {currentProject?.name ?? 'Unknow Project'}
         </Link>{' '}
-        / <Link to=".">member</Link>
+        / <Link to=".">Members</Link>
       </h1>
     </div>
   );

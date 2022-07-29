@@ -122,6 +122,11 @@
       }
     }
 
+    button:disabled{
+      background-color: #728eb9;
+      cursor: progress;
+    }
+
     .btnList {
       display: flex;
       flex-direction: column;
