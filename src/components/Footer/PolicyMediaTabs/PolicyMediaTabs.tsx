@@ -15,30 +15,30 @@ export default function PolicyMediaTabs() {
   return (
     <div className={styles.policiesMediaDownloadPlatform}>
       <div className={styles.leftItem}>
-        <Link to="/terms">Terms & Privacy</Link>
+        <Link to="/privacy-policy">Terms & Privacy</Link>
       </div>
       <div className={styles.middleItem}>
-        <a href="/techscrumapp">
+        <a href="https://www.facebook.com/techscrumapp">
           <AiFillFacebook />
         </a>
-        <a href="/techscrumapp">
+        <a href="https://www.linkedin.com/techscrumapp">
           <AiFillLinkedin />
         </a>
-        <a href="/techscrumapp">
+        <a href="https://www.twitter.com/techscrumapp">
           <AiFillTwitterSquare />
         </a>
-        <a href="/techscrumapp">
+        <a href="https://www.youtube.com/techscrumapp">
           <AiFillYoutube />
         </a>
-        <a href="/techscrumapp">
+        <a href="https://www.instagram.com/techscrumapp">
           <AiFillInstagram />
         </a>
       </div>
       <div className={styles.rightItem}>
-        <a href="/techscrumapp">
+        <a href="https://www.apple.com/techscrumapp">
           <img src={IOS} alt="Download iOS App" draggable="false" loading="lazy" />
         </a>
-        <a href="/techscrumapp">
+        <a href="https://www.google.com/play/techscrumapp">
           <img src={Android} alt="Download Android App" draggable="false" loading="lazy" />
         </a>
       </div>

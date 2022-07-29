@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BsSuitHeartFill } from 'react-icons/bs';
 import axios from 'axios';
 import styles from './Home.module.scss';
@@ -183,13 +183,9 @@ export default function Home() {
               <h3>Switching to TechScrum?</h3>
               <p>Easily import all your tasks and projects in one click.</p>
               <div className={styles.switchingCta}>
-                <a
-                  className={styles.ctaButton}
-                  href="https://www.TechScrum.com/signup/"
-                  target="_self"
-                >
+                <Link className={styles.ctaButton} to="/register">
                   Start Your Free Trial
-                </a>
+                </Link>
                 <p className={styles.ctaText}>No credit card required</p>
               </div>
             </div>
@@ -257,13 +253,9 @@ export default function Home() {
                 </a>
               </div>
               <div className={styles.cardsButtons}>
-                <a
-                  className={styles.ctaButton}
-                  href="https://www.TechScrum.com/signup/"
-                  target="_self"
-                >
+                <Link className={styles.ctaButton} to="/register">
                   Start Your Free Trial
-                </a>
+                </Link>
               </div>
               <img
                 src="https://themexriver.com/appilo-theme/seo-agency/wp-content/uploads/sites/56/2021/11/ab-shape.png"
@@ -333,17 +325,12 @@ export default function Home() {
                   We&apos;re here to answer any question and help every step of the way.
                 </p>
                 <div className={styles.supportButtons}>
-                  <a
-                    href="https://www.TechScrum.com/contact/"
-                    target="_blank"
-                    className={styles.supportContact}
-                    rel="noreferrer"
-                  >
+                  <Link to="/contact" className={styles.supportContact}>
                     <picture>
                       <img src={envelope} alt="envelope" />
                     </picture>
                     <span>Contact</span>
-                  </a>
+                  </Link>
                 </div>
                 <div className={styles.supportQuote} style={{ display: 'none' }}>
                   <div className={styles.quoteAvatar}>

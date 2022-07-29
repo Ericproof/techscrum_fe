@@ -150,7 +150,7 @@ export default function RegisterMain() {
                 <input
                   className={styles.domain}
                   type="app"
-                  placeholder="Enter your company name"
+                  placeholder="Enter company name"
                   name="app"
                   defaultValue={appName}
                   onChange={onChangeAppName}
