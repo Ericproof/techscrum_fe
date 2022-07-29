@@ -20,45 +20,6 @@ import BoardCard from '../BoardCard/BoardCard';
 import { TaskEntity } from '../../api/task/entity/task';
 import { getLabels } from '../../api/label/label';
 
-const projects = [
-  {
-    id: 0,
-    star: false,
-    icon: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10418?size=small',
-    name: 'example',
-    key: 'EX',
-    type: 'Team-managed software',
-    lead: 'Evan Lin',
-    avatar:
-      'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/EL-3.png?ssl=1',
-    lastEditTime: new Date('2021-05-10')
-  },
-  {
-    id: 1,
-    star: false,
-    icon: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10411?size=small',
-    name: 'TECHSCRUM',
-    key: 'TEC',
-    type: 'Team-managed software',
-    lead: 'Yiu Kitman',
-    avatar:
-      'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/YK-3.png?ssl=1',
-    lastEditTime: new Date('2021-05-11')
-  },
-  {
-    id: 2,
-    star: false,
-    icon: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10412?size=small',
-    name: 'Template',
-    key: 'TEM',
-    type: 'Company-managed software',
-    lead: 'Yiu Kitman',
-    avatar:
-      'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/YK-3.png?ssl=1',
-    lastEditTime: new Date('2021-05-8')
-  }
-];
-
 const onDragEnd = (
   result: DropResult,
   columns: IColumnsFromBackend,
@@ -247,7 +208,7 @@ export default function Board() {
   return (
     <div className={style.container}>
       <ProjectHeader />
-      <HeaderNav name="projects" />
+      <HeaderNav />
       <BoardSearch
         updateIsCreateNewCard={getCreateNewCardStateFromChildren}
         setInputQuery={setInputQuery}

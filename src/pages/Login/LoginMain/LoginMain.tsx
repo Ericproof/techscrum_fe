@@ -7,7 +7,6 @@ import { IUserInfo } from '../../../types';
 import { UserDispatchContext } from '../../../context/UserInfoProvider';
 import styles from './LoginMain.module.scss';
 import Icon from '../../../assets/logo.svg';
-import Loading from '../../../components/Loading/Loading';
 import { setLocalStorage } from '../../../utils/helpers';
 
 export default function LoginMain() {

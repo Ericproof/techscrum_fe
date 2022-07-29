@@ -6,7 +6,6 @@ import ProjectHeader from '../../../components/ProjectHeader/ProjectHeader';
 import { UserContext, UserDispatchContext } from '../../../context/UserInfoProvider';
 import { IProject } from '../../../types';
 import Alert from '../../../components/Alert/Alert';
-// import icon from './pic.jpg';
 import styles from './UserMePage.module.scss';
 
 export default function UserMePage() {

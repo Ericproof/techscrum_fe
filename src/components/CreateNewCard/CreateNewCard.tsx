@@ -9,7 +9,6 @@ import UserSelect from '../Form/Select/UserSelect/UserSelect';
 import { upload } from '../../api/upload/upload';
 import Attach from '../BoardCard/CardLeftContent/components/Attach/Attach';
 import PhotoGallery from '../PhotoGallery/PhotoGallery';
-import { UserContext } from '../../context/UserInfoProvider';
 import { TaskTypesContext } from '../../context/TaskTypeProvider';
 import { ProjectContext } from '../../context/ProjectProvider';
 
