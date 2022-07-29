@@ -2,7 +2,8 @@
   align-self: center;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
+  height: 100%;
   @media (max-width: 280px) {
     margin-top: 22%;
   }
@@ -215,4 +216,8 @@
       font-size: 12px;
     }
   }
+}
+
+.logo{
+  max-width: 20%!important;
 }

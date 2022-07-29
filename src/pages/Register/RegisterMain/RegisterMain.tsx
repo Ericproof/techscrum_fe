@@ -130,7 +130,7 @@ export default function RegisterMain() {
           <div className={styles.emailTip}>
             {invalidateStatus ? (
               <>
-                <img src={Error} alt="Error Icon" />
+                <img src={Error} alt="Error Icon" className={styles.logo} />
                 <h1>The link is invalidate, please contact the administrator</h1>
               </>
             ) : (
@@ -212,7 +212,7 @@ export default function RegisterMain() {
       <p className={styles.registerMainFooter}>
         This page is protected by reCAPTCHA and complies with Google&apos;s{' '}
         <Link to="/privacy-policy" target="_blank">
-          Privacy Policy
+          Privacy Policy{' '}
         </Link>
         and{' '}
         <Link to="/terms-of-service" target="_blank">
