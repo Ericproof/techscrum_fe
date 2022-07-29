@@ -70,8 +70,8 @@ export default function ProjectHeader() {
                     <div className={styles.top}>
                       <div className={styles.recent}>RECENT</div>
                       {projectList.slice(0, 2).map((project, index) => (
-                        <a
-                          href="/projects/"
+                        <Link
+                          to="/projects/"
                           onClick={(e) => handleClickEvent(e, project)}
                           key={project.id}
                         >
@@ -133,7 +133,7 @@ export default function ProjectHeader() {
                               )}
                             </div>
                           </div>
-                        </a>
+                        </Link>
                       ))}
                     </div>
                     <div className={styles.bottom}>

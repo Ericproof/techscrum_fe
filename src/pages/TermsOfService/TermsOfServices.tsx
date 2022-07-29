@@ -391,9 +391,9 @@ export default function TermsOfService() {
               make no guarantees as to its completeness or correctness. If a situation arises in
               which our website’s completeness or correctness is in question, please contact us via
               our contact information provided on our&nbsp;
-              <a href="/terms-of-service">
+              <Link to="/terms-of-service">
                 <u>Support</u>
-              </a>
+              </Link>
               &nbsp;page of the website with, if possible, a description of the material to be
               checked and the location (url) where such material can be found on our website.
             </p>
@@ -401,9 +401,9 @@ export default function TermsOfService() {
               If you have any questions regarding this agreement or if you wish to discuss the terms
               of service contained herein please contact Techscrum.com limited using the contact
               details at our&nbsp;
-              <a href="/terms-of-service">
+              <Link to="/terms-of-service">
                 <u>Contact</u>
-              </a>
+              </Link>
               &nbsp;page.
             </p>
           </div>
