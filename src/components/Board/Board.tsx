@@ -251,6 +251,7 @@ export default function Board() {
       <BoardSearch
         updateIsCreateNewCard={getCreateNewCardStateFromChildren}
         setInputQuery={setInputQuery}
+        projectId={projectId}
       />
       <BoardMain
         columnsInfo={columnsInfo}
