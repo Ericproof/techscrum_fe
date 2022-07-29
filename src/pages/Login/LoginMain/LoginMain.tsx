@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { MdOutlineVisibility, MdVisibility } from 'react-icons/md';
+import { AxiosError } from 'axios';
 import login from '../../../api/login/login';
 import { IUserInfo } from '../../../types';
 import { UserDispatchContext } from '../../../context/UserInfoProvider';
@@ -17,11 +18,7 @@ export default function LoginMain() {
   const [emailRecorder, setEmailRecorder] = useState('');
   const [passwordRecorder, setPasswordRecorder] = useState('');
   const [loading, setLoading] = useState(false);
-
-  const tip = (error: string) => {
-    const tipLabel = document.getElementById('tip') as HTMLInputElement;
-    tipLabel.textContent = error;
-  };
+  const [tips, setTips] = useState('');
 
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
@@ -48,11 +45,21 @@ export default function LoginMain() {
         navigate(`/projects`);
       } else {
         setLoading(false);
-        tip('*Incorrect email or password, please try again.');
+        setTips('*Incorrect email or password, please try again.');
       }
     } catch (error) {
       setLoading(false);
-      tip('Something Go Wrong, Please contact staff!');
+      const err = error as AxiosError;
+      const status = err.response?.status ?? 0;
+      if (status === 401) {
+        setTips('Wrong Email or Password.');
+        return;
+      }
+      if (status === 403) {
+        setTips('User has not active account, Please contact staff!');
+        return;
+      }
+      setTips('Something Go Wrong, Please contact staff!');
     }
   };
 
@@ -63,12 +70,10 @@ export default function LoginMain() {
   const setPassword = (password: string) => {
     if (!illegalCharacter.test(password)) {
       setPasswordRecorder(password);
-      tip('');
-    } else tip('Illegal Character Detected');
+      setTips('');
+    } else setTips('Illegal Character Detected');
   };
-  if (loading) {
-    return <Loading />;
-  }
+
   return (
     <div className={styles.registerMain}>
       <img src={Icon} alt="TechScrum Icon" />
@@ -110,8 +115,13 @@ export default function LoginMain() {
             />
           )}
         </div>
-        <span id="tip" className={styles.tip} />
-        <button type="submit" className={styles.btnMargin} onSubmit={handleSubmit}>
+        <p className="colorRed">{tips}</p>
+        <button
+          type="submit"
+          className={styles.btnMargin}
+          onSubmit={handleSubmit}
+          disabled={loading}
+        >
           Login
         </button>
         <div className={styles.formFooter}>
