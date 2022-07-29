@@ -4,13 +4,14 @@ import { useParams } from 'react-router-dom';
 
 import styles from './CreateNewCard.module.scss';
 import { createNewTask } from '../../api/task/task';
-import { ICardData } from '../../types';
+import { ICardData, IProject, IProjectData } from '../../types';
 import UserSelect from '../Form/Select/UserSelect/UserSelect';
 import { upload } from '../../api/upload/upload';
 import Attach from '../BoardCard/CardLeftContent/components/Attach/Attach';
 import PhotoGallery from '../PhotoGallery/PhotoGallery';
 import { UserContext } from '../../context/UserInfoProvider';
 import { TaskTypesContext } from '../../context/TaskTypeProvider';
+import { ProjectContext } from '../../context/ProjectProvider';
 
 interface Props {
   fetchNewCard: (newCard: ICardData) => void;
@@ -26,6 +27,10 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
   const [taskTypeId, setTaskTypeId] = useState<string>();
   const { boardId = '', projectId = '' } = useParams();
   const taskType = useContext(TaskTypesContext);
+  const projectList = useContext<IProject[]>(ProjectContext);
+  const currentProject: IProjectData[] = projectList.filter(
+    (project: IProjectData) => project.id === projectId
+  );
 
   useEffect(() => {
     if (!taskType) {
@@ -113,7 +118,7 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
       <form onSubmit={onSave}>
         <div className={styles.cardContent}>
           <p className={styles.cardStar}>Project</p>
-          <input className={styles.cardInput} disabled defaultValue="TECHSCRUM(TEC)" />
+          <input className={styles.cardInput} disabled defaultValue={currentProject[0].name} />
           <p className={styles.cardStar}>Card type</p>
           <select className={styles.cardSelect} onChange={onChangeTaskType}>
             {taskType.map((item: any) => {
