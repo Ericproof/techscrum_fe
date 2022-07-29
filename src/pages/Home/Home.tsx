@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BsSuitHeartFill } from 'react-icons/bs';
 import axios from 'axios';
@@ -23,6 +23,7 @@ import Footer from '../../components/Footer/Footer';
 
 export default function Home() {
   const isLogin = false;
+  const [loginDetector, setLoginDetector] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     axios.get('http://localhost:8000/api/v1/tenants?domain=d&name=dsf').then(() => {
@@ -31,6 +32,14 @@ export default function Home() {
       }
     });
   }, [isLogin, navigate]);
+  useEffect(() => {
+    if (localStorage.getItem('refresh_token') && localStorage.getItem('refresh_token') !== null)
+      setLoginDetector(true);
+    else setLoginDetector(false);
+    if (loginDetector) {
+      navigate('/projects');
+    }
+  }, [loginDetector]);
 
   return (
     <div>

@@ -29,7 +29,8 @@ $small_size: 704px;
     box-shadow: rgb(0 0 0 / 10%) 0px 0px 10px;
     box-sizing: border-box;
     color: rgb(94, 108, 132);
-
+ 
+    min-height: 370px;
     h1 {
       font-size: 16px;
       align-self: center;
@@ -149,8 +150,8 @@ $small_size: 704px;
       flex-direction: column;
       justify-content: space-around;
       img{
-        width: 80%;
-        height: 80%;
+        max-width: 50%;
+        height: auto;
         align-self: center;
       }
       h1{
@@ -189,4 +190,12 @@ $small_size: 704px;
     font-size: 20px!important;
     font-weight: bold;
   }
+}
+
+.errorIcon{
+  max-width: 25%!important;
+}
+.errorMessage{
+  margin-top: 120px!important;
+  font-size: 25px!important;
 }

@@ -2,6 +2,7 @@ import Ryan from './img/Ryan.png';
 import Flynn from './img/Flynn.png';
 import Lois from './img/Lois.png';
 import Mingshan from './img/Mingshan.png';
+import Valerie from './img/Valerie.png';
 
 const DevOps = [
   {
@@ -41,7 +42,7 @@ const DevOps = [
     LinkedinURL: 'https://www.linkedin.com/in/mingshan-you'
   },
   {
-    image: '',
+    image: Valerie,
     name: 'Valerie Qi',
     position: 'DevOps',
     bulletPoint1: 'Lorem, ipsum dolor',

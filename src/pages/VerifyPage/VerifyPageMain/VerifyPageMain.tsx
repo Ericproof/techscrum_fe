@@ -98,8 +98,8 @@ export default function VerifyPageMain() {
       <form onSubmit={handleSubmit}>
         {invalidateStatus && (
           <div className={styles.emailTip}>
-            <img src={Error} alt="Error Icon" />
-            <h1>{errorMessage}</h1>
+            <img src={Error} alt="Error Icon" className={styles.errorIcon} />
+            <h1 className={styles.errorMessage}>{errorMessage}</h1>
           </div>
         )}
         {isLoading && (
@@ -151,7 +151,7 @@ export default function VerifyPageMain() {
       </form>
       )
       <p className={styles.registerMainFooter}>
-        This page is protected by reCAPTCHA and complies with Google&apos;s
+        This page is protected by reCAPTCHA and complies with Google&apos;s{' '}
         <Link to="/privacy-policy"> Privacy Policy</Link> and{' '}
         <Link to="/terms-of-service">Terms of Service</Link>
       </p>

@@ -61,12 +61,12 @@ export default function PersonalProfile({ userInfo }: Props) {
                           </div>
                         </Link>
                       )}
-                      <a href="/me">
+                      <Link to="/me">
                         <div className={styles.title}>
                           <span>Profile</span>
                         </div>
-                      </a>
-                      <a href="/account-settings">
+                      </Link>
+                      <Link to="/account-settings">
                         <div className={styles.title}>
                           <span>Account settings</span>
                         </div>
@@ -75,7 +75,7 @@ export default function PersonalProfile({ userInfo }: Props) {
                             <BsBoxArrowUpRight />
                           </div>
                         </div>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                   <div className={styles.settingBottom}>

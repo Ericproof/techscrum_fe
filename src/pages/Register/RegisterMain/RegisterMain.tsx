@@ -135,7 +135,7 @@ export default function RegisterMain() {
               </>
             ) : (
               <>
-                <img src={Email} alt="Email Icon" />
+                <img src={Email} alt="Email Icon" className={styles.emailSent} />
                 <h1>Email have Sent, Please check your email</h1>
               </>
             )}
@@ -210,11 +210,11 @@ export default function RegisterMain() {
       </form>
 
       <p className={styles.registerMainFooter}>
-        This page is protected by reCAPTCHA and complies with Google&apos;s
+        This page is protected by reCAPTCHA and complies with Google&apos;s{' '}
         <Link to="/privacy-policy" target="_blank">
           Privacy Policy
         </Link>
-        and
+        and{' '}
         <Link to="/terms-of-service" target="_blank">
           Terms of Service
         </Link>

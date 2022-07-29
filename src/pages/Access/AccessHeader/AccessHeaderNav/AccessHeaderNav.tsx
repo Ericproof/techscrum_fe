@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import style from './AccessHeaderNav.module.scss';
 
 export default function AccessHeaderNav() {
@@ -7,19 +8,19 @@ export default function AccessHeaderNav() {
       <nav className={style.navLayout}>
         <ol>
           <li>
-            <a href="/access" target="_self">
+            <Link to="/access" target="_self">
               <span>Projects</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/access" target="_self">
+            <Link to="/access" target="_self">
               <span>EvanLin</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/access" target="_self">
+            <Link to="/access" target="_self">
               <span>Project settings</span>
-            </a>
+            </Link>
           </li>
         </ol>
       </nav>
