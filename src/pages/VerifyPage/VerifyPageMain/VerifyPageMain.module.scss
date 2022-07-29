@@ -171,3 +171,22 @@ $small_size: 704px;
     }
   }
 }
+
+.loadingContainer{
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  p{
+    width: 100%;
+    padding: 0px;
+    align-self: center;
+    position: absolute;
+    bottom: 15px;
+    margin: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 20px!important;
+    font-weight: bold;
+  }
+}
