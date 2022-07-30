@@ -1,13 +1,13 @@
 import React from 'react';
 import VerifyPageBackground from '../VerifyPage/VerifyPageBackground/VerifyPageBackground';
-import styles from './Login.module.scss';
-import LoginMain from './LoginMain/LoginMain';
+import styles from './RegisterPage.module.scss';
+import RegisterMain from './RegisterMain/RegisterMain';
 
-export default function Login() {
+export default function RegistePager() {
   return (
     <div className={styles.registerContainer}>
       <VerifyPageBackground>
-        <LoginMain />
+        <RegisterMain />
       </VerifyPageBackground>
     </div>
   );

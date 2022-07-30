@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import styles from './CookiePolicy.module.scss';
+import styles from './CookiePolicyPage.module.scss';
 
-export default function CookiePolicy() {
+export default function CookiePolicyPage() {
   return (
     <div className={styles.cookieMain}>
       <div className={styles.cookieContainer}>

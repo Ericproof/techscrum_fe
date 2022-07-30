@@ -2,15 +2,15 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import AuthenticationRoute from './config/AuthenticationRoute';
 import HomePage from './pages/HomePage/HomePage';
-import Register from './pages/Register/Register';
-import Login from './pages/Login/Login';
+import RegisterPage from './pages/Register/RegisterPage';
+import LoginPage from './pages/Login/LoginPage';
 import Setting from './pages/Setting/Setting';
-import Gdpr from './pages/GDPR/GDPR';
-import CookiePolicy from './pages/CookiePolicy/CookiePolicy';
+import GdprPage from './pages/GDPRPage/GDPRPage';
+import CookiePolicyPage from './pages/CookiePolicyPage/CookiePolicyPage';
 import TermsOfServicePage from './pages/TermsOfServicePage/TermsOfServicesPage';
 import RefundPolicyPage from './pages/RefundPolicyPage/RefundPolicyPage';
-import PrivacyPolicy from './pages/PrivacyPolicy/PrivacyPolicy';
-import PrivacyStatement from './pages/PrivacyStatement/PrivacyStatement';
+import PrivacyPolicy from './pages/PrivacyPolicyPage/PrivacyPolicyPage';
+import PrivacyStatementPage from './pages/PrivacyStatement/PrivacyStatement';
 import UserPage from './pages/UserPage/UserPage';
 import UserMePage from './pages/SettingPage/UserMePage/UserMePage';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
@@ -42,15 +42,15 @@ function App() {
         <ProjectProvider>
           <TaskTypesProvider>
             <Routes>
-              {shouldShowRegister && <Route path="/register" element={<Register />} />}
+              {shouldShowRegister && <Route path="/register" element={<RegisterPage />} />}
               <Route path="/verify" element={<VerifyPage />} />
-              <Route path="/login" element={<Login />} />
+              <Route path="/login" element={<LoginPage />} />
               <Route path="/" element={<HomePage />} />
               <Route path="/reset-password" element={<ResetPasswordPage />} />
-              <Route path="/cookie-policy" element={<CookiePolicy />} />
-              <Route path="/gdpr" element={<Gdpr />} />
+              <Route path="/cookie-policy" element={<CookiePolicyPage />} />
+              <Route path="/gdpr" element={<GdprPage />} />
               <Route path="/terms-of-service" element={<TermsOfServicePage />} />
-              <Route path="/privacy-statement" element={<PrivacyStatement />} />
+              <Route path="/privacy-statement" element={<PrivacyStatementPage />} />
               <Route path="/refund-policy" element={<RefundPolicyPage />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/about" element={<AboutPage />} />
