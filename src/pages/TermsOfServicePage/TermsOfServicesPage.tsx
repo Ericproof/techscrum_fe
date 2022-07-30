@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import styles from './TermsOfServices.module.scss';
+import styles from './TermsOfServicesPage.module.scss';
 
-export default function TermsOfService() {
+export default function TermsOfServicePage() {
   return (
     <div className={styles.termMain}>
       <div className={styles.termContainer}>

@@ -4,7 +4,7 @@ import { HiDotsHorizontal } from 'react-icons/hi';
 import { FiSearch } from 'react-icons/fi';
 import { Link, useNavigate } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
-import styles from './Project.module.scss';
+import styles from './ProjectPage.module.scss';
 import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
 import { deleteProject } from '../../api/projects/projects';
 import CreateNewCard from '../../components/CreateNewCard/CreateNewCard';
@@ -12,7 +12,7 @@ import { IProject, IProjectData } from '../../types';
 import { ProjectContext, ProjectDispatchContext } from '../../context/ProjectProvider';
 import checkAccess from '../../utils/helpers';
 
-export default function Project() {
+export default function ProjectPage() {
   const navigate = useNavigate();
   const fetchProjects = useContext(ProjectDispatchContext);
   const projectList = useContext<IProject[]>(ProjectContext);
