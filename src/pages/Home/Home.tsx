@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import styles from './Home.module.scss';
 import cover from '../../assets/cover.png';
 import rochelle from '../../assets/rochelle.png';
@@ -17,24 +16,17 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 
 export default function Home() {
-  const isLogin = false;
   const [loginDetector, setLoginDetector] = useState(false);
   const navigate = useNavigate();
-  useEffect(() => {
-    axios.get('http://localhost:8000/api/v1/tenants?domain=d&name=dsf').then(() => {
-      if (isLogin) {
-        navigate('/404');
-      }
-    });
-  }, [isLogin, navigate]);
+
   useEffect(() => {
     if (localStorage.getItem('refresh_token') && localStorage.getItem('refresh_token') !== null)
       setLoginDetector(true);
     else setLoginDetector(false);
     if (loginDetector) {
-      navigate('/projects');
+      navigate('/ ');
     }
-  }, [loginDetector]);
+  }, [loginDetector, navigate]);
 
   return (
     <div>
@@ -65,7 +57,9 @@ export default function Home() {
           />
         </span>
         <div className={styles.textContainer}>
-          <h1 className={styles.header}>An Efficient way of working together</h1>
+          <h1 className={styles.header} data-testid="header-text">
+            An Efficient way of working together
+          </h1>
           <p className={styles.text}>Manage your project from start to finish with TechScrum</p>
           <p className={styles.text}>No credit required.</p>
         </div>
