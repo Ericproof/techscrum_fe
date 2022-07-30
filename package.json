@@ -34,7 +34,8 @@
     "lint": "eslint src/",
     "lint-fix": "eslint src --quiet --fix",
     "deploy": "aws s3 sync build s3://techscrumapp.com",
-    "cdn": "aws cloudfront create-invalidation --distribution-id E1V3T62UIWQDQ2 --paths /*"
+    "cdn": "aws cloudfront create-invalidation --distribution-id E1V3T62UIWQDQ2 --paths /*",
+    "cypress": "cypress open"
   },
   "eslintConfig": {
     "extends": [
@@ -58,6 +59,7 @@
     "@types/react-router-dom": "^5.3.3",
     "@typescript-eslint/eslint-plugin": "^5.22.0",
     "@typescript-eslint/parser": "^5.22.0",
+    "cypress": "^10.3.1",
     "eslint": "^8.2.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",

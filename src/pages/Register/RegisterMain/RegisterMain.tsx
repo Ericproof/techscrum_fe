@@ -130,12 +130,12 @@ export default function RegisterMain() {
           <div className={styles.emailTip}>
             {invalidateStatus ? (
               <>
-                <img src={Error} alt="Error Icon" />
+                <img src={Error} alt="Error Icon" className={styles.logo} />
                 <h1>The link is invalidate, please contact the administrator</h1>
               </>
             ) : (
               <>
-                <img src={Email} alt="Email Icon" />
+                <img src={Email} alt="Email Icon" className={styles.emailSent} />
                 <h1>Email have Sent, Please check your email</h1>
               </>
             )}
@@ -150,7 +150,7 @@ export default function RegisterMain() {
                 <input
                   className={styles.domain}
                   type="app"
-                  placeholder="Enter your company name"
+                  placeholder="Enter company name"
                   name="app"
                   defaultValue={appName}
                   onChange={onChangeAppName}
@@ -210,11 +210,11 @@ export default function RegisterMain() {
       </form>
 
       <p className={styles.registerMainFooter}>
-        This page is protected by reCAPTCHA and complies with Google&apos;s
+        This page is protected by reCAPTCHA and complies with Google&apos;s{' '}
         <Link to="/privacy-policy" target="_blank">
-          Privacy Policy
+          Privacy Policy{' '}
         </Link>
-        and
+        and{' '}
         <Link to="/terms-of-service" target="_blank">
           Terms of Service
         </Link>

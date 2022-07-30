@@ -66,9 +66,9 @@ function App() {
                 <Route path="/account-settings" element={<AccountSettings />} />
                 <Route path="/projects/:projectId/members" element={<ProjectMembersPage />} />
                 <Route path="/roles" element={<RolePage />} />
-                <Route path="/contact" element={<ContactPage />} />
               </Route>
               <Route path="/unauthorize" element={<UnauthorizePage />} />
+              <Route path="/contact" element={<ContactPage />} />
               <Route path="*" element={<ErrorPage />} />
             </Routes>
           </TaskTypesProvider>

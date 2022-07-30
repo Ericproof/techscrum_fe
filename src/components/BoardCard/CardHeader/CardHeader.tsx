@@ -1,9 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { RiH1, RiMoreFill } from 'react-icons/ri';
+import { RiMoreFill } from 'react-icons/ri';
 import { TaskEntity } from '../../../api/task/entity/task';
 import { TaskTypesContext } from '../../../context/TaskTypeProvider';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
-import { ILabelData } from '../../../types';
 import checkAccess from '../../../utils/helpers';
 import style from './CardHeader.module.scss';
 

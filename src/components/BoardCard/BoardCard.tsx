@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CardHeader from './CardHeader/CardHeader';
 import CardLeftContent from './CardLeftContent/CardLeftContent';
 import CardRightContent from './CardRightContent/CardRightContent';
@@ -6,7 +6,6 @@ import { TaskEntity } from '../../api/task/entity/task';
 import { IColumnsFromBackend, ILabelData } from '../../types';
 import styles from './BoardCard.module.scss';
 import { upload } from '../../api/upload/upload';
-import { TaskTypesContext } from '../../context/TaskTypeProvider';
 
 interface Props {
   columnsInfo: IColumnsFromBackend;

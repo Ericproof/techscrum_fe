@@ -1,36 +1,32 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { BsSuitHeartFill } from 'react-icons/bs';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './Home.module.scss';
-import call from '../../assets/call.svg';
 import cover from '../../assets/cover.png';
 import rochelle from '../../assets/rochelle.png';
 import envelope from '../../assets/envelope.svg';
 import boardView from '../../assets/boardView.png';
 import kfirPravda from '../../assets/kfirPravda.png';
-import projectPlan from '../../assets/projectPlan.png';
 import easilyImport from '../../assets/easilyImport.svg';
 import rochelleAvatar from '../../assets/rochelleAvatar.png';
 import shekharTamasker from '../../assets/shekharTamasker.png';
 import samanthaAnderson from '../../assets/samanthaAnderson.png';
-import clientOnboarding from '../../assets/clientOnboarding.png';
-import projectManagement from '../../assets/projectManagement.png';
 import increaseProfitability from '../../assets/increaseProfitability.png';
 import realTimeCollaboration from '../../assets/realTimeCollaboration.png';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 
 export default function Home() {
-  const isLogin = false;
+  const [loginDetector, setLoginDetector] = useState(false);
   const navigate = useNavigate();
+
   useEffect(() => {
-    axios.get('http://localhost:8000/api/v1/tenants?domain=d&name=dsf').then(() => {
-      if (isLogin) {
-        navigate('/404');
-      }
-    });
-  }, [isLogin, navigate]);
+    if (localStorage.getItem('refresh_token') && localStorage.getItem('refresh_token') !== null)
+      setLoginDetector(true);
+    else setLoginDetector(false);
+    if (loginDetector) {
+      navigate('/ ');
+    }
+  }, [loginDetector, navigate]);
 
   return (
     <div>
@@ -61,7 +57,9 @@ export default function Home() {
           />
         </span>
         <div className={styles.textContainer}>
-          <h1 className={styles.header}>An Efficient way of working together</h1>
+          <h1 className={styles.header} data-testid="header-text">
+            An Efficient way of working together
+          </h1>
           <p className={styles.text}>Manage your project from start to finish with TechScrum</p>
           <p className={styles.text}>No credit required.</p>
         </div>
@@ -174,13 +172,9 @@ export default function Home() {
               <h3>Switching to TechScrum?</h3>
               <p>Easily import all your tasks and projects in one click.</p>
               <div className={styles.switchingCta}>
-                <a
-                  className={styles.ctaButton}
-                  href="https://www.TechScrum.com/signup/"
-                  target="_self"
-                >
+                <Link className={styles.ctaButton} to="/register">
                   Start Your Free Trial
-                </a>
+                </Link>
                 <p className={styles.ctaText}>No credit card required</p>
               </div>
             </div>
@@ -248,13 +242,9 @@ export default function Home() {
                 </a>
               </div>
               <div className={styles.cardsButtons}>
-                <a
-                  className={styles.ctaButton}
-                  href="https://www.TechScrum.com/signup/"
-                  target="_self"
-                >
+                <Link className={styles.ctaButton} to="/register">
                   Start Your Free Trial
-                </a>
+                </Link>
               </div>
               <img
                 src="https://themexriver.com/appilo-theme/seo-agency/wp-content/uploads/sites/56/2021/11/ab-shape.png"
@@ -324,17 +314,12 @@ export default function Home() {
                   We&apos;re here to answer any question and help every step of the way.
                 </p>
                 <div className={styles.supportButtons}>
-                  <a
-                    href="https://www.TechScrum.com/contact/"
-                    target="_blank"
-                    className={styles.supportContact}
-                    rel="noreferrer"
-                  >
+                  <Link to="/contact" className={styles.supportContact}>
                     <picture>
                       <img src={envelope} alt="envelope" />
                     </picture>
                     <span>Contact</span>
-                  </a>
+                  </Link>
                 </div>
                 <div className={styles.supportQuote} style={{ display: 'none' }}>
                   <div className={styles.quoteAvatar}>

@@ -119,7 +119,7 @@ export default function Project() {
         <div className={styles.projectContainer}>
           <div className={styles.projectContent}>
             <div className={styles.header}>
-              <div className={styles.title}>
+              <div className={styles.title} data-testid="project-title">
                 <h1>Projects</h1>
                 <button
                   type="button"

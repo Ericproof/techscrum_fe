@@ -6,8 +6,9 @@ import VerifyPageMain from './VerifyPageMain/VerifyPageMain';
 export default function VerifyPage() {
   return (
     <div className={styles.registerContainer}>
-      <VerifyPageBackground />
-      <VerifyPageMain />
+      <VerifyPageBackground>
+        <VerifyPageMain />
+      </VerifyPageBackground>
     </div>
   );
 }

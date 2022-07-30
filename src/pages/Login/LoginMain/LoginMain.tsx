@@ -7,7 +7,6 @@ import { IUserInfo } from '../../../types';
 import { UserDispatchContext } from '../../../context/UserInfoProvider';
 import styles from './LoginMain.module.scss';
 import Icon from '../../../assets/logo.svg';
-import Loading from '../../../components/Loading/Loading';
 import { setLocalStorage } from '../../../utils/helpers';
 
 export default function LoginMain() {
@@ -45,7 +44,7 @@ export default function LoginMain() {
         navigate(`/projects`);
       } else {
         setLoading(false);
-        setTips('*Incorrect email or password, please try again.');
+        setTips('Wrong Email or Password.');
       }
     } catch (error) {
       setLoading(false);
@@ -76,7 +75,7 @@ export default function LoginMain() {
 
   return (
     <div className={styles.registerMain}>
-      <img src={Icon} alt="TechScrum Icon" />
+      <img src={Icon} alt="TechScrum Icon" className={styles.logo} />
       <form onSubmit={handleSubmit}>
         <h1>Log in to your account</h1>
         <input
@@ -87,6 +86,7 @@ export default function LoginMain() {
           defaultValue={emailRecorder}
           onChange={(e) => setEmail(e.target.value)}
           required
+          data-testid="email"
         />
         <div className={styles.inputContainer}>
           <input
@@ -100,6 +100,7 @@ export default function LoginMain() {
             defaultValue={passwordRecorder}
             onChange={(e) => setPassword(e.target.value)}
             required
+            data-testid="password"
           />
           {passwordInvisible ? (
             <MdOutlineVisibility
@@ -115,12 +116,15 @@ export default function LoginMain() {
             />
           )}
         </div>
-        <p className="colorRed">{tips}</p>
+        <p className="colorRed" data-testid="login-tip">
+          {tips}
+        </p>
         <button
           type="submit"
           className={styles.btnMargin}
           onSubmit={handleSubmit}
           disabled={loading}
+          data-testid="login"
         >
           Login
         </button>

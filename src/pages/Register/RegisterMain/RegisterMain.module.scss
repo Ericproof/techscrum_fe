@@ -4,7 +4,8 @@ $small_size: 704px;
   align-self: center;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  height: 100%;
 
   a {
     text-decoration: none;
@@ -165,6 +166,8 @@ $small_size: 704px;
 
   .registerMainFooter {
     width: 80%;
+    max-width: 20%;
+    text-align: center;
     @media (max-width: $small_size) {
       width: 60%;
     }
@@ -177,4 +180,8 @@ $small_size: 704px;
       font-weight: bold;
     }
   }
+}
+.emailSent{
+  max-width: 40%!important;
+  margin-bottom: 70px!important;
 }

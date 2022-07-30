@@ -1,5 +1,6 @@
 import React from 'react';
 import { IconType } from 'react-icons';
+import { Link } from 'react-router-dom';
 import styles from './Middle.module.scss';
 
 interface Props {
@@ -22,13 +23,13 @@ export default function OneColumnMiddle({ content }: Props) {
         {content.content.map((service) => {
           return (
             <div key={service.title}>
-              <a href={service.href}>
+              <Link to={service.href}>
                 <service.icon />
                 <div>
                   <h2>{service.title}</h2>
                   <p>{service.description}</p>
                 </div>
-              </a>
+              </Link>
             </div>
           );
         })}
