@@ -7,27 +7,42 @@ import styles from './PhotoGallery.module.scss';
 
 interface IPhotoGallery {
   photoData: any;
+  removeAttachment: (url: string) => void;
+  isDisabled?: boolean;
 }
 
 export default function PhotoGallery(props: IPhotoGallery) {
-  const { photoData } = props;
+  const { photoData, removeAttachment, isDisabled } = props;
   const [showImage, setShowImage] = useState(false);
   const [showImageURL, setShowImageUrl] = useState('');
   return (
     <>
-      <div className={styles.photoContainer}>
+      <div className={[styles.photoContainer, 'flex'].join(' ')}>
         {photoData.map((item: any) => {
           return (
-            <button
-              type="button"
-              onClick={() => {
-                setShowImage(true);
-                setShowImageUrl(item);
-              }}
-              className={styles.thumbnailImageContainer}
-            >
-              <img src={item} alt="upload" key={item} className={styles.thumbnailImage} />
-            </button>
+            <React.Fragment key={item}>
+              <button
+                type="button"
+                onClick={() => {
+                  setShowImage(true);
+                  setShowImageUrl(item);
+                }}
+                className={styles.thumbnailImageContainer}
+              >
+                <img src={item} alt="upload" className={styles.thumbnailImage} />
+              </button>
+              {!isDisabled && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    removeAttachment(item);
+                  }}
+                  className={styles.removeButton}
+                >
+                  Remove
+                </button>
+              )}
+            </React.Fragment>
           );
         })}
       </div>
@@ -60,3 +75,7 @@ export default function PhotoGallery(props: IPhotoGallery) {
     </>
   );
 }
+
+PhotoGallery.defaultProps = {
+  isDisabled: false
+};

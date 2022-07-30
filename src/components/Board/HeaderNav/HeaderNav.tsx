@@ -4,12 +4,7 @@ import { ProjectContext } from '../../../context/ProjectProvider';
 import { IProjectData } from '../../../types';
 import styles from './HeaderNav.module.scss';
 
-interface IHeaderProps {
-  name: string;
-}
-
-export default function HeaderNav(props: IHeaderProps) {
-  const { name } = props;
+export default function HeaderNav() {
   const projectList = useContext(ProjectContext);
   const { projectId = '' } = useParams();
   const currentProject: IProjectData[] = projectList.filter(

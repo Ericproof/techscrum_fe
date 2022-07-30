@@ -2,7 +2,9 @@
   align-self: center;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
+  height: 100%;
+
   @media (max-width: 280px) {
     margin-top: 22%;
   }
@@ -30,7 +32,11 @@
     box-sizing: border-box;
     color: rgb(94, 108, 132);
     @media (max-width: 500px) {
-      width: 100%;
+      width: 264px;
+
+      @media (max-width: 280px) {
+        width: 244px;
+      }
     }
     h1 {
       font-size: 16px;
@@ -120,6 +126,11 @@
       &:hover {
         background-color: blue;
       }
+    }
+
+    button:disabled {
+      background-color: #728eb9;
+      cursor: progress;
     }
 
     .btnList {

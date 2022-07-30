@@ -1,87 +1,102 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import config from '../../config/config';
+import styles from './ProjectMemberPage.module.scss';
+import ProjectMemberHeader from '../../components/ProjectHeader/ProjectHeader';
+import ProjectMemberNav from './ProjectMemberHeaderNav/ProjectMemberHeaderNav';
+import ProjectMemberTitle from './ProjectMemberTitle/ProjectMemberTitle';
+import ProjectMemberMain from './ProjectMemberMain/ProjectMemberMain';
+import InviteMemberFloatForm from './InviteMemberFloatForm/InviteMemberFloatForm';
+import { IUserInfo, IRole } from '../../types';
+import Loading from '../../components/Loading/Loading';
+import { getMembers, inviteMember, updateMemberRole, removeMember } from '../../api/member/member';
+import { getRole } from '../../api/role/role';
 
 export default function ProjectMembersPage() {
   const { projectId = '' } = useParams();
-  const [members, setMembers] = useState<any>([]);
-  const [roles, setRoles] = useState<any>([]);
+  const [members, setMembers] = useState<IUserInfo[]>([]);
+  const [roles, setRoles] = useState<IRole[]>([]);
+  const [inviteFormVisible, setInviteFormVisible] = useState(false);
+  const [loadingStatus, setLoadingStatus] = useState(false);
 
-  const getMembers = async () => {
-    const path = `${config.apiAddress}/projects/${projectId}/members`;
-    const res = await axios.get(path);
-    setMembers(res.data);
+  const fetchMembers = async () => {
+    try {
+      setLoadingStatus(true);
+      const res = await getMembers(projectId);
+      setMembers(res.data);
+    } catch (e) {
+      setMembers([]);
+    } finally {
+      setLoadingStatus(false);
+    }
   };
 
   useEffect(() => {
-    const getRoles = async () => {
-      const path = `${config.apiAddress}/roles`;
-      const res = await axios.get(path);
-      setRoles(res.data);
+    const fetchRoles = async () => {
+      try {
+        setLoadingStatus(true);
+        const res = await getRole();
+        setRoles(res.data);
+      } catch (e) {
+        setMembers([]);
+      } finally {
+        setLoadingStatus(false);
+      }
     };
-    getRoles();
-    getMembers();
+    fetchRoles();
+    fetchMembers();
   }, []);
 
-  const onChangeProjectRole = async (e: any, userId: string) => {
-    const path = `${config.apiAddress}/projects/${projectId}/members/${userId}`;
-    const res = await axios.put(path, { roleId: e.target.value });
-    if (res.data) {
-      getMembers();
+  const onChangeProjectRole = async (e: React.ChangeEvent<HTMLSelectElement>, userId: string) => {
+    const roleId = e.target.value;
+    try {
+      const res = await updateMemberRole(roleId, userId, projectId);
+      if (res.data) {
+        await fetchMembers();
+      }
+    } catch (err) {
+      setMembers(members);
     }
   };
 
   const onClickRemove = async (userId: string) => {
-    const path = `${config.apiAddress}/projects/${projectId}/members/${userId}`;
-    const res = await axios.delete(path);
-    if (res.data) {
-      getMembers();
+    try {
+      const res = await removeMember(userId, projectId);
+      if (res.data) {
+        await fetchMembers();
+      }
+    } catch (err) {
+      setMembers(members);
     }
   };
 
-  const onClickAddMember = async () => {
-    const userId = '62d9f7c1741c5a203ce312a4';
-    const path = `${config.apiAddress}/projects/${projectId}/members/invite`;
-    const res = await axios.post(path, { roleId: '62d7f009e4713aab33380392', userId });
-    if (res.data) {
-      getMembers();
+  const InviteMember = async (email: string, roleId: string, onSubmit: boolean) => {
+    setInviteFormVisible(false);
+    if (onSubmit) {
+      const res = await inviteMember(email, roleId, projectId);
+      if (res.data) {
+        await fetchMembers();
+      }
     }
   };
 
   return (
-    <h1>
-      {members.map((user: any) => {
-        const selectProjectRole = user.projectsRoles.filter((projectRole: any) => {
-          return projectRole.projectId === projectId;
-        });
-        return (
-          <>
-            <select
-              value={selectProjectRole[0].roleId}
-              onChange={(e) => {
-                onChangeProjectRole(e, user.id);
-              }}
-            >
-              {roles.map((role: any) => {
-                return <option value={role.id}>{role.name}</option>;
-              })}
-            </select>
-            <button
-              type="button"
-              onClick={() => {
-                onClickRemove(user.id);
-              }}
-            >
-              Remove member
-            </button>
-            <br />
-          </>
-        );
-      })}
-      <button type="button" onClick={onClickAddMember}>
-        Add Member
-      </button>
-    </h1>
+    <div className={styles.projectMemberContainer}>
+      <ProjectMemberHeader />
+      <div className={styles.projectMemberMain}>
+        <ProjectMemberNav />
+        <ProjectMemberTitle setInviteFormVisible={setInviteFormVisible} />
+        {loadingStatus ? (
+          <Loading />
+        ) : (
+          <ProjectMemberMain
+            members={members}
+            roles={roles}
+            onChangeProjectRole={onChangeProjectRole}
+            onClickRemove={onClickRemove}
+          />
+        )}
+      </div>
+      {inviteFormVisible && <InviteMemberFloatForm roles={roles} inviteMember={InviteMember} />}
+    </div>
   );
 }

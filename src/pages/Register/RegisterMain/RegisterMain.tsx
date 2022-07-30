@@ -10,6 +10,7 @@ import Icon from '../../../assets/logo.svg';
 import Email from '../../../assets/email.png';
 import Error from '../../../assets/error.png';
 import Loading from '../../../components/Loading/Loading';
+import { setLocalStorage } from '../../../utils/helpers';
 
 export default function RegisterMain() {
   const navigate = useNavigate();
@@ -23,6 +24,8 @@ export default function RegisterMain() {
   const [emailRegisterProcess, setEmailRegisterProcess] = useState(false);
   const [emailCheckProcess, setEmailCheckProcess] = useState(false);
   const [invalidateStatus, setInvalidateStatus] = useState(false);
+  const [appName, setAppName] = useState('');
+  const [tips, setTips] = useState('');
   let emailRecorder = '';
   let nameRecorder = '';
   let passwordRecorder = '';
@@ -45,29 +48,28 @@ export default function RegisterMain() {
     fetchEmailByToken();
   }, [emailToken, navigate]);
 
-  const tip = (error: string) => {
-    const tipLabel = document.getElementById('tip') as HTMLInputElement;
-    tipLabel.textContent = error;
-  };
-
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
     if (!emailCheckProcess) {
       try {
         setLoading(true);
-        await emailCheck(emailRecorder);
+        await emailCheck(emailRecorder, { appName });
         setLoading(false);
-        tip('');
+        setTips('');
         setEmailRegisterProcess(true);
       } catch (e) {
         setLoading(false);
         const err = e as AxiosError;
         const status = err.response?.status ?? 0;
         if (status === 302) {
-          tip('The email already exists. Please try again');
+          setTips('The email already exists. Please try again');
           return;
         }
-        tip('Something go wrong, please try again');
+        if (status === 409) {
+          setTips('App name already exists. Please try again');
+          return;
+        }
+        setTips('Something go wrong, please try again');
       }
       return;
     }
@@ -89,14 +91,13 @@ export default function RegisterMain() {
           refreshToken
         };
         setUserInfo(userLoginInfo);
-        localStorage.setItem('access_token', token);
-        localStorage.setItem('refresh_token', refreshToken);
+        setLocalStorage(user);
         navigate(`/projects`);
       } else {
-        tip('Register Failed, please try again');
+        setTips('Register Failed, please try again');
       }
     } catch (e) {
-      tip('Something go wrong, please contact staff');
+      setTips('Something go wrong, please contact staff');
     }
   };
 
@@ -108,11 +109,15 @@ export default function RegisterMain() {
     nameRecorder = name;
   };
 
+  const onChangeAppName = (e: any) => {
+    setAppName(e.target.value);
+  };
+
   const setPassword = (password: string) => {
     if (!illegalCharacter.test(password) || password === '') {
       passwordRecorder = password;
-      tip('');
-    } else tip('Illegal Character Detected');
+      setTips('');
+    } else setTips('Illegal Character Detected');
   };
   if (loading) {
     return <Loading />;
@@ -125,12 +130,12 @@ export default function RegisterMain() {
           <div className={styles.emailTip}>
             {invalidateStatus ? (
               <>
-                <img src={Error} alt="Error Icon" />
+                <img src={Error} alt="Error Icon" className={styles.logo} />
                 <h1>The link is invalidate, please contact the administrator</h1>
               </>
             ) : (
               <>
-                <img src={Email} alt="Email Icon" />
+                <img src={Email} alt="Email Icon" className={styles.emailSent} />
                 <h1>Email have Sent, Please check your email</h1>
               </>
             )}
@@ -139,17 +144,32 @@ export default function RegisterMain() {
           <>
             <h1>Register to continue</h1>
             <h1>Your team&apos;s site</h1>
-            <p id="tip" />
+            <p className="colorRed">{tips}</p>
+            {!emailCheckProcess && (
+              <div className={['flex', styles.domainField].join(' ')}>
+                <input
+                  className={styles.domain}
+                  type="app"
+                  placeholder="Enter company name"
+                  name="app"
+                  defaultValue={appName}
+                  onChange={onChangeAppName}
+                  required
+                />
+                <p>.techscrumapp.com</p>
+              </div>
+            )}
             <input
               className={styles.email}
               type="email"
-              placeholder="Input Email Address"
+              placeholder="Enter email address"
               name="email"
               defaultValue={verifyEmail}
               onChange={(e) => setEmail(e.target.value)}
               disabled={emailCheckProcess}
               required
             />
+
             {emailCheckProcess && (
               <>
                 <input
@@ -172,10 +192,14 @@ export default function RegisterMain() {
               </>
             )}
             <p>
-              By registering, I accept the{' '}
-              <Link to="/terms-of-service">TechScrum Terms of Service</Link> and confirm acceptance
-              of the
-              <Link to="/privacy-policy"> Privacy Policy.</Link>
+              By registering, I accept the&nbsp;
+              <Link to="/terms-of-service" target="_blank">
+                TechScrum Terms of Service&nbsp;
+              </Link>
+              and confirm acceptance of the&nbsp;
+              <Link to="/privacy-policy" target="_blank">
+                Privacy Policy.
+              </Link>
             </p>
             <button type="submit">Register</button>
             <div className={styles.formFooter}>
@@ -186,8 +210,13 @@ export default function RegisterMain() {
       </form>
 
       <p className={styles.registerMainFooter}>
-        <Link to="/privacy-policy"> Privacy Policy</Link> &nbsp;and &nbsp;
-        <Link to="/terms-of-service">Terms of Service</Link>
+        <Link to="/privacy-policy" target="_blank">
+          Privacy Policy
+        </Link>
+        &nbsp;and&nbsp;
+        <Link to="/terms-of-service" target="_blank">
+          Terms of Service
+        </Link>
       </p>
     </div>
   );

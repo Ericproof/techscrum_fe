@@ -32,14 +32,13 @@ export default function Shortcut({
   const [isUrlValid, setIsUrlValid] = useState(true);
 
   function validURL(str: string) {
+    // Used from https://www.geeksforgeeks.org/check-if-an-url-is-valid-or-not-using-regular-expression/
     const pattern = new RegExp(
-      '^(https?:\\/\\/)?' + // protocol
-        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
-        '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
-        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
-        '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
-        '(\\#[-a-z\\d_]*)?$',
-      'i'
+      '((http|https)://)(www.)?' +
+        '[a-zA-Z0-9@:%._\\+~#?&//=]' +
+        '{2,256}\\.[a-z]' +
+        '{2,6}\\b([-a-zA-Z0-9@:%' +
+        '._\\+~#?&//=]*)'
     ); // fragment locator
     return !!pattern.test(str);
   }
@@ -49,27 +48,26 @@ export default function Shortcut({
   }, [webValue]);
 
   useEffect(() => {
-    setWebValue(selectedLink?.shortcutLink);
-    setNameValue(selectedLink?.name);
+    setWebValue(selectedLink?.shortcutLink ?? '');
+    setNameValue(selectedLink?.name ?? '');
   }, [selectedLink]);
 
   useEffect(() => {}, [webValue, nameValue]);
 
   const onClickAddShortcut = () => {
-    createShortcut(currentProjectId, { shortcutName: nameValue, webAddress: webValue }).then(
-      (res) => {
-        shortCutAdded(res.data);
-      }
-    );
+    createShortcut(currentProjectId, { name: nameValue, shortcutLink: webValue }).then((res) => {
+      shortCutAdded(res.data);
+    });
   };
 
   const onClickUpdateShortcut = () => {
-    updateShortcut(currentProjectId, selectedLink?.id, {
-      shortcutName: nameValue,
-      webAddress: webValue
-    }).then(() => {
-      shortCutUpdated();
-    });
+    if (selectedLink?.id !== undefined)
+      updateShortcut(currentProjectId, selectedLink?.id, {
+        name: nameValue,
+        shortcutLink: webValue
+      }).then(() => {
+        shortCutUpdated();
+      });
   };
 
   return (
@@ -111,7 +109,7 @@ export default function Shortcut({
                   addLinkToggle={addLinkToggle}
                   shortCutRemoved={shortCutRemoved}
                   currentProjectId={currentProjectId}
-                  shortcutId={selectedLink?.id}
+                  shortcutId={selectedLink?.id ?? ''}
                   onClickUpdateShortcut={onClickUpdateShortcut}
                 />
               )

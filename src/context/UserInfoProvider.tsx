@@ -2,6 +2,7 @@ import React, { createContext, Dispatch, SetStateAction, useEffect, useState } f
 import { useNavigate } from 'react-router-dom';
 import { IUserInfo } from '../types';
 import { getUserInfo } from '../api/userProfile/userProfile';
+import { projectRolesToObject, setLocalStorage } from '../utils/helpers';
 
 const UserContext = createContext<IUserInfo>({});
 const UserDispatchContext = createContext<Dispatch<SetStateAction<IUserInfo>>>(() => {});
@@ -20,9 +21,9 @@ function UserProvider({ children }: ILoginInfoProvider) {
         const result = await getUserInfo(token, refreshToken);
         const { user } = result.data;
         const t = token || user.token;
-        setUserInfo({ ...user, token: t });
-        localStorage.setItem('access_token', result.data.token ?? token);
-        localStorage.setItem('refresh_token', result.data.refreshToken ?? refreshToken);
+        const projectRoles = JSON.stringify(projectRolesToObject(user.projectsRoles));
+        setUserInfo({ ...user, token: t, projectRoles });
+        setLocalStorage(user);
       } catch (e) {
         localStorage.clear();
         setUserInfo({});

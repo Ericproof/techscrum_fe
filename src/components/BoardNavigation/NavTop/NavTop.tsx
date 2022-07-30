@@ -1,6 +1,5 @@
 /* eslint-disable react/jsx-no-useless-fragment */
-import React, { useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import React from 'react';
 
 import { IProjectData } from '../../../types';
 import styles from './NavTop.module.scss';

@@ -10,6 +10,7 @@ import { deleteProject } from '../../api/projects/projects';
 import CreateNewCard from '../../components/CreateNewCard/CreateNewCard';
 import { IProject, IProjectData } from '../../types';
 import { ProjectContext, ProjectDispatchContext } from '../../context/ProjectProvider';
+import checkAccess from '../../utils/helpers';
 
 export default function Project() {
   const navigate = useNavigate();
@@ -231,9 +232,12 @@ export default function Project() {
                       <td className={[styles.lead, styles.overflowVisible].join(' ')}>
                         <div className={styles.leadContainer} onFocus={() => undefined}>
                           <div className={styles.leadContent}>
-                            <a
-                              href="/#"
-                              className={[styles.overflowVisible, styles.relative].join(' ')}
+                            <div
+                              className={[
+                                styles.user,
+                                styles.overflowVisible,
+                                styles.relative
+                              ].join(' ')}
                             >
                               <div className={styles.leadInfo}>
                                 <div className={styles.avatar}>
@@ -263,12 +267,12 @@ export default function Project() {
                                   <p>{project?.projectLeadId?.name || ''}</p>
                                 </div>
                                 <div className={[styles.profileV2Link, styles.textRight].join(' ')}>
-                                  <Link to={`/user/${project?.projectLeadId.id}`}>
+                                  <Link to={`/user/${project?.projectLeadId?.id}`}>
                                     <button type="button">View profile</button>
                                   </Link>
                                 </div>
                               </div>
-                            </a>
+                            </div>
                           </div>
                         </div>
                       </td>
@@ -281,20 +285,27 @@ export default function Project() {
                       >
                         {showProjectDetails === project.id && (
                           <div className={styles.viewDetail} ref={refShowMore[index]}>
-                            <Link to={`/settings/${project.id}`}>
-                              <button type="button">View Detail</button>
-                            </Link>
-                            <button type="button" onClick={() => removeProject(project.id)}>
-                              Delete Project
-                            </button>
+                            {checkAccess('view:projects', project.id) && (
+                              <Link to={`/settings/${project.id}`}>
+                                <button type="button">View Detail</button>
+                              </Link>
+                            )}
+                            {checkAccess('delete:projects', project.id) && (
+                              <button type="button" onClick={() => removeProject(project.id)}>
+                                Delete Project
+                              </button>
+                            )}
                           </div>
                         )}
-                        <HiDotsHorizontal
-                          onClick={() => {
-                            setShowProjectDetails(project.id);
-                          }}
-                          className={styles.verticalMiddle}
-                        />
+                        {(checkAccess('view:projects', project.id) ||
+                          checkAccess('delete:projects', project.id)) && (
+                          <HiDotsHorizontal
+                            onClick={() => {
+                              setShowProjectDetails(project.id);
+                            }}
+                            className={styles.verticalMiddle}
+                          />
+                        )}
                       </td>
                     </tr>
                   ))}

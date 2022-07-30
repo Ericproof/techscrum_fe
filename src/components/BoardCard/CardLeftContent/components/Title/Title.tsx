@@ -5,9 +5,18 @@ import styles from './Title.module.scss';
 interface Props {
   taskInfo: TaskEntity;
   focusEventHandler: () => void;
+  isDisabled: boolean;
+  onChangeTitle: (e: any) => void;
+  value: string | undefined;
 }
 
-export default function Title({ taskInfo, focusEventHandler }: Props) {
+export default function Title({
+  taskInfo,
+  focusEventHandler,
+  isDisabled,
+  onChangeTitle,
+  value
+}: Props) {
   return (
     <div className={styles.cardTitle}>
       <label htmlFor="title">
@@ -17,6 +26,9 @@ export default function Title({ taskInfo, focusEventHandler }: Props) {
           name="title"
           defaultValue={taskInfo.title}
           onFocus={focusEventHandler}
+          disabled={isDisabled}
+          onChange={onChangeTitle}
+          value={value}
         />
       </label>
     </div>

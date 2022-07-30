@@ -14,8 +14,8 @@ export default function ProjectLead(props: IProjectLead) {
   return (
     <div className={styles.leadDropdownMenu}>
       <span> Project lead</span>
-      <UserSelect onChange={onChange} value={value} />
-      <p>Make sure your project lead has access to issues in the project.</p>
+      <UserSelect onChange={onChange} value={value} allowEdit />
+      <p>Make sure your project lead has access to cards in the project.</p>
     </div>
   );
 }

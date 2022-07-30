@@ -1,14 +1,16 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import styles from './CreateNewCard.module.scss';
 import { createNewTask } from '../../api/task/task';
-import { ICardData } from '../../types';
+import { ICardData, IProject, IProjectData } from '../../types';
 import UserSelect from '../Form/Select/UserSelect/UserSelect';
 import { upload } from '../../api/upload/upload';
 import Attach from '../BoardCard/CardLeftContent/components/Attach/Attach';
 import PhotoGallery from '../PhotoGallery/PhotoGallery';
+import { TaskTypesContext } from '../../context/TaskTypeProvider';
+import { ProjectContext } from '../../context/ProjectProvider';
 
 interface Props {
   fetchNewCard: (newCard: ICardData) => void;
@@ -18,10 +20,23 @@ interface Props {
 function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
   const [description, setDescription] = useState('');
   const [title, setTitle] = useState('');
-  const [assigneeId, setAssigneeId] = useState<any>();
+  const [assigneeId, setAssigneeId] = useState<any>(null);
   const [hasError, setError] = useState(false);
   const [photoData, setPhotoData] = useState<any>([]);
+  const [taskTypeId, setTaskTypeId] = useState<string>();
   const { boardId = '', projectId = '' } = useParams();
+  const taskType = useContext(TaskTypesContext);
+  const projectList = useContext<IProject[]>(ProjectContext);
+  const currentProject: IProjectData[] = projectList.filter(
+    (project: IProjectData) => project.id === projectId
+  );
+
+  useEffect(() => {
+    if (!taskType) {
+      return;
+    }
+    setTaskTypeId(taskType[0].id);
+  }, [taskType]);
 
   const data = useState<ICardData>({
     dueAt: new Date()
@@ -29,6 +44,10 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
 
   const onChangeAssigneeId = (e: any) => {
     setAssigneeId(e.target.value);
+  };
+
+  const onChangeTaskType = (e: any) => {
+    setTaskTypeId(e.target.value);
   };
 
   const changeDescriptionHandler = async (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -61,7 +80,8 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
       boardId,
       projectId,
       tag: [],
-      assign: assigneeId.id,
+      typeId: taskTypeId,
+      assignId: assigneeId?.id,
       attachmentUrls: photoData
     };
 
@@ -79,6 +99,13 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
       });
   };
 
+  const removeAttachment = (url: string) => {
+    const updatePhotoData = photoData.filter((photoUrl: string) => {
+      return photoUrl !== url;
+    });
+    setPhotoData(updatePhotoData);
+  };
+
   return (
     <div className={styles.cardContainer}>
       <div className={styles.cardTitle}>
@@ -90,11 +117,16 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
       <form onSubmit={onSave}>
         <div className={styles.cardContent}>
           <p className={styles.cardStar}>Project</p>
-          <input className={styles.cardInput} disabled defaultValue="TECHSCRUM(TEC)" />
+          <input className={styles.cardInput} disabled defaultValue={currentProject[0].name} />
           <p className={styles.cardStar}>Card type</p>
-          <select className={styles.cardSelect}>
-            <option value="story">Story</option>
-            <option value="bug">Bug</option>
+          <select className={styles.cardSelect} onChange={onChangeTaskType}>
+            {taskType.map((item: any) => {
+              return (
+                <option key={item.id} value={item.id}>
+                  {item.name}
+                </option>
+              );
+            })}
           </select>
           <p className={styles.cardStar}>Summary</p>
           <input
@@ -106,7 +138,7 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
           />
           <p className={styles.cardLabel}>Attachment</p>
           <Attach onChangeAttachment={uploadFile} />
-          <PhotoGallery photoData={photoData} />
+          <PhotoGallery photoData={photoData} removeAttachment={removeAttachment} />
           <p className={styles.cardLabel}>Description</p>
           <textarea
             className={styles.cardTextarea}
@@ -114,7 +146,7 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
             onChange={changeDescriptionHandler}
           />
           <p className={styles.cardLabel}>Assignee</p>
-          <UserSelect onChange={onChangeAssigneeId} value={assigneeId} />
+          <UserSelect onChange={onChangeAssigneeId} value={assigneeId} allowEdit />
           <p className={styles.cardLabel} style={{ display: 'none' }}>
             Priority
           </p>

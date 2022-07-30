@@ -26,6 +26,22 @@ export default function Assignee(props: AssigneeProps) {
             <div className={styles.assigneeDropdownOpen}>
               <div className={styles.assigneeMenu}>
                 <ul>
+                  <li>
+                    <button
+                      type="button"
+                      name="assignee"
+                      className={styles.assigneeOptions}
+                      onClick={() => {
+                        setAssignState({ id: 0, state: '' });
+                        onChange({
+                          target: { value: '', name: 'assigneeId' }
+                        });
+                        setVisible(false);
+                      }}
+                    >
+                      Unassigned
+                    </button>
+                  </li>
                   {assignees.map((assignee) => (
                     <li key={assignee.id}>
                       <button

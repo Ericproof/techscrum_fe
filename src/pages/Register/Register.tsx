@@ -1,13 +1,14 @@
 import React from 'react';
+import VerifyPageBackground from '../VerifyPage/VerifyPageBackground/VerifyPageBackground';
 import styles from './Register.module.scss';
-import RegisterBackground from './RegisterBackground/RegisterBackground';
 import RegisterMain from './RegisterMain/RegisterMain';
 
 export default function Register() {
   return (
     <div className={styles.registerContainer}>
-      <RegisterBackground />
-      <RegisterMain />
+      <VerifyPageBackground>
+        <RegisterMain />
+      </VerifyPageBackground>
     </div>
   );
 }

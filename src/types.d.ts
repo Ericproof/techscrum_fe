@@ -1,10 +1,12 @@
 export interface IProject {
-  id: number;
+  id: string;
   name: string;
-  icon: string;
-  type: string;
+  iconUrl: string;
   star: boolean;
-  lastEditTime: Date;
+  type?: string;
+  boardId?: string;
+  projectLeadId?: IUserInfo;
+  updateAt: Date;
 }
 
 export interface IProjectData {
@@ -12,7 +14,9 @@ export interface IProjectData {
 }
 
 export interface IShortcutData {
-  [x: string]: any;
+  id?: string;
+  name?: string;
+  shortcutLink?: string;
 }
 
 export interface ITaskData {
@@ -25,7 +29,7 @@ export interface ICardData {
   title?: string;
   description?: string;
   poster?: string;
-  assign?: string;
+  assignId?: string;
   dueAt?: Date;
   statusId?: string;
   label?: string;
@@ -37,12 +41,28 @@ export interface IProjectEditor {
   [key: string]: any;
 }
 
+export interface ILabelData {
+  id?: string;
+  name?: string;
+  slug?: string;
+}
+
 export interface IAssign {
   id?: string;
   email?: string;
   name?: string;
+  avatarIcon?: string;
 }
 
+export interface ITaskRelator {
+  id?: string;
+  avatar?: string;
+  name?: string;
+}
+
+export interface IItemFromBackend {
+  id: string;
+}
 export interface ITaskCard {
   id?: string;
   tag?: string;
@@ -70,14 +90,14 @@ export default interface IBoardEntity {
 
 export interface IOnChangeTaskStatus {
   target: {
-    status: string;
+    status: string | null;
   };
 }
 
 export interface IOnChangeProjectLead {
   target: {
     name: string;
-    value: string;
+    value: string | null;
   };
 }
 
@@ -86,6 +106,24 @@ export interface IOnChangeAssignee {
     name: string;
     value: string;
   };
+}
+
+export interface IOnChangeTaskReporter {
+  target: {
+    id: string;
+  };
+}
+
+export interface IOnChangeTaskAssignee {
+  target: {
+    id: string;
+  };
+}
+
+export interface IProjectRole {
+  id?: string;
+  projectId: string;
+  roleId: string;
 }
 
 export interface IUserInfo {
@@ -99,6 +137,26 @@ export interface IUserInfo {
   userName?: string;
   jobTitle?: string;
   location?: string;
+  projectsRoles?: [IProjectRole];
+}
+
+export interface IPermission {
+  id?: string;
+  slug?: string;
+  description?: string;
+}
+
+export interface IRole {
+  id?: string;
+  name?: string;
+  slug?: string;
+  permission?: IPermission[];
+}
+
+export interface IPermissions {
+  id?: string;
+  slug?: string;
+  description?: string;
 }
 
 export interface ICommentData {

@@ -4,7 +4,7 @@ import PolicyMediaTabs from './PolicyMediaTabs/PolicyMediaTabs';
 
 export default function index() {
   return (
-    <footer>
+    <footer style={{ flexWrap: 'wrap' }}>
       <CooperateTabs />
       <PolicyMediaTabs />
     </footer>

@@ -9,48 +9,16 @@ import CreateNewCard from '../CreateNewCard/CreateNewCard';
 import HeaderNav from './HeaderNav/HeaderNav';
 import { getBoard } from '../../api/board/board';
 import { updateTaskStatus, fetchTask, updateTask, removeTask } from '../../api/task/task';
-import IBoardEntity, { IColumnsFromBackend, ICardData, ITaskCard } from '../../types';
+import IBoardEntity, {
+  IColumnsFromBackend,
+  ICardData,
+  IProjectData,
+  ILabelData,
+  ITaskCard
+} from '../../types';
 import BoardCard from '../BoardCard/BoardCard';
 import { TaskEntity } from '../../api/task/entity/task';
-
-const projects = [
-  {
-    id: 0,
-    star: false,
-    icon: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10418?size=small',
-    name: 'example',
-    key: 'EX',
-    type: 'Team-managed software',
-    lead: 'Evan Lin',
-    avatar:
-      'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/EL-3.png?ssl=1',
-    lastEditTime: new Date('2021-05-10')
-  },
-  {
-    id: 1,
-    star: false,
-    icon: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10411?size=small',
-    name: 'TECHSCRUM',
-    key: 'TEC',
-    type: 'Team-managed software',
-    lead: 'Yiu Kitman',
-    avatar:
-      'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/YK-3.png?ssl=1',
-    lastEditTime: new Date('2021-05-11')
-  },
-  {
-    id: 2,
-    star: false,
-    icon: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10412?size=small',
-    name: 'Template',
-    key: 'TEM',
-    type: 'Company-managed software',
-    lead: 'Yiu Kitman',
-    avatar:
-      'https://i2.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/initials/YK-3.png?ssl=1',
-    lastEditTime: new Date('2021-05-8')
-  }
-];
+import { getLabels } from '../../api/label/label';
 
 const onDragEnd = (
   result: DropResult,
@@ -101,16 +69,22 @@ const onDragEnd = (
 export default function Board() {
   const [inputQuery, setInputQuery] = useState<string>('');
   const [columnsInfo, setColumnsInfo] = useState<IColumnsFromBackend>({});
-  const { boardId = '' } = useParams();
-
-  const projectsOrderbyDate = projects.sort((a, b) => {
-    return a.lastEditTime < b.lastEditTime ? 1 : -1;
-  });
-  const [projectList] = useState(projectsOrderbyDate);
+  const { boardId = '', projectId = '' } = useParams();
+  const [projectList] = useState<IProjectData[]>([]);
   const [value, setValue] = useState(0);
   const [isCreateNewCard, setIsCreateNewCard] = useState(false);
   const [isViewTask, setIsViewTask] = useState(false);
-  const [taskData, setTaskData] = useState<TaskEntity>({});
+  const [taskData, setTaskData] = useState<TaskEntity>();
+  const [labels, setLabels] = useState<ILabelData[]>([]);
+
+  useEffect(() => {
+    if (!projectId || projectId === '') {
+      return;
+    }
+    getLabels(projectId).then((res) => {
+      setLabels(res.data);
+    });
+  }, [projectId]);
 
   const getProjectFromChildren = (index: number) => {
     projectList[index].star = !projectList[index].star;
@@ -119,8 +93,6 @@ export default function Board() {
 
   const getCreateNewCardStateFromChildren = () => {
     setIsCreateNewCard(!isCreateNewCard);
-
-    // setTaskList([...taskList, ...newTask])
   };
 
   const getViewTaskStateFromChildren = () => {
@@ -159,7 +131,7 @@ export default function Board() {
         const req = await updateTask(newTaskInfo.id, newTaskInfo);
         const updatedTaskInfo = req.data;
         const updatedColumns = { ...columnsInfo };
-        if (updatedTaskInfo.statusId !== undefined && taskData.statusId !== undefined) {
+        if (updatedTaskInfo?.statusId && taskData?.statusId) {
           columnsInfo[taskData.statusId].items.forEach((item, index) => {
             if (
               item.id === updatedTaskInfo.id &&
@@ -189,7 +161,7 @@ export default function Board() {
   };
 
   const deleteTask = async () => {
-    if (taskData.id !== undefined && taskData.id != null) {
+    if (taskData?.id && taskData?.id) {
       try {
         await removeTask(taskData.id);
       } finally {
@@ -203,25 +175,27 @@ export default function Board() {
           });
         }
         setColumnsInfo(updatedColumns);
-        setTaskData({});
+        setTaskData(undefined);
       }
     }
   };
+
   useEffect(() => {
     const fetchColumnsData = (boardInfo: IBoardEntity) => {
       let columnInfoData: IColumnsFromBackend = {};
+      if (boardInfo.taskStatus === undefined) return setColumnsInfo(columnInfoData);
       const { taskStatus, taskList } = boardInfo;
       taskStatus.forEach((status, index) => {
         const tasks: ITaskCard[] = [];
         status.items.forEach((item) => {
           const result = taskList[index].find((task) => {
-            return task.id === item.taskId;
+            return task.id === item.taskId && task.title?.includes(inputQuery);
           });
           if (result !== undefined) tasks.push(result);
         });
         columnInfoData = { ...columnInfoData, [status.id]: { name: status.name, items: tasks } };
       });
-      setColumnsInfo(columnInfoData);
+      return setColumnsInfo(columnInfoData);
     };
 
     const fetchBoardInfo = async () => {
@@ -230,13 +204,15 @@ export default function Board() {
     };
     fetchBoardInfo();
   }, [inputQuery, boardId]);
+
   return (
     <div className={style.container}>
       <ProjectHeader />
-      <HeaderNav name="projects" />
+      <HeaderNav />
       <BoardSearch
         updateIsCreateNewCard={getCreateNewCardStateFromChildren}
         setInputQuery={setInputQuery}
+        projectId={projectId}
       />
       <BoardMain
         columnsInfo={columnsInfo}
@@ -256,6 +232,8 @@ export default function Board() {
           onSave={updateTaskInfo}
           columnsInfo={columnsInfo}
           deleteTask={deleteTask}
+          labels={labels}
+          projectId={projectId}
         />
       )}
     </div>

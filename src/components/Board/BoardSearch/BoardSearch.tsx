@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState, Dispatch } from 'react';
 import styles from './BoardSearch.module.scss';
 import search from '../../../assets/search-line.svg';
+import checkAccess from '../../../utils/helpers';
 
 interface Props {
   updateIsCreateNewCard: () => void;
   setInputQuery: Dispatch<string>;
+  projectId: string;
 }
-export default function BoardSearch({ updateIsCreateNewCard, setInputQuery }: Props) {
+export default function BoardSearch({ updateIsCreateNewCard, setInputQuery, projectId }: Props) {
   const avatars = [
     { id: 1, name: 'avatar1', url: '' },
     { id: 2, name: 'avatar2', url: '' },
@@ -114,9 +116,11 @@ export default function BoardSearch({ updateIsCreateNewCard, setInputQuery }: Pr
           </ul>
         </fieldset>
       </div>
-      <button type="button" className={styles.createButton} onClick={updateIsCreateNewCard}>
-        Create card
-      </button>
+      {checkAccess('add:tasks', projectId) && (
+        <button type="button" className={styles.createButton} onClick={updateIsCreateNewCard}>
+          Create card
+        </button>
+      )}
     </div>
   );
 }

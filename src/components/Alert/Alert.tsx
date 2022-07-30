@@ -2,6 +2,7 @@ import React from 'react';
 import { TiTick } from 'react-icons/ti';
 import { ImCross } from 'react-icons/im';
 import styles from './Alert.module.scss';
+import checkIcon from '../../assets/check-icon.png';
 
 interface Props {
   statusCode: number;
@@ -14,12 +15,15 @@ export default function ErrorAlert({ statusCode, tipContent, confirmAlert }: Pro
     confirmAlert();
   };
 
-  const iconList = [<TiTick color="green" />, <ImCross color="#8B0000" />];
+  const iconList = [
+    <img className={styles.successTik} src={checkIcon} alt="Success Tik" />,
+    <ImCross color="#8B0000" />
+  ];
 
   return (
     <div className={styles.errorContainer}>
       {iconList[statusCode]}
-      <h1>{tipContent}</h1>
+      <h6>{tipContent}</h6>
       <button type="button" onClick={confirmEventHandler}>
         Confirm
       </button>
