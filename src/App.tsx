@@ -8,7 +8,7 @@ import Setting from './pages/Setting/Setting';
 import Gdpr from './pages/GDPR/GDPR';
 import CookiePolicy from './pages/CookiePolicy/CookiePolicy';
 import TermsOfServicePage from './pages/TermsOfServicePage/TermsOfServicesPage';
-import RefundPolicy from './pages/RefundPolicy/RefundPolicy';
+import RefundPolicyPage from './pages/RefundPolicyPage/RefundPolicyPage';
 import PrivacyPolicy from './pages/PrivacyPolicy/PrivacyPolicy';
 import PrivacyStatement from './pages/PrivacyStatement/PrivacyStatement';
 import UserPage from './pages/UserPage/UserPage';
@@ -51,7 +51,7 @@ function App() {
               <Route path="/gdpr" element={<Gdpr />} />
               <Route path="/terms-of-service" element={<TermsOfServicePage />} />
               <Route path="/privacy-statement" element={<PrivacyStatement />} />
-              <Route path="/refund-policy" element={<RefundPolicy />} />
+              <Route path="/refund-policy" element={<RefundPolicyPage />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/errorPage" element={<ErrorPage />} />
