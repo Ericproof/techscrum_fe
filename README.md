@@ -44,7 +44,7 @@ See the [open issues](https://010001.atlassian.net/jira/software/projects/TEC/bo
 
 ## Tests
 
-- npm run test
+- npm run cypress
 
 ## Contributing
 
