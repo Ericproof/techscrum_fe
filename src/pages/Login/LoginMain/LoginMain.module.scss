@@ -32,10 +32,11 @@
     box-sizing: border-box;
     color: rgb(94, 108, 132);
     @media (max-width: 500px) {
-      width: 264px;
+      width: 100%;
+      max-width: 264px;
 
       @media (max-width: 280px) {
-        width: 244px;
+        max-width: 244px;
       }
     }
     h1 {

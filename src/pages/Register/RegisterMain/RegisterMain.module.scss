@@ -43,7 +43,8 @@
       }
     }
     @media (max-width: 500px) {
-      width: 264px;
+      width: 100%;
+      max-width: 264px;
       word-break: break-all;
 
       .domainField {
@@ -58,7 +59,7 @@
       }
 
       @media (max-width: 280px) {
-        width: 244px;
+        max-width: 244px;
       }
     }
 
