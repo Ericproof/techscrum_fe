@@ -7,14 +7,17 @@ import styles from './ProjectHeader.module.scss';
 import useOutsideAlerter from '../../hooks/OutsideAlerter';
 import PersonalProfile from './PersonalProfile/PersonalProfile';
 import { IProjectData } from '../../types';
-import { ProjectContext } from '../../context/ProjectProvider';
+import { ProjectContext, ProjectDispatchContext } from '../../context/ProjectProvider';
 import { UserContext } from '../../context/UserInfoProvider';
 import Icon from '../Header/IconTab/IconTab';
+import StartedProjectItem from './StartedProjectItem/StarredProjectItem';
 
 export default function ProjectHeader() {
   const projectList = useContext(ProjectContext);
+  const fetchProjects = useContext(ProjectDispatchContext);
+
   const userInfo = useContext(UserContext);
-  const { visible, setVisible, myRef } = useOutsideAlerter(false);
+  const { visible, setVisible, myRef } = useOutsideAlerter(false, fetchProjects);
   const handleClickOutside = (state: boolean) => setVisible(!state);
   const navigate = useNavigate();
   const handleClickEvent = (e: React.MouseEvent<HTMLSpanElement>, project: IProjectData) => {
@@ -43,6 +46,8 @@ export default function ProjectHeader() {
     }
   };
 
+  const starredProjects = projectList.filter((project) => project.star === true);
+
   return (
     <div className={styles.projectHeader}>
       <header>
@@ -56,7 +61,13 @@ export default function ProjectHeader() {
             {visible ? (
               <>
                 <div className={styles.optionProjects}>
-                  <button type="button" onClick={() => handleClickOutside(true)}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      handleClickOutside(true);
+                      fetchProjects();
+                    }}
+                  >
                     <span className={styles.title}>Projects</span>
                     <div className={styles.btn}>
                       <span>
@@ -68,6 +79,20 @@ export default function ProjectHeader() {
                 <div className={styles.dropdownSection}>
                   <div className={styles.dropdownContainer}>
                     <div className={styles.top}>
+                      {starredProjects.length >= 1 && (
+                        <div className={styles.starredTitle}>Starred</div>
+                      )}
+                      {starredProjects &&
+                        starredProjects.map((project) => (
+                          <StartedProjectItem
+                            key={project.id}
+                            projectId={project.id}
+                            boardId={project.boardId ?? ''}
+                            projectName={project.name}
+                            iconUrl={project.iconUrl}
+                          />
+                        ))}
+
                       <div className={styles.recent}>RECENT</div>
                       {projectList.slice(0, 2).map((project, index) => (
                         <Link
@@ -155,7 +180,12 @@ export default function ProjectHeader() {
               </>
             ) : (
               <div className={styles.option}>
-                <button type="button" onClick={() => handleClickOutside(false)}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    handleClickOutside(false);
+                  }}
+                >
                   <span className={styles.title}>Projects</span>
                   <div className={styles.btn}>
                     <span>
