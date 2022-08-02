@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import styles from './PrivacyPolicy.module.scss';
+import styles from './PrivacyPolicyPage.module.scss';
 
-export default function PrivacyPolicy() {
+export default function PrivacyPolicyPage() {
   return (
     <div className={styles.privacyPolicyMain}>
       <div className={styles.privacyPolicyContainer}>

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import styles from './Access.module.scss';
+import styles from './AccessPage.module.scss';
 import Header from './AccessHeader/AccessHeader';
 import SearchBar from './AccessSearchBar/AccessSearchBar';
 import Main from './AccessMain/AccessMain';

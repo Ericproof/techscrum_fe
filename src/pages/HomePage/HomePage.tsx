@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import styles from './Home.module.scss';
+import styles from './HomePage.module.scss';
 import cover from '../../assets/cover.png';
 import rochelle from '../../assets/rochelle.png';
 import envelope from '../../assets/envelope.svg';
@@ -15,7 +15,7 @@ import realTimeCollaboration from '../../assets/realTimeCollaboration.png';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 
-export default function Home() {
+export default function HomePage() {
   const [loginDetector, setLoginDetector] = useState(false);
   const navigate = useNavigate();
 

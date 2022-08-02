@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import styles from './GDPR.module.scss';
+import styles from './GDPRPage.module.scss';
 
 export default function Gdpr() {
   return (

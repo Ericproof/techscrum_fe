@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import styles from './RefundPolicy.module.scss';
+import styles from './RefundPolicyPage.module.scss';
 
-export default function RefundPolicy() {
+export default function RefundPolicyPage() {
   return (
     <div className={styles.refundMain}>
       <div className={styles.refundContainer}>

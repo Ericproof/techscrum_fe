@@ -75,7 +75,7 @@ export default function LoginMain() {
 
   return (
     <div className={styles.registerMain}>
-      <img src={Icon} alt="TechScrum Icon" className={styles.logo} />
+      <img src={Icon} alt="TechScrum Icon" />
       <form onSubmit={handleSubmit}>
         <h1>Log in to your account</h1>
         <input

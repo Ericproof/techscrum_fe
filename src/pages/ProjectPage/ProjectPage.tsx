@@ -4,15 +4,15 @@ import { HiDotsHorizontal } from 'react-icons/hi';
 import { FiSearch } from 'react-icons/fi';
 import { Link, useNavigate } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
-import styles from './Project.module.scss';
+import styles from './ProjectPage.module.scss';
 import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
-import { deleteProject } from '../../api/projects/projects';
+import { deleteProject, updateProject } from '../../api/projects/projects';
 import CreateNewCard from '../../components/CreateNewCard/CreateNewCard';
 import { IProject, IProjectData } from '../../types';
 import { ProjectContext, ProjectDispatchContext } from '../../context/ProjectProvider';
 import checkAccess from '../../utils/helpers';
 
-export default function Project() {
+export default function ProjectPage() {
   const navigate = useNavigate();
   const fetchProjects = useContext(ProjectDispatchContext);
   const projectList = useContext<IProject[]>(ProjectContext);
@@ -48,7 +48,7 @@ export default function Project() {
     setValue(value + 1);
   };
 
-  const setProjectStar = (id: number) => {
+  const setProjectStar = (id: string) => {
     const projectIndex = projectList.findIndex((project: IProjectData) => project.id === id);
     projectList[projectIndex].star = !projectList[projectIndex].star;
     setValue(value + 1);
@@ -62,6 +62,19 @@ export default function Project() {
         setFilteredProjectList(updateProjectList);
       }
     });
+  };
+
+  const starProject = (id: string, data: IProjectData, token: string) => {
+    setProjectStar(id);
+    updateProject(id, data, token).then(() => {
+      fetchProjects();
+      setFilteredProjectList(projectList);
+    });
+  };
+
+  const getAuthToken = () => {
+    const token = localStorage.getItem('access_token') ?? '';
+    return token;
   };
 
   const viewDetailPosition = (e: React.MouseEvent<HTMLDivElement>, id: number) => {
@@ -177,7 +190,9 @@ export default function Project() {
                               <button
                                 type="button"
                                 className={[styles.starBtn, styles.overflowVisible].join(' ')}
-                                onClick={() => setProjectStar(project.id)}
+                                onClick={() => {
+                                  starProject(project.id, { star: false }, getAuthToken());
+                                }}
                               >
                                 <div
                                   className={[styles.starStyle, styles.overflowVisible].join(' ')}
@@ -192,7 +207,9 @@ export default function Project() {
                               <button
                                 type="button"
                                 className={[styles.unStarBtn, styles.overflowVisible].join(' ')}
-                                onClick={() => setProjectStar(project.id)}
+                                onClick={() => {
+                                  starProject(project.id, { star: true }, getAuthToken());
+                                }}
                               >
                                 <div
                                   className={[styles.starStyle, styles.overflowVisible].join(' ')}

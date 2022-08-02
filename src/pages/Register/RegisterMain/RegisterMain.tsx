@@ -210,11 +210,10 @@ export default function RegisterMain() {
       </form>
 
       <p className={styles.registerMainFooter}>
-        This page is protected by reCAPTCHA and complies with Google&apos;s{' '}
         <Link to="/privacy-policy" target="_blank">
-          Privacy Policy{' '}
+          Privacy Policy
         </Link>
-        and{' '}
+        &nbsp;and&nbsp;
         <Link to="/terms-of-service" target="_blank">
           Terms of Service
         </Link>

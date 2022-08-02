@@ -4,6 +4,7 @@
   flex-direction: column;
   justify-content: center;
   height: 100%;
+
   @media (max-width: 280px) {
     margin-top: 22%;
   }
@@ -32,6 +33,11 @@
     color: rgb(94, 108, 132);
     @media (max-width: 500px) {
       width: 100%;
+      max-width: 264px;
+
+      @media (max-width: 280px) {
+        max-width: 244px;
+      }
     }
     h1 {
       font-size: 16px;
@@ -123,7 +129,7 @@
       }
     }
 
-    button:disabled{
+    button:disabled {
       background-color: #728eb9;
       cursor: progress;
     }
@@ -216,8 +222,4 @@
       font-size: 12px;
     }
   }
-}
-
-.logo{
-  max-width: 20%!important;
 }
