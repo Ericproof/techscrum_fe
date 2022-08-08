@@ -166,3 +166,7 @@ export interface ICommentData {
 export interface ICommentItemData {
   [x: string]: any;
 }
+
+export interface IForgetPasswordForm {
+  email: stirng;
+}
