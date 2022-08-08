@@ -27,5 +27,4 @@ settings.json
 
 # cypress
 /cypress/screenshots
-/cypress/support
 /cypress/videos
