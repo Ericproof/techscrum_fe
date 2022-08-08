@@ -131,7 +131,7 @@ export default function LoginMain() {
         <div className={styles.formFooter}>
           <Link to="/register">Register</Link>
           <span>•</span>
-          <Link to="/forget-password">Forgot password</Link>
+          <Link to="/login/reset-password">Forgot password</Link>
         </div>
       </form>
       <p className={styles.registerMainFooter}>

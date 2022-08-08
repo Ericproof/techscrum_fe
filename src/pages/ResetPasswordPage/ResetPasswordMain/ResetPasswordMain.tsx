@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import styles from './ForgetPasswordMain.module.scss';
+import styles from './ResetPasswordMain.module.scss';
 import Icon from '../../../assets/logo.svg';
 import Loading from '../../../components/Loading/Loading';
-import { forgetPasswordApply } from '../../../api/forgetPassword/forgetPassword';
-import ForgetPasswordResult from './ForgetPasswordResult/ForgetPasswordResult';
+import { resetPasswordApply } from '../../../api/resetPassword/resetPassword';
+import ResetPasswordResult from './ResetPasswordResult/ResetPasswordResult';
 
 export default function RegisterMain() {
-  const [forgetPasswordForm, setForgetPasswordForm] = useState({
+  const [resetPasswordForm, setResetPasswordForm] = useState({
     email: ''
   });
   const [loading, setLoading] = useState(false);
@@ -17,7 +17,7 @@ export default function RegisterMain() {
   const handleSubmit = async () => {
     setLoading(true);
     try {
-      await forgetPasswordApply(forgetPasswordForm);
+      await resetPasswordApply(resetPasswordForm);
       setApplySuccessStatus(true);
     } catch (e) {
       setApplySuccessStatus(false);
@@ -28,18 +28,18 @@ export default function RegisterMain() {
   };
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForgetPasswordForm({ ...forgetPasswordForm, [e.target.name]: e.target.value });
+    setResetPasswordForm({ ...resetPasswordForm, [e.target.name]: e.target.value });
   };
 
   if (loading) {
     return <Loading />;
   }
   return (
-    <div className={styles.registerMain}>
+    <div className={styles.resetPasswordMain}>
       <img src={Icon} alt="TechScrum Icon" />
       <form onSubmit={handleSubmit}>
         {applyStatus ? (
-          <ForgetPasswordResult successFlag={applySuccessStatus} />
+          <ResetPasswordResult successFlag={applySuccessStatus} />
         ) : (
           <>
             <h1>Forget Password</h1>
@@ -48,7 +48,7 @@ export default function RegisterMain() {
               type="email"
               placeholder="Enter email address"
               name="email"
-              defaultValue={forgetPasswordForm.email}
+              defaultValue={resetPasswordForm.email}
               onChange={onChangeHandler}
               required
               data-testid="email"

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './ForgetPasswordResult.module.scss';
+import styles from './ResetPasswordResult.module.scss';
 import Error from '../../../../assets/error.png';
 import Email from '../../../../assets/email.png';
 
@@ -7,9 +7,9 @@ interface Props {
   successFlag: boolean;
 }
 
-export default function ForgetPasswordResult({ successFlag }: Props) {
+export default function ResetPasswordResult({ successFlag }: Props) {
   return (
-    <div className={styles.forgetPasswordResultContainer}>
+    <div className={styles.resetPasswordResultContainer}>
       {successFlag ? (
         <>
           <img src={Email} alt="Email Icon" />

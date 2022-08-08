@@ -13,7 +13,7 @@
 
 describe('forget password page', () => {
     beforeEach(() => {
-        cy.visit('/forget-password')
+        cy.visit('/login/reset-password')
     })
 
     it('should able to send forgetPassword Application', () => {

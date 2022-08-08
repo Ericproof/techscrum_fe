@@ -18,8 +18,8 @@ import AccessPage from './pages/AccessPage/AccessPage';
 import ProjectPage from './pages/ProjectPage/ProjectPage';
 import CreateProject from './pages/CreateProject/CreateProject';
 import AccountSettingsPage from './pages/AccountSettingPage/AccountSettingPage';
-import ForgetPasswordPage from './pages/ForgetPasswordPage/ForgetPasswordPage';
-import ResetPasswordVerifyPage from './pages/ForgetPasswordVerifyPage/ForgetPasswordVerifyPage';
+import ResetPasswordPage from './pages/ResetPasswordPage/ResetPasswordPage';
+import ChangePasswordPage from './pages/ChangePasswordPage/ChangePasswordPage';
 import BoardPage from './pages/BoardPage/BoardPage';
 import AboutPage from './pages/AboutPage/AboutPage';
 import './App.css';
@@ -47,8 +47,8 @@ function App() {
               <Route path="/verify" element={<VerifyPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/" element={<HomePage />} />
-              <Route path="/forget-password" element={<ForgetPasswordPage />} />
-              <Route path="/forget-password-verify" element={<ResetPasswordVerifyPage />} />
+              <Route path="/login/reset-password" element={<ResetPasswordPage />} />
+              <Route path="/login/change-password" element={<ChangePasswordPage />} />
               <Route path="/cookie-policy" element={<CookiePolicyPage />} />
               <Route path="/gdpr" element={<GdprPage />} />
               <Route path="/terms-of-service" element={<TermsOfServicePage />} />

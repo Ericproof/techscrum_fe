@@ -13,8 +13,8 @@
 
 describe('forget password verify page', () => {
     beforeEach(() => {
-        cy.intercept('GET', '**/forget-password/*', { fixture: 'forgetPassword.json' }).as('fetch-email');
-        cy.visit("forget-password-verify?token='123'");
+        cy.intercept('GET', '**/change-password/*', { fixture: 'forgetPassword.json' }).as('fetch-email');
+        cy.visit("/login/change-password?token='123'");
         cy.wait('@fetch-email');
     })
 

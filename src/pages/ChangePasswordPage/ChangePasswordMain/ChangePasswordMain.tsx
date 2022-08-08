@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import styles from './ForgetPasswordVerifyMain.module.scss';
+import styles from './ChangePasswordMain.module.scss';
 import Icon from '../../../assets/logo.svg';
 import Error from '../../../assets/error.png';
 import Loading from '../../../components/Loading/Loading';
-import {
-  getForgetPasswordApplication,
-  setPassword
-} from '../../../api/forgetPassword/forgetPassword';
-import { IForgetPasswordForm } from '../../../types';
+import { getResetPasswordApplication, setPassword } from '../../../api/resetPassword/resetPassword';
+import { IResetPasswordForm } from '../../../types';
 import Alert from '../../../components/Alert/Alert';
 
 export default function RegisterMain() {
@@ -17,7 +14,7 @@ export default function RegisterMain() {
   const illegalCharacter = /[%&]/;
   const [searchParams] = useSearchParams();
   const token = searchParams.get('token');
-  const [forgetPasswordForm, setForgetPasswordForm] = useState<IForgetPasswordForm>({
+  const [changePasswordForm, setChangePasswordForm] = useState<IResetPasswordForm>({
     email: ''
   });
   const [passwordForm, setPasswordForm] = useState({
@@ -32,18 +29,18 @@ export default function RegisterMain() {
   const [tipContent, setTipContent] = useState('');
 
   useEffect(() => {
-    const fetchForgetPassword = async () => {
+    const fetchUserEmail = async () => {
       try {
         setLoading(true);
-        const result = await getForgetPasswordApplication(token ?? '');
-        setForgetPasswordForm({ ...result.data });
+        const result = await getResetPasswordApplication(token ?? '');
+        setChangePasswordForm({ ...result.data });
       } catch (e) {
         setInvalideTokenStatus(true);
       } finally {
         setLoading(false);
       }
     };
-    fetchForgetPassword();
+    fetchUserEmail();
   }, [token]);
 
   const handleSubmit = async () => {
@@ -92,7 +89,7 @@ export default function RegisterMain() {
     return <div />;
   }
   return (
-    <div className={styles.registerMain}>
+    <div className={styles.changePasswordMain}>
       <img src={Icon} alt="TechScrum Icon" />
       <form onSubmit={handleSubmit}>
         {invalideTokenStatus ? (
@@ -107,7 +104,7 @@ export default function RegisterMain() {
               className={styles.email}
               type="text"
               name="email"
-              defaultValue={forgetPasswordForm.email}
+              defaultValue={changePasswordForm.email}
               onChange={onChangeHandler}
               disabled
               required

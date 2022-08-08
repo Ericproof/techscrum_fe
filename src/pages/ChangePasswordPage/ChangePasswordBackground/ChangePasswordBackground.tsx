@@ -1,11 +1,11 @@
 import React from 'react';
-import styles from './ForgetPasswordVerifyBackground.module.scss';
+import styles from './ChangePasswordBackground.module.scss';
 
-interface ResetPasswordPageBackground {
+interface ChangePasswordPageBackground {
   children?: React.ReactNode;
 }
 
-export default function PasswordResetBackground(props: ResetPasswordPageBackground) {
+export default function PasswordChangeBackground(props: ChangePasswordPageBackground) {
   const { children } = props;
   return (
     <div className={styles.unauthorizePageContainer}>
@@ -32,6 +32,6 @@ export default function PasswordResetBackground(props: ResetPasswordPageBackgrou
   );
 }
 
-PasswordResetBackground.defaultProps = {
+PasswordChangeBackground.defaultProps = {
   children: null
 };
