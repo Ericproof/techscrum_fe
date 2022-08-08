@@ -25,3 +25,7 @@ node_modules
 .vscode
 settings.json
 
+# cypress
+/cypress/screenshots
+/cypress/support
+/cypress/videos
