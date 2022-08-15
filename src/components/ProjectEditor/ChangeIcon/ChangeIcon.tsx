@@ -16,6 +16,7 @@ export default function ChangeIcon(props: IChangeIconProps) {
       <img src={value || defaultIcon} alt="project icon" />
       <button
         type="button"
+        data-testid="iconButton"
         onClick={() => {
           toggleModal(!modalShown);
         }}
