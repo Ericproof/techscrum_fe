@@ -20,7 +20,7 @@ export default function ChangeIcon(props: IChangeIconProps) {
           toggleModal(!modalShown);
         }}
       >
-        Change icon
+        Upload Profile
       </button>
       <Modal
         shown={modalShown}
