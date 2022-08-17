@@ -110,7 +110,7 @@ export default function BoardMain({
                           role="button"
                           tabIndex={0}
                         >
-                          <p>+ Add Task</p>
+                          <span>+ Add Task</span>
                         </div>
                       )}
                     </div>
@@ -122,7 +122,7 @@ export default function BoardMain({
         })}
       </DragDropContext>
       <div className={[styles.columnsContainer, styles.lastColumnContainer].join(' ')}>
-        <p>+ Add Columns</p>
+        <span>+ Add Columns</span>
       </div>
     </div>
   );
