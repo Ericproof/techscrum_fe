@@ -15,6 +15,7 @@ interface Props {
   deleteTask: () => void;
   labels: ILabelData[];
   projectId: string;
+  updateTaskTags: (tags: ILabelData[] | undefined) => void;
 }
 
 export default function BoardCard({
@@ -24,7 +25,8 @@ export default function BoardCard({
   deleteTask,
   updateIsViewTask,
   labels,
-  projectId
+  projectId,
+  updateTaskTags
 }: Props) {
   const [taskInfo, setTaskInfo] = useState<TaskEntity | null>(null);
 
@@ -87,6 +89,7 @@ export default function BoardCard({
             taskStatusOnchange={onSave}
             labels={labels}
             projectId={projectId}
+            updateTaskTags={updateTaskTags}
           />
         </div>
       </div>

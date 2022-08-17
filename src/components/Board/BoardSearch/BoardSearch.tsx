@@ -39,7 +39,7 @@ export default function BoardSearch({ updateIsCreateNewCard, setInputQuery, proj
 
   return (
     <div className={styles.boardSearchSection}>
-      <div className={styles.container}>
+      <div className={styles.searchBarContainer}>
         <div
           className={
             inputState
@@ -117,7 +117,12 @@ export default function BoardSearch({ updateIsCreateNewCard, setInputQuery, proj
         </fieldset>
       </div>
       {checkAccess('add:tasks', projectId) && (
-        <button type="button" className={styles.createButton} onClick={updateIsCreateNewCard}>
+        <button
+          type="button"
+          className={styles.createButton}
+          style={{ display: 'none' }}
+          onClick={updateIsCreateNewCard}
+        >
           Create card
         </button>
       )}

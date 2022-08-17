@@ -3,20 +3,29 @@ import React from 'react';
 import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
 import { IColumnsFromBackend } from '../../../types';
 import Loading from '../../Loading/Loading';
-import style from './BoardMain.module.scss';
+import styles from './BoardMain.module.scss';
+import checkAccess from '../../../utils/helpers';
 
 interface Props {
   columnsInfo: IColumnsFromBackend;
   onDragEventHandler: (result: DropResult) => boolean | void | null;
   passTaskId: (itemId: string) => void;
+  updateIsCreateNewCard: () => void;
+  projectId: string;
 }
 
-export default function BoardMain({ columnsInfo, onDragEventHandler, passTaskId }: Props) {
+export default function BoardMain({
+  columnsInfo,
+  onDragEventHandler,
+  passTaskId,
+  updateIsCreateNewCard,
+  projectId
+}: Props) {
   if (!columnsInfo || Object.keys(columnsInfo).length === 0) {
     return <Loading />;
   }
   return (
-    <div className={style.container}>
+    <div className={styles.boardMainContainer}>
       <DragDropContext
         onDragEnd={(result) => {
           onDragEventHandler(result);
@@ -24,7 +33,7 @@ export default function BoardMain({ columnsInfo, onDragEventHandler, passTaskId 
       >
         {Object.entries(columnsInfo).map(([id, column]) => {
           return (
-            <div key={id} className={style.columnsContainer}>
+            <div key={id} className={styles.columnsContainer}>
               <Droppable droppableId={id} key={id}>
                 {(provided) => {
                   return (
@@ -32,11 +41,11 @@ export default function BoardMain({ columnsInfo, onDragEventHandler, passTaskId 
                       /* eslint-disable react/jsx-props-no-spreading */
                       ref={provided.innerRef}
                       {...provided.droppableProps}
-                      className={style.column}
+                      className={styles.column}
                     >
-                      <div className={style.name}>
-                        {column.name} {column.items.length}{' '}
-                        {column.items.length > 1 ? 'issues' : 'issue'}
+                      <div className={styles.columnInfo}>
+                        <h1 className={styles.name}>{column.name}</h1>
+                        <h1 className={styles.taskNum}>{column.items.length}</h1>
                       </div>
                       {column.items.map((item, index) => {
                         return (
@@ -44,7 +53,7 @@ export default function BoardMain({ columnsInfo, onDragEventHandler, passTaskId 
                             {(provided2) => {
                               return (
                                 <div
-                                  className={style.card}
+                                  className={styles.card}
                                   ref={provided2.innerRef}
                                   {...provided2.dragHandleProps}
                                   {...provided2.draggableProps}
@@ -53,16 +62,27 @@ export default function BoardMain({ columnsInfo, onDragEventHandler, passTaskId 
                                     passTaskId(item.id ?? '');
                                   }}
                                 >
-                                  <span> {item.title}</span>
-                                  <div className={style.cardFooter}>
-                                    <div className={style.cardFooterLeft}>
-                                      <img
-                                        src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png"
-                                        alt="Story"
-                                      />
-                                      <span>{item.tag}</span>
+                                  <span>
+                                    {' '}
+                                    {item.tags?.map((tag) => {
+                                      return (
+                                        <div className={styles.tag} key={tag.id}>
+                                          <h1>{tag.name}</h1>
+                                        </div>
+                                      );
+                                    })}
+                                  </span>
+                                  <p>{item.title ?? ''}</p>
+                                  <div className={styles.cardFooter}>
+                                    <div className={styles.cardFooterLeft}>
+                                      <span>
+                                        Due Date:{' '}
+                                        {item.dueAt?.toString().split('T')[0].split('-')[2]}/
+                                        {item.dueAt?.toString().split('T')[0].split('-')[1]}/
+                                        {item.dueAt?.toString().split('T')[0].split('-')[0]}
+                                      </span>
                                     </div>
-                                    <div className={style.cardFooterRight}>
+                                    <div className={styles.cardFooterRight}>
                                       <img
                                         src={
                                           item !== undefined && item.assignInfo !== undefined
@@ -71,7 +91,7 @@ export default function BoardMain({ columnsInfo, onDragEventHandler, passTaskId 
                                             : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'
                                         }
                                         alt="avatar"
-                                        className={style.avatorIcon}
+                                        className={styles.avatorIcon}
                                       />
                                     </div>
                                   </div>
@@ -82,6 +102,17 @@ export default function BoardMain({ columnsInfo, onDragEventHandler, passTaskId 
                         );
                       })}
                       {provided.placeholder}
+                      {checkAccess('add:tasks', projectId) && (
+                        <div
+                          className={[styles.card, styles.cardAddNewCard].join(' ')}
+                          onClick={updateIsCreateNewCard}
+                          onKeyDown={updateIsCreateNewCard}
+                          role="button"
+                          tabIndex={0}
+                        >
+                          <p>+ Add Task</p>
+                        </div>
+                      )}
                     </div>
                   );
                 }}
@@ -90,6 +121,9 @@ export default function BoardMain({ columnsInfo, onDragEventHandler, passTaskId 
           );
         })}
       </DragDropContext>
+      <div className={[styles.columnsContainer, styles.lastColumnContainer].join(' ')}>
+        <p>+ Add Columns</p>
+      </div>
     </div>
   );
 }
