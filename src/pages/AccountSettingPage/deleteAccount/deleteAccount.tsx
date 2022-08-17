@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import deleteAccount from '../../../api/accountSetting/deleteAccount';
+import styles from './deleteAccount.module.scss';
 
 interface Props {
   deleteAccountTipHandler: (tip: string, statusCode: number) => void;
@@ -43,18 +44,41 @@ export default function DeleteAccount({ deleteAccountTipHandler }: Props) {
   };
 
   return (
-    <div>
-      <h2>Delete Account</h2>
-      <form onSubmit={submitHandler}>
-        <input
-          type="password"
-          placeholder="Enter Password"
-          onChange={(e) => fetchPassword(e.target.value)}
-          required
-        />
-        <p>Enter the password to delete the account.</p>
-        <button type="submit">Delete</button>
-      </form>
+    <div className={styles.deleteAccountContainer}>
+      <div className={styles.accountHeader}>
+        <h3>Account Settings</h3>
+      </div>
+      <div className={styles.accountSettingContent}>
+        <div className={styles.accountSidebar}>
+          <h4>Change Password</h4>
+          <h4>Notifications</h4>
+          <h4>Others</h4>
+          <hr />
+          <button type="button" className={styles.deleteButton}>
+            Delete Account
+          </button>
+        </div>
+        <div className={styles.deleteRightContent}>
+          <h3>We are sorry to see you go</h3>
+          <h4>
+            If you’d like to reduce your email notifications, you can disable them here or if you
+            just want to change your username, you can do that here. Be advised, account deletion is
+            final. There will be no way to restore your account.
+          </h4>
+          <p>Password</p>
+          <form onSubmit={submitHandler}>
+            <input
+              className={styles.passwordInput}
+              type="password"
+              placeholder="Enter Password"
+              onChange={(e) => fetchPassword(e.target.value)}
+              required
+            />
+            <p className={styles.deleteCaution}>Enter the password to delete your account.</p>
+            <button type="submit">Delete Account</button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }
