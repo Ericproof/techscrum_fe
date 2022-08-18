@@ -75,7 +75,7 @@ export default function ChangePassword({ changePasswordTipHandler }: Props) {
         </div>
         <div className={styles.rightContent}>
           <form onSubmit={submitHandler}>
-            <p>Old Password</p>
+            <span>Old Password</span>
             <input
               className={styles.passwordInput}
               type="password"
@@ -83,7 +83,7 @@ export default function ChangePassword({ changePasswordTipHandler }: Props) {
               onChange={(e) => fetchOldPassword(e.target.value)}
               required
             />
-            <p>New Password</p>
+            <span>New Password</span>
             <input
               className={styles.passwordInput}
               type="password"
@@ -93,7 +93,7 @@ export default function ChangePassword({ changePasswordTipHandler }: Props) {
               maxLength={16}
               required
             />
-            <p>Confirm Password</p>
+            <span>Confirm Password</span>
             <input
               className={styles.passwordInput}
               type="password"

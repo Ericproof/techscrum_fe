@@ -48,6 +48,7 @@ export default function Assignee(props: AssigneeProps) {
                         type="button"
                         name="assignee"
                         className={styles.assigneeOptions}
+                        data-testid="assignee"
                         onClick={() => {
                           setAssignState({ id: assignee.id, state: assignee.state });
                           onChange({

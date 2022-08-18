@@ -12,7 +12,14 @@ export default function ChangeName(props: ChangeNameProps) {
     <div className={styles.nameInputSection}>
       <label htmlFor="name">
         <span>Name</span>
-        <input type="text" id="name" name="name" value={value} onChange={onChange} />
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value={value}
+          data-testid="name"
+          onChange={onChange}
+        />
       </label>
     </div>
   );

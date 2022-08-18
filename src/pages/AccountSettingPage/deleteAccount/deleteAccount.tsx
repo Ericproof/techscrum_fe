@@ -62,19 +62,22 @@ export default function DeleteAccount({ deleteAccountTipHandler }: Props) {
           <h3>We are sorry to see you go</h3>
           <h4>
             If you’d like to reduce your email notifications, you can disable them here or if you
-            just want to change your username, you can do that here. Be advised, account deletion is
-            final. There will be no way to restore your account.
+            just want to change your username, you can do that here.
           </h4>
-          <p>Password</p>
+          <h4>
+            {' '}
+            Be advised, account deletion is final. There will be no way to restore your account.
+          </h4>
+          <span>Password</span>
           <form onSubmit={submitHandler}>
             <input
               className={styles.passwordInput}
               type="password"
-              placeholder="Enter Password"
+              placeholder="Enter your password"
               onChange={(e) => fetchPassword(e.target.value)}
               required
             />
-            <p className={styles.deleteCaution}>Enter the password to delete your account.</p>
+            <span className={styles.deleteCaution}>Enter the password to delete your account.</span>
             <button type="submit">Delete Account</button>
           </form>
         </div>
