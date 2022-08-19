@@ -59,54 +59,38 @@ export default function ChangePassword({ changePasswordTipHandler }: Props) {
   };
 
   return (
-    <div className={styles.accountContainer}>
-      <div className={styles.accountHeader}>
-        <h3>Account Settings</h3>
-      </div>
-      <div className={styles.accountSettingContent}>
-        <div className={styles.accountSidebar}>
-          <button type="button" className={styles.changeButton}>
-            Change Password
-          </button>
-          <h4>Notifications</h4>
-          <h4>Others</h4>
-          <hr />
-          <h4 className={styles.deleteAccount}>Delete Account</h4>
-        </div>
-        <div className={styles.rightContent}>
-          <form onSubmit={submitHandler}>
-            <span>Old Password</span>
-            <input
-              className={styles.passwordInput}
-              type="password"
-              placeholder="Enter Old Password"
-              onChange={(e) => fetchOldPassword(e.target.value)}
-              required
-            />
-            <span>New Password</span>
-            <input
-              className={styles.passwordInput}
-              type="password"
-              placeholder="Enter New Password"
-              onChange={(e) => fetchNewPassword(e.target.value)}
-              minLength={6}
-              maxLength={16}
-              required
-            />
-            <span>Confirm Password</span>
-            <input
-              className={styles.passwordInput}
-              type="password"
-              placeholder="Re-enter New Password"
-              onChange={(e) => fetchConfirmPassword(e.target.value, e)}
-              minLength={6}
-              maxLength={16}
-              required
-            />
-            <button type="submit">Save Changes</button>
-          </form>
-        </div>
-      </div>
+    <div className={styles.rightContent}>
+      <form onSubmit={submitHandler}>
+        <span>Old Password</span>
+        <input
+          className={styles.passwordInput}
+          type="password"
+          placeholder="Enter Old Password"
+          onChange={(e) => fetchOldPassword(e.target.value)}
+          required
+        />
+        <span>New Password</span>
+        <input
+          className={styles.passwordInput}
+          type="password"
+          placeholder="Enter New Password"
+          onChange={(e) => fetchNewPassword(e.target.value)}
+          minLength={6}
+          maxLength={16}
+          required
+        />
+        <span>Confirm Password</span>
+        <input
+          className={styles.passwordInput}
+          type="password"
+          placeholder="Re-enter New Password"
+          onChange={(e) => fetchConfirmPassword(e.target.value, e)}
+          minLength={6}
+          maxLength={16}
+          required
+        />
+        <button type="submit">Save Changes</button>
+      </form>
     </div>
   );
 }
