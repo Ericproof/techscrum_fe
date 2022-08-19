@@ -21,7 +21,6 @@ export default function Nav() {
 
   return (
     <nav className={style.container}>
-      <NavTop currentProject={currentProject[0]} />
       <NavMain
         currentProject={currentProject[0]}
         shortCutAdded={fetchProjectsList}

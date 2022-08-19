@@ -10,10 +10,11 @@ interface IPropsLabel {
   labels: ILabelData[];
   taskInfo: TaskEntity;
   isDisabled: boolean;
+  updateTaskTags: (tags: ILabelData[] | undefined) => void;
 }
 
 export default function LabelFields(props: IPropsLabel) {
-  const { labels, taskInfo, isDisabled } = props;
+  const { labels, taskInfo, isDisabled, updateTaskTags } = props;
   const [selectedTaskLabelList, setSelectedTaskLabelList] = useState<ILabelData[] | undefined>(
     taskInfo.tags
   );
@@ -54,7 +55,9 @@ export default function LabelFields(props: IPropsLabel) {
       await removeLabel(taskInfo.id, label.id);
     } finally {
       if (selectedTaskLabelList !== undefined) {
-        setSelectedTaskLabelList(selectedTaskLabelList.filter((item) => item.name !== label.name));
+        const newLabelList = selectedTaskLabelList.filter((item) => item.name !== label.name);
+        setSelectedTaskLabelList(newLabelList);
+        updateTaskTags(newLabelList);
       }
     }
   };
@@ -63,7 +66,9 @@ export default function LabelFields(props: IPropsLabel) {
     if (!selectedTaskLabelList) {
       return;
     }
-    setSelectedTaskLabelList(selectedTaskLabelList.concat(label));
+    const newLabelList = selectedTaskLabelList.concat(label);
+    setSelectedTaskLabelList(newLabelList);
+    updateTaskTags(newLabelList);
   };
 
   const onChangeFilterLabel = (e: React.ChangeEvent<HTMLInputElement>) => {
