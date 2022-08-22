@@ -31,7 +31,7 @@ export default function BoardMain({
           onDragEventHandler(result);
         }}
       >
-        {Object.entries(columnsInfo).map(([id, column]) => {
+        {Object.entries(columnsInfo).map(([id, column], columnIndex) => {
           return (
             <div key={id} className={styles.columnsContainer}>
               <Droppable droppableId={id} key={id}>
@@ -104,13 +104,21 @@ export default function BoardMain({
                       {provided.placeholder}
                       {checkAccess('add:tasks', projectId) && (
                         <div
-                          className={[styles.card, styles.cardAddNewCard].join(' ')}
+                          className={
+                            columnIndex === 0
+                              ? [styles.card, styles.cardAddNewCard].join(' ')
+                              : [
+                                  styles.card,
+                                  styles.cardAddNewCard,
+                                  styles.cardAddNewCardHide
+                                ].join(' ')
+                          }
                           onClick={updateIsCreateNewCard}
                           onKeyDown={updateIsCreateNewCard}
                           role="button"
                           tabIndex={0}
                         >
-                          <span>+ Add Task</span>
+                          <p>+ Add Task</p>
                         </div>
                       )}
                     </div>
