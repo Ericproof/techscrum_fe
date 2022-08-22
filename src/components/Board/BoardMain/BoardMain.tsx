@@ -104,15 +104,11 @@ export default function BoardMain({
                       {provided.placeholder}
                       {checkAccess('add:tasks', projectId) && (
                         <div
-                          className={
-                            columnIndex === 0
-                              ? [styles.card, styles.cardAddNewCard].join(' ')
-                              : [
-                                  styles.card,
-                                  styles.cardAddNewCard,
-                                  styles.cardAddNewCardHide
-                                ].join(' ')
-                          }
+                          className={[
+                            styles.card,
+                            styles.cardAddNewCard,
+                            styles.cardAddNewCardHide
+                          ].join(' ')}
                           onClick={updateIsCreateNewCard}
                           onKeyDown={updateIsCreateNewCard}
                           role="button"

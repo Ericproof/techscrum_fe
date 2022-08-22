@@ -20,6 +20,7 @@
   
 }
 .createButton {
+  margin-top: -50px;
   align-items: baseline;
   border-width: 0px;
   border-radius: 3px;
@@ -45,7 +46,7 @@
   width: auto;
   justify-content: center;
   color: #ffffff;
-  left: 1343px;
+  right: 500px;
   z-index: 1;
   &:hover {
     background: #0065ff;
