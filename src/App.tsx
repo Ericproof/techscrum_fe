@@ -66,6 +66,8 @@ function App() {
                 <Route path="/projects" element={<ProjectPage />} />
                 <Route path="/create-projects" element={<CreateProject />} />
                 <Route path="/account-settings" element={<AccountSettingsPage />} />
+                <Route path="/account-settings/change-password" element={<AccountSettingsPage />} />
+                <Route path="/account-settings/delete-account" element={<AccountSettingsPage />} />
                 <Route path="/projects/:projectId/members" element={<ProjectMembersPage />} />
                 <Route path="/roles" element={<RolePage />} />
               </Route>

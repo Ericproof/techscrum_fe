@@ -80,25 +80,23 @@ export default function ProjectMembersPage() {
   };
 
   return (
-    <>
+    <div className={styles.projectMemberContainer}>
       <ProjectMemberHeader />
-      <div className={styles.projectMemberContainer}>
-        <div className={styles.projectMemberMain}>
-          <ProjectMemberNav />
-          <ProjectMemberTitle setInviteFormVisible={setInviteFormVisible} />
-          {loadingStatus ? (
-            <Loading />
-          ) : (
-            <ProjectMemberMain
-              members={members}
-              roles={roles}
-              onChangeProjectRole={onChangeProjectRole}
-              onClickRemove={onClickRemove}
-            />
-          )}
-        </div>
-        {inviteFormVisible && <InviteMemberFloatForm roles={roles} inviteMember={InviteMember} />}
+      <div className={styles.projectMemberMain}>
+        <ProjectMemberNav />
+        <ProjectMemberTitle setInviteFormVisible={setInviteFormVisible} />
+        {loadingStatus ? (
+          <Loading />
+        ) : (
+          <ProjectMemberMain
+            members={members}
+            roles={roles}
+            onChangeProjectRole={onChangeProjectRole}
+            onClickRemove={onClickRemove}
+          />
+        )}
       </div>
-    </>
+      {inviteFormVisible && <InviteMemberFloatForm roles={roles} inviteMember={InviteMember} />}
+    </div>
   );
 }
