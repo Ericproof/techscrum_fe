@@ -48,6 +48,8 @@
   color: #ffffff;
   right: 500px;
   z-index: 1;
+
+  @media (min-width: 768px) {}
   &:hover {
     background: #0065ff;
     text-decoration: inherit;
