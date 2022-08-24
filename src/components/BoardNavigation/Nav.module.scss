@@ -1,15 +1,12 @@
-
-
-  .container {
-    width: 10%;
-    color: var(--ds-text-subtle, #42526e);
-    min-width: 240px;
-    background-color: var(--ds-surface, white);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    padding: 30px 8px 8px 8px;
-    min-height: 100%;
-    margin-top: 4%;
-  }
-
+.container {
+  width: 10%;
+  color: var(--ds-text-subtle, #42526e);
+  min-width: 240px;
+  background-color: var(--ds-surface, white);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 30px 8px 8px 8px;
+  min-height: 100%;
+  margin-top: 10px;
+}
