@@ -36,7 +36,7 @@ const Developers = [
   },
   {
     image: Regan,
-    name: 'Regan Xu',
+    name: 'Regan Leung',
     position: 'Developer',
     bulletPoint1: 'Lorem, ipsum dolor',
     bulletPoint2: 'Lorem, ipsum dolor',
