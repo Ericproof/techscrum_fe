@@ -156,9 +156,8 @@ export default function Board() {
   const updateTaskInfo = async (newTaskInfo: TaskEntity) => {
     try {
       if (newTaskInfo.id !== undefined) {
-        const req = await updateTask(newTaskInfo.id, newTaskInfo);
-        const updatedTaskInfo = req.data;
-        showUpdatedTask(updatedTaskInfo);
+        await updateTask(newTaskInfo.id, newTaskInfo);
+        showUpdatedTask(newTaskInfo);
       }
     } catch (e) {
       getViewTaskStateFromChildren();
