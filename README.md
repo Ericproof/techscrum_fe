@@ -48,6 +48,9 @@ See the [open issues](https://010001.atlassian.net/jira/software/projects/TEC/bo
 
 ## Contributing
 
+Emil (Junqian Su)
+Finish login, logout, register, forget password, member page, part of board page, projects page, account setting page, shortcut
+
 ## License
 
 ## Contact
