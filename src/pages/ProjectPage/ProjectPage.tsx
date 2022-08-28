@@ -143,7 +143,11 @@ export default function ProjectPage() {
                 </button>
               </div>
               <div className={styles.searchBar}>
-                <input onChange={onChangeFilterProject} name="filterProject" />
+                <input
+                  onChange={onChangeFilterProject}
+                  name="filterProject"
+                  data-testid="filter-Project"
+                />
                 <div className={styles.searchIcon}>
                   <span>
                     <FiSearch />
@@ -234,7 +238,7 @@ export default function ProjectPage() {
                               }
                               alt="icon"
                             />
-                            <span>{project.name}</span>
+                            <span data-testid="project-name">{project.name}</span>
                           </div>
                         </Link>
                       </td>
@@ -308,7 +312,11 @@ export default function ProjectPage() {
                               </Link>
                             )}
                             {checkAccess('delete:projects', project.id) && (
-                              <button type="button" onClick={() => removeProject(project.id)}>
+                              <button
+                                type="button"
+                                onClick={() => removeProject(project.id)}
+                                data-testid="project-delete"
+                              >
                                 Delete Project
                               </button>
                             )}
@@ -321,6 +329,7 @@ export default function ProjectPage() {
                               setShowProjectDetails(project.id);
                             }}
                             className={styles.verticalMiddle}
+                            data-testid="project-expand-button"
                           />
                         )}
                       </td>
