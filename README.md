@@ -48,6 +48,10 @@ See the [open issues](https://010001.atlassian.net/jira/software/projects/TEC/bo
 
 ## Contributing
 
+Emil (Junqian Su)
+Implement UI and functions of login, logout, register, forget password, member page, part of board page, projects page, account setting page, shortcut
+Test: Forget Password
+
 ## License
 
 ## Contact
