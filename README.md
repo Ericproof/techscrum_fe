@@ -8,6 +8,7 @@
 
 - React
 - Redux
+- npm
 
 ### Prerequisites
 

@@ -36,7 +36,7 @@ jobs:
 
       - run: yarn build
       - aws-s3/copy:
-          from: dist/
+          from: build/
           to: s3://techscrumapp.com
           arguments: --recursive
 
