@@ -28,6 +28,7 @@
     "SharedArrayBuffer": "readonly"
   },
   "rules": {
+    "@typescript-eslint/no-explicit-any": "off",
     "react/button-has-type": [
       0,
       {

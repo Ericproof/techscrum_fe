@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from 'react';
 import { RiMoreFill } from 'react-icons/ri';
 import { TaskEntity } from '../../../api/task/entity/task';
@@ -36,7 +37,6 @@ export default function CardHeader({
     'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium'
   );
   const [showSelectDropDown, setShowSelectDropDown] = useState(false);
-  const { tags } = taskInfo;
 
   useEffect(() => {
     setSelectedType(TYPE[taskInfo?.typeId?.slug]);

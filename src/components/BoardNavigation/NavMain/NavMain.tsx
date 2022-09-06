@@ -4,7 +4,6 @@ import { VscNewFile } from 'react-icons/vsc';
 import { NavLink, useParams } from 'react-router-dom';
 import { BsFillPeopleFill } from 'react-icons/bs';
 import { FiSettings } from 'react-icons/fi';
-import addShortcut from '../../../assets/addShortcut.svg';
 import { IProjectData, IShortcutData } from '../../../types';
 import checkAccess from '../../../utils/helpers';
 import Shortcut from '../../AddShortcut/Shortcut';
