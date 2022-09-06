@@ -17,7 +17,7 @@ orbs:
 jobs:
   build_react_app:
       docker:
-        - image: circleci/node:12.9.1-browsers  
+        - image: circleci/node:14.15.0-browsers  
       working_directory: ~/repo  
       steps:
         - checkout
@@ -33,10 +33,7 @@ jobs:
               - ~/.npm
               - ~/.cache
             key: v1-dependencies-{{ checksum "package.json" }}
-  
-        - run: yarn lint
-        - run: yarn size
-        - run: yarn test
+
         - run: yarn build
         - aws-s3/copy:
             from: dist/
