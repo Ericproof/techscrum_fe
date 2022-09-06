@@ -14,18 +14,39 @@ orbs:
   # See here https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-project
   aws-s3: circleci/aws-s3@2.0
 
+jobs:
+  build_react_app:
+      docker:
+        - image: circleci/node:12.9.1-browsers  
+      working_directory: ~/repo  
+      steps:
+        - checkout
+        - restore_cache:
+            keys:
+              - v1-dependencies-{{ checksum "package.json" }}
+              # fallback to using the latest cache if no exact match is found
+              - v1-dependencies-
+        - run: yarn install  
+        - save_cache:
+            paths:
+              - node_modules
+              - ~/.npm
+              - ~/.cache
+            key: v1-dependencies-{{ checksum "package.json" }}
+  
+        - run: yarn lint
+        - run: yarn size
+        - run: yarn test
+        - run: yarn build
+        - aws-s3/copy:
+            from: dist/
+            to: s3://sample-app-vue
+            arguments: --recursive
+
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   sample: # This is the name of the workflow, feel free to change it to better match your workflow.
     # Inside the workflow, you define the jobs you want to run.
     jobs:
-      - node/test:
-          version: "15.1"
-          # after the node/test job completes, build the dist packages and save them to a workspace
-          post-steps:
-            - run: npm run build
-            - aws-s3/copy:
-                from: dist/
-                to: s3://sample-app-vue
-                arguments: --recursive
+      - build_react_app
