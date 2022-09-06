@@ -16,29 +16,29 @@ orbs:
 
 jobs:
   build_react_app:
-      docker:
-        - image: cimg/node:16.17.0-browsers  
-      working_directory: ~/repo  
-      steps:
-        - checkout
-        - restore_cache:
-            keys:
-              - v1-dependencies-{{ checksum "package.json" }}
-              # fallback to using the latest cache if no exact match is found
-              - v1-dependencies-
-        - run: yarn install  
-        - save_cache:
-            paths:
-              - node_modules
-              - ~/.npm
-              - ~/.cache
-            key: v1-dependencies-{{ checksum "package.json" }}
+    docker:
+      - image: cimg/node:16.17.0-browsers
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run: yarn install
+      - save_cache:
+          paths:
+            - node_modules
+            - ~/.npm
+            - ~/.cache
+          key: v1-dependencies-{{ checksum "package.json" }}
 
-        - run: yarn build
-        - aws-s3/copy:
-            from: dist/
-            to: s3://sample-app-vue
-            arguments: --recursive
+      - run: yarn build
+      - aws-s3/copy:
+          from: dist/
+          to: s3://techscrumapp.com
+          arguments: --recursive
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
