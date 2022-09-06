@@ -110,11 +110,13 @@ export default function Board() {
 
   const fetchNewCard = (newCard: ICardData) => {
     getCreateNewCardStateFromChildren();
+    const now = new Date();
     const newItem: ITaskCard = {
       id: newCard.id,
-      tag: newCard.tag,
+      tags: newCard.tags,
       title: newCard.title,
-      statusId: newCard.statusId
+      statusId: newCard.statusId,
+      dueAt: now.toISOString()
     };
     const columns = columnsInfo;
     columns[newCard.statusId ?? ''].items.push(newItem);
@@ -125,39 +127,47 @@ export default function Board() {
     return onDragEnd(result, columnsInfo, setColumnsInfo);
   };
 
+  const showUpdatedTask = (updatedTaskInfo: any) => {
+    const updatedColumns = { ...columnsInfo };
+    if (updatedTaskInfo?.statusId && taskData?.statusId) {
+      columnsInfo[taskData.statusId].items.forEach((item, index) => {
+        if (
+          item.id === updatedTaskInfo.id &&
+          updatedTaskInfo.title !== undefined &&
+          updatedTaskInfo.title != null &&
+          item.statusId !== undefined &&
+          updatedTaskInfo.statusId !== undefined
+        ) {
+          const updatedStatusId = updatedTaskInfo.statusId;
+          const updatedItem = { ...item, ...updatedTaskInfo };
+          if (updatedStatusId === item.statusId) {
+            updatedColumns[item.statusId].items[index] = updatedItem;
+            return;
+          }
+          updatedColumns[item.statusId].items.splice(index, 1);
+          updatedColumns[updatedStatusId].items.push(updatedItem);
+        }
+      });
+    }
+    setColumnsInfo(updatedColumns);
+    setTaskData(updatedTaskInfo);
+  };
+
   const updateTaskInfo = async (newTaskInfo: TaskEntity) => {
     try {
       if (newTaskInfo.id !== undefined) {
-        const req = await updateTask(newTaskInfo.id, newTaskInfo);
-        const updatedTaskInfo = req.data;
-        const updatedColumns = { ...columnsInfo };
-        if (updatedTaskInfo?.statusId && taskData?.statusId) {
-          columnsInfo[taskData.statusId].items.forEach((item, index) => {
-            if (
-              item.id === updatedTaskInfo.id &&
-              updatedTaskInfo.title !== undefined &&
-              updatedTaskInfo.title != null &&
-              item.statusId !== undefined &&
-              updatedTaskInfo.statusId !== undefined
-            ) {
-              const updatedTitle = updatedTaskInfo.title;
-              const updatedStatusId = updatedTaskInfo.statusId;
-              const updatedItem = { ...item, title: updatedTitle, statusId: updatedStatusId };
-              if (updatedStatusId === item.statusId) {
-                updatedColumns[item.statusId].items[index] = updatedItem;
-                return;
-              }
-              updatedColumns[item.statusId].items.splice(index, 1);
-              updatedColumns[updatedStatusId].items.push(updatedItem);
-            }
-          });
-        }
-        setColumnsInfo(updatedColumns);
-        setTaskData(updatedTaskInfo);
+        await updateTask(newTaskInfo.id, newTaskInfo);
+        showUpdatedTask(newTaskInfo);
       }
     } catch (e) {
       getViewTaskStateFromChildren();
     }
+  };
+
+  const updasteTaskInfo = (tags: ILabelData[] | undefined) => {
+    if (tags === undefined) return;
+    const updatedTaskInfo = { ...taskData, tags };
+    showUpdatedTask(updatedTaskInfo);
   };
 
   const deleteTask = async () => {
@@ -184,14 +194,12 @@ export default function Board() {
     const fetchColumnsData = (boardInfo: IBoardEntity) => {
       let columnInfoData: IColumnsFromBackend = {};
       if (boardInfo.taskStatus === undefined) return setColumnsInfo(columnInfoData);
-      const { taskStatus, taskList } = boardInfo;
-      taskStatus.forEach((status, index) => {
+      const { taskStatus } = boardInfo;
+      taskStatus.forEach((status) => {
         const tasks: ITaskCard[] = [];
-        status.items.forEach((item) => {
-          const result = taskList[index].find((task) => {
-            return task.id === item.taskId && task.title?.includes(inputQuery);
-          });
-          if (result !== undefined) tasks.push(result);
+        status.taskList.forEach((task) => {
+          const result = task.detail;
+          if (result !== undefined && result.title?.includes(inputQuery)) tasks.push(result);
         });
         columnInfoData = { ...columnInfoData, [status.id]: { name: status.name, items: tasks } };
       });
@@ -208,7 +216,6 @@ export default function Board() {
   return (
     <div className={style.container}>
       <ProjectHeader />
-      <HeaderNav />
       <BoardSearch
         updateIsCreateNewCard={getCreateNewCardStateFromChildren}
         setInputQuery={setInputQuery}
@@ -218,6 +225,8 @@ export default function Board() {
         columnsInfo={columnsInfo}
         onDragEventHandler={dragEventHandler}
         passTaskId={getTaskId}
+        updateIsCreateNewCard={getCreateNewCardStateFromChildren}
+        projectId={projectId}
       />
       {isCreateNewCard && (
         <CreateNewCard
@@ -234,6 +243,7 @@ export default function Board() {
           deleteTask={deleteTask}
           labels={labels}
           projectId={projectId}
+          updateTaskTags={updasteTaskInfo}
         />
       )}
     </div>

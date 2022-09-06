@@ -1,11 +1,13 @@
-$small_size: 704px;
-
 .registerMain {
   align-self: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   height: 100%;
+
+  @media (max-width: 280px) {
+    margin-top: 22%;
+  }
 
   a {
     text-decoration: none;
@@ -14,7 +16,7 @@ $small_size: 704px;
 
   img {
     margin: 40px 0 10px 0;
-    width: 80%;
+    width: 50%;
     height: 10%;
     align-self: center;
   }
@@ -30,6 +32,36 @@ $small_size: 704px;
     box-shadow: rgb(0 0 0 / 10%) 0px 0px 10px;
     box-sizing: border-box;
     color: rgb(94, 108, 132);
+
+    .domainField {
+      margin-bottom: 20px;
+      display: flex;
+
+      p {
+        font-size: 14px;
+        font-weight: bold;
+      }
+    }
+    @media (max-width: 500px) {
+      width: 100%;
+      max-width: 264px;
+      word-break: break-all;
+
+      .domainField {
+        display: flex;
+        flex-direction: column;
+        justify-items: flex-start;
+        margin-bottom: 0px;
+
+        p {
+          text-align: left;
+        }
+      }
+
+      @media (max-width: 280px) {
+        max-width: 244px;
+      }
+    }
 
     h1 {
       font-size: 16px;
@@ -48,6 +80,9 @@ $small_size: 704px;
 
     input.email {
       display: block;
+      @media (max-width: 500px) {
+        width: 91%;
+      }
     }
 
     input.password {
@@ -141,19 +176,22 @@ $small_size: 704px;
 
       a {
         color: rgb(0, 82, 204);
+        @media (max-width: 280px) {
+          font-size: 12px;
+        }
       }
     }
 
-    .emailTip{
+    .emailTip {
       display: flex;
       flex-direction: column;
       justify-content: space-around;
-      img{
+      img {
         width: 80%;
         height: 80%;
         align-self: center;
       }
-      h1{
+      h1 {
         align-self: center;
       }
     }
@@ -166,22 +204,15 @@ $small_size: 704px;
 
   .registerMainFooter {
     width: 80%;
-    max-width: 20%;
     text-align: center;
-    @media (max-width: $small_size) {
-      width: 60%;
-    }
-  }
-  .domainField{
-    align-items: flex-end;
-    margin-bottom: 20px;
-    p{
-      font-size: 14px;
-      font-weight: bold;
+    font-size: 14px;
+    @media (max-width: 280px) {
+      width: 100%;
+      font-size: 12px;
     }
   }
 }
-.emailSent{
-  max-width: 40%!important;
-  margin-bottom: 70px!important;
+.emailSent {
+  max-width: 40% !important;
+  margin-bottom: 70px !important;
 }

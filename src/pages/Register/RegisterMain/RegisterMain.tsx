@@ -127,7 +127,7 @@ export default function RegisterMain() {
       <img src={Icon} alt="TechScrum Icon" />
       <form onSubmit={handleSubmit}>
         {emailRegisterProcess ? (
-          <div className={styles.emailTip}>
+          <div className={styles.emailTip} data-testid="email-tip">
             {invalidateStatus ? (
               <>
                 <img src={Error} alt="Error Icon" className={styles.logo} />
@@ -144,7 +144,9 @@ export default function RegisterMain() {
           <>
             <h1>Register to continue</h1>
             <h1>Your team&apos;s site</h1>
-            <p className="colorRed">{tips}</p>
+            <p className="colorRed" data-testid="email-warning-tip">
+              {tips}
+            </p>
             {!emailCheckProcess && (
               <div className={['flex', styles.domainField].join(' ')}>
                 <input
@@ -155,6 +157,7 @@ export default function RegisterMain() {
                   defaultValue={appName}
                   onChange={onChangeAppName}
                   required
+                  data-testid="name"
                 />
                 <p>.techscrumapp.com</p>
               </div>
@@ -168,6 +171,7 @@ export default function RegisterMain() {
               onChange={(e) => setEmail(e.target.value)}
               disabled={emailCheckProcess}
               required
+              data-testid="email"
             />
 
             {emailCheckProcess && (
@@ -179,6 +183,7 @@ export default function RegisterMain() {
                   name="name"
                   onChange={(e) => setName(e.target.value)}
                   required
+                  data-testid="username"
                 />
                 <input
                   className={styles.password}
@@ -188,6 +193,7 @@ export default function RegisterMain() {
                   minLength={8}
                   maxLength={16}
                   onChange={(e) => setPassword(e.target.value)}
+                  data-testid="password"
                 />
               </>
             )}
@@ -201,7 +207,9 @@ export default function RegisterMain() {
                 Privacy Policy.
               </Link>
             </p>
-            <button type="submit">Register</button>
+            <button type="submit" data-testid="register">
+              Register
+            </button>
             <div className={styles.formFooter}>
               <Link to="/login">Already have TechScrum Account? Login</Link>
             </div>
@@ -210,11 +218,10 @@ export default function RegisterMain() {
       </form>
 
       <p className={styles.registerMainFooter}>
-        This page is protected by reCAPTCHA and complies with Google&apos;s{' '}
         <Link to="/privacy-policy" target="_blank">
-          Privacy Policy{' '}
+          Privacy Policy
         </Link>
-        and{' '}
+        &nbsp;and&nbsp;
         <Link to="/terms-of-service" target="_blank">
           Terms of Service
         </Link>

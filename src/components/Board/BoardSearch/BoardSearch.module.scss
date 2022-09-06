@@ -17,10 +17,10 @@
   }
 }
 .boardSearchSection {
-  display: flex;
-  align-items: center;
+  
 }
 .createButton {
+  margin-top: -50px;
   align-items: baseline;
   border-width: 0px;
   border-radius: 3px;
@@ -46,20 +46,17 @@
   width: auto;
   justify-content: center;
   color: #ffffff;
-  left: 1343px;
+  right: 500px;
   z-index: 1;
+
+  @media (min-width: 768px) {}
   &:hover {
     background: #0065ff;
     text-decoration: inherit;
     transition-duration: 0s, 0.15s;
   }
 }
-.container {
-  display: flex;
-  position: relative;
-  flex-direction: row;
-  align-items: center;
-  align-self: center;
+.searchBarContainer {
   justify-content: left;
   margin-bottom: 1%;
   padding-left: 3%;
@@ -67,16 +64,17 @@
 }
 
 .inputContainer {
+  border-color: transparent;
   position: relative;
   display: flex;
-  width: 120px;
+  width: 25%;
   transition: all 0.3s cubic-bezier(0.15, 1, 0.3, 1) 0s;
   align-items: center;
   background-color: var(--ds-background-input, #fafbfc);
   border-color: var(--ds-border, #dfe1e6);
   color: var(--ds-text, #091e42);
   cursor: text;
-  border-radius: 3px;
+  border-radius: 50px;
   border-width: 2px;
   border-style: solid;
   box-sizing: border-box;
@@ -89,15 +87,16 @@
 }
 
 .inputContainerPlus {
-  width: 184px;
+  
 }
 
 .inputContainer input[type='text'] {
+  left: 10%;
   position: relative;
   outline: 0;
-  border-bottom-right-radius: 3.01px;
+  border-radius: 3px 50px 50px 3px;
   padding: 8px 26px 8px 6px;
-  height: 2.57em;
+  height: 44px;
   width: inherit;
   background-color: transparent;
   border: 0px;
@@ -121,7 +120,6 @@
 
   &:focus {
     outline: 2px solid #4c9fff;
-    border-radius: 3px;
     background-color: #fff;
 
     &::-webkit-input-placeholder {
@@ -142,7 +140,7 @@
 .inputContainer span {
   color: rgb(94, 108, 132);
   position: absolute;
-  right: 5%;
+  left: 3%;
   display: flex;
   pointer-events: none;
 }

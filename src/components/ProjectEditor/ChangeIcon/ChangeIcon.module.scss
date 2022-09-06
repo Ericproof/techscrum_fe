@@ -13,16 +13,18 @@
   button {
     margin-top: 16px;
     border-radius: 3px;
-    background-color: rgba(9, 30, 66, 0.04);
-    border: none;
-    color: #42526e;
+    background-color: white;
+    border-color: #0052cc;
+    border-width: 1.5px;
+    color: #0052cc;
     cursor: pointer;
-    height: 2.45em;
+    height: 3.45em;
     line-height: 2.28571em;
-    padding: 2px 16px;
+    padding: 2px;
     font-family: inherit;
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 8px;
+    font-weight: 700;
+    width: 100%;
     &:hover {
       background: rgba(9, 30, 66, 0.08);
       text-decoration: inherit;
