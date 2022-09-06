@@ -75,7 +75,7 @@ export default function LoginMain() {
 
   return (
     <div className={styles.registerMain}>
-      <img src={Icon} alt="TechScrum Icon" className={styles.logo} />
+      <img src={Icon} alt="TechScrum Icon" />
       <form onSubmit={handleSubmit}>
         <h1>Log in to your account</h1>
         <input
@@ -131,7 +131,7 @@ export default function LoginMain() {
         <div className={styles.formFooter}>
           <Link to="/register">Register</Link>
           <span>•</span>
-          <Link to="/reset-password">Forgot password</Link>
+          <Link to="/login/reset-password">Forgot password</Link>
         </div>
       </form>
       <p className={styles.registerMainFooter}>

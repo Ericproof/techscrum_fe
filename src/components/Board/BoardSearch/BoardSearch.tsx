@@ -39,7 +39,7 @@ export default function BoardSearch({ updateIsCreateNewCard, setInputQuery, proj
 
   return (
     <div className={styles.boardSearchSection}>
-      <div className={styles.container}>
+      <div className={styles.searchBarContainer}>
         <div
           className={
             inputState

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { RiPencilFill, RiPencilLine } from 'react-icons/ri';
+import { VscNewFile } from 'react-icons/vsc';
 import { NavLink, useParams } from 'react-router-dom';
 import { BsFillPeopleFill } from 'react-icons/bs';
 import { FiSettings } from 'react-icons/fi';
@@ -39,7 +40,7 @@ export default function NavMain(props: IPropsNavMain) {
               className={styles.planningButton}
             >
               {planningToggle ? (
-                <span>
+                <span style={{ display: 'none' }}>
                   <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
                     <path
                       d="M8.292 10.293a1.009 1.009 0 000 1.419l2.939 2.965c.218.215.5.322.779.322s.556-.107.769-.322l2.93-2.955a1.01 1.01 0 000-1.419.987.987 0 00-1.406 0l-2.298 2.317-2.307-2.327a.99.99 0 00-1.406 0z"
@@ -60,8 +61,6 @@ export default function NavMain(props: IPropsNavMain) {
                 </span>
               )}
             </button>
-
-            <h3>PLANNING</h3>
           </div>
 
           {planningToggle && (
@@ -228,6 +227,26 @@ export default function NavMain(props: IPropsNavMain) {
       <br />
 
       <div className={styles.containerBottom}>
+        {checkAccess('view:members', projectId) && (
+          <>
+            <NavLink to={`/projects/${currentProject?.id}/members`}>
+              <BsFillPeopleFill width="30" height="30" viewBox="0 0 14 20" role="presentation" />
+
+              <span>Members</span>
+            </NavLink>
+            <br />
+          </>
+        )}
+        {checkAccess('view:settings', projectId) && (
+          <>
+            <NavLink to={`/settings/${currentProject?.id}`}>
+              <FiSettings width="24" height="24" viewBox="-3 0 28 28" role="presentation" />
+              <span>Project Settings</span>
+            </NavLink>
+            <br />
+          </>
+        )}
+
         {currentProject?.shortcut.map((shortcutData: IShortcutData, index: number) => {
           return (
             <React.Fragment key={shortcutData.id}>
@@ -267,26 +286,6 @@ export default function NavMain(props: IPropsNavMain) {
             </React.Fragment>
           );
         })}
-        {checkAccess('view:members', projectId) && (
-          <>
-            <NavLink to={`/projects/${currentProject?.id}/members`}>
-              <BsFillPeopleFill width="30" height="30" viewBox="0 0 14 20" role="presentation" />
-
-              <span>Members</span>
-            </NavLink>
-            <br />
-          </>
-        )}
-        {checkAccess('view:settings', projectId) && (
-          <>
-            <NavLink to={`/settings/${currentProject?.id}`}>
-              <FiSettings width="24" height="24" viewBox="-3 0 28 28" role="presentation" />
-              <span>Project Settings</span>
-            </NavLink>
-            <br />
-          </>
-        )}
-
         {checkAccess('add:shortcut', projectId) && (
           <button
             className={styles.addShortcut}
@@ -297,7 +296,7 @@ export default function NavMain(props: IPropsNavMain) {
               setSelectedLink(null);
             }}
           >
-            <img src={addShortcut} alt="addShortcut" />
+            <VscNewFile />
             <span>Add shortcut</span>
           </button>
         )}

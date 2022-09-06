@@ -16,6 +16,7 @@ interface Props {
   taskStatusOnchange: (taskInfo: TaskEntity) => void;
   labels: ILabelData[];
   projectId: string;
+  updateTaskTags: (tags: ILabelData[] | undefined) => void;
 }
 
 export default function CardRightContent({
@@ -23,7 +24,8 @@ export default function CardRightContent({
   taskInfo,
   taskStatusOnchange,
   labels,
-  projectId
+  projectId,
+  updateTaskTags
 }: Props) {
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const handleClickOutside = () => setVisible(true);
@@ -150,7 +152,12 @@ export default function CardRightContent({
               allowEdit={editAccess}
             />
           </Row>
-          <LabelFields labels={labels} taskInfo={taskInfo} isDisabled={!editAccess} />
+          <LabelFields
+            labels={labels}
+            taskInfo={taskInfo}
+            isDisabled={!editAccess}
+            updateTaskTags={updateTaskTags}
+          />
           <div className={style.dueDate}>
             <div>Due date</div>
             <div>

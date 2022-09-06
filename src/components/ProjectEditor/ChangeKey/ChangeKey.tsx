@@ -12,7 +12,14 @@ export default function ChangeKey(props: ChangeKeyProps) {
     <div className={styles.keyInputSection}>
       <label htmlFor="key">
         <span>Key</span>
-        <input type="text" id="key" name="key" onChange={onChange} value={value} />
+        <input
+          type="text"
+          id="key"
+          name="key"
+          data-testid="key"
+          onChange={onChange}
+          value={value}
+        />
       </label>
     </div>
   );

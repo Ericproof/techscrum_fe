@@ -162,6 +162,7 @@ export default function Modal({ shown, close, uploadSuccess }: IModalProps) {
                             id="uploadPhoto"
                             type="file"
                             name="Upload a photo"
+                            data-testid="picInput"
                             style={{ display: 'none' }}
                             onChange={uploadFile}
                           />
@@ -182,7 +183,12 @@ export default function Modal({ shown, close, uploadSuccess }: IModalProps) {
                 </div>
               )}
               <div className={styles.buttonSection}>
-                <button className={styles.selectBtn} type="button" onClick={close}>
+                <button
+                  className={styles.selectBtn}
+                  type="button"
+                  data-testid="saveIcon"
+                  onClick={close}
+                >
                   Select
                 </button>
                 <button className={styles.cancelBtn} type="button" onClick={close}>
