@@ -29,8 +29,7 @@ export default function ProjectHeader() {
   };
   const refStar = projectList.map(() => createRef<HTMLDivElement>());
   const setProjectStar = (id: string) => {
-    const index = projectList.findIndex((project) => project.id === id);
-    // updateProject(index);
+    projectList.findIndex((project) => project.id === id);
   };
   const getStarPosition = (e: React.MouseEvent<HTMLDivElement>, id: string) => {
     const mouseStarPosition = e.currentTarget.getBoundingClientRect();

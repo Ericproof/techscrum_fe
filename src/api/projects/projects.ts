@@ -1,5 +1,4 @@
 /* eslint-disable consistent-return */
-import axios from 'axios';
 import config, { alphaApi } from '../../config/config';
 import { IProjectData } from '../../types';
 
