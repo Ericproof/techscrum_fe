@@ -1,9 +1,7 @@
 import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { ProjectContext, ProjectDispatchContext } from '../../context/ProjectProvider';
-import NavBottom from './NavBottom/NavBottom';
 import NavMain from './NavMain/NavMain';
-import NavTop from './NavTop/NavTop';
 import style from './Nav.module.scss';
 import { IProject, IProjectData } from '../../types';
 

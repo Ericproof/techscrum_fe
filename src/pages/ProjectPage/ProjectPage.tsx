@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, createRef, useEffect, useContext } from 'react';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { HiDotsHorizontal } from 'react-icons/hi';
@@ -41,11 +42,6 @@ export default function ProjectPage() {
         return item.name?.toLowerCase().includes(e.target.value.toLowerCase());
       })
     );
-  };
-
-  const getProjectFromChildren = (id: number) => {
-    projectList[id].star = !projectList[id].star;
-    setValue(value + 1);
   };
 
   const setProjectStar = (id: string) => {
