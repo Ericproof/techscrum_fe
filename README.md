@@ -4,6 +4,8 @@
 
 [TechScrum](https://techscrumapp.com)
 
+Must run under http://localhost:3000 else register will return 404
+
 ### Tech Stack
 
 - React
