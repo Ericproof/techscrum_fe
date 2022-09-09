@@ -10,6 +10,7 @@ Must run under http://localhost:3000 else register will return 404
 
 - React
 - Redux
+- npm
 
 ### Prerequisites
 
@@ -67,3 +68,7 @@ Use this space to list resources you find helpful and would like to give credit 
 ## Coding Standard
 
 - https://docs.google.com/document/d/1mmmdfmJqeM81y5cajolUOLGxRJtr_DONof82MQP9HZs/edit?usp=sharing
+
+## Pratice
+
+08/09/2022 Kitman

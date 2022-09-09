@@ -8,14 +8,7 @@ import {
   AiOutlineTeam,
   AiOutlineFundProjectionScreen,
   AiTwotoneSwitcher,
-  AiOutlineAliwangwang,
-  AiFillProfile,
-  AiOutlineApartment,
-  AiOutlineDingding,
-  AiFillVideoCamera,
-  AiFillRedditCircle,
-  AiOutlineRocket,
-  AiTwotoneExperiment
+  AiOutlineAliwangwang
 } from 'react-icons/ai';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { Link } from 'react-router-dom';

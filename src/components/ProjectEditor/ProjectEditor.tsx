@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from 'react';
 import { AxiosResponse } from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -36,6 +37,7 @@ function ProjectEditor(props: ProjectEditorProps) {
   }, [userInfo.id]);
 
   const {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     onCompletedSubmit = null,
     showCancelBtn = false,
     projectData,

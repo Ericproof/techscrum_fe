@@ -31,7 +31,7 @@ export default function BoardMain({
           onDragEventHandler(result);
         }}
       >
-        {Object.entries(columnsInfo).map(([id, column], columnIndex) => {
+        {Object.entries(columnsInfo).map(([id, column]) => {
           return (
             <div key={id} className={styles.columnsContainer}>
               <Droppable droppableId={id} key={id}>

@@ -6,16 +6,9 @@ import BoardSearch from './BoardSearch/BoardSearch';
 import BoardMain from './BoardMain/BoardMain';
 import ProjectHeader from '../ProjectHeader/ProjectHeader';
 import CreateNewCard from '../CreateNewCard/CreateNewCard';
-import HeaderNav from './HeaderNav/HeaderNav';
 import { getBoard } from '../../api/board/board';
 import { updateTaskStatus, fetchTask, updateTask, removeTask } from '../../api/task/task';
-import IBoardEntity, {
-  IColumnsFromBackend,
-  ICardData,
-  IProjectData,
-  ILabelData,
-  ITaskCard
-} from '../../types';
+import IBoardEntity, { IColumnsFromBackend, ICardData, ILabelData, ITaskCard } from '../../types';
 import BoardCard from '../BoardCard/BoardCard';
 import { TaskEntity } from '../../api/task/entity/task';
 import { getLabels } from '../../api/label/label';
@@ -70,8 +63,6 @@ export default function Board() {
   const [inputQuery, setInputQuery] = useState<string>('');
   const [columnsInfo, setColumnsInfo] = useState<IColumnsFromBackend>({});
   const { boardId = '', projectId = '' } = useParams();
-  const [projectList] = useState<IProjectData[]>([]);
-  const [value, setValue] = useState(0);
   const [isCreateNewCard, setIsCreateNewCard] = useState(false);
   const [isViewTask, setIsViewTask] = useState(false);
   const [taskData, setTaskData] = useState<TaskEntity>();
@@ -85,11 +76,6 @@ export default function Board() {
       setLabels(res.data);
     });
   }, [projectId]);
-
-  const getProjectFromChildren = (index: number) => {
-    projectList[index].star = !projectList[index].star;
-    setValue(value + 1);
-  };
 
   const getCreateNewCardStateFromChildren = () => {
     setIsCreateNewCard(!isCreateNewCard);
