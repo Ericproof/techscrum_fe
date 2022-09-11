@@ -4,6 +4,8 @@
 
 [TechScrum](https://techscrumapp.com)
 
+Must run under http://localhost:3000 else register will return 404
+
 ### Tech Stack
 
 - React
@@ -70,4 +72,8 @@ Use this space to list resources you find helpful and would like to give credit 
 ## Pratice
 
 08/09/2022 Kitman
-08/09/2022 Wendy
+=======
+09/09/2022 David
+10/09/2022 David
+11/09/2022 David
+>>>>>>> dee099c635a70349c873f3e2b57623e84b9a44e4
