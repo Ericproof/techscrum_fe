@@ -75,12 +75,13 @@ Use this space to list resources you find helpful and would like to give credit 
 09/09/2022 David
 10/09/2022 David
 11/09/2022 David
-<<<<<<< HEAD
+
 09/09/2022 Wendy
 10/09/2022 Wendy
 11/09/2022 Wendy
 12/09/2022 Wendy
-=======
+
 
 10/09/2022 Felix
->>>>>>> 41ad8dc3bf2e255f2e7cff71db0482d840d42fcb
+
+
