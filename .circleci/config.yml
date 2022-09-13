@@ -62,9 +62,12 @@ jobs:
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  build_master:
+  simple_workflow:
     jobs:
+      - code_qa
       - build_react_app:
+          requires:
+            - code_qa
           filters:
             branches:
               only:
