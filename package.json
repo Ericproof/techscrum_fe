@@ -37,7 +37,7 @@
     "deploy": "aws s3 sync build s3://techscrumapp.com",
     "cdn": "aws cloudfront create-invalidation --distribution-id E1V3T62UIWQDQ2 --paths /*",
     "cypress": "cypress open",
-    "cypress:ci": "yarn start & wait-on http-get://localhost:3000 && cypress run" 
+    "cypress:ci": "yarn start & wait-on http://localhost:3000 && cypress run" 
   },
   "eslintConfig": {
     "extends": [
