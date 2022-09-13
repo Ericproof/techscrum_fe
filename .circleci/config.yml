@@ -8,7 +8,7 @@ version: 2.1
 orbs:
   node: circleci/node@4.1
   aws-s3: circleci/aws-s3@2.0
-  cypress: cypress-io/cypress@1
+  cypress: cypress-io/cypress@2
 
 executors:
   with-chrome:
