@@ -68,15 +68,6 @@ workflows:
     jobs:
       - cypress/run:
           yarn: true
-          executor: with-chrome
-          browser: chrome
-          start: 'yarn start'
-          post-steps:
-            - run: ls
-            - store_test_results:
-                path: cypress/results
-            - store_artifacts:
-                path: cypress/screenshots
       - code_qa
       - build_react_app:
           requires:
