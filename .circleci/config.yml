@@ -66,8 +66,7 @@ jobs:
 workflows:
   simple_workflow:
     jobs:
-      - cypress/install:
-          build: 'yarn build'
+      - cypress/install
       - cypress/run:
           install-command: 'yarn install --force'
           yarn: true
