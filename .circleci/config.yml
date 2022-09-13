@@ -67,14 +67,11 @@ workflows:
   simple_workflow:
     jobs:
       - cypress/install: 
-          install-command: yarn install --frozen-lockfile
       - cypress/run:
-          yarn: true
           requires:
             - cypress/install
           executor: with-chrome
           browser: chrome
-          start: 'yarn start'
           parallel: true
           post-steps:
             - run: ls
