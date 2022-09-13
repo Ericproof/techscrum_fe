@@ -63,7 +63,7 @@ jobs:
       - run: yarn lint
   e2e:
     docker:
-      - image: "cypress/browsers:node16.17.0-chrome90-ff88"    
+      - image: "cypress/browsers:node16.14.0-chrome99-ff97"    
     steps:
       - checkout
       - restore_cache:
