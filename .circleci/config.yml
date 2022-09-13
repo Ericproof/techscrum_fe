@@ -8,7 +8,7 @@ version: 2.1
 orbs:
   node: circleci/node@4.1
   aws-s3: circleci/aws-s3@2.0
-  cypress: cypress-io/cypress@2
+  cypress: cypress-io/cypress@1
 
 executors:
   with-chrome:
@@ -67,13 +67,22 @@ workflows:
   simple_workflow:
     jobs:
       - cypress/install:
-          build: 'npm run build'
+          build: 'yarn build'
       - cypress/run:
+          install-command: 'yarn install --force'
+          yarn: true
           requires:
             - cypress/install
-          record: true
-          start: 'npm start'
+          executor: with-chrome
+          browser: chrome
+          start: 'yarn start'
           parallel: true
+          post-steps:
+            - run: ls
+            - store_test_results:
+                path: cypress/results
+            - store_artifacts:
+                path: cypress/screenshots
       - code_qa
       - build_react_app:
           requires:
