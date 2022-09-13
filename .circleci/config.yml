@@ -67,7 +67,7 @@ workflows:
   simple_workflow:
     jobs:
       - cypress/install:
-          install-command: yarn install --frozen-lockfile
+          install-command: "yarn install --frozen-lockfile"
       - cypress/run:
           requires:
             - cypress/install
