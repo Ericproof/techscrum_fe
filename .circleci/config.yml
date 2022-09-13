@@ -14,7 +14,7 @@ executors:
   with-chrome:
     resource_class: small
     docker:
-      - image: "cypress/browsers:node14.16.0-chrome90-ff88"
+      - image: "cypress/browsers:node16.14.0-chrome99-ff97"
 
 jobs:
   build_react_app:
@@ -61,32 +61,24 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - run: yarn lint
-  e2e:
-    docker:
-      - image: "cypress/browsers:node16.14.0-chrome99-ff97"    
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
-      - run: yarn install
-      - save_cache:
-          paths:
-            - node_modules
-            - ~/.npm
-            - ~/.cache
-          key: v1-dependencies-{{ checksum "package.json" }}
-      - run: cypress/install
-      - run: cypress/run
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   simple_workflow:
     jobs:
+      - cypress/install
+      - cypress/run:
+          requires:
+            - cypress/install
+          executor: with-chrome
+          browser: chrome
+          post-steps:
+            - run: ls
+            - store_test_results:
+                path: cypress/results
+            - store_artifacts:
+                path: cypress/screenshots
       - code_qa
-      - e2e
       - build_react_app:
           requires:
             - code_qa
