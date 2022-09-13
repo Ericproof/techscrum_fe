@@ -68,7 +68,6 @@ workflows:
     jobs:
       - cypress/install
       - cypress/run:
-          install-command: 'yarn install --force'
           yarn: true
           requires:
             - cypress/install
