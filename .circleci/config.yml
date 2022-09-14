@@ -61,7 +61,7 @@ jobs:
             - ~/.cache
           key: v1-dependencies-{{ checksum "package.json" }}
       - snyk/scan
-      
+
   code_qa:
     docker:
       - image: cimg/node:16.17.0-browsers
@@ -87,6 +87,7 @@ jobs:
 workflows:
   simple_workflow:
     jobs:
+      - security_check
       - code_qa
       - build_react_app:
           requires:
