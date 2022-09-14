@@ -66,8 +66,6 @@ jobs:
 workflows:
   simple_workflow:
     jobs:
-      - cypress/run:
-          yarn: true
       - code_qa
       - build_react_app:
           requires:
