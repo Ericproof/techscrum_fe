@@ -9,6 +9,7 @@ orbs:
   node: circleci/node@4.1
   aws-s3: circleci/aws-s3@2.0
   cypress: cypress-io/cypress@2
+  snyk: snyk/snyk@1.2.3
 
 executors:
   with-chrome:
@@ -61,21 +62,12 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - run: yarn lint
+      - snyk/scan
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   simple_workflow:
     jobs:
-      - cypress/run:
-          yarn: true
-          executor: with-chrome
-          browser: chrome
-          post-steps:
-            - run: ls
-            - store_test_results:
-                path: cypress/results
-            - store_artifacts:
-                path: cypress/screenshots
       - code_qa
       - build_react_app:
           requires:
