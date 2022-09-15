@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import AuthenticationRoute from './config/AuthenticationRoute';
 import HomePage from './pages/HomePage/HomePage';
 import RegisterPage from './pages/Register/RegisterPage';
 import LoginPage from './pages/Login/LoginPage';
@@ -33,6 +32,7 @@ import { RolesProvider } from './context/UserPermissionProvider';
 import { TaskTypesProvider } from './context/TaskTypeProvider';
 import ContactPage from './pages/ContactPage/ContactPage';
 import FAQPage from './pages/FAQpage/FAQPage';
+import AuthenticationRoute from './routes/AuthenticationRoute';
 
 function App() {
   const shouldShowRegister =
