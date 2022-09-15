@@ -45,7 +45,7 @@ jobs:
           arguments: --recursive
       - aws-cloudfront/invalidate:
           distribution_id: E1V3T62UIWQDQ2
-          paths: ~/*
+          paths: /*
   security_check:
     docker:
       - image: cimg/node:16.17.0-browsers
