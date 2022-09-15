@@ -10,6 +10,7 @@ orbs:
   aws-s3: circleci/aws-s3@2.0
   cypress: cypress-io/cypress@2
   snyk: snyk/snyk@1.2.3
+  aws-cloudfront: topmonks/aws-cloudfront@1.0.0
 
 executors:
   with-chrome:
@@ -42,6 +43,9 @@ jobs:
           from: build/
           to: s3://techscrumapp.com
           arguments: --recursive
+      - aws-cloudfront:
+          distribution_id: E1V3T62UIWQDQ2
+          paths: ~/*
   security_check:
     docker:
       - image: cimg/node:16.17.0-browsers
