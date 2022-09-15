@@ -9,6 +9,7 @@ $base-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxy
   box-sizing: border-box;
   flex-direction: column;
   align-self: flex-start;
+  width: 100%;
 }
 
 .containerTop,
@@ -20,8 +21,7 @@ $base-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxy
     display: flex;
     flex-direction: column;
     position: relative;
-    padding-left: 18px;
-
+    padding:  0px 10px;
     &:hover {
       .containerItemTitle button span {
         display: block;
@@ -104,11 +104,9 @@ $base-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxy
         line-height: 1.42857142857143;
         text-decoration-skip-ink: auto;
         font-family: $base-font-family;
-        padding: 0px 0px 0px 5px;
+        padding: 0 15px;
         color: var(--ds-text-subtle, #42526e);
-        margin-left: -10px;
         justify-content:flex-start;
-
         svg {
           height: 24px;
           width: 24px;
@@ -142,13 +140,12 @@ $base-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxy
 }
 
 .containerBottom {
-  margin-top: -50px;
   flex-shrink: 0;
-  padding-top: 30px;
+  margin-top: 30px;
   margin-left: 10px;
   left: 1%;
   right: 1%;
-
+  border-top: 3px solid #ededed;
   a,
   .addShortcut {
     display: flex;
@@ -167,9 +164,8 @@ $base-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxy
     font-family: $base-font-family;
     padding: 8px 10px 8px 10px;
     color: var(--ds-text-subtle, #42526e);
-    margin-top: -20px;
     position: relative;
-    margin-right: 10px;
+    margin-top: 10px;
 
     .shortcutContent{
       width: 150px;
@@ -203,7 +199,7 @@ $base-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxy
       right: 0;
       position: absolute;
       border-width: 0px;
-      border-radius: 3px;
+      border-radius: 10px;
       box-sizing: border-box;
       font-weight: 500;
       text-decoration: none;
@@ -240,6 +236,7 @@ $base-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxy
 
     &:hover {
       background-color: var(--ds-background-selected, #e6effc);
+      border-radius: 10px;
       .pencilLine {
         display: block;
       }
