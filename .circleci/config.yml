@@ -43,7 +43,7 @@ jobs:
           from: build/
           to: s3://techscrumapp.com
           arguments: --recursive
-      - aws-cloudfront:
+      - aws-cloudfront/invalidate:
           distribution_id: E1V3T62UIWQDQ2
           paths: ~/*
   security_check:
