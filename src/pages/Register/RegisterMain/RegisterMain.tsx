@@ -119,6 +119,9 @@ export default function RegisterMain() {
       setTips('');
     } else setTips('Illegal Character Detected');
   };
+
+  const shouldShowSubDomain = window.location.origin !== 'http://localhost:3000';
+
   if (loading) {
     return <Loading />;
   }
@@ -147,7 +150,7 @@ export default function RegisterMain() {
             <p className="colorRed" data-testid="email-warning-tip">
               {tips}
             </p>
-            {!emailCheckProcess && (
+            {!emailCheckProcess && shouldShowSubDomain && (
               <div className={['flex', styles.domainField].join(' ')}>
                 <input
                   className={styles.domain}

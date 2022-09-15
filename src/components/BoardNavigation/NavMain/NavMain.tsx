@@ -222,28 +222,19 @@ export default function NavMain(props: IPropsNavMain) {
         </div>
       </div>
 
-      <br />
-      <br />
-
       <div className={styles.containerBottom}>
         {checkAccess('view:members', projectId) && (
-          <>
-            <NavLink to={`/projects/${currentProject?.id}/members`}>
-              <BsFillPeopleFill width="30" height="30" viewBox="0 0 14 20" role="presentation" />
+          <NavLink to={`/projects/${currentProject?.id}/members`}>
+            <BsFillPeopleFill width="30" height="30" viewBox="0 0 14 20" role="presentation" />
 
-              <span>Members</span>
-            </NavLink>
-            <br />
-          </>
+            <span>Members</span>
+          </NavLink>
         )}
         {checkAccess('view:settings', projectId) && (
-          <>
-            <NavLink to={`/settings/${currentProject?.id}`}>
-              <FiSettings width="24" height="24" viewBox="-3 0 28 28" role="presentation" />
-              <span>Project Settings</span>
-            </NavLink>
-            <br />
-          </>
+          <NavLink to={`/settings/${currentProject?.id}`}>
+            <FiSettings width="24" height="24" viewBox="-3 0 28 28" role="presentation" />
+            <span>Project Settings</span>
+          </NavLink>
         )}
 
         {currentProject?.shortcut.map((shortcutData: IShortcutData, index: number) => {

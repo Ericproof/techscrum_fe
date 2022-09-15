@@ -7,12 +7,16 @@ version: 2.1
 # See: https://circleci.com/docs/2.0/orb-intro/
 orbs:
   node: circleci/node@4.1
-  # The S3 orb will setup the aws-cli and quickly copy or sync anything to s3.
-  # Orbs reduce the amount of configuration required for common tasks.
-  # See the orb documentation here: https://circleci.com/developer/orbs/orb/circleci/aws-s3
-  # NOTE: Environment variables containing the necessary secrets can be setup in the CircleCI UI
-  # See here https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-project
   aws-s3: circleci/aws-s3@2.0
+  cypress: cypress-io/cypress@2
+  snyk: snyk/snyk@1.2.3
+  aws-cloudfront: topmonks/aws-cloudfront@1.0.0
+
+executors:
+  with-chrome:
+    resource_class: small
+    docker:
+      - image: "cypress/browsers:node16.14.0-chrome99-ff97"
 
 jobs:
   build_react_app:
@@ -39,6 +43,29 @@ jobs:
           from: build/
           to: s3://techscrumapp.com
           arguments: --recursive
+      - aws-cloudfront/invalidate:
+          distribution_id: E1V3T62UIWQDQ2
+          paths: ~/*
+  security_check:
+    docker:
+      - image: cimg/node:16.17.0-browsers
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run: yarn install
+      - save_cache:
+          paths:
+            - node_modules
+            - ~/.npm
+            - ~/.cache
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - snyk/scan
+
   code_qa:
     docker:
       - image: cimg/node:16.17.0-browsers
@@ -62,11 +89,14 @@ jobs:
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  sample: # This is the name of the workflow, feel free to change it to better match your workflow.
-    # Inside the workflow, you define the jobs you want to run.
+  simple_workflow:
     jobs:
+      - security_check
       - code_qa
       - build_react_app:
-        filters:
-          branches:
-            only: master
+          requires:
+            - code_qa
+          filters:
+            branches:
+              only:
+                - master

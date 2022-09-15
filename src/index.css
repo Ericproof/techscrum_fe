@@ -16,6 +16,7 @@ code {
   position: relative;
   background-color: #e6effc!important;
   color: #0052cc!important;
+  border-radius: 10px!important;
 }
 
 .active::before {

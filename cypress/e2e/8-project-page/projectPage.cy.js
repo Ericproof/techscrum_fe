@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 import projectsData from "../../fixtures/projects.json";
 
-describe('project page', () => {
+describe('Project page', () => {
     beforeEach(() => {
         let projectList = projectsData;
         cy.intercept('GET', '**/projects', projectList).as('fetch-projects');
@@ -17,7 +17,7 @@ describe('project page', () => {
             return projectList;
         }).as('delete-projects');
         cy.visit('/login');
-        cy.login('shiyumeng942@gmail.com', '123123123');
+        cy.login('kitman200220022002@gmail.com', '12345678');
         cy.wait('@fetch-projects');
     })
 
