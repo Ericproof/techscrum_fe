@@ -1,0 +1,38 @@
+$light-gray: rgb(207, 207, 207);
+$dark-gray: rgb(107, 107, 107);
+section {
+  background: white;
+}
+.container {
+  width: 65%;
+  margin: auto;
+  .iconsContainer {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 63px 0px;
+    justify-content: center;
+    .iconContainer {
+      width: 33%;
+      height: 250px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+      cursor: pointer;
+      h3 {
+        font-size: 25px;
+        color: $dark-gray;
+      }
+      img {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 20px;
+      }
+    }
+    .iconContainer:hover {
+      border: 2px solid $light-gray;
+    }
+  }
+}
