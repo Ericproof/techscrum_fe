@@ -1,0 +1,62 @@
+.securitytopContainer * {
+  margin: 0;
+  padding: 0;
+}
+
+.securitytopContainer {
+  text-align: center;
+  background-color: white;
+
+  h1 {
+    padding-top: 80px;
+    font-size: 50px;
+  }
+
+  p {
+    padding-top: 30px;
+    font-size: 20px;
+  }
+
+  .blueRecContainer {
+    position: relative;
+    left: 210px;
+    bottom: 120px;
+    .blueRec {
+      fill: #1fcbdc;
+      width: 10px;
+      height: 10px;
+    }
+    @media screen and (max-width: 800px) {
+      display: none;
+    }
+  }
+
+  .yellowRecContainer {
+    position: relative;
+    right: 280px;
+    bottom: 70px;
+    .yellowRec {
+      fill: #ffc63c;
+      width: 10px;
+      height: 10px;
+    }
+    @media screen and (max-width: 800px) {
+      display: none;
+    }
+  }
+
+  .pinkCirContainer {
+    position: relative;
+    left: 330px;
+    bottom: -90px;
+    .pinkCir {
+      fill: #f8cae8;
+      cx: 10;
+      cy: 10;
+      r: 5;
+    }
+    @media screen and (max-width: 800px) {
+      display: none;
+    }
+  }
+}
