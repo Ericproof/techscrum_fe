@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from './FAQbutton.module.scss';
+import styles from './FAQButton.module.scss';
 
-export default function FAQbutton() {
+export default function FAQButton() {
   return <button className={styles.btn}>View All</button>;
 }

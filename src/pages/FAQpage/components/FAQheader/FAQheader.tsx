@@ -1,11 +1,11 @@
 import React from 'react';
-import styles from './FAQheader.module.scss';
+import styles from './FAQHeader.module.scss';
 
-export default function FAQheader() {
+export default function FAQHeader() {
   return (
-    <header className={styles.FAQheader}>
-      <h1>How can we help you today?</h1>
-      <input type="text" placeholder="Search" />
+    <header className={styles.FAQHeader}>
+      <h1 className={styles.headerTitle}>How can we help you today?</h1>
+      <input className={styles.searchBar} type="text" placeholder="Search" />
     </header>
   );
 }

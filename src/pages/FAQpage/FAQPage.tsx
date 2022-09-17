@@ -1,7 +1,7 @@
 import React from 'react';
-import FAQheader from './components/FAQheader/FAQheader';
-import FAQicons from './components/FAQicons/FAQicons';
-import FAQdetails from './components/FAQdetails/FAQdetails';
+import FAQHeader from './components/FAQHeader/FAQHeader';
+import FAQIcons from './components/FAQIcons/FAQIcons';
+import FAQDetails from './components/FAQDetails/FAQDetails';
 
 export default function FAQPage() {
   const getStarted = [
@@ -30,18 +30,18 @@ export default function FAQPage() {
   ];
 
   return (
-    <div>
-      <FAQheader />
-      <FAQicons />
-      <FAQdetails links={getStarted} title="Getting Started" />
-      <FAQdetails links={usingTeamwork} title="Using Teamwork" />
-      <FAQdetails links={getStarted} title="Working with Your Projects" />
-      <FAQdetails links={getStarted} title="Integrations" />
-      <FAQdetails links={getStarted} title="Teamwork Tips" />
-      <FAQdetails links={getStarted} title="Teamwork Settings" />
-      <FAQdetails links={getStarted} title="Planning and Managing Work" />
-      <FAQdetails links={getStarted} title="Pricing and Billing" />
-      <FAQdetails links={getStarted} title="Agency and Professional Services" />
-    </div>
+    <>
+      <FAQHeader />
+      <FAQIcons />
+      <FAQDetails links={getStarted} title="Getting Started" />
+      <FAQDetails links={usingTeamwork} title="Using Teamwork" />
+      <FAQDetails links={getStarted} title="Working with Your Projects" />
+      <FAQDetails links={getStarted} title="Integrations" />
+      <FAQDetails links={getStarted} title="Teamwork Tips" />
+      <FAQDetails links={getStarted} title="Teamwork Settings" />
+      <FAQDetails links={getStarted} title="Planning and Managing Work" />
+      <FAQDetails links={getStarted} title="Pricing and Billing" />
+      <FAQDetails links={getStarted} title="Agency and Professional Services" />
+    </>
   );
 }

@@ -1,67 +1,82 @@
 import React from 'react';
-import styles from './FAQicons.module.scss';
+import styles from './FAQIcons.module.scss';
 
-export default function FAQicons() {
+export default function FAQIcons() {
   return (
-    <section>
+    <section className={styles.FAQicons}>
       <div className={styles.container}>
         <div className={styles.iconsContainer}>
           <div className={styles.iconContainer}>
             <img
+              className={styles.iconImg}
               src="https://s3.amazonaws.com/tw-helpdocs/svgs/projects/just-signed-icon.svg"
-              alt=""
+              alt="Getting started icon"
             />
-            <h3>Getting Started</h3>
+            <h3 className={styles.iconDescription}>Getting Started</h3>
           </div>
           <div className={styles.iconContainer}>
             <img
+              className={styles.iconImg}
               src="https://s3.amazonaws.com/tw-helpdocs/svgs/projects/Projects-settings.svg"
-              alt=""
+              alt="Projects settings icon"
             />
-            <h3>Using Teamwork</h3>
+            <h3 className={styles.iconDescription}>Using Teamwork</h3>
           </div>
           <div className={styles.iconContainer}>
             <img
+              className={styles.iconImg}
               src="https://s3.amazonaws.com/tw-helpdocs/svgs/projects/projects-overview.svg"
-              alt=""
+              alt="Working with your projects icon"
             />
-            <h3>Working with your projects</h3>
-          </div>
-          <div className={styles.iconContainer}>
-            <img src="https://s3.amazonaws.com/tw-helpdocs/svgs/projects/integrations.svg" alt="" />
-            <h3>Integrations</h3>
+            <h3 className={styles.iconDescription}>Working with your projects</h3>
           </div>
           <div className={styles.iconContainer}>
             <img
+              className={styles.iconImg}
+              src="https://s3.amazonaws.com/tw-helpdocs/svgs/projects/integrations.svg"
+              alt="Integration icon"
+            />
+            <h3 className={styles.iconDescription}>Integrations</h3>
+          </div>
+          <div className={styles.iconContainer}>
+            <img
+              className={styles.iconImg}
               src="https://s3.amazonaws.com/tw-helpdocs/svgs/projects/projects-tips.svg"
-              alt=""
+              alt="Teamwork tips icon"
             />
-            <h3>Teamwork Tips</h3>
+            <h3 className={styles.iconDescription}>Teamwork Tips</h3>
           </div>
           <div className={styles.iconContainer}>
             <img
+              className={styles.iconImg}
               src="https://s3.amazonaws.com/tw-helpdocs/svgs/projects/advanced-settings.svg"
-              alt=""
+              alt="Teamwork settings icon"
             />
-            <h3>Teamwork Settings</h3>
+            <h3 className={styles.iconDescription}>Teamwork Settings</h3>
           </div>
           <div className={styles.iconContainer}>
             <img
+              className={styles.iconImg}
               src="https://s3.amazonaws.com/tw-helpdocs/svgs/projects/Working-as-a-team.svg"
-              alt=""
+              alt="Planing and managing work icon"
             />
-            <h3>Planning and Managing Work</h3>
+            <h3 className={styles.iconDescription}>Planning and Managing Work</h3>
           </div>
           <div className={styles.iconContainer}>
             <img
+              className={styles.iconImg}
               src="https://s3.amazonaws.com/tw-helpdocs/svgs/projects/pricing-and-billing.svg"
-              alt=""
+              alt="Pricing and billing icon"
             />
-            <h3>Pricing and Billing</h3>
+            <h3 className={styles.iconDescription}>Pricing and Billing</h3>
           </div>
           <div className={styles.iconContainer}>
-            <img src="https://s3.amazonaws.com/tw-helpdocs/svgs/agency-icon.svg" alt="" />
-            <h3>Agency and Professional Services</h3>
+            <img
+              className={styles.iconImg}
+              src="https://s3.amazonaws.com/tw-helpdocs/svgs/agency-icon.svg"
+              alt="Agency and professional services icon"
+            />
+            <h3 className={styles.iconDescription}>Agency and Professional Services</h3>
           </div>
         </div>
       </div>

@@ -31,7 +31,7 @@ import UnauthorizePage from './pages/UnauthorizePage/UnauthorizePage';
 import { RolesProvider } from './context/UserPermissionProvider';
 import { TaskTypesProvider } from './context/TaskTypeProvider';
 import ContactPage from './pages/ContactPage/ContactPage';
-import FAQPage from './pages/FAQpage/FAQPage';
+import FAQPage from './pages/FAQPage/FAQPage';
 import AuthenticationRoute from './routes/AuthenticationRoute';
 
 function App() {
@@ -45,7 +45,7 @@ function App() {
           <TaskTypesProvider>
             <Routes>
               {shouldShowRegister && <Route path="/register" element={<RegisterPage />} />}
-              <Route path="/FAQ" element={<FAQPage />} />
+              <Route path="/faq" element={<FAQPage />} />
               <Route path="/verify" element={<VerifyPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/" element={<HomePage />} />

@@ -1,18 +1,18 @@
 import React from 'react';
-import styles from './FAQdetails.module.scss';
-import FAQbutton from '../FAQbutton/FAQbutton';
+import styles from './FAQDetails.module.scss';
+import FAQButton from '../FAQButton/FAQButton';
 
 interface IMember {
   links: string[];
   title: string;
 }
-export default function FAQdetails(props: IMember) {
+export default function FAQDetails(props: IMember) {
   const { links, title } = props;
   return (
-    <section>
+    <section className={styles.FAQdetails}>
       <div className={styles.container}>
         <div className={styles.sectionContainer}>
-          <h1>{title}</h1>
+          <h1 className={styles.linkTitle}>{title}</h1>
           <div className={styles.infoContainer}>
             {links.map((link) => {
               return (
@@ -22,7 +22,7 @@ export default function FAQdetails(props: IMember) {
               );
             })}
           </div>
-          {title !== 'Planning and Managing Work' && <FAQbutton />}
+          {title !== 'Planning and Managing Work' && <FAQButton />}
         </div>
       </div>
     </section>

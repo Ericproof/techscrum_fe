@@ -1,21 +1,21 @@
-.FAQheader {
+.FAQHeader {
   background-color: rgb(28, 29, 55);
   height: 400px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  h1 {
+  .headerTitle {
     color: white;
     font-size: 50px;
     margin-bottom: 50px;
   }
-  input {
+  .searchBar {
     width: 50%;
     height: 70px;
     font-size: 30px;
     outline: none;
-    border-radius: 5px;
+    border-radius: 10px;
     background-image: url(https://support.teamwork.com/projects/public/images/icons/i-search@2x.png);
     background-position: 20px center;
     background-repeat: no-repeat;
