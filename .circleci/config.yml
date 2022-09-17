@@ -85,7 +85,7 @@ jobs:
             - ~/.npm
             - ~/.cache
           key: v1-dependencies-{{ checksum "package.json" }}
-
+      - jq/install
       - run: yarn lint
       - run: sh ./abc.sh 
 # Invoke jobs via workflows
