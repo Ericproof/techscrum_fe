@@ -38,6 +38,7 @@ function App() {
   const shouldShowRegister =
     window.location.origin === 'https://www.techscrumapp.com' ||
     window.location.origin === 'http://localhost:3000';
+
   return (
     <UserProvider>
       <RolesProvider>
