@@ -96,7 +96,7 @@ jobs:
       - run: git config --global user.email "kitman200220022002@gmail.com"
       - run: git config --global user.name "kitman20022002"
       - run: yarn version --patch
-      - run: git push --follow-tags
+      - run: git push --follow-tags --set-upstream origin develop
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
