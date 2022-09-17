@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
+$small: 1000px;
+
+.PartnersContainer * {
+  margin: 0;
+  padding: 0;
+}
+
+.PartnersContainer {
+  background-color: white;
+  font-family: 'Open Sans', sans-serif;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 10px;
+  padding-top: 50px;
+  // border: 3px solid red;
+
+  h3 {
+    padding-top: 50px;
+    font-size: 30px;
+  }
+
+  p {
+    padding-top: 20px;
+    padding-bottom: 50px;
+    font-size: 20px;
+  }
+
+  .CustomerLogs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    padding-bottom: 50px;
+    // border: 3px solid red;
+
+    .SingleLogContainer {
+      width: 13%;
+      margin: 20px;
+      // border: 3px solid red;
+
+      img {
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+  }
+}
