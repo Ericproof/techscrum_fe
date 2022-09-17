@@ -87,7 +87,16 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - jq/install
       - run: yarn lint
-      - run: sh ./abc.sh 
+  bump_patch:
+    docker:
+      - image: cimg/node:16.17.0-browsers
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run: git config --global user.email "kitman200220022002@gmail.com"
+      - run: git config --global user.name "kitman20022002"
+      - run: yarn version --patch
+      - run: git push --follow-tags --set-upstream origin develop
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
@@ -102,3 +111,12 @@ workflows:
             branches:
               only:
                 - master
+      - bump_patch:
+          requires:
+            - build_react_app
+            - code_qa
+            - security_check
+          filters:
+            branches:
+              only:
+                - develop                
