@@ -1,6 +1,5 @@
-/* eslint-disable react/jsx-no-useless-fragment */
 import React, { useState, useEffect } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './HomePage.module.scss';
 import cover from '../../assets/cover.png';
 import rochelle from '../../assets/rochelle.png';
@@ -19,14 +18,6 @@ import Footer from '../../components/Footer/Footer';
 export default function HomePage() {
   const [loginDetector, setLoginDetector] = useState(false);
   const navigate = useNavigate();
-  const showHomePage =
-    window.location.origin === 'https://www.techscrumapp.com' ||
-    window.location.origin === 'http://localhost:3000';
-  useEffect(() => {
-    if (!showHomePage) {
-      navigate('/login');
-    }
-  }, [navigate, showHomePage]);
 
   useEffect(() => {
     if (localStorage.getItem('refresh_token') && localStorage.getItem('refresh_token') !== null)
@@ -36,9 +27,7 @@ export default function HomePage() {
       navigate('/ ');
     }
   }, [loginDetector, navigate]);
-  if (!showHomePage) {
-    return <></>;
-  }
+
   return (
     <div>
       <Header />

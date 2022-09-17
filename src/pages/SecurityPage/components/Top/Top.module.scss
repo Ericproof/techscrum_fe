@@ -1,62 +1,60 @@
-.securitytopContainer * {
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
+$small: 1000px;
+
+.topContainer * {
   margin: 0;
   padding: 0;
 }
 
-.securitytopContainer {
+.topContainer {
   text-align: center;
-  background-color: white;
-
+  font-family: 'Open Sans', sans-serif;
+  background-color: rgb(255, 255, 255);
   h1 {
-    padding-top: 80px;
     font-size: 50px;
+    padding-top: 50px;
+    // margin: 0px;
   }
 
   p {
-    padding-top: 30px;
-    font-size: 20px;
+    font-size: 19.6px;
+    color: #494e6a;
+    margin: 21px 0px;
   }
 
-  .blueRecContainer {
+  .buleRec {
     position: relative;
-    left: 210px;
-    bottom: 120px;
-    .blueRec {
-      fill: #1fcbdc;
-      width: 10px;
-      height: 10px;
-    }
-    @media screen and (max-width: 800px) {
-      display: none;
+    bottom: 150px;
+    left: 180px;
+    rect {
+      fill: rgb(119, 202, 229);
+      @media screen and (max-width: $small) {
+        display: none;
+      }
     }
   }
 
-  .yellowRecContainer {
+  .yellowRec {
     position: relative;
-    right: 280px;
-    bottom: 70px;
-    .yellowRec {
+    bottom: 80px;
+    right: 300px;
+    rect {
       fill: #ffc63c;
-      width: 10px;
-      height: 10px;
-    }
-    @media screen and (max-width: 800px) {
-      display: none;
+      @media screen and (max-width: $small) {
+        display: none;
+      }
     }
   }
 
-  .pinkCirContainer {
+  .pinkCir {
     position: relative;
-    left: 330px;
-    bottom: -90px;
-    .pinkCir {
+    bottom: -50px;
+    left: 300px;
+    circle {
       fill: #f8cae8;
-      cx: 10;
-      cy: 10;
-      r: 5;
-    }
-    @media screen and (max-width: 800px) {
-      display: none;
+      @media screen and (max-width: $small) {
+        display: none;
+      }
     }
   }
 }

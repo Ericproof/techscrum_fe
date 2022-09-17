@@ -1,21 +1,21 @@
 import React from 'react';
 import styles from './Top.module.scss';
 
-export default function SecurityPage() {
+export default function Top() {
   return (
-    <div className={styles.securitytopContainer}>
-      <h1>Security at Teamwork</h1>
-      <p>
+    <div className={styles.topContainer}>
+      <h1 className={styles.heading}>Security at Teamwork</h1>
+      <p className={styles.para}>
         We’re privileged to be trusted by thousands of companies in over 140 countries worldwide.
       </p>
-      <svg className={styles.blueRecContainer}>
-        <rect className={styles.blueRec} />
+      <svg className={styles.buleRec}>
+        <rect width="10" height="10" />
       </svg>
-      <svg className={styles.yellowRecContainer}>
-        <rect className={styles.yellowRec} />
+      <svg className={styles.yellowRec}>
+        <rect width="10" height="10" />
       </svg>
-      <svg className={styles.pinkCirContainer}>
-        <circle className={styles.pinkCir} />
+      <svg className={styles.pinkCir}>
+        <circle cx="10" cy="10" r="5" />
       </svg>
     </div>
   );
