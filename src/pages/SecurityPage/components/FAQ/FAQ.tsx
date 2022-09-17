@@ -1,3 +1,5 @@
+// eslint-disable no-console, no-control-regex
+
 import React from 'react';
 import { FaRegPlusSquare } from 'react-icons/fa';
 import styles from './FAQ.module.scss';
@@ -7,7 +9,13 @@ export default function Certifications() {
     <div className={styles.FAQRoot}>
       <h3>Frequently asked questions</h3>
       <div className={styles.FAQDetailesContainer}>
-        <div className={styles.FAQDetailes}>
+        <div
+          className={styles.FAQDetailes}
+          role="button"
+          tabIndex={0}
+          onClick={() => {}}
+          onKeyDown={() => {}}
+        >
           <div className={styles.Qcontainer}>
             <h4>Where are your servers located?</h4>
           </div>
