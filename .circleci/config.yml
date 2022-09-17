@@ -11,7 +11,7 @@ orbs:
   cypress: cypress-io/cypress@2
   snyk: snyk/snyk@1.2.3
   aws-cloudfront: topmonks/aws-cloudfront@1.0.0
-
+  jq: circleci/jq@2.2.0
 executors:
   with-chrome:
     resource_class: small
@@ -65,7 +65,6 @@ jobs:
             - ~/.cache
           key: v1-dependencies-{{ checksum "package.json" }}
       - snyk/scan
-
   code_qa:
     docker:
       - image: cimg/node:16.17.0-browsers
@@ -78,14 +77,17 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
       - run: yarn install
+      - run: git log
+      
       - save_cache:
           paths:
             - node_modules
             - ~/.npm
             - ~/.cache
           key: v1-dependencies-{{ checksum "package.json" }}
-
+      - jq/install
       - run: yarn lint
+      - run: sh ./abc.sh 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:

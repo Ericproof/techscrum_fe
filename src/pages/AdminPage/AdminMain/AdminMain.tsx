@@ -5,7 +5,7 @@ import { emailCheck, emailVerifyCheck } from '../../../api/register/emailCheck';
 import { IUserInfo } from '../../../types';
 import { UserDispatchContext } from '../../../context/UserInfoProvider';
 import register from '../../../api/register/register';
-import styles from './RegisterMain.module.scss';
+import styles from './AdminMain.module.scss';
 import Icon from '../../../assets/logo.svg';
 import Email from '../../../assets/email.png';
 import Error from '../../../assets/error.png';
@@ -24,7 +24,7 @@ export default function RegisterMain() {
   const [emailRegisterProcess, setEmailRegisterProcess] = useState(false);
   const [emailCheckProcess, setEmailCheckProcess] = useState(false);
   const [invalidateStatus, setInvalidateStatus] = useState(false);
-  const [appName, setAppName] = useState('');
+  const [appName] = useState('');
   const [tips, setTips] = useState('');
   let emailRecorder = '';
   let nameRecorder = '';
@@ -41,8 +41,6 @@ export default function RegisterMain() {
           setEmailRegisterProcess(true);
           setInvalidateStatus(true);
         }
-      } else {
-        navigate('/register');
       }
     };
     fetchEmailByToken();
@@ -109,10 +107,6 @@ export default function RegisterMain() {
     nameRecorder = name;
   };
 
-  const onChangeAppName = (e: any) => {
-    setAppName(e.target.value);
-  };
-
   const setPassword = (password: string) => {
     if (!illegalCharacter.test(password) || password === '') {
       passwordRecorder = password;
@@ -148,21 +142,6 @@ export default function RegisterMain() {
             <p className="colorRed" data-testid="email-warning-tip">
               {tips}
             </p>
-            {!emailCheckProcess && (
-              <div className={['flex', styles.domainField].join(' ')}>
-                <input
-                  className={styles.domain}
-                  type="app"
-                  placeholder="Enter company name"
-                  name="app"
-                  defaultValue={appName}
-                  onChange={onChangeAppName}
-                  required
-                  data-testid="name"
-                />
-                <p>.techscrumapp.com</p>
-              </div>
-            )}
             <input
               className={styles.email}
               type="email"
