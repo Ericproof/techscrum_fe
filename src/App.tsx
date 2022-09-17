@@ -32,9 +32,14 @@ import { RolesProvider } from './context/UserPermissionProvider';
 import { TaskTypesProvider } from './context/TaskTypeProvider';
 import ContactPage from './pages/ContactPage/ContactPage';
 import AuthenticationRoute from './routes/AuthenticationRoute';
+import AdminPage from './pages/AdminPage/AdminPage';
 
 function App() {
   const shouldShowRegister =
+    window.location.origin === 'https://www.techscrumapp.com' ||
+    window.location.origin === 'http://localhost:3000';
+
+  const shouldShowAdmin =
     window.location.origin === 'https://www.techscrumapp.com' ||
     window.location.origin === 'http://localhost:3000';
 
@@ -45,6 +50,7 @@ function App() {
           <TaskTypesProvider>
             <Routes>
               {shouldShowRegister && <Route path="/register" element={<RegisterPage />} />}
+              {shouldShowAdmin && <Route path="/admin" element={<AdminPage />} />}
               <Route path="/verify" element={<VerifyPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/" element={<HomePage />} />
