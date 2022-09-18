@@ -147,17 +147,14 @@ workflows:
           requires:
             - code_qa
             - security_check
+            - cypress/run
           filters:
             branches:
               only:
                 - develop
       - bump_patch:
           requires:
-            - cypress/run
             - build_dev
-            - build_react_app
-            - code_qa
-            - security_check
           filters:
             branches:
               only:
