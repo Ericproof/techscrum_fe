@@ -14,9 +14,9 @@ orbs:
   jq: circleci/jq@2.2.0
 executors:
   with-chrome:
-    resource_class: small
+    resource_class: large
     docker:
-      - image: 'cypress/browsers:node16.14.0-chrome99-ff97'
+      - image: 'cypress/browsers:node16.14.2-slim-chrome100-ff99-edge'
 
 jobs:
   build_react_app:
@@ -127,9 +127,13 @@ workflows:
       - cypress/install:
           yarn: true
       - cypress/run:
+          requires:
+            - cypress/install
           wait-on: 'http://localhost:3000'
           yarn: true
-          executor: cypress/browsers:node16.14.2-slim-chrome100-ff99-edge
+          executor: with-chrome
+          browser: chrome
+          start: yarn start
       - build_react_app:
           requires:
             - code_qa
