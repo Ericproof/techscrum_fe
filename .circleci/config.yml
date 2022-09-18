@@ -111,12 +111,3 @@ workflows:
             branches:
               only:
                 - master
-      - bump_patch:
-          requires:
-            - build_react_app
-            - code_qa
-            - security_check
-          filters:
-            branches:
-              only:
-                - develop                
