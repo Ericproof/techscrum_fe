@@ -16,7 +16,7 @@ executors:
   with-chrome:
     resource_class: small
     docker:
-      - image: "cypress/browsers:node16.14.0-chrome99-ff97"
+      - image: 'cypress/browsers:node16.14.0-chrome99-ff97'
 
 jobs:
   build_react_app:
@@ -69,7 +69,7 @@ jobs:
       - aws-s3/copy:
           from: build/
           to: s3://devtechscrum
-          arguments: --recursive    
+          arguments: --recursive
   security_check:
     docker:
       - image: cimg/node:16.17.0-browsers
@@ -102,7 +102,7 @@ jobs:
             - v1-dependencies-
       - run: yarn install
       - run: git log
-      
+
       - save_cache:
           paths:
             - node_modules
@@ -124,6 +124,11 @@ workflows:
     jobs:
       - security_check
       - code_qa
+      - cypress/install:
+          yarn: true
+      - cypress/run:
+          wait-on: 'http://localhost:3000'
+          yarn: true
       - build_react_app:
           requires:
             - code_qa
@@ -139,7 +144,7 @@ workflows:
           filters:
             branches:
               only:
-                - develop                
+                - develop
       - bump_patch:
           requires:
             - build_react_app
@@ -148,4 +153,4 @@ workflows:
           filters:
             branches:
               only:
-                - develop                
+                - develop
