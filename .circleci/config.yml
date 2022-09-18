@@ -126,6 +126,7 @@ workflows:
       - code_qa
       - cypress/install:
           yarn: true
+          executor: with-chrome
       - cypress/run:
           requires:
             - cypress/install
