@@ -126,7 +126,6 @@ workflows:
       - code_qa
       - cypress/install:
           yarn: true
-          executor: cypress/browsers:node16.14.2-slim-chrome100-ff99-edge
       - cypress/run:
           wait-on: 'http://localhost:3000'
           yarn: true
