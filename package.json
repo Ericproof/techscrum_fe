@@ -35,7 +35,8 @@
     "cdn": "aws cloudfront create-invalidation --distribution-id E1V3T62UIWQDQ2 --paths /*",
     "cypress": "cypress open",
     "cy:run": "cypress run",
-    "test": "start-server-and-test start http-get://localhost:3030 cy:run"
+    "test": "start-server-and-test start http-get://localhost:3030 cy:run",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
@@ -70,6 +71,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "husky": "^8.0.1",
     "prettier": "^2.6.2",
     "react-scripts": "5.0.1",
     "sass": "^1.51.0",
