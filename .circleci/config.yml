@@ -153,6 +153,7 @@ workflows:
                 - develop
       - bump_patch:
           requires:
+            - build_dev
             - build_react_app
             - code_qa
             - security_check
