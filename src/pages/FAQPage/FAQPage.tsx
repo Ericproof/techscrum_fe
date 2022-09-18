@@ -1,7 +1,7 @@
 import React from 'react';
+import FAQDetails from './components/FAQDetails/FAQDetails';
 import FAQHeader from './components/FAQHeader/FAQHeader';
 import FAQIcons from './components/FAQIcons/FAQIcons';
-import FAQDetails from './components/FAQDetails/FAQDetails';
 
 export default function FAQPage() {
   const getStarted = [

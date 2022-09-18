@@ -3,16 +3,16 @@ $dark-gray: rgb(107, 107, 107);
 .FAQicons {
   background-color: white;
   .container {
-    width: 65%;
+    max-width: 65%;
     margin: auto;
     .iconsContainer {
-      width: 100%;
+      max-width: 100%;
       display: flex;
       flex-wrap: wrap;
       padding: 63px 0px;
       justify-content: center;
       .iconContainer {
-        width: 33%;
+        max-width: 33%;
         height: 250px;
         display: flex;
         flex-direction: column;
@@ -27,7 +27,7 @@ $dark-gray: rgb(107, 107, 107);
           color: $dark-gray;
         }
         .iconImg {
-          width: 100px;
+          max-width: 100px;
           height: 100px;
           margin-bottom: 20px;
         }

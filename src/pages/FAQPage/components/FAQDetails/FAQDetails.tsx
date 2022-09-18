@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './FAQDetails.module.scss';
-import FAQButton from '../FAQButton/FAQButton';
 
 interface IMember {
   links: string[];
@@ -22,7 +21,9 @@ export default function FAQDetails(props: IMember) {
               );
             })}
           </div>
-          {title !== 'Planning and Managing Work' && <FAQButton />}
+          {title !== 'Planning and Managing Work' && (
+            <button className={styles.btn}>View All</button>
+          )}
         </div>
       </div>
     </section>
