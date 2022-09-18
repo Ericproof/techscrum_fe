@@ -46,6 +46,30 @@ jobs:
       - aws-cloudfront/invalidate:
           distribution_id: E1V3T62UIWQDQ2
           paths: ~/*
+  build_dev:
+    docker:
+      - image: cimg/node:16.17.0-browsers
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run: yarn install
+      - save_cache:
+          paths:
+            - node_modules
+            - ~/.npm
+            - ~/.cache
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      - run: yarn build
+      - aws-s3/copy:
+          from: build/
+          to: s3://devtechscrum.com
+          arguments: --recursive    
   security_check:
     docker:
       - image: cimg/node:16.17.0-browsers
@@ -87,7 +111,12 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - jq/install
       - run: yarn lint
-      - run: sh ./abc.sh 
+  bump_patch:
+    docker:
+      - image: cimg/node:16.17.0-browsers
+    working_directory: ~/repo
+    steps:
+      - run: echo 'WIP'
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
@@ -98,7 +127,25 @@ workflows:
       - build_react_app:
           requires:
             - code_qa
+            - security_check
           filters:
             branches:
               only:
                 - master
+      - build_dev:
+          requires:
+            - code_qa
+            - security_check
+          filters:
+            branches:
+              only:
+                - develop                
+      - bump_patch:
+          requires:
+            - build_react_app
+            - code_qa
+            - security_check
+          filters:
+            branches:
+              only:
+                - develop                
