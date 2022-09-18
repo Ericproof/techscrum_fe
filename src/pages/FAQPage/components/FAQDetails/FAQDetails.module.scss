@@ -4,7 +4,7 @@ $extra-dark-gray: rgb(86, 86, 86);
 .FAQdetails {
   background-color: white;
   .container {
-    max-width: 65%;
+    width: 65%;
     margin: auto;
     .sectionContainer {
       padding: 63px 0px;
@@ -18,7 +18,7 @@ $extra-dark-gray: rgb(86, 86, 86);
         flex-wrap: wrap;
         margin-bottom: 30px;
         .singleInfoContainer {
-          max-width: 50%;
+          width: 50%;
           height: 65px;
           color: rgb(77, 141, 189);
           font-size: 23px;
