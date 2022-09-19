@@ -6,11 +6,11 @@ $small: 1000px;
   font-family: 'Open Sans', sans-serif;
   background-color: rgb(245, 247, 250);
 
-  h2 {
+  .headaing {
     padding-top: 50px;
   }
 
-  p {
+  .subheading {
     font-size: 19.6px;
     color: #494e6a;
     margin: 21px 0px;
@@ -34,7 +34,7 @@ $small: 1000px;
         width: 80%;
       }
 
-      img {
+      .webAssetsImg {
         width: 100%;
         border-radius: 5px 5px 0px 0px;
       }
@@ -46,11 +46,11 @@ $small: 1000px;
         padding-right: 16px;
         padding-bottom: 30px;
 
-        p {
+       .webAssetsDesc{
           font-size: 15px;
         }
 
-        span {
+        .learnMore {
           color: #6a84ed;
         }
       }

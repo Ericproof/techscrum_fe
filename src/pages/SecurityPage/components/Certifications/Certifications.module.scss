@@ -26,9 +26,9 @@ $small: 1000px;
       width: 80%;
     }
 
-    h1 {
-      font-size: 30px;
-    }
+    // h1 {
+    //   font-size: 30px;
+    // }
 
     .DescText {
       padding-top: 30px;
@@ -37,14 +37,14 @@ $small: 1000px;
     .DescSpan {
       padding-top: 30px;
 
-      a {
+      .isoLink {
         padding-right: 1.8em;
         text-decoration: none;
         color: #4461d7;
       }
     }
 
-    button {
+    .learnMoreButton {
       background-color: #4461d7;
       color: white;
       border: none;
@@ -55,12 +55,12 @@ $small: 1000px;
       font-size: 15px;
     }
 
-    button:hover {
+    .learnMoreButton:hover {
       cursor: pointer;
     }
   }
 
-  .CertImg {
+  .CertImgs {
     width: 40%;
     margin: 30px;
 
@@ -68,7 +68,7 @@ $small: 1000px;
       width: 80%;
     }
 
-    img {
+    .CertImg {
       padding: 35px;
 
       @media screen and (max-width: $small) {
