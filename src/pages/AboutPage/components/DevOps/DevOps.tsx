@@ -21,7 +21,7 @@ const DevOps = [
     bulletPoint1: 'Lorem, ipsum dolor',
     bulletPoint2: 'Lorem, ipsum dolor',
     bulletPoint3: 'Lorem, ipsum dolor',
-    LinkedinURL: 'http://linkedin.com/in/yuchen-diao-63644b20a'
+    LinkedinURL: 'https://linkedin.com/in/yuchen-diao-63644b20a'
   },
   {
     image: Lois,
