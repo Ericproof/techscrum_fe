@@ -133,11 +133,7 @@ export default function ProjectHeader() {
                                   </div>
                                 </button>
                               ) : (
-                                <button
-                                  type="button"
-                                  className={styles.unStarBtn}
-                                  onClick={() => setProjectStar(project.id)}
-                                >
+                                <button type="button" className={styles.unStarBtn}>
                                   <div className={styles.starContent}>
                                     <span className={styles.unStar}>
                                       <AiOutlineStar />
