@@ -32,7 +32,7 @@ const Developers = [
     bulletPoint1: 'Lorem, ipsum dolor',
     bulletPoint2: 'Lorem, ipsum dolor',
     bulletPoint3: 'Lorem, ipsum dolor',
-    LinkedinURL: 'http://www.linkedin.com/in/talisa-li'
+    LinkedinURL: 'https://www.linkedin.com/in/talisa-li'
   },
   {
     image: Regan,
