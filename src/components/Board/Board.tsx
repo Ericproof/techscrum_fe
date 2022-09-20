@@ -157,7 +157,7 @@ export default function Board() {
   };
 
   const deleteTask = async () => {
-    if (taskData?.id && taskData?.id) {
+    if (taskData?.id ?? taskData?.id) {
       try {
         await removeTask(taskData.id);
       } finally {

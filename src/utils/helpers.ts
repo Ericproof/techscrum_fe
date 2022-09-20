@@ -29,7 +29,6 @@ export default function checkAccess(accessLevel: any, projectId: string) {
   if (Object.keys(projectData).length === 0) {
     projectData = JSON.parse(projects);
   }
-  // console.log(projectData, userId, projectData[projectId].ownerId, projectId);
 
   if (projectData[projectId]?.ownerId?.id === userId) {
     return true;

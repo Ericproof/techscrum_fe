@@ -3,10 +3,9 @@ import { Link } from 'react-router-dom';
 import styles from './ContactForm.module.scss';
 
 export default function ContactForm() {
-  const handleSubmit = () => {};
   return (
     <div className={styles.container}>
-      <form onSubmit={handleSubmit}>
+      <form>
         <h3>Get a Live Demo</h3>
         <input placeholder="Full Name *" />
         <input placeholder="Company *" />
