@@ -28,9 +28,6 @@ export default function ProjectHeader() {
     }
   };
   const refStar = projectList.map(() => createRef<HTMLDivElement>());
-  const setProjectStar = (id: string) => {
-    projectList.findIndex((project) => project.id === id);
-  };
   const getStarPosition = (e: React.MouseEvent<HTMLDivElement>, id: string) => {
     const mouseStarPosition = e.currentTarget.getBoundingClientRect();
     const starPosition = {
@@ -125,11 +122,7 @@ export default function ProjectHeader() {
                           >
                             <div className={styles.starContainer}>
                               {project.star ? (
-                                <button
-                                  type="button"
-                                  className={styles.starBtn}
-                                  onClick={() => setProjectStar(project.id)}
-                                >
+                                <button type="button" className={styles.starBtn}>
                                   <div className={styles.starContent}>
                                     <span className={styles.isStar}>
                                       <AiFillStar />
