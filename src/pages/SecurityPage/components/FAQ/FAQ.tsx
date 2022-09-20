@@ -37,18 +37,21 @@ export default function Certifications() {
 
   return (
     <div className={styles.FAQRoot}>
-      <h3>Frequently asked questions</h3>
+      <h3 className={styles.heading}>Frequently asked questions</h3>
       <div className={styles.FAQDetailesContainer}>
         {faqComponent}
         <div className={styles.FAQInfoContainer}>
-          <div className={styles.desc}>
-            <p>
+          <div className={styles.descContainer}>
+            <p className={styles.desc}>
               Have a question that we haven’t answered here? We’d love to talk to you. Get in touch
-              with us by emailing <a href="mailto:support@teamwork.com">support@teamwork.com</a>
+              with us by emailing{' '}
+              <a className={styles.emailLink} href="mailto:support@teamwork.com">
+                support@teamwork.com
+              </a>
             </p>
           </div>
           <div className={styles.buttonContainer}>
-            <button>More Information</button>
+            <button className={styles.linkButton}>More Information</button>
           </div>
         </div>
       </div>

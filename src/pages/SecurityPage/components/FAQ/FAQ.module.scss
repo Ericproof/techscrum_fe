@@ -10,7 +10,7 @@ $small: 1000px;
   font-family: 'Open Sans', sans-serif;
   text-align: center;
 
-  h3 {
+  .heading {
     padding-top: 70px;
     padding-bottom: 70px;
     font-size: 30px;
@@ -46,11 +46,6 @@ $small: 1000px;
         text-align: left;
         padding: 20px;
         padding-left: 50px;
-        // border: 1px solid red;
-
-        h4 {
-          font-size: 20px;
-        }
       }
 
       .IconContainer {
@@ -59,7 +54,6 @@ $small: 1000px;
         max-height: 100%;
         padding: 20px;
         padding-left: 50px;
-        // border: 1px solid red;
 
         .PlusIcon {
           max-height: 100%;
@@ -79,12 +73,12 @@ $small: 1000px;
         flex-direction: column;
       }
 
-      .desc {
+      .descContainer {
         width: 70%;
         padding: 20px;
         text-align: left;
 
-        a {
+        .emailLink {
           text-decoration: none;
           color: #6a84ed;
         }
@@ -95,7 +89,7 @@ $small: 1000px;
         padding: 20px;
         text-align: right;
 
-        button {
+        .linkButton {
           padding: 10px;
           font-size: 15px;
           max-width: 100%;
@@ -106,7 +100,7 @@ $small: 1000px;
           transition: 0.3s;
         }
 
-        button:hover {
+        .linkButton:hover {
           cursor: pointer;
           background-color: #6a84ed;
           color: white;
