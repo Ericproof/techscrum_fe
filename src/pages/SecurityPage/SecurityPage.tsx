@@ -11,13 +11,13 @@ import Teamwork from './components/Teamwork/Teamwork';
 
 export default function SecurityPage() {
   return (
-    <div>
+    <>
       <Top />
       <Card />
       <Certifications />
       <Partners />
       <FAQ />
       <Teamwork />
-    </div>
+    </>
   );
 }
