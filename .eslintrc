@@ -28,6 +28,7 @@
     "SharedArrayBuffer": "readonly"
   },
   "rules": {
+    "no-secrets/no-secrets":["error",{"ignoreContent":"^https"}],
     "@typescript-eslint/no-explicit-any": "off",
     "react/button-has-type": [
       0,
