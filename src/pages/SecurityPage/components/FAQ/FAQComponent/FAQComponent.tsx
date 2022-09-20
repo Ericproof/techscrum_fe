@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 import React, { useState } from 'react';
 import { FaRegPlusSquare, FaRegMinusSquare } from 'react-icons/fa';
 import styles from './FAQComponent.module.scss';
@@ -12,20 +10,14 @@ interface Imember {
 export default function FAQComponent(props: Imember) {
   const { title, content } = props;
   const [display, setDisplay] = useState(false);
-  let icon;
-  if (display) {
-    icon = <FaRegMinusSquare className={styles.PlusIcon} />;
-  } else {
-    icon = <FaRegPlusSquare className={styles.PlusIcon} />;
-  }
+  const icon = display ? (
+    <FaRegMinusSquare className={styles.PlusIcon} />
+  ) : (
+    <FaRegPlusSquare className={styles.PlusIcon} />
+  );
 
   function toggleDisplay() {
-    // display === true ? setDisplay(false) : setDisplay(true);
-    if (display) {
-      setDisplay(false);
-    } else {
-      setDisplay(true);
-    }
+    setDisplay(!display);
   }
 
   return (
@@ -37,7 +29,11 @@ export default function FAQComponent(props: Imember) {
         onClick={() => {
           toggleDisplay();
         }}
-        onKeyDown={() => {}}
+        onKeyDown={(event) => {
+          if (event.keyCode === 40) {
+            toggleDisplay();
+          }
+        }}
       >
         <div className={styles.Qcontainer}>
           <h4 className={styles.title}>{title}</h4>
