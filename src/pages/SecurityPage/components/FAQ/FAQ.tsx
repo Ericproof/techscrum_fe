@@ -1,28 +1,10 @@
 /* eslint-disable no-console */
 
 import React, { useState } from 'react';
-import { FaRegPlusSquare, FaRegMinusSquare } from 'react-icons/fa';
-import { icons } from 'react-icons/lib';
 import styles from './FAQ.module.scss';
 import FAQComponent from './FAQComponent/FAQComponent';
 
 export default function Certifications() {
-  const [display, setDisplay] = useState(false);
-  let icon;
-  if (display) {
-    icon = <FaRegMinusSquare className={styles.PlusIcon} />;
-  } else {
-    icon = <FaRegPlusSquare className={styles.PlusIcon} />;
-  }
-
-  function toggleDisplay() {
-    if (display) {
-      setDisplay(false);
-    } else {
-      setDisplay(true);
-    }
-  }
-
   const objs = [
     {
       title: 'Where are your servers located',

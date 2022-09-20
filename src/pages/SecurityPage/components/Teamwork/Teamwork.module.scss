@@ -9,14 +9,11 @@ $small: 1000px;
 .teamworkContainer {
   position: relative;
   margin-top: 80px;
-  // padding: 80px;
   font-family: 'Open Sans', sans-serif;
-  // background-image: linear-gradient(-90deg, #6126e6, #854cff);
   overflow: hidden;
 
   .background {
     position: absolute;
-    // background: purple;
     background-image: linear-gradient(-90deg, #6126e6, #854cff);
     height: 300%;
     width: 200%;
@@ -26,7 +23,7 @@ $small: 1000px;
     overflow: hidden;
   }
 
-  .DescButtonContainer {
+  .descButtonContainer {
     text-align: center;
     display: flex;
     align-items: center;
@@ -44,17 +41,17 @@ $small: 1000px;
       color: white;
       text-align: left;
 
-      p {
+      .subheading {
         padding-top: 30px;
       }
     }
 
-    .buttonContainer {
+    .linkButtonContainer {
       width: 30%;
       padding: 20px;
       text-align: left;
 
-      button {
+      .linkButton {
         cursor: pointer;
         color: white;
         background-color: #1d1c35;

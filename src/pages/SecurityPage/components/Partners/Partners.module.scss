@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
 $small: 1000px;
 
-.PartnersContainer * {
+.partnersContainer * {
   margin: 0;
   padding: 0;
 }
 
-.PartnersContainer {
+.partnersContainer {
   background-color: white;
   font-family: 'Open Sans', sans-serif;
   text-align: center;
@@ -15,34 +15,31 @@ $small: 1000px;
   align-items: center;
   margin-right: 10px;
   padding-top: 50px;
-  // border: 3px solid red;
 
-  h3 {
+  .heading {
     padding-top: 50px;
     font-size: 30px;
   }
 
-  p {
+  .subheading {
     padding-top: 20px;
     padding-bottom: 50px;
     font-size: 20px;
   }
 
-  .CustomerLogs {
+  .customerLogs {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     width: 50%;
     padding-bottom: 50px;
-    // border: 3px solid red;
 
-    .SingleLogContainer {
+    .singleLogContainer {
       width: 13%;
       margin: 20px;
-      // border: 3px solid red;
 
-      img {
+      .brandImg {
         max-width: 100%;
         max-height: 100%;
       }

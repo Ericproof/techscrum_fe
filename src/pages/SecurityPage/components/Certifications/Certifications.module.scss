@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
 $small: 1000px;
 
-.CertContainer * {
+.certContainer * {
   margin: 0;
   padding: 0;
 }
 
-.CertContainer {
+.certContainer {
   background-color: white;
   padding-top: 50px;
   display: flex;
@@ -18,7 +18,7 @@ $small: 1000px;
     align-items: center;
   }
 
-  .CertDesc {
+  .certDesc {
     width: 30%;
     margin: 30px;
 
@@ -26,15 +26,11 @@ $small: 1000px;
       width: 80%;
     }
 
-    // h1 {
-    //   font-size: 30px;
-    // }
-
-    .DescText {
+    .descText {
       padding-top: 30px;
     }
 
-    .DescSpan {
+    .descSpan {
       padding-top: 30px;
 
       .isoLink {
@@ -60,7 +56,7 @@ $small: 1000px;
     }
   }
 
-  .CertImgs {
+  .certImgs {
     width: 40%;
     margin: 30px;
 
@@ -68,7 +64,7 @@ $small: 1000px;
       width: 80%;
     }
 
-    .CertImg {
+    .certImg {
       padding: 35px;
 
       @media screen and (max-width: $small) {

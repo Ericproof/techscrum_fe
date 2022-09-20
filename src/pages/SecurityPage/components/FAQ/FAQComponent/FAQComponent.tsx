@@ -20,6 +20,7 @@ export default function FAQComponent(props: Imember) {
   }
 
   function toggleDisplay() {
+    // display === true ? setDisplay(false) : setDisplay(true);
     if (display) {
       setDisplay(false);
     } else {
@@ -39,7 +40,7 @@ export default function FAQComponent(props: Imember) {
         onKeyDown={() => {}}
       >
         <div className={styles.Qcontainer}>
-          <h4>{title}</h4>
+          <h4 className={styles.title}>{title}</h4>
         </div>
         <div className={styles.IconContainer}>{icon}</div>
       </div>
