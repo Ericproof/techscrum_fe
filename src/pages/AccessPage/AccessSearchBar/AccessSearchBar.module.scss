@@ -1,7 +1,5 @@
 .container {
-  box-sizing: border-box;
   display: flex;
-  overflow: hidden;
   width: 336px;
   margin: 0px 0px 24px;
   align-items: center;
@@ -15,7 +13,6 @@
   flex: 1 1 100%;
   font-size: 14px;
   justify-content: space-between;
-  overflow: hidden;
   transition: background-color 0.2s ease-in-out 0s, border-color 0.2s ease-in-out 0s;
   overflow-wrap: break-word;
   vertical-align: top;
