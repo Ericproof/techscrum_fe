@@ -30,7 +30,7 @@ export default function FAQComponent(props: Imember) {
           toggleDisplay();
         }}
         onKeyDown={(event) => {
-          if (event.keyCode === 40) {
+          if (event.key === 'ArrowDown') {
             toggleDisplay();
           }
         }}
