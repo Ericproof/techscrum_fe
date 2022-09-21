@@ -48,10 +48,8 @@
         .searchBar {
           margin-top: 16px;
           position: relative;
-          display: flex;
           margin-bottom: 16px;
           width: 184px;
-          transition: all 0.3s cubic-bezier(0.15, 1, 0.3, 1) 0s;
           align-items: center;
           background-color: #fafbfc;
           border-color: #dfe1e6;
@@ -75,7 +73,6 @@
             border-color: var(--ds-border-focused, #4c9aff);
           }
           input {
-            outline: 0;
             border-bottom-right-radius: 3.01px;
             padding: 4px 6px;
             height: 2em;
@@ -135,7 +132,6 @@
               text-indent: initial;
               border-spacing: 2px;
               .stars {
-                position: relative;
                 width: 2.85%;
                 color: #5e6c84;
                 padding: 4px 8px 4px 0;
@@ -647,7 +643,6 @@
                         }
 
                         button {
-                          text-align: right;
                           margin-left: 0;
                           align-items: baseline;
                           border-width: 0;
@@ -656,7 +651,6 @@
                           display: inline-flex;
                           font-size: inherit;
                           font-family: inherit;
-                          font-weight: 500;
                           max-width: 100%;
                           position: relative;
                           text-align: center;
@@ -709,7 +703,6 @@
                               // width: 100px;
                               // height: 100px;
                               position: relative;
-                              display: inline-block;
                               outline: 0;
                               // background-color: #ffffff;
                               border-radius: 50%;
@@ -763,7 +756,6 @@
                                 display: inline-flex;
                                 font-size: inherit;
                                 font-family: inherit;
-                                font-weight: 500;
                                 max-width: 100%;
                                 position: relative;
                                 text-align: center;
@@ -829,7 +821,6 @@
                               border-radius: 50%;
                               display: flex;
                               width: 100%;
-                              height: 100%;
                               flex: 1 1 100%;
                               background-color: transparent;
                               background-position: center center;
@@ -854,7 +845,6 @@
                               border-radius: 50%;
                               display: flex;
                               width: 100%;
-                              height: 100%;
                               flex: 1 1 100%;
                               background-color: transparent;
                               background-position: center center;
