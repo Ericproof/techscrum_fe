@@ -1,6 +1,4 @@
-/* eslint-disable no-console */
-
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './FAQ.module.scss';
 import FAQComponent from './FAQComponent/FAQComponent';
 
