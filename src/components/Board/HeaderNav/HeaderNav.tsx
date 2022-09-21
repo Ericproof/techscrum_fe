@@ -21,12 +21,12 @@ export default function HeaderNav() {
       <nav className={styles.navLayout}>
         <ol>
           <li>
-            <NavLink to="/projects" className={({ isActive }) => (isActive ? 'none' : 'none')}>
+            <NavLink to="/projects" className="none">
               <span>Projects</span>
             </NavLink>
           </li>
           <li>
-            <NavLink to={currentUrl} className={({ isActive }) => (isActive ? 'none' : 'none')}>
+            <NavLink to={currentUrl} className="none">
               <span>{currentProject[0].name}</span>
             </NavLink>
           </li>
