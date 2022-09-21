@@ -36,11 +36,11 @@ export default function Certifications() {
   });
 
   return (
-    <div className={styles.FAQRoot}>
+    <div className={styles.faqRoot}>
       <h3 className={styles.heading}>Frequently asked questions</h3>
-      <div className={styles.FAQDetailesContainer}>
+      <div className={styles.faqDetailesContainer}>
         {faqComponent}
-        <div className={styles.FAQInfoContainer}>
+        <div className={styles.faqInfoContainer}>
           <div className={styles.descContainer}>
             <p className={styles.desc}>
               Have a question that we haven’t answered here? We’d love to talk to you. Get in touch

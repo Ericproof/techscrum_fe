@@ -5,7 +5,7 @@ export default function Card() {
   return (
     <div className={styles.securityCardDivContainer}>
       <h2 className={styles.headaing}>We keep your data safe</h2>
-      <p className={styles.subheading}>
+      <p className={styles.subHeading}>
         Maintaining the security, integrity, and confidentiality of your data is our top priority.
       </p>
       <div className={styles.securityCards}>

@@ -25,7 +25,7 @@ $small: 1000px;
     position: relative;
     bottom: 150px;
     left: 180px;
-    rect {
+    .blue {
       fill: rgb(119, 202, 229);
       @media screen and (max-width: $small) {
         display: none;
@@ -37,7 +37,7 @@ $small: 1000px;
     position: relative;
     bottom: 80px;
     right: 300px;
-    rect {
+    .yellow {
       fill: #ffc63c;
       @media screen and (max-width: $small) {
         display: none;
@@ -49,7 +49,7 @@ $small: 1000px;
     position: relative;
     bottom: -50px;
     left: 300px;
-    circle {
+    .pink {
       fill: #f8cae8;
       @media screen and (max-width: $small) {
         display: none;

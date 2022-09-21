@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
 $small: 1000px;
 
-.FAQDetailes {
+.faqDetailes {
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -9,7 +9,7 @@ $small: 1000px;
   padding: 20px;
   transition: 0.3s;
 
-  .Qcontainer {
+  .questionContainer {
     width: 50%;
     text-align: left;
     padding: 20px;
@@ -20,14 +20,14 @@ $small: 1000px;
     }
   }
 
-  .IconContainer {
+  .iconContainer {
     width: 50%;
     text-align: right;
     max-height: 100%;
     padding: 20px;
     padding-left: 50px;
 
-    .PlusIcon {
+    .plusIcon {
       max-height: 100%;
       font-weight: bolder;
     }

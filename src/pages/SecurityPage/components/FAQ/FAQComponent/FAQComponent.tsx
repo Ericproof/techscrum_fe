@@ -11,9 +11,9 @@ export default function FAQComponent(props: Imember) {
   const { title, content } = props;
   const [display, setDisplay] = useState(false);
   const icon = display ? (
-    <FaRegMinusSquare className={styles.PlusIcon} />
+    <FaRegMinusSquare className={styles.plusIcon} />
   ) : (
-    <FaRegPlusSquare className={styles.PlusIcon} />
+    <FaRegPlusSquare className={styles.plusIcon} />
   );
 
   function toggleDisplay() {
@@ -23,7 +23,7 @@ export default function FAQComponent(props: Imember) {
   return (
     <>
       <div
-        className={styles.FAQDetailes}
+        className={styles.faqDetailes}
         role="button"
         tabIndex={0}
         onClick={() => {
@@ -35,10 +35,10 @@ export default function FAQComponent(props: Imember) {
           }
         }}
       >
-        <div className={styles.Qcontainer}>
+        <div className={styles.questionContainer}>
           <h4 className={styles.title}>{title}</h4>
         </div>
-        <div className={styles.IconContainer}>{icon}</div>
+        <div className={styles.iconContainer}>{icon}</div>
       </div>
       <hr className={styles.breaker} />
       <div className={display ? styles.expand : styles.hide}>

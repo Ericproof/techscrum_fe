@@ -5,7 +5,7 @@ export default function Partners() {
   return (
     <div className={styles.partnersContainer}>
       <h3 className={styles.heading}>Trusted by over 20,000 companies</h3>
-      <p className={styles.subheading}>
+      <p className={styles.subHeading}>
         Join teams all over the world increasing their productivity with Teamwork
       </p>
       <div className={styles.customerLogs}>
