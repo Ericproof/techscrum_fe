@@ -36,9 +36,11 @@ export default function HomePage() {
       navigate('/ ');
     }
   }, [loginDetector, navigate]);
+
   if (!showHomePage) {
     return <></>;
   }
+
   return (
     <div>
       <Header />

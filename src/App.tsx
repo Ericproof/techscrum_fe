@@ -33,6 +33,7 @@ import { TaskTypesProvider } from './context/TaskTypeProvider';
 import ContactPage from './pages/ContactPage/ContactPage';
 import FAQPage from './pages/FAQPage/FAQPage';
 import AuthenticationRoute from './routes/AuthenticationRoute';
+import SecurityPage from './pages/SecurityPage/SecurityPage';
 import AdminPage from './pages/AdminPage/AdminPage';
 
 function App() {
@@ -65,6 +66,7 @@ function App() {
               <Route path="/refund-policy" element={<RefundPolicyPage />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/about" element={<AboutPage />} />
+              <Route path="/security-page" element={<SecurityPage />} />
               <Route path="/errorPage" element={<ErrorPage />} />
               <Route path="" element={<AuthenticationRoute />}>
                 <Route path="/settings/:projectId" element={<Setting />} />
