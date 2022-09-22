@@ -7,10 +7,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-
-}
-
 .active{
   position: relative;
   background-color: #e6effc!important;
