@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-syntax */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, createRef, useEffect, useContext } from 'react';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
@@ -12,7 +11,7 @@ import { deleteProject, updateProject } from '../../api/projects/projects';
 import CreateNewCard from '../../components/CreateNewCard/CreateNewCard';
 import { IProject, IProjectData } from '../../types';
 import { ProjectContext, ProjectDispatchContext } from '../../context/ProjectProvider';
-import checkAccess from '../../utils/helpers';
+import checkAccess, { clickedShowMore } from '../../utils/helpers';
 
 export default function ProjectPage() {
   const navigate = useNavigate();
@@ -89,16 +88,7 @@ export default function ProjectPage() {
   };
 
   const handleClickInside = (e: MouseEvent) => {
-    const target = e.target as HTMLDivElement;
-    let hasClickShowMore = false;
-
-    for (const element of refShowMore) {
-      const ref = element.current;
-      if (ref !== null && ref.contains(target)) {
-        hasClickShowMore = true;
-      }
-    }
-    if (hasClickShowMore === false) {
+    if (!clickedShowMore(e, refShowMore)) {
       setShowProjectDetails(-1);
     }
   };
