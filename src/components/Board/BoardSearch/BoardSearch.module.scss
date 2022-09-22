@@ -14,9 +14,7 @@
     z-index: 999;
   }
 }
-.boardSearchSection {
-  
-}
+
 .createButton {
   margin-top: -50px;
   align-items: baseline;
@@ -26,8 +24,6 @@
   display: inline-flex;
   font-size: 14px;
   font-style: normal;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   font-weight: 500;
   max-width: 100%;
   position: absolute;
@@ -97,9 +93,6 @@
   outline: none;
   width: 100%;
   line-height: 1.42857;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, 'Fira Sans',
-    'Droid Sans', 'Helvetica Neue', sans-serif;
-
   &::-webkit-input-placeholder {
     opacity: 0;
     visibility: hidden;
