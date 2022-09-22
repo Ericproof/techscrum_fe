@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 import axios from 'axios';
 import React, { useEffect, useState, createRef } from 'react';
 import { TiDelete } from 'react-icons/ti';
@@ -70,8 +71,8 @@ export default function ProjectMembersPage() {
     const target = e.target as HTMLDivElement;
     let hasClickShowMore = false;
 
-    for (let i = 0; i < refShowMore.length; i += 1) {
-      const ref = refShowMore[i].current;
+    for (const element of refShowMore) {
+      const ref = element.current;
       if (ref !== null && ref.contains(target)) {
         hasClickShowMore = true;
       }
