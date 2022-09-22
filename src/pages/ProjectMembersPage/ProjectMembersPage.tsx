@@ -49,24 +49,17 @@ export default function ProjectMembersPage() {
 
   const onChangeProjectRole = async (e: React.ChangeEvent<HTMLSelectElement>, userId: string) => {
     const roleId = e.target.value;
-    try {
-      const res = await updateMemberRole(roleId, userId, projectId);
-      if (res.data) {
-        await fetchMembers();
-      }
-    } catch (err) {
-      setMembers(members);
+
+    const res = await updateMemberRole(roleId, userId, projectId);
+    if (res.data) {
+      await fetchMembers();
     }
   };
 
   const onClickRemove = async (userId: string) => {
-    try {
-      const res = await removeMember(userId, projectId);
-      if (res.data) {
-        await fetchMembers();
-      }
-    } catch (err) {
-      setMembers(members);
+    const res = await removeMember(userId, projectId);
+    if (res.data) {
+      await fetchMembers();
     }
   };
 
