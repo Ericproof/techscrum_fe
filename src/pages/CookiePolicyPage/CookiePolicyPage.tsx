@@ -63,7 +63,7 @@ export default function CookiePolicyPage() {
             </p>
             <p>
               Further information on cookies can be found at the{' '}
-              <a href="http://ec.europa.eu/ipg/basics/legal/cookies/index_en.htm">
+              <a href="https://ec.europa.eu/ipg/basics/legal/cookies/index_en.htm">
                 EU Internet Handbook
               </a>{' '}
               or <a href="https://www.allaboutcookies.org/verify">AllAboutCookies.org</a> .
