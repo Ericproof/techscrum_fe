@@ -429,7 +429,6 @@
                     text-transform: initial;
                   }
                   .type {
-                    margin-top: 3px !important;
                     color: var(--ds-text-subtlest, #6b778c);
                     display: block;
                     overflow: hidden;
@@ -442,7 +441,6 @@
                     text-transform: initial;
                     padding: 0;
                     margin: 0;
-
                   }
                 }
                 .starSection {
@@ -718,7 +716,6 @@
           }
         }
         .createIssue {
-          margin-left: 12px;
           display: flex;
           align-items: center;
           flex-shrink: 0;
