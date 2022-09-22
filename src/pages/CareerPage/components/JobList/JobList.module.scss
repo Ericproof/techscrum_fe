@@ -1,0 +1,15 @@
+.JobList {
+  font-size: 18px;
+  .JobListHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    .JobListTitle {
+      font-size: 32px;
+      font-family: 'Work Sans', Arial, Helvetica, sans-serif;
+      line-height: 115%;
+      font-weight: 400;
+      margin-top: 15px;
+    }
+  }
+}
