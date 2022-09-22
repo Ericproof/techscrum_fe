@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 import axios from 'axios';
 import config from '../config/config';
 
@@ -115,4 +116,17 @@ export const setLocalStorage = (user: any) => {
   if (!roles) {
     getRoles();
   }
+};
+
+export const clickedShowMore = (e, refShowMore) => {
+  const target = e.target as HTMLDivElement;
+  let hasClickShowMore = false;
+
+  for (const element of refShowMore) {
+    const ref = element.current;
+    if (ref !== null && ref.contains(target)) {
+      hasClickShowMore = true;
+    }
+  }
+  return hasClickShowMore;
 };
