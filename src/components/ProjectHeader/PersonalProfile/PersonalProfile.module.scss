@@ -241,11 +241,6 @@
               }
             }
           }
-          &::before {
-            display: block;
-            height: 6px;
-            content: '';
-          }
         }
         .settingBottom {
           flex-shrink: 0;

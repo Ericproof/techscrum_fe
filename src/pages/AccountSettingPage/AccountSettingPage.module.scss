@@ -23,15 +23,11 @@
   .accountSettingContent {
     display: flex;
     flex-direction: row;
+    display: flex;
+    flex-direction: row;
     justify-content: space-between;
     background: #ffff;
     padding: 0px 64px 32px 32px;
-  }
-
-  .accountSettingContent {
-    display: flex;
-    flex-direction: row;
-
     .accountSidebar {
       margin-bottom: 56px;
       button {
