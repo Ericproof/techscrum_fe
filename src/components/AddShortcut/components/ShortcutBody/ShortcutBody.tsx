@@ -29,7 +29,7 @@ export default function ShortcutBody({
           type="text"
           name="input"
           className={styles.inputRight}
-          placeholder="e.g. http://www.techscrumapp.com"
+          placeholder="e.g. https://www.techscrumapp.com"
           onChange={(event) => {
             setWebValue(event.target.value);
           }}

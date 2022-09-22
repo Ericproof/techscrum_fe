@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, createRef, useEffect, useContext } from 'react';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
@@ -91,8 +92,8 @@ export default function ProjectPage() {
     const target = e.target as HTMLDivElement;
     let hasClickShowMore = false;
 
-    for (let i = 0; i < refShowMore.length; i += 1) {
-      const ref = refShowMore[i].current;
+    for (const element of refShowMore) {
+      const ref = element.current;
       if (ref !== null && ref.contains(target)) {
         hasClickShowMore = true;
       }

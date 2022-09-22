@@ -1,6 +1,6 @@
 {
   "name": "techscrum",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "private": true,
   "dependencies": {
     "@atlaskit/datetime-picker": "^11.1.11",
@@ -35,7 +35,8 @@
     "cdn": "aws cloudfront create-invalidation --distribution-id E1V3T62UIWQDQ2 --paths /*",
     "cypress": "cypress open",
     "cy:run": "cypress run",
-    "test": "start-server-and-test start http-get://localhost:3030 cy:run"
+    "test": "start-server-and-test start http-get://localhost:3030 cy:run",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
@@ -67,12 +68,15 @@
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-jest": "^26.1.5",
     "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-no-secrets": "^0.8.9",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-security": "^1.5.0",
+    "husky": "^8.0.1",
     "prettier": "^2.6.2",
+    "react-scripts": "5.0.1",
     "sass": "^1.51.0",
-    "start-server-and-test": "^1.14.0",
-    "react-scripts": "5.0.1"
+    "start-server-and-test": "^1.14.0"
   }
 }

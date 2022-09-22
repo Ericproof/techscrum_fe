@@ -1,5 +1,3 @@
-$font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-  'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 
 .container {
   margin-top: 50px;
@@ -15,10 +13,8 @@ $font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxy
   min-height: 24px;
   font-style: normal;
   font-weight: 500;
-  font-family: $font-family-base;
 
   .containerSpan {
-    display: inline-block;
     margin: 6px;
     margin-top: 3px;
     color: var(--ds-text-subtlest, #6b778c);
@@ -37,8 +33,6 @@ $font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxy
       font-style: normal;
       font-family: inherit;
       font-weight: 600;
-      transition: background 0.1s ease-out 0s,
-        box-shadow 0.15s cubic-bezier(0.47, 0.03, 0.49, 1.38) 0s;
       background: none;
       cursor: pointer;
       line-height: inherit;

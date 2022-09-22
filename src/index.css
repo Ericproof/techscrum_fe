@@ -7,11 +7,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
 .active{
   position: relative;
   background-color: #e6effc!important;
@@ -32,5 +27,5 @@ code {
 }
 
 .colorRed{
-  color: red !important;;
+  color: red !important;
 }

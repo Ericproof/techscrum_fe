@@ -129,14 +129,12 @@
                 margin-left: 10px;
                 display: flex;
                 font-size: 14px;
-                font-family: Arial;
                 font-weight: 400;
                 font-style: normal;
                 letter-spacing: normal;
                 text-transform: none;
                 flex: 1 1 100%;
-                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-                  'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+
                 color: rgb(23, 43, 77);
               }
             }
@@ -184,8 +182,7 @@
         overflow: hidden;
         white-space:nowrap; 
         text-overflow:ellipsis;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-          'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+ 
         font-size: 14px;
         color: rgb(23, 43, 77);
         font-weight: 400;
@@ -198,8 +195,7 @@
     display: flex;
     margin-top: 6px;
     font-size: 12px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, 'Fira Sans',
-      'Droid Sans', 'Helvetica Neue', sans-serif;
+
     font-weight: 500;
     color: #6b778c;
     padding: 0;
