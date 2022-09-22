@@ -790,7 +790,6 @@
           font-size: 14px;
           line-height: 157%;
           letter-spacing: 0.25px;
-          margin-bottom: 23px;
           align-items: flex-start;
           max-width: 479px;
           margin-bottom: 50px;
@@ -1058,11 +1057,6 @@
 }
 @media (min-width: 1440px) {
   .homePage {
-    .jobDoneSection {
-      .jobDoneContainer {
-
-      }
-    }
     .cardsSection {
       .cardsContainer {
         max-width: 1224px;
@@ -1077,11 +1071,6 @@
 }
 @media (min-width: 1280px) {
   .homePage {
-    .jobDoneSection {
-      .jobDoneContainer {
-    
-      }
-    }
     .switchingSection {
       .switchingContainer {
         max-width: 1164px;
