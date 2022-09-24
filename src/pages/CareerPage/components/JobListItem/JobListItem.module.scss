@@ -18,6 +18,7 @@
     font-weight: 400;
     flex: 1;
   }
+
   .role {
     @include section();
     text-decoration: none;
@@ -30,6 +31,7 @@
       color: #0091ff;
     }
   }
+
   .department {
     @include section();
     flex: 1;
@@ -41,6 +43,7 @@
     text-decoration: none;
     min-width: 110px;
     @include section();
+
     .applyButtonText {
       background: #1d1c39;
       border-radius: 24px;

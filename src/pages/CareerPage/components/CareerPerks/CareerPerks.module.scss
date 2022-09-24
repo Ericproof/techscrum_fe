@@ -4,6 +4,7 @@
   text-align: left;
   color: #1d1c39;
 }
+
 @mixin perkImage {
   background: #eee;
   overflow: hidden;
@@ -12,6 +13,7 @@
 .careerPerksContainer {
   text-align: center;
   max-width: 1224px;
+
   .careerPerksTitle {
     color: #1d1c39;
     margin-bottom: 20px;
@@ -19,16 +21,17 @@
     font-weight: 745;
     line-height: 115%;
   }
+
   .careerPerksText {
     color: #494e6a;
     max-width: 841px;
     margin: 0 auto;
     font-size: 18px;
-    font-family: 'Work Sans', Arial, Helvetica, sans-serif;
     letter-spacing: 0.75px;
     line-height: 145%;
     font-weight: 400;
   }
+
   .careerPerksGrid {
     margin-top: 72px;
     display: grid;
@@ -41,11 +44,13 @@
       width: 100%;
       height: auto;
     }
+
     .perkText {
       display: block;
       font-size: 32px;
       font-weight: 700;
     }
+
     .perkDetails {
       position: absolute;
       z-index: 100;
@@ -62,6 +67,7 @@
       transition: all 0.2s ease-in-out;
       text-align: left;
       box-sizing: border-box;
+
       .perkDetailsList {
         margin: 0;
         padding: 0;
@@ -70,11 +76,11 @@
           margin-bottom: 19px;
           font-size: 16px;
           font-weight: 500;
-          font-family: 'Work Sans', Arial, Helvetica, sans-serif;
           letter-spacing: 0.75px;
           line-height: 145%;
         }
       }
+
       .perkDetailsFooter {
         font-weight: 600;
         font-size: 16px;
@@ -96,7 +102,8 @@
         }
       }
     }
-    .perk_1 {
+
+    .perk1 {
       background: #85f1b8;
       grid-column-start: 1;
       grid-column-end: 4;
@@ -110,7 +117,8 @@
         }
       }
     }
-    .perk_2 {
+
+    .perk2 {
       background: #ff97da;
       grid-column-start: 6;
       grid-column-end: 9;
@@ -124,7 +132,8 @@
         }
       }
     }
-    .perk_3 {
+
+    .perk3 {
       background: #50c8fc;
       display: flex;
       align-items: center;
@@ -142,7 +151,8 @@
         }
       }
     }
-    .perk_4 {
+
+    .perk4 {
       background: #879df2;
       grid-column-start: 1;
       grid-column-end: 4;
@@ -154,7 +164,8 @@
         }
       }
     }
-    .perk_5 {
+
+    .perk5 {
       background: #6dfded;
       grid-column-start: 4;
       grid-column-end: 7;
@@ -170,48 +181,56 @@
         }
       }
     }
-    .img_1 {
+
+    .img1 {
       grid-column-start: 1;
       grid-column-end: 1;
       grid-row-start: 3;
       grid-row-end: 4;
       @include perkImage();
     }
-    .img_2 {
+
+    .img2 {
       grid-column-start: 2;
       grid-column-end: 4;
       @include perkImage();
     }
-    .img_3 {
+
+    .img3 {
       grid-column-start: 4;
       grid-column-end: 6;
       grid-row-start: 1;
       grid-row-end: 2;
       @include perkImage();
     }
-    .img_4 {
+
+    .img4 {
       grid-column-start: 7;
       grid-column-end: 9;
       grid-row-start: 2;
       grid-row-end: 4;
       @include perkImage();
     }
-    .img_5 {
+
+    .img5 {
       grid-column-start: 4;
       grid-column-end: 9;
       @include perkImage();
     }
-    .img_6 {
+
+    .img6 {
       grid-column-start: 1;
       grid-column-end: 2;
       @include perkImage();
     }
-    .img_7 {
+
+    .img7 {
       grid-column-start: 2;
       grid-column-end: 4;
       @include perkImage();
     }
-    .img_8 {
+
+    .img8 {
       grid-column-start: 7;
       grid-column-end: 9;
       @include perkImage();

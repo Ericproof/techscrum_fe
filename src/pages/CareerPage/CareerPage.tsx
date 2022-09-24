@@ -1,12 +1,12 @@
 import React from 'react';
 import styles from './CareerPage.module.scss';
-import careerPage_hero from '../../assets/careerPage/careerPage_hero.png';
-import mission_bg from '../../assets/careerPage/mission_bg.svg';
+import careerPageHero from '../../assets/careerPage/careerPageHero.png';
+import missionBg from '../../assets/careerPage/missionBg.svg';
 import customer1 from '../../assets/careerPage/customer1.png';
 import customer2 from '../../assets/careerPage/customer2.png';
 import customer3 from '../../assets/careerPage/customer3.png';
-import global_map from '../../assets/careerPage/global_map.svg';
-import team_value from '../../assets/careerPage/values.png';
+import globalMap from '../../assets/careerPage/globalMap.svg';
+import teamValue from '../../assets/careerPage/values.png';
 import balance from '../../assets/careerPage/balance.png';
 import Header from '../../components/Header/Header';
 import JobList from './components/JobList/JobList';
@@ -34,7 +34,7 @@ export default function CareerPage() {
             </div>
           </div>
           <div className={styles.heroImage}>
-            <img src={careerPage_hero} alt="hero_image" />
+            <img src={careerPageHero} alt="hero_image" />
           </div>
         </div>
       </section>
@@ -47,7 +47,7 @@ export default function CareerPage() {
             <img src={customer1} alt="customer1" className={styles.globalCustomer1} />
             <img src={customer2} alt="customer2" className={styles.globalCustomer2} />
             <img src={customer3} alt="customer3" className={styles.globalCustomer3} />
-            <img src={global_map} alt="global_map" />
+            <img src={globalMap} alt="global_map" />
           </div>
           <div className={styles.careerGlobalText}>
             <h1>Our customers are all over the globe—and we are too!</h1>
@@ -63,7 +63,7 @@ export default function CareerPage() {
       <section className={styles.careerMission}>
         <div className={styles.missionContainer}>
           <div className={styles.missionBackground}>
-            <img src={mission_bg} alt="mission_background" />
+            <img src={missionBg} alt="mission_background" />
           </div>
           <div className={styles.missionText}>
             <h1>
@@ -92,12 +92,12 @@ export default function CareerPage() {
                 inclusive, and diverse workplace.
               </p>
             </div>
-            <div className={styles.careerTeamValueImage}>
-              <img src={team_value} alt="team_values" />
+            <div className={styles.careerTeamValueImageContainer}>
+              <img src={teamValue} alt="team_values" />
             </div>
           </div>
           <div className={styles.careerTeamBalance}>
-            <div className={styles.careerTeamBalanceImage}>
+            <div className={styles.careerTeamBalanceImageContainer}>
               <img src={balance} alt="balance" />
             </div>
             <div className={styles.careerTeamBalanceText}>

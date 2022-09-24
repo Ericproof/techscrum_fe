@@ -1,7 +1,7 @@
 .jobListFilter {
   position: relative;
   margin-bottom: 20px;
-  width: 300px;
+  max-width: 300px;
   margin-left: 20px;
   margin-top: 15px;
   select {
@@ -11,10 +11,8 @@
     appearance: none;
     font-size: 18px;
     width: 100%;
-    padding: 17.21px 45px 17.21px 22px;
+    padding: 25px 45px 9.41px 22px;
     outline: none;
-    padding-top: 25px;
-    padding-bottom: 9.41px;
   }
   span {
     top: 4px;

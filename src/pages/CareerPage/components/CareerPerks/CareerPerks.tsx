@@ -19,7 +19,7 @@ function CareerPerks() {
         stipends, we&apos;ve got all the perks and benefits that matter most.
       </p>
       <div className={styles.careerPerksGrid}>
-        <div className={styles.perk_1}>
+        <div className={styles.perk1}>
           <span className={styles.perkText}>When you start</span>
           <div className={styles.perkDetails}>
             <ul className={styles.perkDetailsList}>
@@ -35,16 +35,16 @@ function CareerPerks() {
             </div>
           </div>
         </div>
-        <div className={styles.img_1}>
+        <div className={styles.img1}>
           <img src={perkVisual1} alt="Perks visual 1" />
         </div>
-        <div className={styles.img_2}>
+        <div className={styles.img2}>
           <img src={perkVisual2} alt="Perks visual 2" />
         </div>
-        <div className={styles.img_3}>
+        <div className={styles.img3}>
           <img src={perkVisual3} alt="Perks visual 3" />
         </div>
-        <div className={styles.perk_2}>
+        <div className={styles.perk2}>
           <span className={styles.perkText}>While you work</span>
           <div className={styles.perkDetails}>
             <ul className={styles.perkDetailsList}>
@@ -62,7 +62,7 @@ function CareerPerks() {
             </div>
           </div>
         </div>
-        <div className={styles.perk_3}>
+        <div className={styles.perk3}>
           <span className={styles.perkText}>Your health and wellness</span>
           <div className={styles.perkDetails}>
             <ul className={styles.perkDetailsList}>
@@ -80,10 +80,10 @@ function CareerPerks() {
             </div>
           </div>
         </div>
-        <div className={styles.img_4}>
+        <div className={styles.img4}>
           <img src={perkVisual4} alt="Perks visual 4" />
         </div>
-        <div className={styles.perk_4}>
+        <div className={styles.perk4}>
           <span className={styles.perkText}>Continuous learning</span>
           <div className={styles.perkDetails}>
             <ul className={styles.perkDetailsList}>
@@ -98,16 +98,16 @@ function CareerPerks() {
             </div>
           </div>
         </div>
-        <div className={styles.img_5}>
+        <div className={styles.img5}>
           <img src={perkVisual5} alt="Perks visual 5" />
         </div>
-        <div className={styles.img_6}>
+        <div className={styles.img6}>
           <img src={perkVisual6} alt="Perks visual 6" />
         </div>
-        <div className={styles.img_7}>
+        <div className={styles.img7}>
           <img src={perkVisual7} alt="Perks visual 7" />
         </div>
-        <div className={styles.perk_5}>
+        <div className={styles.perk5}>
           <span className={styles.perkText}>Family</span>
           <div className={styles.perkDetails}>
             <ul className={styles.perkDetailsList}>
@@ -123,7 +123,7 @@ function CareerPerks() {
             </div>
           </div>
         </div>
-        <div className={styles.img_8}>
+        <div className={styles.img8}>
           <img src={perkVisual8} alt="Perks visual 8" />
         </div>
       </div>

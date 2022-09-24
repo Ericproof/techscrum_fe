@@ -6,9 +6,9 @@ import JobListTable from '../JobListTable/JobListTable';
 
 function JobList() {
   return (
-    <div className={styles.JobList}>
-      <div className={styles.JobListHeader}>
-        <h3 className={styles.JobListTitle}>Open opportunities at Teamwork</h3>
+    <div className={styles.jobList}>
+      <div className={styles.jobListHeader}>
+        <h3 className={styles.jobListTitle}>Open opportunities at Teamwork</h3>
         <JobListFilter />
       </div>
       <JobListTable />

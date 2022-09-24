@@ -12,7 +12,6 @@ function JobListFooter() {
         We&apos;re always on the lookout for exceptional talent, so even if you didn&apos;t find the
         perfect fit, we&apos;d still love to hear from you.
       </p>
-
       <Link to={`${location.pathname}/iwanttoworkthere`}>Submit a general application</Link>
     </div>
   );
