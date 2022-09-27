@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate, Link, useParams } from 'react-router-dom';
 import { AxiosError } from 'axios';
-import { adminEmailCheck, emailCheck, emailVerifyCheck } from '../../../api/register/emailCheck';
+import { adminEmailCheck, emailVerifyCheck } from '../../../api/register/emailCheck';
 import { IUserInfo } from '../../../types';
 import { UserDispatchContext } from '../../../context/UserInfoProvider';
 import register from '../../../api/register/register';
