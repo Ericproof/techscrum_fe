@@ -39,11 +39,13 @@ import AdminPage from './pages/AdminPage/AdminPage';
 function App() {
   const shouldShowRegister =
     window.location.origin === 'https://www.techscrumapp.com' ||
-    window.location.origin === 'http://localhost:3000';
+    window.location.origin === 'http://localhost:3000' ||
+    window.location.origin === 'http://devtechscrum.s3-website-ap-southeast-2.amazonaws.com';
 
   const shouldShowAdmin =
     window.location.origin === 'https://www.techscrumapp.com' ||
-    window.location.origin === 'http://localhost:3000';
+    window.location.origin === 'http://localhost:3000' ||
+    window.location.origin === 'http://devtechscrum.s3-website-ap-southeast-2.amazonaws.com';
 
   return (
     <UserProvider>
