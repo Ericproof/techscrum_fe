@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate, Link, useParams } from 'react-router-dom';
 import { AxiosError } from 'axios';
-import { emailCheck, emailVerifyCheck } from '../../../api/register/emailCheck';
+import { adminEmailCheck, emailCheck, emailVerifyCheck } from '../../../api/register/emailCheck';
 import { IUserInfo } from '../../../types';
 import { UserDispatchContext } from '../../../context/UserInfoProvider';
 import register from '../../../api/register/register';
@@ -51,7 +51,7 @@ export default function RegisterMain() {
     if (!emailCheckProcess) {
       try {
         setLoading(true);
-        await emailCheck(emailRecorder, { appName });
+        await adminEmailCheck(emailRecorder, { appName });
         setLoading(false);
         setTips('');
         setEmailRegisterProcess(true);

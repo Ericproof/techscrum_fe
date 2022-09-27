@@ -6,6 +6,11 @@ export async function emailCheck(email: string, data: any) {
   const result = await axios.post(path, data);
   return result;
 }
+export async function adminEmailCheck(email: string, data: any) {
+  const path = `${config.apiAddress}/admin-register/${email}`;
+  const result = await axios.post(path, data);
+  return result;
+}
 
 export async function emailVerifyCheck(emalToken: string) {
   const path = `${config.apiAddress}/register/${emalToken}`;
