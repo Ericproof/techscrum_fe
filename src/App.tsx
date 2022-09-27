@@ -21,6 +21,7 @@ import ResetPasswordPage from './pages/ResetPasswordPage/ResetPasswordPage';
 import ChangePasswordPage from './pages/ChangePasswordPage/ChangePasswordPage';
 import BoardPage from './pages/BoardPage/BoardPage';
 import AboutPage from './pages/AboutPage/AboutPage';
+import CareerPage from './pages/CareerPage/CareerPage';
 import './App.css';
 import { UserProvider } from './context/UserInfoProvider';
 import { ProjectProvider } from './context/ProjectProvider';
@@ -68,6 +69,7 @@ function App() {
               <Route path="/refund-policy" element={<RefundPolicyPage />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/about" element={<AboutPage />} />
+              <Route path="/careers" element={<CareerPage />} />
               <Route path="/security-page" element={<SecurityPage />} />
               <Route path="/errorPage" element={<ErrorPage />} />
               <Route path="" element={<AuthenticationRoute />}>
