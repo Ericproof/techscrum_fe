@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import TaskTypeSelect from '../../components/Select/TypeSelect/TaskTypeSelect';
+import React from 'react';
 import BacklogView from './BacklogView/BacklogView';
 
 export default function BacklogPage() {
-  // WIP add props after backend is done
-  // const [type, setType] = useState('');
+  // WIP fetch data from backend and pass into BacklogView
 
-  // return <TaskTypeSelect onChange={(e) => setType(e)} />;
   return <BacklogView />;
 }
