@@ -8,15 +8,40 @@ import styles from './BacklogView.module.scss';
 import Button from '../../../components/Button/Button';
 import TaskTypeSelect from '../../../components/Select/TypeSelect/TaskTypeSelect';
 
+// WIP more function will be added after backend is complete
 export default function BacklogView() {
-  const [showSprintInput, setSprintInput] = useState(false);
+  const [showSprintInput, setShowSprintInput] = useState(false);
   const [showBacklogInput, setShowBacklogInput] = useState(false);
-  const formRef = useRef<HTMLFormElement | null>(null);
+  const [sprintInputFocus, setSprintInputFocus] = useState(false);
+  const [backlogInputFocus, setBacklogInputFocus] = useState(false);
+  const sprintFormRef = useRef<HTMLFormElement | null>(null);
+  const backlogFormRef = useRef<HTMLFormElement | null>(null);
+
   const [sprintType, setSprintType] = useState('');
   const [backlogType, setBacklogType] = useState('');
 
+  useEffect(() => {
+    const handleClickOutside = (e: any) => {
+      if (sprintInputFocus && !sprintFormRef.current?.contains(e.target)) {
+        setShowSprintInput(false);
+      }
+      if (backlogInputFocus && !backlogFormRef.current?.contains(e.target)) {
+        setShowBacklogInput(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [backlogInputFocus, sprintInputFocus]);
+
   return (
     <DashboardLayout>
+      <div>
+        <h1>Backlog</h1>
+      </div>
       <section className={[styles.container, styles.sprintContainer].join(' ')}>
         <div className={styles.header}>
           <div className={styles.heading}>
@@ -34,22 +59,30 @@ export default function BacklogView() {
           <TaskItem />
           <TaskItem />
         </div>
-        {showSprintInput && (
-          <form ref={formRef}>
+        {showSprintInput ? (
+          <form ref={sprintFormRef}>
             <div className={styles.formField}>
               <TaskTypeSelect onChange={setSprintType} />
-              {/* eslint-disable-next-line jsx-a11y/no-autofocus */}
-              <input className={styles.input} type="text" name="newTask" id="newTask" autoFocus />
+              <input
+                className={styles.input}
+                type="text"
+                name="newTask"
+                id="newTask"
+                // eslint-disable-next-line jsx-a11y/no-autofocus
+                autoFocus
+                onFocus={() => setSprintInputFocus(true)}
+              />
             </div>
           </form>
+        ) : (
+          <Button
+            icon={<GoPlus />}
+            overrideStyle={styles.buttonRow}
+            onClick={() => setShowSprintInput(true)}
+          >
+            Create issue
+          </Button>
         )}
-        <Button
-          icon={<GoPlus />}
-          overrideStyle={styles.buttonRow}
-          onClick={() => setSprintInput(true)}
-        >
-          Create issue
-        </Button>
       </section>
 
       <section className={styles.container}>
@@ -68,8 +101,8 @@ export default function BacklogView() {
           <TaskItem />
           <TaskItem />
         </div>
-        {showBacklogInput && (
-          <form ref={formRef}>
+        {showBacklogInput ? (
+          <form ref={backlogFormRef}>
             <div className={styles.formField}>
               <TaskTypeSelect onChange={setBacklogType} />
               <input
@@ -79,17 +112,21 @@ export default function BacklogView() {
                 id="newBacklog"
                 // eslint-disable-next-line jsx-a11y/no-autofocus
                 autoFocus
+                onFocus={() => {
+                  setBacklogInputFocus(true);
+                }}
               />
             </div>
           </form>
+        ) : (
+          <Button
+            icon={<GoPlus />}
+            overrideStyle={styles.buttonRow}
+            onClick={() => setShowBacklogInput(true)}
+          >
+            Create issue
+          </Button>
         )}
-        <Button
-          icon={<GoPlus />}
-          overrideStyle={styles.buttonRow}
-          onClick={() => setShowBacklogInput(true)}
-        >
-          Create issue
-        </Button>
       </section>
     </DashboardLayout>
   );
