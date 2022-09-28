@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import styles from './TaskTypeSelect.module.scss';
 
 const TYPES = [
@@ -62,7 +61,6 @@ export default function TaskTypeSelect({ onChange }: ITypeSelect) {
   useEffect(() => {
     const handleClickOutside = (e: any) => {
       if (!containerRef.current?.contains(e.target)) {
-        setCurrentOption(initialOption);
         setShowOptions(false);
       }
     };
