@@ -33,7 +33,7 @@ To able to start the server these are the following commands that would need to 
 
 ### Deployment
 
-To able to deploy this to the server you would need to run the following commands, which it will create an dist folder, you would need to update that to the server
+To able to deploy this to the server you would need to run the following commands, which it will create an build folder, you would need to update that to the server
 
 - npm run build
 
