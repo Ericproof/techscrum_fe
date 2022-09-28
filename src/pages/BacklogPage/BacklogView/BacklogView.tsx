@@ -6,12 +6,14 @@ import IconButton from '../../../components/Button/IconButton/IconButton';
 import TaskItem from '../TaskItem/TaskItem';
 import styles from './BacklogView.module.scss';
 import Button from '../../../components/Button/Button';
-import TaskTypeIcon from '../TaskTypeIcon/TaskTypeIcon';
+import TaskTypeSelect from '../../../components/Select/TypeSelect/TaskTypeSelect';
 
 export default function BacklogView() {
   const [showSprintInput, setSprintInput] = useState(false);
   const [showBacklogInput, setShowBacklogInput] = useState(false);
   const formRef = useRef<HTMLFormElement | null>(null);
+  const [sprintType, setSprintType] = useState('');
+  const [backlogType, setBacklogType] = useState('');
 
   return (
     <DashboardLayout>
@@ -35,9 +37,7 @@ export default function BacklogView() {
         {showSprintInput && (
           <form ref={formRef}>
             <div className={styles.formField}>
-              <span>
-                <TaskTypeIcon storyType="story" />
-              </span>
+              <TaskTypeSelect onChange={setSprintType} />
               {/* eslint-disable-next-line jsx-a11y/no-autofocus */}
               <input className={styles.input} type="text" name="newTask" id="newTask" autoFocus />
             </div>
@@ -71,9 +71,7 @@ export default function BacklogView() {
         {showBacklogInput && (
           <form ref={formRef}>
             <div className={styles.formField}>
-              <span>
-                <TaskTypeIcon storyType="story" />
-              </span>
+              <TaskTypeSelect onChange={setBacklogType} />
               <input
                 className={styles.input}
                 type="text"
