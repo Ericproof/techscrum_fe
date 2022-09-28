@@ -8,7 +8,6 @@ interface IIconButton {
   overrideStyle?: string;
 }
 export default function IconButton({ icon, tooltip, overrideStyle }: IIconButton) {
-  const displayTooltip = () => {};
   return (
     <button className={[styles.iconButton, overrideStyle].join(' ')} onMouseEnter={displayTooltip}>
       {icon}
