@@ -35,6 +35,7 @@ import FAQPage from './pages/FAQPage/FAQPage';
 import AuthenticationRoute from './routes/AuthenticationRoute';
 import SecurityPage from './pages/SecurityPage/SecurityPage';
 import AdminPage from './pages/AdminPage/AdminPage';
+import BacklogPage from './pages/BacklogPage/BacklogPage';
 
 function App() {
   const shouldShowRegister =
@@ -81,6 +82,8 @@ function App() {
                 <Route path="/account-settings/delete-account" element={<AccountSettingsPage />} />
                 <Route path="/projects/:projectId/members" element={<ProjectMembersPage />} />
                 <Route path="/roles" element={<RolePage />} />
+                {/* WIP may change the route later */}
+                <Route path="/backlog" element={<BacklogPage />} />
               </Route>
               <Route path="/unauthorize" element={<UnauthorizePage />} />
               <Route path="/contact" element={<ContactPage />} />
