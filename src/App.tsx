@@ -36,6 +36,7 @@ import FAQPage from './pages/FAQPage/FAQPage';
 import AuthenticationRoute from './routes/AuthenticationRoute';
 import SecurityPage from './pages/SecurityPage/SecurityPage';
 import AdminPage from './pages/AdminPage/AdminPage';
+import DailyScrumPage from './pages/DailyScrumPage/DailyScrumPage';
 
 function App() {
   const shouldShowRegister =
@@ -85,6 +86,7 @@ function App() {
                 <Route path="/account-settings/delete-account" element={<AccountSettingsPage />} />
                 <Route path="/projects/:projectId/members" element={<ProjectMembersPage />} />
                 <Route path="/roles" element={<RolePage />} />
+                <Route path="/projects/:projectId/dailyScrums" element={<DailyScrumPage />} />
               </Route>
               <Route path="/unauthorize" element={<UnauthorizePage />} />
               <Route path="/contact" element={<ContactPage />} />
