@@ -15,18 +15,23 @@ import increaseProfitability from '../../assets/increaseProfitability.png';
 import realTimeCollaboration from '../../assets/realTimeCollaboration.png';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
+import { getDomains } from '../../api/domain/domain';
 
 export default function HomePage() {
   const [loginDetector, setLoginDetector] = useState(false);
+  const [showHomePage, setShowHomePage] = useState(false);
   const navigate = useNavigate();
-  const showHomePage =
-    window.location.origin === 'https://www.techscrumapp.com' ||
-    window.location.origin === 'http://localhost:3000';
+
   useEffect(() => {
-    if (!showHomePage) {
-      navigate('/login');
-    }
-  }, [navigate, showHomePage]);
+    const getD = async () => {
+      const res = await getDomains();
+      if (!res.data) {
+        navigate('/login');
+      }
+      setShowHomePage(true);
+    };
+    getD();
+  }, []);
 
   useEffect(() => {
     if (localStorage.getItem('refresh_token') && localStorage.getItem('refresh_token') !== null)
