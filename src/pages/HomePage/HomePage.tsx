@@ -31,7 +31,7 @@ export default function HomePage() {
       setShowHomePage(true);
     };
     getD();
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
     if (localStorage.getItem('refresh_token') && localStorage.getItem('refresh_token') !== null)
