@@ -22,7 +22,7 @@ const TYPES = [
 interface IOption {
   title: string;
   imgUrl: string;
-  onClick: (e: any) => void;
+  onClick?: (e: any) => void;
 }
 
 function Option({ title, imgUrl, onClick }: IOption) {
@@ -34,11 +34,11 @@ function Option({ title, imgUrl, onClick }: IOption) {
   );
 }
 
-interface ITypeSelect {
-  onChange: (e: any) => void;
+interface ITaskTypeSelect {
+  onChange?: (e: any) => void;
 }
 
-export default function TaskTypeSelect({ onChange }: ITypeSelect) {
+export default function TaskTypeSelect({ onChange }: ITaskTypeSelect) {
   const initialOption = TYPES[0];
   const [showOptions, setShowOptions] = useState(false);
   const [currentOption, setCurrentOption] = useState(initialOption);
@@ -52,7 +52,7 @@ export default function TaskTypeSelect({ onChange }: ITypeSelect) {
   const onClickOption = (e: any) => {
     e.preventDefault();
     setShowOptions(!showOptions);
-    onChange(e.target.value);
+    if (onChange) onChange(e.target.value);
     handleCurrentOption(e.target.name);
   };
 
@@ -90,3 +90,11 @@ export default function TaskTypeSelect({ onChange }: ITypeSelect) {
     </div>
   );
 }
+
+Option.defaultProps = {
+  onClick: null
+};
+
+TaskTypeSelect.defaultProps = {
+  onChange: null
+};

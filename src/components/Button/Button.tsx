@@ -1,4 +1,3 @@
-/* eslint-disable react/require-default-props */
 import React from 'react';
 import styles from './Button.module.scss';
 
@@ -29,3 +28,10 @@ export default function Button({
     </button>
   );
 }
+
+Button.defaultProps = {
+  icon: null,
+  iconPosition: 'start',
+  overrideStyle: '',
+  onClick: null
+};
