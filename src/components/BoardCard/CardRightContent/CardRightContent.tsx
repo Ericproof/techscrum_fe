@@ -1,7 +1,7 @@
 import React from 'react';
 import { DatePicker } from '@atlaskit/datetime-picker';
 import { TaskEntity } from '../../../api/task/entity/task';
-import { IColumnsFromBackend, ILabelData } from '../../../types';
+import { IColumnsFromBackend, ILabelData, IOnChangeProjectLead } from '../../../types';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import style from './CardRightContent.module.scss';
 import ReporterFields from './ReporterFields/ReporterFields';
@@ -31,9 +31,9 @@ export default function CardRightContent({
   const handleClickOutside = () => setVisible(true);
   const editAccess = checkAccess('edit:tasks', projectId);
 
-  const assigneeOnchangeEventHandler = (e: any) => {
+  const assigneeOnchangeEventHandler = (e: IOnChangeProjectLead) => {
     const updatedTaskInfo = { ...taskInfo };
-    updatedTaskInfo.assignId = !e.target.value ? null : e.target.value.id;
+    updatedTaskInfo.assignId = !e.target.value ? undefined : e.target.value;
     taskStatusOnchange(updatedTaskInfo);
   };
 

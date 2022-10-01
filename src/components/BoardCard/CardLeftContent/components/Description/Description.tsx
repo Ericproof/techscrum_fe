@@ -6,7 +6,7 @@ interface Props {
   taskInfo: TaskEntity;
   focusEventHandler: () => void;
   isDisabled: boolean;
-  onChangeDesc: (e: any) => void;
+  onChangeDesc: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   value: string | undefined;
 }
 
