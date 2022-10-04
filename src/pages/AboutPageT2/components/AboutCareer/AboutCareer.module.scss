@@ -1,0 +1,41 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    margin: 0 110px;
+    text-align: left;
+
+    .leftPart {
+        margin: auto;
+        h1 {
+            margin: 0 auto 50px auto;
+            font-size: 32px;
+        }
+
+        p {
+            margin: 0 auto 40px auto;
+            font-size: 14px;
+        }
+
+        a {
+            display: block;
+            font-size: 16px;
+            color: #FFFFFF;
+            background-color: #ff22b1;
+            border-radius: 32px;
+            width: 244px;
+            height: 56px;
+            padding: 16px, 24px;
+            align-items: center;
+            text-decoration: none;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+    }
+
+    .rightPart {
+        height: 330px;
+    }
+
+}
