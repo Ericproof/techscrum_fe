@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-syntax */
 import axios from 'axios';
 import React, { useEffect, useState, createRef } from 'react';
 import { TiDelete } from 'react-icons/ti';
@@ -6,6 +5,7 @@ import { updateRole, removePermission } from '../../api/role/role';
 import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
 import config from '../../config/config';
 import { IPermissions, IRole } from '../../types';
+import { clickedShowMore } from '../../utils/helpers';
 import styles from './RolePage.module.scss';
 
 export default function ProjectMembersPage() {
@@ -68,16 +68,7 @@ export default function ProjectMembersPage() {
   };
 
   const handleClickInside = (e: MouseEvent) => {
-    const target = e.target as HTMLDivElement;
-    let hasClickShowMore = false;
-
-    for (const element of refShowMore) {
-      const ref = element.current;
-      if (ref !== null && ref.contains(target)) {
-        hasClickShowMore = true;
-      }
-    }
-    if (hasClickShowMore === false) {
+    if (!clickedShowMore(e, refShowMore)) {
       setShowPermissionOptions(-1);
     }
   };

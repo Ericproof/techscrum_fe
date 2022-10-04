@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage/HomePage';
 import RegisterPage from './pages/Register/RegisterPage';
@@ -21,6 +21,7 @@ import ResetPasswordPage from './pages/ResetPasswordPage/ResetPasswordPage';
 import ChangePasswordPage from './pages/ChangePasswordPage/ChangePasswordPage';
 import BoardPage from './pages/BoardPage/BoardPage';
 import AboutPage from './pages/AboutPage/AboutPage';
+import CareerPage from './pages/CareerPage/CareerPage';
 import './App.css';
 import { UserProvider } from './context/UserInfoProvider';
 import { ProjectProvider } from './context/ProjectProvider';
@@ -36,15 +37,17 @@ import AuthenticationRoute from './routes/AuthenticationRoute';
 import SecurityPage from './pages/SecurityPage/SecurityPage';
 import AdminPage from './pages/AdminPage/AdminPage';
 import AboutPageT2 from './pages/AboutPageT2/AboutPageT2';
+import { getDomains } from './api/domain/domain';
 
 function App() {
-  const shouldShowRegister =
-    window.location.origin === 'https://www.techscrumapp.com' ||
-    window.location.origin === 'http://localhost:3000';
-
-  const shouldShowAdmin =
-    window.location.origin === 'https://www.techscrumapp.com' ||
-    window.location.origin === 'http://localhost:3000';
+  const [showPages, setShowPages] = useState(false);
+  useEffect(() => {
+    const getD = async () => {
+      const res = await getDomains();
+      setShowPages(res.data);
+    };
+    getD();
+  }, []);
 
   return (
     <UserProvider>
@@ -52,8 +55,8 @@ function App() {
         <ProjectProvider>
           <TaskTypesProvider>
             <Routes>
-              {shouldShowRegister && <Route path="/register" element={<RegisterPage />} />}
-              {shouldShowAdmin && <Route path="/admin" element={<AdminPage />} />}
+              {showPages && <Route path="/register" element={<RegisterPage />} />}
+              {showPages && <Route path="/admin" element={<AdminPage />} />}
               <Route path="/faq" element={<FAQPage />} />
               <Route path="/verify" element={<VerifyPage />} />
               <Route path="/login" element={<LoginPage />} />
@@ -66,7 +69,9 @@ function App() {
               <Route path="/privacy-statement" element={<PrivacyStatementPage />} />
               <Route path="/refund-policy" element={<RefundPolicyPage />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-              <Route path="/about" element={<AboutPageT2 />} />
+              <Route path="/about-g2" element={<AboutPageT2 />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/careers" element={<CareerPage />} />
               <Route path="/security-page" element={<SecurityPage />} />
               <Route path="/errorPage" element={<ErrorPage />} />
               <Route path="" element={<AuthenticationRoute />}>

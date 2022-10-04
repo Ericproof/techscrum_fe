@@ -3,7 +3,7 @@ import { ImAttachment } from 'react-icons/im';
 import styles from './Attach.module.scss';
 
 interface IPropsAttach {
-  onChangeAttachment: (e: any) => void;
+  onChangeAttachment: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
 }
 

@@ -5,7 +5,7 @@ import {
   deleteComment,
   updateComment
 } from '../../../../../api/comment/comment';
-import { ICommentData, ICommentItemData } from '../../../../../types';
+import { ICommentData, ICommentItemData, IUserInfo } from '../../../../../types';
 import checkAccess from '../../../../../utils/helpers';
 import CommentItem from './components/CommentItem/CommentItem';
 import style from './LeftBottom.module.scss';
@@ -15,7 +15,7 @@ interface ILeftBottom {
   taskId?: string;
   userEmail?: string;
   projectId: string;
-  userInfo: any;
+  userInfo: IUserInfo;
 }
 
 export default function LeftBottom(props: ILeftBottom) {

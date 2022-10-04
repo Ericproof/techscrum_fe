@@ -20,10 +20,26 @@ Node
 
 ### Installation
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
+Below are the command that you would need to run after clone down the repo, unless to told these command usually would need to be run only once
 
-- npm install
+- npm install --force
 - cp .env.example .env
+
+### Start up
+
+To able to start the server these are the following commands that would need to be run
+
+- npm start
+
+### Deployment
+
+To able to deploy this to the server you would need to run the following commands, which it will create an build folder, you would need to update that to the server
+
+- npm run build
+
+#### Entity Point
+
+- index.html
 
 ## Usage
 
@@ -86,3 +102,5 @@ Use this space to list resources you find helpful and would like to give credit 
 10/09/2022 Felix
 09/09/2022 Felix
 11/09/2022 Felix
+
+abc

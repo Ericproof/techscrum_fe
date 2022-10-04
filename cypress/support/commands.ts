@@ -23,7 +23,7 @@ Cypress.Commands.add('login', (email:string, password:string) => {
     cy.get('[data-testid="email"]').type(email)
     cy.get('[data-testid="password"]').type(password)
     cy.get('[data-testid="login"]').click();
-    cy.url().should('be.equal', `${Cypress.config("baseUrl")}/projects`)
+    cy.url({ timeout: 20000 }).should('be.equal', `${Cypress.config("baseUrl")}/projects`)
 })
 //
 //

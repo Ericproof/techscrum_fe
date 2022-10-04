@@ -176,3 +176,7 @@ export interface ICommentItemData {
 export interface IResetPasswordForm {
   email: stirng;
 }
+
+export interface IConfig {
+  [x: string]: any;
+}
