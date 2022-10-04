@@ -37,6 +37,7 @@ import AuthenticationRoute from './routes/AuthenticationRoute';
 import SecurityPage from './pages/SecurityPage/SecurityPage';
 import AdminPage from './pages/AdminPage/AdminPage';
 import { getDomains } from './api/domain/domain';
+import BacklogPage from './pages/BacklogPage/BacklogPage';
 
 function App() {
   const [showPages, setShowPages] = useState(false);
@@ -85,6 +86,8 @@ function App() {
                 <Route path="/account-settings/delete-account" element={<AccountSettingsPage />} />
                 <Route path="/projects/:projectId/members" element={<ProjectMembersPage />} />
                 <Route path="/roles" element={<RolePage />} />
+                {/* WIP may change the route later */}
+                <Route path="/backlog" element={<BacklogPage />} />
               </Route>
               <Route path="/unauthorize" element={<UnauthorizePage />} />
               <Route path="/contact" element={<ContactPage />} />

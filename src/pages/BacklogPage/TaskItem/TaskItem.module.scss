@@ -1,0 +1,72 @@
+$bgColor: white;
+$borderColor: #ebecf0;
+$textColor: #616c82;
+
+@mixin ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.container {
+  background-color: $bgColor;
+  box-sizing: border-box;
+  border: 1px solid $borderColor;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -1px;
+  cursor: pointer;
+
+  .toDoButton {
+    height: 1.5rem;
+  }
+}
+
+.taskInfo {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  -moz-column-gap: 0.5rem;
+  column-gap: 0.5rem;
+  align-items: center;
+}
+
+.taskType {
+  flex-shrink: 0;
+  color: $textColor;
+  @include ellipsis;
+}
+
+.taskTitle {
+  @include ellipsis;
+}
+
+.editButton {
+  flex-shrink: 0;
+  visibility: hidden;
+}
+
+.container:hover .editButton {
+  visibility: visible;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.assignee {
+  width: 1.5rem;
+  aspect-ratio: 1/1;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  img {
+    height: 100%;
+    width: 100%;
+  }
+}

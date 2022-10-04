@@ -1,0 +1,45 @@
+$btHoverBg: #e8e8e8;
+
+.buttonContainer {
+  width: 3.75rem;
+  box-sizing: border-box;
+  display: flex;
+  padding: 0.25rem;
+  gap: 0.2rem;
+  border: none;
+  align-items: center;
+  background-color: white;
+  text-transform: capitalize;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $btHoverBg;
+  }
+}
+
+.container {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+  background-color: white;
+}
+
+.optionsContainer {
+  background-color: #d2d2d2;
+  position: absolute;
+  top: 100%;
+  z-index: 99;
+}
+
+.listContainer {
+  display: none;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.show {
+  display: inline-flex;
+}
