@@ -1,46 +1,17 @@
 import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
+import LegalDocumentsNav from '../../components/TermsAndConditionsLayout/LegalDocumentsNav/LegalDocumentsNav';
 import styles from './CookiePolicyPage.module.scss';
 
 export default function CookiePolicyPage() {
   return (
-    <div className={styles.cookieMain}>
-      <div className={styles.cookieContainer}>
-        <div className={styles.cookieTextCenter}>
-          <p>LEGAL</p>
-          <h1>Cookie Policy</h1>
-          <hr />
-        </div>
-        <div className={styles.cookieRow}>
-          <div className={styles.sidebar}>
-            <ul className={styles.stickySidebar}>
-              <li id={styles.RemoveBorder}>
-                <Link to="/" style={{ padding: '0 0 7px 0' }}>
-                  Our Legal Documents
-                </Link>
-              </li>
-              <li>
-                <Link to="/cookie-policy">Cookie Policy</Link>
-              </li>
-              <li>
-                <Link to="/gdpr">GDPR compliance</Link>
-              </li>
-              <li>
-                <Link to="/privacy-policy">Privacy Policy</Link>
-              </li>
-              <li>
-                <Link to="/privacy-statement">Privacy Statement</Link>
-              </li>
-              <li>
-                <Link to="/refund-policy">Refund Policy</Link>
-              </li>
-              <li>
-                <Link to="/terms-of-service">Terms Of Service</Link>
-              </li>
-            </ul>
-            <Outlet />
-          </div>
-          <div className={styles.legalText}>
+    <>
+      <ProjectHeader />
+      <div className={styles.container}>
+        <h1>Tech Scrum Cookie Policy</h1>
+        <div className={styles.content}>
+          <LegalDocumentsNav />
+          <div className={styles.detailedInfo}>
             <p>
               TechScrum.com makes use of cookies and other tracking technologies on our company
               website (ie: TechScrum.com), within our Software as a Service (SaaS) product offerings
@@ -64,9 +35,9 @@ export default function CookiePolicyPage() {
             <p>
               Further information on cookies can be found at the{' '}
               <a href="https://ec.europa.eu/ipg/basics/legal/cookies/index_en.htm">
-                EU Internet Handbook
-              </a>{' '}
-              or <a href="https://www.allaboutcookies.org/verify">AllAboutCookies.org</a> .
+                EU Internet Handbook{' '}
+              </a>
+              or <a href="https://www.allaboutcookies.org/verify"> AllAboutCookies.org</a>.
             </p>
             <h2>Cookie types</h2>
             <h3>Session cookies</h3>
@@ -104,23 +75,19 @@ export default function CookiePolicyPage() {
             </p>
             <ul>
               <li>
-                <p>
-                  Flash Locally Stored Objects (eg ‘Flash’ cookies) – these follow the same
-                  principle as normal standard cookies in that they allow information to be stored
-                  on a user’s machine.
-                </p>
+                Flash Locally Stored Objects (eg ‘Flash’ cookies) – these follow the same principle
+                as normal standard cookies in that they allow information to be stored on a user’s
+                machine.
               </li>
               <li>
-                <p>
-                  Transparent GIF or web beacons- these mechanisms can be used to deliver a cookie
-                  to your browser. They can also be used in email marketing to identify to the
-                  sender if an email has been opened.
-                </p>
+                Transparent GIF or web beacons- these mechanisms can be used to deliver a cookie to
+                your browser. They can also be used in email marketing to identify to the sender if
+                an email has been opened.
               </li>
             </ul>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
