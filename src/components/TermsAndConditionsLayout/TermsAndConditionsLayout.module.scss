@@ -12,7 +12,7 @@ $lightColor: #3563e9;
     flex-direction: column;
     align-items: center;
     color: $headingTextColor;
-    font-size: 30px;
+    font-size: 23px;
     font-weight: 700;
     line-height: 47px;
     margin: 100px 0 60px;
@@ -25,13 +25,13 @@ $lightColor: #3563e9;
   }
   @media (min-width: 375px) {
     h1 {
-      font-size: 32px;
+      font-size: 30px;
     }
   }
 
   @media (min-width: 425px) {
     h1 {
-      font-size: 34px;
+      font-size: 33px;
       margin: 129px 0 100px;
       &::after {
         content: '';
