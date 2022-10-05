@@ -9,7 +9,7 @@ import CookiePolicyPage from './pages/CookiePolicyPage/CookiePolicyPage';
 import TermsOfServicePage from './pages/TermsOfServicePage/TermsOfServicesPage';
 import RefundPolicyPage from './pages/RefundPolicyPage/RefundPolicyPage';
 import PrivacyPolicy from './pages/PrivacyPolicyPage/PrivacyPolicyPage';
-import PrivacyStatementPage from './pages/PrivacyStatement/PrivacyStatement';
+import PrivacyStatementPage from './pages/PrivacyStatementPage/PrivacyStatementPage';
 import UserPage from './pages/UserPage/UserPage';
 import UserMePage from './pages/SettingPage/UserMePage/UserMePage';
 import ErrorPage from './pages/ErrorPage/ErrorPage';

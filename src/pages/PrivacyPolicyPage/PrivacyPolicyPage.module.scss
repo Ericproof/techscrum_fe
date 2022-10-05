@@ -1,189 +1,90 @@
-.privacyPolicyMain {
-  background: #f5f7fa;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.6;
-  box-sizing: border-box;
-  -webkit-font-smoothing: antialiased;
+$headingTextColor: #3d5278;
+$lightColor: #3563e9;
 
-  .privacyPolicyContainer {
-    padding-top: 147px;
-    padding-right: 20px;
-    padding-left: 12px;
-    margin-right: auto;
-    margin-left: auto;
-    margin-bottom: 84px;
-    @media screen and (min-width: 280px) {
-      max-width: 240px;
-    }
-    @media screen and (min-width: 768px) {
-      max-width: 744px;
-    }
-    @media screen and (min-width: 992px) {
-      max-width: 992px;
-    }
-    @media screen and (min-width: 1280px) {
-      max-width: 1164px;
-    }
-    @media screen and (min-width: 1440px) {
-      max-width: 1224px;
-    }
-
-    .pb_5 {
-      padding-bottom: 6rem !important;
-    }
-  }
-
-  .privacyPolicyTextCenter {
+.container {
+  p {
     width: 100%;
-    text-align: center !important;
-    p {
-      font-weight: 600;
-      font-size: 18px;
-      color: #a7acc5;
-      text-align: center;
-      text-transform: uppercase;
-      margin-bottom: 21px;
-    }
-    h1 {
-      font-size: 42px;
-      font-weight: 400;
-      color: rgb(33, 37, 41);
-      margin: 0;
-      padding: 0;
-      line-height: 1;
-    }
-    hr {
-      background-color: #6a84ed;
-      border: 0px;
-      height: 4px;
-      width: 100px;
-      margin: 42px auto;
-      margin-bottom: 7rem;
-    }
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.41px;
+    color: #555;
   }
 
-  .privacyPolicyRow {
-    display: flex;
-    flex-wrap: wrap;
-    margin-right: -12px;
-    margin-left: -12px;
-    padding-top: 10px;
+  h2 {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 18.75px;
+    color: $headingTextColor;
   }
 
-  .legalSidebar {
-    @media screen and (min-width: 768px) {
-      flex: 0 0 100%;
-      max-width: 100%;
-    }
-    @media screen and (min-width: 992px) {
-      flex: 0 0 33.3333333333%;
-      max-width: 33.3333333333%;
-    }
-  }
-
-  .legalStickySidebar {
-    padding-left: 0;
-    position: sticky;
-    top: 100px;
-    transition: height 0.3s ease;
-    #RemoveBorder {
-      border: 0;
-    }
+  ul {
+    padding-left: 23px;
+    width: 100%;
     li {
-      color: #494e6a;
-      border-left: 2px solid #e7ebf1;
-      font-weight: 500;
-      list-style-type: none;
-      position: relative;
-      display: list-item;
-      text-align: -webkit-match-parent;
-
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 16.41px;
+      color: #555;
+      margin-bottom: 13px;
+      &::marker {
+        color: #555;
+        font-size: 0.77em;
+      }
       a {
-        line-height: 1.3;
+        color: $lightColor;
         text-decoration: none;
-        font-weight: 600;
-        font-size: 18px;
-        display: block;
-        padding: 7px 14px;
-        color: #373753;
       }
     }
-    li:hover {
-      border-left: 2px solid #4461d7;
+  }
+  .nestedUl {
+    padding-left: 21px;
+    .nestedLi::marker {
+      color: #555;
+      font-size: 0.5em;
     }
   }
-  .privacyPolicyText {
-    margin-top: -25px;
 
-    @media screen and (max-width: 992px) {
-      flex: 0 0 100%;
-      max-width: 100%;
-    }
-    @media screen and (min-width: 992px) {
-      flex: 0 0 66.6666666667%;
-      max-width: 66.6666666667%;
-    }
-    @media screen and (max-width: 400px) {
-      flex: 0 0 100%;
-      max-width: 100%;
+  @media (max-width: 425px) {
+    p {
+      font-size: 12px;
     }
 
     h2 {
-      line-height: 1.5rem;
-      margin-bottom: 1.5rem !important;
-      font-size: 1.714rem;
-      font-weight: 500;
-      color: black;
+      font-size: 14px;
     }
 
-    p {
-      font-weight: 400;
-      line-height: 1.6;
-      margin-top: 0;
-      margin-bottom: 1.5rem;
-      font-size: 16px;
-      color: #494e6a !important;
-    }
-
-    .privacyPolicyUl {
-      width: 85%;
-      @media screen and (max-width: 400px) {
-        flex: 0 0 60%;
-        max-width: 60%;
+    ul {
+      padding-left: 16px;
+      li {
+        font-size: 12px;
       }
     }
+    .nestedUl {
+      padding-left: 4px;
+    }
+  }
 
-    .privacyPolicyLi {
-      font-weight: 400;
-      line-height: 1.6;
-      margin-top: 0;
-      margin-bottom: 1.3rem;
-      margin-left: 28px;
-      font-size: 1rem;
-      color: #494e6a !important;
-      width: 100%;
-      list-style: disc !important;
-      border: 0px;
-      padding: 0;
+  @media (max-width: 320px) {
+    p {
+      font-size: 10px;
     }
 
-    .privacyPolicyLi:hover {
-      border: none;
+    h2 {
+      font-size: 12px;
     }
 
-    .privacyPolicyA {
-      color: #4da2f8;
-      text-decoration: underline;
-      margin-top: 0;
-      display: inline;
-      padding: 0 5px;
-      font-weight: 400;
-      font-size: 1rem;
+    h3 {
+      font-size: 12px;
     }
 
-    .privacyPolicyBr {
-      margin-top: 1.5rem;
+    ul {
+      padding-left: 14px;
+      li {
+        font-size: 10px;
+      }
+    }
+    .nestedUl {
+      padding-left: 12px;
     }
   }
 }
