@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
 import TermsAndConditionsLayout from '../../components/TermsAndConditionsLayout/TermsAndConditionsLayout';
 import styles from './RefundPolicyPage.module.scss';
 
