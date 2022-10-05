@@ -6,6 +6,7 @@ import IconButton from '../../../components/Button/IconButton/IconButton';
 import TaskTypeSelect from '../../../components/Select/TaskTypeSelect/TaskTypeSelect';
 import TaskItem from '../TaskItem/TaskItem';
 import styles from './SprintSection.module.scss';
+// WIP more function will be added
 
 export default function SprintSection() {
   const dummyTaskList = [

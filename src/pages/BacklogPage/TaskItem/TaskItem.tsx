@@ -4,7 +4,7 @@ import IconButton from '../../../components/Button/IconButton/IconButton';
 import styles from './TaskItem.module.scss';
 import TaskTypeSelect from '../../../components/Select/TaskTypeSelect/TaskTypeSelect';
 import ToolBar from '../ToolBar/ToolBar';
-// WIP more function will be added
+// WIP fixing click outside handle
 interface ITaskInput {
   taskTitle: string;
   id: string;

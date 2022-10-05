@@ -4,6 +4,7 @@ import Button from '../../../components/Button/Button';
 import TaskTypeSelect from '../../../components/Select/TaskTypeSelect/TaskTypeSelect';
 import TaskItem from '../TaskItem/TaskItem';
 import styles from './BacklogSection.module.scss';
+// WIP more function will be added
 
 export default function BacklogSection() {
   const dummyTaskList = [
