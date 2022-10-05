@@ -12,7 +12,7 @@ $lightColor: #3563e9;
     flex-direction: column;
     align-items: center;
     color: $headingTextColor;
-    font-size: 24px;
+    font-size: 30px;
     font-weight: 700;
     line-height: 47px;
     margin: 100px 0 60px;
@@ -20,26 +20,51 @@ $lightColor: #3563e9;
       content: '';
       border-bottom: 4px solid $lightColor;
       width: 106px;
-      margin: 15px 0 0 0;
+      margin: 0;
     }
-
-    @media (min-width: 375px) {
-      font-size: 28px;
+  }
+  @media (min-width: 375px) {
+    h1 {
+      font-size: 32px;
     }
+  }
 
-    @media (min-width: 425px) {
-      font-size: 30px;
+  @media (min-width: 425px) {
+    h1 {
+      font-size: 34px;
       margin: 129px 0 100px;
+      &::after {
+        content: '';
+        border-bottom: 4px solid $lightColor;
+        width: 106px;
+        margin: 5px 0 0 0;
+      }
     }
+  }
 
-    @media (min-width: 768px) {
+  @media (min-width: 768px) {
+    h1 {
       font-size: 36px;
       margin: 135px 0 105px;
+      &::after {
+        margin: 10px 0 0 0;
+      }
     }
+  }
 
-    @media (min-width: 1440px) {
-      font-size: 24px;
+  @media (min-width: 1024px) {
+    h1 {
+      font-size: 38px;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    h1 {
+      font-size: 40px;
       margin: 156px 0 117px;
+      &::after {
+        margin: 15px 0 0 0;
+      }
     }
   }
 
