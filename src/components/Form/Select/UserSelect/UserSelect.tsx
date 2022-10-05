@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import { getUsers } from '../../../../api/user/user';
 import useOutsideAlerter from '../../../../hooks/OutsideAlerter';
@@ -28,7 +27,6 @@ export default function UserSelect(props: IUserSelect) {
         setUserList(res.data);
       }
       if (Array.isArray(userList)) {
-        console.log(userList);
         const filteredUsers = userList.filter((user) => {
           const name = user.userName && user.userName !== '' ? user.userName : user.name;
           return name?.toLowerCase().includes(query.toLowerCase());
@@ -52,10 +50,6 @@ export default function UserSelect(props: IUserSelect) {
       setCurrentUser(unassignedUser);
     }
   };
-
-  useEffect(() => {
-    console.log(currentUser);
-  }, [currentUser]);
 
   return (
     <div ref={myRef} className={styles.leadDropdownMenu}>
