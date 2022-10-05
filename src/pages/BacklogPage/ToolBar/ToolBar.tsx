@@ -14,7 +14,6 @@ export default function DropDownBtnList() {
     setShowDropDown(!showDropDown);
   };
   const btnClick = (status) => {
-    // eslint-disable-next-line no-console
     setCurrentStatus(status);
     setShowDropDown(false);
   };
