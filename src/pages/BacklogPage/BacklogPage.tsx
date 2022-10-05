@@ -4,7 +4,7 @@ import BacklogSection from './BacklogSection/BacklogSection';
 import SprintSection from './SprintSection/SprintSection';
 
 export default function BacklogPage() {
-  // WIP fetch data from backend and pass donw
+  // WIP fetch data from backend and pass down
 
   return (
     <DashboardLayout>

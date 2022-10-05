@@ -4,6 +4,7 @@ import styles from './ToolBar.module.scss';
 import Button from '../../../components/Button/Button';
 import Avartar from '../../../assets/userAvatar.png';
 import IconButton from '../../../components/Button/IconButton/IconButton';
+// WIP more function will be added
 
 export default function DropDownBtnList() {
   const dropDownBtnRef = useRef<HTMLDivElement | null>(null);
