@@ -268,11 +268,11 @@ export default function TermsOfServicePage() {
           and other information, you should review their privacy policy.
         </p>
         <p>
-          <b>
+          <p className={styles.highlightedText}>
             You expressly understand and agree that the Company shall not be liable for any damages
             or losses resulting from your use of the API or third-party products that access data
             via the API.
-          </b>
+          </p>
         </p>
         <p>
           Abuse or excessively frequent requests to the Service via the API may result in the

@@ -4,9 +4,9 @@ $lightColor: #3563e9;
 .container {
   p {
     width: 100%;
-    font-size: 14px;
+    font-size: 10px;
     font-weight: 400;
-    line-height: 16.41px;
+    line-height: 17px;
     color: #555;
 
     a {
@@ -15,30 +15,35 @@ $lightColor: #3563e9;
     }
   }
 
+  .highlightedText {
+    font-weight: 700;
+  }
+
   h2 {
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 500;
-    line-height: 18.75px;
+    line-height: 19px;
     color: $headingTextColor;
   }
 
   h3 {
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 400;
-    line-height: 18.75px;
+    line-height: 19px;
     color: $headingTextColor;
   }
   ul {
+    padding-left: 30px;
     li {
-      font-size: 14px;
+      font-size: 10px;
       font-weight: 400;
-      line-height: 16.41px;
+      line-height: 17px;
       color: #555;
       margin-bottom: 13px;
     }
   }
 
-  @media (max-width: 425px) {
+  @media (min-width: 425px) {
     p {
       font-size: 12px;
     }
@@ -52,28 +57,29 @@ $lightColor: #3563e9;
     }
 
     ul {
-      padding-left: 20px;
       li {
         font-size: 12px;
       }
     }
   }
 
-  @media (max-width: 320px) {
+  @media (min-width: 768px) {
     p {
-      font-size: 10px;
+      font-size: 14px;
     }
 
     h2 {
-      font-size: 12px;
+      font-size: 16px;
     }
 
     h3 {
-      font-size: 12px;
+      font-size: 16px;
     }
 
-    ul li {
-      font-size: 10px;
+    ul {
+      li {
+        font-size: 14px;
+      }
     }
   }
 }
