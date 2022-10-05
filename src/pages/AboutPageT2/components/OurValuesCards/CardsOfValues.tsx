@@ -41,21 +41,22 @@ export default function CardsOfValues() {
     }
   ];
   return (
-    <section className={[styles.container, styles.cardOfValuesContainer].join(' ')}>
+    <section className={[styles.container, styles.ourValuesContainer].join(' ')}>
       <h1>Our Values</h1>
       <p>
         No matter what size our business grows to, these are the values that guide our decision
         making everyday
       </p>
-
-      {cardsDetails.map((card) => {
-        return (
-          <div className={styles.card}>
-            <span className={styles.cardDescription}>{card.description}</span>
-            <img className={styles.cardImg} src={card.imageLink} alt={card.altInfo} />
-          </div>
-        );
-      })}
+      <div className={styles.cardOfValuesContainer}>
+        {cardsDetails.map((card) => {
+          return (
+            <div className={styles.card}>
+              <span className={styles.cardDescription}>{card.description}</span>
+              <img className={styles.cardImg} src={card.imageLink} alt={card.altInfo} />
+            </div>
+          );
+        })}
+      </div>
     </section>
   );
 }

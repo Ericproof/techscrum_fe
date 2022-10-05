@@ -1,20 +1,13 @@
 .container {
-    max-width: 712px;
+    max-width: 972px;
     width: 100%;
     margin: 50px auto;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-
+    justify-content: space-between;
 }
 
-.cardOfValuesContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.ourValuesContainer{
+.cardOfValuesContainer{
     h1 {
         font-size: 35px;
         font-weight: lighter;
@@ -60,47 +53,13 @@
     
 @media screen and (min-width: 992px) {
     .container {
-        max-width: 960px;
-        width: 95vw;
-
-    }
-
-    .cardOfValuesContainer {
-        column-gap: 2%;
-        height: 70vw;
+        width: 956px;
+        height: 700.9px;
     }
 
     .card{
         width: 39%;
         height: 27%;
-        margin: 0;
     }
     
-    .ourValuesContainer {
-        p {
-            font-size: 23px;
-            color: #858484;
-            margin: 0 6px 10px 6px;
-            width: 65%;
-        }
-    }
-}
-
-@media screen and (min-width: 1010px) {
-    .container {
-        width: 960px;
-        
-    }
-
-    .cardOfValuesContainer {
-        column-gap: 2%;
-        height: 705.9px;
-    }
-
-    .card {
-        margin: 0;
-        width: 39%;
-        height: 27%;
-    }
-
 }
