@@ -23,6 +23,7 @@ $lightColor: #3563e9;
       margin: 0;
     }
   }
+
   @media (min-width: 375px) {
     h1 {
       font-size: 30px;
@@ -72,6 +73,7 @@ $lightColor: #3563e9;
     display: flex;
     flex-direction: row;
     background-color: #ffffff;
+
     .detailedInfo {
       flex: 1 1 60%;
       margin: 90px 20px 0;
