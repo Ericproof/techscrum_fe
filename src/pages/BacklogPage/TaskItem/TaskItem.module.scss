@@ -1,6 +1,12 @@
 $bgColor: white;
 $borderColor: #ebecf0;
 $textColor: #616c82;
+$btnColorGray: rgb(100, 109, 129);
+$btnBgColorGray: rgb(224, 226, 231);
+$btnColorBlue: rgb(31, 70, 160);
+$btnBgColorBlue: rgb(224, 235, 253);
+$btnColorGreen: rgb(42, 100, 71);
+$btnBgColorGreen: rgb(232, 251, 240);
 
 @mixin ellipsis {
   white-space: nowrap;
@@ -12,24 +18,25 @@ $textColor: #616c82;
   background-color: $bgColor;
   box-sizing: border-box;
   border: 1px solid $borderColor;
-  padding: 0.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: -1px;
   cursor: pointer;
-
-  .toDoButton {
-    height: 1.5rem;
-  }
+  height: 40px;
 }
 
 .taskInfo {
-  display: grid;
-  grid-template-columns: repeat(4, auto);
-  -moz-column-gap: 0.5rem;
-  column-gap: 0.5rem;
-  align-items: center;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  .taskInput {
+    width: 80%;
+    font-size: 16px;
+    outline-color: rgb(77, 144, 254);
+    outline-style: auto;
+    outline-width: 5px;
+    margin-left: 20px;
+  }
 }
 
 .taskType {
@@ -40,33 +47,19 @@ $textColor: #616c82;
 
 .taskTitle {
   @include ellipsis;
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  margin-left: 20px;
 }
 
 .editButton {
   flex-shrink: 0;
   visibility: hidden;
+  display: flex;
+  align-items: center;
 }
 
 .container:hover .editButton {
   visibility: visible;
-}
-
-.toolbar {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.assignee {
-  width: 1.5rem;
-  aspect-ratio: 1/1;
-  padding: 0;
-  border: none;
-  background-color: transparent;
-  border-radius: 50%;
-  cursor: pointer;
-  img {
-    height: 100%;
-    width: 100%;
-  }
 }

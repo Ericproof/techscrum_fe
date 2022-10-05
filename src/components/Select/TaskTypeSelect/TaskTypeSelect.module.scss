@@ -1,17 +1,15 @@
 $btHoverBg: #e8e8e8;
 
 .buttonContainer {
-  width: 3.75rem;
+  height: 100%;
+  width: 70px;
   box-sizing: border-box;
   display: flex;
-  padding: 0.25rem;
-  gap: 0.2rem;
   border: none;
   align-items: center;
   background-color: white;
   text-transform: capitalize;
   cursor: pointer;
-
   &:hover {
     background-color: $btHoverBg;
   }
@@ -20,7 +18,6 @@ $btHoverBg: #e8e8e8;
 .container {
   display: inline-flex;
   flex-direction: column;
-  gap: 0.5rem;
   position: relative;
   background-color: white;
 }
@@ -38,6 +35,10 @@ $btHoverBg: #e8e8e8;
   list-style: none;
   margin: 0;
   padding: 0;
+  height: 80px;
+  li {
+    height: 50%;
+  }
 }
 
 .show {

@@ -6,8 +6,15 @@ import TaskItem from '../TaskItem/TaskItem';
 import styles from './BacklogSection.module.scss';
 
 export default function BacklogSection() {
+  const dummyTaskList = [
+    { id: '1', title: 'Task 1' },
+    { id: '2', title: 'Task 2' },
+    { id: '3', title: 'Task 3' }
+  ];
   const [showBacklogInput, setShowBacklogInput] = useState(false);
   const [backlogInputFocus, setBacklogInputFocus] = useState(false);
+  const [editId, setEditId] = useState('0');
+  const [taskList, setTaskList] = useState(dummyTaskList);
 
   const backlogFormRef = useRef<HTMLFormElement | null>(null);
 
@@ -17,13 +24,25 @@ export default function BacklogSection() {
         setShowBacklogInput(false);
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
-
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [backlogInputFocus]);
+
+  const onClickEditId = (id: string) => {
+    setEditId(id);
+  };
+
+  const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const updatedTaskList = taskList.map((task) => {
+      if (task.id === event.target.id) {
+        return { id: task.id, title: event.target.value };
+      }
+      return { id: task.id, title: task.title };
+    });
+    setTaskList(updatedTaskList);
+  };
 
   return (
     <section className={styles.container}>
@@ -37,10 +56,18 @@ export default function BacklogSection() {
         </div>
       </div>
       <div className={styles.listContainer}>
-        <TaskItem />
-        <TaskItem />
-        <TaskItem />
-        <TaskItem />
+        {taskList.map((task) => {
+          return (
+            <TaskItem
+              taskTitle={task.title}
+              key={task.id}
+              id={task.id}
+              editMode={editId === task.id}
+              onClickEditId={onClickEditId}
+              onChangeTitle={onChangeTitle}
+            />
+          );
+        })}
       </div>
       {showBacklogInput ? (
         <form ref={backlogFormRef}>
