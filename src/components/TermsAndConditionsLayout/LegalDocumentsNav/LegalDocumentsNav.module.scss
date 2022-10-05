@@ -1,4 +1,5 @@
 $lightColor: #3563e9;
+
 .navContainer {
   flex: 1 1 40%;
   margin: 78px 0 0 18px;
@@ -119,6 +120,7 @@ $lightColor: #3563e9;
         }
       }
     }
+
     .active {
       border-left: 3px solid $lightColor;
       position: relative;
