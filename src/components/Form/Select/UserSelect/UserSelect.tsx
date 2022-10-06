@@ -19,6 +19,7 @@ export default function UserSelect(props: IUserSelect) {
   const [query, setQuery] = useState('');
   const [queryUserList, setQueryUserList] = useState<any>([]);
   const [currentUser, setCurrentUser] = useState<any>('');
+  let setInitialUser = true;
 
   useEffect(() => {
     const getUsersList = async () => {
@@ -50,6 +51,22 @@ export default function UserSelect(props: IUserSelect) {
       setCurrentUser(unassignedUser);
     }
   };
+
+  useEffect(() => {
+    if (queryUserList.length > 0) {
+      if (setInitialUser) {
+        if (value !== null) {
+          setCurrentUser({ name: value.name });
+        } else {
+          const unassignedUser = {
+            name: 'Unassigned'
+          };
+          setCurrentUser(unassignedUser);
+        }
+      }
+      setInitialUser = false;
+    }
+  }, [queryUserList]);
 
   return (
     <div ref={myRef} className={styles.leadDropdownMenu}>
