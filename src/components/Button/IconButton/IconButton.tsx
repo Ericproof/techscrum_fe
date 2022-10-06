@@ -5,7 +5,7 @@ interface IIconButton {
   icon: React.ReactNode;
   tooltip: string;
   overrideStyle?: string;
-  onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 export default function IconButton({ icon, tooltip, overrideStyle, onClick }: IIconButton) {
   return (
