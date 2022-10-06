@@ -6,27 +6,32 @@
 
     .leftPart {
         margin: auto;
+        width: 50%;
         h1 {
             margin: 0 auto 50px auto;
             font-size: 32px;
         }
 
         p {
-            margin: 0 auto 40px auto;
+            margin: 0 50px 40px auto;
             font-size: 14px;
         }
 
-        a {
-            display: block;
-            font-size: 16px;
-            color: #FFFFFF;
+        .positionLink {
             background-color: #ff22b1;
             border-radius: 32px;
-            width: 244px;
             height: 56px;
-            padding: 16px, 24px;
+            width: 244px;
+            display: flex;
             align-items: center;
+        }
+
+        a {
+            font-size: 16px;
+            font-weight: bold;
+            color: #FFFFFF;
             text-decoration: none;
+            margin: auto;
             &:hover {
                 cursor: pointer;
             }

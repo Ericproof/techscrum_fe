@@ -12,6 +12,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin: auto;
 }
 
 .ourValuesContainer{
@@ -24,7 +25,7 @@
     p {
         font-size: 23px;
         color: #858484;
-        margin: 0 6px 60px 6px;
+        margin: 0 6px 40px 6px;
         width: 100%;
     }
 }
@@ -36,7 +37,7 @@
     box-shadow: 0px 0px 7px -3px #000000;
     border-radius: 10px;
     transition: transform 0.2s;
-    max-width:475px;
+    max-width:688px;
     &:hover {
         box-shadow: 0px 2px 5px -1px #000000;
         transform: translate(0, -5px);
@@ -89,7 +90,6 @@
 @media screen and (min-width: 1010px) {
     .container {
         width: 960px;
-        
     }
 
     .cardOfValuesContainer {
@@ -102,5 +102,4 @@
         width: 39%;
         height: 27%;
     }
-
 }
