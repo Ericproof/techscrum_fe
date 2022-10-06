@@ -36,6 +36,7 @@ import FAQPage from './pages/FAQPage/FAQPage';
 import AuthenticationRoute from './routes/AuthenticationRoute';
 import SecurityPage from './pages/SecurityPage/SecurityPage';
 import AdminPage from './pages/AdminPage/AdminPage';
+import AboutPageT2 from './pages/AboutPageT2/AboutPageT2';
 import { getDomains } from './api/domain/domain';
 import BacklogPage from './pages/BacklogPage/BacklogPage';
 
@@ -69,6 +70,7 @@ function App() {
               <Route path="/privacy-statement" element={<PrivacyStatementPage />} />
               <Route path="/refund-policy" element={<RefundPolicyPage />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/about-g2" element={<AboutPageT2 />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/careers" element={<CareerPage />} />
               <Route path="/security-page" element={<SecurityPage />} />

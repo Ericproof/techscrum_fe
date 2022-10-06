@@ -1,0 +1,50 @@
+.getStartedContainer {
+    width: 100%;
+    height: 539px;
+    background-image: linear-gradient(90deg, #6126e6, #854cff);
+    transform: skewY(4deg);
+    transform-origin: 0;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.getStartedIntroduction {
+    transform: skewY(-4deg);
+    margin: auto 20px;
+    padding: auto 20px;
+    text-align: left;
+    color: #fff;
+    max-width: 768px;
+    width: 100%;
+    font-size: 16px;
+
+    h1 {
+        color: #fff;
+        font-size: 19.6px;
+    }
+
+    // p {
+    //     width: 100%;
+    // }
+
+
+}
+
+.getStartedInteractionLinks {
+    transform: skewY(-4deg);
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.getStartedLinksBtn {
+    background-color: #000;
+    width: auto;
+    height: auto;
+
+    a {
+        padding: 15 19;
+        color: #fff;
+    }
+}
