@@ -1,22 +1,10 @@
 .container {
     display: flex;
     flex-direction: row;
-    margin: 0 110px;
+    background: white;
     text-align: left;
-
-    .leftPart {
-        margin: auto;
-        width: 50%;
-        h1 {
-            margin: 0 auto 50px auto;
-            font-size: 32px;
-        }
-
-        p {
-            margin: 0 50px 40px auto;
-            font-size: 14px;
-        }
-
+    height: 90vh;
+    .textContainer {
         .positionLink {
             background-color: #ff22b1;
             border-radius: 32px;
@@ -39,8 +27,31 @@
 
     }
 
-    .rightPart {
-        height: 330px;
+    .img {
+        width: 100%;
+        max-width: 626px;
     }
 
+}
+
+.text{
+    margin: 50px 0 44px 0 ;
+    max-width: 354px;
+    width: 100%;
+    font-size: 18px;
+}
+
+.header{
+    font-size: 46px;
+    font-weight: bold;
+        margin: 0 auto 50px auto;
+}
+
+.sectionContiner{
+    max-width: 1280px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    width: 100%;
 }
