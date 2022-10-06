@@ -1,5 +1,5 @@
 import React from 'react';
-import ProjectHeader from '../ProjectHeader/ProjectHeader';
+import Header from '../Header/Header';
 import LegalDocumentsNav from './LegalDocumentsNav/LegalDocumentsNav';
 import styles from './TermsAndConditionsLayout.module.scss';
 
@@ -11,7 +11,7 @@ export interface ITermsAndConditionsLayout {
 export default function TermsAndConditionsLayout({ title, children }: ITermsAndConditionsLayout) {
   return (
     <>
-      <ProjectHeader />
+      <Header />
       <div className={styles.container}>
         <h1>{title}</h1>
         <div className={styles.content}>

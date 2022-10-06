@@ -1,10 +1,11 @@
-$max_size: 1201px;
+$max_size: 768px;
 $small_size: 1000px;
 
 .functionsLoginTabs {
   display: flex;
   flex-direction: row;
   gap: 14px;
+  align-items: center;
   @media (max-width: $max_size) {
     display: none;
     flex-direction: column;
@@ -35,5 +36,6 @@ $small_size: 1000px;
 .functionLoginTabsActive {
   @media (max-width: $max_size) {
     display: flex;
+    align-items: flex-start;
   }
 }
