@@ -4,7 +4,7 @@ import styles from './AboutCareer.module.scss';
 export default function AboutCareer() {
   return (
     <section className={styles.container}>
-      <div className={styles.sectionContiner}>
+      <div className={styles.sectionContainer}>
         <div className={styles.textContainer}>
           <h1 className={styles.header}>Come join us!</h1>
           <p className={styles.text}>
