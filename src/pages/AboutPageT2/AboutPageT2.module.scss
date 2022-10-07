@@ -21,3 +21,13 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+@media (max-width: 1280px) {
+    .introImg {
+        max-width: 615px;
+    }
+
+    .greeting {
+        background-image: none;
+    }
+}

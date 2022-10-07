@@ -8,10 +8,12 @@
         .positionLink {
             background-color: #ff22b1;
             border-radius: 32px;
-            height: 56px;
-            width: 244px;
-            display: flex;
-            align-items: center;
+            padding: 16px 24px;
+            max-width: 100%;
+            // height: 56px;
+            // width: 244px;
+            // display: flex;
+            // align-items: center;
         }
 
         a {
@@ -19,19 +21,17 @@
             font-weight: bold;
             color: #FFFFFF;
             text-decoration: none;
-            margin: auto;
+            // margin: auto;
             &:hover {
                 cursor: pointer;
             }
         }
-
     }
 
     .img {
         width: 100%;
         max-width: 626px;
     }
-
 }
 
 .text{
@@ -54,4 +54,16 @@
     justify-content: space-between;
     margin: auto;
     width: 100%;
+}
+
+@media (max-width: 1279px) {
+
+}
+
+@media (max-width: 980px) {
+
+}
+
+@media (max-width: 767px) {
+    
 }
