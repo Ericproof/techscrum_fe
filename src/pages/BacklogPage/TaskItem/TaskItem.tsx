@@ -1,9 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { FaPen } from 'react-icons/fa';
 import IconButton from '../../../components/Button/IconButton/IconButton';
 import styles from './TaskItem.module.scss';
-import TaskTypeSelect from '../../../components/Select/TaskTypeSelect/TaskTypeSelect';
 import ToolBar from '../ToolBar/ToolBar';
+import PriorityBtn from '../PriorityBtn/PriorityBtn';
+import OptionBtn from '../OptionBtn/OptionBtn';
 // WIP fixing click outside handle
 interface ITaskInput {
   taskTitle: string;
@@ -11,15 +12,28 @@ interface ITaskInput {
   editMode: boolean;
   onClickEditId: (id: string) => void;
   onChangeTitle: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  imgUrl: string;
+  type: string;
+  status: string;
+  onClickChangeStatus: (id: string, status: string) => void;
+  priority: string;
+  onClickChangePriority: (id: string, priority: string) => void;
 }
 export default function TaskItem({
   taskTitle,
   id,
   editMode,
   onClickEditId,
-  onChangeTitle
+  onChangeTitle,
+  imgUrl,
+  type,
+  status,
+  onClickChangeStatus,
+  priority,
+  onClickChangePriority
 }: ITaskInput) {
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const [showOptionBtn, setShowOptionBtn] = useState(false);
   const editClick = () => {
     onClickEditId(id);
   };
@@ -36,9 +50,20 @@ export default function TaskItem({
   };
 
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      onMouseOver={() => setShowOptionBtn(true)}
+      onMouseOut={() => setShowOptionBtn(false)}
+      onFocus={() => {}}
+      onBlur={() => {}}
+    >
       <div className={styles.taskInfo}>
-        <TaskTypeSelect />
+        <div className={styles.iconContainer}>
+          <img className={styles.icon} src={imgUrl} alt={type} />
+        </div>
+        <div className={styles.taskIdContainer}>
+          <p>{id}</p>
+        </div>
         {editMode ? (
           <input
             id={id}
@@ -58,7 +83,9 @@ export default function TaskItem({
           </div>
         )}
       </div>
-      <ToolBar />
+      <PriorityBtn priority={priority} id={id} onClickChangePriority={onClickChangePriority} />
+      <ToolBar status={status} id={id} onClickChangeStatus={onClickChangeStatus} />
+      <OptionBtn showOptionBtn={showOptionBtn} />
     </div>
   );
 }

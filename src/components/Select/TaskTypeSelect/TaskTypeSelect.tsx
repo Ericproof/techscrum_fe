@@ -3,50 +3,52 @@ import styles from './TaskTypeSelect.module.scss';
 
 const TYPES = [
   {
-    title: 'story',
+    type: 'story',
     imgUrl:
       'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium'
   },
   {
-    title: 'task',
+    type: 'task',
     imgUrl:
       'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium'
   },
   {
-    title: 'bug',
+    type: 'bug',
     imgUrl:
       'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium'
   }
 ];
 
 interface IOption {
-  title: string;
+  type: string;
   imgUrl: string;
   onClick?: (e: any) => void;
 }
 
-function Option({ title, imgUrl, onClick }: IOption) {
+function Option({ type, imgUrl, onClick }: IOption) {
   return (
-    <button className={styles.buttonContainer} onClick={onClick} name={title} value={title}>
-      <img className={styles.icon} src={imgUrl} alt={title} />
-      {title}
+    <button className={styles.buttonContainer} onClick={onClick} name={type} value={type}>
+      <img className={styles.icon} src={imgUrl} alt={type} />
+      {type}
     </button>
   );
 }
 
 interface ITaskTypeSelect {
   onChange?: (e: any) => void;
+  onChangeType: (obj: { type: string; imgUrl: string }) => void;
 }
 
-export default function TaskTypeSelect({ onChange }: ITaskTypeSelect) {
+export default function TaskTypeSelect({ onChange, onChangeType }: ITaskTypeSelect) {
   const initialOption = TYPES[0];
   const [showOptions, setShowOptions] = useState(false);
   const [currentOption, setCurrentOption] = useState(initialOption);
-  const otherOptions = TYPES.filter((item) => item.title !== currentOption.title);
+  const otherOptions = TYPES.filter((item) => item.type !== currentOption.type);
 
-  const handleCurrentOption = useCallback((title) => {
-    const newCurrentOption = TYPES.filter((item) => item.title === title)[0];
+  const handleCurrentOption = useCallback((type) => {
+    const newCurrentOption = TYPES.filter((item) => item.type === type)[0];
     setCurrentOption(newCurrentOption);
+    onChangeType(newCurrentOption);
   }, []);
 
   const onClickOption = (e: any) => {
@@ -74,14 +76,14 @@ export default function TaskTypeSelect({ onChange }: ITaskTypeSelect) {
 
   return (
     <div className={styles.container} ref={containerRef}>
-      <Option onClick={onClickOption} title={currentOption.title} imgUrl={currentOption.imgUrl} />
+      <Option onClick={onClickOption} type={currentOption.type} imgUrl={currentOption.imgUrl} />
       <div className={styles.optionsContainer}>
         <ul className={[styles.listContainer, showOptions && styles.show].join(' ')}>
           {otherOptions.map((option) => {
-            const { title, imgUrl } = option;
+            const { type, imgUrl } = option;
             return (
-              <li key={title}>
-                <Option onClick={onClickOption} title={title} imgUrl={imgUrl} />
+              <li key={type}>
+                <Option onClick={onClickOption} type={type} imgUrl={imgUrl} />
               </li>
             );
           })}

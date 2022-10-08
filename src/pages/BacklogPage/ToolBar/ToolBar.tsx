@@ -5,17 +5,30 @@ import Button from '../../../components/Button/Button';
 import Avartar from '../../../assets/userAvatar.png';
 import IconButton from '../../../components/Button/IconButton/IconButton';
 // WIP fixing dropdown btn menu
-
-export default function DropDownBtnList() {
+interface IToolBar {
+  status: string;
+  onClickChangeStatus: (id: string, status: string) => void;
+  id: string;
+}
+export default function ToolBar({ status, onClickChangeStatus, id }: IToolBar) {
+  const allBtns = [
+    { status: 'TO DO', color: 'dropDownBtnGray' },
+    { status: 'BLOCKED', color: 'dropDownBtnBlue' },
+    { status: 'IN PROGRESS', color: 'dropDownBtnBlue' },
+    { status: 'PR REVIEW', color: 'dropDownBtnBlue' },
+    { status: 'TESTING', color: 'dropDownBtnBlue' },
+    { status: 'DONE', color: 'dropDownBtnGreen' }
+  ];
   const dropDownBtnRef = useRef<HTMLDivElement | null>(null);
+
   const [showDropDown, setShowDropDown] = useState(false);
-  const [currentStatus, setCurrentStatus] = useState('TO DO');
+
   const dropDownClick = () => {
     setShowDropDown(!showDropDown);
   };
-  const btnClick = (status) => {
-    setCurrentStatus(status);
+  const btnClick = (title: string) => {
     setShowDropDown(false);
+    onClickChangeStatus(id, title);
   };
   useEffect(() => {
     const handleClickOutside = (e: any) => {
@@ -33,10 +46,13 @@ export default function DropDownBtnList() {
       <Button
         icon={<FaChevronDown />}
         iconPosition="end"
-        overrideStyle={styles.statusBtn}
+        overrideStyle={[
+          styles.statusBtn,
+          styles[allBtns.filter((btn) => btn.status === status)[0].color]
+        ].join(' ')}
         onClick={dropDownClick}
       >
-        {currentStatus}
+        {allBtns.filter((btn) => btn.status === status)[0].status}
       </Button>
       <div
         className={
@@ -46,46 +62,22 @@ export default function DropDownBtnList() {
         }
       >
         <ul className={styles.btnDropDownListContainer}>
-          <li>
-            <Button
-              overrideStyle={[styles.statusBtn, styles.dropDownBtnGray].join(' ')}
-              onClick={btnClick}
-            >
-              TO DO
-            </Button>
-          </li>
-          <li>
-            <Button
-              overrideStyle={[styles.statusBtn, styles.dropDownBtnBlue].join(' ')}
-              onClick={btnClick}
-            >
-              IN PROGRESS
-            </Button>
-          </li>
-          <li>
-            <Button
-              overrideStyle={[styles.statusBtn, styles.dropDownBtnBlue].join(' ')}
-              onClick={btnClick}
-            >
-              PR REVIEW
-            </Button>
-          </li>
-          <li>
-            <Button
-              overrideStyle={[styles.statusBtn, styles.dropDownBtnBlue].join(' ')}
-              onClick={btnClick}
-            >
-              MERGED
-            </Button>
-          </li>
-          <li>
-            <Button
-              overrideStyle={[styles.statusBtn, styles.dropDownBtnGreen].join(' ')}
-              onClick={btnClick}
-            >
-              DONE
-            </Button>
-          </li>
+          {allBtns
+            .filter((btn) => btn.status !== status)
+            .map((btnInfo) => {
+              return (
+                <li key={btnInfo.status}>
+                  <Button
+                    overrideStyle={[styles.statusBtn, styles[btnInfo.color]].join(' ')}
+                    onClick={() => {
+                      btnClick(btnInfo.status);
+                    }}
+                  >
+                    {btnInfo.status}
+                  </Button>
+                </li>
+              );
+            })}
         </ul>
       </div>
       <IconButton

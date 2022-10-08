@@ -8,20 +8,69 @@ import styles from './BacklogSection.module.scss';
 
 export default function BacklogSection() {
   const dummyTaskList = [
-    { id: '1', title: 'Task 1' },
-    { id: '2', title: 'Task 2' },
-    { id: '3', title: 'Task 3' }
+    {
+      id: 'TEC-315',
+      title: 'Task 1',
+      type: 'Story',
+      imgUrl:
+        'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium',
+      status: 'TO DO',
+      priority: 'Medium'
+    },
+    {
+      id: 'TEC-316',
+      title: 'Task 2',
+      type: 'Bug',
+      imgUrl:
+        'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium',
+      status: 'TO DO',
+      priority: 'Medium'
+    },
+    {
+      id: 'TEC-317',
+      title: 'Task 3',
+      type: 'Task',
+      imgUrl:
+        'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium',
+      status: 'TO DO',
+      priority: 'Medium'
+    }
   ];
+  const initialType = {
+    type: 'story',
+    imgUrl:
+      'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium'
+  };
   const [showBacklogInput, setShowBacklogInput] = useState(false);
   const [backlogInputFocus, setBacklogInputFocus] = useState(false);
-  const [editId, setEditId] = useState('0');
+  const [currentTypeOption, setCurrentTypeOption] = useState(initialType);
+
+  const [editId, setEditId] = useState('-1');
   const [taskList, setTaskList] = useState(dummyTaskList);
 
   const backlogFormRef = useRef<HTMLFormElement | null>(null);
+  const createIssueRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     const handleClickOutside = (e: any) => {
       if (backlogInputFocus && !backlogFormRef.current?.contains(e.target)) {
+        if (createIssueRef?.current?.value) {
+          const id = 'TEC-'.concat(
+            (+taskList[taskList.length - 1].id.split('-')[1] + 1).toString()
+          );
+          setTaskList([
+            ...taskList,
+            {
+              id,
+              title: createIssueRef?.current?.value,
+              type: currentTypeOption.type,
+              imgUrl: currentTypeOption.imgUrl,
+              status: 'TO DO',
+              priority: 'Medium'
+            }
+          ]);
+          setCurrentTypeOption(initialType);
+        }
         setShowBacklogInput(false);
       }
     };
@@ -29,7 +78,7 @@ export default function BacklogSection() {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [backlogInputFocus]);
+  }, [backlogInputFocus, currentTypeOption.imgUrl, currentTypeOption.type, initialType, taskList]);
 
   const onClickEditId = (id: string) => {
     setEditId(id);
@@ -38,19 +87,63 @@ export default function BacklogSection() {
   const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
     const updatedTaskList = taskList.map((task) => {
       if (task.id === event.target.id) {
-        return { id: task.id, title: event.target.value };
+        return {
+          ...task,
+          title: event.target.value
+        };
       }
-      return { id: task.id, title: task.title };
+      return task;
     });
     setTaskList(updatedTaskList);
   };
 
+  const onKeyDownCreateIssue = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      if (createIssueRef?.current?.value) {
+        const id = 'TEC-'.concat((+taskList[taskList.length - 1].id.split('-')[1] + 1).toString());
+        setTaskList([
+          ...taskList,
+          {
+            id,
+            title: createIssueRef?.current?.value,
+            type: currentTypeOption.type,
+            imgUrl: currentTypeOption.imgUrl,
+            status: 'TO DO',
+            priority: 'Medium'
+          }
+        ]);
+        setCurrentTypeOption(initialType);
+      }
+      setShowBacklogInput(false);
+    }
+  };
+  const getCurrentTypeOption = (option: { type: string; imgUrl: string }) => {
+    setCurrentTypeOption(option);
+  };
+  const onClickChangeStatus = (id, status) => {
+    const updatedTaskList = taskList.map((task) => {
+      if (task.id === id) {
+        return { ...task, status };
+      }
+      return task;
+    });
+    setTaskList(updatedTaskList);
+  };
+  const onClickChangePriority = (id, priority) => {
+    const updatedTaskList = taskList.map((task) => {
+      if (task.id === id) {
+        return { ...task, priority };
+      }
+      return task;
+    });
+    setTaskList(updatedTaskList);
+  };
   return (
     <section className={styles.container}>
       <div className={styles.header}>
         <div className={styles.heading}>
           <h1>Backlog</h1>
-          <div className={styles.issueCount}>number of issues</div>
+          <div className={styles.issueCount}>{taskList.length} issues</div>
         </div>
         <div className={styles.toolbar}>
           <Button>Create sprint</Button>
@@ -66,6 +159,12 @@ export default function BacklogSection() {
               editMode={editId === task.id}
               onClickEditId={onClickEditId}
               onChangeTitle={onChangeTitle}
+              imgUrl={task.imgUrl}
+              type={task.type}
+              status={task.status}
+              onClickChangeStatus={onClickChangeStatus}
+              priority={task.priority}
+              onClickChangePriority={onClickChangePriority}
             />
           );
         })}
@@ -73,17 +172,17 @@ export default function BacklogSection() {
       {showBacklogInput ? (
         <form ref={backlogFormRef}>
           <div className={styles.formField}>
-            <TaskTypeSelect />
+            <TaskTypeSelect onChangeType={getCurrentTypeOption} />
             <input
               className={styles.input}
               type="text"
               name="newBacklog"
               id="newBacklog"
-              // eslint-disable-next-line jsx-a11y/no-autofocus
-              autoFocus
               onFocus={() => {
                 setBacklogInputFocus(true);
               }}
+              ref={createIssueRef}
+              onKeyDown={onKeyDownCreateIssue}
             />
           </div>
         </form>

@@ -5,7 +5,7 @@ export interface IButton {
   icon?: React.ReactNode;
   iconPosition?: 'start' | 'end';
   overrideStyle?: string;
-  onClick?: (e: any) => void;
+  onClick?: () => void;
   children: string;
 }
 
@@ -21,7 +21,7 @@ export default function Button({
       className={`${styles.buttonContainer} ${
         iconPosition === 'start' ? '' : styles.rowReversed
       } ${overrideStyle}`}
-      onClick={onClick?.bind(null, children)}
+      onClick={onClick}
     >
       {icon && <span className={styles.icon}>{icon}</span>}
       <span className={styles.buttonText}>{children}</span>

@@ -23,14 +23,28 @@ $btnBgColorGreen: rgb(232, 251, 240);
   align-items: center;
   cursor: pointer;
   height: 40px;
+  padding-right: 10px;
 }
 
 .taskInfo {
   display: flex;
   width: 100%;
   height: 100%;
+  .iconContainer {
+    width: 40px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .taskIdContainer {
+    display: flex;
+    align-items: center;
+    color: $textColor;
+    font-size: 15px;
+  }
   .taskInput {
-    width: 80%;
+    width: 70%;
     font-size: 16px;
     outline-color: rgb(77, 144, 254);
     outline-style: auto;
