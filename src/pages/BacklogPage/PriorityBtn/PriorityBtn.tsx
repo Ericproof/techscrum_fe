@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Id } from 'react-beautiful-dnd';
 import styles from './PriorityBtn.module.scss';
 
 interface IPriorityBtn {
@@ -27,9 +26,10 @@ export default function PriorityBtn({ priority, onClickChangePriority, id }: IPr
 
   const [showPriorityBtnDropDown, setShowPriorityBtnDropDown] = useState(false);
   const [showPriorityBtnOutline, setShowPriorityBtnOutline] = useState(false);
-  const [currentPriorityBtn, setCurrentPriorityBtn] = useState(
-    allPriorities.find((eachPriority) => eachPriority.priority === priority)
+  const currentPriorityBtn = allPriorities.find(
+    (eachPriority) => eachPriority.priority === priority
   );
+
   const priorityBtnContainerRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     const handleClickOutside = (e: any) => {
@@ -37,24 +37,22 @@ export default function PriorityBtn({ priority, onClickChangePriority, id }: IPr
         showPriorityBtnDropDown &&
         showPriorityBtnOutline &&
         !priorityBtnContainerRef?.current?.contains(e.target)
-      )
+      ) {
         setShowPriorityBtnDropDown(false);
-      setShowPriorityBtnOutline(false);
+        setShowPriorityBtnOutline(false);
+      }
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [showPriorityBtnDropDown, showPriorityBtnOutline]);
-  const onClickPriorityBtnDropDown = (eachPriority) => {
+  const onClickPriorityBtnDropDown = (eachPriority: { priority: string; imgUrl: string }) => {
     onClickChangePriority(id, eachPriority.priority);
-    setCurrentPriorityBtn({
-      priority: eachPriority.priority,
-      imgUrl: eachPriority.imgUrl
-    });
     setShowPriorityBtnDropDown(false);
     setShowPriorityBtnOutline(false);
   };
+
   return (
     <div className={styles.priorityBtnContainer} ref={priorityBtnContainerRef}>
       <button
@@ -64,8 +62,8 @@ export default function PriorityBtn({ priority, onClickChangePriority, id }: IPr
             : styles.priorityBtn
         }
         onClick={() => {
-          setShowPriorityBtnDropDown(true);
-          setShowPriorityBtnOutline(true);
+          setShowPriorityBtnDropDown(!showPriorityBtnDropDown);
+          setShowPriorityBtnOutline(!showPriorityBtnOutline);
         }}
       >
         <img src={currentPriorityBtn?.imgUrl} alt="" />

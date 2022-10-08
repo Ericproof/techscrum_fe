@@ -138,6 +138,10 @@ export default function BacklogSection() {
     });
     setTaskList(updatedTaskList);
   };
+  const onClickDelete = (id) => {
+    const updatedTaskList = taskList.filter((task) => task.id !== id);
+    setTaskList(updatedTaskList);
+  };
   return (
     <section className={styles.container}>
       <div className={styles.header}>
@@ -165,6 +169,7 @@ export default function BacklogSection() {
               onClickChangeStatus={onClickChangeStatus}
               priority={task.priority}
               onClickChangePriority={onClickChangePriority}
+              onClickDelete={onClickDelete}
             />
           );
         })}

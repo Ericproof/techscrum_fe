@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FaPen } from 'react-icons/fa';
 import IconButton from '../../../components/Button/IconButton/IconButton';
 import styles from './TaskItem.module.scss';
@@ -18,6 +18,7 @@ interface ITaskInput {
   onClickChangeStatus: (id: string, status: string) => void;
   priority: string;
   onClickChangePriority: (id: string, priority: string) => void;
+  onClickDelete: (id: string) => void;
 }
 export default function TaskItem({
   taskTitle,
@@ -30,10 +31,12 @@ export default function TaskItem({
   status,
   onClickChangeStatus,
   priority,
-  onClickChangePriority
+  onClickChangePriority,
+  onClickDelete
 }: ITaskInput) {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [showOptionBtn, setShowOptionBtn] = useState(false);
+  const [disableShowOptionBtnEffect, setDisableShowOptionBtnEffect] = useState(false);
   const editClick = () => {
     onClickEditId(id);
   };
@@ -49,11 +52,31 @@ export default function TaskItem({
     }
   };
 
+  const mouseOver = () => {
+    if (!disableShowOptionBtnEffect) {
+      setShowOptionBtn(true);
+    }
+  };
+  const mouseOut = () => {
+    if (!disableShowOptionBtnEffect) {
+      setShowOptionBtn(false);
+    }
+  };
+
+  const toggleDisableShowOptionBtnEffect = () => {
+    if (!disableShowOptionBtnEffect) {
+      setDisableShowOptionBtnEffect(true);
+    } else {
+      setDisableShowOptionBtnEffect(false);
+      setShowOptionBtn(false);
+    }
+  };
+
   return (
     <div
       className={styles.container}
-      onMouseOver={() => setShowOptionBtn(true)}
-      onMouseOut={() => setShowOptionBtn(false)}
+      onMouseOver={mouseOver}
+      onMouseOut={mouseOut}
       onFocus={() => {}}
       onBlur={() => {}}
     >
@@ -85,7 +108,12 @@ export default function TaskItem({
       </div>
       <PriorityBtn priority={priority} id={id} onClickChangePriority={onClickChangePriority} />
       <ToolBar status={status} id={id} onClickChangeStatus={onClickChangeStatus} />
-      <OptionBtn showOptionBtn={showOptionBtn} />
+      <OptionBtn
+        showOptionBtn={showOptionBtn}
+        id={id}
+        onClickDelete={onClickDelete}
+        toggleDisableShowOptionBtnEffect={toggleDisableShowOptionBtnEffect}
+      />
     </div>
   );
 }
