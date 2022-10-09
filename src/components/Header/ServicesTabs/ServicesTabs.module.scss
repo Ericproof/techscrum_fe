@@ -1,4 +1,4 @@
-$max_size: 1201px;
+$max_size: 768px;
 $small_size: 1000px;
 
 .serviceListTabs {
@@ -14,7 +14,7 @@ $small_size: 1000px;
   div {
     align-self: center;
     @media (max-width: $max_size) {
-      width: 100%;
+      width: 94%;
     }
     a {
       text-decoration: none;
