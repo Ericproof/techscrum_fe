@@ -113,6 +113,8 @@ export default function BacklogSection() {
   };
   const getCurrentTypeOption = (option: { type: string; imgUrl: string }) => {
     setCurrentTypeOption(option);
+    // eslint-disable-next-line no-console
+    console.log('asdasda');
   };
   const onClickChangeStatus = (id, status) => {
     const updatedTaskList = taskList.map((task) => {
