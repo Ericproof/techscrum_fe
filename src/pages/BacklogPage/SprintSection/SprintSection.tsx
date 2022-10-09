@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { BiDotsHorizontal } from 'react-icons/bi';
 import { GoPlus } from 'react-icons/go';
 import Button from '../../../components/Button/Button';
@@ -55,39 +55,43 @@ export default function SprintSection() {
   const getCurrentTypeOption = (option: { type: string; imgUrl: string }) => {
     setCurrentTypeOption(option);
   };
+  const createIssueAction = useCallback(() => {
+    if (createIssueRef?.current?.value) {
+      const id = 'TEC-'.concat((+taskList[taskList.length - 1].id.split('-')[1] + 1).toString());
+      setTaskList([
+        ...taskList,
+        {
+          id,
+          title: createIssueRef?.current?.value,
+          type: currentTypeOption.type,
+          imgUrl: currentTypeOption.imgUrl,
+          status: 'TO DO',
+          priority: 'Medium'
+        }
+      ]);
+      setCurrentTypeOption(initialType);
+    }
+    setShowSprintInput(false);
+  }, [currentTypeOption.imgUrl, currentTypeOption.type, initialType, taskList]);
+
   useEffect(() => {
     const handleClickOutside = (e: any) => {
       if (sprintInputFocus && !sprintFormRef.current?.contains(e.target)) {
-        if (createIssueRef?.current?.value) {
-          const id = 'TEC-'.concat(
-            (+taskList[taskList.length - 1].id.split('-')[1] + 1).toString()
-          );
-          setTaskList([
-            ...taskList,
-            {
-              id,
-              title: createIssueRef?.current?.value,
-              type: currentTypeOption.type,
-              imgUrl: currentTypeOption.imgUrl,
-              status: 'TO DO',
-              priority: 'Medium'
-            }
-          ]);
-          setCurrentTypeOption(initialType);
-        }
-        setShowSprintInput(false);
+        createIssueAction();
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [currentTypeOption.imgUrl, currentTypeOption.type, initialType, sprintInputFocus, taskList]);
-
-  useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log(taskList);
-  }, [taskList]);
+  }, [
+    createIssueAction,
+    currentTypeOption.imgUrl,
+    currentTypeOption.type,
+    initialType,
+    sprintInputFocus,
+    taskList
+  ]);
 
   const onClickEditId = (id: string) => {
     setEditId(id);
@@ -104,24 +108,10 @@ export default function SprintSection() {
     });
     setTaskList(updatedTaskList);
   };
+
   const onKeyDownCreateIssue = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      if (createIssueRef?.current?.value) {
-        const id = 'TEC-'.concat((+taskList[taskList.length - 1].id.split('-')[1] + 1).toString());
-        setTaskList([
-          ...taskList,
-          {
-            id,
-            title: createIssueRef?.current?.value,
-            type: currentTypeOption.type,
-            imgUrl: currentTypeOption.imgUrl,
-            status: 'TO DO',
-            priority: 'Medium'
-          }
-        ]);
-        setCurrentTypeOption(initialType);
-      }
-      setShowSprintInput(false);
+      createIssueAction();
     }
   };
   const onClickChangeStatus = (id, status) => {

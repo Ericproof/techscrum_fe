@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { GoPlus } from 'react-icons/go';
 import Button from '../../../components/Button/Button';
 import TaskTypeSelect from '../../../components/Select/TaskTypeSelect/TaskTypeSelect';
@@ -51,34 +51,43 @@ export default function BacklogSection() {
   const backlogFormRef = useRef<HTMLFormElement | null>(null);
   const createIssueRef = useRef<HTMLInputElement | null>(null);
 
+  const createIssueAction = useCallback(() => {
+    if (createIssueRef?.current?.value) {
+      const id = 'TEC-'.concat((+taskList[taskList.length - 1].id.split('-')[1] + 1).toString());
+      setTaskList([
+        ...taskList,
+        {
+          id,
+          title: createIssueRef?.current?.value,
+          type: currentTypeOption.type,
+          imgUrl: currentTypeOption.imgUrl,
+          status: 'TO DO',
+          priority: 'Medium'
+        }
+      ]);
+      setCurrentTypeOption(initialType);
+    }
+    setShowBacklogInput(false);
+  }, [currentTypeOption.imgUrl, currentTypeOption.type, initialType, taskList]);
+
   useEffect(() => {
     const handleClickOutside = (e: any) => {
       if (backlogInputFocus && !backlogFormRef.current?.contains(e.target)) {
-        if (createIssueRef?.current?.value) {
-          const id = 'TEC-'.concat(
-            (+taskList[taskList.length - 1].id.split('-')[1] + 1).toString()
-          );
-          setTaskList([
-            ...taskList,
-            {
-              id,
-              title: createIssueRef?.current?.value,
-              type: currentTypeOption.type,
-              imgUrl: currentTypeOption.imgUrl,
-              status: 'TO DO',
-              priority: 'Medium'
-            }
-          ]);
-          setCurrentTypeOption(initialType);
-        }
-        setShowBacklogInput(false);
+        createIssueAction();
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [backlogInputFocus, currentTypeOption.imgUrl, currentTypeOption.type, initialType, taskList]);
+  }, [
+    backlogInputFocus,
+    createIssueAction,
+    currentTypeOption.imgUrl,
+    currentTypeOption.type,
+    initialType,
+    taskList
+  ]);
 
   const onClickEditId = (id: string) => {
     setEditId(id);
@@ -99,22 +108,7 @@ export default function BacklogSection() {
 
   const onKeyDownCreateIssue = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      if (createIssueRef?.current?.value) {
-        const id = 'TEC-'.concat((+taskList[taskList.length - 1].id.split('-')[1] + 1).toString());
-        setTaskList([
-          ...taskList,
-          {
-            id,
-            title: createIssueRef?.current?.value,
-            type: currentTypeOption.type,
-            imgUrl: currentTypeOption.imgUrl,
-            status: 'TO DO',
-            priority: 'Medium'
-          }
-        ]);
-        setCurrentTypeOption(initialType);
-      }
-      setShowBacklogInput(false);
+      createIssueAction();
     }
   };
   const getCurrentTypeOption = (option: { type: string; imgUrl: string }) => {
