@@ -19,7 +19,7 @@ export default function OptionBtn({
   const [hoverOptionBtn, setHoverOptionBtn] = useState(false);
   const optionBtnRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
-    const handleClickOutside = (e) => {
+    const handleClickOutside = (e: any) => {
       if (showOptionDropDownBtns && !optionBtnRef?.current?.contains(e.target)) {
         setShowOptionDropDownBtns(false);
         toggleDisableShowOptionBtnEffect();

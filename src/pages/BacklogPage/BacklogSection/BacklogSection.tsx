@@ -113,10 +113,8 @@ export default function BacklogSection() {
   };
   const getCurrentTypeOption = (option: { type: string; imgUrl: string }) => {
     setCurrentTypeOption(option);
-    // eslint-disable-next-line no-console
-    console.log('asdasda');
   };
-  const onClickChangeStatus = (id, status) => {
+  const onClickChangeStatus = (id: string, status: string) => {
     const updatedTaskList = taskList.map((task) => {
       if (task.id === id) {
         return { ...task, status };
@@ -125,7 +123,7 @@ export default function BacklogSection() {
     });
     setTaskList(updatedTaskList);
   };
-  const onClickChangePriority = (id, priority) => {
+  const onClickChangePriority = (id: string, priority: string) => {
     const updatedTaskList = taskList.map((task) => {
       if (task.id === id) {
         return { ...task, priority };
@@ -134,7 +132,7 @@ export default function BacklogSection() {
     });
     setTaskList(updatedTaskList);
   };
-  const onClickDelete = (id) => {
+  const onClickDelete = (id: string) => {
     const updatedTaskList = taskList.filter((task) => task.id !== id);
     setTaskList(updatedTaskList);
   };

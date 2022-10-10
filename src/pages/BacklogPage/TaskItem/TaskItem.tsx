@@ -41,9 +41,7 @@ export default function TaskItem({
     onClickEditId(id);
   };
   const updateTaskTitleContent = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (onChangeTitle) {
-      onChangeTitle(event);
-    }
+    onChangeTitle(event);
   };
 
   const saveKeyPress = (event) => {

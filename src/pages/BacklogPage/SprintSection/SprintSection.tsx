@@ -43,7 +43,7 @@ export default function SprintSection() {
     imgUrl:
       'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium'
   };
-  const [taskList, setTaskList] = useState(dummyTaskList);
+  const [sprintTaskList, setSprintTaskList] = useState(dummyTaskList);
   const [showSprintInput, setShowSprintInput] = useState(false);
   const [sprintInputFocus, setSprintInputFocus] = useState(false);
   const [currentTypeOption, setCurrentTypeOption] = useState(initialType);
@@ -57,9 +57,11 @@ export default function SprintSection() {
   };
   const createIssueAction = useCallback(() => {
     if (createIssueRef?.current?.value) {
-      const id = 'TEC-'.concat((+taskList[taskList.length - 1].id.split('-')[1] + 1).toString());
-      setTaskList([
-        ...taskList,
+      const id = 'TEC-'.concat(
+        (+sprintTaskList[sprintTaskList.length - 1].id.split('-')[1] + 1).toString()
+      );
+      setSprintTaskList([
+        ...sprintTaskList,
         {
           id,
           title: createIssueRef?.current?.value,
@@ -72,7 +74,7 @@ export default function SprintSection() {
       setCurrentTypeOption(initialType);
     }
     setShowSprintInput(false);
-  }, [currentTypeOption.imgUrl, currentTypeOption.type, initialType, taskList]);
+  }, [currentTypeOption.imgUrl, currentTypeOption.type, initialType, sprintTaskList]);
 
   useEffect(() => {
     const handleClickOutside = (e: any) => {
@@ -90,14 +92,14 @@ export default function SprintSection() {
     currentTypeOption.type,
     initialType,
     sprintInputFocus,
-    taskList
+    sprintTaskList
   ]);
 
   const onClickEditId = (id: string) => {
     setEditId(id);
   };
   const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const updatedTaskList = taskList.map((task) => {
+    const updatedTaskList = sprintTaskList.map((task) => {
       if (task.id === event.target.id) {
         return {
           ...task,
@@ -106,7 +108,7 @@ export default function SprintSection() {
       }
       return task;
     });
-    setTaskList(updatedTaskList);
+    setSprintTaskList(updatedTaskList);
   };
 
   const onKeyDownCreateIssue = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -114,34 +116,34 @@ export default function SprintSection() {
       createIssueAction();
     }
   };
-  const onClickChangeStatus = (id, status) => {
-    const updatedTaskList = taskList.map((task) => {
+  const onClickChangeStatus = (id: string, status: string) => {
+    const updatedTaskList = sprintTaskList.map((task) => {
       if (task.id === id) {
         return { ...task, status };
       }
       return task;
     });
-    setTaskList(updatedTaskList);
+    setSprintTaskList(updatedTaskList);
   };
-  const onClickChangePriority = (id, priority) => {
-    const updatedTaskList = taskList.map((task) => {
+  const onClickChangePriority = (id: string, priority: string) => {
+    const updatedTaskList = sprintTaskList.map((task) => {
       if (task.id === id) {
         return { ...task, priority };
       }
       return task;
     });
-    setTaskList(updatedTaskList);
+    setSprintTaskList(updatedTaskList);
   };
-  const onClickDelete = (id) => {
-    const updatedTaskList = taskList.filter((task) => task.id !== id);
-    setTaskList(updatedTaskList);
+  const onClickDelete = (id: string) => {
+    const updatedTaskList = sprintTaskList.filter((task) => task.id !== id);
+    setSprintTaskList(updatedTaskList);
   };
   return (
     <section className={[styles.container, styles.sprintContainer].join(' ')}>
       <div className={styles.header}>
         <div className={styles.heading}>
           <h1>Current Sprint</h1>
-          <div className={styles.issueCount}>{taskList.length} issues</div>
+          <div className={styles.issueCount}>{sprintTaskList.length} issues</div>
         </div>
         <div className={styles.toolbar}>
           <Button>Create sprint</Button>
@@ -149,7 +151,7 @@ export default function SprintSection() {
         </div>
       </div>
       <div className={styles.listContainer}>
-        {taskList.map((task) => {
+        {sprintTaskList.map((task) => {
           return (
             <TaskItem
               taskTitle={task.title}
