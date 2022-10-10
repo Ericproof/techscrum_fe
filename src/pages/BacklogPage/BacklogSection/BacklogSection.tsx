@@ -93,12 +93,12 @@ export default function BacklogSection() {
     setEditId(id);
   };
 
-  const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeTitle = (id: string, title: string) => {
     const updatedTaskList = taskList.map((task) => {
-      if (task.id === event.target.id) {
+      if (task.id === id) {
         return {
           ...task,
-          title: event.target.value
+          title
         };
       }
       return task;

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { FaPen } from 'react-icons/fa';
 import IconButton from '../../../components/Button/IconButton/IconButton';
 import styles from './TaskItem.module.scss';
@@ -11,7 +11,7 @@ interface ITaskInput {
   id: string;
   editMode: boolean;
   onClickEditId: (id: string) => void;
-  onChangeTitle: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeTitle: (id: string, title: string) => void;
   imgUrl: string;
   type: string;
   status: string;
@@ -37,16 +37,33 @@ export default function TaskItem({
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [showOptionBtn, setShowOptionBtn] = useState(false);
   const [disableShowOptionBtnEffect, setDisableShowOptionBtnEffect] = useState(false);
+
   const editClick = () => {
     onClickEditId(id);
   };
-  const updateTaskTitleContent = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onChangeTitle(event);
-  };
+  const updateTaskTitleContent = useCallback(() => {
+    if (inputRef?.current?.value) {
+      onChangeTitle(id, inputRef?.current?.value);
+    }
+  }, [id, onChangeTitle]);
+
+  useEffect(() => {
+    const handleClickOutside = (e: any) => {
+      if (editMode && !inputRef.current?.contains(e.target)) {
+        onClickEditId('-1');
+        updateTaskTitleContent();
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [editMode, onClickEditId, updateTaskTitleContent]);
 
   const saveKeyPress = (event) => {
     if (event.key === 'Enter') {
       onClickEditId('-1');
+      updateTaskTitleContent();
     }
   };
 
@@ -91,7 +108,6 @@ export default function TaskItem({
             ref={inputRef}
             type="text"
             defaultValue={taskTitle}
-            onChange={updateTaskTitleContent}
             onKeyDown={saveKeyPress}
             className={styles.taskInput}
           />

@@ -95,15 +95,20 @@ export default function SprintSection() {
     sprintTaskList
   ]);
 
+  useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.log(sprintTaskList);
+  }, [sprintTaskList]);
+
   const onClickEditId = (id: string) => {
     setEditId(id);
   };
-  const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeTitle = (id: string, title: string) => {
     const updatedTaskList = sprintTaskList.map((task) => {
-      if (task.id === event.target.id) {
+      if (task.id === id) {
         return {
           ...task,
-          title: event.target.value
+          title
         };
       }
       return task;
