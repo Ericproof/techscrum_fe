@@ -18,6 +18,8 @@ export default function UserSelect(props: IUserSelect) {
   const handleClickOutside = () => setVisible(true);
   const [query, setQuery] = useState('');
   const [queryUserList, setQueryUserList] = useState<any>([]);
+  const [currentUser, setCurrentUser] = useState<any>('');
+  let setInitialUser = true;
 
   useEffect(() => {
     const getUsersList = async () => {
@@ -40,7 +42,31 @@ export default function UserSelect(props: IUserSelect) {
   const onClickUser = (user: string | null) => {
     onChange({ target: { name: 'projectLeadId', value: user } });
     setVisible(false);
+    if (user !== null) {
+      setCurrentUser(user);
+    } else {
+      const unassignedUser = {
+        name: 'Unassigned'
+      };
+      setCurrentUser(unassignedUser);
+    }
   };
+
+  useEffect(() => {
+    if (queryUserList.length > 0) {
+      if (setInitialUser) {
+        if (value !== null) {
+          setCurrentUser({ name: value.name });
+        } else {
+          const unassignedUser = {
+            name: 'Unassigned'
+          };
+          setCurrentUser(unassignedUser);
+        }
+      }
+      setInitialUser = false;
+    }
+  }, [queryUserList]);
 
   return (
     <div ref={myRef} className={styles.leadDropdownMenu}>
@@ -56,7 +82,12 @@ export default function UserSelect(props: IUserSelect) {
                 }
                 alt="avatar"
               />
-              <input dir="auto" type="Text" onChange={(e) => setQuery(e.target.value)} />
+              <input
+                dir="auto"
+                type="Text"
+                onChange={(e) => setQuery(e.target.value)}
+                value={currentUser.name}
+              />
               <button className={styles.optionToggle} type="button" onClick={handleClickOutside}>
                 <i role="button" aria-label="openDropdown" tabIndex={0} />
               </button>
@@ -77,27 +108,30 @@ export default function UserSelect(props: IUserSelect) {
                     <span>Unassigned</span>
                   </button>
                 </li>
-                {queryUserList.map((user: any) => (
-                  <li key={user.id}>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        onClickUser(user);
-                      }}
-                    >
-                      <img
-                        src={
-                          user.avatarIcon ||
-                          'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'
-                        }
-                        alt="avatar"
-                      />
-                      <span>
-                        {user.userName && user.userName !== '' ? user.userName : user.name}
-                      </span>
-                    </button>
-                  </li>
-                ))}
+                {queryUserList.map(
+                  (user: any) =>
+                    user.name !== currentUser.name && (
+                      <li key={user.id}>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            onClickUser(user);
+                          }}
+                        >
+                          <img
+                            src={
+                              user.avatarIcon ||
+                              'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'
+                            }
+                            alt="avatar"
+                          />
+                          <span>
+                            {user.userName && user.userName !== '' ? user.userName : user.name}
+                          </span>
+                        </button>
+                      </li>
+                    )
+                )}
               </ul>
             </div>
           </div>
