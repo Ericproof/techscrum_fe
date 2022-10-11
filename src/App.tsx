@@ -70,7 +70,7 @@ function App() {
               <Route path="/privacy-statement" element={<PrivacyStatementPage />} />
               <Route path="/refund-policy" element={<RefundPolicyPage />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-              <Route path="/about-g2" element={<AboutPageT2 />} />
+              <Route path="/about-t2" element={<AboutPageT2 />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/careers" element={<CareerPage />} />
               <Route path="/security-page" element={<SecurityPage />} />

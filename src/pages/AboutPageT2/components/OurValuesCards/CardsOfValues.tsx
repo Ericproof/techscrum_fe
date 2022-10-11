@@ -50,7 +50,7 @@ export default function CardsOfValues() {
       <div className={styles.cardOfValuesContainer}>
         {cardsDetails.map((card) => {
           return (
-            <div className={styles.card}>
+            <div key={card.altInfo} className={styles.card}>
               <span className={styles.cardDescription}>{card.description}</span>
               <img className={styles.cardImg} src={card.imageLink} alt={card.altInfo} />
             </div>
