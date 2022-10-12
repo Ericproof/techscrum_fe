@@ -5,7 +5,6 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-
 }
 
 .cardOfValuesContainer {
@@ -48,13 +47,11 @@
         transform: translate(0, -5px);
     }
 
-
     .cardImg {
         max-width: 202px;
         width: 100%;
         border-radius: 0 10px 10px 0;
     }
-
 }
     
 .cardDescription {
@@ -64,8 +61,8 @@
     margin: auto 40px auto 50px;
     line-height: 1.6;
     color: #494e6a;
-
 }
+
 @media (max-width: 1280px) {
     .container{
         max-width: 960px;
@@ -76,8 +73,8 @@
                 margin: 21px;
                 font-size: 24px;
             }
-                        .cardImg{
-                            max-width: 156px;
+            .cardImg{
+                max-width: 156px;
                         }
         }
 }
@@ -107,6 +104,5 @@
         text-align: center;
         max-width: 100%;
         width: 100%;
-        
     }
 }

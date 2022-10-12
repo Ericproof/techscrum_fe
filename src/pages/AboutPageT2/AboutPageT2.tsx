@@ -11,7 +11,6 @@ export default function AboutPageT2() {
       <div className={styles.greeting}>
         <Banner />
       </div>
-
       <div className="introduction-clip">
         <img
           src="https://embed-ssl.wistia.com/deliveries/c3648fe3ea850ffce14b1b3d78c6a517.webp?image_crop_resized=1920x1080"
@@ -19,15 +18,12 @@ export default function AboutPageT2() {
           className={styles.introImg}
         />
       </div>
-
       <div>
         <CardsOfValues />
       </div>
-
       <div>
         <AboutCareer />
       </div>
-
       <div className="background-white">
         <GetStarted />
       </div>
