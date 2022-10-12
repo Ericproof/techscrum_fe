@@ -12,11 +12,9 @@
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-<<<<<<< HEAD
-  "window.zoomLevel": 0,
-=======
+
   "window.zoomLevel": 1,
->>>>>>> 36b791d02d074c5f07c3bc020b9e81b298a62c0c
+
   "eslint.format.enable": true,
   "html.format.unformatted": "",
   "eslint.codeActionsOnSave.rules": null
