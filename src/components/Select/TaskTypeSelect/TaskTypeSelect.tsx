@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { HiChevronDown } from 'react-icons/hi';
 import styles from './TaskTypeSelect.module.scss';
 
 const TYPES = [
@@ -22,40 +23,49 @@ const TYPES = [
 interface IOption {
   type: string;
   imgUrl: string;
-  onClick?: (e: any) => void;
+  onClickOption: (e: any, type: string) => void;
+  setClicked: (state: boolean) => void;
 }
 
-function Option({ type, imgUrl, onClick }: IOption) {
+function Option({ type, imgUrl, onClickOption, setClicked }: IOption) {
   return (
-    <button className={styles.buttonContainer} onClick={onClick} name={type} value={type}>
-      <img className={styles.icon} src={imgUrl} alt={type} />
-      {type}
+    <button
+      className={styles.dropDownButtonContainer}
+      onClick={(e) => {
+        onClickOption(e, type);
+        setClicked(false);
+      }}
+      name={type}
+      value={type}
+    >
+      <img src={imgUrl} alt={type} />
+      <p>{type}</p>
     </button>
   );
 }
 
 interface ITaskTypeSelect {
-  onChange?: (e: any) => void;
   onChangeType: (obj: { type: string; imgUrl: string }) => void;
 }
 
-export default function TaskTypeSelect({ onChange, onChangeType }: ITaskTypeSelect) {
+export default function TaskTypeSelect({ onChangeType }: ITaskTypeSelect) {
   const initialOption = TYPES[0];
   const [showOptions, setShowOptions] = useState(false);
   const [currentOption, setCurrentOption] = useState(initialOption);
+  const [showHover, setShowHover] = useState(false);
+  const [clicked, setClicked] = useState(false);
   const otherOptions = TYPES.filter((item) => item.type !== currentOption.type);
 
-  const handleCurrentOption = useCallback((type) => {
+  const handleCurrentOption = (type: string) => {
     const newCurrentOption = TYPES.filter((item) => item.type === type)[0];
     setCurrentOption(newCurrentOption);
     onChangeType(newCurrentOption);
-  }, []);
+  };
 
-  const onClickOption = (e: any) => {
+  const onClickOption = (e: any, option: string) => {
     e.preventDefault();
     setShowOptions(!showOptions);
-    if (onChange) onChange(e.target.value);
-    handleCurrentOption(e.target.name);
+    handleCurrentOption(option);
   };
 
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -64,6 +74,7 @@ export default function TaskTypeSelect({ onChange, onChangeType }: ITaskTypeSele
     const handleClickOutside = (e: any) => {
       if (!containerRef.current?.contains(e.target)) {
         setShowOptions(false);
+        setClicked(false);
       }
     };
 
@@ -73,17 +84,47 @@ export default function TaskTypeSelect({ onChange, onChangeType }: ITaskTypeSele
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+  let btnClassName = '';
+  if (clicked) {
+    btnClassName = [styles.buttonContainer, styles.buttonClicked].join(' ');
+  } else if (showHover) {
+    btnClassName = [styles.hoverButton, styles.buttonContainer].join(' ');
+  } else {
+    btnClassName = styles.buttonContainer;
+  }
 
   return (
     <div className={styles.container} ref={containerRef}>
-      <Option onClick={onClickOption} type={currentOption.type} imgUrl={currentOption.imgUrl} />
+      <button
+        onClick={(e) => {
+          onClickOption(e, currentOption.type);
+          setClicked(!clicked);
+        }}
+        className={btnClassName}
+        onMouseOver={() => {
+          setShowHover(true);
+        }}
+        onMouseOut={() => {
+          setShowHover(false);
+        }}
+        onBlur={() => {}}
+        onFocus={() => {}}
+      >
+        <img className={styles.icon} src={currentOption.imgUrl} alt={currentOption.type} />
+        <HiChevronDown />
+      </button>
       <div className={styles.optionsContainer}>
         <ul className={[styles.listContainer, showOptions && styles.show].join(' ')}>
           {otherOptions.map((option) => {
             const { type, imgUrl } = option;
             return (
               <li key={type}>
-                <Option onClick={onClickOption} type={type} imgUrl={imgUrl} />
+                <Option
+                  onClickOption={onClickOption}
+                  type={type}
+                  imgUrl={imgUrl}
+                  setClicked={setClicked}
+                />
               </li>
             );
           })}
@@ -92,11 +133,3 @@ export default function TaskTypeSelect({ onChange, onChangeType }: ITaskTypeSele
     </div>
   );
 }
-
-Option.defaultProps = {
-  onClick: null
-};
-
-TaskTypeSelect.defaultProps = {
-  onChange: null
-};

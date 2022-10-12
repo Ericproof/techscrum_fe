@@ -13,7 +13,7 @@ export default function SprintSection() {
     {
       id: 'TEC-318',
       title: 'Task 1',
-      type: 'Story',
+      type: 'story',
       imgUrl:
         'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium',
       status: 'TO DO',
@@ -22,7 +22,7 @@ export default function SprintSection() {
     {
       id: 'TEC-319',
       title: 'Task 2',
-      type: 'Bug',
+      type: 'bug',
       imgUrl:
         'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium',
       status: 'TO DO',
@@ -31,7 +31,7 @@ export default function SprintSection() {
     {
       id: 'TEC-320',
       title: 'Task 3',
-      type: 'Task',
+      type: 'task',
       imgUrl:
         'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium',
       status: 'TESTING',

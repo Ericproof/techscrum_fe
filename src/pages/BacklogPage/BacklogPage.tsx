@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import config from '../../config/config';
+import { getBacklogData } from '../../api/backlog/backlog';
 import DashboardLayout from '../../components/DashboardLayout/DashboardLayout';
 import BacklogSection from './BacklogSection/BacklogSection';
 import SprintSection from './SprintSection/SprintSection';
@@ -10,17 +9,12 @@ export default function BacklogPage() {
   const [backlogData, setBacklogData] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
-    const path = 'http://localhost:8000/api/v1/backlog';
-    const getData = async () => {
-      const response = await axios.get(path);
-      setIsLoaded(true);
+    getBacklogData().then((response) => {
       setBacklogData(response);
-    };
-    getData();
+      setIsLoaded(true);
+    });
   }, []);
   useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log(backlogData);
     // eslint-disable-next-line no-console
     console.log(backlogData);
   }, [backlogData]);
