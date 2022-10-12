@@ -2,7 +2,7 @@ import React, { createRef, useContext } from 'react';
 import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 import { BiPlus } from 'react-icons/bi';
 import { RiArrowDropDownLine } from 'react-icons/ri';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styles from './ProjectHeader.module.scss';
 import useOutsideAlerter from '../../hooks/OutsideAlerter';
 import PersonalProfile from './PersonalProfile/PersonalProfile';
@@ -44,6 +44,8 @@ export default function ProjectHeader() {
 
   const starredProjects = projectList.filter((project) => project.star === true);
 
+  const location = useLocation();
+
   return (
     <div className={styles.projectHeader}>
       <header>
@@ -56,7 +58,11 @@ export default function ProjectHeader() {
           <div className={styles.options}>
             {visible ? (
               <>
-                <div className={styles.optionProjects}>
+                <div
+                  className={[
+                    location.pathname.includes('projects') ? styles.underline : styles.option
+                  ].join('')}
+                >
                   <button
                     type="button"
                     onClick={() => {
@@ -64,12 +70,8 @@ export default function ProjectHeader() {
                       fetchProjects();
                     }}
                   >
-                    <span className={styles.title}>Projects</span>
-                    <div className={styles.btn}>
-                      <span>
-                        <RiArrowDropDownLine />
-                      </span>
-                    </div>
+                    Projects
+                    <RiArrowDropDownLine />
                   </button>
                 </div>
                 <div className={styles.dropdownSection}>
@@ -167,30 +169,26 @@ export default function ProjectHeader() {
                 </div>
               </>
             ) : (
-              <div className={styles.option}>
+              <div
+                className={[
+                  location.pathname.includes('projects') ? styles.underline : styles.option
+                ].join('')}
+              >
                 <button
                   type="button"
                   onClick={() => {
                     handleClickOutside(false);
                   }}
                 >
-                  <span className={styles.title}>Projects</span>
-                  <div className={styles.btn}>
-                    <span>
-                      <RiArrowDropDownLine />
-                    </span>
-                  </div>
+                  Projects
+                  <RiArrowDropDownLine />
                 </button>
               </div>
             )}
             <div className={styles.option}>
               <button type="button">
-                <span className={styles.title}>People</span>
-                <div className={styles.btn}>
-                  <span>
-                    <RiArrowDropDownLine />
-                  </span>
-                </div>
+                People
+                <RiArrowDropDownLine />
               </button>
             </div>
             <div className={styles.createIssue}>
