@@ -5,7 +5,8 @@ import BacklogSection from './BacklogSection/BacklogSection';
 import SprintSection from './SprintSection/SprintSection';
 
 export default function BacklogPage() {
-  // WIP fetch data from backend and pass down
+  // WIP need to communicate with backend
+
   const [backlogData, setBacklogData] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
@@ -14,10 +15,6 @@ export default function BacklogPage() {
       setIsLoaded(true);
     });
   }, []);
-  useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log(backlogData);
-  }, [backlogData]);
 
   return (
     <DashboardLayout>

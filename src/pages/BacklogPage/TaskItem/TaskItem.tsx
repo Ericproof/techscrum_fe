@@ -5,7 +5,7 @@ import styles from './TaskItem.module.scss';
 import ToolBar from '../ToolBar/ToolBar';
 import PriorityBtn from '../PriorityBtn/PriorityBtn';
 import OptionBtn from '../OptionBtn/OptionBtn';
-// WIP fixing click outside handle
+
 interface ITaskInput {
   taskTitle: string;
   id: string;

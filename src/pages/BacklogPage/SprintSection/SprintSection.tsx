@@ -6,7 +6,7 @@ import IconButton from '../../../components/Button/IconButton/IconButton';
 import TaskTypeSelect from '../../../components/Select/TaskTypeSelect/TaskTypeSelect';
 import TaskItem from '../TaskItem/TaskItem';
 import styles from './SprintSection.module.scss';
-// WIP more function will be added
+// WIP need to communicate with backend
 
 export default function SprintSection() {
   const dummyTaskList = [
@@ -94,11 +94,6 @@ export default function SprintSection() {
     sprintInputFocus,
     sprintTaskList
   ]);
-
-  useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log(sprintTaskList);
-  }, [sprintTaskList]);
 
   const onClickEditId = (id: string) => {
     setEditId(id);

@@ -4,7 +4,7 @@ import styles from './ToolBar.module.scss';
 import Button from '../../../components/Button/Button';
 import Avartar from '../../../assets/userAvatar.png';
 import IconButton from '../../../components/Button/IconButton/IconButton';
-// WIP fixing dropdown btn menu
+
 interface IToolBar {
   status: string;
   onClickChangeStatus: (id: string, status: string) => void;
