@@ -25,6 +25,7 @@ export default function NavMain(props: IPropsNavMain) {
 
   const [addLinkToggle, setAddLinkToggle] = useState(false);
   const { boardId = '', projectId = '' } = useParams();
+
   const { currentProject, shortCutAdded, shortCutRemoved, shortCutUpdated } = props;
   return (
     <div className={styles.container}>
@@ -84,8 +85,7 @@ export default function NavMain(props: IPropsNavMain) {
                 </svg>
                 <p>Board</p>
               </NavLink>
-              {/* WIP may change the route later */}
-              <NavLink className={styles.navLink} to="/backlog">
+              <NavLink className={styles.navLink} to={`/projects/${projectId}/backlog`}>
                 <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
                   <g fill="currentColor">
                     <path d="M5 19.002C5 19 17 19 17 19v-2.002C17 17 5 17 5 17v2.002zm-2-2.004C3 15.894 3.895 15 4.994 15h12.012c1.101 0 1.994.898 1.994 1.998v2.004A1.997 1.997 0 0117.006 21H4.994A1.998 1.998 0 013 19.002v-2.004z" />
