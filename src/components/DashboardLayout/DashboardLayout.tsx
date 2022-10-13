@@ -6,7 +6,6 @@ import styles from './DashboardLayout.module.scss';
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      {/* WIP may change to universal layout */}
       <ProjectHeader />
       <div className={styles.container}>
         <Nav />

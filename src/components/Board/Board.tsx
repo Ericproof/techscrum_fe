@@ -201,7 +201,6 @@ export default function Board() {
 
   return (
     <div className={style.container}>
-      <ProjectHeader />
       <BoardSearch
         updateIsCreateNewCard={getCreateNewCardStateFromChildren}
         setInputQuery={setInputQuery}

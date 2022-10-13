@@ -1,13 +1,11 @@
 import React from 'react';
-import Nav from '../../components/BoardNavigation/Nav';
 import Board from '../../components/Board/Board';
-import styles from './BoardPage.module.scss';
+import DashboardLayout from '../../components/DashboardLayout/DashboardLayout';
 
 export default function BoardPage() {
   return (
-    <div className={styles.navAndBoard}>
-      <Nav />
+    <DashboardLayout>
       <Board />
-    </div>
+    </DashboardLayout>
   );
 }
