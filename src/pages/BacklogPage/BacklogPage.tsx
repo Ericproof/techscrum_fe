@@ -7,26 +7,26 @@ import SprintSection from './SprintSection/SprintSection';
 export default function BacklogPage() {
   // WIP need to communicate with backend
 
-  // const [backlogData, setBacklogData] = useState({});
-  // const [isLoaded, setIsLoaded] = useState(false);
-  // useEffect(() => {
-  //   getBacklogData().then((response) => {
-  //     setBacklogData(response);
-  //     setIsLoaded(true);
-  //   });
-  // }, []);
+  const [backlogData, setBacklogData] = useState({});
+  const [isLoaded, setIsLoaded] = useState(false);
+  useEffect(() => {
+    getBacklogData().then((response) => {
+      setBacklogData(response);
+      setIsLoaded(true);
+    });
+  }, []);
 
   return (
     <DashboardLayout>
       <div>
         <h1>Backlog</h1>
       </div>
-      {/* {isLoaded && ( */}
-      <>
-        <SprintSection />
-        <BacklogSection />
-      </>
-      {/* )} */}
+      {isLoaded && (
+        <>
+          <SprintSection />
+          <BacklogSection />
+        </>
+      )}
     </DashboardLayout>
   );
 }
