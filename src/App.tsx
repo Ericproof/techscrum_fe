@@ -92,7 +92,6 @@ function App() {
                 <Route path="/account-settings/delete-account" element={<AccountSettingsPage />} />
                 <Route path="/projects/:projectId/members" element={<ProjectMembersPage />} />
                 <Route path="/roles" element={<RolePage />} />
-                {/* WIP may change the route later */}
               </Route>
               <Route path="/unauthorize" element={<UnauthorizePage />} />
               <Route path="/contact" element={<ContactPage />} />
