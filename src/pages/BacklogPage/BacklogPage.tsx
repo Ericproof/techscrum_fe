@@ -7,12 +7,10 @@ import SprintSection from './SprintSection/SprintSection';
 export default function BacklogPage() {
   // WIP need to communicate with backend
 
-  const [backlogData, setBacklogData] = useState({});
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [backlogData, setBacklogData] = useState(null);
   useEffect(() => {
     getBacklogData().then((response) => {
       setBacklogData(response);
-      setIsLoaded(true);
     });
   }, []);
 
@@ -21,7 +19,7 @@ export default function BacklogPage() {
       <div>
         <h1>Backlog</h1>
       </div>
-      {isLoaded && (
+      {backlogData && (
         <>
           <SprintSection />
           <BacklogSection />
