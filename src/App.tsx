@@ -78,7 +78,7 @@ function App() {
               <Route path="/errorPage" element={<ErrorPage />} />
               <Route path="" element={<AuthenticationRoute />}>
                 <Route path="/projects/:projectId/" element={<DashboardLayout />}>
-                  <Route index path="board/:boardId" element={<BoardPage />} />
+                  <Route path="board/:boardId" element={<BoardPage />} />
                   <Route path="backlog" element={<BacklogPage />} />
                 </Route>
                 <Route path="/settings/:projectId" element={<Setting />} />
