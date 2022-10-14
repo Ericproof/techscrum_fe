@@ -13,6 +13,10 @@
 
 describe('login', () => {
   beforeEach(() => {
+    cy.intercept("GET","**/api/v1/domains",{
+  statusCode: 200,
+  body: true,
+})
     cy.visit('/')
   })
 
