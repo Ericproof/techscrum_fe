@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { getBacklogData } from '../../api/backlog/backlog';
-import DashboardLayout from '../../components/DashboardLayout/DashboardLayout';
 import BacklogSection from './BacklogSection/BacklogSection';
 import SprintSection from './SprintSection/SprintSection';
 import styles from './BacklogPage.module.scss';
@@ -21,11 +20,11 @@ export default function BacklogPage() {
         <h1>Backlog</h1>
       </div>
       {backlogData && (
-        <>
+        <div className={styles.scrollContainer}>
           <SprintSection />
           <BacklogSection />
-        </>
+        </div>
       )}
-    </DashboardLayout>
+    </div>
   );
 }
