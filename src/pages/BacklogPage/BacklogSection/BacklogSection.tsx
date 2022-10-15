@@ -30,7 +30,11 @@ export default function BacklogSection() {
       priority: 'Medium'
     }
   ];
-
+  const initialType = {
+    type: 'story',
+    imgUrl:
+      'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium'
+  };
   const [showBacklogInput, setShowBacklogInput] = useState(false);
   const [backlogInputFocus, setBacklogInputFocus] = useState(false);
   const [currentTypeOption, setCurrentTypeOption] = useState('story');
