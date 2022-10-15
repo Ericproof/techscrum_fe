@@ -7,12 +7,12 @@ import SprintSection from './SprintSection/SprintSection';
 export default function BacklogPage() {
   // WIP need to communicate with backend
 
-  const [backlogData, setBacklogData] = useState(null);
-  useEffect(() => {
-    getBacklogData().then((response) => {
-      setBacklogData(response);
-    });
-  }, []);
+  const [backlogData, setBacklogData] = useState(true);
+  // useEffect(() => {
+  //   getBacklogData().then((response) => {
+  //     setBacklogData(response);
+  //   });
+  // }, []);
 
   return (
     <DashboardLayout>

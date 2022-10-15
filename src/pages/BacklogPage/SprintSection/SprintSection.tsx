@@ -77,11 +77,6 @@ export default function SprintSection() {
     };
   }, [createIssueAction, currentTypeOption, sprintInputFocus, sprintTaskList]);
 
-  useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log(sprintTaskList);
-  }, [sprintTaskList]);
-
   const onClickEditId = (id: string) => {
     setEditId(id);
   };
