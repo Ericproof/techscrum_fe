@@ -39,6 +39,7 @@ import AdminPage from './pages/AdminPage/AdminPage';
 import AboutPageT2 from './pages/AboutPageT2/AboutPageT2';
 import { getDomains } from './api/domain/domain';
 import BacklogPage from './pages/BacklogPage/BacklogPage';
+import DashboardLayout from './components/DashboardLayout/DashboardLayout';
 
 function App() {
   const [showPages, setShowPages] = useState(false);
@@ -76,11 +77,14 @@ function App() {
               <Route path="/security-page" element={<SecurityPage />} />
               <Route path="/errorPage" element={<ErrorPage />} />
               <Route path="" element={<AuthenticationRoute />}>
+                <Route path="/projects/:projectId/" element={<DashboardLayout />}>
+                  <Route path="board/:boardId" element={<BoardPage />} />
+                  <Route path="backlog" element={<BacklogPage />} />
+                </Route>
                 <Route path="/settings/:projectId" element={<Setting />} />
                 <Route path="/me" element={<UserMePage />} />
                 <Route path="/user/:id" element={<UserPage />} />
                 <Route path="/access" element={<AccessPage />} />
-                <Route path="/projects/:projectId/board/:boardId" element={<BoardPage />} />
                 <Route path="/projects" element={<ProjectPage />} />
                 <Route path="/create-projects" element={<CreateProject />} />
                 <Route path="/account-settings" element={<AccountSettingsPage />} />
@@ -88,8 +92,6 @@ function App() {
                 <Route path="/account-settings/delete-account" element={<AccountSettingsPage />} />
                 <Route path="/projects/:projectId/members" element={<ProjectMembersPage />} />
                 <Route path="/roles" element={<RolePage />} />
-                {/* WIP may change the route later */}
-                <Route path="/backlog" element={<BacklogPage />} />
               </Route>
               <Route path="/unauthorize" element={<UnauthorizePage />} />
               <Route path="/contact" element={<ContactPage />} />
