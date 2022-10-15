@@ -66,7 +66,7 @@ export default function UserSelect(props: IUserSelect) {
       }
       setInitialUser(false);
     }
-  }, [queryUserList]);
+  }, [queryUserList, initialUser, value]);
 
   return (
     <div ref={myRef} className={styles.leadDropdownMenu}>
