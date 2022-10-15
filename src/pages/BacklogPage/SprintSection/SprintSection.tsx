@@ -74,7 +74,7 @@ export default function SprintSection() {
       setCurrentTypeOption(initialType);
     }
     setShowSprintInput(false);
-  }, [currentTypeOption.imgUrl, currentTypeOption.type, initialType, sprintTaskList]);
+  }, [currentTypeOption.imgUrl, currentTypeOption.type, sprintTaskList]);
 
   useEffect(() => {
     const handleClickOutside = (e: any) => {
@@ -90,7 +90,6 @@ export default function SprintSection() {
     createIssueAction,
     currentTypeOption.imgUrl,
     currentTypeOption.type,
-    initialType,
     sprintInputFocus,
     sprintTaskList
   ]);

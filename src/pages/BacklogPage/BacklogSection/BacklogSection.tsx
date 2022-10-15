@@ -68,7 +68,7 @@ export default function BacklogSection() {
       setCurrentTypeOption(initialType);
     }
     setShowBacklogInput(false);
-  }, [currentTypeOption.imgUrl, currentTypeOption.type, initialType, taskList]);
+  }, [currentTypeOption.imgUrl, currentTypeOption.type, taskList]);
 
   useEffect(() => {
     const handleClickOutside = (e: any) => {
@@ -85,7 +85,6 @@ export default function BacklogSection() {
     createIssueAction,
     currentTypeOption.imgUrl,
     currentTypeOption.type,
-    initialType,
     taskList
   ]);
 
