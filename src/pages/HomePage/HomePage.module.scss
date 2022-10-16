@@ -52,7 +52,7 @@
           min-width: 440px;
           max-width: 500px;
           padding-right: 50px;
-       
+
           h3 {
             margin-bottom: 28px;
             margin-top: 8px;
@@ -324,7 +324,7 @@
         justify-content: space-between;
         align-items: center;
         margin-bottom: 0;
-        background-color:#9021afd9;
+        background-color: #9021afd9;
         .projectManagementContent {
           min-width: 440px;
           max-width: 500px;
@@ -582,7 +582,7 @@
         gap: 40px;
         margin-top: 60px;
         .eachCards {
-          box-shadow:0px 15px 50px 0px rgb(11 11 11 / 8%);
+          box-shadow: 0px 15px 50px 0px rgb(11 11 11 / 8%);
           margin-right: 20px;
           max-width: 350px;
           width: 100%;
@@ -622,7 +622,7 @@
             .cardsName {
               font-size: 21px;
               line-height: 145%;
-              color: #00163B;
+              color: #00163b;
               margin-top: 8px;
               font-weight: 700;
             }
@@ -634,7 +634,7 @@
               .cardsHeart {
                 display: flex;
                 align-items: center;
-                color:#00163B;
+                color: #00163b;
                 svg {
                   margin-right: 16px;
                   fill: #ff22b1;
@@ -876,7 +876,6 @@
     }
   }
   .supportSection {
-
     .supportContainer {
       display: flex;
       justify-content: space-between;
@@ -1746,22 +1745,20 @@
   }
 }
 
-
-
-.unauthorizePageContainer{
-   background-repeat: no-repeat;
-    position: relative;
-    margin: 0;
-    border: 0;
-    outline: 0;
-    height: 100vh;
-    overflow: hidden;
+.unauthorizePageContainer {
+  background-repeat: no-repeat;
+  position: relative;
+  margin: 0;
+  border: 0;
+  outline: 0;
+  height: 100vh;
+  overflow: hidden;
 }
-.unauthorizePageContainer::before{
+.unauthorizePageContainer::before {
   background-image: url(https://themexriver.com/appilo-theme/saas-classic-dark/wp-content/themes/appilo/img/saas-classic/banner/b-shape1.png);
   right: 0;
   width: 100%;
-  content: "";
+  content: '';
   top: 2%;
   height: 100vh;
   position: absolute;
@@ -1770,37 +1767,37 @@
   background-size: 90%;
 }
 
-.circleContainer{
-    position: absolute;
-    right: 250px;
-    top: 0;
-    max-width: 500px;
-    animation: 7s apldg_rotate_animation ease-in-out infinite;
-    animation-direction: alternate;
+.circleContainer {
+  position: absolute;
+  right: 250px;
+  top: 0;
+  max-width: 500px;
+  animation: 7s apldg_rotate_animation ease-in-out infinite;
+  animation-direction: alternate;
 }
 
-.shape2Container{
-    position: absolute;
-    left: 0%;
-    bottom: -300px;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: 0;
+.shape2Container {
+  position: absolute;
+  left: 0%;
+  bottom: -300px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
 }
 
-.shape3Container{
-    position: absolute;
-    left: 10%;
-    bottom: 20%;
-    animation: 20s apldg_move_animation linear infinite;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: 0;
+.shape3Container {
+  position: absolute;
+  left: 10%;
+  bottom: 20%;
+  animation: 20s apldg_move_animation linear infinite;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
 }
 
-.shape4Container{
+.shape4Container {
   position: absolute;
   right: 0%;
   bottom: 40%;
@@ -1812,68 +1809,102 @@
   outline: 0;
 }
 
-.textContainer{
-    position: absolute;
-    top:50%;
-    left:20%;
-    right: 0;
-    bottom: 0;
-    width: 500px;
-    height: 500px;
-    text-align: center;
-    @media (max-width: 1280px) {
-      top:40%;
-      left:10%
-    }
-    // background-image: url('https://themexriver.com/appilo-theme/seo-agency/wp-content/uploads/sites/56/2021/11/box-shape.png');
-    // background-repeat: no-repeat;
-    // position: relative;
-    // background-position: right center;
- 
+.textContainer {
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 500px;
+  height: 500px;
+  text-align: center;
+  @media (max-width: 1280px) {
+    top: 40%;
+    left: 10%;
+  }
+  @media (max-width: 550px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    top: 20%;
+    left: 0;
+    max-width: 100%;
+  }
+
+  // background-image: url('https://themexriver.com/appilo-theme/seo-agency/wp-content/uploads/sites/56/2021/11/box-shape.png');
+  // background-repeat: no-repeat;
+  // position: relative;
+  // background-position: right center;
 }
 
-.header{
-    color:#894bb5;
-    font-size: 50px;
-    margin: 40px 0 ;
+.header {
+  color: #894bb5;
+  font-size: 50px;
+  margin: 40px 0;
+  @media (max-width: 1024px) {
+    font-size: 45px;
+  }
+  @media (max-width: 768px) {
+    font-size: 40px;
+  }
+  @media (max-width: 550px) {
+    font-size: 35px;
+  }
+  @media (max-width: 320px) {
+    font-size: 25px;
+  }
 }
 
-.text{
-    color:#2a1737;
-    font-size: 18px;
+.text {
+  color: #2a1737;
+  font-size: 18px;
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
+  @media (max-width: 550px) {
+    font-size: 14px;
+  }
+  @media (max-width: 375px) {
+    max-width: 95%;
+  }
+  @media (max-width: 320px) {
+    font-size: 12px;
+  }
 }
 
-.button{
-    border-radius: 5px;
-    background: #bd68f8;
-    border:none;
-    padding: 10px 30px;
-    color:white;
-    text-decoration: none;
+.button {
+  border-radius: 5px;
+  background: #bd68f8;
+  border: none;
+  padding: 10px 30px;
+  color: white;
+  text-decoration: none;
 }
 
-.btnContainer{
-    margin-top: 50px;
+.btnContainer {
+  margin-top: 50px;
 }
 
 @-webkit-keyframes apldg_rotate_animation {
-    from {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-    to {
-        -webkit-transform: rotate(360deg);
-        transform: rotate(360deg);
-    }
+  from {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes apldg_rotate_animation {
-    from {
-        right: 250px;
-    }
-    to {
-        right: 350px;
-    }
+  from {
+    right: 250px;
+  }
+  to {
+    right: 350px;
+  }
 }
 
 @keyframes apldg_rotate_animation2 {
@@ -1885,108 +1916,104 @@
   }
 }
 
-
-
-
 @-webkit-keyframes apldg_move_animation {
-    0% {
-        -webkit-transform: translate(0) rotate(0deg);
-        transform: translate(0) rotate(0deg);
-    }
-    25% {
-        -webkit-transform: translate(200px, 100px) rotate(90deg);
-        transform: translate(200px, 100px) rotate(90deg);
-    }
-    50% {
-        -webkit-transform: transalate(600px, 200px) rotate(180deg);
-        transform: transalate(600px, 200px) rotate(180deg);
-    }
-    75% {
-        -webkit-transform: translate(-50px) rotate(270deg);
-        transform: translate(-50px) rotate(270deg);
-    }
-    100% {
-        -webkit-transform: translate(0) rotate(360deg);
-        transform: translate(0) rotate(360deg);
-    }
+  0% {
+    -webkit-transform: translate(0) rotate(0deg);
+    transform: translate(0) rotate(0deg);
+  }
+  25% {
+    -webkit-transform: translate(200px, 100px) rotate(90deg);
+    transform: translate(200px, 100px) rotate(90deg);
+  }
+  50% {
+    -webkit-transform: transalate(600px, 200px) rotate(180deg);
+    transform: transalate(600px, 200px) rotate(180deg);
+  }
+  75% {
+    -webkit-transform: translate(-50px) rotate(270deg);
+    transform: translate(-50px) rotate(270deg);
+  }
+  100% {
+    -webkit-transform: translate(0) rotate(360deg);
+    transform: translate(0) rotate(360deg);
+  }
 }
 
 @keyframes apldg_move_animation {
-    0% {
-        -webkit-transform: translate(0) rotate(0deg);
-        transform: translate(0) rotate(0deg);
-    }
-    25% {
-        -webkit-transform: translate(200px, 100px) rotate(90deg);
-        transform: translate(200px, 100px) rotate(90deg);
-    }
-    50% {
-        -webkit-transform: transalate(600px, 200px) rotate(180deg);
-        transform: transalate(600px, 200px) rotate(180deg);
-    }
-    75% {
-        -webkit-transform: translate(-50px) rotate(270deg);
-        transform: translate(-50px) rotate(270deg);
-    }
-    100% {
-        -webkit-transform: translate(0) rotate(360deg);
-        transform: translate(0) rotate(360deg);
-    }
+  0% {
+    -webkit-transform: translate(0) rotate(0deg);
+    transform: translate(0) rotate(0deg);
+  }
+  25% {
+    -webkit-transform: translate(200px, 100px) rotate(90deg);
+    transform: translate(200px, 100px) rotate(90deg);
+  }
+  50% {
+    -webkit-transform: transalate(600px, 200px) rotate(180deg);
+    transform: transalate(600px, 200px) rotate(180deg);
+  }
+  75% {
+    -webkit-transform: translate(-50px) rotate(270deg);
+    transform: translate(-50px) rotate(270deg);
+  }
+  100% {
+    -webkit-transform: translate(0) rotate(360deg);
+    transform: translate(0) rotate(360deg);
+  }
 }
 
-
-.colorMainTheme{
-  color:rgb(137, 75, 181)
+.colorMainTheme {
+  color: rgb(137, 75, 181);
 }
 
-.maxWidth80{
+.maxWidth80 {
   max-width: 80%;
   margin: auto;
 }
 
-.bgImg{
+.bgImg {
   position: absolute;
-  bottom:-500px;
-  right:0;
+  bottom: -500px;
+  right: 0;
   z-index: -1;
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
-} 
+}
 
-.bgImg2{
+.bgImg2 {
   position: absolute;
-  bottom:-300px;
-  left:0;
+  bottom: -300px;
+  left: 0;
   z-index: -1;
-} 
+}
 
-.bgImg3{
+.bgImg3 {
   position: absolute;
-  bottom:-550px;
-  right:0;
+  bottom: -550px;
+  right: 0;
   z-index: -1;
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
-} 
+}
 
-.container{
+.container {
   max-width: 1280px;
   @media (max-width: 1280px) {
     max-width: 1000px;
   }
 }
 
-.row{
+.row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin:auto;
+  margin: auto;
 }
 
-.projectManagement{
+.projectManagement {
   padding: 100px 0;
 }
 
-.colorWhite{
+.colorWhite {
   color: white !important;
 }
