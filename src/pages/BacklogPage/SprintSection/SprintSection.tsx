@@ -7,7 +7,11 @@ import TaskTypeSelect from '../../../components/Select/TaskTypeSelect/TaskTypeSe
 import TaskItem from '../TaskItem/TaskItem';
 import styles from './SprintSection.module.scss';
 // WIP need to communicate with backend
-
+const initialType = {
+  type: 'story',
+  imgUrl:
+    'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium'
+};
 export default function SprintSection() {
   const dummyTaskList = [
     {
@@ -38,11 +42,7 @@ export default function SprintSection() {
       priority: 'Lowest'
     }
   ];
-  const initialType = {
-    type: 'story',
-    imgUrl:
-      'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium'
-  };
+
   const [sprintTaskList, setSprintTaskList] = useState(dummyTaskList);
   const [showSprintInput, setShowSprintInput] = useState(false);
   const [sprintInputFocus, setSprintInputFocus] = useState(false);
@@ -74,7 +74,7 @@ export default function SprintSection() {
       setCurrentTypeOption(initialType);
     }
     setShowSprintInput(false);
-  }, [currentTypeOption.imgUrl, currentTypeOption.type, initialType, sprintTaskList]);
+  }, [currentTypeOption.imgUrl, currentTypeOption.type, sprintTaskList]);
 
   useEffect(() => {
     const handleClickOutside = (e: any) => {
@@ -90,7 +90,6 @@ export default function SprintSection() {
     createIssueAction,
     currentTypeOption.imgUrl,
     currentTypeOption.type,
-    initialType,
     sprintInputFocus,
     sprintTaskList
   ]);
