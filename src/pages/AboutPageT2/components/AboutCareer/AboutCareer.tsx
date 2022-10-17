@@ -10,9 +10,11 @@ export default function AboutCareer() {
           <p className={styles.text}>
             We’re always on the lookout for exceptional talent so we’d love to hear from you.
           </p>
-          <div className={styles.positionLink}>
-            <a href="none">See our open positions</a>
-          </div>
+          {/* <div className={styles.positionLink}> */}
+          <a className={styles.positionLink} href="none">
+            See our open positions
+          </a>
+          {/* </div> */}
         </div>
         <img
           className={styles.img}
