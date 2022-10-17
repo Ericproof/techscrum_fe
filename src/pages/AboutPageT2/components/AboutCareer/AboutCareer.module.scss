@@ -3,25 +3,23 @@
     flex-direction: row;
     background: #FFFFFF;
     text-align: left;
-    
-    .textContainer {
+}
         
-        .positionLink {
-            background-color: #ff22b1;
-            border-radius: 32px;
-            padding: 16px 24px;
-            max-width: 100%;
-            display: inline-block;
-        }
+.positionLink {
+    background-color: #ff22b1;
+    border-radius: 32px;
+    padding: 16px 24px;
+    max-width: 100%;
+    display: inline-block;
 
-        a {
-            font-size: 16px;
-            font-weight: bold;
-            color: #FFFFFF;
-            text-decoration: none;
-            &:hover {
-                cursor: pointer;
-            }
+    a {
+        font-size: 16px;
+        font-weight: bold;
+        color: #FFFFFF;
+        text-decoration: none;
+
+        &:hover {
+            cursor: pointer;
         }
     }
 }
@@ -51,7 +49,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 50px 68px;
+    margin: 50px auto;
     padding: auto 15px;
     width: 100%;
 }
@@ -82,9 +80,6 @@
     .sectionContainer {
         display: flex;
         flex-direction: column;
-    }
-
-    .textContainer {
         text-align: center;
     }
 
