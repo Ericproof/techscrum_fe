@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import BacklogSection from './BacklogSection/BacklogSection';
 import SprintSection from './SprintSection/SprintSection';
 import styles from './BacklogPage.module.scss';
