@@ -1,59 +1,71 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { HiChevronDown } from 'react-icons/hi';
 import styles from './TaskTypeSelect.module.scss';
 
 const TYPES = [
   {
-    title: 'story',
+    type: 'story',
     imgUrl:
       'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium'
   },
   {
-    title: 'task',
+    type: 'task',
     imgUrl:
       'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium'
   },
   {
-    title: 'bug',
+    type: 'bug',
     imgUrl:
       'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium'
   }
 ];
 
 interface IOption {
-  title: string;
+  type: string;
   imgUrl: string;
-  onClick?: (e: any) => void;
+  onClickOption: (e: any, type: string) => void;
+  setClicked: (state: boolean) => void;
 }
 
-function Option({ title, imgUrl, onClick }: IOption) {
+function Option({ type, imgUrl, onClickOption, setClicked }: IOption) {
   return (
-    <button className={styles.buttonContainer} onClick={onClick} name={title} value={title}>
-      <img className={styles.icon} src={imgUrl} alt={title} />
-      {title}
+    <button
+      className={styles.dropDownButtonContainer}
+      onClick={(e) => {
+        onClickOption(e, type);
+        setClicked(false);
+      }}
+      name={type}
+      value={type}
+    >
+      <img src={imgUrl} alt={type} />
+      <p>{type}</p>
     </button>
   );
 }
 
 interface ITaskTypeSelect {
-  onChange?: (e: any) => void;
+  onChangeType: (obj: { type: string; imgUrl: string }) => void;
 }
 
-export default function TaskTypeSelect({ onChange }: ITaskTypeSelect) {
+export default function TaskTypeSelect({ onChangeType }: ITaskTypeSelect) {
   const initialOption = TYPES[0];
   const [showOptions, setShowOptions] = useState(false);
   const [currentOption, setCurrentOption] = useState(initialOption);
-  const otherOptions = TYPES.filter((item) => item.title !== currentOption.title);
+  const [showHover, setShowHover] = useState(false);
+  const [clicked, setClicked] = useState(false);
+  const otherOptions = TYPES.filter((item) => item.type !== currentOption.type);
 
-  const handleCurrentOption = useCallback((title) => {
-    const newCurrentOption = TYPES.filter((item) => item.title === title)[0];
+  const handleCurrentOption = (type: string) => {
+    const newCurrentOption = TYPES.filter((item) => item.type === type)[0];
     setCurrentOption(newCurrentOption);
-  }, []);
+    onChangeType(newCurrentOption);
+  };
 
-  const onClickOption = (e: any) => {
+  const onClickOption = (e: any, option: string) => {
     e.preventDefault();
     setShowOptions(!showOptions);
-    if (onChange) onChange(e.target.value);
-    handleCurrentOption(e.target.name);
+    handleCurrentOption(option);
   };
 
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -62,6 +74,7 @@ export default function TaskTypeSelect({ onChange }: ITaskTypeSelect) {
     const handleClickOutside = (e: any) => {
       if (!containerRef.current?.contains(e.target)) {
         setShowOptions(false);
+        setClicked(false);
       }
     };
 
@@ -71,17 +84,47 @@ export default function TaskTypeSelect({ onChange }: ITaskTypeSelect) {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+  let btnClassName = '';
+  if (clicked) {
+    btnClassName = [styles.buttonContainer, styles.buttonClicked].join(' ');
+  } else if (showHover) {
+    btnClassName = [styles.hoverButton, styles.buttonContainer].join(' ');
+  } else {
+    btnClassName = styles.buttonContainer;
+  }
 
   return (
     <div className={styles.container} ref={containerRef}>
-      <Option onClick={onClickOption} title={currentOption.title} imgUrl={currentOption.imgUrl} />
+      <button
+        onClick={(e) => {
+          onClickOption(e, currentOption.type);
+          setClicked(!clicked);
+        }}
+        className={btnClassName}
+        onMouseOver={() => {
+          setShowHover(true);
+        }}
+        onMouseOut={() => {
+          setShowHover(false);
+        }}
+        onBlur={() => {}}
+        onFocus={() => {}}
+      >
+        <img className={styles.icon} src={currentOption.imgUrl} alt={currentOption.type} />
+        <HiChevronDown />
+      </button>
       <div className={styles.optionsContainer}>
         <ul className={[styles.listContainer, showOptions && styles.show].join(' ')}>
           {otherOptions.map((option) => {
-            const { title, imgUrl } = option;
+            const { type, imgUrl } = option;
             return (
-              <li key={title}>
-                <Option onClick={onClickOption} title={title} imgUrl={imgUrl} />
+              <li key={type}>
+                <Option
+                  onClickOption={onClickOption}
+                  type={type}
+                  imgUrl={imgUrl}
+                  setClicked={setClicked}
+                />
               </li>
             );
           })}
@@ -90,11 +133,3 @@ export default function TaskTypeSelect({ onChange }: ITaskTypeSelect) {
     </div>
   );
 }
-
-Option.defaultProps = {
-  onClick: null
-};
-
-TaskTypeSelect.defaultProps = {
-  onChange: null
-};

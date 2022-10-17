@@ -1,10 +1,5 @@
 .projectHeader {
-  position: fixed;
   z-index: 2;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 0;
   header {
     align-items: center;
     box-sizing: border-box;
@@ -74,18 +69,18 @@
         }
       }
       a {
-        margin-left: 0px;
         display: flex;
         max-width: 260px;
         width: 134px;
         height: 24px;
-        @media (min-width: 1280px) {
-          margin: 0px 16px;
-          margin-left: 1px;
-        }
+        margin: 0 0 0 12px;
+
         .logo {
           display: inline-block;
           position: relative;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
           user-select: none;
           height: 28px;
           width: 115px;
@@ -97,108 +92,69 @@
         display: flex;
         flex: 1 0 0px;
         height: 100%;
-        position: relative;
-        margin-left: -27px;
+
         .option {
           display: flex;
-          flex-direction: column;
           justify-content: center;
           align-items: center;
-          height: 100%;
-          position: relative;
-          flex-shrink: 0;
-          margin: 0px 4px;
-          button {
-            align-items: baseline;
-            box-sizing: border-box;
-            display: inline-flex;
-            font-size: inherit;
-            font-style: normal;
-            font-family: inherit;
-            font-weight: 500;
+        }
+
+        button {
+          color: #344563;
+          cursor: pointer;
+          background-color: transparent;
+          display: flex;
+          align-items: center;
+          border-radius: 3px;
+          border: none;
+          text-decoration: none;
+          outline: none;
+          white-space: nowrap;
+          font-size: 14px;
+          font-weight: 500;
+          line-height: 32px;
+
+          &:hover {
+            color: #0052cc;
+            background-color: rgba(222, 235, 255, 0.9);
+          }
+
+          &:hover svg {
+            color: #0052cc;
+            background-color: rgba(222, 235, 255, 0.9);
+          }
+
+          svg {
+            overflow: hidden;
+            pointer-events: none;
             max-width: 100%;
-            position: relative;
-            text-align: center;
-            white-space: nowrap;
-            color: #344563;
-            cursor: pointer;
-            height: 2.28571em;
-            line-height: 2.28571em;
-            vertical-align: middle;
-            width: auto;
-            justify-content: center;
-            background-color: transparent;
-            margin-left: 0px;
-            margin-right: 0px;
-            border-width: 0px;
-            border-radius: 3px;
-            text-decoration: none;
-            transition: background 0.1s ease-out 0s,
-              box-shadow 0.15s cubic-bezier(0.47, 0.03, 0.49, 1.38) 0s;
-            padding: 0px 4px;
-            outline: none;
-            &:hover {
-              color: #0052cc;
-              background-color: rgba(222, 235, 255, 0.9);
-            }
-            .title {
-              transition: opacity 0.3s ease 0s;
-              opacity: 1;
-              margin: 0px 2px;
-              flex-grow: 1;
-              flex-shrink: 1;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              white-space: nowrap;
-              font-size: 14px;
-              font-weight: 500;
-              line-height: 32px;
-            }
-            .btn {
-              transition: opacity 0.3s ease 0s;
-              opacity: 1;
-              align-self: center;
-              display: flex;
-              flex-grow: 0;
-              flex-shrink: 0;
-              line-height: 0;
-              font-size: 0px;
-              user-select: none;
-              margin: 0px 2px;
-              color: rgb(52, 69, 99);
-              &:hover:hover {
-                color: #0052cc;
-              }
-              span {
-                margin-left: -8px;
-                margin-right: -8px;
-                opacity: 0.51;
-                width: 24px;
-                height: 24px;
-                svg {
-                  overflow: hidden;
-                  pointer-events: none;
-                  max-width: 100%;
-                  max-height: 100%;
-                  vertical-align: bottom;
-                  width: 24px;
-                  height: 24px;
-                }
-              }
-            }
+            max-height: 100%;
+            vertical-align: bottom;
+            width: 24px;
+            height: 24px;
+            color: rgb(52, 69, 99);
           }
         }
-        .option:nth-child(1)::after {
-          position: absolute;
-          bottom: 0px;
-          left: 4px;
-          right: 4px;
-          content: '';
-          height: 3px;
-          background-color: #0052cc;
-          border-top-left-radius: 1px;
-          border-top-right-radius: 1px;
+
+        .underline {
+          position: relative;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          &::after {
+            position: absolute;
+            bottom: 0px;
+            left: 4px;
+            right: 4px;
+            content: '';
+            height: 3px;
+            width: 70.5px;
+            background-color: #0052cc;
+            border-top-left-radius: 1px;
+            border-top-right-radius: 1px;
+          }
         }
+
         .optionProjects {
           display: flex;
           flex-direction: column;
@@ -262,6 +218,9 @@
               flex-shrink: 0;
               line-height: 0;
               font-size: 0px;
+              -webkit-user-select: none;
+              -moz-user-select: none;
+              -ms-user-select: none;
               user-select: none;
               margin: 0px 2px;
               color: #0052cc;
@@ -299,7 +258,7 @@
             0 4px 8px -2px rgba(9, 30, 66, 0.25),
             0 0 1px rgba(9, 30, 66, 0.31)
           );
-          left: 63px;
+          left: 140px;
           .dropdownContainer {
             min-width: 320px;
             max-width: 800px;
@@ -342,6 +301,9 @@
                 font-size: 14px;
                 outline: 0px;
                 text-decoration: none;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
                 user-select: none;
                 background-color: transparent;
                 cursor: pointer;
@@ -637,6 +599,7 @@
                 font-style: normal;
                 font-weight: 400;
                 line-height: 1.42857142857143;
+                -webkit-text-decoration-skip: ink;
                 text-decoration-skip-ink: auto;
                 a {
                   display: flex;
@@ -651,6 +614,9 @@
                   font-size: 14px;
                   outline: 0px;
                   text-decoration: none;
+                  -webkit-user-select: none;
+                  -moz-user-select: none;
+                  -ms-user-select: none;
                   user-select: none;
                   background-color: transparent;
                   color: rgb(23, 43, 77);
@@ -690,6 +656,9 @@
                   font-size: 14px;
                   outline: 0px;
                   text-decoration: none;
+                  -webkit-user-select: none;
+                  -moz-user-select: none;
+                  -ms-user-select: none;
                   user-select: none;
                   background-color: transparent;
                   color: rgb(23, 43, 77);
@@ -809,6 +778,9 @@
               flex-shrink: 0;
               line-height: 0;
               font-size: 0px;
+              -webkit-user-select: none;
+              -moz-user-select: none;
+              -ms-user-select: none;
               user-select: none;
               margin: 0px 2px;
               svg {

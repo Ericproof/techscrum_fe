@@ -5,10 +5,11 @@ interface IIconButton {
   icon: React.ReactNode;
   tooltip: string;
   overrideStyle?: string;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
-export default function IconButton({ icon, tooltip, overrideStyle }: IIconButton) {
+export default function IconButton({ icon, tooltip, overrideStyle, onClick }: IIconButton) {
   return (
-    <button className={[styles.iconButton, overrideStyle].join(' ')}>
+    <button className={[styles.iconButton, overrideStyle].join(' ')} onClick={onClick}>
       {icon}
       <span className={styles.tooltip}>{tooltip}</span>
     </button>
@@ -16,5 +17,6 @@ export default function IconButton({ icon, tooltip, overrideStyle }: IIconButton
 }
 
 IconButton.defaultProps = {
-  overrideStyle: ''
+  overrideStyle: '',
+  onClick: () => {}
 };

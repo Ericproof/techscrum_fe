@@ -1,34 +1,64 @@
-$btHoverBg: #e8e8e8;
+$btHoverBg: rgb(245, 245, 247);
+$borderColor: #ebecf0;
+$bgColorDark: rgb(40, 54, 84);
 
 .buttonContainer {
-  width: 3.75rem;
+  height: 100%;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  img {
+    margin-right: 5px;
+  }
+}
+.hoverButton {
+  background-color: $btHoverBg;
+}
+.buttonClicked {
+  background-color: $bgColorDark;
+  color: white;
+}
+.dropDownButtonContainer {
+  height: 100%;
+  width: 100%;
   box-sizing: border-box;
   display: flex;
-  padding: 0.25rem;
-  gap: 0.2rem;
   border: none;
   align-items: center;
   background-color: white;
   text-transform: capitalize;
   cursor: pointer;
-
+  border-left: 2px solid white;
   &:hover {
     background-color: $btHoverBg;
+    border-left: 2px solid rgb(33, 81, 197);
+  }
+  img {
+    margin-right: 5px;
+  }
+  p {
+    font-size: 15px;
+    margin: 0;
+    padding: 0;
   }
 }
 
 .container {
   display: inline-flex;
   flex-direction: column;
-  gap: 0.5rem;
   position: relative;
-  background-color: white;
+  height: 70%;
 }
 
 .optionsContainer {
-  background-color: #d2d2d2;
+  background-color: white;
+  border: 1px solid $borderColor;
+  border-radius: 5px;
   position: absolute;
-  top: 100%;
+  top: 30px;
   z-index: 99;
 }
 
@@ -36,8 +66,14 @@ $btHoverBg: #e8e8e8;
   display: none;
   flex-direction: column;
   list-style: none;
+  justify-content: center;
   margin: 0;
   padding: 0;
+  height: 80px;
+  width: 150px;
+  li {
+    height: 40%;
+  }
 }
 
 .show {
