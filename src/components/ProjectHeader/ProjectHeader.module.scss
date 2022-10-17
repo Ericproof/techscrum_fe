@@ -1,10 +1,5 @@
 .projectHeader {
-  position: fixed;
   z-index: 2;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 0;
   header {
     align-items: center;
     box-sizing: border-box;
@@ -83,6 +78,9 @@
         .logo {
           display: inline-block;
           position: relative;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
           user-select: none;
           height: 28px;
           width: 115px;
@@ -220,6 +218,9 @@
               flex-shrink: 0;
               line-height: 0;
               font-size: 0px;
+              -webkit-user-select: none;
+              -moz-user-select: none;
+              -ms-user-select: none;
               user-select: none;
               margin: 0px 2px;
               color: #0052cc;
@@ -300,6 +301,9 @@
                 font-size: 14px;
                 outline: 0px;
                 text-decoration: none;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
                 user-select: none;
                 background-color: transparent;
                 cursor: pointer;
@@ -595,6 +599,7 @@
                 font-style: normal;
                 font-weight: 400;
                 line-height: 1.42857142857143;
+                -webkit-text-decoration-skip: ink;
                 text-decoration-skip-ink: auto;
                 a {
                   display: flex;
@@ -609,6 +614,9 @@
                   font-size: 14px;
                   outline: 0px;
                   text-decoration: none;
+                  -webkit-user-select: none;
+                  -moz-user-select: none;
+                  -ms-user-select: none;
                   user-select: none;
                   background-color: transparent;
                   color: rgb(23, 43, 77);
@@ -648,6 +656,9 @@
                   font-size: 14px;
                   outline: 0px;
                   text-decoration: none;
+                  -webkit-user-select: none;
+                  -moz-user-select: none;
+                  -ms-user-select: none;
                   user-select: none;
                   background-color: transparent;
                   color: rgb(23, 43, 77);
@@ -767,6 +778,9 @@
               flex-shrink: 0;
               line-height: 0;
               font-size: 0px;
+              -webkit-user-select: none;
+              -moz-user-select: none;
+              -ms-user-select: none;
               user-select: none;
               margin: 0px 2px;
               svg {

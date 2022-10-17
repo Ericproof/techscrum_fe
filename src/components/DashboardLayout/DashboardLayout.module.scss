@@ -1,10 +1,13 @@
 $children-min-width: 375px;
-$children-min-height: 600px;
+$children-min-height: 500px;
+$nav-height: 56px;
 
 .container {
   display: flex;
   flex-direction: row;
-  margin-top: 5rem;
+  gap: 1rem;
+  height: calc(100vh - $nav-height);
+  overflow: hidden;
 }
 
 .childrenContainer {
