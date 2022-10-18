@@ -7,7 +7,7 @@ import {
   updateComment
 } from '../../../../../api/comment/comment';
 import { getUsers } from '../../../../../api/user/user';
-import { ICommentData, ICommentItemData, IUserInfo } from '../../../../../types';
+import { ICommentData, ICommentItemData } from '../../../../../types';
 import checkAccess from '../../../../../utils/helpers';
 import CommentItem from './components/CommentItem/CommentItem';
 import Editor from './components/Editor/Editor';
@@ -18,10 +18,9 @@ interface ILeftBottom {
   taskId?: string;
   userEmail?: string;
   projectId: string;
-  userInfo: IUserInfo;
 }
 export default function LeftBottom(props: ILeftBottom) {
-  const { userId = '', taskId = '', userEmail = '', projectId, userInfo } = props;
+  const { userId = '', taskId = '', userEmail = '', projectId } = props;
   const [comments, setComments] = useState([]);
   const [saveState, setSaveState] = useState(false);
   const [deleteState, setDeleteState] = useState(false);

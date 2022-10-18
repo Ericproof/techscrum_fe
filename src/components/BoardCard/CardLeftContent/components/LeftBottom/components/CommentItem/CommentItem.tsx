@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { MentionData } from '@draft-js-plugins/mention';
 import style from './CommentItem.module.scss';
 import Edit from '../Editor/Editor';
