@@ -5,19 +5,13 @@ import TaskTypeSelect from '../../../components/Select/TaskTypeSelect/TaskTypeSe
 import TaskItem from '../TaskItem/TaskItem';
 import styles from './BacklogSection.module.scss';
 // WIP more function will be added
-const initialType = {
-  type: 'story',
-  imgUrl:
-    'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium'
-};
+
 export default function BacklogSection() {
   const dummyTaskList = [
     {
       id: 'TEC-315',
       title: 'Task 1',
       type: 'story',
-      imgUrl:
-        'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium',
       status: 'TO DO',
       priority: 'Medium'
     },
@@ -25,8 +19,6 @@ export default function BacklogSection() {
       id: 'TEC-316',
       title: 'Task 2',
       type: 'bug',
-      imgUrl:
-        'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium',
       status: 'TO DO',
       priority: 'Medium'
     },
@@ -34,8 +26,6 @@ export default function BacklogSection() {
       id: 'TEC-317',
       title: 'Task 3',
       type: 'task',
-      imgUrl:
-        'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium',
       status: 'TO DO',
       priority: 'Medium'
     }
@@ -43,7 +33,7 @@ export default function BacklogSection() {
 
   const [showBacklogInput, setShowBacklogInput] = useState(false);
   const [backlogInputFocus, setBacklogInputFocus] = useState(false);
-  const [currentTypeOption, setCurrentTypeOption] = useState(initialType);
+  const [currentTypeOption, setCurrentTypeOption] = useState('story');
 
   const [editId, setEditId] = useState('-1');
   const [taskList, setTaskList] = useState(dummyTaskList);
@@ -59,16 +49,15 @@ export default function BacklogSection() {
         {
           id,
           title: createIssueRef?.current?.value,
-          type: currentTypeOption.type,
-          imgUrl: currentTypeOption.imgUrl,
+          type: currentTypeOption,
           status: 'TO DO',
           priority: 'Medium'
         }
       ]);
-      setCurrentTypeOption(initialType);
+      setCurrentTypeOption('story');
     }
     setShowBacklogInput(false);
-  }, [currentTypeOption.imgUrl, currentTypeOption.type, taskList]);
+  }, [currentTypeOption, taskList]);
 
   useEffect(() => {
     const handleClickOutside = (e: any) => {
@@ -80,13 +69,7 @@ export default function BacklogSection() {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [
-    backlogInputFocus,
-    createIssueAction,
-    currentTypeOption.imgUrl,
-    currentTypeOption.type,
-    taskList
-  ]);
+  }, [backlogInputFocus, createIssueAction, taskList]);
 
   const onClickEditId = (id: string) => {
     setEditId(id);
@@ -110,8 +93,8 @@ export default function BacklogSection() {
       createIssueAction();
     }
   };
-  const getCurrentTypeOption = (option: { type: string; imgUrl: string }) => {
-    setCurrentTypeOption(option);
+  const getCurrentTypeOption = (type: string) => {
+    setCurrentTypeOption(type);
   };
   const onClickChangeStatus = (id: string, status: string) => {
     const updatedTaskList = taskList.map((task) => {
@@ -156,7 +139,6 @@ export default function BacklogSection() {
               editMode={editId === task.id}
               onClickEditId={onClickEditId}
               onChangeTitle={onChangeTitle}
-              imgUrl={task.imgUrl}
               type={task.type}
               status={task.status}
               onClickChangeStatus={onClickChangeStatus}

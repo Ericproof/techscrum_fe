@@ -31,13 +31,16 @@ $btnBgColorGreen: rgb(232, 251, 240);
   width: 100%;
   height: 100%;
   .iconContainer {
-    width: 40px;
+    width: 100%;
+    max-width: 40px;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
   }
   .taskIdContainer {
+    width: 100%;
+    max-width: 70px;
     display: flex;
     align-items: center;
     color: $textColor;

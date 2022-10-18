@@ -45,7 +45,7 @@ function Option({ type, imgUrl, onClickOption, setClicked }: IOption) {
 }
 
 interface ITaskTypeSelect {
-  onChangeType: (obj: { type: string; imgUrl: string }) => void;
+  onChangeType: (type: string) => void;
 }
 
 export default function TaskTypeSelect({ onChangeType }: ITaskTypeSelect) {
@@ -59,7 +59,7 @@ export default function TaskTypeSelect({ onChangeType }: ITaskTypeSelect) {
   const handleCurrentOption = (type: string) => {
     const newCurrentOption = TYPES.filter((item) => item.type === type)[0];
     setCurrentOption(newCurrentOption);
-    onChangeType(newCurrentOption);
+    onChangeType(type);
   };
 
   const onClickOption = (e: any, option: string) => {

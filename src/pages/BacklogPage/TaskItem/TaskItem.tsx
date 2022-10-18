@@ -12,7 +12,6 @@ interface ITaskInput {
   editMode: boolean;
   onClickEditId: (id: string) => void;
   onChangeTitle: (id: string, title: string) => void;
-  imgUrl: string;
   type: string;
   status: string;
   onClickChangeStatus: (id: string, status: string) => void;
@@ -26,7 +25,6 @@ export default function TaskItem({
   editMode,
   onClickEditId,
   onChangeTitle,
-  imgUrl,
   type,
   status,
   onClickChangeStatus,
@@ -34,6 +32,12 @@ export default function TaskItem({
   onClickChangePriority,
   onClickDelete
 }: ITaskInput) {
+  const allTypes = {
+    story:
+      'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium',
+    bug: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium',
+    task: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium'
+  };
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [showOptionBtn, setShowOptionBtn] = useState(false);
   const [disableShowOptionBtnEffect, setDisableShowOptionBtnEffect] = useState(false);
@@ -97,7 +101,7 @@ export default function TaskItem({
     >
       <div className={styles.taskInfo}>
         <div className={styles.iconContainer}>
-          <img className={styles.icon} src={imgUrl} alt={type} />
+          <img className={styles.icon} src={allTypes[type]} alt={type} />
         </div>
         <div className={styles.taskIdContainer}>
           <p>{id}</p>

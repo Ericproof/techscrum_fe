@@ -7,19 +7,13 @@ import TaskTypeSelect from '../../../components/Select/TaskTypeSelect/TaskTypeSe
 import TaskItem from '../TaskItem/TaskItem';
 import styles from './SprintSection.module.scss';
 // WIP need to communicate with backend
-const initialType = {
-  type: 'story',
-  imgUrl:
-    'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium'
-};
+
 export default function SprintSection() {
   const dummyTaskList = [
     {
       id: 'TEC-318',
       title: 'Task 1',
       type: 'story',
-      imgUrl:
-        'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium',
       status: 'TO DO',
       priority: 'Highest'
     },
@@ -27,8 +21,6 @@ export default function SprintSection() {
       id: 'TEC-319',
       title: 'Task 2',
       type: 'bug',
-      imgUrl:
-        'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium',
       status: 'TO DO',
       priority: 'Medium'
     },
@@ -36,8 +28,6 @@ export default function SprintSection() {
       id: 'TEC-320',
       title: 'Task 3',
       type: 'task',
-      imgUrl:
-        'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium',
       status: 'TESTING',
       priority: 'Lowest'
     }
@@ -46,14 +36,14 @@ export default function SprintSection() {
   const [sprintTaskList, setSprintTaskList] = useState(dummyTaskList);
   const [showSprintInput, setShowSprintInput] = useState(false);
   const [sprintInputFocus, setSprintInputFocus] = useState(false);
-  const [currentTypeOption, setCurrentTypeOption] = useState(initialType);
+  const [currentTypeOption, setCurrentTypeOption] = useState('story');
   const sprintFormRef = useRef<HTMLFormElement | null>(null);
   const createIssueRef = useRef<HTMLInputElement | null>(null);
 
   const [editId, setEditId] = useState('-1');
 
-  const getCurrentTypeOption = (option: { type: string; imgUrl: string }) => {
-    setCurrentTypeOption(option);
+  const getCurrentTypeOption = (type: string) => {
+    setCurrentTypeOption(type);
   };
   const createIssueAction = useCallback(() => {
     if (createIssueRef?.current?.value) {
@@ -65,16 +55,15 @@ export default function SprintSection() {
         {
           id,
           title: createIssueRef?.current?.value,
-          type: currentTypeOption.type,
-          imgUrl: currentTypeOption.imgUrl,
+          type: currentTypeOption,
           status: 'TO DO',
           priority: 'Medium'
         }
       ]);
-      setCurrentTypeOption(initialType);
+      setCurrentTypeOption('story');
     }
     setShowSprintInput(false);
-  }, [currentTypeOption.imgUrl, currentTypeOption.type, sprintTaskList]);
+  }, [currentTypeOption, sprintTaskList]);
 
   useEffect(() => {
     const handleClickOutside = (e: any) => {
@@ -86,13 +75,7 @@ export default function SprintSection() {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [
-    createIssueAction,
-    currentTypeOption.imgUrl,
-    currentTypeOption.type,
-    sprintInputFocus,
-    sprintTaskList
-  ]);
+  }, [createIssueAction, currentTypeOption, sprintInputFocus, sprintTaskList]);
 
   const onClickEditId = (id: string) => {
     setEditId(id);
@@ -159,7 +142,6 @@ export default function SprintSection() {
               editMode={editId === task.id}
               onClickEditId={onClickEditId}
               onChangeTitle={onChangeTitle}
-              imgUrl={task.imgUrl}
               type={task.type}
               status={task.status}
               onClickChangeStatus={onClickChangeStatus}
