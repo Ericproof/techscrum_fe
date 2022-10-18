@@ -26,6 +26,7 @@ $base-font-size: 14px;
     display: flex;
     flex-direction: column;
     width: 100%;
+    overflow-x: auto;
 
     .commentTitle {
       margin-bottom: 8px;
@@ -58,7 +59,6 @@ $base-font-size: 14px;
     display: flex;
     flex-direction: row;
     align-items: baseline;
-    margin-top: 10px;
 
     button {
       font-size: 14px;
