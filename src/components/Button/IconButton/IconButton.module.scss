@@ -28,6 +28,7 @@ $activeBgColor: #d3e3fc;
     border-radius: 0.25rem;
     text-transform: capitalize;
     visibility: hidden;
+    z-index: 1;
   }
 
   &:hover {
