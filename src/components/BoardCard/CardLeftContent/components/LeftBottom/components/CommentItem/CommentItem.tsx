@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { MentionData } from '@draft-js-plugins/mention';
 import style from './CommentItem.module.scss';
+import Edit from '../Editor/Editor';
 
 interface ICommentItem {
   content: string;
@@ -16,6 +18,7 @@ interface ICommentItem {
   onClickDelete: (id: string) => void;
   onClickUpdate: (id: string, commentContent: string) => void;
   userEmail: string;
+  users: MentionData[];
 }
 const monthShortNames = [
   'Jan',
@@ -47,22 +50,18 @@ const dateWithTimestamp = (d: Date | null) => {
 };
 
 export default function CommentItem(props: ICommentItem) {
-  const { content, id, senderId, updatedAt, onClickDelete, onClickUpdate, userEmail } = props;
-  const [isEditMode, setIsEditMode] = useState(false);
-  const [commentContent, setCommentContent] = useState('');
+  const { content, id, senderId, updatedAt, onClickDelete, onClickUpdate, userEmail, users } =
+    props;
+
+  const [readOnly, setReadOnly] = useState(true);
 
   const handelOnClickDelete = () => {
     onClickDelete(id);
   };
 
-  useEffect(() => {
-    if (isEditMode) {
-      setCommentContent(content);
-    }
-  }, [isEditMode, content]);
-
-  const onChangeComment = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCommentContent(e.target.value);
+  const onClickPublish = (comment) => {
+    setReadOnly(true);
+    onClickUpdate(id, comment);
   };
 
   return (
@@ -74,49 +73,38 @@ export default function CommentItem(props: ICommentItem) {
           <span>{dateWithTimestamp(updatedAt)}</span>
         </div>
         <div className={style.commentBody}>
-          {isEditMode ? (
-            <div className={style.commentInputField}>
-              <input
-                type="text"
-                value={commentContent}
-                onChange={onChangeComment}
-                placeholder="Add a comment..."
-              />
-            </div>
-          ) : (
-            <span>{content}</span>
-          )}
+          <Edit
+            content={content}
+            readOnly={readOnly}
+            onClickPublish={onClickPublish}
+            onClickDiscard={() => {
+              setReadOnly(true);
+            }}
+            users={users}
+            imageInputId={id}
+          />
         </div>
         <div
           className={
             userEmail === senderId.email ? style.commentButtons : style.commentButtonsBlocked
           }
         >
-          {!isEditMode ? (
-            <button
-              type="button"
-              className={style.edit}
-              onClick={() => {
-                setIsEditMode(true);
-              }}
-            >
-              Edit
-            </button>
-          ) : (
-            <button
-              type="button"
-              className={style.edit}
-              onClick={() => {
-                setIsEditMode(false);
-                onClickUpdate(id, commentContent);
-              }}
-            >
-              Save
-            </button>
+          {readOnly && (
+            <>
+              <button
+                type="button"
+                className={style.edit}
+                onClick={() => {
+                  setReadOnly(false);
+                }}
+              >
+                Edit
+              </button>
+              <button type="button" className={style.delete} onClick={handelOnClickDelete}>
+                Delete
+              </button>
+            </>
           )}
-          <button type="button" className={style.delete} onClick={handelOnClickDelete}>
-            Delete
-          </button>
         </div>
       </div>
     </div>
