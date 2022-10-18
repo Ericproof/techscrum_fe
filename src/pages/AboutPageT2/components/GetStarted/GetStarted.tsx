@@ -12,16 +12,16 @@ export default function GetStarted() {
             free trial.
           </p>
         </div>
-        <div className={styles.getStartedInteractionLinks}>
-          <div className={styles.getStartedlinksBtn}>
-            <a href="none">Try Teamwork for free</a>
-          </div>
-          <div className={styles.getStartedlinksBtn}>
-            <a href="none">Join a webinar</a>
-          </div>
-          <div className={styles.getStartedlinksBtn}>
-            <a href="none">Get in touch</a>
-          </div>
+        <div className={styles.getStartedLinksContainer}>
+          <a className={styles.getStartedlinksBtn} href="none">
+            Try Teamwork for free
+          </a>
+          <a className={styles.getStartedlinksBtn} href="none">
+            Join a webinar
+          </a>
+          <a className={styles.getStartedlinksBtn} href="none">
+            Get in touch
+          </a>
         </div>
       </div>
     </section>
