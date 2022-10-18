@@ -6,15 +6,15 @@ export default function GetStarted() {
     <section className={styles.getStartedContainer}>
       <div className={styles.getStartedContentContainer}>
         <div className={styles.getStartedIntroduction}>
-          <h1>Get started with Teamwork</h1>
+          <h1>Get started with TechScrum</h1>
           <p>
-            Start working together beautifully. See how Teamwork can help your team with our 30-day
+            Start working together beautifully. See how TechScrum can help your team with our 30-day
             free trial.
           </p>
         </div>
         <div className={styles.getStartedLinksContainer}>
           <a className={styles.getStartedlinksBtn} href="none">
-            Try Teamwork for free
+            Try TechScrum for free
           </a>
           <a className={styles.getStartedlinksBtn} href="none">
             Join a webinar
