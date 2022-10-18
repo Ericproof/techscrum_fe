@@ -7,6 +7,7 @@ interface IDailyScrumTicket {
 }
 export default function DailyScrumTicket({ id, title }: IDailyScrumTicket) {
   const [progressValue, setProgressValue] = useState('0');
+  const [finishRadioClicked, setFinishRadioClicked] = useState(false);
   const [finish, setFinish] = useState(false);
   const [support, setSupport] = useState(false);
   const onChangeProgress = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,6 +41,7 @@ export default function DailyScrumTicket({ id, title }: IDailyScrumTicket) {
             name="finish"
             id="finish"
             onChange={() => {
+              setFinishRadioClicked(true);
               setFinish(true);
             }}
           />
@@ -51,11 +53,18 @@ export default function DailyScrumTicket({ id, title }: IDailyScrumTicket) {
             name="finish"
             id="notFinish"
             onChange={() => {
+              setFinishRadioClicked(true);
               setFinish(false);
             }}
           />
           No
         </label>
+        {!finish && finishRadioClicked && (
+          <div className={styles.anyReason}>
+            <p>Any reasons?</p>
+            <textarea name="reason" id="" cols={30} rows={10} />
+          </div>
+        )}
       </div>
       <div className={styles.support}>
         <p>Do you need support to complete this ticket?</p>

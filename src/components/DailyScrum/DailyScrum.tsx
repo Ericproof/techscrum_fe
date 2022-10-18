@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { AiOutlineClose } from 'react-icons/ai';
 import styles from './DailyScrum.module.scss';
 import DailyScrumTicket from './DailyScrumTicket/DailyScrumTicket';
+import Modal from '../Modal/Modal';
 
 // WIP need to add submit function
 
@@ -19,26 +20,24 @@ function DailyScrumModal({ onClickCloseModal }: IDailyScrumModal) {
     { id: 'TEC-334', title: 'create backlog page' }
   ];
   return (
-    <div className={styles.backdrop}>
-      <div className={styles.dailyScrumContainer}>
-        <div className={styles.dailyScrumHeader}>
-          <h2>Daily Log</h2>
-          <button className={styles.closeBtn} onClick={onClickCloseModal}>
-            <AiOutlineClose />
-          </button>
-        </div>
-        <h4>Today: {date}</h4>
-        {dailyScrumTicketData.map((ticket) => {
-          return <DailyScrumTicket key={ticket.id} id={ticket.id} title={ticket.title} />;
-        })}
-        <div className={styles.btnContainer}>
-          <button className={styles.cancelBtn} onClick={onClickCloseModal}>
-            Cancel
-          </button>
-          <button className={styles.submitBtn} onClick={onClickCloseModal}>
-            Submit
-          </button>
-        </div>
+    <div className={styles.dailyScrumContainer}>
+      <div className={styles.dailyScrumHeader}>
+        <h2>Daily Log</h2>
+        <button className={styles.closeBtn} onClick={onClickCloseModal}>
+          <AiOutlineClose />
+        </button>
+      </div>
+      <h4>Today: {date}</h4>
+      {dailyScrumTicketData.map((ticket) => {
+        return <DailyScrumTicket key={ticket.id} id={ticket.id} title={ticket.title} />;
+      })}
+      <div className={styles.btnContainer}>
+        <button className={styles.cancelBtn} onClick={onClickCloseModal}>
+          Cancel
+        </button>
+        <button className={styles.submitBtn} onClick={onClickCloseModal}>
+          Submit
+        </button>
       </div>
     </div>
   );
@@ -51,8 +50,10 @@ export default function DailyScrum({ onClickCloseModal }: IDailyScrum) {
   return (
     <>
       {ReactDOM.createPortal(
-        <DailyScrumModal onClickCloseModal={onClickCloseModal} />,
-        document.getElementById('dailyScrum') as Element
+        <Modal>
+          <DailyScrumModal onClickCloseModal={onClickCloseModal} />
+        </Modal>,
+        document.getElementById('modal') as Element
       )}
     </>
   );

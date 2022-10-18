@@ -60,4 +60,18 @@ $colorLightGray: rgb(245, 246, 254);
       background-color: $colorBlue;
     }
   }
+  .anyReason {
+    p {
+      font-weight: 500;
+    }
+    textarea {
+      padding: 5px;
+      height: 100px;
+      width: 70%;
+      border: 1px solid $colorBorder;
+      background-color: $colorLightGray;
+      border-radius: 10px;
+      resize: none;
+    }
+  }
 }
