@@ -2,11 +2,7 @@ $closeBtnColor: rgb(202, 207, 227);
 $closeBtnColorHover: rgb(178, 182, 200);
 $colorGray: rgb(102, 106, 133);
 $colorBlue: rgb(50, 115, 246);
-@mixin center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+
 @mixin btn {
   height: 100%;
   border-radius: 5px;
@@ -28,7 +24,9 @@ $colorBlue: rgb(50, 115, 246);
     justify-content: space-between;
     align-items: center;
     .closeBtn {
-      @include center();
+      display: flex;
+      justify-content: center;
+      align-items: center;
       font-size: 35px;
       color: $closeBtnColor;
       border: none;
