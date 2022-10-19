@@ -53,7 +53,7 @@ export default function DailyScrum({ onClickCloseModal }: IDailyScrum) {
         <Modal>
           <DailyScrumModal onClickCloseModal={onClickCloseModal} />
         </Modal>,
-        document.getElementById('modal') as Element
+        document.getElementById('root') as Element
       )}
     </>
   );
