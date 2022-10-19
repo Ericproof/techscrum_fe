@@ -5,16 +5,25 @@ import RadioInput from '../../ReusableElement/RadioInput/RadioInput';
 interface IDailyScrumTicket {
   id: string;
   title: string;
+  progress: string;
+  finish: boolean;
+  finishValidation: boolean;
+  onChangeFinish: (id: string, value: boolean) => void;
+  onChangeSupport: (id: string, value: boolean) => void;
+  onChangeReason: (id: string, value: string) => void;
+  onChangeProgress: (id: string, e: React.ChangeEvent<HTMLInputElement>) => void;
 }
-export default function DailyScrumTicket({ id, title }: IDailyScrumTicket) {
-  const [progressValue, setProgressValue] = useState('0');
-  const [finishRadioClicked, setFinishRadioClicked] = useState(false);
-  const [finish, setFinish] = useState(false);
-  const [support, setSupport] = useState(false);
-  const onChangeProgress = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setProgressValue(e.target.value);
-  };
-
+export default function DailyScrumTicket({
+  id,
+  title,
+  progress,
+  finish,
+  finishValidation,
+  onChangeFinish,
+  onChangeSupport,
+  onChangeReason,
+  onChangeProgress
+}: IDailyScrumTicket) {
   return (
     <div className={styles.dailyScrumTicket}>
       <p className={styles.ticketTitle}>
@@ -29,9 +38,11 @@ export default function DailyScrumTicket({ id, title }: IDailyScrumTicket) {
             max="100"
             step="1"
             defaultValue="0"
-            onChange={onChangeProgress}
+            onChange={(e) => {
+              onChangeProgress(id, e);
+            }}
           />
-          <p>{progressValue}%</p>
+          <p>{progress}%</p>
         </div>
       </div>
       <div className={styles.finish}>
@@ -41,8 +52,7 @@ export default function DailyScrumTicket({ id, title }: IDailyScrumTicket) {
           name={`finish/${id}`}
           content="Yes"
           onChange={() => {
-            setFinishRadioClicked(true);
-            setFinish(true);
+            onChangeFinish(id, true);
           }}
         />
         <RadioInput
@@ -50,14 +60,21 @@ export default function DailyScrumTicket({ id, title }: IDailyScrumTicket) {
           name={`finish/${id}`}
           content="No"
           onChange={() => {
-            setFinishRadioClicked(true);
-            setFinish(false);
+            onChangeFinish(id, false);
           }}
         />
-        {!finish && finishRadioClicked && (
+        {!finish && finishValidation && (
           <div className={styles.anyReason}>
             <p>Any reasons?</p>
-            <textarea name="reason" id="" cols={30} rows={10} />
+            <textarea
+              name="reason"
+              id=""
+              cols={30}
+              rows={10}
+              onChange={(e) => {
+                onChangeReason(id, e.target.value);
+              }}
+            />
           </div>
         )}
       </div>
@@ -68,7 +85,7 @@ export default function DailyScrumTicket({ id, title }: IDailyScrumTicket) {
           name={`support/${id}`}
           content="Yes"
           onChange={() => {
-            setSupport(true);
+            onChangeSupport(id, true);
           }}
         />
         <RadioInput
@@ -76,7 +93,7 @@ export default function DailyScrumTicket({ id, title }: IDailyScrumTicket) {
           name={`support/${id}`}
           content="No"
           onChange={() => {
-            setSupport(false);
+            onChangeSupport(id, false);
           }}
         />
       </div>
