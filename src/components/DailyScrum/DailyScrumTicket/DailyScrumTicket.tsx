@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './DailyScrumTicket.module.scss';
 import RadioInput from '../../ReusableElement/RadioInput/RadioInput';
 
