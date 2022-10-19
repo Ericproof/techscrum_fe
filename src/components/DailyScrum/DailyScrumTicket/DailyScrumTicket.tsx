@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './DailyScrumTicket.module.scss';
+import RadioInput from '../../ReusableElement/RadioInput/RadioInput';
 
 interface IDailyScrumTicket {
   id: string;
@@ -35,30 +36,24 @@ export default function DailyScrumTicket({ id, title }: IDailyScrumTicket) {
       </div>
       <div className={styles.finish}>
         <p>Can you finish this ticket by sprint end?</p>
-        <label htmlFor="finish" className={styles.radioLabel}>
-          <input
-            type="radio"
-            name="finish"
-            id="finish"
-            onChange={() => {
-              setFinishRadioClicked(true);
-              setFinish(true);
-            }}
-          />
-          Yes
-        </label>
-        <label htmlFor="notFinish" className={styles.radioLabel}>
-          <input
-            type="radio"
-            name="finish"
-            id="notFinish"
-            onChange={() => {
-              setFinishRadioClicked(true);
-              setFinish(false);
-            }}
-          />
-          No
-        </label>
+        <RadioInput
+          id="finish"
+          name={`finish/${id}`}
+          content="Yes"
+          onChange={() => {
+            setFinishRadioClicked(true);
+            setFinish(true);
+          }}
+        />
+        <RadioInput
+          id="notFinish"
+          name={`finish/${id}`}
+          content="No"
+          onChange={() => {
+            setFinishRadioClicked(true);
+            setFinish(false);
+          }}
+        />
         {!finish && finishRadioClicked && (
           <div className={styles.anyReason}>
             <p>Any reasons?</p>
@@ -68,28 +63,22 @@ export default function DailyScrumTicket({ id, title }: IDailyScrumTicket) {
       </div>
       <div className={styles.support}>
         <p>Do you need support to complete this ticket?</p>
-        <label htmlFor="support" className={styles.radioLabel}>
-          <input
-            type="radio"
-            name="support"
-            id="support"
-            onChange={() => {
-              setSupport(true);
-            }}
-          />
-          Yes
-        </label>
-        <label htmlFor="notSupport" className={styles.radioLabel}>
-          <input
-            type="radio"
-            name="support"
-            id="notSupport"
-            onChange={() => {
-              setSupport(false);
-            }}
-          />
-          No
-        </label>
+        <RadioInput
+          id="support"
+          name={`support/${id}`}
+          content="Yes"
+          onChange={() => {
+            setSupport(true);
+          }}
+        />
+        <RadioInput
+          id="notSupport"
+          name={`support/${id}`}
+          content="No"
+          onChange={() => {
+            setSupport(false);
+          }}
+        />
       </div>
     </div>
   );

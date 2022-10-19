@@ -10,50 +10,44 @@ $colorBlue: rgb(50, 115, 246);
   cursor: pointer;
 }
 
-.dailyScrumContainer {
-  width: 50%;
-  height: 90%;
-  background-color: white;
-  padding: 40px;
-  box-sizing: border-box;
-  border-radius: 10px;
-  overflow-y: auto;
-  .dailyScrumHeader {
+.dailyScrumModal {
+  max-width: 45% !important;
+}
+.dailyScrumHeader {
+  display: flex;
+  height: 50px;
+  justify-content: space-between;
+  align-items: center;
+  .closeBtn {
     display: flex;
-    height: 50px;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    .closeBtn {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 35px;
-      color: $closeBtnColor;
-      border: none;
-      background-color: white;
-      cursor: pointer;
-    }
-    .closeBtn:hover {
-      color: $closeBtnColorHover;
-    }
+    font-size: 35px;
+    color: $closeBtnColor;
+    border: none;
+    background-color: white;
+    cursor: pointer;
   }
-  .btnContainer {
-    width: 25%;
-    height: 40px;
-    display: flex;
-    justify-content: space-between;
-    margin-left: auto;
-    .cancelBtn {
-      border: 1px solid $colorGray;
-      color: $colorGray;
-      background-color: white;
-      @include btn();
-    }
-    .submitBtn {
-      border: none;
-      color: white;
-      background-color: $colorBlue;
-      @include btn();
-    }
+  .closeBtn:hover {
+    color: $closeBtnColorHover;
+  }
+}
+.btnContainer {
+  width: 25%;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  margin-left: auto;
+  .cancelBtn {
+    border: 1px solid $colorGray;
+    color: $colorGray;
+    background-color: white;
+    @include btn();
+  }
+  .submitBtn {
+    border: none;
+    color: white;
+    background-color: $colorBlue;
+    @include btn();
   }
 }

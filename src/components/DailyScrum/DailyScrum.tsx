@@ -20,7 +20,7 @@ function DailyScrumModal({ onClickCloseModal }: IDailyScrumModal) {
     { id: 'TEC-334', title: 'create backlog page' }
   ];
   return (
-    <div className={styles.dailyScrumContainer}>
+    <>
       <div className={styles.dailyScrumHeader}>
         <h2>Daily Log</h2>
         <button className={styles.closeBtn} onClick={onClickCloseModal}>
@@ -39,7 +39,7 @@ function DailyScrumModal({ onClickCloseModal }: IDailyScrumModal) {
           Submit
         </button>
       </div>
-    </div>
+    </>
   );
 }
 
@@ -50,7 +50,7 @@ export default function DailyScrum({ onClickCloseModal }: IDailyScrum) {
   return (
     <>
       {ReactDOM.createPortal(
-        <Modal>
+        <Modal classesName={styles.dailyScrumModal}>
           <DailyScrumModal onClickCloseModal={onClickCloseModal} />
         </Modal>,
         document.getElementById('root') as Element

@@ -9,4 +9,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  .modal {
+    max-width: 70%;
+    max-height: 80vh;
+    width: 100%;
+    background-color: white;
+    padding: 40px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    overflow-y: auto;
+  }
 }
