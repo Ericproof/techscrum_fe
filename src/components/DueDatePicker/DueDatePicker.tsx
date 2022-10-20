@@ -26,14 +26,10 @@ export default function DueDatePicker({ taskInfo, dueDateOnchange, projectId }: 
       appearance="subtle"
       dateFormat="MM-DD-YYYY"
       placeholder={dateWithDay(taskInfo.dueAt ?? null)}
-      // placeholder="None"
       onChange={(date) => {
-        if (date !== '') {
-          const updatedTaskInfo = { ...taskInfo };
-          updatedTaskInfo.dueAt = new Date(date);
-          dueDateOnchange(updatedTaskInfo);
-          console.log(typeof date);
-        }
+        const updatedTaskInfo = { ...taskInfo };
+        updatedTaskInfo.dueAt = date ? new Date(date) : undefined;
+        dueDateOnchange(updatedTaskInfo);
       }}
       isDisabled={!editAccess}
     />
