@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import { DatePicker } from '@atlaskit/datetime-picker';
 import checkAccess from '../../utils/helpers';
@@ -17,17 +18,22 @@ export default function DueDatePicker({ taskInfo, dueDateOnchange, projectId }: 
       const dateDataArray = date.split('-');
       return `${dateDataArray[1]}-${dateDataArray[2]}-${dateDataArray[0]}`;
     }
-    return '';
+    return 'None';
   };
   const editAccess = checkAccess('edit:tasks', projectId);
   return (
     <DatePicker
+      appearance="subtle"
       dateFormat="MM-DD-YYYY"
       placeholder={dateWithDay(taskInfo.dueAt ?? null)}
+      // placeholder="None"
       onChange={(date) => {
-        const updatedTaskInfo = { ...taskInfo };
-        updatedTaskInfo.dueAt = new Date(date);
-        dueDateOnchange(updatedTaskInfo);
+        if (date !== '') {
+          const updatedTaskInfo = { ...taskInfo };
+          updatedTaskInfo.dueAt = new Date(date);
+          dueDateOnchange(updatedTaskInfo);
+          console.log(typeof date);
+        }
       }}
       isDisabled={!editAccess}
     />
