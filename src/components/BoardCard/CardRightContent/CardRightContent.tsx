@@ -9,6 +9,7 @@ import LabelFields from './LabelFields/LabelFields';
 import UserSelect from '../../Form/Select/UserSelect/UserSelect';
 import Row from '../../Grid/Row/Row';
 import checkAccess from '../../../utils/helpers';
+import DueDatePicker from '../../DueDatePicker/DueDatePicker';
 
 interface Props {
   taskInfo: TaskEntity;
@@ -141,11 +142,11 @@ export default function CardRightContent({
         <div className={style.boxBody}>
           <Row classesName={style.fieldMargin}>
             <div className={['fullWidth', style.label].join(' ')}>Assignee</div>
-            <UserSelect
+            {/* <UserSelect
               onChange={assigneeOnchangeEventHandler}
               value={taskInfo.assignId}
               allowEdit={editAccess}
-            />
+            /> */}
           </Row>
           <LabelFields
             labels={labels}
@@ -155,8 +156,8 @@ export default function CardRightContent({
           />
           <div className={style.dueDate}>
             <div>Due date</div>
-            <div>
-              <DatePicker
+
+            {/* <DatePicker
                 dateFormat="MM-DD-YYYY"
                 placeholder={dateWithDay(taskInfo.dueAt ?? null)}
                 onChange={(date) => {
@@ -165,8 +166,12 @@ export default function CardRightContent({
                   taskStatusOnchange(updatedTaskInfo);
                 }}
                 isDisabled={!editAccess}
-              />
-            </div>
+              /> */}
+            <DueDatePicker
+              taskInfo={taskInfo}
+              dueDateOnchange={taskStatusOnchange}
+              projectId={projectId}
+            />
           </div>
           <ReporterFields reporterInfo={taskInfo.reporterId ?? {}} />
         </div>
