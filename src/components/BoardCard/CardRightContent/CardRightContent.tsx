@@ -1,5 +1,4 @@
 import React from 'react';
-import { DatePicker } from '@atlaskit/datetime-picker';
 import { TaskEntity } from '../../../api/task/entity/task';
 import { IColumnsFromBackend, ILabelData, IOnChangeProjectLead } from '../../../types';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
@@ -52,15 +51,6 @@ export default function CardRightContent({
     'Nov',
     'Dec'
   ];
-
-  const dateWithDay = (d: Date | null) => {
-    if (d != null) {
-      const date = d.toString().split('T')[0];
-      const dateDataArray = date.split('-');
-      return `${dateDataArray[1]}-${dateDataArray[2]}-${dateDataArray[0]}`;
-    }
-    return '';
-  };
 
   const dateWithTimestamp = (d: Date | null) => {
     if (d != null) {
@@ -142,11 +132,11 @@ export default function CardRightContent({
         <div className={style.boxBody}>
           <Row classesName={style.fieldMargin}>
             <div className={['fullWidth', style.label].join(' ')}>Assignee</div>
-            {/* <UserSelect
+            <UserSelect
               onChange={assigneeOnchangeEventHandler}
               value={taskInfo.assignId}
               allowEdit={editAccess}
-            /> */}
+            />
           </Row>
           <LabelFields
             labels={labels}
@@ -156,17 +146,6 @@ export default function CardRightContent({
           />
           <div className={style.dueDate}>
             <div>Due date</div>
-
-            {/* <DatePicker
-                dateFormat="MM-DD-YYYY"
-                placeholder={dateWithDay(taskInfo.dueAt ?? null)}
-                onChange={(date) => {
-                  const updatedTaskInfo = { ...taskInfo };
-                  updatedTaskInfo.dueAt = new Date(date);
-                  taskStatusOnchange(updatedTaskInfo);
-                }}
-                isDisabled={!editAccess}
-              /> */}
             <DueDatePicker
               taskInfo={taskInfo}
               dueDateOnchange={taskStatusOnchange}
