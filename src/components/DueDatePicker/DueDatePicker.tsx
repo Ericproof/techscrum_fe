@@ -10,10 +10,10 @@ interface Props {
 }
 
 export default function DueDatePicker({ taskInfo, dueDateOnchange, projectId }: Props) {
-  const dateWithDay = (d: Date | null) => {
-    if (d != null) {
-      const date = d.toString().split('T')[0];
-      const dateDataArray = date.split('-');
+  const dateWithDay = (date: Date | null) => {
+    if (date != null) {
+      const fullDate = date.toString().split('T')[0];
+      const dateDataArray = fullDate.split('-');
       return `${dateDataArray[1]}-${dateDataArray[2]}-${dateDataArray[0]}`;
     }
     return '';
