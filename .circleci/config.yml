@@ -136,6 +136,7 @@ workflows:
           executor: with-chrome
           browser: chrome
           start: yarn start
+          record: true
       - build_react_app:
           requires:
             - code_qa
