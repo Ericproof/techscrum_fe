@@ -149,7 +149,7 @@ export default function CardRightContent({
             <DueDatePicker
               taskInfo={taskInfo}
               dueDateOnchange={taskStatusOnchange}
-              projectId={projectId}
+              isDisabled={editAccess}
             />
           </div>
           <ReporterFields reporterInfo={taskInfo.reporterId ?? {}} />

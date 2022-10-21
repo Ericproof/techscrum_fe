@@ -1,15 +1,14 @@
 import React from 'react';
 import { DatePicker } from '@atlaskit/datetime-picker';
-import checkAccess from '../../utils/helpers';
 import { TaskEntity } from '../../api/task/entity/task';
 
 interface Props {
   taskInfo: TaskEntity;
   dueDateOnchange: (taskInfo: TaskEntity) => void;
-  projectId: string;
+  isDisabled: boolean;
 }
 
-export default function DueDatePicker({ taskInfo, dueDateOnchange, projectId }: Props) {
+export default function DueDatePicker({ taskInfo, dueDateOnchange, isDisabled }: Props) {
   const dateWithDay = (date: Date | null) => {
     if (date != null) {
       const fullDate = date.toString().split('T')[0];
@@ -18,7 +17,7 @@ export default function DueDatePicker({ taskInfo, dueDateOnchange, projectId }: 
     }
     return '';
   };
-  const editAccess = checkAccess('edit:tasks', projectId);
+
   return (
     <DatePicker
       appearance="subtle"
@@ -29,7 +28,7 @@ export default function DueDatePicker({ taskInfo, dueDateOnchange, projectId }: 
         updatedTaskInfo.dueAt = new Date(date);
         dueDateOnchange(updatedTaskInfo);
       }}
-      isDisabled={!editAccess}
+      isDisabled={!isDisabled}
     />
   );
 }
