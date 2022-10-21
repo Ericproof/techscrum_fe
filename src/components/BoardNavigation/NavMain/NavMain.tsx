@@ -8,6 +8,7 @@ import { IProjectData, IShortcutData } from '../../../types';
 import checkAccess from '../../../utils/helpers';
 import Shortcut from '../../AddShortcut/Shortcut';
 import styles from './NavMain.module.scss';
+import DailyScrum from '../../DailyScrum/DailyScrum';
 
 interface IPropsNavMain {
   currentProject: IProjectData;
@@ -20,6 +21,7 @@ export default function NavMain(props: IPropsNavMain) {
   const [planningToggle, setPlanningToggle] = useState(true);
   const [developmentToggle, setDevelopmentToggle] = useState(true);
   const [operationsToggle, setOperationsToggle] = useState(true);
+  const [showDailyScrum, setShowDailyScrum] = useState(false);
   const [operation, setOperation] = useState('');
   const [selectedLink, setSelectedLink] = useState<IShortcutData | null>(null);
 
@@ -224,6 +226,22 @@ export default function NavMain(props: IPropsNavMain) {
       </div>
 
       <div className={styles.containerBottom}>
+        <button
+          onClick={() => {
+            setShowDailyScrum(true);
+          }}
+          className={styles.dailyScrumBtn}
+        >
+          Daily scrum
+        </button>
+        {showDailyScrum && (
+          <DailyScrum
+            onClickCloseModal={() => {
+              setShowDailyScrum(false);
+            }}
+          />
+        )}
+
         {checkAccess('view:members', projectId) && (
           <NavLink to={`/projects/${currentProject?.id}/members`}>
             <BsFillPeopleFill width="30" height="30" viewBox="0 0 14 20" role="presentation" />
@@ -237,7 +255,6 @@ export default function NavMain(props: IPropsNavMain) {
             <span>Project Settings</span>
           </NavLink>
         )}
-
         {currentProject?.shortcut.map((shortcutData: IShortcutData, index: number) => {
           return (
             <React.Fragment key={shortcutData.id}>
