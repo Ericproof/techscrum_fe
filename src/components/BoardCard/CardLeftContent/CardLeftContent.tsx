@@ -13,7 +13,7 @@ interface Props {
   taskInfo: TaskEntity;
   onSave: (updatedTaskInfo: TaskEntity) => void;
   removeAttachment: (url: string) => void;
-  uploadFile: (e: any) => void;
+  uploadFile: (e: React.ChangeEvent<HTMLInputElement>) => void;
   projectId: string;
 }
 
@@ -43,11 +43,11 @@ export default function CardLeftContent({
   };
   const onResetHandler = () => setVisible(false);
 
-  const onChangeDesc = (e: any) => {
+  const onChangeDesc = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setDesc(e.target.value);
   };
 
-  const onChangeTitle = (e: any) => {
+  const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
     const updatedTaskInfo = { ...taskInfo, title: e.target.value, description: desc };
     onSave(updatedTaskInfo);
@@ -91,7 +91,6 @@ export default function CardLeftContent({
           userId={userInfo.id}
           userEmail={userInfo?.email}
           projectId={projectId}
-          userInfo={userInfo}
         />
       </form>
     </div>

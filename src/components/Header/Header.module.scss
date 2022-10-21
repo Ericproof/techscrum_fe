@@ -1,4 +1,4 @@
-$max_size: 1201px;
+$max_size: 768px;
 $small_size: 1000px;
 
 nav.navNormal {
@@ -37,6 +37,23 @@ nav.navNormal {
     width: 100%;
     max-width: 1224px;
     margin: 0 auto;
+
+    @media (max-width: 1250px) {
+      max-width: 1120px;
+    }
+
+    @media (max-width: 1150px) {
+      max-width: 1000px;
+    }
+
+    @media (max-width: 1020px) {
+      max-width: 900px;
+    }
+
+    @media (max-width: 920px) {
+      max-width: 760px;
+    }
+
     @media (max-width: $max_size) {
       flex-direction: column;
       max-height: auto;
@@ -59,6 +76,7 @@ nav.navNormal {
     .functionsLoginTabs {
       display: flex;
       flex-direction: row;
+      align-items: center;
       gap: 14px;
       @media (max-width: $max_size) {
         flex-direction: column;
@@ -127,7 +145,7 @@ nav.navNormal {
 }
 
 nav.navActive {
-  @media(max-width: $max-size) {
+  @media (max-width: $max-size) {
     max-width: 400px;
     min-height: none;
     max-height: none;

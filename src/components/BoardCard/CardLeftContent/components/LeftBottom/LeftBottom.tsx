@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { MentionData } from '@draft-js-plugins/mention';
 import {
   createComment,
   getComment,
   deleteComment,
   updateComment
 } from '../../../../../api/comment/comment';
+import { getUsers } from '../../../../../api/user/user';
 import { ICommentData, ICommentItemData } from '../../../../../types';
 import checkAccess from '../../../../../utils/helpers';
 import CommentItem from './components/CommentItem/CommentItem';
+import Editor from './components/Editor/Editor';
 import style from './LeftBottom.module.scss';
 
 interface ILeftBottom {
@@ -15,20 +18,15 @@ interface ILeftBottom {
   taskId?: string;
   userEmail?: string;
   projectId: string;
-  userInfo: any;
 }
-
 export default function LeftBottom(props: ILeftBottom) {
-  const [visible, setVisible] = useState(false);
-  const [content, setContent] = useState('');
-  const { userId = '', taskId = '', userEmail = '', projectId, userInfo } = props;
+  const { userId = '', taskId = '', userEmail = '', projectId } = props;
   const [comments, setComments] = useState([]);
   const [saveState, setSaveState] = useState(false);
   const [deleteState, setDeleteState] = useState(false);
   const [updateState, setUpdateState] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-
-  const onFocusEventHandler = () => setVisible(true);
+  const [users, setUsers] = useState<MentionData[]>([]);
 
   const fetchCommentsData = () => {
     async function fetchData() {
@@ -38,10 +36,6 @@ export default function LeftBottom(props: ILeftBottom) {
       });
     }
     fetchData();
-  };
-
-  const onChangeContent = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setContent(e.target.value);
   };
 
   const onClickDelete = async (id: string) => {
@@ -54,11 +48,9 @@ export default function LeftBottom(props: ILeftBottom) {
     setUpdateState(true);
   };
 
-  const onClickSave = async () => {
+  const onClickPublish = async (content) => {
     await createComment({ taskId, senderId: userId, content });
     setSaveState(true);
-    setVisible(false);
-    setContent('');
   };
 
   useEffect(() => {
@@ -81,7 +73,22 @@ export default function LeftBottom(props: ILeftBottom) {
     }
   }, [isLoading, saveState, deleteState, updateState]);
 
-  const onResetHandler = () => setVisible(false);
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const res = await getUsers();
+      if (Array.isArray(res.data)) {
+        const usersArray = res.data.map((item) => {
+          return {
+            name: item.name,
+            avatar: item.avatarIcon
+          };
+        });
+        setUsers(usersArray);
+      }
+    };
+    fetchUsers();
+  }, []);
+
   return (
     <div className={style.container}>
       <div className={style.activity}>
@@ -93,25 +100,9 @@ export default function LeftBottom(props: ILeftBottom) {
       </div>
       {checkAccess('edit:tasks', projectId) && (
         <div>
-          <div className={style.commentInputField} onFocus={onFocusEventHandler}>
-            <img className={style.avatar} src={userInfo.avatarIcon} alt={userInfo.avatarIcon} />
-            <input
-              value={content}
-              onChange={onChangeContent}
-              type="text"
-              placeholder="Add a comment..."
-            />
+          <div className={style.commentInputField}>
+            <Editor onClickPublish={onClickPublish} users={users} imageInputId="insertImage" />
           </div>
-          {visible && (
-            <div className={style.commentButton}>
-              <button className={style.saveButton} type="button" onClick={onClickSave}>
-                <span>Save</span>
-              </button>
-              <button className={style.cancelButton} type="reset" onClick={onResetHandler}>
-                <span>Cancel</span>
-              </button>
-            </div>
-          )}
         </div>
       )}
       {comments.map((item: ICommentItemData) => {
@@ -126,6 +117,7 @@ export default function LeftBottom(props: ILeftBottom) {
               onClickDelete={onClickDelete}
               onClickUpdate={onClickUpdate}
               userEmail={userEmail}
+              users={users}
             />
           );
         }

@@ -6,7 +6,7 @@ interface Props {
   taskInfo: TaskEntity;
   focusEventHandler: () => void;
   isDisabled: boolean;
-  onChangeTitle: (e: any) => void;
+  onChangeTitle: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value: string | undefined;
 }
 

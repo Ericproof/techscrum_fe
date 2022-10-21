@@ -1,0 +1,33 @@
+.container {
+    font-family: "Work Sans", Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.introImg{
+    max-width: 1200px;
+    margin-top: -250px;
+}
+
+.greeting{
+    background-color: white;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    background-image: url('../../assets/screen2.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@media (max-width: 1280px) {
+    .introImg {
+        max-width: 615px;
+        width: 100%
+    }
+
+    .greeting {
+        background-image: none;
+    }
+}
