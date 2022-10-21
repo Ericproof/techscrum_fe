@@ -63,12 +63,9 @@ function Editor(props: IEditor) {
     setOpen(_open);
   }, []);
 
-  const onSearchChange = useCallback(
-    ({ value }: { value: string }) => {
-      setSuggestions(users);
-    },
-    [users]
-  );
+  const onSearchChange = useCallback(() => {
+    setSuggestions(users);
+  }, [users]);
 
   function handleMentionClick() {
     const newContentState = Modifier.insertText(

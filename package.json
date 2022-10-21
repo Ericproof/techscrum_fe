@@ -39,7 +39,7 @@
     "deploy": "aws s3 sync build s3://techscrumapp.com",
     "cdn": "aws cloudfront create-invalidation --distribution-id E1V3T62UIWQDQ2 --paths /*",
     "cypress": "cypress open",
-    "cy:run": "cypress run",
+    "cy:run": "cypress run --browser chrome",
     "test": "start-server-and-test start http-get://localhost:3030 cy:run",
     "prepare": "husky install"
   },

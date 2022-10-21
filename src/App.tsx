@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage/HomePage';
@@ -42,7 +43,8 @@ import BacklogPage from './pages/BacklogPage/BacklogPage';
 import DashboardLayout from './components/DashboardLayout/DashboardLayout';
 
 function App() {
-  const [showPages, setShowPages] = useState(false);
+  const [showPages, setShowPages] = useState(null);
+
   useEffect(() => {
     const getD = async () => {
       const res = await getDomains();
@@ -50,6 +52,16 @@ function App() {
     };
     getD();
   }, []);
+
+  const getHomePage = () => {
+    if (showPages === null) {
+      return <></>;
+    }
+    if (!showPages) {
+      return <LoginPage />;
+    }
+    return <HomePage />;
+  };
 
   return (
     <UserProvider>
@@ -62,7 +74,7 @@ function App() {
               <Route path="/faq" element={<FAQPage />} />
               <Route path="/verify" element={<VerifyPage />} />
               <Route path="/login" element={<LoginPage />} />
-              <Route path="/" element={<HomePage />} />
+              <Route path="/" element={getHomePage()} />
               <Route path="/login/reset-password" element={<ResetPasswordPage />} />
               <Route path="/login/change-password" element={<ChangePasswordPage />} />
               <Route path="/cookie-policy" element={<CookiePolicyPage />} />
