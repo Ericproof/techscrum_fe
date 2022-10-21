@@ -24,6 +24,7 @@ describe('Project page', () => {
     it('should search projects and find it in the project list', () => {
         cy.wait(1000);
         cy.get('[data-testid="filter-Project"]').click();
+        cy.get('[data-testid="filter-Project"]').clear();
         cy.get('[data-testid="filter-Project"]').type('123');
         cy.get('[data-testid="project-name"]').should('have.length', 2);
         cy.get('[data-testid="project-name"]').then( items => {
