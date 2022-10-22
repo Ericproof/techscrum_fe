@@ -16,32 +16,25 @@
 }
 
 .createButton {
-  margin-top: -50px;
-  align-items: baseline;
-  border-width: 0px;
   border-radius: 3px;
   box-sizing: border-box;
-  display: inline-flex;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
-  max-width: 100%;
-  position: absolute;
-  text-align: center;
-  text-decoration: none;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   transition: background 0.1s ease-out 0s, box-shadow 0.15s cubic-bezier(0.47, 0.03, 0.49, 1.38) 0s;
-  white-space: nowrap;
   background: #0052cc;
   cursor: pointer;
   height: 2.28571em;
   line-height: 2.28571em;
   padding: 0px 10px;
-  vertical-align: middle;
-  width: auto;
-  justify-content: center;
   color: #ffffff;
-  right: 500px;
-  z-index: 1;
+  @media (max-width: 800px) {
+    margin-top: 20px;
+  }
 
   &:hover {
     background: #0065ff;
@@ -52,14 +45,21 @@
 .searchBarContainer {
   justify-content: left;
   margin-bottom: 1%;
-  padding-left: 3%;
+  padding: 0% 3%;
   z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @media (max-width: 800px) {
+    flex-direction: column;
+  }
 }
 
 .inputContainer {
   position: relative;
   display: flex;
-  width: 25%;
+  max-width: 300px;
+  width: 100%;
   align-items: center;
   background-color: var(--ds-background-input, #fafbfc);
   border-color: var(--ds-border, #dfe1e6);
