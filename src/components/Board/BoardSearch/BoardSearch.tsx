@@ -56,6 +56,7 @@ export default function BoardSearch({ updateIsCreateNewCard, setInputQuery, proj
               setInputState(true);
             }}
             onChange={(event) => setInputQuery(event.target.value)}
+            data-testid="board-search"
           />
           <span>
             <img

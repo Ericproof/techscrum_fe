@@ -44,7 +44,9 @@ export default function BoardMain({
                       className={styles.column}
                     >
                       <div className={styles.columnInfo}>
-                        <h1 className={styles.name}>{column.name}</h1>
+                        <h1 className={styles.name} data-testid={`board-col-${id}`}>
+                          {column.name}
+                        </h1>
                         <h1 className={styles.taskNum}>{column.items.length}</h1>
                       </div>
                       {column.items.map((item, index) => {
@@ -61,6 +63,7 @@ export default function BoardMain({
                                   onClick={() => {
                                     passTaskId(item.id ?? '');
                                   }}
+                                  data-testid={`task-${item.id}`}
                                 >
                                   <span>
                                     {' '}
