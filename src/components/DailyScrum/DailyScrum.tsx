@@ -89,7 +89,7 @@ function DailyScrumModal({ onClickCloseModal }: IDailyScrumModal) {
           <AiOutlineClose />
         </button>
       </div>
-      <h4>Today {date}</h4>
+      <h4>Today: {date}</h4>
       {dailyScrumTicketData.map((ticket) => {
         return (
           <DailyScrumTicket
