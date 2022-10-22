@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from 'react';
-import { AxiosResponse } from 'axios';
 import { useNavigate } from 'react-router-dom';
 import ChangeIcon from './ChangeIcon/ChangeIcon';
 import ChangeKey from './ChangeKey/ChangeKey';
@@ -11,7 +10,6 @@ import { IOnChangeProjectLead, IProjectEditor } from '../../types';
 import { UserContext } from '../../context/UserInfoProvider';
 
 interface ProjectEditorProps {
-  onCompletedSubmit?: (res: AxiosResponse) => void;
   showCancelBtn?: boolean;
   projectData?: IProjectEditor;
   onClickSave: (data: any) => void;
@@ -36,14 +34,7 @@ function ProjectEditor(props: ProjectEditorProps) {
     setData({ ...data, projectLeadId: userInfo });
   }, [userInfo.id]);
 
-  const {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    onCompletedSubmit = null,
-    showCancelBtn = false,
-    projectData,
-    onClickSave,
-    hasError
-  } = props;
+  const { showCancelBtn = false, projectData, onClickSave, hasError } = props;
   const onChange = (e: IOnChangeProjectLead) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
@@ -111,7 +102,6 @@ function ProjectEditor(props: ProjectEditorProps) {
 }
 
 ProjectEditor.defaultProps = {
-  onCompletedSubmit: null,
   showCancelBtn: false,
   projectData: null
 };

@@ -255,7 +255,7 @@ export default function NavMain(props: IPropsNavMain) {
             <span>Project Settings</span>
           </NavLink>
         )}
-        {currentProject?.shortcut.map((shortcutData: IShortcutData, index: number) => {
+        {currentProject?.shortcut.map((shortcutData: IShortcutData) => {
           return (
             <React.Fragment key={shortcutData.id}>
               <a
