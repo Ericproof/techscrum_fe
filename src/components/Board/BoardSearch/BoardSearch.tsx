@@ -118,7 +118,12 @@ export default function BoardSearch({ updateIsCreateNewCard, setInputQuery, proj
         </fieldset>
       </div>
       {checkAccess('add:tasks', projectId) && (
-        <button type="button" className={styles.createButton} onClick={updateIsCreateNewCard}>
+        <button
+          type="button"
+          className={styles.createButton}
+          onClick={updateIsCreateNewCard}
+          data-testid="board-create-card"
+        >
           Create card
         </button>
       )}
