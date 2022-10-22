@@ -291,7 +291,6 @@ export default function NavMain(props: IPropsNavMain) {
                   </button>
                 )}
               </a>
-              {currentProject?.shortcut.length !== index - 1 && <br />}
             </React.Fragment>
           );
         })}
