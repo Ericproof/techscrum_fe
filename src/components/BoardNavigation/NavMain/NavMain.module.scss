@@ -242,18 +242,28 @@
   }
 }
 
-$btnColorBlue: rgb(33, 81, 197);
-$btnColorBlueHover: rgb(232, 239, 251);
 .dailyScrumBtn {
-  margin: 10px;
-  padding: 5px;
-  width: 50%;
-  color: $btnColorBlue;
-  border: 1px solid $btnColorBlue;
-  background-color: white;
-  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  border: none;
+  font-size: 14px;
   cursor: pointer;
+  user-select: none;
+  background-color: transparent;
+  font-weight: 500;
+  padding: 8px 10px 8px 10px;
+  color: var(--ds-text-subtle, #42526e);
+  margin-top: 10px;
+  height: 42px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  .dailyScrumIcon {
+    width: 24px;
+    height: 24px;
+    margin-right: 16px;
+  }
 }
 .dailyScrumBtn:hover {
-  background-color: $btnColorBlueHover;
+  background-color: rgb(232, 239, 251);
 }
