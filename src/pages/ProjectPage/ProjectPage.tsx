@@ -215,7 +215,10 @@ export default function ProjectPage() {
                           </span>
                         </div>
                       </td>
-                      <td className={styles.name}>
+                      <td
+                        className={styles.name}
+                        data-testid={project.name.replace(' ', '-').toLowerCase()}
+                      >
                         <Link to={`/projects/${project.id}/board/${project.boardId}`}>
                           <div className={styles.nameContent}>
                             <img

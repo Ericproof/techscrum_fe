@@ -266,6 +266,7 @@ export default function NavMain(props: IPropsNavMain) {
                 }
                 target="_blank"
                 rel="noreferrer"
+                data-testid={`shortcut-${shortcutData.id}`}
               >
                 <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
                   <g fill="currentColor">
@@ -303,6 +304,7 @@ export default function NavMain(props: IPropsNavMain) {
               setOperation('Add');
               setSelectedLink(null);
             }}
+            data-testid="add-shortcut"
           >
             <VscNewFile />
             <span>Add shortcut</span>

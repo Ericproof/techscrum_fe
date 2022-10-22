@@ -26,6 +26,7 @@ export default function AddShortcutFooter({
           className={styles.cancelButton}
           type="button"
           onClick={() => setAddLinkToggle(!addLinkToggle)}
+          data-testid="cancel-shortcut-btn"
         >
           <span>Cancel</span>
         </button>
@@ -35,6 +36,7 @@ export default function AddShortcutFooter({
           type="button"
           onClick={onClickAddShortcut}
           disabled={isUrlValid || !hasData}
+          data-testid="add-shortcut-btn"
         >
           <span>Add</span>
         </button>

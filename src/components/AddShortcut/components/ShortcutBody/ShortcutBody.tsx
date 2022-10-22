@@ -34,8 +34,13 @@ export default function ShortcutBody({
             setWebValue(event.target.value);
           }}
           value={webValue}
+          data-testid="shortcut-title"
         />
-        {!!webValue && isUrlValid && <p className={styles.colorRed}>Invalid URL</p>}
+        {!!webValue && isUrlValid && (
+          <p className={styles.colorRed} data-testid="invalid-url">
+            Invalid URL
+          </p>
+        )}
       </div>
       <br />
       <div className={styles.inputContent}>
@@ -51,6 +56,7 @@ export default function ShortcutBody({
             setNameValue(event.target.value);
           }}
           value={value}
+          data-testid="shortcut-name"
         />
       </div>
       <div className={styles.proTip}>
