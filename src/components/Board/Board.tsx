@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { DropResult } from 'react-beautiful-dnd';
@@ -177,17 +178,16 @@ export default function Board() {
 
   useEffect(() => {
     const fetchColumnsData = (boardInfo: IBoardEntity) => {
-      let columnInfoData: IColumnsFromBackend = {};
-      if (boardInfo.taskStatus === undefined) return setColumnsInfo(columnInfoData);
-      const { taskStatus } = boardInfo;
-      taskStatus.forEach((status) => {
-        const tasks: ITaskCard[] = [];
-        status.taskList.forEach((task) => {
-          const result = task.detail;
-          if (result !== undefined && result.title?.includes(inputQuery)) tasks.push(result);
-        });
-        columnInfoData = { ...columnInfoData, [status.id]: { name: status.name, items: tasks } };
-      });
+      const columnInfoData: IColumnsFromBackend = {};
+      for (const item of boardInfo.taskStatus) {
+        columnInfoData[item.id] = {
+          name: item.name,
+          slug: item.slug,
+          order: item.order,
+          items: item.taskList
+        };
+      }
+
       return setColumnsInfo(columnInfoData);
     };
 
