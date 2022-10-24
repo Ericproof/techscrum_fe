@@ -179,6 +179,21 @@ export default function Board() {
   useEffect(() => {
     const fetchColumnsData = (boardInfo: IBoardEntity) => {
       const columnInfoData: IColumnsFromBackend = {};
+
+      if (inputQuery) {
+        for (const item of boardInfo.taskStatus) {
+          columnInfoData[item.id] = {
+            name: item.name,
+            slug: item.slug,
+            order: item.order,
+            items: item.taskList.filter((task) =>
+              task.title?.toLowerCase().includes(inputQuery.toLowerCase())
+            )
+          };
+        }
+        return setColumnsInfo(columnInfoData);
+      }
+
       for (const item of boardInfo.taskStatus) {
         columnInfoData[item.id] = {
           name: item.name,
