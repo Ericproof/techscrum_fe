@@ -7,13 +7,7 @@ import BoardMain from './BoardMain/BoardMain';
 import CreateNewCard from '../CreateNewCard/CreateNewCard';
 import { getBoard } from '../../api/board/board';
 import { updateTaskStatus, fetchTask, updateTask, removeTask } from '../../api/task/task';
-import IBoardEntity, {
-  IColumnsFromBackend,
-  ICardData,
-  ILabelData,
-  ITaskCard,
-  IStatusEntity
-} from '../../types';
+import IBoardEntity, { IColumnsFromBackend, ICardData, ILabelData, ITaskCard } from '../../types';
 import BoardCard from '../BoardCard/BoardCard';
 import { TaskEntity } from '../../api/task/entity/task';
 import { getLabels } from '../../api/label/label';
@@ -25,8 +19,6 @@ const onDragEnd = (
 ) => {
   if (!result.destination) return null;
   const { source, destination } = result;
-
-  console.log(source, destination);
 
   if (source.droppableId !== destination.droppableId) {
     const sourceColumn = columns[source.droppableId];
@@ -68,7 +60,7 @@ const onDragEnd = (
 
 export default function Board() {
   const [inputQuery, setInputQuery] = useState<string>('');
-  const [columnsInfo, setColumnsInfo] = useState<IStatusEntity[] | []>([]);
+  const [columnsInfo, setColumnsInfo] = useState<IColumnsFromBackend>({});
   const { boardId = '', projectId = '' } = useParams();
   const [isCreateNewCard, setIsCreateNewCard] = useState(false);
   const [isViewTask, setIsViewTask] = useState(false);
@@ -184,22 +176,18 @@ export default function Board() {
   };
 
   useEffect(() => {
-    console.log('columnsInfo:', columnsInfo);
-  }, [columnsInfo]);
-
-  useEffect(() => {
     const fetchColumnsData = (boardInfo: IBoardEntity) => {
-      const { taskStatus } = boardInfo;
-
-      if (boardInfo.taskStatus.length > 0) return setColumnsInfo(taskStatus);
-      taskStatus.forEach((status) => {
-        const tasks: ITaskCard[] = [];
-        status.taskList.forEach((task) => {
-          if (task && task.title?.includes(inputQuery)) tasks.push(task);
-        });
-      });
-
-      return setColumnsInfo(taskStatus);
+      const columnInfoData: IColumnsFromBackend = {};
+      for (let i = 0; i < boardInfo.taskStatus.length; i += 1) {
+        const item = boardInfo.taskStatus[i];
+        columnInfoData[item.id] = {
+          name: item.name,
+          slug: item.slug,
+          order: item.order,
+          items: item.taskList
+        };
+      }
+      return setColumnsInfo(columnInfoData);
     };
 
     const fetchBoardInfo = async () => {
@@ -217,7 +205,7 @@ export default function Board() {
         projectId={projectId}
       />
       <BoardMain
-        taskStatus={columnsInfo}
+        columnsInfo={columnsInfo}
         onDragEventHandler={dragEventHandler}
         passTaskId={getTaskId}
         updateIsCreateNewCard={getCreateNewCardStateFromChildren}

@@ -78,14 +78,19 @@ export interface ITaskCard {
 }
 
 export interface IColumnsFromBackend {
-  [statusId: string]: { name: string; items: ITaskCard[] };
+  [statusId: string]: {
+    name: string;
+    slug: string;
+    order: number;
+    items: ITaskCard[];
+  };
 }
 
 export interface IStatusEntity {
   id: string;
   slug: string;
   name: string;
-  order: string;
+  order: number;
   taskList: ITaskCard[];
 }
 
