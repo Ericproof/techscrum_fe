@@ -42,7 +42,7 @@ export default function UserSelect(props: IUserSelect) {
   const onClickUser = (user: string | null) => {
     onChange({ target: { name: 'projectLeadId', value: user } });
     setVisible(false);
-    if (user !== null) {
+    if (user) {
       setCurrentUser(user);
     } else {
       const unassignedUser = {
@@ -55,7 +55,7 @@ export default function UserSelect(props: IUserSelect) {
   useEffect(() => {
     if (queryUserList.length > 0) {
       if (initialUser) {
-        if (value !== null) {
+        if (value) {
           setCurrentUser({ name: value.name });
         } else {
           const unassignedUser = {
