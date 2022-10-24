@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { DropResult } from 'react-beautiful-dnd';
@@ -178,8 +179,7 @@ export default function Board() {
   useEffect(() => {
     const fetchColumnsData = (boardInfo: IBoardEntity) => {
       const columnInfoData: IColumnsFromBackend = {};
-      for (let i = 0; i < boardInfo.taskStatus.length; i += 1) {
-        const item = boardInfo.taskStatus[i];
+      for (const item of boardInfo.taskStatus) {
         columnInfoData[item.id] = {
           name: item.name,
           slug: item.slug,
@@ -187,6 +187,7 @@ export default function Board() {
           items: item.taskList
         };
       }
+
       return setColumnsInfo(columnInfoData);
     };
 
