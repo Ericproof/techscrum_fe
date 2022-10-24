@@ -91,7 +91,7 @@ function App() {
               <Route path="" element={<AuthenticationRoute />}>
                 <Route path="/projects/:projectId/" element={<DashboardLayout />}>
                   <Route path="board/:boardId" element={<BoardPage />} />
-                  <Route path="backlog" element={<BacklogPage />} />
+                  <Route path="board/:boardId/backlog" element={<BacklogPage />} />
                 </Route>
                 <Route path="/settings/:projectId" element={<Setting />} />
                 <Route path="/me" element={<UserMePage />} />
