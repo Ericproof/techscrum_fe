@@ -7,11 +7,18 @@ import {
   updateComment
 } from '../../../../../api/comment/comment';
 import { getUsers } from '../../../../../api/user/user';
-import { ICommentData, ICommentItemData } from '../../../../../types';
+import {
+  ICommentData,
+  ICommentItemData,
+  IActivityData,
+  IActivityItemData
+} from '../../../../../types';
 import checkAccess from '../../../../../utils/helpers';
 import CommentItem from './components/CommentItem/CommentItem';
 import Editor from './components/Editor/Editor';
 import style from './LeftBottom.module.scss';
+import ActivityItem from './components/ActivityItem/ActivityItem';
+import { getActivity } from '../../../../../api/activity/activity';
 
 interface ILeftBottom {
   userId?: string;
@@ -27,6 +34,8 @@ export default function LeftBottom(props: ILeftBottom) {
   const [updateState, setUpdateState] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [users, setUsers] = useState<MentionData[]>([]);
+  const [activities, setActivities] = useState([]);
+  const [showActivities, setShowActivities] = useState(false);
 
   const fetchCommentsData = () => {
     async function fetchData() {
@@ -52,6 +61,26 @@ export default function LeftBottom(props: ILeftBottom) {
     await createComment({ taskId, senderId: userId, content });
     setSaveState(true);
   };
+
+  const fetchActivityData = () => {
+    async function fetchData() {
+      await getActivity(taskId).then((data: IActivityData) => {
+        const result = data.data;
+        setActivities(result);
+      });
+    }
+    fetchData();
+  };
+
+  const onActivityClick = () => {
+    setShowActivities(!showActivities);
+  };
+
+  useEffect(() => {
+    if (showActivities) {
+      fetchActivityData();
+    }
+  }, [showActivities]);
 
   useEffect(() => {
     if (isLoading) {
@@ -95,8 +124,27 @@ export default function LeftBottom(props: ILeftBottom) {
         <h3>Activity</h3>
         <div className={style.showCommentButton}>
           <span>Show: </span>
-          <button type="button">Comments</button>
+          <button type="button" onClick={onActivityClick}>
+            Activities
+          </button>
         </div>
+        {showActivities ? (
+          activities.map((item: IActivityItemData) => {
+            if (item.taskId === taskId) {
+              return (
+                <ActivityItem
+                  id={item.id}
+                  userId={item.userId}
+                  operation={item.operation}
+                  createdAt={item.createdAt}
+                />
+              );
+            }
+            return null;
+          })
+        ) : (
+          <br />
+        )}
       </div>
       {checkAccess('edit:tasks', projectId) && (
         <div>

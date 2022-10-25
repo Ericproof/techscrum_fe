@@ -12,6 +12,7 @@ import IBoardEntity, { IColumnsFromBackend, ICardData, ILabelData, ITaskCard } f
 import BoardCard from '../BoardCard/BoardCard';
 import { TaskEntity } from '../../api/task/entity/task';
 import { getLabels } from '../../api/label/label';
+import { deleteActivity } from '../../api/activity/activity';
 
 const onDragEnd = (
   result: DropResult,
@@ -169,6 +170,7 @@ export default function Board() {
               updatedColumns[item.statusId].items.splice(index, 1);
             }
           });
+          await deleteActivity(taskData.id);
         }
         setColumnsInfo(updatedColumns);
         setTaskData(undefined);

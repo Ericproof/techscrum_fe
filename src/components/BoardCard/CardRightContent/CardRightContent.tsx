@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { TaskEntity } from '../../../api/task/entity/task';
 import { IColumnsFromBackend, ILabelData, IOnChangeProjectLead } from '../../../types';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
@@ -9,6 +9,8 @@ import UserSelect from '../../Form/Select/UserSelect/UserSelect';
 import Row from '../../Grid/Row/Row';
 import checkAccess from '../../../utils/helpers';
 import DueDatePicker from '../../DueDatePicker/DueDatePicker';
+import { UserContext } from '../../../context/UserInfoProvider';
+import { createActivity } from '../../../api/activity/activity';
 
 interface Props {
   taskInfo: TaskEntity;
@@ -30,11 +32,16 @@ export default function CardRightContent({
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const handleClickOutside = () => setVisible(true);
   const editAccess = checkAccess('edit:tasks', projectId);
+  const userInfo = useContext(UserContext);
+  const operation = 'updated';
+  const userId = userInfo.id;
+  const taskId = taskInfo.id;
 
-  const assigneeOnchangeEventHandler = (e: IOnChangeProjectLead) => {
+  const assigneeOnchangeEventHandler = async (e: IOnChangeProjectLead) => {
     const updatedTaskInfo = { ...taskInfo };
     updatedTaskInfo.assignId = !e.target.value ? undefined : e.target.value;
     taskStatusOnchange(updatedTaskInfo);
+    await createActivity({ operation, userId, taskId });
   };
 
   const monthShortNames = [

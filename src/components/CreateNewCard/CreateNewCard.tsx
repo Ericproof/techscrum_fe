@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-
+import { createActivity } from '../../api/activity/activity';
 import styles from './CreateNewCard.module.scss';
 import { createNewTask } from '../../api/task/task';
 import { ICardData, IProject, IProjectData } from '../../types';
@@ -11,6 +11,7 @@ import Attach from '../BoardCard/CardLeftContent/components/Attach/Attach';
 import PhotoGallery from '../PhotoGallery/PhotoGallery';
 import { TaskTypesContext } from '../../context/TaskTypeProvider';
 import { ProjectContext } from '../../context/ProjectProvider';
+import { UserContext } from '../../context/UserInfoProvider';
 
 interface Props {
   fetchNewCard: (newCard: ICardData) => void;
@@ -30,6 +31,7 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
   const currentProject: IProjectData[] = projectList.filter(
     (project: IProjectData) => project.id === projectId
   );
+  const userInfo = useContext(UserContext);
 
   useEffect(() => {
     if (!taskType) {
@@ -89,6 +91,10 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
       .then((res) => {
         if (res.status === 201) {
           setError(false);
+          const operation = 'created';
+          const userId = userInfo?.id;
+          const taskId = res.data.id;
+          createActivity({ operation, userId, taskId });
           fetchNewCard(res.data);
           return;
         }

@@ -1,0 +1,19 @@
+import axios from 'axios';
+
+import config from '../../config/config';
+
+export function getActivity(taskId = 'abc') {
+  return axios.get(`${config.apiAddress}/activities/${taskId}`);
+}
+
+export function createActivity(data: {
+  operation: string;
+  userId: string | undefined;
+  taskId: any;
+}) {
+  return axios.post(`${config.apiAddress}/activities`, data);
+}
+
+export function deleteActivity(taskId = 'abc') {
+  return axios.delete(`${config.apiAddress}/activities/${taskId}`);
+}
