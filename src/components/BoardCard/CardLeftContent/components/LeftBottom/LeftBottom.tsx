@@ -133,6 +133,7 @@ export default function LeftBottom(props: ILeftBottom) {
             if (item.taskId === taskId) {
               return (
                 <ActivityItem
+                  key={item.id}
                   id={item.id}
                   userId={item.userId}
                   operation={item.operation}
