@@ -23,42 +23,21 @@ const dateHandler = (fullDate) => {
   let month = YearMonthDay[1];
   const day = YearMonthDay[2];
   let result = '';
-  if (month === '01') {
-    month = 'Jan';
-  }
-  if (month === '02') {
-    month = 'Feb';
-  }
-  if (month === '03') {
-    month = 'Mar';
-  }
-  if (month === '04') {
-    month = 'Apr';
-  }
-  if (month === '05') {
-    month = 'May';
-  }
-  if (month === '06') {
-    month = 'Jun';
-  }
-  if (month === '7') {
-    month = 'Jul';
-  }
-  if (month === '08') {
-    month = 'Aug';
-  }
-  if (month === '09') {
-    month = 'Sep';
-  }
-  if (month === '10') {
-    month = 'Oct';
-  }
-  if (month === '11') {
-    month = 'Nov';
-  }
-  if (month === '12') {
-    month = 'Dec';
-  }
+  const monthObj = {
+    '01': 'Jan',
+    '02': 'Feb',
+    '03': 'Mar',
+    '04': 'Apr',
+    '05': 'May',
+    '06': 'Jun',
+    '07': 'Jul',
+    '08': 'Aug',
+    '09': 'Sep',
+    '10': 'Oct',
+    '11': 'Nov',
+    '12': 'Dec'
+  };
+  month = monthObj[month];
   const time = dateAndTime[1];
   const trueTime = time.split('.');
   let hourMinSec = trueTime[0];
@@ -67,7 +46,7 @@ const dateHandler = (fullDate) => {
   const min = hourMinSec[1];
   let resultTime = '';
   if (hour <= 12) {
-    resultTime = `${hour}:${min} AM`;
+    resultTime = ` ${hour}:${min} AM`;
   } else {
     const newHour = Number(hour) - 12;
     if (newHour < 10) {
