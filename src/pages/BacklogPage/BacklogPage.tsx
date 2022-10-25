@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import BacklogSection from './BacklogSection/BacklogSection';
 // import SprintSection from './SprintSection/SprintSection';
 import styles from './BacklogPage.module.scss';
-import { getBacklogData } from '../../api/backlog/backlog';
+import { getBacklog } from '../../api/backlog/backlog';
 
 export default function BacklogPage() {
   // WIP need to communicate with backend
@@ -13,10 +13,10 @@ export default function BacklogPage() {
   // const [sprintData, setSprintData] = useState(null);
   const { projectId = '' } = useParams();
 
-  const render = useCallback(() => {
-    const getBacklog = async () => {
+  const getBacklogDataApi = useCallback(() => {
+    const getBacklogData = async () => {
       try {
-        const res = await getBacklogData(projectId);
+        const res = await getBacklog(projectId);
         setBacklogData(res.backlog);
         // setSprintData(res.sprints);
         setLoaded(true);
@@ -24,12 +24,12 @@ export default function BacklogPage() {
         setLoaded(false);
       }
     };
-    getBacklog();
+    getBacklogData();
   }, [projectId]);
 
   useEffect(() => {
-    render();
-  }, [render]);
+    getBacklogDataApi();
+  }, [getBacklogDataApi]);
 
   return (
     <div className={styles.container}>
@@ -38,7 +38,11 @@ export default function BacklogPage() {
       </div>
       <div className={styles.scrollContainer}>
         {/* <SprintSection sprintData={sprintData} render={render} /> */}
-        <BacklogSection backlogData={backlogData} render={render} loaded={loaded} />
+        <BacklogSection
+          backlogData={backlogData}
+          getBacklogDataApi={getBacklogDataApi}
+          loaded={loaded}
+        />
       </div>
     </div>
   );

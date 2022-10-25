@@ -2,7 +2,7 @@ import axios from 'axios';
 import config from '../../config/config';
 
 // eslint-disable-next-line import/prefer-default-export
-export const getBacklogData = async (projectId: string) => {
+export const getBacklog = async (projectId: string) => {
   const path = `${config.apiAddress}/projects/${projectId}/backlogs`;
   const response = await axios.get(path);
   return response.data;

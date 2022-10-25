@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { GoPlus } from 'react-icons/go';
 import { useParams } from 'react-router-dom';
@@ -10,11 +9,15 @@ import { addTask, updateTask, deleteTask } from '../../../api/backlog/backlog';
 // WIP more function will be added
 interface IBacklogSection {
   backlogData: any;
-  render: () => void;
+  getBacklogDataApi: () => void;
   loaded: boolean;
 }
 
-export default function BacklogSection({ backlogData, render, loaded }: IBacklogSection) {
+export default function BacklogSection({
+  backlogData,
+  getBacklogDataApi,
+  loaded
+}: IBacklogSection) {
   const [showBacklogInput, setShowBacklogInput] = useState(false);
   const [backlogInputFocus, setBacklogInputFocus] = useState(false);
   const [currentTypeOption, setCurrentTypeOption] = useState('story');
@@ -29,7 +32,6 @@ export default function BacklogSection({ backlogData, render, loaded }: IBacklog
       const data = {
         title: createIssueRef?.current?.value,
         status: 'to do',
-        describtion: '',
         typeId: {
           createdAt: new Date().toISOString(),
           name: currentTypeOption.charAt(0).toUpperCase() + currentTypeOption.slice(1),
@@ -42,13 +44,12 @@ export default function BacklogSection({ backlogData, render, loaded }: IBacklog
         projectId,
         sprintId: null
       };
-      console.log(data);
       addTask(data).then(() => {
-        render();
+        getBacklogDataApi();
       });
     }
     setShowBacklogInput(false);
-  }, [boardId, currentTypeOption, projectId, render]);
+  }, [boardId, currentTypeOption, projectId, getBacklogDataApi]);
 
   useEffect(() => {
     const handleClickOutside = (e: any) => {
@@ -69,7 +70,7 @@ export default function BacklogSection({ backlogData, render, loaded }: IBacklog
   const onChangeTitle = (id: string, title: string) => {
     const data = { title };
     updateTask(id, data).then(() => {
-      render();
+      getBacklogDataApi();
     });
   };
 
@@ -86,7 +87,7 @@ export default function BacklogSection({ backlogData, render, loaded }: IBacklog
       status: status.toLowerCase()
     };
     updateTask(id, data).then(() => {
-      render();
+      getBacklogDataApi();
     });
   };
   // const onClickChangePriority = (id: string, priority: string) => {
@@ -100,7 +101,7 @@ export default function BacklogSection({ backlogData, render, loaded }: IBacklog
   // };
   const onClickDelete = (id: string) => {
     deleteTask(id).then(() => {
-      render();
+      getBacklogDataApi();
     });
   };
   return (
