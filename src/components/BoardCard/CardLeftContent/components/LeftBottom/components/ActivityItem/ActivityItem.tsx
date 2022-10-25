@@ -23,31 +23,31 @@ const dateHandler = (fullDate) => {
   let month = YearMonthDay[1];
   const day = YearMonthDay[2];
   let result = '';
-  if (month === '1' || month === '01') {
+  if (month === '01') {
     month = 'Jan';
   }
-  if (month === '2' || month === '02') {
+  if (month === '02') {
     month = 'Feb';
   }
-  if (month === '3' || month === '03') {
+  if (month === '03') {
     month = 'Mar';
   }
-  if (month === '4' || month === '04') {
+  if (month === '04') {
     month = 'Apr';
   }
-  if (month === '5' || month === '05') {
+  if (month === '05') {
     month = 'May';
   }
-  if (month === '6' || month === '06') {
+  if (month === '06') {
     month = 'Jun';
   }
-  if (month === '7' || month === '7') {
+  if (month === '7') {
     month = 'Jul';
   }
-  if (month === '8' || month === '08') {
+  if (month === '08') {
     month = 'Aug';
   }
-  if (month === '9' || month === '09') {
+  if (month === '09') {
     month = 'Sep';
   }
   if (month === '10') {
