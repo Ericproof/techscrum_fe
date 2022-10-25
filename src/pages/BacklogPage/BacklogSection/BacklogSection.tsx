@@ -11,9 +11,10 @@ import { addTask, updateTask, deleteTask } from '../../../api/backlog/backlog';
 interface IBacklogSection {
   backlogData: any;
   render: () => void;
+  loaded: boolean;
 }
 
-export default function BacklogSection({ backlogData, render }: IBacklogSection) {
+export default function BacklogSection({ backlogData, render, loaded }: IBacklogSection) {
   const [showBacklogInput, setShowBacklogInput] = useState(false);
   const [backlogInputFocus, setBacklogInputFocus] = useState(false);
   const [currentTypeOption, setCurrentTypeOption] = useState('story');
@@ -107,32 +108,33 @@ export default function BacklogSection({ backlogData, render }: IBacklogSection)
       <div className={styles.header}>
         <div className={styles.heading}>
           <h1>Backlog</h1>
-          <div className={styles.issueCount}>{backlogData.cards.length} issues</div>
+          <div className={styles.issueCount}>{loaded && backlogData.cards.length} issues</div>
         </div>
         <div className={styles.toolbar}>
           <Button>Create sprint</Button>
         </div>
       </div>
       <div className={styles.listContainer}>
-        {backlogData.cards.map((task) => {
-          return (
-            <TaskItem
-              taskTitle={task.title}
-              key={task.id}
-              taskId={task.id}
-              id={'TEC-'.concat(task.id.slice(task.id.length - 3))}
-              editMode={editId === task.id}
-              onClickEditId={onClickEditId}
-              onChangeTitle={onChangeTitle}
-              type={task.typeId.slug}
-              status={task.status.name.toUpperCase()}
-              onClickChangeStatus={onClickChangeStatus}
-              // priority={"Highest"}
-              // onClickChangePriority={onClickChangePriority}
-              onClickDelete={onClickDelete}
-            />
-          );
-        })}
+        {loaded &&
+          backlogData.cards.map((task) => {
+            return (
+              <TaskItem
+                taskTitle={task.title}
+                key={task.id}
+                taskId={task.id}
+                id={'TEC-'.concat(task.id.slice(task.id.length - 3))}
+                editMode={editId === task.id}
+                onClickEditId={onClickEditId}
+                onChangeTitle={onChangeTitle}
+                type={task.typeId.slug}
+                status={task.status.name.toUpperCase()}
+                onClickChangeStatus={onClickChangeStatus}
+                // priority={"Highest"}
+                // onClickChangePriority={onClickChangePriority}
+                onClickDelete={onClickDelete}
+              />
+            );
+          })}
       </div>
       {showBacklogInput ? (
         <form ref={backlogFormRef}>

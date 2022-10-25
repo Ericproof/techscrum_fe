@@ -36,12 +36,10 @@ export default function BacklogPage() {
       <div>
         <h1>Backlog</h1>
       </div>
-      {loaded && (
-        <div className={styles.scrollContainer}>
-          {/* <SprintSection sprintData={sprintData} render={render} /> */}
-          <BacklogSection backlogData={backlogData} render={render} />
-        </div>
-      )}
+      <div className={styles.scrollContainer}>
+        {/* <SprintSection sprintData={sprintData} render={render} /> */}
+        <BacklogSection backlogData={backlogData} render={render} loaded={loaded} />
+      </div>
     </div>
   );
 }
