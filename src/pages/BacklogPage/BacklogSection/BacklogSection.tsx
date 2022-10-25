@@ -1,63 +1,53 @@
+/* eslint-disable no-console */
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { GoPlus } from 'react-icons/go';
+import { useParams } from 'react-router-dom';
 import Button from '../../../components/Button/Button';
 import TaskTypeSelect from '../../../components/Select/TaskTypeSelect/TaskTypeSelect';
 import TaskItem from '../TaskItem/TaskItem';
 import styles from './BacklogSection.module.scss';
+import { addTask, updateTask, deleteTask } from '../../../api/backlog/backlog';
 // WIP more function will be added
+interface IBacklogSection {
+  backlogData: any;
+  render: () => void;
+}
 
-export default function BacklogSection() {
-  const dummyTaskList = [
-    {
-      id: 'TEC-315',
-      title: 'Task 1',
-      type: 'story',
-      status: 'TO DO',
-      priority: 'Medium'
-    },
-    {
-      id: 'TEC-316',
-      title: 'Task 2',
-      type: 'bug',
-      status: 'TO DO',
-      priority: 'Medium'
-    },
-    {
-      id: 'TEC-317',
-      title: 'Task 3',
-      type: 'task',
-      status: 'TO DO',
-      priority: 'Medium'
-    }
-  ];
-
+export default function BacklogSection({ backlogData, render }: IBacklogSection) {
   const [showBacklogInput, setShowBacklogInput] = useState(false);
   const [backlogInputFocus, setBacklogInputFocus] = useState(false);
   const [currentTypeOption, setCurrentTypeOption] = useState('story');
-
   const [editId, setEditId] = useState('-1');
-  const [taskList, setTaskList] = useState(dummyTaskList);
+  const { boardId = '', projectId = '' } = useParams();
 
   const backlogFormRef = useRef<HTMLFormElement | null>(null);
   const createIssueRef = useRef<HTMLInputElement | null>(null);
 
   const createIssueAction = useCallback(() => {
     if (createIssueRef?.current?.value) {
-      const id = 'TEC-'.concat((+taskList[taskList.length - 1].id.split('-')[1] + 1).toString());
-      setTaskList([
-        ...taskList,
-        {
-          id,
-          title: createIssueRef?.current?.value,
-          type: currentTypeOption,
-          status: 'TO DO',
-          priority: 'Medium'
-        }
-      ]);
-      setCurrentTypeOption('story');
+      const data = {
+        title: createIssueRef?.current?.value,
+        status: 'to do',
+        describtion: '',
+        typeId: {
+          createdAt: new Date().toISOString(),
+          name: currentTypeOption.charAt(0).toUpperCase() + currentTypeOption.slice(1),
+          slug: currentTypeOption,
+          updatedAt: new Date().toISOString(),
+          _v: 0,
+          _id: '631d94d08a05945727602cd1'
+        },
+        boardId,
+        projectId,
+        sprintId: null
+      };
+      console.log(data);
+      addTask(data).then(() => {
+        render();
+      });
     }
     setShowBacklogInput(false);
-  }, [currentTypeOption, taskList]);
+  }, [boardId, currentTypeOption, projectId, render]);
 
   useEffect(() => {
     const handleClickOutside = (e: any) => {
@@ -69,23 +59,17 @@ export default function BacklogSection() {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [backlogInputFocus, createIssueAction, taskList]);
+  }, [backlogInputFocus, createIssueAction]);
 
   const onClickEditId = (id: string) => {
     setEditId(id);
   };
 
   const onChangeTitle = (id: string, title: string) => {
-    const updatedTaskList = taskList.map((task) => {
-      if (task.id === id) {
-        return {
-          ...task,
-          title
-        };
-      }
-      return task;
+    const data = { title };
+    updateTask(id, data).then(() => {
+      render();
     });
-    setTaskList(updatedTaskList);
   };
 
   const onKeyDownCreateIssue = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -97,53 +81,54 @@ export default function BacklogSection() {
     setCurrentTypeOption(type);
   };
   const onClickChangeStatus = (id: string, status: string) => {
-    const updatedTaskList = taskList.map((task) => {
-      if (task.id === id) {
-        return { ...task, status };
-      }
-      return task;
+    const data = {
+      status: status.toLowerCase()
+    };
+    updateTask(id, data).then(() => {
+      render();
     });
-    setTaskList(updatedTaskList);
   };
-  const onClickChangePriority = (id: string, priority: string) => {
-    const updatedTaskList = taskList.map((task) => {
-      if (task.id === id) {
-        return { ...task, priority };
-      }
-      return task;
-    });
-    setTaskList(updatedTaskList);
-  };
+  // const onClickChangePriority = (id: string, priority: string) => {
+  //   const updatedTaskList = taskList.map((task) => {
+  //     if (task.id === id) {
+  //       return { ...task, priority };
+  //     }
+  //     return task;
+  //   });
+  //   setTaskList(updatedTaskList);
+  // };
   const onClickDelete = (id: string) => {
-    const updatedTaskList = taskList.filter((task) => task.id !== id);
-    setTaskList(updatedTaskList);
+    deleteTask(id).then(() => {
+      render();
+    });
   };
   return (
     <section className={styles.container}>
       <div className={styles.header}>
         <div className={styles.heading}>
           <h1>Backlog</h1>
-          <div className={styles.issueCount}>{taskList.length} issues</div>
+          <div className={styles.issueCount}>{backlogData.cards.length} issues</div>
         </div>
         <div className={styles.toolbar}>
           <Button>Create sprint</Button>
         </div>
       </div>
       <div className={styles.listContainer}>
-        {taskList.map((task) => {
+        {backlogData.cards.map((task) => {
           return (
             <TaskItem
               taskTitle={task.title}
               key={task.id}
-              id={task.id}
+              taskId={task.id}
+              id={'TEC-'.concat(task.id.slice(task.id.length - 3))}
               editMode={editId === task.id}
               onClickEditId={onClickEditId}
               onChangeTitle={onChangeTitle}
-              type={task.type}
-              status={task.status}
+              type={task.typeId.slug}
+              status={task.status.name.toUpperCase()}
               onClickChangeStatus={onClickChangeStatus}
-              priority={task.priority}
-              onClickChangePriority={onClickChangePriority}
+              // priority={"Highest"}
+              // onClickChangePriority={onClickChangePriority}
               onClickDelete={onClickDelete}
             />
           );

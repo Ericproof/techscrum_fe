@@ -7,8 +7,14 @@ import TaskTypeSelect from '../../../components/Select/TaskTypeSelect/TaskTypeSe
 import TaskItem from '../TaskItem/TaskItem';
 import styles from './SprintSection.module.scss';
 // WIP need to communicate with backend
-
-export default function SprintSection() {
+interface ISprintSection {
+  sprintData: any;
+  render: () => void;
+}
+// eslint-disable-next-line no-unused-vars
+export default function SprintSection({ sprintData, render }: ISprintSection) {
+  // eslint-disable-next-line no-console
+  console.log(sprintData);
   const dummyTaskList = [
     {
       id: 'TEC-318',
@@ -107,15 +113,15 @@ export default function SprintSection() {
     });
     setSprintTaskList(updatedTaskList);
   };
-  const onClickChangePriority = (id: string, priority: string) => {
-    const updatedTaskList = sprintTaskList.map((task) => {
-      if (task.id === id) {
-        return { ...task, priority };
-      }
-      return task;
-    });
-    setSprintTaskList(updatedTaskList);
-  };
+  // const onClickChangePriority = (id: string, priority: string) => {
+  //   const updatedTaskList = sprintTaskList.map((task) => {
+  //     if (task.id === id) {
+  //       return { ...task, priority };
+  //     }
+  //     return task;
+  //   });
+  //   setSprintTaskList(updatedTaskList);
+  // };
   const onClickDelete = (id: string) => {
     const updatedTaskList = sprintTaskList.filter((task) => task.id !== id);
     setSprintTaskList(updatedTaskList);
@@ -138,6 +144,7 @@ export default function SprintSection() {
             <TaskItem
               taskTitle={task.title}
               key={task.id}
+              taskId={task.id}
               id={task.id}
               editMode={editId === task.id}
               onClickEditId={onClickEditId}
@@ -145,8 +152,8 @@ export default function SprintSection() {
               type={task.type}
               status={task.status}
               onClickChangeStatus={onClickChangeStatus}
-              priority={task.priority}
-              onClickChangePriority={onClickChangePriority}
+              // priority={task.priority}
+              // onClickChangePriority={onClickChangePriority}
               onClickDelete={onClickDelete}
             />
           );

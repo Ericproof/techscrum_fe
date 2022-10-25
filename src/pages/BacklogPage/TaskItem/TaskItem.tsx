@@ -3,7 +3,7 @@ import { FaPen } from 'react-icons/fa';
 import IconButton from '../../../components/Button/IconButton/IconButton';
 import styles from './TaskItem.module.scss';
 import ToolBar from '../ToolBar/ToolBar';
-import PriorityBtn from '../PriorityBtn/PriorityBtn';
+// import PriorityBtn from '../PriorityBtn/PriorityBtn';
 import OptionBtn from '../OptionBtn/OptionBtn';
 
 interface ITaskInput {
@@ -14,9 +14,10 @@ interface ITaskInput {
   onChangeTitle: (id: string, title: string) => void;
   type: string;
   status: string;
+  taskId: string;
   onClickChangeStatus: (id: string, status: string) => void;
-  priority: string;
-  onClickChangePriority: (id: string, priority: string) => void;
+  // priority: string;
+  // onClickChangePriority: (id: string, priority: string) => void;
   onClickDelete: (id: string) => void;
 }
 export default function TaskItem({
@@ -28,8 +29,9 @@ export default function TaskItem({
   type,
   status,
   onClickChangeStatus,
-  priority,
-  onClickChangePriority,
+  taskId,
+  // priority,
+  // onClickChangePriority,
   onClickDelete
 }: ITaskInput) {
   const allTypes = {
@@ -43,13 +45,13 @@ export default function TaskItem({
   const [disableShowOptionBtnEffect, setDisableShowOptionBtnEffect] = useState(false);
 
   const editClick = () => {
-    onClickEditId(id);
+    onClickEditId(taskId);
   };
   const updateTaskTitleContent = useCallback(() => {
     if (inputRef?.current?.value) {
-      onChangeTitle(id, inputRef?.current?.value);
+      onChangeTitle(taskId, inputRef?.current?.value);
     }
-  }, [id, onChangeTitle]);
+  }, [taskId, onChangeTitle]);
 
   useEffect(() => {
     const handleClickOutside = (e: any) => {
@@ -108,7 +110,6 @@ export default function TaskItem({
         </div>
         {editMode ? (
           <input
-            id={id}
             ref={inputRef}
             type="text"
             defaultValue={taskTitle}
@@ -124,11 +125,11 @@ export default function TaskItem({
           </div>
         )}
       </div>
-      <PriorityBtn priority={priority} id={id} onClickChangePriority={onClickChangePriority} />
-      <ToolBar status={status} id={id} onClickChangeStatus={onClickChangeStatus} />
+      {/* <PriorityBtn priority={priority} id={id} onClickChangePriority={onClickChangePriority} /> */}
+      <ToolBar status={status} id={taskId} onClickChangeStatus={onClickChangeStatus} />
       <OptionBtn
         showOptionBtn={showOptionBtn}
-        id={id}
+        id={taskId}
         onClickDelete={onClickDelete}
         toggleDisableShowOptionBtnEffect={toggleDisableShowOptionBtnEffect}
       />
