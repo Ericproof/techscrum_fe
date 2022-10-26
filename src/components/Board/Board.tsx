@@ -163,9 +163,11 @@ export default function Board() {
       } finally {
         getViewTaskStateFromChildren();
         const updatedColumns = { ...columnsInfo };
-        if (taskData.statusId !== undefined) {
-          columnsInfo[taskData.statusId].items.forEach((item, index) => {
-            if (item.statusId !== undefined && item.id === taskData.id) {
+        // WIP temporarily fix the columns not updated after deleting a task
+        const task = { ...taskData, statusId: taskData.status.id };
+        if (task.statusId !== undefined) {
+          columnsInfo[task.statusId].items.forEach((item, index) => {
+            if (item.statusId !== undefined && item.id === task.id) {
               updatedColumns[item.statusId].items.splice(index, 1);
             }
           });
