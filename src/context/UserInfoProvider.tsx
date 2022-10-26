@@ -14,10 +14,10 @@ interface ILoginInfoProvider {
 }
 
 const getExpirtationDate = (token: string) => {
-  const { exp } = decode(token);
+  const decodeJSON: any = decode(token);
   const expirationDate = new Date();
   const ts = new Date().getTime();
-  expirationDate.setTime(ts + exp / 10);
+  expirationDate.setTime(ts + decodeJSON.exp / 10);
   return expirationDate;
 };
 
