@@ -1,125 +1,94 @@
-[
+{
+  "id": "63565445d377d106f9a8b610",
+  "title": "tes",
+  "taskStatus": [
     {
-        "id": "634e9f20162cb5e204e4e532",
-        "title": "project Date",
-        "taskStatus": [
-            {
-                "id": "634e9f20162cb5e204e4e533",
-                "name": "To Do",
-                "slug": "to-do",
-                "taskList": [
-                    {
-                        "id": "63533acedd32116190a0c408",
-                        "order": 0
-                    },
-                    {
-                        "id": "63533ea0dd32116190a0c4da",
-                        "order": 1
-                    },
-                    {
-                        "id": "635344aadd32116190a0c7de",
-                        "order": 2
-                    },
-                    {
-                        "id": "63535dcadd32116190a0ce6b",
-                        "order": 3,
-                        "detail": {
-                            "id": "63534b09dd32116190a0c8e5",
-                            "title": "act t",
-                            "statusId": "634e9f20162cb5e204e4e533",
-                            "projectId": "634e9f20162cb5e204e4e538",
-                            "boardId": "634e9f20162cb5e204e4e532",
-                            "typeId": "631d94d08a05945727602cd1",
-                            "description": "test test",
-                            "storyPoint": 0,
-                            "dueAt": "2022-10-10T00:00:00.000Z",
-                            "attachmentUrls": [],
-                            "assignInfo": {
-                                "id": "632fc37a89d19ed1f57c7ab1",
-                                "email": "joe.hz.au@gmail.com",
-                                "avatarIcon": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png",
-                                "createdAt": "2022-09-25T02:56:58.574Z",
-                                "projectsRoles": [],
-                                "updatedAt": "2022-09-25T02:57:31.761Z",
-                                "name": "Joe"
-                            }
-                        }
-                    },
-                    {
-                        "id": "63537bf7be998aac9549316f",
-                        "order": 4,
-                        "detail": {
-                            "id": "634f8a1ef8d245b0eba99b61",
-                            "title": "test",
-                            "statusId": "634e9f20162cb5e204e4e533",
-                            "projectId": "634e9f20162cb5e204e4e538",
-                            "boardId": "634e9f20162cb5e204e4e532",
-                            "typeId": "631d94d08a05945727602cd1",
-                            "description": "test3",
-                            "storyPoint": 0,
-                            "dueAt": "2022-10-19T05:24:38.681Z",
-                            "attachmentUrls": [],
-                            "assignInfo": {
-                                "id": "631dd53189d19ed1f532fb85",
-                                "email": "kitman200220022002@gmail.com",
-                                "avatarIcon": "https://kitmanimage.s3.ap-southeast-2.amazonaws.com/1665799533694.png",
-                                "createdAt": "2022-09-11T12:31:46.017Z",
-                                "projectsRoles": [],
-                                "updatedAt": "2022-10-15T02:05:36.159Z",
-                                "name": "kitman",
-                                "abbreviation": "",
-                                "jobTitle": "",
-                                "location": "",
-                                "userName": ""
-                            }
-                        }
-                    }
-                ]
-            },
-            {
-                "id": "634e9f20162cb5e204e4e534",
-                "name": "In Progress",
-                "slug": "in-progress",
-                "taskList": []
-            },
-            {
-                "id": "634e9f20162cb5e204e4e535",
-                "name": "Review",
-                "slug": "review",
-                "taskList": [
-                    {
-                        "id": "63537c3ebe998aac954931a4",
-                        "order": 0,
-                        "detail": {
-                            "id": "634e9f2d162cb5e204e4e54c",
-                            "title": "date",
-                            "statusId": "634e9f20162cb5e204e4e535",
-                            "projectId": "634e9f20162cb5e204e4e538",
-                            "boardId": "634e9f20162cb5e204e4e532",
-                            "typeId": "631d94d08a05945727602cd1",
-                            "description": "",
-                            "storyPoint": 0,
-                            "dueAt": "2022-10-21T00:00:00.000Z",
-                            "attachmentUrls": [],
-                            "assignInfo": {
-                                "id": "6333fe4089d19ed1f511b516",
-                                "email": "565311899@qq.com",
-                                "avatarIcon": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png",
-                                "createdAt": "2022-09-28T07:56:48.487Z",
-                                "projectsRoles": [],
-                                "updatedAt": "2022-09-28T07:57:28.472Z",
-                                "name": "jack"
-                            }
-                        }
-                    }
-                ]
-            },
-            {
-                "id": "634e9f20162cb5e204e4e536",
-                "name": "Done",
-                "slug": "done",
-                "taskList": []
-            }
-        ]
+      "id": "63565445d377d106f9a8b608",
+      "name": "to do",
+      "slug": "to-do",
+      "order": 0,
+      "taskList": [
+        {
+          "assignId": null,
+          "title": "test",
+          "tags": [],
+          "comments": [],
+          "status": "63565445d377d106f9a8b608",
+          "projectId": "63565445d377d106f9a8b611",
+          "boardId": "63565445d377d106f9a8b610",
+          "sprintId": null,
+          "description": "",
+          "storyPoint": 0,
+          "dueAt": "2022-10-24T09:01:49.927Z",
+          "reporterId": "632fc37a89d19ed1f57c7ab1",
+          "typeId": "631d94d08a05945727602cd1",
+          "attachmentUrls": [],
+          "createdAt": "2022-10-24T09:01:57.330Z",
+          "updatedAt": "2022-10-24T09:01:57.330Z",
+          "id": "63565485d377d106f9a8b643"
+        },
+        {
+          "assignId": null,
+          "title": "hello",
+          "tags": [],
+          "comments": [],
+          "status": "63565445d377d106f9a8b608",
+          "projectId": "63565445d377d106f9a8b611",
+          "boardId": "63565445d377d106f9a8b610",
+          "sprintId": null,
+          "description": "",
+          "storyPoint": 0,
+          "dueAt": "2022-10-24T11:46:40.956Z",
+          "reporterId": "632fc37a89d19ed1f57c7ab1",
+          "typeId": "631d94d08a05945727602cd1",
+          "attachmentUrls": [],
+          "createdAt": "2022-10-24T11:46:59.191Z",
+          "updatedAt": "2022-10-24T11:46:59.191Z",
+          "id": "63567b33e9bcb85c00640d0d"
+        },
+        {
+          "assignId": null,
+          "title": "hi",
+          "tags": [],
+          "comments": [],
+          "status": "63565445d377d106f9a8b608",
+          "projectId": "63565445d377d106f9a8b611",
+          "boardId": "63565445d377d106f9a8b610",
+          "sprintId": null,
+          "description": "",
+          "storyPoint": 0,
+          "dueAt": "2022-10-24T11:46:40.956Z",
+          "reporterId": "632fc37a89d19ed1f57c7ab1",
+          "typeId": "631d94d08a05945727602cd1",
+          "attachmentUrls": [],
+          "createdAt": "2022-10-24T11:47:01.003Z",
+          "updatedAt": "2022-10-24T11:47:01.003Z",
+          "id": "63567b35e9bcb85c00640d14"
+        }
+      ]
+    },
+    {
+      "id": "63565445d377d106f9a8b609",
+      "name": "in progress",
+      "slug": "in-progress",
+      "order": 1,
+      "taskList": []
+    },
+    {
+      "id": "63565445d377d106f9a8b60a",
+      "name": "review",
+      "slug": "review",
+      "order": 2,
+      "taskList": []
+    },
+    {
+      "id": "63565445d377d106f9a8b60b",
+      "name": "done",
+      "slug": "done",
+      "order": 3,
+      "taskList": []
     }
-]
+  ],
+  "createdAt": "2022-10-24T09:00:54.111Z",
+  "updatedAt": "2022-10-24T09:00:54.111Z"
+}

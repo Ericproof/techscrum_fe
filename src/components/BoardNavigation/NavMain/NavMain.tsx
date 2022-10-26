@@ -4,6 +4,7 @@ import { VscNewFile } from 'react-icons/vsc';
 import { NavLink, useParams } from 'react-router-dom';
 import { BsFillPeopleFill } from 'react-icons/bs';
 import { FiSettings } from 'react-icons/fi';
+import { FaDailymotion } from 'react-icons/fa';
 import { IProjectData, IShortcutData } from '../../../types';
 import checkAccess from '../../../utils/helpers';
 import Shortcut from '../../AddShortcut/Shortcut';
@@ -239,8 +240,10 @@ export default function NavMain(props: IPropsNavMain) {
             setShowDailyScrum(true);
           }}
           className={styles.dailyScrumBtn}
+          data-testid="dailyscrumBtn"
         >
-          Daily scrum
+          <FaDailymotion className={styles.dailyScrumIcon} />
+          <p>Daily scrum</p>
         </button>
         {showDailyScrum && (
           <DailyScrum

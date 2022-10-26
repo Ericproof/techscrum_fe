@@ -13,6 +13,7 @@ export interface Task {
 }
 
 export interface TaskEntity {
+  status?: any;
   id?: string;
   title?: string;
   tags?: ILabelData[];

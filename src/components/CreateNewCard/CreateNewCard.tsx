@@ -89,7 +89,7 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
       .then((res) => {
         if (res.status === 201) {
           setError(false);
-          fetchNewCard(res.data);
+          fetchNewCard({ ...res.data, statusId: res.data.status });
           return;
         }
         setError(true);
