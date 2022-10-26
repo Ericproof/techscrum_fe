@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { createContext, Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import decode from 'jwt-decode';
 import { IUserInfo } from '../types';
 import { getUserInfo } from '../api/userProfile/userProfile';
 import { projectRolesToObject, setLocalStorage } from '../utils/helpers';
@@ -11,6 +12,14 @@ const UserDispatchContext = createContext<Dispatch<SetStateAction<IUserInfo>>>((
 interface ILoginInfoProvider {
   children?: React.ReactNode;
 }
+
+const getExpirtationDate = (token: string) => {
+  const { exp } = decode(token);
+  const expirationDate = new Date();
+  const ts = new Date().getTime();
+  expirationDate.setTime(ts + exp / 10);
+  return expirationDate;
+};
 
 function UserProvider({ children }: ILoginInfoProvider) {
   const [userInfo, setUserInfo] = useState<IUserInfo>({});
@@ -25,6 +34,7 @@ function UserProvider({ children }: ILoginInfoProvider) {
         const projectRoles = JSON.stringify(projectRolesToObject(user.projectsRoles));
         setUserInfo({ ...user, token: t, projectRoles });
         setLocalStorage(user);
+        localStorage.setItem('expiration_date', getExpirtationDate(t).toString());
       } catch (e) {
         localStorage.clear();
         setUserInfo({});
@@ -34,6 +44,12 @@ function UserProvider({ children }: ILoginInfoProvider) {
 
     const token = localStorage.getItem('access_token');
     const refreshToken = localStorage.getItem('refresh_token');
+    const expirationDate = new Date(localStorage.getItem('expiration_date') || '');
+    if (expirationDate <= new Date()) {
+      localStorage.clear();
+      setUserInfo({});
+      navigator('/login');
+    }
     if (
       token !== undefined &&
       token != null &&
