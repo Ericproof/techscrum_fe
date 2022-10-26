@@ -39,7 +39,8 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
   }, [taskType]);
 
   const data = useState<ICardData>({
-    dueAt: new Date()
+    dueAt: new Date(),
+    title: ''
   });
 
   const onChangeAssigneeId = (e: any) => {

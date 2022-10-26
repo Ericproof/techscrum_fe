@@ -41,6 +41,11 @@ export function updateTask(taskId: string, data: ITaskData) {
   if (typeof data.typeId !== 'string') {
     copyData.typeId = data?.typeId?.id;
   }
+
+  copyData.tags = data.tags.map((item) => {
+    return typeof item !== 'string' ? item.id : item;
+  });
+
   return axios.put(`${config.apiAddress}/tasks/${taskId}`, copyData);
 }
 

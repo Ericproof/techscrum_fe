@@ -75,7 +75,10 @@ export default function BoardMain({
                                       );
                                     })}
                                   </span>
-                                  <p>{item.title ?? ''}</p>
+                                  <p>
+                                    {item.title.substring(0, 30) +
+                                      (item.title.length > 30 ? '...' : '')}
+                                  </p>
                                   <div className={styles.cardFooter}>
                                     <div className={styles.cardFooterLeft}>
                                       <span>
