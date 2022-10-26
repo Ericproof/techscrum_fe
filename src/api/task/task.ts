@@ -31,6 +31,13 @@ export function updateTask(taskId: string, data: ITaskData) {
   if (typeof data.assignId !== 'string') {
     copyData.assignId = !data.assignId ? null : data.assignId.id;
   }
+  if (typeof data.status !== 'string') {
+    copyData.status = data?.status?.id;
+  }
+  if (typeof data.reporterId !== 'string') {
+    copyData.reporterId = data?.reporterId?.id;
+  }
+
   if (typeof data.typeId !== 'string') {
     copyData.typeId = data?.typeId?.id;
   }
