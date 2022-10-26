@@ -20,6 +20,7 @@ export default function BacklogPage() {
         setBacklogData(res.backlog);
         // setSprintData(res.sprints);
         setLoaded(true);
+        console.log(res.backlog);
       } catch (e) {
         setLoaded(false);
       }

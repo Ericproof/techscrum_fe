@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { GoPlus } from 'react-icons/go';
 import { useParams } from 'react-router-dom';
@@ -44,7 +45,8 @@ export default function BacklogSection({
         projectId,
         sprintId: null
       };
-      addTask(data).then(() => {
+      addTask(data).then((res) => {
+        console.log(res);
         getBacklogDataApi();
       });
     }
