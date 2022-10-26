@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { DropResult } from 'react-beautiful-dnd';
@@ -162,9 +163,11 @@ export default function Board() {
       } finally {
         getViewTaskStateFromChildren();
         const updatedColumns = { ...columnsInfo };
-        if (taskData.statusId !== undefined) {
-          columnsInfo[taskData.statusId].items.forEach((item, index) => {
-            if (item.statusId !== undefined && item.id === taskData.id) {
+        // WIP temporarily fix the columns not updated after deleting a task
+        const task = { ...taskData, statusId: taskData.status.id };
+        if (task.statusId !== undefined) {
+          columnsInfo[task.statusId].items.forEach((item, index) => {
+            if (item.statusId !== undefined && item.id === task.id) {
               updatedColumns[item.statusId].items.splice(index, 1);
             }
           });
@@ -177,17 +180,31 @@ export default function Board() {
 
   useEffect(() => {
     const fetchColumnsData = (boardInfo: IBoardEntity) => {
-      let columnInfoData: IColumnsFromBackend = {};
-      if (boardInfo.taskStatus === undefined) return setColumnsInfo(columnInfoData);
-      const { taskStatus } = boardInfo;
-      taskStatus.forEach((status) => {
-        const tasks: ITaskCard[] = [];
-        status.taskList.forEach((task) => {
-          const result = task.detail;
-          if (result !== undefined && result.title?.includes(inputQuery)) tasks.push(result);
-        });
-        columnInfoData = { ...columnInfoData, [status.id]: { name: status.name, items: tasks } };
-      });
+      const columnInfoData: IColumnsFromBackend = {};
+
+      if (inputQuery) {
+        for (const item of boardInfo.taskStatus) {
+          columnInfoData[item.id] = {
+            name: item.name,
+            slug: item.slug,
+            order: item.order,
+            items: item.taskList.filter((task) =>
+              task.title?.toLowerCase().includes(inputQuery.toLowerCase())
+            )
+          };
+        }
+        return setColumnsInfo(columnInfoData);
+      }
+
+      for (const item of boardInfo.taskStatus) {
+        columnInfoData[item.id] = {
+          name: item.name,
+          slug: item.slug,
+          order: item.order,
+          items: item.taskList
+        };
+      }
+
       return setColumnsInfo(columnInfoData);
     };
 

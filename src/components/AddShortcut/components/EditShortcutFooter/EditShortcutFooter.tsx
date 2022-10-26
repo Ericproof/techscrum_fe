@@ -34,6 +34,7 @@ export default function EditShortcutFooter({
           className={styles.cancelButton}
           type="button"
           onClick={() => setAddLinkToggle(!addLinkToggle)}
+          data-testid="cancel-shortcut-btn"
         >
           <span>Cancel</span>
         </button>
@@ -44,6 +45,7 @@ export default function EditShortcutFooter({
             setAddLinkToggle(!addLinkToggle);
             onClickUpdateShortcut();
           }}
+          data-testid="update-shortcut-btn"
         >
           <span>Update</span>
         </button>

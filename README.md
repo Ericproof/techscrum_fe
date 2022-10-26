@@ -16,26 +16,26 @@ Must run under http://localhost:3000 else register will return 404
 
 This is an example of how to list things you need to use the software and how to install them.
 
-Node
+- Node
 
 ### Installation
 
 Below are the command that you would need to run after clone down the repo, unless to told these command usually would need to be run only once
 
-- npm install --force
+- yarn install --force
 - cp .env.example .env
 
 ### Start up
 
 To able to start the server these are the following commands that would need to be run
 
-- npm start
+- yarn start
 
 ### Deployment
 
-To able to deploy this to the server you would need to run the following commands, which it will create an build folder, you would need to update that to the server
+To able to deploy this to the server, please follow this doc below
 
-- npm run build
+https://www.notion.so/React-Frontend-37039aec81b041b8b5cea4bc80fe4b90
 
 #### Entity Point
 
@@ -84,23 +84,3 @@ Use this space to list resources you find helpful and would like to give credit 
 ## Coding Standard
 
 - https://docs.google.com/document/d/1mmmdfmJqeM81y5cajolUOLGxRJtr_DONof82MQP9HZs/edit?usp=sharing
-
-## Pratice
-
-08/09/2022 Kitman
-09/09/2022 David
-10/09/2022 David
-11/09/2022 David
-12/09/2022 David
-
-09/09/2022 Wendy
-10/09/2022 Wendy
-11/09/2022 Wendy
-12/09/2022 Wendy
-13/09/2022 Wendy
-
-10/09/2022 Felix
-09/09/2022 Felix
-11/09/2022 Felix
-
-abc

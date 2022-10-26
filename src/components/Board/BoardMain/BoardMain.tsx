@@ -44,7 +44,9 @@ export default function BoardMain({
                       className={styles.column}
                     >
                       <div className={styles.columnInfo}>
-                        <h1 className={styles.name}>{column.name}</h1>
+                        <h1 className={styles.name} data-testid={`board-col-${id}`}>
+                          {column.name}
+                        </h1>
                         <h1 className={styles.taskNum}>{column.items.length}</h1>
                       </div>
                       {column.items.map((item, index) => {
@@ -61,6 +63,7 @@ export default function BoardMain({
                                   onClick={() => {
                                     passTaskId(item.id ?? '');
                                   }}
+                                  data-testid={`task-${item.id}`}
                                 >
                                   <span>
                                     {' '}
@@ -85,8 +88,8 @@ export default function BoardMain({
                                     <div className={styles.cardFooterRight}>
                                       <img
                                         src={
-                                          item !== undefined && item.assignInfo !== undefined
-                                            ? item.assignInfo.avatarIcon ??
+                                          item !== undefined && item?.assignee !== undefined
+                                            ? item.assignee?.avatarIcon ??
                                               'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'
                                             : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'
                                         }
