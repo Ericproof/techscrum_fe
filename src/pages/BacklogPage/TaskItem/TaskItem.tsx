@@ -3,7 +3,6 @@ import { FaPen } from 'react-icons/fa';
 import IconButton from '../../../components/Button/IconButton/IconButton';
 import styles from './TaskItem.module.scss';
 import ToolBar from '../ToolBar/ToolBar';
-// import PriorityBtn from '../PriorityBtn/PriorityBtn';
 import OptionBtn from '../OptionBtn/OptionBtn';
 
 interface ITaskInput {
@@ -16,8 +15,6 @@ interface ITaskInput {
   status: string;
   taskId: string;
   onClickChangeStatus: (id: string, status: string) => void;
-  // priority: string;
-  // onClickChangePriority: (id: string, priority: string) => void;
   onClickDelete: (id: string) => void;
 }
 export default function TaskItem({
@@ -30,8 +27,6 @@ export default function TaskItem({
   status,
   onClickChangeStatus,
   taskId,
-  // priority,
-  // onClickChangePriority,
   onClickDelete
 }: ITaskInput) {
   const allTypes = {
@@ -125,7 +120,6 @@ export default function TaskItem({
           </div>
         )}
       </div>
-      {/* <PriorityBtn priority={priority} id={id} onClickChangePriority={onClickChangePriority} /> */}
       <ToolBar status={status} id={taskId} onClickChangeStatus={onClickChangeStatus} />
       <OptionBtn
         showOptionBtn={showOptionBtn}

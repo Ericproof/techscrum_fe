@@ -7,14 +7,8 @@ import TaskTypeSelect from '../../../components/Select/TaskTypeSelect/TaskTypeSe
 import TaskItem from '../TaskItem/TaskItem';
 import styles from './SprintSection.module.scss';
 // WIP need to communicate with backend
-interface ISprintSection {
-  sprintData: any;
-  render: () => void;
-}
-// eslint-disable-next-line no-unused-vars
-export default function SprintSection({ sprintData, render }: ISprintSection) {
-  // eslint-disable-next-line no-console
-  console.log(sprintData);
+
+export default function SprintSection() {
   const dummyTaskList = [
     {
       id: 'TEC-318',
@@ -113,15 +107,6 @@ export default function SprintSection({ sprintData, render }: ISprintSection) {
     });
     setSprintTaskList(updatedTaskList);
   };
-  // const onClickChangePriority = (id: string, priority: string) => {
-  //   const updatedTaskList = sprintTaskList.map((task) => {
-  //     if (task.id === id) {
-  //       return { ...task, priority };
-  //     }
-  //     return task;
-  //   });
-  //   setSprintTaskList(updatedTaskList);
-  // };
   const onClickDelete = (id: string) => {
     const updatedTaskList = sprintTaskList.filter((task) => task.id !== id);
     setSprintTaskList(updatedTaskList);
@@ -152,8 +137,6 @@ export default function SprintSection({ sprintData, render }: ISprintSection) {
               type={task.type}
               status={task.status}
               onClickChangeStatus={onClickChangeStatus}
-              // priority={task.priority}
-              // onClickChangePriority={onClickChangePriority}
               onClickDelete={onClickDelete}
             />
           );

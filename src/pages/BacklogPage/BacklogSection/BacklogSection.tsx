@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { GoPlus } from 'react-icons/go';
 import { useParams } from 'react-router-dom';
@@ -7,7 +6,7 @@ import TaskTypeSelect from '../../../components/Select/TaskTypeSelect/TaskTypeSe
 import TaskItem from '../TaskItem/TaskItem';
 import styles from './BacklogSection.module.scss';
 import { addTask, updateTask, deleteTask } from '../../../api/backlog/backlog';
-// WIP more function will be added
+
 interface IBacklogSection {
   backlogData: any;
   getBacklogDataApi: () => void;
@@ -45,8 +44,7 @@ export default function BacklogSection({
         projectId,
         sprintId: null
       };
-      addTask(data).then((res) => {
-        console.log(res);
+      addTask(data).then(() => {
         getBacklogDataApi();
       });
     }
@@ -92,15 +90,6 @@ export default function BacklogSection({
       getBacklogDataApi();
     });
   };
-  // const onClickChangePriority = (id: string, priority: string) => {
-  //   const updatedTaskList = taskList.map((task) => {
-  //     if (task.id === id) {
-  //       return { ...task, priority };
-  //     }
-  //     return task;
-  //   });
-  //   setTaskList(updatedTaskList);
-  // };
   const onClickDelete = (id: string) => {
     deleteTask(id).then(() => {
       getBacklogDataApi();
@@ -132,8 +121,6 @@ export default function BacklogSection({
                 type={task.typeId.slug}
                 status={task.status.name.toUpperCase()}
                 onClickChangeStatus={onClickChangeStatus}
-                // priority={"Highest"}
-                // onClickChangePriority={onClickChangePriority}
                 onClickDelete={onClickDelete}
               />
             );

@@ -1,8 +1,6 @@
-/* eslint-disable no-console */
 import React, { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import BacklogSection from './BacklogSection/BacklogSection';
-// import SprintSection from './SprintSection/SprintSection';
 import styles from './BacklogPage.module.scss';
 import { getBacklog } from '../../api/backlog/backlog';
 
@@ -10,7 +8,6 @@ export default function BacklogPage() {
   // WIP need to communicate with backend
   const [loaded, setLoaded] = useState(false);
   const [backlogData, setBacklogData] = useState(null);
-  // const [sprintData, setSprintData] = useState(null);
   const { projectId = '' } = useParams();
 
   const getBacklogDataApi = useCallback(() => {
@@ -18,9 +15,7 @@ export default function BacklogPage() {
       try {
         const res = await getBacklog(projectId);
         setBacklogData(res.backlog);
-        // setSprintData(res.sprints);
         setLoaded(true);
-        console.log(res.backlog);
       } catch (e) {
         setLoaded(false);
       }
@@ -38,7 +33,6 @@ export default function BacklogPage() {
         <h1>Backlog</h1>
       </div>
       <div className={styles.scrollContainer}>
-        {/* <SprintSection sprintData={sprintData} render={render} /> */}
         <BacklogSection
           backlogData={backlogData}
           getBacklogDataApi={getBacklogDataApi}
