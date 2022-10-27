@@ -3,7 +3,6 @@ import { FaPen } from 'react-icons/fa';
 import IconButton from '../../../components/Button/IconButton/IconButton';
 import styles from './TaskItem.module.scss';
 import ToolBar from '../ToolBar/ToolBar';
-import PriorityBtn from '../PriorityBtn/PriorityBtn';
 import OptionBtn from '../OptionBtn/OptionBtn';
 
 interface ITaskInput {
@@ -14,9 +13,8 @@ interface ITaskInput {
   onChangeTitle: (id: string, title: string) => void;
   type: string;
   status: string;
+  taskId: string;
   onClickChangeStatus: (id: string, status: string) => void;
-  priority: string;
-  onClickChangePriority: (id: string, priority: string) => void;
   onClickDelete: (id: string) => void;
 }
 export default function TaskItem({
@@ -28,8 +26,7 @@ export default function TaskItem({
   type,
   status,
   onClickChangeStatus,
-  priority,
-  onClickChangePriority,
+  taskId,
   onClickDelete
 }: ITaskInput) {
   const allTypes = {
@@ -43,13 +40,13 @@ export default function TaskItem({
   const [disableShowOptionBtnEffect, setDisableShowOptionBtnEffect] = useState(false);
 
   const editClick = () => {
-    onClickEditId(id);
+    onClickEditId(taskId);
   };
   const updateTaskTitleContent = useCallback(() => {
     if (inputRef?.current?.value) {
-      onChangeTitle(id, inputRef?.current?.value);
+      onChangeTitle(taskId, inputRef?.current?.value);
     }
-  }, [id, onChangeTitle]);
+  }, [taskId, onChangeTitle]);
 
   useEffect(() => {
     const handleClickOutside = (e: any) => {
@@ -98,6 +95,7 @@ export default function TaskItem({
       onMouseOut={mouseOut}
       onFocus={() => {}}
       onBlur={() => {}}
+      data-testid={'task-hover-'.concat(taskId)}
     >
       <div className={styles.taskInfo}>
         <div className={styles.iconContainer}>
@@ -108,27 +106,33 @@ export default function TaskItem({
         </div>
         {editMode ? (
           <input
-            id={id}
             ref={inputRef}
             type="text"
             defaultValue={taskTitle}
             onKeyDown={saveKeyPress}
             className={styles.taskInput}
+            data-testid={'task-title-input-'.concat(taskId)}
           />
         ) : (
-          <div className={styles.taskTitle}>{taskTitle}</div>
+          <div className={styles.taskTitle} data-testid={'task-'.concat(taskId)}>
+            {taskTitle}
+          </div>
         )}
         {!editMode && (
           <div className={styles.editButton}>
-            <IconButton icon={<FaPen size={10} />} tooltip="Edit" onClick={editClick} />
+            <IconButton
+              icon={<FaPen size={10} />}
+              taskId={taskId}
+              tooltip="Edit"
+              onClick={editClick}
+            />
           </div>
         )}
       </div>
-      <PriorityBtn priority={priority} id={id} onClickChangePriority={onClickChangePriority} />
-      <ToolBar status={status} id={id} onClickChangeStatus={onClickChangeStatus} />
+      <ToolBar status={status} taskId={taskId} onClickChangeStatus={onClickChangeStatus} />
       <OptionBtn
         showOptionBtn={showOptionBtn}
-        id={id}
+        taskId={taskId}
         onClickDelete={onClickDelete}
         toggleDisableShowOptionBtnEffect={toggleDisableShowOptionBtnEffect}
       />

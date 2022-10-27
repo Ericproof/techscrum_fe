@@ -24,10 +24,7 @@ $hoverBgColor: #d5d8dd;
   .buttonText {
     font-weight: 700;
     white-space: nowrap;
-  }
-
-  &:hover {
-    background-color: $hoverBgColor;
+    margin-right: 5px;
   }
 }
 
