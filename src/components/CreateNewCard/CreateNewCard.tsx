@@ -134,6 +134,7 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
             type="text"
             value={title}
             onChange={changeTitleHandler}
+            data-testid="summary"
             required
           />
           <p className={styles.cardLabel}>Attachment</p>
@@ -177,7 +178,7 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
           >
             Cancel
           </button>
-          <button type="submit" className={styles.createButton}>
+          <button type="submit" className={styles.createButton} data-testid="create-issue">
             Create
           </button>
         </div>

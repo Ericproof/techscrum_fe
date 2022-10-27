@@ -75,7 +75,17 @@ export default function BoardMain({
                                       );
                                     })}
                                   </span>
-                                  <p>{item.title ?? ''}</p>
+                                  <p>
+                                    {item?.title &&
+                                      item.title
+                                        .split(' ')
+                                        .map((word: string) => {
+                                          return word.length > 27
+                                            ? `${word.substring(0, 27)}...`
+                                            : word;
+                                        })
+                                        .join(' ')}
+                                  </p>
                                   <div className={styles.cardFooter}>
                                     <div className={styles.cardFooterLeft}>
                                       <span>
