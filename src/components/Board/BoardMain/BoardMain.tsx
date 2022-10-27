@@ -98,8 +98,8 @@ export default function BoardMain({
                                     <div className={styles.cardFooterRight}>
                                       <img
                                         src={
-                                          item !== undefined && item.assignInfo !== undefined
-                                            ? item.assignInfo.avatarIcon ??
+                                          item !== undefined && item?.assignee !== undefined
+                                            ? item.assignee?.avatarIcon ??
                                               'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'
                                             : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'
                                         }

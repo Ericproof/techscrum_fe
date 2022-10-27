@@ -49,8 +49,13 @@ export default function CardLeftContent({
 
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
-    const updatedTaskInfo = { ...taskInfo, title: e.target.value, description: desc };
-    onSave(updatedTaskInfo);
+  };
+
+  const onBlurHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value !== taskInfo.title) {
+      const updatedTaskInfo = { ...taskInfo, title: e.target.value, description: desc };
+      onSave(updatedTaskInfo);
+    }
   };
 
   return (
@@ -61,6 +66,7 @@ export default function CardLeftContent({
           focusEventHandler={onFocusEventHandler}
           isDisabled={!checkAccess('edit:tasks', projectId)}
           onChangeTitle={onChangeTitle}
+          onBlurHandler={onBlurHandler}
           value={title}
         />
         {checkAccess('edit:tasks', projectId) && <Attach onChangeAttachment={uploadFile} />}
