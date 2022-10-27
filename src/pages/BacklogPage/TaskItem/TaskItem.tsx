@@ -95,6 +95,7 @@ export default function TaskItem({
       onMouseOut={mouseOut}
       onFocus={() => {}}
       onBlur={() => {}}
+      data-testid={'task-hover-'.concat(taskId)}
     >
       <div className={styles.taskInfo}>
         <div className={styles.iconContainer}>
@@ -110,20 +111,28 @@ export default function TaskItem({
             defaultValue={taskTitle}
             onKeyDown={saveKeyPress}
             className={styles.taskInput}
+            data-testid={'task-title-input-'.concat(taskId)}
           />
         ) : (
-          <div className={styles.taskTitle}>{taskTitle}</div>
+          <div className={styles.taskTitle} data-testid={'task-'.concat(taskId)}>
+            {taskTitle}
+          </div>
         )}
         {!editMode && (
           <div className={styles.editButton}>
-            <IconButton icon={<FaPen size={10} />} tooltip="Edit" onClick={editClick} />
+            <IconButton
+              icon={<FaPen size={10} />}
+              taskId={taskId}
+              tooltip="Edit"
+              onClick={editClick}
+            />
           </div>
         )}
       </div>
-      <ToolBar status={status} id={taskId} onClickChangeStatus={onClickChangeStatus} />
+      <ToolBar status={status} taskId={taskId} onClickChangeStatus={onClickChangeStatus} />
       <OptionBtn
         showOptionBtn={showOptionBtn}
-        id={taskId}
+        taskId={taskId}
         onClickDelete={onClickDelete}
         toggleDisableShowOptionBtnEffect={toggleDisableShowOptionBtnEffect}
       />

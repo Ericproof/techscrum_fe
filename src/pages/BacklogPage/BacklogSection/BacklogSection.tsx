@@ -135,6 +135,7 @@ export default function BacklogSection({
               type="text"
               name="newBacklog"
               id="newBacklog"
+              data-testid="create-issue-input"
               onFocus={() => {
                 setBacklogInputFocus(true);
               }}
@@ -149,7 +150,7 @@ export default function BacklogSection({
           overrideStyle={styles.buttonRow}
           onClick={() => setShowBacklogInput(true)}
         >
-          Create issue
+          <p data-testid="create-issue">Create issue</p>
         </Button>
       )}
     </section>

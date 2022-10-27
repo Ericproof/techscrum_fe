@@ -6,9 +6,9 @@ import Button from '../../../components/Button/Button';
 interface IToolBar {
   status: string;
   onClickChangeStatus: (id: string, status: string) => void;
-  id: string;
+  taskId: string;
 }
-export default function StatusBtn({ status, onClickChangeStatus, id }: IToolBar) {
+export default function StatusBtn({ status, onClickChangeStatus, taskId }: IToolBar) {
   const allBtns = [
     { status: 'TO DO', color: 'dropDownBtnGray' },
     { status: 'BLOCKED', color: 'dropDownBtnBlue' },
@@ -26,7 +26,7 @@ export default function StatusBtn({ status, onClickChangeStatus, id }: IToolBar)
   };
   const btnClick = (name: string) => {
     setShowDropDown(false);
-    onClickChangeStatus(id, name);
+    onClickChangeStatus(taskId, name);
   };
   useEffect(() => {
     const handleClickOutside = (e: any) => {
