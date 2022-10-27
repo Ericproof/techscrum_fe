@@ -241,7 +241,7 @@ export default function NavMain(props: IPropsNavMain) {
             setShowDailyScrum(true);
           }}
           className={styles.dailyScrumBtn}
-          data-testid="dailyscrumBtn"
+          data-testid="dailyscrum-btn"
         >
           <FaDailymotion className={styles.dailyScrumIcon} />
           <p>Daily scrum</p>
