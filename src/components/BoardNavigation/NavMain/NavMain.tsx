@@ -83,6 +83,7 @@ export default function NavMain(props: IPropsNavMain) {
                 className={styles.navLink}
                 end
                 to={`/projects/${projectId}/board/${boardId}`}
+                data-testid="board-btn"
               >
                 <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
                   <g fill="currentColor">

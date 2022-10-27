@@ -110,7 +110,9 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
   return (
     <div className={styles.cardContainer}>
       <div className={styles.cardTitle}>
-        <h2 className={styles.titleContent}>Create card</h2>
+        <h2 className={styles.titleContent} data-testid="board-create-card-btn">
+          Create card
+        </h2>
         <button type="button" className={styles.titleButton}>
           ...
         </button>
