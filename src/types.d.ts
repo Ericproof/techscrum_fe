@@ -179,6 +179,13 @@ export interface ICommentItemData {
   [x: string]: any;
 }
 
+export interface IActivityData {
+  [x: string]: any;
+}
+export interface IActivityItemData {
+  [x: string]: any;
+}
+
 export interface IResetPasswordForm {
   email: stirng;
 }
