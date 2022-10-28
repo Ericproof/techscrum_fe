@@ -26,7 +26,7 @@ export interface ITaskData {
 export interface ICardData {
   id?: string;
   tags?: [ILabelData];
-  title?: string;
+  title: string;
   statusId?: string;
   typeId?: string;
   description?: string;
@@ -68,7 +68,7 @@ export interface IItemFromBackend {
 export interface ITaskCard {
   id?: string;
   tags?: [ILabelData];
-  title?: string;
+  title: string;
   statusId?: string;
   typeId?: string;
   description?: string;

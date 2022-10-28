@@ -4,6 +4,7 @@ import { VscNewFile } from 'react-icons/vsc';
 import { NavLink, useParams } from 'react-router-dom';
 import { BsFillPeopleFill } from 'react-icons/bs';
 import { FiSettings } from 'react-icons/fi';
+import { FaDailymotion } from 'react-icons/fa';
 import { IProjectData, IShortcutData } from '../../../types';
 import checkAccess from '../../../utils/helpers';
 import Shortcut from '../../AddShortcut/Shortcut';
@@ -82,6 +83,7 @@ export default function NavMain(props: IPropsNavMain) {
                 className={styles.navLink}
                 end
                 to={`/projects/${projectId}/board/${boardId}`}
+                data-testid="board-btn"
               >
                 <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
                   <g fill="currentColor">
@@ -95,6 +97,7 @@ export default function NavMain(props: IPropsNavMain) {
                 className={styles.navLink}
                 end
                 to={`/projects/${projectId}/board/${boardId}/backlog`}
+                data-testid="backlog-btn"
               >
                 <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
                   <g fill="currentColor">
@@ -239,8 +242,10 @@ export default function NavMain(props: IPropsNavMain) {
             setShowDailyScrum(true);
           }}
           className={styles.dailyScrumBtn}
+          data-testid="dailyscrum-btn"
         >
-          Daily scrum
+          <FaDailymotion className={styles.dailyScrumIcon} />
+          <p>Daily scrum</p>
         </button>
         {showDailyScrum && (
           <DailyScrum

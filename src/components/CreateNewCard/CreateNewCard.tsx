@@ -41,7 +41,8 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
   }, [taskType]);
 
   const data = useState<ICardData>({
-    dueAt: new Date()
+    dueAt: new Date(),
+    title: ''
   });
 
   const onChangeAssigneeId = (e: any) => {
@@ -95,7 +96,7 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
           const userId = userInfo?.id;
           const taskId = res.data.id;
           createActivity({ operation, userId, taskId });
-          fetchNewCard(res.data);
+          fetchNewCard({ ...res.data, statusId: res.data.status });
           return;
         }
         setError(true);
@@ -115,7 +116,9 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
   return (
     <div className={styles.cardContainer}>
       <div className={styles.cardTitle}>
-        <h2 className={styles.titleContent}>Create card</h2>
+        <h2 className={styles.titleContent} data-testid="board-create-card-btn">
+          Create card
+        </h2>
         <button type="button" className={styles.titleButton}>
           ...
         </button>
@@ -140,6 +143,7 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
             type="text"
             value={title}
             onChange={changeTitleHandler}
+            data-testid="summary"
             required
           />
           <p className={styles.cardLabel}>Attachment</p>
@@ -183,7 +187,7 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
           >
             Cancel
           </button>
-          <button type="submit" className={styles.createButton}>
+          <button type="submit" className={styles.createButton} data-testid="create-issue">
             Create
           </button>
         </div>

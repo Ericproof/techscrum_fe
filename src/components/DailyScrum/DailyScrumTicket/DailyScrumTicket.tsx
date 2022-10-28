@@ -41,8 +41,9 @@ export default function DailyScrumTicket({
             onChange={(e) => {
               onChangeProgress(id, e);
             }}
+            data-testid={'dailyscrum-progress-bar-'.concat(id)}
           />
-          <p>{progress}%</p>
+          <p data-testid={'dailyscrum-progress-'.concat(id)}>{progress}%</p>
         </div>
       </div>
       <div className={styles.finish}>
@@ -74,6 +75,7 @@ export default function DailyScrumTicket({
               onChange={(e) => {
                 onChangeReason(id, e.target.value);
               }}
+              data-testid={'dailyscrum-reason-'.concat(id)}
             />
           </div>
         )}

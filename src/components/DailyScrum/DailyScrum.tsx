@@ -80,8 +80,12 @@ function DailyScrumModal({ onClickCloseModal }: IDailyScrumModal) {
   return (
     <>
       <div className={styles.dailyScrumHeader}>
-        <h2>Daily Log</h2>
-        <button className={styles.closeBtn} onClick={onClickCloseModal}>
+        <h2 data-testid="dailyscrum-header">Daily Log</h2>
+        <button
+          className={styles.closeBtn}
+          onClick={onClickCloseModal}
+          data-testid="dailyscrum-close"
+        >
           <AiOutlineClose />
         </button>
       </div>
@@ -103,7 +107,11 @@ function DailyScrumModal({ onClickCloseModal }: IDailyScrumModal) {
         );
       })}
       <div className={styles.btnContainer}>
-        <button className={styles.cancelBtn} onClick={onClickCloseModal}>
+        <button
+          className={styles.cancelBtn}
+          onClick={onClickCloseModal}
+          data-testid="dailyscrum-cancel"
+        >
           Cancel
         </button>
         <button className={styles.submitBtn} onClick={onClickCloseModal}>

@@ -4,13 +4,13 @@ import styles from './OptionBtn.module.scss';
 
 interface IOptionBtn {
   showOptionBtn: boolean;
-  id: string;
+  taskId: string;
   onClickDelete: (id: string) => void;
   toggleDisableShowOptionBtnEffect: () => void;
 }
 export default function OptionBtn({
   showOptionBtn,
-  id,
+  taskId,
   onClickDelete,
   toggleDisableShowOptionBtnEffect
 }: IOptionBtn) {
@@ -59,6 +59,7 @@ export default function OptionBtn({
         }}
         onBlur={() => {}}
         onFocus={() => {}}
+        data-testid={'hover-show-option-btn-'.concat(taskId)}
       >
         <BsThreeDots />
       </button>
@@ -78,8 +79,9 @@ export default function OptionBtn({
             <button
               className={styles.dropDownBtn}
               onClick={() => {
-                onClickDelete(id);
+                onClickDelete(taskId);
               }}
+              data-testid={'delete-task-'.concat(taskId)}
             >
               Delete
             </button>
