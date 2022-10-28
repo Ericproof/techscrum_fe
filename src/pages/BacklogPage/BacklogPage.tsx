@@ -30,7 +30,7 @@ export default function BacklogPage() {
   return (
     <div className={styles.container}>
       <div>
-        <h1>Backlog</h1>
+        <h1 data-testid="backlog-header">Backlog</h1>
       </div>
       <div className={styles.scrollContainer}>
         <BacklogSection
