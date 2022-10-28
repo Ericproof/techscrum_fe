@@ -8,7 +8,7 @@
   width: 100%;
   min-height: 40px;
   align-items: center;
-  font-size: 14px;
+  font-size: 17px;
   color: currentcolor;
   cursor: pointer;
   border-radius: 3px;
@@ -45,10 +45,10 @@
     text-align: left;
 
     h2 {
-      font-size: 14px;
+      font-size: 17px;
       letter-spacing: -0.003em;
       font-weight: 700;
-      color: var(--ds-text, #42526e);
+      color: rgba(255, 255, 255, 0.80);
       line-height: 1.2 !important;
     }
 

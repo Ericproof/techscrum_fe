@@ -1,3 +1,4 @@
+
 .container {
   overflow: hidden;
   position: relative;
@@ -17,12 +18,12 @@
     align-items: center;
     border-radius: 10px;
     border: none;
-    font-size: 14px;
+    font-size: 17px;
     cursor: pointer;
     background-color: transparent;
     font-weight: 500;
     padding: 8px 10px 8px 10px;
-    color: var(--ds-text-subtle, #42526e);
+    color: rgba(255,255,255,0.80);
     margin-top: 10px;
     height: 42px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
@@ -34,7 +35,8 @@
     }
   }
   .dailyScrumBtn:hover {
-    background-color: rgb(232, 239, 251);
+    background-color: rgba(255, 255, 255, 0.2);
+    color:white;
   }
 
   .containerItem {
@@ -91,7 +93,7 @@
       h3 {
         margin-top: 16px;
         display: block;
-        color: var(--ds-text-subtle, #42526e);
+        color: rgba(255, 255, 255, 0.80);
         margin-bottom: 6px;
         font-size: 11px;
         font-weight: 800;
@@ -113,7 +115,7 @@
         text-decoration: inherit;
         outline: 0px;
         border: 0px;
-        font-size: 14px;
+        font-size: 17px;
         margin: 0;
         cursor: pointer;
         -webkit-user-select: none;
@@ -127,7 +129,7 @@
         -webkit-text-decoration-skip: ink;
         text-decoration-skip-ink: auto;
         padding: 0 15px;
-        color: var(--ds-text-subtle, #42526e);
+        color:rgba(255, 255, 255, 0.80);
         justify-content: flex-start;
         svg {
           height: 24px;
@@ -148,8 +150,8 @@
         }
 
         &:hover {
-          background-color: var(--ds-background-selected, #e6effc);
-          color: var(--ds-text-selected, #0052cc);
+          background-color: rgba(255, 255, 255, 0.2);
+          color: white;
         }
       }
       .deployments {
@@ -174,7 +176,7 @@
     text-decoration: inherit;
     outline: 0px;
     border: 0px;
-    font-size: 14px;
+    font-size: 17px;
     cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -186,7 +188,7 @@
     -webkit-text-decoration-skip: ink;
     text-decoration-skip-ink: auto;
     padding: 8px 10px 8px 10px;
-    color: var(--ds-text-subtle, #42526e);
+    color: rgba(255, 255, 255, 0.80);
     position: relative;
     margin-top: 10px;
 
@@ -257,7 +259,8 @@
     }
 
     &:hover {
-      background-color: var(--ds-background-selected, #e6effc);
+      background-color: rgba(255, 255, 255, 0.2);
+      color: white;
       border-radius: 10px;
       .pencilLine {
         display: block;
