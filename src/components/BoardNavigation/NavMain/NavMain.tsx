@@ -83,6 +83,7 @@ export default function NavMain(props: IPropsNavMain) {
                 className={styles.navLink}
                 end
                 to={`/projects/${projectId}/board/${boardId}`}
+                data-testid="board-btn"
               >
                 <svg width="28" height="28" viewBox="0 0 28 28" role="presentation">
                   <g fill="currentColor">
@@ -241,7 +242,7 @@ export default function NavMain(props: IPropsNavMain) {
             setShowDailyScrum(true);
           }}
           className={styles.dailyScrumBtn}
-          data-testid="dailyscrumBtn"
+          data-testid="dailyscrum-btn"
         >
           <FaDailymotion className={styles.dailyScrumIcon} />
           <p>Daily scrum</p>

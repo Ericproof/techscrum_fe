@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { DatePicker } from '@atlaskit/datetime-picker';
 import { TaskEntity } from '../../api/task/entity/task';
+import { UserContext } from '../../context/UserInfoProvider';
+import { createActivity } from '../../api/activity/activity';
 
 interface Props {
   taskInfo: TaskEntity;
@@ -9,6 +11,11 @@ interface Props {
 }
 
 export default function DueDatePicker({ taskInfo, dueDateOnchange, isDisabled }: Props) {
+  const userInfo = useContext(UserContext);
+  const operation = 'updated';
+  const userId = userInfo.id;
+  const taskId = taskInfo.id;
+
   const dateWithDay = (date: Date | null) => {
     if (date != null) {
       const fullDate = date.toString().split('T')[0];
@@ -23,10 +30,11 @@ export default function DueDatePicker({ taskInfo, dueDateOnchange, isDisabled }:
       appearance="subtle"
       dateFormat="MM-DD-YYYY"
       placeholder={dateWithDay(taskInfo.dueAt ?? null)}
-      onChange={(date) => {
+      onChange={async (date) => {
         const updatedTaskInfo = { ...taskInfo };
         updatedTaskInfo.dueAt = new Date(date);
         dueDateOnchange(updatedTaskInfo);
+        await createActivity({ operation, userId, taskId });
       }}
       isDisabled={!isDisabled}
     />

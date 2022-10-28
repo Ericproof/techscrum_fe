@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import CardHeader from './CardHeader/CardHeader';
 import CardLeftContent from './CardLeftContent/CardLeftContent';
 import CardRightContent from './CardRightContent/CardRightContent';
@@ -6,6 +6,8 @@ import { TaskEntity } from '../../api/task/entity/task';
 import { IColumnsFromBackend, ILabelData } from '../../types';
 import styles from './BoardCard.module.scss';
 import { upload } from '../../api/upload/upload';
+import { createActivity } from '../../api/activity/activity';
+import { UserContext } from '../../context/UserInfoProvider';
 
 interface Props {
   columnsInfo: IColumnsFromBackend;
@@ -29,6 +31,7 @@ export default function BoardCard({
   updateTaskTags
 }: Props) {
   const [taskInfo, setTaskInfo] = useState<TaskEntity | null>(null);
+  const userInfo = useContext(UserContext);
 
   useEffect(() => {
     if (!taskData) {
@@ -37,20 +40,28 @@ export default function BoardCard({
     setTaskInfo(taskData);
   }, [taskData]);
 
-  const removeAttachment = (url: string) => {
+  const removeAttachment = async (url: string) => {
     const updateTaskInfo = { ...taskInfo };
     updateTaskInfo.attachmentUrls = taskInfo?.attachmentUrls.filter((photoUrl: string) => {
       return photoUrl !== url;
     });
     setTaskInfo(updateTaskInfo);
     onSave(updateTaskInfo);
+    const operation = 'updated';
+    const userId = userInfo.id;
+    const taskId = taskInfo?.id;
+    await createActivity({ operation, userId, taskId });
   };
 
-  const uploadSuccess = (newPhotoData: any) => {
+  const uploadSuccess = async (newPhotoData: any) => {
     const updateTaskInfo = { ...taskInfo };
     updateTaskInfo.attachmentUrls = [...updateTaskInfo.attachmentUrls, newPhotoData[0].location];
     setTaskInfo(updateTaskInfo);
     onSave(updateTaskInfo);
+    const operation = 'updated';
+    const userId = userInfo.id;
+    const taskId = taskInfo?.id;
+    await createActivity({ operation, userId, taskId });
   };
 
   const uploadFile = (e: any) => {
