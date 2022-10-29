@@ -21,6 +21,6 @@ describe('login', () => {
   })
 
   it('should able to see text', () => {
-    cy.get('[data-testid="header-text"]').contains('An Efficient way of working together')
+    cy.get('[data-testid="header-text"]').contains('Efficient way of working together')
   })
 })
