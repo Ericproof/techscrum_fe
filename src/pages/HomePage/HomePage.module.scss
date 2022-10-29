@@ -1,3 +1,5 @@
+@import "../../../variables.scss";
+
 .homePage {
   width: 100%;
   height: 100%;
@@ -27,7 +29,7 @@
             font-weight: bolder;
           }
           .headerIndigo {
-            color: #894bb5;
+            color: $primaryColor;
           }
         }
         .jobDoneText {
@@ -49,10 +51,6 @@
         box-sizing: border-box;
         position: relative;
         .businessContent {
-          min-width: 440px;
-          max-width: 500px;
-          padding-right: 50px;
-
           h3 {
             margin-bottom: 28px;
             margin-top: 8px;
@@ -77,6 +75,9 @@
                 color: #4461d7;
                 text-decoration: none;
               }
+            }
+            li{
+              list-style: none;
             }
           }
           .jobDoneQuote {
@@ -143,7 +144,7 @@
             line-height: 1.6;
             .ctaButton {
               border-radius: 32px;
-              background: #894bb5;
+              background: $primaryColor;
               font-weight: 600;
               font-size: 16px;
               line-height: 150%;
@@ -292,7 +293,7 @@
             line-height: 1.6;
             .ctaButton {
               border-radius: 32px;
-              background: #894bb5;
+              background: $primaryColor;
               font-weight: 600;
               font-size: 16px;
               line-height: 150%;
@@ -324,16 +325,15 @@
         justify-content: space-between;
         align-items: center;
         margin-bottom: 0;
-        background-color: #9021afd9;
+        background-color: $primaryColor;
         .projectManagementContent {
           min-width: 440px;
           max-width: 500px;
-          padding-right: 50px;
           h3 {
             margin-bottom: 29px;
             margin-top: 0;
-            font-size: 36px;
-            font-weight: 300;
+            font-size: 28px;
+            font-weight: 600;
             line-height: 133%;
             letter-spacing: 1px;
             color: #1d1c35;
@@ -420,7 +420,7 @@
             align-items: center;
             .ctaButton {
               border-radius: 32px;
-              background: #894bb5;
+              background: $primaryColor;
               font-weight: 600;
               font-size: 16px;
               line-height: 150%;
@@ -495,7 +495,7 @@
           line-height: 1.6;
           .ctaButton {
             border-radius: 32px;
-            background: #894bb5;
+            background: $primaryColor;
             font-weight: 600;
             font-size: 16px;
             line-height: 150%;
@@ -696,7 +696,7 @@
         text-align: center;
         .ctaButton {
           border-radius: 5px;
-          background: #894bb5;
+          background: $primaryColor;
           margin: 0 5px;
           font-weight: 600;
           font-size: 16px;
@@ -847,7 +847,7 @@
           line-height: 1.6;
           .ctaButton {
             border-radius: 5px;
-            background: #894bb5;
+            background: $primaryColor;
             font-weight: 600;
             font-size: 16px;
             line-height: 150%;
@@ -884,10 +884,13 @@
       padding-left: 15px;
       margin-right: auto;
       margin-left: auto;
+      width:100%;
       .supportContent {
         font-size: 36px;
         font-weight: 700;
         line-height: 112%;
+        max-width: 400px;
+        width: 100%;
         h3 {
           font-size: 36px;
           font-weight: 700;
@@ -1420,13 +1423,11 @@
         .jobDoneRows {
           .businessContent {
             padding-left: 0;
-            padding-right: 50px;
           }
         }
         .projectManagementRow {
           .projectManagementContent {
             padding-left: 0;
-            padding-right: 50px;
           }
         }
       }
@@ -1752,7 +1753,7 @@
   border: 0;
   outline: 0;
   height: 100vh;
-  overflow: hidden;
+  background-color: #f6f8f9;
 }
 .unauthorizePageContainer::before {
   background-image: url(https://themexriver.com/appilo-theme/saas-classic-dark/wp-content/themes/appilo/img/saas-classic/banner/b-shape1.png);
@@ -1777,8 +1778,12 @@
 }
 
 .shape2Container {
+  img{
+    max-width: 616px;
+    opacity: 0.5;
+  }
   position: absolute;
-  left: 0%;
+  left: -300px;
   bottom: -300px;
   margin: 0;
   padding: 0;
@@ -1835,7 +1840,7 @@
 }
 
 .header {
-  color: #894bb5;
+  color: #4F5366;
   font-size: 50px;
   margin: 40px 0;
   @media (max-width: 1024px) {
@@ -1958,7 +1963,7 @@
 }
 
 .colorMainTheme {
-  color: rgb(137, 75, 181);
+  color:$primaryColor
 }
 
 .maxWidth80 {
@@ -1966,14 +1971,7 @@
   margin: auto;
 }
 
-.bgImg {
-  position: absolute;
-  bottom: -500px;
-  right: 0;
-  z-index: -1;
-  -webkit-transform: scaleX(-1);
-  transform: scaleX(-1);
-}
+
 
 .bgImg2 {
   position: absolute;
@@ -2007,8 +2005,89 @@
 
 .projectManagement {
   padding: 100px 0;
+  max-width: 1000px;
+  width:100%;
 }
 
 .colorWhite {
   color: white !important;
+}
+
+
+.businessContent{
+  max-width: 400px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  h3{
+    font-size: 22px!important;
+    color:$textPrimaryColor!important;
+    font-weight: 600!important;
+    margin: 0;
+  }
+
+  .jobDoneParagraph{
+    color:#9191A1;
+    padding: 0!important;
+    margin: 0!important;
+    ul{ 
+      padding: 0;
+      
+    }
+    li{
+      margin: 12px 0;
+      display: flex;
+
+      svg{
+        font-size: 20px;
+        margin-right: 10px;
+        fill:$textPrimaryColor
+      }
+    }
+  }
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  margin: 0;
+  color: $textPrimaryColor;
+  font-weight: 600
+}        
+
+.eyebrowIcon{
+    font-size: 30px !important;
+}
+
+.button{
+  color:white;
+  background-color: $primaryColor;
+  padding: 16px 24px;
+  font-size: 12px;
+  border-radius: 99px;
+  max-width: 100px;
+  width:100%;
+  text-align: center;
+}
+
+.link{
+  color:$primaryColor;
+  font-size: 13px;
+  width: 100%;
+  margin-left:20px;
+}
+
+.links{
+  max-width: 417px;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.supportPicture{
+  img{
+    max-width: 400px;
+  }
 }

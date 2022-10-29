@@ -1,3 +1,5 @@
+@import "../variables.scss";
+
 :root {
   --data-color-menu-link: #ffcc00;
   --data-color-secondary: #4b4b4b;
@@ -33,4 +35,22 @@ body {
 
 .colorRed{
   color: red !important;
+}
+
+.primaryColor{
+  color: $primaryColor !important;
+}
+
+.container{
+  max-width: 1000px;
+  width: 100%;
+  margin: auto;
+}
+
+.spaceBetween{
+  justify-content: space-between;
+}
+
+.background--grey{
+  background-color: #f6f8f9;
 }
