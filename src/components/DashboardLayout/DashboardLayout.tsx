@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import Nav from '../BoradNavigationV2/Nav';
+import Navigation from '../BoradNavigationV2/Navigation';
 import ProjectHeader from '../ProjectHeader/ProjectHeader';
 import styles from './DashboardLayout.module.scss';
 
@@ -9,7 +9,7 @@ export default function DashboardLayout() {
     <>
       <ProjectHeader />
       <div className={styles.container}>
-        <Nav />
+        <Navigation />
         <div className={styles.childrenContainer}>
           <Outlet />
         </div>
