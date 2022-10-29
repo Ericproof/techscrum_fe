@@ -1,8 +1,10 @@
 /* eslint-disable react/jsx-no-useless-fragment */
-import React from 'react';
+import React, { useState } from 'react';
 
+import { AiOutlineCaretDown, AiOutlineCaretRight } from 'react-icons/ai';
 import { IProjectData } from '../../../types';
 import styles from './NavTop.module.scss';
+import ProjectsDropdown from '../ProjectsDropdown/PropjectsDropdown';
 
 interface IPropsNavTop {
   currentProject: IProjectData;
@@ -10,6 +12,10 @@ interface IPropsNavTop {
 
 export default function NavTop(props: IPropsNavTop) {
   const { currentProject } = props;
+  const [showProjectDropdown, setShowProjectDropdown] = useState(false);
+
+  // eslint-disable-next-line no-console
+  console.log(currentProject);
   if (!currentProject) {
     return <></>;
   }
@@ -23,9 +29,20 @@ export default function NavTop(props: IPropsNavTop) {
           }
           alt="img"
         />
-        <div className={styles.textContext}>
+        <div className={styles.projectInfo}>
           <h2 className={styles.clearMargin}>{currentProject.name}</h2>
-          <span>Software project</span>
+          <button
+            onClick={() => {
+              setShowProjectDropdown(!showProjectDropdown);
+            }}
+            className={styles.showDropdownBtn}
+          >
+            {showProjectDropdown ? <AiOutlineCaretDown /> : <AiOutlineCaretRight />}
+            <span>Software project</span>
+          </button>
+          {showProjectDropdown && (
+            <ProjectsDropdown setShowProjectDropdown={setShowProjectDropdown} />
+          )}
         </div>
       </div>
     </div>

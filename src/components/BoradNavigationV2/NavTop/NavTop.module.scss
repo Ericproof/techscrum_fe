@@ -1,8 +1,4 @@
-
-
 .container {
-  margin-left: 8px;
-  padding: 24px 8px 8px;
   display: flex;
   box-sizing: border-box;
   width: 100%;
@@ -12,13 +8,14 @@
   color: currentcolor;
   cursor: pointer;
   border-radius: 3px;
+  margin-bottom: 30px;
+  padding: 8px 14px;
 }
 
 .content {
   display: flex;
   box-sizing: border-box;
   align-items: center;
-
   img {
     display: flex;
     height: 24px;
@@ -34,7 +31,7 @@
     margin-right: 16px;
   }
 
-  .textContext {
+  .projectInfo {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -48,24 +45,38 @@
       font-size: 17px;
       letter-spacing: -0.003em;
       font-weight: 700;
-      color: rgba(255, 255, 255, 0.80);
+      color: rgb(255, 255, 255);
       line-height: 1.2 !important;
     }
 
-    span {
+    button {
+      display: flex;
+      align-items: center;
+      height: 20px;
       margin-top: 3px;
-      color: var(--ds-text-subtlest, #6b778c);
-      font-size: 12px;
-      display: block;
+      border: none;
+      max-width: 150px;
+      color: rgb(255, 255, 255);
+      background-color: transparent;
+      font-size: 14px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
       line-height: 1.2 !important;
       font-weight: 500;
+      padding: 0;
+      cursor: pointer;
+      svg {
+        width: 12px;
+        height: 12px;
+      }
+      span {
+        margin-left: 5px;
+      }
     }
   }
 }
 
-.clearMargin{
+.clearMargin {
   margin: 0;
 }

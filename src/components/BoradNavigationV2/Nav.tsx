@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { ProjectContext, ProjectDispatchContext } from '../../context/ProjectProvider';
 import NavMain from './NavMain/NavMain';
+import NavTop from './NavTop/NavTop';
 import style from './Nav.module.scss';
 import { IProject, IProjectData } from '../../types';
 
@@ -19,6 +20,7 @@ export default function Nav() {
 
   return (
     <nav className={style.container}>
+      <NavTop currentProject={currentProject[0]} />
       <NavMain
         currentProject={currentProject[0]}
         shortCutAdded={fetchProjectsList}
