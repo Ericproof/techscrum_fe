@@ -29,8 +29,6 @@ export default function Setting() {
     showProject(projectId, token)
       .then((res) => {
         setData(res.data);
-        // eslint-disable-next-line no-console
-        console.log(res.data);
       })
       .catch((e) => {
         if (e.response.status === 403) {
