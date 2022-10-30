@@ -31,41 +31,53 @@ export default function Nav() {
     (project: IProjectData) => project.id === projectId
   )[0];
 
-  const planningBtns = [
-    {
-      name: 'Board',
-      url: `/projects/${projectId}/board/${boardId}`,
-      icon: <HiViewBoards />,
-      dataTestId: 'board-btn'
-    },
-    {
-      name: 'Backlog',
-      url: `/projects/${projectId}/board/${boardId}/backlog`,
-      icon: <IoMdList />,
-      dataTestId: 'backlog-btn'
-    }
-  ];
-  const utilBtns = [
-    {
-      name: 'Members',
-      checkAccess: 'view:members',
-      url: `/projects/${currentProject?.id}/members`,
-      icon: <BsFillPeopleFill />,
-      dataTestId: 'member-btn'
-    },
-    {
-      name: 'Project Settings',
-      checkAccess: 'view:settings',
-      url: `/settings/${currentProject?.id}`,
-      icon: <FiSettings />,
-      dataTestId: 'project-settings-btn'
-    }
-  ];
+  const buttons = {
+    planningBtns: [
+      {
+        name: 'Board',
+        url: `/projects/${projectId}/board/${boardId}`,
+        icon: <HiViewBoards />,
+        dataTestId: 'board-btn'
+      },
+      {
+        name: 'Backlog',
+        url: `/projects/${projectId}/board/${boardId}/backlog`,
+        icon: <IoMdList />,
+        dataTestId: 'backlog-btn'
+      }
+    ],
+    utilBtns: [
+      {
+        name: 'Members',
+        checkAccess: 'view:members',
+        url: `/projects/${currentProject?.id}/members`,
+        icon: <BsFillPeopleFill />,
+        dataTestId: 'member-btn'
+      },
+      {
+        name: 'Project Settings',
+        checkAccess: 'view:settings',
+        url: `/settings/${currentProject?.id}`,
+        icon: <FiSettings />,
+        dataTestId: 'project-settings-btn'
+      }
+    ],
+    dailyScrumBtn: [
+      {
+        name: 'Daily scrum',
+        showDailyScrumFunction: () => {
+          setShowDailyScrum(true);
+        },
+        icon: <FaDailymotion />,
+        dataTestId: 'dailyscrum-btn'
+      }
+    ]
+  };
 
   return (
     <nav className={styles.container}>
       <ProjectHeaderNav currentProject={currentProject} />
-      <div className={styles.planning}>
+      <div className={styles.section}>
         <button
           className={styles.category}
           onClick={() => {
@@ -76,9 +88,9 @@ export default function Nav() {
           PLANNING
         </button>
         {showPlanning &&
-          planningBtns.map((btn) => {
+          buttons.planningBtns.map((btn) => {
             return (
-              <NavLink end to={btn.url} data-testid={btn.dataTestId}>
+              <NavLink end to={btn.url} data-testid={btn.dataTestId} className={styles.navBtn}>
                 {btn.icon}
                 <span>{btn.name}</span>
               </NavLink>
@@ -88,7 +100,7 @@ export default function Nav() {
 
       <div className={styles.dividingLine} />
 
-      <div className={styles.tracking}>
+      <div className={styles.section}>
         <button
           className={styles.category}
           onClick={() => {
@@ -98,18 +110,19 @@ export default function Nav() {
           <span>{showTracking ? <AiOutlineCaretDown /> : <AiOutlineCaretRight />}</span>
           TRACKING
         </button>
-        {showTracking && (
-          <button
-            onClick={() => {
-              setShowDailyScrum(true);
-            }}
-            className={styles.dailyScrumBtn}
-            data-testid="dailyscrum-btn"
-          >
-            <FaDailymotion className={styles.dailyScrumIcon} />
-            <span>Daily scrum</span>
-          </button>
-        )}
+        {showTracking &&
+          buttons.dailyScrumBtn.map((btn) => {
+            return (
+              <button
+                onClick={btn.showDailyScrumFunction}
+                className={styles.navBtn}
+                data-testid={btn.dataTestId}
+              >
+                {btn.icon}
+                <span>{btn.name}</span>
+              </button>
+            );
+          })}
 
         {showDailyScrum && (
           <DailyScrum
@@ -122,7 +135,7 @@ export default function Nav() {
 
       <div className={styles.dividingLine} />
 
-      <div className={styles.shortcuts}>
+      <div className={styles.section}>
         <button
           className={styles.category}
           onClick={() => {
@@ -145,6 +158,7 @@ export default function Nav() {
                   target="_blank"
                   rel="noreferrer"
                   data-testid={`shortcut-${shortcutData.id}`}
+                  className={styles.navBtn}
                 >
                   <AiOutlineLink />
                   <span className={styles.shortcutContent}>{shortcutData.name}</span>
@@ -168,7 +182,7 @@ export default function Nav() {
           })}
         {showShortcuts && checkAccess('add:shortcut', projectId) && (
           <button
-            className={styles.addShortcut}
+            className={styles.navBtn}
             type="button"
             onClick={() => {
               setAddLinkToggle(!addLinkToggle);
@@ -202,11 +216,11 @@ export default function Nav() {
       </div>
       <div className={styles.dividingLine} />
 
-      <div className={styles.utils}>
-        {utilBtns.map((btn) => {
+      <div className={styles.section}>
+        {buttons.utilBtns.map((btn) => {
           return (
             checkAccess(btn.checkAccess, projectId) && (
-              <NavLink to={btn.url} data-testid={btn.dataTestId}>
+              <NavLink to={btn.url} data-testid={btn.dataTestId} className={styles.navBtn}>
                 {btn.icon}
                 <span>{btn.name}</span>
               </NavLink>
