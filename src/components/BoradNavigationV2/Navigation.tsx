@@ -9,7 +9,7 @@ import { IoMdList } from 'react-icons/io';
 import { FaDailymotion } from 'react-icons/fa';
 import { AiOutlineCaretDown, AiOutlineCaretRight, AiOutlineLink } from 'react-icons/ai';
 import { IProject, IProjectData, IShortcutData } from '../../types';
-import ProjectHeader from './ProjectHeader/ProjectHeader';
+import ProjectHeaderNav from './ProjectHeaderNav/ProjectHeaderNav';
 import { ProjectContext, ProjectDispatchContext } from '../../context/ProjectProvider';
 import styles from './Navigation.module.scss';
 import checkAccess from '../../utils/helpers';
@@ -20,10 +20,8 @@ export default function Nav() {
   const [showDailyScrum, setShowDailyScrum] = useState(false);
   const [operation, setOperation] = useState('');
   const [selectedLink, setSelectedLink] = useState<IShortcutData | null>(null);
-
   const [addLinkToggle, setAddLinkToggle] = useState(false);
   const { boardId = '', projectId = '' } = useParams();
-
   const [showPlanning, setShowPlanning] = useState(true);
   const [showTracking, setShowTracking] = useState(true);
   const [showShortcuts, setShowShortcuts] = useState(true);
@@ -33,9 +31,40 @@ export default function Nav() {
     (project: IProjectData) => project.id === projectId
   )[0];
 
+  const planningBtns = [
+    {
+      name: 'Board',
+      url: `/projects/${projectId}/board/${boardId}`,
+      icon: <HiViewBoards />,
+      dataTestId: 'board-btn'
+    },
+    {
+      name: 'Backlog',
+      url: `/projects/${projectId}/board/${boardId}/backlog`,
+      icon: <IoMdList />,
+      dataTestId: 'backlog-btn'
+    }
+  ];
+  const utilBtns = [
+    {
+      name: 'Members',
+      checkAccess: 'view:members',
+      url: `/projects/${currentProject?.id}/members`,
+      icon: <BsFillPeopleFill />,
+      dataTestId: 'member-btn'
+    },
+    {
+      name: 'Project Settings',
+      checkAccess: 'view:settings',
+      url: `/settings/${currentProject?.id}`,
+      icon: <FiSettings />,
+      dataTestId: 'project-settings-btn'
+    }
+  ];
+
   return (
     <nav className={styles.container}>
-      <ProjectHeader currentProject={currentProject} />
+      <ProjectHeaderNav currentProject={currentProject} />
       <div className={styles.planning}>
         <button
           className={styles.category}
@@ -46,22 +75,15 @@ export default function Nav() {
           <span>{showPlanning ? <AiOutlineCaretDown /> : <AiOutlineCaretRight />}</span>
           PLANNING
         </button>
-        {showPlanning && (
-          <>
-            <NavLink end to={`/projects/${projectId}/board/${boardId}`} data-testid="board-btn">
-              <HiViewBoards />
-              <span>Board</span>
-            </NavLink>
-            <NavLink
-              end
-              to={`/projects/${projectId}/board/${boardId}/backlog`}
-              data-testid="backlog-btn"
-            >
-              <IoMdList />
-              <span>Backlog</span>
-            </NavLink>
-          </>
-        )}
+        {showPlanning &&
+          planningBtns.map((btn) => {
+            return (
+              <NavLink end to={btn.url} data-testid={btn.dataTestId}>
+                {btn.icon}
+                <span>{btn.name}</span>
+              </NavLink>
+            );
+          })}
       </div>
 
       <div className={styles.dividingLine} />
@@ -178,19 +200,19 @@ export default function Nav() {
           />
         )}
       </div>
+      <div className={styles.dividingLine} />
+
       <div className={styles.utils}>
-        {checkAccess('view:members', projectId) && (
-          <NavLink to={`/projects/${currentProject?.id}/members`}>
-            <BsFillPeopleFill />
-            <span>Members</span>
-          </NavLink>
-        )}
-        {checkAccess('view:settings', projectId) && (
-          <NavLink to={`/settings/${currentProject?.id}`} className={styles.projectSettings}>
-            <FiSettings />
-            <span>Project Settings</span>
-          </NavLink>
-        )}
+        {utilBtns.map((btn) => {
+          return (
+            checkAccess(btn.checkAccess, projectId) && (
+              <NavLink to={btn.url} data-testid={btn.dataTestId}>
+                {btn.icon}
+                <span>{btn.name}</span>
+              </NavLink>
+            )
+          );
+        })}
       </div>
     </nav>
   );

@@ -20,9 +20,6 @@ $white: rgb(245, 245, 245);
   border-radius: 2px;
   margin: 20px 0px;
 }
-.shortcuts {
-  min-height: 250px;
-}
 .planning,
 .tracking,
 .shortcuts,
@@ -109,6 +106,7 @@ $white: rgb(245, 245, 245);
       }
     }
   }
+
   .addShortcut {
     .shortcutContent {
       width: 150px;

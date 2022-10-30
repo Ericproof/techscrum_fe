@@ -16,7 +16,7 @@ export default function ProjectsDropdown({ setShowProjectDropdown }: IProjectsDr
     setShowProjectDropdown(false);
   };
   return (
-    <div className={styles.dropdownSection}>
+    <div className={styles.dropdownSection} data-testid="project-dropdown">
       <div className={styles.dropdownContainer}>
         <div className={styles.top}>
           <div className={styles.recent}>RECENT</div>

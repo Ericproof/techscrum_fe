@@ -3,14 +3,14 @@ import React, { useState } from 'react';
 
 import { AiOutlineCaretDown, AiOutlineCaretRight } from 'react-icons/ai';
 import { IProjectData } from '../../../types';
-import styles from './ProjectHeader.module.scss';
+import styles from './ProjectHeaderNav.module.scss';
 import ProjectsDropdown from '../ProjectsDropdown/ProjectsDropdown';
 
 interface IPropsNavTop {
   currentProject: IProjectData;
 }
 
-export default function NavTop(props: IPropsNavTop) {
+export default function ProjectHeaderNav(props: IPropsNavTop) {
   const { currentProject } = props;
   const [showProjectDropdown, setShowProjectDropdown] = useState(false);
 
@@ -33,6 +33,7 @@ export default function NavTop(props: IPropsNavTop) {
             onClick={() => {
               setShowProjectDropdown(!showProjectDropdown);
             }}
+            data-testid="show-project-dropdown-btn"
           >
             {showProjectDropdown ? <AiOutlineCaretDown /> : <AiOutlineCaretRight />}
             <span>Software project</span>
