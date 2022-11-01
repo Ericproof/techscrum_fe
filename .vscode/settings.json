@@ -1,19 +1,24 @@
 {
+  "javascript.updateImportsOnFileMove.enabled": "always",
   "eslint.alwaysShowStatus": true,
-  "editor.formatOnSave": true,
-  "editor.formatOnPaste": true,
-  "git.enableSmartCommit": true,
-  "tslint.autoFixOnSave": true,
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "[typescriptreact]": {
+  "eslint.format.enable": true,
+  "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "javascript.updateImportsOnFileMove.enabled": "always",
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.formatOnSave": true,
+  "gitlens.currentLine.dateFormat": "",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "window.zoomLevel": 0,
-  "eslint.format.enable": true,
-  "html.format.unformatted": "",
-  "eslint.codeActionsOnSave.rules": null
+  "editor.language.brackets": []
 }
