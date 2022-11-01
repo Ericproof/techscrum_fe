@@ -34,6 +34,7 @@ export default function LeftBottom(props: ILeftBottom) {
   const [deleteState, setDeleteState] = useState(false);
   const [updateState, setUpdateState] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
   const [users, setUsers] = useState<MentionData[]>([]);
   const [activities, setActivities] = useState([]);
   const [showActivities, setShowActivities] = useState(false);
@@ -59,8 +60,10 @@ export default function LeftBottom(props: ILeftBottom) {
   };
 
   const onClickPublish = async (content) => {
+    setSubmitting(true);
     await createComment({ taskId, senderId: userId, content });
     setSaveState(true);
+    setSubmitting(false);
   };
 
   const fetchActivityData = () => {
@@ -151,7 +154,12 @@ export default function LeftBottom(props: ILeftBottom) {
       {checkAccess('edit:tasks', projectId) && (
         <div>
           <div className={style.commentInputField}>
-            <Editor onClickPublish={onClickPublish} users={users} imageInputId="insertImage" />
+            <Editor
+              submitting={submitting}
+              onClickPublish={onClickPublish}
+              users={users}
+              imageInputId="insertImage"
+            />
           </div>
         </div>
       )}
@@ -168,6 +176,7 @@ export default function LeftBottom(props: ILeftBottom) {
               onClickUpdate={onClickUpdate}
               userEmail={userEmail}
               users={users}
+              submitting={submitting}
             />
           );
         }
