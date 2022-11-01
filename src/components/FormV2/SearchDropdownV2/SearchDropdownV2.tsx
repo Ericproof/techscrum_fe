@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 interface IDropdownV2 {
   onValueChanged: (label: string, value: string) => void;
@@ -12,10 +12,6 @@ export default function DropdownV2(props: IDropdownV2) {
   const [value, setValue] = useState(defaultValue || options[0].value);
   const [isSearching, setIsSearching] = useState(false);
   const [showList, setShowList] = useState(false);
-
-  useEffect(() => {
-    setValue(value);
-  }, []);
 
   const onClickDropdownHandler = (val: string, name: string) => {
     setValue(val);

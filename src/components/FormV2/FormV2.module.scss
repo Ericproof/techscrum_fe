@@ -2,7 +2,7 @@ $errorRed: rgb(221, 42, 59);
 $lightColor: rgb(145, 145, 161);
 $lightBorder: rgb(238, 239, 246);
 $textColor: rgb(79, 83, 102);
-
+$transition: all .25s ease-in-out;
 .input {
     width: 100%;
     border:none;
@@ -40,7 +40,7 @@ $textColor: rgb(79, 83, 102);
     color: $errorRed;
     text-align: left;
     letter-spacing: 0px;
-    transition: all .5s ease-in-out;
+    transition: $transition;
 }
 
 .label {
@@ -60,7 +60,7 @@ $textColor: rgb(79, 83, 102);
     opacity: 1;
     color: rgb(145, 145, 161);
     top: -10px;
-    transition: all .25s ease-in-out;
+    transition: $transition;
 }
 
 .errorRed {
@@ -84,7 +84,7 @@ $textColor: rgb(79, 83, 102);
     font-size: 15px;
     color: $textColor;
     border: 2px solid $lightBorder;
-    transition: all .25s ease-in-out;
+    transition: $transition;
     background: transparent;
     text-align: left;
     line-height: 20px;
