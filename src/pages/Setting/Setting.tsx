@@ -72,7 +72,7 @@ export default function Setting() {
     return <></>;
   }
   return (
-    <div className={styles.settingPage}>
+    <div className={styles.settingPage} data-testid="setting-page">
       <div className={styles.settingContent}>
         <div className={styles.nav}>
           <div className={styles.navContent}>

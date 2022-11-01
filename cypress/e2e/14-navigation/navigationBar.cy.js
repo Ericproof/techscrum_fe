@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 import projectsData from '../../fixtures/projects.json';
 import boardData from '../../fixtures/board.json';
+import project from '../../fixtures/project.json';
 describe('Project page', () => {
   beforeEach(() => {
     let projectList = projectsData;
@@ -17,5 +18,9 @@ describe('Project page', () => {
     cy.get('[data-testid="backlog-header"]').should('be.exist');
     cy.get('[data-testid="board-btn"]').click();
     cy.get('[data-testid="board-create-card"]').should('be.exist');
+  });
+  it('Test project drop down', () => {
+    cy.get('[data-testid="show-project-dropdown-btn"]').click();
+    cy.get('[data-testid="project-dropdown"]').should('be.exist');
   });
 });
