@@ -9,8 +9,18 @@ $white: rgb(245, 245, 245);
   background-color: var(--ds-surface, $primaryColor);
   height: 94vh;
   padding: 30px 12px;
-  overflow-y: scroll;
+  overflow-y: overlay;
   font-family: Poppins, sans-serif;
+}
+
+.container::-webkit-scrollbar {
+  background-color: $primaryColor;
+  width: 6px;
+}
+
+.container:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
 }
 
 .dividingLine {

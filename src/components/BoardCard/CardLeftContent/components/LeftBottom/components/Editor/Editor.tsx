@@ -16,6 +16,7 @@ interface IEditor {
   content?: string;
   users: MentionData[];
   imageInputId: string;
+  submitting: boolean;
 }
 function initialEditorState(content) {
   if (content) {
@@ -32,13 +33,13 @@ function Editor(props: IEditor) {
     content,
     onClickDiscard = () => {},
     users,
-    imageInputId
+    imageInputId,
+    submitting
   } = props;
   const ref = useRef<DraftEditor>(null);
   const [editorState, setEditorState] = useState(initialEditorState(content));
   const [open, setOpen] = useState(false);
   const [suggestions, setSuggestions] = useState(users);
-
   useEffect(() => {
     setSuggestions(users);
   }, [users]);
@@ -104,6 +105,13 @@ function Editor(props: IEditor) {
   };
   const onHandlePublish = () => {
     const data = editorState.getCurrentContent();
+    if (submitting) {
+      return;
+    }
+    if (!data.hasText()) {
+      return;
+    }
+
     const currentContent = JSON.stringify(convertToRaw(data));
     onClickPublish(currentContent);
     if (!content) {
@@ -162,7 +170,12 @@ function Editor(props: IEditor) {
           <button type="button" onClick={onHandleDiscard} className={styles.discardButton}>
             Discard
           </button>
-          <button type="button" onClick={onHandlePublish} className={styles.publishButton}>
+          <button
+            type="button"
+            onClick={onHandlePublish}
+            className={styles.publishButton}
+            disabled={submitting}
+          >
             {content ? 'Save' : 'Publish'}
           </button>
         </div>
