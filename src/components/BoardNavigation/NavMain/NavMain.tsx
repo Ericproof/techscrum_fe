@@ -83,8 +83,9 @@ export default function NavMain(props: IPropsNavMain) {
                 className={styles.navLink}
                 end
                 to={`/projects/${projectId}/board/${boardId}`}
+                data-testid="board-btn"
               >
-                <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
+                <svg width="28" height="28" viewBox="0 0 28 28" role="presentation">
                   <g fill="currentColor">
                     <path d="M4 18h16.008C20 18 20 6 20 6H3.992C4 6 4 18 4 18zM2 5.994C2 4.893 2.898 4 3.99 4h16.02C21.108 4 22 4.895 22 5.994v12.012A1.997 1.997 0 0120.01 20H3.99A1.994 1.994 0 012 18.006V5.994z" />
                     <path d="M8 6v12h2V6zm6 0v12h2V6z" />
@@ -96,6 +97,7 @@ export default function NavMain(props: IPropsNavMain) {
                 className={styles.navLink}
                 end
                 to={`/projects/${projectId}/board/${boardId}/backlog`}
+                data-testid="backlog-btn"
               >
                 <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
                   <g fill="currentColor">
@@ -220,7 +222,7 @@ export default function NavMain(props: IPropsNavMain) {
             </div>
             {operationsToggle && (
               <NavLink to="/nav">
-                <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
+                <svg width="26" height="26" viewBox="0 0 26 26" role="presentation">
                   <g fill="currentColor" fillRule="evenodd">
                     <path d="M11.208 9.32L9.29 11.253a1 1 0 000 1.409.982.982 0 001.397 0l1.29-1.301 1.336 1.347a.982.982 0 001.397.001 1.002 1.002 0 00.001-1.408l-1.965-1.98a1.08 1.08 0 00-1.538-.001z" />
                     <path d="M11 10.007l.001 9.986c0 .557.448 1.008 1 1.007.553 0 1-.45 1-1.007L13 10.006C13 9.451 12.552 9 12 9s-1.001.451-1 1.007z" />
@@ -240,7 +242,7 @@ export default function NavMain(props: IPropsNavMain) {
             setShowDailyScrum(true);
           }}
           className={styles.dailyScrumBtn}
-          data-testid="dailyscrumBtn"
+          data-testid="dailyscrum-btn"
         >
           <FaDailymotion className={styles.dailyScrumIcon} />
           <p>Daily scrum</p>

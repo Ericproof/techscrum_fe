@@ -1,3 +1,5 @@
+@import "../../../../variables.scss";
+
 .boardMainContainer {
   position: relative;
   margin-left: 3%;
@@ -57,7 +59,7 @@
     line-height: 1.14286;
     text-transform: uppercase;
     font-weight: 600;
-    color: blue;
+    color: $primaryColor;
   }
 }
 

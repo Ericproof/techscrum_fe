@@ -1,8 +1,10 @@
+@import "../../../variables.scss";
+
 .container {
   width: 10%;
-  color: var(--ds-text-subtle, #42526e);
+  color: var(--ds-text-subtle, white);
   min-width: 240px;
-  background-color: var(--ds-surface, white);
+  background-color: var(--ds-surface, $primaryColor);
   display: flex;
   flex-direction: column;
   overflow: hidden;

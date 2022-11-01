@@ -74,7 +74,7 @@ export default function ProjectMembersPage() {
   };
 
   return (
-    <div className={styles.projectMemberContainer}>
+    <div className={styles.projectMemberContainer} data-testid="member-page">
       <ProjectMemberHeader />
       <div className={styles.projectMemberMain}>
         <ProjectMemberNav />

@@ -2,19 +2,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './HomePage.module.scss';
-import cover from '../../assets/cover.png';
 import rochelle from '../../assets/rochelle.png';
 import envelope from '../../assets/envelope.svg';
 import boardView from '../../assets/boardView.png';
-import kfirPravda from '../../assets/kfirPravda.png';
-import easilyImport from '../../assets/easilyImport.svg';
 import rochelleAvatar from '../../assets/rochelleAvatar.png';
-import shekharTamasker from '../../assets/shekharTamasker.png';
-import samanthaAnderson from '../../assets/samanthaAnderson.png';
-import increaseProfitability from '../../assets/increaseProfitability.png';
-import realTimeCollaboration from '../../assets/realTimeCollaboration.png';
+import shapeLight from '../../assets/shapeLight.png';
+import chat from '../../assets/undraw_quick_chat_re_bit5.svg';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
+import WhyUs from './WhyUs/WhyUs';
+import Organizing from './Organizing/Organizing';
+import AnyWhereSection from './AnyWhereSection/AnyWhereSection';
+import Prevent from './Prevent/Prevent';
 
 export default function HomePage() {
   return (
@@ -22,10 +21,7 @@ export default function HomePage() {
       <Header />
       <div className={styles.unauthorizePageContainer}>
         <span className={styles.shape2Container}>
-          <img
-            src="https://themexriver.com/appilo-theme/saas-classic-dark/wp-content/uploads/sites/19/2021/07/b-shape4.png"
-            alt=""
-          />
+          <img src={shapeLight} alt="" />
         </span>
         <div className={styles.circleContainer}>
           <img
@@ -47,7 +43,7 @@ export default function HomePage() {
         </span>
         <div className={styles.textContainer}>
           <h1 className={styles.header} data-testid="header-text">
-            An Efficient way of working together
+            <span className="primaryColor">Efficient</span> way of working together.
           </h1>
           <p className={styles.text}>Manage your project from start to finish with TechScrum</p>
           <p className={styles.text}>No credit required.</p>
@@ -56,95 +52,20 @@ export default function HomePage() {
       <div className={styles.homePage}>
         <section className={styles.jobDoneSection}>
           <div className={styles.jobDoneContainer}>
-            <div className={[styles.jobDoneRows].join(' ')}>
-              <div className={[styles.container, styles.row, styles.projectManagement].join(' ')}>
-                <div className={styles.businessPicture}>
-                  <img src={increaseProfitability} alt="business" />
-                </div>
-                <div className={[styles.businessContent].join(' ')}>
-                  <h3>
-                    Plan projects and boost <b className={styles.colorMainTheme}>efficiency</b>
-                  </h3>
-                  <div className={styles.jobDoneParagraph}>
-                    <p>
-                      Plan projects and break down each step to getting things done. Instantly see
-                      the status of every task and feel a sense of accomplishment. Project
-                      management has never been so efficient.
-                    </p>
-                  </div>
-                  <div className={styles.jobDoneQuote} style={{ display: 'none' }}>
-                    <div className={styles.quoteAvatar}>
-                      <picture>
-                        <img src={kfirPravda} alt="avatar" />
-                      </picture>
-                    </div>
-                    <div className={styles.quoteWrap}>
-                      <p className={styles.quoteText}>
-                        “My stress is way down because my team members are in the driver&apos;s
-                        seat, and I know what&apos;s happening every day.”
-                      </p>
-                      <div className={styles.quoteAuthor}>
-                        <span className={styles.authorName}>Kfir Pravda</span>
-                        <span className={styles.authorRole}>Pravda Media</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <img
-                  src="https://themexriver.com/appilo-theme/seo-agency/wp-content/uploads/sites/56/2021/11/ab-shape.png"
-                  alt="https://themexriver.com/appilo-theme/seo-agency/wp-content/uploads/sites/56/2021/11/ab-shape.png"
-                  className={styles.bgImg}
-                />
-              </div>
-            </div>
-            <div className={styles.collaborationRows}>
-              <div className={[styles.container, styles.row, styles.projectManagement].join(' ')}>
-                <picture>
-                  <img src={realTimeCollaboration} alt="realTimeCollaboration" />
-                </picture>
-                <div className={styles.collaborationContent}>
-                  <h3>
-                    Start with a <b className={styles.colorMainTheme}>Techscrum board</b>
-                  </h3>
-                  <div className={styles.jobDoneParagraph}>
-                    <p>
-                      Techscrum board is the easiest way to go from idea to action. View lists and
-                      cards in a Kanban board. Customize and expand with more features as your
-                      TechScrum grows. Manage projects, organize tasks, and build team spirit—all in
-                      one place.
-                    </p>
-                  </div>
-                  <div className={styles.jobDoneQuote}>
-                    <div className={styles.quoteAvatar}>
-                      <picture>
-                        <img src={samanthaAnderson} alt="avatar" />
-                      </picture>
-                    </div>
-                    <div className={styles.quoteWrap}>
-                      <p className={styles.quoteText}>
-                        “TechScrum helps me keep up with all the thousands of activities between all
-                        our clients. It gives me full oversight on what&apos;s moving and
-                        what&apos;s not.”
-                      </p>
-                      <div className={styles.quoteAuthor}>
-                        <span className={styles.authorName}>Samantha Anderson</span>
-                        <span className={styles.authorRole}>Account Director</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <WhyUs />
+            <Organizing />
             <div className={styles.projectManagementRow}>
               <div className={[styles.container, styles.row, styles.projectManagement].join(' ')}>
                 <div className={styles.projectManagementContent}>
-                  <h3 className={styles.colorWhite}>Create cards that contain every detail</h3>
+                  <h3 className={styles.colorWhite}>
+                    Experience the simplest project management software.{' '}
+                  </h3>
                   <div className={styles.jobDoneParagraph}>
                     <p className={styles.colorWhite}>
-                      TechScrum card is a place where you can organize your work. Each section of
-                      your tasks allows you to manage, track and share with your team. When opening
-                      each card, you can unlock an array of functions such as checklists, due dates,
-                      attachments, comments, and more.
+                      Using TechScrum on mobile, desktop, or tablet, thanks to automatic,
+                      cloud-based syncing. You and your team can update inventory in real time from
+                      any location. Are you ready to experience to boost up the company
+                      productivity?
                     </p>
                   </div>
                 </div>
@@ -155,97 +76,11 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-        <section className={styles.switchingSection} style={{ display: 'none' }}>
-          <div className={styles.switchingContainer}>
-            <div className={styles.switchingContent}>
-              <h3>Switching to TechScrum?</h3>
-              <p>Easily import all your tasks and projects in one click.</p>
-              <div className={styles.switchingCta}>
-                <Link className={styles.ctaButton} to="/register">
-                  Start Your Free Trial
-                </Link>
-                <p className={styles.ctaText}>No credit card required</p>
-              </div>
-            </div>
-            <picture className={styles.switchingPicture}>
-              <img src={easilyImport} alt="brand icons" />
-            </picture>
-          </div>
-        </section>
+
         <section className={styles.cardsSection}>
-          <div className={[styles.container, styles.row, styles.projectManagement].join(' ')}>
-            <div className={styles.cardsContainer}>
-              <h3>Why Choose TechScrum</h3>
-              <div className={styles.cardsParagraph}>
-                <p>
-                  No matter the job, <b className={styles.colorMainTheme}>TechScrum</b> has all the
-                  tracking data you need
-                </p>
-              </div>
-              <div className={styles.cardsCards}>
-                <a
-                  href="https://www.TechScrum.com/templates/client-onboarding-checklist/"
-                  target="_self"
-                  className={styles.eachCards}
-                >
-                  <div className={styles.cardsWrap}>
-                    <h4 className={styles.cardsName}>Tracking</h4>
-                    <div className={styles.cardsCta}>
-                      <div className={styles.cardsHeart}>
-                        Techscrum has all the tracking for you so when you are doing review you can
-                        find out what happen in what time
-                      </div>
-                    </div>
-                  </div>
-                </a>
-                <a
-                  href="https://www.TechScrum.com/templates/client-onboarding-checklist/"
-                  target="_self"
-                  className={styles.eachCards}
-                >
-                  <div className={styles.cardsWrap}>
-                    <h4 className={styles.cardsName}>Best practices </h4>
-                    <div className={styles.cardsCta}>
-                      <div className={styles.cardsHeart}>
-                        We have system that designed to ensure that you can make sure it follows
-                        best practices for your PM methodology of choice.
-                      </div>
-                    </div>
-                  </div>
-                </a>
-                <a
-                  href="https://www.TechScrum.com/templates/client-onboarding-checklist/"
-                  target="_self"
-                  className={styles.eachCards}
-                >
-                  <div className={styles.cardsWrap}>
-                    <h4 className={styles.cardsName}>Save time</h4>
-                    <div className={styles.cardsCta}>
-                      <div className={styles.cardsHeart}>
-                        Reduce the time spent on manual admin without sacrificing on detail or
-                        efficiency. With our project plan, you can quickly create tried-and-trusted
-                        project management plans in seconds.
-                      </div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div className={styles.cardsButtons}>
-                <Link className={styles.ctaButton} to="/register">
-                  Start Your Free Trial
-                </Link>
-              </div>
-              <img
-                src="https://themexriver.com/appilo-theme/seo-agency/wp-content/uploads/sites/56/2021/11/ab-shape.png"
-                alt="https://themexriver.com/appilo-theme/seo-agency/wp-content/uploads/sites/56/2021/11/ab-shape.png"
-                className={styles.bgImg2}
-              />
-              <img
-                src="https://themexriver.com/appilo-theme/seo-agency/wp-content/uploads/sites/56/2021/11/ab-shape.png"
-                alt="https://themexriver.com/appilo-theme/seo-agency/wp-content/uploads/sites/56/2021/11/ab-shape.png"
-                className={styles.bgImg3}
-              />
-            </div>
+          <AnyWhereSection />
+          <div className="background--grey">
+            <Prevent />
           </div>
         </section>
         <section className={styles.clientsSection} style={{ display: 'none' }}>
@@ -290,13 +125,23 @@ export default function HomePage() {
               </div>
             </div>
           </div>
+          <img
+            src="https://themexriver.com/appilo-theme/seo-agency/wp-content/uploads/sites/56/2021/11/ab-shape.png"
+            alt="https://themexriver.com/appilo-theme/seo-agency/wp-content/uploads/sites/56/2021/11/ab-shape.png"
+            className={styles.bgImg2}
+          />
+          <img
+            src="https://themexriver.com/appilo-theme/seo-agency/wp-content/uploads/sites/56/2021/11/ab-shape.png"
+            alt="https://themexriver.com/appilo-theme/seo-agency/wp-content/uploads/sites/56/2021/11/ab-shape.png"
+            className={styles.bgImg3}
+          />
         </section>
         <section className={styles.supportSection}>
           <div className={[styles.container, styles.row, styles.projectManagement].join(' ')}>
             <div className={styles.supportContainer}>
               <div className={styles.supportContent}>
                 <h3>
-                  <span>Support</span> that&apos;s here for you when you need them
+                  <span className="primaryColor">Support</span> when needed
                 </h3>
                 <p>
                   Our support team delivers first-class customer support around the clock.
@@ -313,7 +158,7 @@ export default function HomePage() {
                 <div className={styles.supportQuote} style={{ display: 'none' }}>
                   <div className={styles.quoteAvatar}>
                     <picture>
-                      <img src={shekharTamasker} alt="avatar" />
+                      <img src={chat} alt="avatar" />
                     </picture>
                   </div>
                   <div className={styles.quoteWrap}>
@@ -331,7 +176,7 @@ export default function HomePage() {
                 </div>
               </div>
               <picture className={styles.supportPicture}>
-                <img src={cover} alt="cover" />
+                <img src={chat} alt="cover" />
               </picture>
             </div>
           </div>

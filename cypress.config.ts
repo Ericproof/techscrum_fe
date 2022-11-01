@@ -8,5 +8,7 @@ export default defineConfig({
     baseUrl: 'http://localhost:3000',
     defaultCommandTimeout:4000,
   },
-  projectId: "zjgbkp"
+  projectId: "zjgbkp",
+  viewportWidth: 1920,
+  viewportHeight: 1080
 });
