@@ -8,6 +8,7 @@ $textColor: rgb(79, 83, 102);
     border:none;
     background: transparent;
     text-align: left;
+    padding: 9px 14px;
 }
 
 .textArea{
@@ -81,14 +82,13 @@ $textColor: rgb(79, 83, 102);
     cursor: auto;
     border-radius: 6px;
     font-size: 15px;
-    padding: 9px 14px;
     color: $textColor;
     border: 2px solid $lightBorder;
     transition: all .25s ease-in-out;
     background: transparent;
     text-align: left;
     line-height: 20px;
-    margin: 35px 0;
+    padding: 0;
 }
 
 .dropDown{

@@ -52,11 +52,10 @@ export default function DropdownV2(props: IDropdownV2) {
   };
 
   return (
-    <div>
+    <div
+      className={['relative', styles.inputContainer, isActive ? styles.borderActive : ''].join(' ')}
+    >
       <div
-        className={['relative', styles.inputContainer, isActive ? styles.borderActive : ''].join(
-          ' '
-        )}
         onClick={() => {
           setShowMenu(!showMenu);
           setIsActive(true);

@@ -1,4 +1,4 @@
-@import "../variables.scss";
+@import "./variables.scss";
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 :root {
   --data-color-menu-link: #ffcc00;
@@ -20,7 +20,7 @@ button{
 .active{
   position: relative;
   background-color: rgba(255, 255, 255, 0.2)!important;
-  color: white!important;
+  // color: white!important;
   border-radius: 10px!important;
 }
 
@@ -60,4 +60,8 @@ button{
 
 .relative{
   position: relative;
+}
+
+.width-100{
+  width: 100%;
 }

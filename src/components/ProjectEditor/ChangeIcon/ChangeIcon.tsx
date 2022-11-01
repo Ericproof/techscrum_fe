@@ -12,16 +12,17 @@ export default function ChangeIcon(props: IChangeIconProps) {
   const { uploadSuccess, value } = props;
   const [modalShown, toggleModal] = useState(false);
   return (
-    <div className={styles.icon}>
-      <img src={value || defaultIcon} alt="project icon" />
+    <div className={(styles.icon, styles.changeIconContainer)}>
+      <img className={styles.profileImg} src={value || defaultIcon} alt="project icon" />
       <button
         type="button"
         data-testid="iconButton"
+        className={styles.uploadImgBtn}
         onClick={() => {
           toggleModal(!modalShown);
         }}
       >
-        Upload Profile
+        Change
       </button>
       <Modal
         shown={modalShown}
