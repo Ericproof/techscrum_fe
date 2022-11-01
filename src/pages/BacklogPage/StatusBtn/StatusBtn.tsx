@@ -11,10 +11,8 @@ interface IToolBar {
 export default function StatusBtn({ status, onClickChangeStatus, taskId }: IToolBar) {
   const allBtns = [
     { status: 'TO DO', color: 'dropDownBtnGray' },
-    { status: 'BLOCKED', color: 'dropDownBtnBlue' },
     { status: 'IN PROGRESS', color: 'dropDownBtnBlue' },
-    { status: 'PR REVIEW', color: 'dropDownBtnBlue' },
-    { status: 'TESTING', color: 'dropDownBtnBlue' },
+    { status: 'REVIEW', color: 'dropDownBtnBlue' },
     { status: 'DONE', color: 'dropDownBtnGreen' }
   ];
   const dropDownBtnRef = useRef<HTMLDivElement | null>(null);
