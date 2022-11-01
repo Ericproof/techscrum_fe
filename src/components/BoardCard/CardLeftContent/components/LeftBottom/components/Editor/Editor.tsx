@@ -104,6 +104,10 @@ function Editor(props: IEditor) {
   };
   const onHandlePublish = () => {
     const data = editorState.getCurrentContent();
+    if (!data.hasText()) {
+      return;
+    }
+
     const currentContent = JSON.stringify(convertToRaw(data));
     onClickPublish(currentContent);
     if (!content) {
