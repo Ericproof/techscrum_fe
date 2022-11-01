@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import Navigation from '../BoradNavigationV2/Navigation';
+import Navigation from '../BoardNavigationV2/Navigation';
 import ProjectHeader from '../ProjectHeader/ProjectHeader';
 import styles from './DashboardLayout.module.scss';
 
