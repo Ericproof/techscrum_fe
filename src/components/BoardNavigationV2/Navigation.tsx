@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { useParams, NavLink } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { RiPencilLine } from 'react-icons/ri';
 import { HiViewBoards } from 'react-icons/hi';
 import { VscNewFile } from 'react-icons/vsc';
@@ -16,15 +16,26 @@ import checkAccess from '../../utils/helpers';
 import Shortcut from '../AddShortcut/Shortcut';
 import DailyScrum from '../DailyScrum/DailyScrum';
 
+interface IItem {
+  name: string;
+  url: string | null;
+  checkAccess: string | null;
+  icon: React.ReactNode;
+  dataTestId: string;
+}
 export default function Nav() {
+  const navigate = useNavigate();
   const [showDailyScrum, setShowDailyScrum] = useState(false);
   const [operation, setOperation] = useState('');
   const [selectedLink, setSelectedLink] = useState<IShortcutData | null>(null);
   const [addLinkToggle, setAddLinkToggle] = useState(false);
   const { boardId = '', projectId = '' } = useParams();
-  const [showPlanning, setShowPlanning] = useState(true);
-  const [showTracking, setShowTracking] = useState(true);
-  const [showShortcuts, setShowShortcuts] = useState(true);
+  const [showBtns, setShowBtns] = useState({
+    planning: true,
+    tracking: true,
+    shortcuts: true,
+    utility: true
+  });
   const projectList = useContext<IProject[]>(ProjectContext);
   const fetchProjects = useContext(ProjectDispatchContext);
   const currentProject: IProjectData = projectList.filter(
@@ -32,7 +43,7 @@ export default function Nav() {
   )[0];
 
   const buttons = {
-    planningBtns: [
+    planning: [
       {
         name: 'Board',
         url: `/projects/${projectId}/board/${boardId}`,
@@ -46,7 +57,14 @@ export default function Nav() {
         dataTestId: 'backlog-btn'
       }
     ],
-    utilBtns: [
+    tracking: [
+      {
+        name: 'Daily scrum',
+        icon: <FaDailymotion />,
+        dataTestId: 'dailyscrum-btn'
+      }
+    ],
+    utility: [
       {
         name: 'Members',
         checkAccess: 'view:members',
@@ -61,91 +79,84 @@ export default function Nav() {
         icon: <FiSettings />,
         dataTestId: 'project-settings-btn'
       }
-    ],
-    dailyScrumBtn: [
-      {
-        name: 'Daily scrum',
-        showDailyScrumFunction: () => {
-          setShowDailyScrum(true);
-        },
-        icon: <FaDailymotion />,
-        dataTestId: 'dailyscrum-btn'
-      }
     ]
+  };
+
+  const setShowBtnState = (category: string) => {
+    setShowBtns({ ...showBtns, [category]: !showBtns[category] });
+  };
+
+  const renderCategoryBtn = (categoryType: string) => {
+    return (
+      <button
+        className={styles.category}
+        onClick={() => {
+          setShowBtnState(categoryType);
+        }}
+      >
+        <span>{showBtns[categoryType] ? <AiOutlineCaretDown /> : <AiOutlineCaretRight />}</span>
+        {categoryType.toUpperCase()}
+      </button>
+    );
+  };
+
+  const renderBtn = (item: IItem) => {
+    return (
+      <button
+        data-testid={item.dataTestId}
+        className={styles.navBtn}
+        onClick={() => {
+          if (item.url) {
+            navigate(item.url);
+          } else {
+            setShowDailyScrum(true);
+          }
+        }}
+        key={item.name}
+      >
+        {item.icon}
+        <span>{item.name}</span>
+      </button>
+    );
   };
 
   return (
     <nav className={styles.container}>
       <ProjectHeaderNav currentProject={currentProject} />
-      <div className={styles.section}>
-        <button
-          className={styles.category}
-          onClick={() => {
-            setShowPlanning(!showPlanning);
+      {Object.keys(buttons).map((category) => {
+        return (
+          <>
+            <div className={styles.section} key={category}>
+              {renderCategoryBtn(category)}
+              {showBtns[category] &&
+                buttons[category].map((item: IItem) => {
+                  return renderBtn(item);
+                })}
+            </div>
+            <div className={styles.dividingLine} />
+          </>
+        );
+      })}
+
+      {showDailyScrum && (
+        <DailyScrum
+          onClickCloseModal={() => {
+            setShowDailyScrum(false);
           }}
-        >
-          <span>{showPlanning ? <AiOutlineCaretDown /> : <AiOutlineCaretRight />}</span>
-          PLANNING
-        </button>
-        {showPlanning &&
-          buttons.planningBtns.map((btn) => {
-            return (
-              <NavLink end to={btn.url} data-testid={btn.dataTestId} className={styles.navBtn}>
-                {btn.icon}
-                <span>{btn.name}</span>
-              </NavLink>
-            );
-          })}
-      </div>
-
-      <div className={styles.dividingLine} />
-
-      <div className={styles.section}>
-        <button
-          className={styles.category}
-          onClick={() => {
-            setShowTracking(!showTracking);
-          }}
-        >
-          <span>{showTracking ? <AiOutlineCaretDown /> : <AiOutlineCaretRight />}</span>
-          TRACKING
-        </button>
-        {showTracking &&
-          buttons.dailyScrumBtn.map((btn) => {
-            return (
-              <button
-                onClick={btn.showDailyScrumFunction}
-                className={styles.navBtn}
-                data-testid={btn.dataTestId}
-              >
-                {btn.icon}
-                <span>{btn.name}</span>
-              </button>
-            );
-          })}
-
-        {showDailyScrum && (
-          <DailyScrum
-            onClickCloseModal={() => {
-              setShowDailyScrum(false);
-            }}
-          />
-        )}
-      </div>
-
-      <div className={styles.dividingLine} />
+        />
+      )}
 
       <div className={styles.section}>
         <button
           className={styles.category}
           onClick={() => {
-            setShowShortcuts(!showShortcuts);
+            setShowBtnState('shortcuts');
           }}
         >
-          <span>{showShortcuts ? <AiOutlineCaretDown /> : <AiOutlineCaretRight />}</span>
+          <span>{showBtns.shortcuts ? <AiOutlineCaretDown /> : <AiOutlineCaretRight />}</span>
           SHORTCUTS
         </button>
-        {showShortcuts &&
+        {showBtns.shortcuts &&
           currentProject?.shortcut.map((shortcutData: IShortcutData) => {
             return (
               <React.Fragment key={shortcutData.id}>
@@ -180,7 +191,7 @@ export default function Nav() {
               </React.Fragment>
             );
           })}
-        {showShortcuts && checkAccess('add:shortcut', projectId) && (
+        {showBtns.shortcuts && checkAccess('add:shortcut', projectId) && (
           <button
             className={styles.navBtn}
             type="button"
@@ -213,20 +224,6 @@ export default function Nav() {
             }}
           />
         )}
-      </div>
-      <div className={styles.dividingLine} />
-
-      <div className={styles.section}>
-        {buttons.utilBtns.map((btn) => {
-          return (
-            checkAccess(btn.checkAccess, projectId) && (
-              <NavLink to={btn.url} data-testid={btn.dataTestId} className={styles.navBtn}>
-                {btn.icon}
-                <span>{btn.name}</span>
-              </NavLink>
-            )
-          );
-        })}
       </div>
     </nav>
   );
