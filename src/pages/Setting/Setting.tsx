@@ -8,13 +8,13 @@ import styles from './Setting.module.scss';
 import { showProject, updateProject } from '../../api/projects/projects';
 import { IOnChangeProjectLead, IProjectEditor } from '../../types';
 import { UserContext } from '../../context/UserInfoProvider';
-import Navigation from '../../components/BoradNavigationV2/Navigation';
 import SubSettingMenu from '../../components/SubSettingMenu/SubSettingMenu';
 import InputV2 from '../../components/FormV2/InputV2/InputV2';
 import SettingCard from '../../components/SettingCard/SettingCard';
 import ChangeIcon from '../../components/ProjectEditor/ChangeIcon/ChangeIcon';
 import DropdownV2 from '../../components/FormV2/DropdownV2/DropdownV2';
 import { getUsers } from '../../api/user/user';
+import Navigation from '../../components/BoardNavigationV2/Navigation';
 
 export default function Setting() {
   const navigate = useNavigate();

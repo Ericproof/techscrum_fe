@@ -9,7 +9,7 @@ import styles from './UserMePage.module.scss';
 import SettingCard from '../../../components/SettingCard/SettingCard';
 import InputV2 from '../../../components/FormV2/InputV2/InputV2';
 import SubSettingMenu from '../../../components/SubSettingMenu/SubSettingMenu';
-import Navigation from '../../../components/BoradNavigationV2/Navigation';
+import Navigation from '../../../components/BoardNavigationV2/Navigation';
 
 export default function UserMePage() {
   const navigate = useNavigate();
