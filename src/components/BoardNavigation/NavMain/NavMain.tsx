@@ -252,6 +252,7 @@ export default function NavMain(props: IPropsNavMain) {
             onClickCloseModal={() => {
               setShowDailyScrum(false);
             }}
+            projectId={currentProject?.id}
           />
         )}
 
