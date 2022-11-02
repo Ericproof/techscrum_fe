@@ -143,6 +143,7 @@ export default function Nav() {
           onClickCloseModal={() => {
             setShowDailyScrum(false);
           }}
+          projectId={currentProject?.id}
         />
       )}
 
