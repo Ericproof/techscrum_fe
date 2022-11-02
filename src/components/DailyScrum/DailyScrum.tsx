@@ -4,13 +4,17 @@ import { AiOutlineClose } from 'react-icons/ai';
 import styles from './DailyScrum.module.scss';
 import DailyScrumTicket from './DailyScrumTicket/DailyScrumTicket';
 import Modal from '../Modal/Modal';
+import { createDailyScrum } from '../../api/dailyScrum/dailyScrum';
 
 // WIP need to add submit function
 
 interface IDailyScrumModal {
   onClickCloseModal: () => void;
+  projectId: string;
 }
-function DailyScrumModal({ onClickCloseModal }: IDailyScrumModal) {
+
+// eslint-disable-next-line no-unused-vars
+function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal) {
   const date = '01/10/2022';
   const dummyDailyScrumTicketData = [
     {
@@ -35,6 +39,7 @@ function DailyScrumModal({ onClickCloseModal }: IDailyScrumModal) {
     }
   ];
   const [dailyScrumTicketData, setDailyScrumTicketData] = useState(dummyDailyScrumTicketData);
+  const [submitting, setSubmitting] = useState(false);
 
   const onChangeFinish = (id: string, value: boolean) => {
     setDailyScrumTicketData(
@@ -77,6 +82,12 @@ function DailyScrumModal({ onClickCloseModal }: IDailyScrumModal) {
     );
   };
 
+  const onHandleSubmit = async () => {
+    setSubmitting(true);
+    await createDailyScrum(projectId, dailyScrumTicketData);
+    setSubmitting(false);
+  };
+
   return (
     <>
       <div className={styles.dailyScrumHeader}>
@@ -114,7 +125,7 @@ function DailyScrumModal({ onClickCloseModal }: IDailyScrumModal) {
         >
           Cancel
         </button>
-        <button className={styles.submitBtn} onClick={onClickCloseModal}>
+        <button className={styles.submitBtn} onClick={onHandleSubmit} disabled={submitting}>
           Submit
         </button>
       </div>
@@ -124,13 +135,14 @@ function DailyScrumModal({ onClickCloseModal }: IDailyScrumModal) {
 
 interface IDailyScrum {
   onClickCloseModal: () => void;
+  projectId: string;
 }
-export default function DailyScrum({ onClickCloseModal }: IDailyScrum) {
+export default function DailyScrum({ onClickCloseModal, projectId }: IDailyScrum) {
   return (
     <>
       {ReactDOM.createPortal(
         <Modal classesName={styles.dailyScrumModal}>
-          <DailyScrumModal onClickCloseModal={onClickCloseModal} />
+          <DailyScrumModal onClickCloseModal={onClickCloseModal} projectId={projectId} />
         </Modal>,
         document.getElementById('root') as Element
       )}
