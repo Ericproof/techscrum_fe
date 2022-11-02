@@ -12,7 +12,6 @@ interface IDailyScrumModal {
   onClickCloseModal: () => void;
   projectId: string;
 }
-
 function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal) {
   const date = '01/10/2022';
   const dummyDailyScrumTicketData = [
@@ -39,7 +38,6 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal) {
   ];
   const [dailyScrumTicketData, setDailyScrumTicketData] = useState(dummyDailyScrumTicketData);
   const [submitting, setSubmitting] = useState(false);
-
   const onChangeFinish = (id: string, value: boolean) => {
     setDailyScrumTicketData(
       dailyScrumTicketData.map((ticket) => {
@@ -80,13 +78,11 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal) {
       })
     );
   };
-
   const onHandleSubmit = async () => {
     setSubmitting(true);
     await createDailyScrum(projectId, dailyScrumTicketData);
     setSubmitting(false);
   };
-
   return (
     <>
       <div className={styles.dailyScrumHeader}>
