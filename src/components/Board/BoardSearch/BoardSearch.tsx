@@ -123,6 +123,7 @@ export default function BoardSearch({ updateIsCreateNewCard, setInputQuery, proj
           onClick={updateIsCreateNewCard}
           icon={<IoIosAdd className={styles.createCardIcon} />}
           fill
+          dataTestId="board-create-card"
         />
       )}
     </div>
