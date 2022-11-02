@@ -13,7 +13,6 @@ interface IDailyScrumModal {
   projectId: string;
 }
 
-// eslint-disable-next-line no-unused-vars
 function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal) {
   const date = '01/10/2022';
   const dummyDailyScrumTicketData = [
