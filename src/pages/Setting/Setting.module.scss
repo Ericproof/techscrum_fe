@@ -43,3 +43,18 @@
 .row{
     margin: 24px 0;
 }
+
+.modal{
+    max-width: 500px!important;
+    p{
+        margin: 20px 0 50px 0;
+    }
+}
+
+.modalBtn{
+    display: flex;
+    justify-content: flex-end;
+    button{
+        margin-left: 20px;
+    }
+}

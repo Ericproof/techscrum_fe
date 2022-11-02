@@ -68,7 +68,8 @@ $white: rgb(245, 245, 245);
     height: 50px;
     color: rgb(79, 83, 102);
     &:hover {
-      background:rgb(226, 226, 233);
+      //background:rgb(226, 226, 233);
+      border-right: 3px solid $primaryColor;
       border-radius: 0;
       color:$primaryColor;
       font-weight: 300;
