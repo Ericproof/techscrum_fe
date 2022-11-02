@@ -196,6 +196,7 @@ export default function Setting() {
             <ButtonV2
               text="DELETE"
               danger
+              size="xs"
               onClick={() => {
                 setShowDeleteModal(true);
               }}

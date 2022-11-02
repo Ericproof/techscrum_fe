@@ -8,10 +8,21 @@ interface IPropsButtonV2 {
   danger?: boolean;
   loading?: boolean;
   fill?: boolean;
+  icon?: any;
+  size?: 'xs' | 'md' | 'lg';
 }
 
 export default function ButtonV2(props: IPropsButtonV2) {
-  const { text, customStyles = '', onClick, danger = false, loading = false, fill = false } = props;
+  const {
+    text,
+    customStyles = '',
+    onClick,
+    danger = false,
+    loading = false,
+    fill = false,
+    icon = null,
+    size = 'md'
+  } = props;
   return (
     <button
       type="button"
@@ -19,11 +30,13 @@ export default function ButtonV2(props: IPropsButtonV2) {
         styles.buttonV2,
         customStyles || '',
         danger ? styles.danger : '',
-        fill ? styles.fill : ''
+        fill ? styles.fill : '',
+        styles[size]
       ].join(' ')}
       onClick={onClick}
       disabled={loading}
     >
+      {icon && icon}
       {text}
     </button>
   );
@@ -33,5 +46,7 @@ ButtonV2.defaultProps = {
   customStyles: '',
   danger: false,
   loading: false,
-  fill: false
+  fill: false,
+  icon: null,
+  size: 'md'
 };

@@ -4,7 +4,6 @@
 $transition :all .25s ease-in-out;
 
 .buttonV2{
-    display: inline-block;
     position: relative;
     box-sizing: border-box;
     border: 1px solid $primaryColor;
@@ -12,8 +11,7 @@ $transition :all .25s ease-in-out;
     text-align: center;
     text-transform: uppercase;
     cursor: pointer;
-    height: 42px;
-    min-width: 142px;
+    min-width: 125px;
     border-radius: 6px;
     font-size: 11px;
     font-weight: 700;
@@ -23,6 +21,9 @@ $transition :all .25s ease-in-out;
     margin: 0px;
     background-color: transparent;
     transition: $transition;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 
@@ -56,4 +57,12 @@ $transition :all .25s ease-in-out;
 .danger:hover{
     background-color: red;
     color:white
+}
+
+.md{
+    height: 42px;
+}
+
+.xs{
+    height: 30px;
 }
