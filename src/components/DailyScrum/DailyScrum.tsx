@@ -78,7 +78,8 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal) {
       })
     );
   };
-  const onHandleSubmit = async () => {
+  const onHandleSubmit = async (e) => {
+    e.preventDefault();
     setSubmitting(true);
     await createDailyScrum(projectId, dailyScrumTicketData);
     setSubmitting(false);
@@ -120,7 +121,12 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal) {
         >
           Cancel
         </button>
-        <button className={styles.submitBtn} onClick={onHandleSubmit} disabled={submitting}>
+        <button
+          className={styles.submitBtn}
+          onClick={onHandleSubmit}
+          disabled={submitting}
+          data-testid="dailyscrum-submit"
+        >
           Submit
         </button>
       </div>

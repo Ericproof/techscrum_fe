@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 import projectsData from '../../fixtures/projects.json';
 import boardData from '../../fixtures/board.json';
+import dailyScrum from '../../fixtures/dailyScrum.json';
 describe('Project page', () => {
   beforeEach(() => {
     let projectList = projectsData;
@@ -40,5 +41,13 @@ describe('Project page', () => {
       range.dispatchEvent(new Event('change', { value: 80, bubbles: true }));
     });
     cy.get('[data-testid="dailyscrum-progress-TEC-333"]').contains('80%');
+  });
+  it('Test should submit data', () => {
+    cy.intercept('POST', '**/projects/**/dailyScrums', dailyScrum).as('add-dailyScrums');
+    cy.get('[data-testid="dailyscrum-btn"]').click();
+    cy.get('[type="radio"]').check();
+    cy.get('[data-testid="dailyscrum-reason-TEC-333"]').type('I need support');
+    cy.get('[data-testid="dailyscrum-submit"]').click();
+    cy.wait('@add-dailyScrums');
   });
 });
