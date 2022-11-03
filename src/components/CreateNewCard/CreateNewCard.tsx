@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { createActivity } from '../../api/activity/activity';
 import styles from './CreateNewCard.module.scss';
 import { createNewTask } from '../../api/task/task';
-import { ICardData, IProject, IProjectData } from '../../types';
+import { ICardData, ILabelData, IProject, IProjectData } from '../../types';
 import UserSelect from '../Form/Select/UserSelect/UserSelect';
 import { upload } from '../../api/upload/upload';
 import Attach from '../BoardCard/CardLeftContent/components/Attach/Attach';
@@ -20,6 +20,7 @@ import DropdownV2 from '../FormV2/DropdownV2/DropdownV2';
 import TextAreaV2 from '../FormV2/TextAreaV2/TextAreaV2';
 import UsersFieldsV2 from '../FieldsV2/UsersFieldsV2/UsersFieldsV2';
 import MultiSelectDropdownV2 from '../FormV2/MultiSelectDropdownV2/MultiSelectDropdownV2';
+import LabelFieldsV2 from '../FieldsV2/LabelFieldsV2/LabelFieldsV2';
 
 interface Props {
   fetchNewCard: (newCard: ICardData) => void;
@@ -150,12 +151,13 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
           />
         </Row>
         <Row defaultGap>
-          <MultiSelectDropdownV2
+          {/* <MultiSelectDropdownV2
             label="Labels"
             name="labels"
             onValueChanged={() => {}}
             options={[]}
-          />
+          /> */}
+          <LabelFieldsV2 taskInfo={null} isDisabled={false} updateTaskTags={() => {}} />
           <UsersFieldsV2
             onChange={onChangeAssigneeId}
             defaultValue={null}
