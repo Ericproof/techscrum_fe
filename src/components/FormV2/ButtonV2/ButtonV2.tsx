@@ -39,7 +39,7 @@ export default function ButtonV2(props: IPropsButtonV2) {
       disabled={loading}
       data-testid={dataTestId}
     >
-      {icon && icon}
+      {icon}
       {text}
     </button>
   );
