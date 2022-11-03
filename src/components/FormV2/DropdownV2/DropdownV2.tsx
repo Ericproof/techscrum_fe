@@ -8,8 +8,8 @@ import defaultStyles from './DropdownV2.module.scss';
 
 interface IDropdownV2 {
   onValueChanged: (e: any) => void;
-  onValueBlur: (e: any) => void;
-  defaultValue: string | null;
+  onValueBlur?: (e: any) => void;
+  defaultValue?: string | null;
   name: string;
   options: any;
   label: string;
@@ -28,13 +28,15 @@ export default function DropdownV2(props: IDropdownV2) {
     required,
     options,
     onValueChanged,
-    onValueBlur
+    onValueBlur = null
   } = props;
+  const defaultPlaceHolder = placeHolder || 'None';
   const [value, setValue] = useState(defaultValue);
   const [error, setError] = useState<null | string>(null);
   const [isActive, setIsActive] = useState(false);
-
   const [showMenu, setShowMenu] = useState(false);
+
+  const finalValue = options.filter((item) => item.value === value)[0]?.label;
 
   const onChangeSelect = (val: string) => {
     const e = { target: { value: val, name } };
@@ -47,13 +49,22 @@ export default function DropdownV2(props: IDropdownV2) {
   };
 
   const onBlurValue = (e: any) => {
-    onValueBlur(e);
+    if (onValueBlur) {
+      onValueBlur(e);
+    }
+    const errorMessage = getErrorMessage(e, props);
+    setError(errorMessage);
     setIsActive(false);
   };
 
   return (
     <div
-      className={['relative', styles.inputContainer, isActive ? styles.borderActive : ''].join(' ')}
+      className={[
+        'relative',
+        styles.inputContainer,
+        isActive ? styles.borderActive : '',
+        error ? styles.borderRed : ''
+      ].join(' ')}
     >
       <div
         onClick={() => {
@@ -69,19 +80,17 @@ export default function DropdownV2(props: IDropdownV2) {
           ].join(' ')}
           htmlFor={name}
         >
-          {label}
+          {label && label}
           {required ? <span className={styles.errorRed}>*</span> : ''}
         </label>
         <button
           type={type}
-          className={[
-            styles.input,
-            error ? styles.borderRed : '',
-            !value ? styles.lightGrey : ''
-          ].join(' ')}
+          className={[styles.input, !value ? styles.lightGrey : ''].join(' ')}
           onBlur={onBlurValue}
         >
-          {!value ? placeHolder : options.filter((item) => item.value === value)[0].label}
+          <p className={!finalValue ? defaultStyles.placeHolder : defaultStyles.val}>
+            {!finalValue ? defaultPlaceHolder : finalValue}
+          </p>
         </button>
         <RiArrowDropDownLine className={defaultStyles.dropDown} />
 
@@ -90,11 +99,16 @@ export default function DropdownV2(props: IDropdownV2) {
       <div className="relative">
         {showMenu && (
           <div className={defaultStyles.dropDownList}>
-            {options
-              .filter((item) => item.value !== value)
-              .map((item) => {
-                return <button onClick={() => onChangeSelect(item.value)}>{item.label}</button>;
-              })}
+            {options.length > 0 &&
+              options
+                .filter((item) => item.value !== value)
+                .map((item) => {
+                  return (
+                    <button key={item.value} onClick={() => onChangeSelect(item.value)}>
+                      {item.label}
+                    </button>
+                  );
+                })}
           </div>
         )}
       </div>
@@ -105,5 +119,7 @@ export default function DropdownV2(props: IDropdownV2) {
 DropdownV2.defaultProps = {
   required: false,
   placeHolder: '',
-  type: 'button'
+  type: 'button',
+  onValueBlur: null,
+  defaultValue: null
 };

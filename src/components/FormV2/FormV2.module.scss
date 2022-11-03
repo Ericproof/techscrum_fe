@@ -69,6 +69,7 @@ $transition: all .25s ease-in-out;
 
 .borderRed {
     border: 2px solid $errorRed !important;
+    border-radius: 6px;
 }
 
 .lightGrey{

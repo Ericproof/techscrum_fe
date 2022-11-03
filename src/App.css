@@ -58,3 +58,44 @@ body{
 .background-white{
   background: white;
 }
+
+.modalHeader{
+  position: relative;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  height: 56px;
+  box-sizing: border-box;
+  padding: 16px 20px;
+  background-color: rgb(230, 230, 240);
+  justify-content: space-between;
+}
+
+.modalHeader h1{
+  display: inline-block;
+  font-style: normal;
+  font-stretch: normal;
+  word-break: break-word;
+  font-family: Poppins, sans-serif;
+  color: rgb(79, 83, 102);
+  font-size: 16px;
+  line-height: 1.25;
+  font-weight: 500;
+}
+
+.clear{
+  padding: 0!important;
+  margin: 0!important;
+}
+
+.defaultModalPadding{
+  padding: 40px;
+}
+
+.defaultHeaderModalPadding{
+  padding: 0 40px;
+}
+
+.defaultModalCross:hover{
+  cursor: pointer;
+}

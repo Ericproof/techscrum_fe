@@ -9,7 +9,7 @@ import defaultStyles from './MultiSelectDropdownV2.module.scss';
 
 interface IMultiSelectDropdownV2 {
   onValueChanged: (e: any) => void;
-  onValueBlur: (e: any) => void;
+  onValueBlur?: (e: any) => void;
   name: string;
   options: any;
   label: string;
@@ -47,7 +47,9 @@ export default function MultiSelectDropdownV2(props: IMultiSelectDropdownV2) {
   };
 
   const onBlurValue = (e: any) => {
-    onValueBlur(e);
+    if (onValueBlur) {
+      onValueBlur(e);
+    }
   };
 
   const getFilteredOptions = () => {
@@ -107,7 +109,7 @@ export default function MultiSelectDropdownV2(props: IMultiSelectDropdownV2) {
 
   return (
     <div
-      className="relative"
+      className="relative fullWidth"
       onClick={() => {
         setIsActive(true);
       }}
@@ -163,5 +165,6 @@ export default function MultiSelectDropdownV2(props: IMultiSelectDropdownV2) {
 
 MultiSelectDropdownV2.defaultProps = {
   required: false,
-  placeHolder: ''
+  placeHolder: '',
+  onValueBlur: null
 };

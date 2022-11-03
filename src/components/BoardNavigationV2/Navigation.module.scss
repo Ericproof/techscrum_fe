@@ -7,7 +7,7 @@ $white: rgb(245, 245, 245);
   color: $white;
   min-width: 250px;
   background-color: var(--ds-surface, $primaryColor);
-  height: 94vh;
+  min-height: 94vh;
   padding: 30px 12px;
   overflow-y: overlay;
   font-family: Poppins, sans-serif;

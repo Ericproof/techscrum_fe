@@ -1,6 +1,8 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Fade from 'react-reveal/Fade';
+import Zoom from 'react-reveal/Zoom';
 import styles from './HomePage.module.scss';
 import rochelle from '../../assets/rochelle.png';
 import envelope from '../../assets/envelope.svg';
@@ -19,60 +21,64 @@ export default function HomePage() {
   return (
     <div>
       <Header />
-      <div className={styles.unauthorizePageContainer}>
-        <span className={styles.shape2Container}>
-          <img src={shapeLight} alt="" />
-        </span>
-        <div className={styles.circleContainer}>
-          <img
-            src="https://themexriver.com/appilo-theme/saas-classic-dark/wp-content/uploads/sites/19/2021/07/b-shape2.png"
-            alt=""
-          />
+      <Fade>
+        <div className={styles.unauthorizePageContainer}>
+          <span className={styles.shape2Container}>
+            <img src={shapeLight} alt="" />
+          </span>
+          <div className={styles.circleContainer}>
+            <img
+              src="https://themexriver.com/appilo-theme/saas-classic-dark/wp-content/uploads/sites/19/2021/07/b-shape2.png"
+              alt=""
+            />
+          </div>
+          <span className={styles.shape3Container}>
+            <img
+              src="https://themexriver.com/appilo-theme/seo-agency/wp-content/uploads/sites/56/2021/11/slider-shape-3.png"
+              alt=""
+            />
+          </span>
+          <span className={styles.shape4Container}>
+            <img
+              src="https://themexriver.com/appilo-theme/saas-classic-dark/wp-content/uploads/sites/19/2021/07/b-shape3-1.png"
+              alt=""
+            />
+          </span>
+          <div className={styles.textContainer}>
+            <h1 className={styles.header} data-testid="header-text">
+              <span className="primaryColor">Efficient</span> way of working together.
+            </h1>
+            <p className={styles.text}>Manage your project from start to finish with TechScrum</p>
+            <p className={styles.text}>No credit required.</p>
+          </div>
         </div>
-        <span className={styles.shape3Container}>
-          <img
-            src="https://themexriver.com/appilo-theme/seo-agency/wp-content/uploads/sites/56/2021/11/slider-shape-3.png"
-            alt=""
-          />
-        </span>
-        <span className={styles.shape4Container}>
-          <img
-            src="https://themexriver.com/appilo-theme/saas-classic-dark/wp-content/uploads/sites/19/2021/07/b-shape3-1.png"
-            alt=""
-          />
-        </span>
-        <div className={styles.textContainer}>
-          <h1 className={styles.header} data-testid="header-text">
-            <span className="primaryColor">Efficient</span> way of working together.
-          </h1>
-          <p className={styles.text}>Manage your project from start to finish with TechScrum</p>
-          <p className={styles.text}>No credit required.</p>
-        </div>
-      </div>
+      </Fade>
       <div className={styles.homePage}>
         <section className={styles.jobDoneSection}>
           <div className={styles.jobDoneContainer}>
             <WhyUs />
             <Organizing />
             <div className={styles.projectManagementRow}>
-              <div className={[styles.container, styles.row, styles.projectManagement].join(' ')}>
-                <div className={styles.projectManagementContent}>
-                  <h3 className={styles.colorWhite}>
-                    Experience the simplest project management software.{' '}
-                  </h3>
-                  <div className={styles.jobDoneParagraph}>
-                    <p className={styles.colorWhite}>
-                      Using TechScrum on mobile, desktop, or tablet, thanks to automatic,
-                      cloud-based syncing. You and your team can update inventory in real time from
-                      any location. Are you ready to experience to boost up the company
-                      productivity?
-                    </p>
+              <Fade>
+                <div className={[styles.container, styles.row, styles.projectManagement].join(' ')}>
+                  <div className={styles.projectManagementContent}>
+                    <h3 className={styles.colorWhite}>
+                      Experience the simplest project management software.{' '}
+                    </h3>
+                    <div className={styles.jobDoneParagraph}>
+                      <p className={styles.colorWhite}>
+                        Using TechScrum on mobile, desktop, or tablet, thanks to automatic,
+                        cloud-based syncing. You and your team can update inventory in real time
+                        from any location. Are you ready to experience to boost up the company
+                        productivity?
+                      </p>
+                    </div>
                   </div>
+                  <picture>
+                    <img src={boardView} alt="board view" />
+                  </picture>
                 </div>
-                <picture>
-                  <img src={boardView} alt="board view" />
-                </picture>
-              </div>
+              </Fade>
             </div>
           </div>
         </section>
@@ -175,9 +181,11 @@ export default function HomePage() {
                   </div>
                 </div>
               </div>
-              <picture className={styles.supportPicture}>
-                <img src={chat} alt="cover" />
-              </picture>
+              <Zoom>
+                <picture className={styles.supportPicture}>
+                  <img src={chat} alt="cover" />
+                </picture>
+              </Zoom>
             </div>
           </div>
         </section>

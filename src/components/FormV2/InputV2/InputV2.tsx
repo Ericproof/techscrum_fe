@@ -5,7 +5,7 @@ import styles from '../FormV2.module.scss';
 
 interface IInputV2 {
   onValueChanged: (e: any) => void;
-  onValueBlur: (e: any) => void;
+  onValueBlur?: (e: any) => void;
   defaultValue: string;
   name: string;
   label: string;
@@ -31,7 +31,9 @@ export default function InputV2(props: IInputV2) {
   };
 
   const onBlurValue = (e: any) => {
-    onValueBlur(e);
+    if (onValueBlur) {
+      onValueBlur(e);
+    }
     setIsActive(false);
   };
 
@@ -75,5 +77,6 @@ InputV2.defaultProps = {
   placeHolder: '',
   type: 'text',
   min: null,
-  max: null
+  max: null,
+  onValueBlur: null
 };

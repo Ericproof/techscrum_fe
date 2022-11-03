@@ -4,7 +4,7 @@ import styles from '../FormV2.module.scss';
 
 interface ITextAreaV2 {
   onValueChanged: (e: any) => void;
-  onValueBlur: (e: any) => void;
+  onValueBlur?: (e: any) => void;
   defaultValue: string;
   name: string;
   label: string;
@@ -26,7 +26,9 @@ export default function TextAreaV2(props: ITextAreaV2) {
   };
 
   const onBlurValue = (e: any) => {
-    onValueBlur(e);
+    if (onValueBlur) {
+      onValueBlur(e);
+    }
     setIsActive(false);
   };
 
@@ -66,5 +68,6 @@ export default function TextAreaV2(props: ITextAreaV2) {
 
 TextAreaV2.defaultProps = {
   required: false,
-  placeHolder: ''
+  placeHolder: '',
+  onValueBlur: null
 };

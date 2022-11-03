@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react/no-array-index-key */
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -12,6 +14,12 @@ import PhotoGallery from '../PhotoGallery/PhotoGallery';
 import { TaskTypesContext } from '../../context/TaskTypeProvider';
 import { ProjectContext } from '../../context/ProjectProvider';
 import { UserContext } from '../../context/UserInfoProvider';
+import Row from '../Grid/Row/Row';
+import InputV2 from '../FormV2/InputV2/InputV2';
+import DropdownV2 from '../FormV2/DropdownV2/DropdownV2';
+import TextAreaV2 from '../FormV2/TextAreaV2/TextAreaV2';
+import UsersFieldsV2 from '../FieldsV2/UsersFieldsV2/UsersFieldsV2';
+import MultiSelectDropdownV2 from '../FormV2/MultiSelectDropdownV2/MultiSelectDropdownV2';
 
 interface Props {
   fetchNewCard: (newCard: ICardData) => void;
@@ -114,17 +122,74 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
   };
 
   return (
-    <div className={styles.cardContainer}>
-      <div className={styles.cardTitle}>
-        <h2 className={styles.titleContent} data-testid="board-create-card-btn">
-          Create card
-        </h2>
-        <button type="button" className={styles.titleButton}>
-          ...
-        </button>
-      </div>
+    <div className="defaultHeaderModalPadding">
       <form onSubmit={onSave}>
-        <div className={styles.cardContent}>
+        <Row defaultMargin>
+          <InputV2
+            label="Title"
+            name="title"
+            onValueChanged={changeTitleHandler}
+            defaultValue="12"
+          />
+        </Row>
+        <Row defaultMargin defaultGap>
+          <DropdownV2
+            label="Card Type"
+            name="type"
+            onValueChanged={onChangeTaskType}
+            defaultValue={taskType[0].name}
+            options={taskType.map((item) => {
+              return { value: item.id, label: item.name };
+            })}
+          />
+          <DropdownV2
+            label="Status"
+            name="status"
+            onValueChanged={() => {}}
+            defaultValue="High"
+            options={[
+              { value: 'High', label: 'High' },
+              { value: 'Medium', label: 'Medium' },
+              { value: 'Low', label: 'Low' }
+            ]}
+          />
+        </Row>
+        <Row defaultGap>
+          <MultiSelectDropdownV2
+            label="Labels"
+            name="labels"
+            onValueChanged={() => {}}
+            options={[]}
+          />
+          <UsersFieldsV2
+            onChange={onChangeAssigneeId}
+            defaultValue={null}
+            label="Assignee"
+            name="assignee"
+          />
+        </Row>
+        <Attach onChangeAttachment={uploadFile} />
+        <PhotoGallery photoData={photoData} removeAttachment={removeAttachment} />
+        <TextAreaV2
+          label="Description"
+          onValueChanged={changeDescriptionHandler}
+          defaultValue={description}
+          name="description"
+        />
+        <div className={styles.cardButton}>
+          <button
+            type="button"
+            className={styles.cancelButton}
+            name="close"
+            onClick={updateIsCreateNewCard}
+          >
+            Cancel
+          </button>
+          <button type="submit" className={styles.createButton} data-testid="create-issue">
+            Create
+          </button>
+        </div>
+        {/* <div className={styles.cardContent}>
           <p className={styles.cardStar}>Project</p>
           <input className={styles.cardInput} disabled defaultValue={currentProject[0].name} />
           <p className={styles.cardStar}>Card type</p>
@@ -147,14 +212,9 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
             required
           />
           <p className={styles.cardLabel}>Attachment</p>
-          <Attach onChangeAttachment={uploadFile} />
-          <PhotoGallery photoData={photoData} removeAttachment={removeAttachment} />
+
           <p className={styles.cardLabel}>Description</p>
-          <textarea
-            className={styles.cardTextarea}
-            value={description}
-            onChange={changeDescriptionHandler}
-          />
+
           <p className={styles.cardLabel}>Assignee</p>
           <UserSelect onChange={onChangeAssigneeId} value={assigneeId} allowEdit />
           <p className={styles.cardLabel} style={{ display: 'none' }}>
@@ -190,7 +250,7 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
           <button type="submit" className={styles.createButton} data-testid="create-issue">
             Create
           </button>
-        </div>
+        </div> */}
       </form>
     </div>
   );
