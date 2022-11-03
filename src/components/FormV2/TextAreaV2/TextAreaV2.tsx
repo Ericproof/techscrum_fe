@@ -10,10 +10,20 @@ interface ITextAreaV2 {
   label: string;
   required?: boolean;
   placeHolder?: string;
+  dataTestId?: string;
 }
 
 export default function TextAreaV2(props: ITextAreaV2) {
-  const { defaultValue, name, label, placeHolder, required, onValueChanged, onValueBlur } = props;
+  const {
+    defaultValue,
+    name,
+    label,
+    placeHolder,
+    required,
+    onValueChanged,
+    onValueBlur,
+    dataTestId
+  } = props;
   const [value, setValue] = useState(defaultValue);
   const [error, setError] = useState<null | string>(null);
   const [isActive, setIsActive] = useState(false);
@@ -60,6 +70,7 @@ export default function TextAreaV2(props: ITextAreaV2) {
           setIsActive(true);
         }}
         placeholder={placeHolder}
+        data-testid={dataTestId}
       />
       {error && <p className={styles.errorMessage}>{error}</p>}
     </div>
@@ -69,5 +80,6 @@ export default function TextAreaV2(props: ITextAreaV2) {
 TextAreaV2.defaultProps = {
   required: false,
   placeHolder: '',
-  onValueBlur: null
+  onValueBlur: null,
+  dataTestId: null
 };

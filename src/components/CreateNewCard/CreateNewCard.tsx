@@ -172,6 +172,7 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
           onValueChanged={changeDescriptionHandler}
           defaultValue={description}
           name="description"
+          dataTestId="summary"
         />
         <div className={styles.cardButton}>
           <button
