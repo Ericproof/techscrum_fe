@@ -81,7 +81,7 @@ export default function DropdownV2(props: IDropdownV2) {
           ].join(' ')}
           onBlur={onBlurValue}
         >
-          {!value ? placeHolder : value}
+          {!value ? placeHolder : options.filter((item) => item.value === value)[0].label}
         </button>
         <RiArrowDropDownLine className={defaultStyles.dropDown} />
 
@@ -90,9 +90,11 @@ export default function DropdownV2(props: IDropdownV2) {
       <div className="relative">
         {showMenu && (
           <div className={defaultStyles.dropDownList}>
-            {options.map((item) => {
-              return <button onClick={() => onChangeSelect(item.value)}>{item.label}</button>;
-            })}
+            {options
+              .filter((item) => item.value !== value)
+              .map((item) => {
+                return <button onClick={() => onChangeSelect(item.value)}>{item.label}</button>;
+              })}
           </div>
         )}
       </div>

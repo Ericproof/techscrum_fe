@@ -31,5 +31,8 @@ export function updateProject(id: string, data: IProjectData, token: string) {
   if (typeof data.ownerId !== 'string') {
     copyData.ownerId = !data.ownerId ? null : data.ownerId.id;
   }
+  if (typeof data.projectLeadId !== 'string') {
+    copyData.projectLeadId = !data.projectLeadId ? null : data.projectLeadId.id;
+  }
   return alphaApi.put(`${config.apiAddress}/projects/${id}`, copyData, getAuthHeader(token));
 }

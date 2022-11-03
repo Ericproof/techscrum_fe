@@ -3,7 +3,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
-import ProjectEditor from '../../components/ProjectEditor/ProjectEditor';
+import { ToastContainer, toast } from 'react-toastify';
 import styles from './Setting.module.scss';
 import { showProject, updateProject } from '../../api/projects/projects';
 import { IOnChangeProjectLead, IProjectEditor } from '../../types';
@@ -15,14 +15,18 @@ import ChangeIcon from '../../components/ProjectEditor/ChangeIcon/ChangeIcon';
 import DropdownV2 from '../../components/FormV2/DropdownV2/DropdownV2';
 import { getUsers } from '../../api/user/user';
 import Navigation from '../../components/BoardNavigationV2/Navigation';
+import ButtonV2 from '../../components/FormV2/ButtonV2/ButtonV2';
+import 'react-toastify/dist/ReactToastify.css';
+import Modal from '../../components/Modal/Modal';
 
 export default function Setting() {
   const navigate = useNavigate();
   const { projectId = '' } = useParams();
   const [data, setData] = useState<IProjectEditor | null>(null);
-  const [hasError, setError] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const userInfo = useContext(UserContext);
   const [userList, setUserList] = useState<any>([]);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   useEffect(() => {
     if (Object.keys(userInfo).length === 0 || !userInfo) {
@@ -53,28 +57,39 @@ export default function Setting() {
     getUsersList();
   }, [userList]);
 
-  const onClickSave = (projectData: IProjectEditor) => {
-    if (!projectData) {
-      return;
-    }
+  const update = (updateData: any) => {
     const token = userInfo?.token || '';
-    updateProject(projectId, projectData, token)
+    setLoading(true);
+    updateProject(projectId, updateData, token)
       .then((res: AxiosResponse) => {
         if (!res.data) {
           return;
         }
-        setError(false);
-        navigate('/projects');
+        setLoading(false);
+        toast.success('Your profile has been successfully updated', {
+          theme: 'colored',
+          className: 'primaryColorBackground'
+        });
       })
       .catch(() => {
-        setError(true);
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+        setLoading(false);
       });
+  };
+
+  const onClickSave = () => {
+    if (!data) {
+      return;
+    }
+    const copiedData = { name: data.name, key: data.key, projectLeadId: data.projectLeadId };
+    update(copiedData);
   };
 
   const uploadSuccess = (photoData: any) => {
     const updateData = { ...data };
     updateData.iconUrl = photoData[0].location;
     setData(updateData);
+    update({ iconUrl: updateData.iconUrl });
   };
 
   const onChange = (e: IOnChangeProjectLead) => {
@@ -94,7 +109,8 @@ export default function Setting() {
     return <></>;
   }
   return (
-    <div className={styles.settingPage} data-testid="setting-page">
+    <div className={[styles.settingPage, 'relative'].join(' ')} data-testid="setting-page">
+      <ToastContainer style={{ width: '400px' }} />
       <Navigation />
       <SubSettingMenu />
       <div className={styles.settingContainer}>
@@ -111,14 +127,14 @@ export default function Setting() {
                 onValueChanged={onChangeName}
                 onValueBlur={() => {}}
                 defaultValue={data.name}
-                name="Project Name"
+                name="name"
               />
               <InputV2
                 label="Project Key"
                 onValueChanged={onChange}
                 onValueBlur={() => {}}
                 defaultValue={data.key}
-                name="projectKey"
+                name="key"
               />
             </div>
             <div className={[styles.gap, styles.row, 'flex'].join(' ')}>
@@ -126,8 +142,8 @@ export default function Setting() {
                 label="Project Lead"
                 onValueChanged={onChange}
                 onValueBlur={() => {}}
-                defaultValue={data.projectLeadId.id}
-                name="projectLead"
+                defaultValue={data.projectLeadId?.id}
+                name="projectLeadId"
                 options={userList.map((item) => {
                   return {
                     label: item.name,
@@ -152,6 +168,7 @@ export default function Setting() {
                 name="description"
               />
             </div>
+            <ButtonV2 text="SAVE CHANGES" onClick={onClickSave} loading={loading} />
           </SettingCard>
           <SettingCard title="Change Password">
             <div className={[styles.gap, styles.row, 'flex'].join(' ')}>
@@ -172,18 +189,36 @@ export default function Setting() {
                 type="password"
               />
             </div>
+            <ButtonV2 text="SAVE CHANGES" onClick={() => {}} />
           </SettingCard>
           <SettingCard title="Delete Account">
             <p>Delete your account and all of your source data. This is irreversible.</p>
+            <ButtonV2
+              text="DELETE"
+              danger
+              size="xs"
+              onClick={() => {
+                setShowDeleteModal(true);
+              }}
+            />
           </SettingCard>
-          <ProjectEditor
-            showCancelBtn
-            projectData={data}
-            onClickSave={onClickSave}
-            hasError={hasError}
-          />
         </div>
       </div>
+      {showDeleteModal && (
+        <Modal classesName={styles.modal}>
+          <p>Are you sure you want to delete the account?</p>
+          <div className={styles.modalBtn}>
+            <ButtonV2 text="Confirm" danger onClick={() => {}} />
+            <ButtonV2
+              text="Cancel"
+              fill
+              onClick={() => {
+                setShowDeleteModal(false);
+              }}
+            />
+          </div>
+        </Modal>
+      )}
     </div>
   );
 }

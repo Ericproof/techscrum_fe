@@ -49,5 +49,9 @@ $colorBlue: rgb(50, 115, 246);
     color: white;
     background-color: $colorBlue;
     @include btn();
+    &[disabled] {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
   }
 }

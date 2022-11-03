@@ -224,6 +224,7 @@ export default function Board() {
         setInputQuery={setInputQuery}
         projectId={projectId}
       />
+      <hr className={style.line} />
       <BoardMain
         columnsInfo={columnsInfo}
         onDragEventHandler={dragEventHandler}
