@@ -34,7 +34,7 @@ export default function LabelFieldsV2(props: IPropsLabel) {
     }
     await createLabel(taskInfo.id, {
       name: label,
-      slug: label.replace(' ', '-') || label.replace(' ', '-')
+      slug: label.replace(' ', '-')
     });
   };
 
