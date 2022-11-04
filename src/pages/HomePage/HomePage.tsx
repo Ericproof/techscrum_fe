@@ -16,6 +16,8 @@ import WhyUs from './WhyUs/WhyUs';
 import Organizing from './Organizing/Organizing';
 import AnyWhereSection from './AnyWhereSection/AnyWhereSection';
 import Prevent from './Prevent/Prevent';
+import darkCircle from '../../assets/shapeDark.png';
+// import midCircle from '../../assets/shapeMid.png';
 
 export default function HomePage() {
   return (
@@ -39,10 +41,7 @@ export default function HomePage() {
             />
           </span>
           <span className={styles.shape4Container}>
-            <img
-              src="https://themexriver.com/appilo-theme/saas-classic-dark/wp-content/uploads/sites/19/2021/07/b-shape3-1.png"
-              alt=""
-            />
+            <img src={darkCircle} alt="" />
           </span>
           <div className={styles.textContainer}>
             <h1 className={styles.header} data-testid="header-text">

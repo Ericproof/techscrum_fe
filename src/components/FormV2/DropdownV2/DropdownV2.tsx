@@ -80,7 +80,7 @@ export default function DropdownV2(props: IDropdownV2) {
           ].join(' ')}
           htmlFor={name}
         >
-          {label && label}
+          {label}
           {required ? <span className={styles.errorRed}>*</span> : ''}
         </label>
         <button

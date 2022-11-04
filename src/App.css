@@ -59,6 +59,8 @@ body{
   background: white;
 }
 
+
+
 .modalHeader{
   position: relative;
   display: flex;
@@ -67,8 +69,11 @@ body{
   height: 56px;
   box-sizing: border-box;
   padding: 16px 20px;
-  background-color: rgb(230, 230, 240);
+  background-color: #6a2add;
   justify-content: space-between;
+
+  -webkit-clip-path: polygon(0% 0%, 0% 100%, 26% 75%, 54% 100%, 79% 64%, 100% 100%, 100% 84%, 100% 0%);
+  clip-path: polygon(0% 0%, 0% 100%, 26% 75%, 54% 100%, 79% 64%, 100% 100%, 100% 84%, 100% 0%);
 }
 
 .modalHeader h1{
@@ -77,10 +82,10 @@ body{
   font-stretch: normal;
   word-break: break-word;
   font-family: Poppins, sans-serif;
-  color: rgb(79, 83, 102);
-  font-size: 16px;
+  color: white;
+  font-size: 19px;
   line-height: 1.25;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .clear{
@@ -95,7 +100,9 @@ body{
 .defaultHeaderModalPadding{
   padding: 0 40px;
 }
-
+.defaultModalCross{
+  color: white !important;;
+}
 .defaultModalCross:hover{
   cursor: pointer;
 }

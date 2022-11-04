@@ -34,14 +34,14 @@ export default function LabelFieldsV2(props: IPropsLabel) {
     }
     await createLabel(taskInfo.id, {
       name: label,
-      slug: label.replace(' ', '-') || label.replace(' ', '-')
+      slug: label.replace(' ', '-')
     });
   };
 
   return (
     <MultiSelectDropdownV2
-      label="Labels"
-      name="labels (WIP)"
+      label="Labels (WIP)"
+      name="labels"
       onValueChanged={() => {
         //   addLabelToSelectedTaskLabelList(label);
         //   setInputLabel('');
