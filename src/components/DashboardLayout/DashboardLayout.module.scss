@@ -5,7 +5,7 @@ $nav-height: 56px;
 .container {
   display: flex;
   flex-direction: row;
-  height: calc(100vh - $nav-height);
+  min-height: 100vh;
   overflow: hidden;
   background: #f6f8f9;
 }

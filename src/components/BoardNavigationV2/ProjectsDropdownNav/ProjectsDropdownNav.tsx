@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ReactDOM from 'react-dom';
-import styles from './ProjectsDropdown.module.scss';
+import styles from './ProjectsDropdownNav.module.scss';
 import { IProjectData } from '../../../types';
 import { ProjectContext } from '../../../context/ProjectProvider';
 
