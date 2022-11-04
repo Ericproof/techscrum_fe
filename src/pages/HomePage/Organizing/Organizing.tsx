@@ -3,6 +3,7 @@ import { TiTick } from 'react-icons/ti';
 import { BsBoxSeam } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import Fade from 'react-reveal/Fade';
+import Zoom from 'react-reveal/Zoom';
 import styles from './Organizing.module.scss';
 import itemDetails from '../../../assets/item_details-2.png';
 
@@ -45,11 +46,11 @@ export default function Organizing() {
             </div>
           </div>
         </Fade>
-        <Fade up>
+        <Zoom>
           <div className={styles.businessPicture}>
             <img src={itemDetails} alt="business" />
           </div>
-        </Fade>
+        </Zoom>
       </div>
     </div>
   );
