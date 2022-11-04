@@ -14,7 +14,7 @@ import SettingCard from '../../components/SettingCard/SettingCard';
 import ChangeIcon from '../../components/ProjectEditor/ChangeIcon/ChangeIcon';
 import DropdownV2 from '../../components/FormV2/DropdownV2/DropdownV2';
 import { getUsers } from '../../api/user/user';
-import Navigation from '../../components/BoardNavigationV2/Navigation';
+import NavigationV2 from '../../components/BoardNavigationV2/NavigationV2';
 import ButtonV2 from '../../components/FormV2/ButtonV2/ButtonV2';
 import 'react-toastify/dist/ReactToastify.css';
 import Modal from '../../components/Modal/Modal';
@@ -111,7 +111,7 @@ export default function Setting() {
   return (
     <div className={[styles.settingPage, 'relative'].join(' ')} data-testid="setting-page">
       <ToastContainer style={{ width: '400px' }} />
-      <Navigation />
+      <NavigationV2 />
       <SubSettingMenu />
       <div className={styles.settingContainer}>
         <div className={styles.settingMiniContainer}>

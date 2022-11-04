@@ -9,7 +9,7 @@ import styles from './UserMePage.module.scss';
 import SettingCard from '../../../components/SettingCard/SettingCard';
 import InputV2 from '../../../components/FormV2/InputV2/InputV2';
 import SubSettingMenu from '../../../components/SubSettingMenu/SubSettingMenu';
-import Navigation from '../../../components/BoardNavigationV2/Navigation';
+import NavigationV2 from '../../../components/BoardNavigationV2/NavigationV2';
 
 export default function UserMePage() {
   const navigate = useNavigate();
@@ -59,7 +59,7 @@ export default function UserMePage() {
   return (
     <>
       <div className={styles.settingPage} data-testid="setting-page">
-        <Navigation />
+        <NavigationV2 />
         <SubSettingMenu />
         <div className={styles.settingContainer}>
           <div className={styles.settingMiniContainer}>
