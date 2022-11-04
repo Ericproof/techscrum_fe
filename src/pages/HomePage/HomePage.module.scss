@@ -1754,6 +1754,7 @@
   outline: 0;
   height: 100vh;
   background-color: #f6f8f9;
+  overflow:hidden;
 }
 .unauthorizePageContainer::before {
   background-image: url(https://themexriver.com/appilo-theme/saas-classic-dark/wp-content/themes/appilo/img/saas-classic/banner/b-shape1.png);
@@ -1784,7 +1785,7 @@
   }
   position: absolute;
   left: -300px;
-  bottom: -300px;
+  bottom: -750px;
   margin: 0;
   padding: 0;
   border: 0;
@@ -1804,7 +1805,7 @@
 
 .shape4Container {
   position: absolute;
-  right: 0%;
+  right: -25%;
   bottom: 40%;
   animation: 5s apldg_rotate_animation2 linear infinite;
   animation-direction: alternate;
@@ -1812,6 +1813,10 @@
   padding: 0;
   border: 0;
   outline: 0;
+  opacity: 0.3;
+  img{
+   max-width: 600px;
+  }
 }
 
 .textContainer {
@@ -1909,10 +1914,10 @@
 
 @keyframes apldg_rotate_animation2 {
   from {
-    bottom: 40%;
+    bottom: 20%;
   }
   to {
-    bottom: 50%;
+    bottom: 30%;
   }
 }
 
