@@ -72,8 +72,8 @@ body{
   background-color: #6a2add;
   justify-content: space-between;
 
-  -webkit-clip-path: polygon(0% 0%, 0% 100%, 16% 66%, 38% 100%, 69% 64%, 90% 100%, 100% 84%, 100% 0%);
-  clip-path: polygon(0% 0%, 0% 100%, 16% 66%, 38% 100%, 69% 64%, 90% 100%, 100% 84%, 100% 0%);
+  -webkit-clip-path: polygon(0% 0%, 0% 100%, 26% 75%, 54% 100%, 79% 64%, 100% 100%, 100% 84%, 100% 0%);
+  clip-path: polygon(0% 0%, 0% 100%, 26% 75%, 54% 100%, 79% 64%, 100% 100%, 100% 84%, 100% 0%);
 }
 
 .modalHeader h1{
@@ -83,9 +83,9 @@ body{
   word-break: break-word;
   font-family: Poppins, sans-serif;
   color: white;
-  font-size: 16px;
+  font-size: 19px;
   line-height: 1.25;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .clear{
