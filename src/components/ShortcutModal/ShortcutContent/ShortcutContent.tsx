@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './ShortcutBody.module.scss';
+import styles from './ShortcutContent.module.scss';
 
-interface IShortCutBody {
+interface IShortCutContent {
   operation: string;
   setWebValue: (value: string) => void;
   setNameValue: (value: string) => void;
@@ -10,14 +10,14 @@ interface IShortCutBody {
   isUrlValid: boolean;
 }
 
-export default function ShortcutBody({
+export default function ShortcutContent({
   operation,
   setWebValue,
   setNameValue,
   value,
   webValue,
   isUrlValid
-}: IShortCutBody) {
+}: IShortCutContent) {
   return (
     <>
       <h1>{operation} shortcut</h1>

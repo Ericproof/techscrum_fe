@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { createShortcut, updateShortcut } from '../../api/shortcut/shortcut';
 import { IShortcutData } from '../../types';
-import AddShortcutFooter from './components/AddShortcutFooter/AddShortcutFooter';
-import EditShortcutFooter from './components/EditShortcutFooter/EditShortcutFooter';
-import ShortcutBody from './components/ShortcutBody/ShortcutBody';
-import styles from './Shortcut.module.scss';
+import styles from './ShortcutModal.module.scss';
+import ShortcutContent from './ShortcutContent/ShortcutContent';
+import AddShortcutButtons from './AddShortcutButtons/AddShortcutButtons';
+import EditShortcutButtons from './EditShortcutButtons/EditShortcutButtons';
 
 interface IOperation {
   operation: string;
@@ -17,7 +17,7 @@ interface IOperation {
   currentProjectId: string;
 }
 
-export default function Shortcut({
+export default function ShortcutModal({
   operation,
   setAddLinkToggle,
   addLinkToggle,
@@ -83,7 +83,7 @@ export default function Shortcut({
           </div>
         </header>
         <div className={styles.dialog}>
-          <ShortcutBody
+          <ShortcutContent
             operation={operation}
             setWebValue={setWebValue}
             setNameValue={setNameValue}
@@ -94,7 +94,7 @@ export default function Shortcut({
           {
             {
               Add: (
-                <AddShortcutFooter
+                <AddShortcutButtons
                   setAddLinkToggle={setAddLinkToggle}
                   addLinkToggle={addLinkToggle}
                   webValue={webValue}
@@ -104,7 +104,7 @@ export default function Shortcut({
                 />
               ),
               Edit: (
-                <EditShortcutFooter
+                <EditShortcutButtons
                   setAddLinkToggle={setAddLinkToggle}
                   addLinkToggle={addLinkToggle}
                   shortCutRemoved={shortCutRemoved}
