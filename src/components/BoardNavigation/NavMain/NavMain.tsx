@@ -7,7 +7,7 @@ import { FiSettings } from 'react-icons/fi';
 import { FaDailymotion } from 'react-icons/fa';
 import { IProjectData, IShortcutData } from '../../../types';
 import checkAccess from '../../../utils/helpers';
-import Shortcut from '../../AddShortcut/Shortcut';
+import ShortcutModal from '../../ShortcutModal/ShortcutModal';
 import styles from './NavMain.module.scss';
 import DailyScrum from '../../DailyScrum/DailyScrum';
 
@@ -324,7 +324,7 @@ export default function NavMain(props: IPropsNavMain) {
           </button>
         )}
         {addLinkToggle && (
-          <Shortcut
+          <ShortcutModal
             operation={operation}
             setAddLinkToggle={setAddLinkToggle}
             addLinkToggle={addLinkToggle}

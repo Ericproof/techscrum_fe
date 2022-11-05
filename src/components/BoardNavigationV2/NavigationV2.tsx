@@ -13,8 +13,8 @@ import ProjectHeaderNav from './ProjectHeaderNav/ProjectHeaderNav';
 import { ProjectContext, ProjectDispatchContext } from '../../context/ProjectProvider';
 import styles from './NavigationV2.module.scss';
 import checkAccess from '../../utils/helpers';
-import Shortcut from '../AddShortcut/Shortcut';
 import DailyScrum from '../DailyScrum/DailyScrum';
+import ShortcutModal from '../ShortcutModal/ShortcutModal';
 
 interface IItem {
   name: string;
@@ -210,7 +210,7 @@ export default function Nav() {
             </button>
           )}
           {addLinkToggle && (
-            <Shortcut
+            <ShortcutModal
               operation={operation}
               setAddLinkToggle={setAddLinkToggle}
               addLinkToggle={addLinkToggle}
