@@ -136,7 +136,7 @@ export default function ServicesTabs({ show }: Props) {
       </div>
       <div>
         <Link to="/about" onClick={() => activeMenu('about')}>
-          About
+          Teams
         </Link>
       </div>
       <div>

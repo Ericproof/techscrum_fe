@@ -1,13 +1,17 @@
-$headingTextColor: #3d5278;
-$lightColor: #3563e9;
+@import "../../variables.scss";
+
+$headingTextColor: white;
+$lightColor: $primaryColor;
 
 .container {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  background-color: #f5f5f5;
-
+  background-color: $primaryColor;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
   h1 {
     display: flex;
     flex-direction: column;
@@ -77,27 +81,48 @@ $lightColor: #3563e9;
   .content {
     display: flex;
     flex-direction: row;
-    background-color: #ffffff;
-
+    width: 100%;
+    padding: 75px;
+    background: transparent;
     .detailedInfo {
-      flex: 1 1 60%;
-      margin: 90px 20px 0;
-
-      @media (min-width: 576px) {
-        margin: 90px 70px 0;
-      }
-
-      @media (min-width: 768px) {
-        margin: 90px 80px 0;
-      }
-
-      @media (min-width: 1024px) {
-        margin: 90px 100px 0;
-      }
-
-      @media (min-width: 1440px) {
-        margin: 90px 150px 0;
+      display: flex;
+      margin: auto;
+      z-index: 100;
+      background-color: #ffffff;
+      box-shadow: rgb(140 152 164 / 18%) 0px 10px 40px 10px;
+      border-radius: 8px;
+      padding: 64px 50px;
+      max-width: 1200px;
+      @media (max-width: 1280px) {
+        flex-wrap: wrap;
+        div{
+          width: 100%;
+        }
       }
     }
+  }
+}
+
+
+.bgImg{
+  position: absolute;
+  bottom: 100px;
+  right:0;
+  z-index: 0;
+  transform: scaleX(-1);
+}
+
+.bgImg2{
+  position: absolute;
+  top: 150px;
+  left:0;
+  width: 350px;
+  z-index: 0;
+}
+
+.childrenContainer{
+  padding: 50px;
+  @media (max-width: 1280px) {
+    padding: 0;
   }
 }

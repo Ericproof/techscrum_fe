@@ -78,6 +78,16 @@ export default function HomePage() {
                   </picture>
                 </div>
               </Fade>
+              <img
+                src="https://themexriver.com/appilo-theme/seo-agency/wp-content/uploads/sites/56/2021/11/ab-shape.png"
+                alt="https://themexriver.com/appilo-theme/seo-agency/wp-content/uploads/sites/56/2021/11/ab-shape.png"
+                className={styles.projectManagementbgImg2}
+              />
+              <img
+                src="https://themexriver.com/appilo-theme/seo-agency/wp-content/uploads/sites/56/2021/11/ab-shape.png"
+                alt="https://themexriver.com/appilo-theme/seo-agency/wp-content/uploads/sites/56/2021/11/ab-shape.png"
+                className={styles.projectManagementbgImg1}
+              />
             </div>
           </div>
         </section>

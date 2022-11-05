@@ -326,6 +326,7 @@
         align-items: center;
         margin-bottom: 0;
         background-color: $primaryColor;
+        position: relative;
         .projectManagementContent {
           min-width: 440px;
           max-width: 500px;
@@ -1892,6 +1893,31 @@
   margin-top: 50px;
 }
 
+.projectManagementbgImg1{
+  position: absolute;
+  bottom: 54px;
+  left: 0;
+  z-index: 1;
+  filter: brightness(1000%);
+  width: 206px;
+  @media (max-width: 1460px) {
+    display: none;
+  }
+}
+
+.projectManagementbgImg2{
+  position: absolute;
+  top: 48px;
+  right: 0;
+  transform: rotate(180deg);
+  z-index: 1;
+  filter: brightness(1000%);
+  width: 211px;
+  @media (max-width: 1460px) {
+    display: none;
+  }
+}
+
 @-webkit-keyframes apldg_rotate_animation {
   from {
     -webkit-transform: rotate(0deg);
@@ -2012,6 +2038,7 @@
   padding: 100px 0;
   max-width: 1000px;
   width:100%;
+  position: relative;
 }
 
 .colorWhite {

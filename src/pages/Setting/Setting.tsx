@@ -119,7 +119,7 @@ export default function Setting() {
             <h1 className={styles.headerText}>Project Settings</h1>
             <hr className={styles.divider} />
           </header>
-          <SettingCard title="Personal Information">
+          <SettingCard title="Project Information">
             <ChangeIcon uploadSuccess={uploadSuccess} value={data.iconUrl} />
             <div className={[styles.gap, styles.row, 'flex'].join(' ')}>
               <InputV2
@@ -170,6 +170,17 @@ export default function Setting() {
             </div>
             <ButtonV2 text="SAVE CHANGES" onClick={onClickSave} loading={loading} />
           </SettingCard>
+          <SettingCard title="Delete Project">
+            <p>Delete your project and all of your source data. This is irreversible.</p>
+            <ButtonV2
+              text="DELETE"
+              danger
+              size="xs"
+              onClick={() => {
+                setShowDeleteModal(true);
+              }}
+            />
+          </SettingCard>
           <SettingCard title="Change Password">
             <div className={[styles.gap, styles.row, 'flex'].join(' ')}>
               <InputV2
@@ -190,17 +201,6 @@ export default function Setting() {
               />
             </div>
             <ButtonV2 text="SAVE CHANGES" onClick={() => {}} />
-          </SettingCard>
-          <SettingCard title="Delete Account">
-            <p>Delete your account and all of your source data. This is irreversible.</p>
-            <ButtonV2
-              text="DELETE"
-              danger
-              size="xs"
-              onClick={() => {
-                setShowDeleteModal(true);
-              }}
-            />
           </SettingCard>
         </div>
       </div>

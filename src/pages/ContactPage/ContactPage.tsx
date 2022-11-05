@@ -32,34 +32,26 @@ export default function ContactPage() {
         <div className={styles.container}>
           <div className={styles.content}>
             <p className={styles.title}>GET A DEMO</p>
-            <h1>The easiest way to see TechScrum in action</h1>
-            <p>Get a personalized walk through and see how TechScrum solves challenges like:</p>
+            <h1>Contact Information</h1>
+            <p>Fill up the form and our team will get back to you as soon as possible.</p>
             <ul>
               <li>
                 <div className={styles.icons}>
                   <AiOutlineEye />
                 </div>
-                <p className={styles.info}>
-                  Getting full visibility into every project so your team never misses a deadline.
-                </p>
+                <p className={styles.info}>Work in progress (WIP)</p>
               </li>
               <li>
                 <div className={styles.icons}>
                   <BsCalendar4Week />
                 </div>
-                <p className={styles.info}>
-                  Managing resource scheduling and allocation so you&apos;re always on time and on
-                  budget.
-                </p>
+                <p className={styles.info}>info@techscrumapp.com</p>
               </li>
               <li>
                 <div className={styles.icons}>
                   <BiMessageSquareDetail />
                 </div>
-                <p className={styles.info}>
-                  Cutting the menial manual work from everyone&apos;s lives (phew) through templates
-                  and automation.
-                </p>
+                <p className={styles.info}>Australia, Melbourne</p>
               </li>
             </ul>
           </div>
