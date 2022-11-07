@@ -4,51 +4,146 @@ import styles from './JobListTable.module.scss';
 
 const jobs = [
   {
-    title: 'Account Executive',
-    department: 'Sales',
+    title: 'Junior Software developer(Intern)',
+    department: 'Developer',
     location: 'Denver',
+    total: 1,
+    desc: 'This role is suitable for people who has no previous experience in IT or either people that are switching to IT. Mainly responsible is creating static pages and doing simple functions.',
+    list: [
+      'Have a clear idea what you wanted and a basic plan of what you need to do in this inter',
+      'Able to ask for help when needed',
+      'Effective communication skills',
+      'Being a team player to achieve shared team goals',
+      'Project management process improvement.',
+      'Experience in HTML',
+      'Experience in CSS',
+      'Experience in Next.js(Recommend)'
+    ],
     id: '1'
   },
   {
-    title: 'Customer Care Agent',
-    department: '	Customer Success',
-    location: '	Belfast',
-    id: '2'
+    title: 'Mid Software developer(Intern)',
+    department: 'Developer',
+    location: 'Denver',
+    total: 4,
+    desc: 'This role are suitable people who are currently or finished studying IT and wanted to get a job after the bootcamp. The mainly responsible for this role is to creating and maintaining new functionality.',
+    list: [
+      'Have a clear idea what you wanted and a basic plan of what you need to do in this inter',
+      'Able to do self-research before asking Senior Devs',
+      'Able to ask for help when needed',
+      'Effective communication skills',
+      'Exceptional problem-solving and analysis skills',
+      'An pro active attitude',
+      'Experience in HTML',
+      'Experience in CSS',
+      'Experience in React(Recommend)',
+      'Experience in Typescript(Recommend)',
+      'Experience in Node.js(Recommend)',
+      'Project management process improvement.',
+      'Will have chance to learn CI/CD pipeline',
+      'Will have chance to learn AWS'
+    ],
+    id: '1'
   },
+
   {
-    title: 'General Application',
-    department: '	General',
-    location: '	Cork (Remote)',
-    id: '3'
-  },
-  {
-    title: 'SysOps Teamlead',
-    department: 'Technical Operations',
+    title: 'Software Team Lead(Intern)',
+    department: 'Developer',
     location: 'Cork (Remote)',
+    desc: 'Mainly responsible for creating and maintaining new functionality. Ensure that the teams can finish tasks on time.',
+    total: 1,
+    list: [
+      'Have a clear idea what you wanted and a basic plan of what you need to do in this inter',
+      'Able to do self-research before asking Senior Devs',
+      'Able to ask for help when needed',
+      'Effective communication skills',
+      'Exceptional problem-solving and analysis skills',
+      'An pro active attitude',
+      'Experience in HTML',
+      'Experience in CSS',
+      'Experience in React(Recommend)',
+      'Experience in Typescript(Recommend)',
+      'Experience in Node.js(Recommend)',
+      'Ensure that you other team members to finish task on time',
+      'Creating a great team culture.',
+      'Project management process improvement.',
+      'Will have chance to learn CI/CD pipeline',
+      'Will have chance to learn AWS'
+    ],
     id: '4'
   },
   {
-    title: 'Head of People Experience and Performance',
-    department: 'People & Talent',
+    title: 'Project Manager(Intern)',
+    department: 'Product',
     location: 'Cork (Remote)',
+    list: [
+      'Have a clear idea what you wanted and a basic plan of what you need to do in this inter',
+      'Assist in planning and executing the product roadmap',
+      'Develop innovative solutions to our user’s problems, delivering immediate benefit.',
+      'Exceptional problem-solving and analysis skills',
+      'Categorising support tickets and drawing out themes.',
+      'Briefing new product ideas into development teams.',
+      'An pro active attitude',
+      'Experience in using JIRA',
+      'Experience in SCRUM',
+      'Self motivated',
+      'Algin to our core value'
+    ],
+    total: 1,
+    desc: 'Mainly responsible for creating and maintaining new functionality. Ensure that the teams can finish tasks on time.',
+    id: '5'
+  },
+  {
+    title: 'Designer(Intern)',
+    department: 'Design',
+    location: 'Cork (Remote)',
+    total: 1,
+    list: [
+      'Have a clear idea what you wanted and a basic plan of what you need to do in this inter',
+      'Strong creative skills.',
+      'Well-presented and personable with excellent communication and organizational skills.',
+      'Experience in Figma or similar',
+      'Experience in PhotoShop or similar',
+      'Resilient to cope with conflicting demands and able to priortise duties, work effectively and meet deadlines.',
+      'Understand what you wanted after this inter'
+    ],
+    desc: 'Mainly responsible for creating and maintaining new functionality. Ensure that the teams can finish tasks on time.',
+    id: '5'
+  },
+  {
+    title: 'Devops(Intern)',
+    department: 'Devops',
+    location: 'Cork (Remote)',
+    total: 1,
+    desc: 'Creating the website from scratch.',
+    list: [
+      'Have a clear idea what you wanted and a basic plan of what you need to do in this inter',
+      'Able to do self-research before asking Senior Devs',
+      'Able to ask for help when needed',
+      'Effective communication skills',
+      'Exceptional problem-solving and analysis skills',
+      'Implement scalable, resilient, and secure solutions in the public cloud in AWS.',
+      'Ability to analyse and troubleshoot complex software and infrastructure issues, and develop tools/systems for task automation'
+    ],
     id: '5'
   }
 ];
 function JobListTable() {
   return (
-    <ul className={styles.jobListTable}>
+    <div className={styles.jobListTable}>
       {jobs.map((job) => {
         return (
           <JobListItem
-            title={job.title}
             department={job.department}
-            location={job.location}
+            title={job.title}
             id={job.id}
             key={job.id}
+            desc={job.desc}
+            list={job.list}
           />
         );
       })}
-    </ul>
+    </div>
   );
 }
 

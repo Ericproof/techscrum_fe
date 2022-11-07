@@ -1,29 +1,37 @@
 import React from 'react';
-
-import { Link, useLocation } from 'react-router-dom';
 import styles from './JobListItem.module.scss';
 
 interface IJobListItem {
   title: string;
   department: string;
-  location: string;
   id: string;
+  desc: string;
+  list: string[] | undefined;
 }
 
+const tagClassesMap = {
+  developer: styles.pupple,
+  devops: styles.orange,
+  design: styles.red,
+  product: styles.blue
+};
+
 function JobListItem(props: IJobListItem) {
-  const location = useLocation();
-  const { title, department, location: jobLocation, id } = props;
+  const { title, id, desc, list, department } = props;
   return (
-    <li className={styles.jobListItem} id={id}>
-      <Link className={styles.role} to={`${location.pathname}/${id}`}>
-        {title}
-      </Link>
-      <div className={styles.department}> {department}</div>
-      <div className={styles.location}>{jobLocation}</div>
-      <Link className={styles.applyButton} to={`${location.pathname}/1`}>
-        <span className={styles.applyButtonText}>Apply now</span>
-      </Link>
-    </li>
+    <div className={styles.careerCard} id={id}>
+      <span className={[styles.tag, tagClassesMap[department.toLocaleLowerCase()]].join(' ')}>
+        {department}
+      </span>
+      <h3>{title}</h3>
+      <p className={styles.department}>{desc}</p>
+      <ul>
+        {list?.map((item) => {
+          return <li>{item}</li>;
+        })}
+      </ul>
+      <button className={styles.applyButtonText}>Apply now</button>
+    </div>
   );
 }
 

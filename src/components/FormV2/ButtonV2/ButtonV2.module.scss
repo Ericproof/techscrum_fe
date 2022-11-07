@@ -30,6 +30,7 @@ $transition :all .25s ease-in-out;
 .buttonV2:hover{
     background-color: $primaryColor;
     color:white;
+    cursor: pointer;
 }
 
 .buttonV2:disabled{
@@ -42,6 +43,7 @@ $transition :all .25s ease-in-out;
 .fill{
     background-color: $primaryColor;
     color:white;
+    cursor: pointer;
 }
 
 .fill:hover{

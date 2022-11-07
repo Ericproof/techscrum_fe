@@ -12,6 +12,7 @@ import CreateNewCard from '../../components/CreateNewCard/CreateNewCard';
 import { IProject, IProjectData } from '../../types';
 import { ProjectContext, ProjectDispatchContext } from '../../context/ProjectProvider';
 import checkAccess, { clickedShowMore } from '../../utils/helpers';
+import Modal from '../../components/Modal/Modal';
 
 export default function ProjectPage() {
   const navigate = useNavigate();
@@ -110,10 +111,12 @@ export default function ProjectPage() {
     <>
       <ProjectHeader />
       {isCreateNewCard && (
-        <CreateNewCard
-          updateIsCreateNewCard={getCreateNewCardStateFromChildren}
-          fetchNewCard={fetchNewCard}
-        />
+        <Modal>
+          <CreateNewCard
+            updateIsCreateNewCard={getCreateNewCardStateFromChildren}
+            fetchNewCard={fetchNewCard}
+          />
+        </Modal>
       )}
       <div className={styles.projectPage}>
         <div className={styles.projectContainer}>

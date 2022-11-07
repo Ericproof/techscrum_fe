@@ -1,13 +1,14 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import styles from './ProjectsDropdown.module.scss';
+import ReactDOM from 'react-dom';
+import styles from './ProjectsDropdownNav.module.scss';
 import { IProjectData } from '../../../types';
 import { ProjectContext } from '../../../context/ProjectProvider';
 
 interface IProjectsDropdown {
   setShowProjectDropdown: (state: boolean) => void;
 }
-export default function ProjectsDropdown({ setShowProjectDropdown }: IProjectsDropdown) {
+function ProjectsDropdown({ setShowProjectDropdown }: IProjectsDropdown) {
   const navigate = useNavigate();
   const projectList = useContext(ProjectContext);
   const handleClickEvent = (e: React.MouseEvent<HTMLSpanElement>, project: IProjectData) => {
@@ -47,5 +48,16 @@ export default function ProjectsDropdown({ setShowProjectDropdown }: IProjectsDr
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ProjectsDropdownNav({ setShowProjectDropdown }: IProjectsDropdown) {
+  return (
+    <>
+      {ReactDOM.createPortal(
+        <ProjectsDropdown setShowProjectDropdown={setShowProjectDropdown} />,
+        document.getElementById('projectDropdownNav') as Element
+      )}
+    </>
   );
 }

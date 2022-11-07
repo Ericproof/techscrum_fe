@@ -1,5 +1,6 @@
+@import "../../variables.scss";
 $headingTextColor: #3d5278;
-$lightColor: #3563e9;
+$lightColor: $primaryColor;
 
 .container {
   p {

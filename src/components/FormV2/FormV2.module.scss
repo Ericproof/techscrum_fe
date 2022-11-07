@@ -51,7 +51,6 @@ $transition: all .25s ease-in-out;
     letter-spacing: 0.2px;
     font-size: 12px;
     padding: 0px 5px;
-    transition: opacity 0.2s ease 0s;
     max-width: 315px;
     box-sizing: border-box;
     overflow: hidden;
@@ -69,6 +68,7 @@ $transition: all .25s ease-in-out;
 
 .borderRed {
     border: 2px solid $errorRed !important;
+    border-radius: 6px;
 }
 
 .lightGrey{

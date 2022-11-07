@@ -9,16 +9,30 @@ import defaultStyles from './MultiSelectDropdownV2.module.scss';
 
 interface IMultiSelectDropdownV2 {
   onValueChanged: (e: any) => void;
-  onValueBlur: (e: any) => void;
+  onValueBlur?: (e: any) => void;
+  onLabelDelete: (e: any) => void;
+  onLabelAdd: (e: any) => void;
   name: string;
   options: any;
   label: string;
   required?: boolean;
   placeHolder?: string;
+  isDisabled?: boolean;
 }
 
 export default function MultiSelectDropdownV2(props: IMultiSelectDropdownV2) {
-  const { name, label, placeHolder, required, options, onValueChanged, onValueBlur } = props;
+  const {
+    name,
+    label,
+    placeHolder,
+    required,
+    options,
+    onValueChanged,
+    onValueBlur,
+    onLabelDelete,
+    onLabelAdd,
+    isDisabled
+  } = props;
   const [searchValue, setSearchValue] = useState(null);
   const [error, setError] = useState<null | string>(null);
   const [showMenu, setShowMenu] = useState(false);
@@ -44,10 +58,18 @@ export default function MultiSelectDropdownV2(props: IMultiSelectDropdownV2) {
 
   const removeItem = (itemRemove: any) => {
     setSelectedItems(selectedItems.filter((item) => item.value !== itemRemove.value));
+    onLabelDelete(itemRemove.value);
+  };
+
+  const addItem = (itemAdd: any) => {
+    onLabelAdd(itemAdd);
+    setSearchValue(null);
   };
 
   const onBlurValue = (e: any) => {
-    onValueBlur(e);
+    if (onValueBlur) {
+      onValueBlur(e);
+    }
   };
 
   const getFilteredOptions = () => {
@@ -98,7 +120,7 @@ export default function MultiSelectDropdownV2(props: IMultiSelectDropdownV2) {
         {searchValue && !isInOptionsList && (
           <>
             {filteredOptions.length > 0 && <hr className={defaultStyles.newLabelLine} />}
-            <button>{`${searchValue} (New Label)`}</button>
+            <button onClick={() => addItem(searchValue)}>{`${searchValue} (New Label)`}</button>
           </>
         )}
       </div>
@@ -107,7 +129,7 @@ export default function MultiSelectDropdownV2(props: IMultiSelectDropdownV2) {
 
   return (
     <div
-      className="relative"
+      className="relative fullWidth"
       onClick={() => {
         setIsActive(true);
       }}
@@ -148,6 +170,7 @@ export default function MultiSelectDropdownV2(props: IMultiSelectDropdownV2) {
             onBlur={onBlurValue}
             value={searchValue || ''}
             placeholder={placeHolder}
+            disabled={isDisabled}
           />
         )}
 
@@ -163,5 +186,7 @@ export default function MultiSelectDropdownV2(props: IMultiSelectDropdownV2) {
 
 MultiSelectDropdownV2.defaultProps = {
   required: false,
-  placeHolder: ''
+  placeHolder: '',
+  onValueBlur: null,
+  isDisabled: false
 };

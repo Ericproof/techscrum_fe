@@ -14,7 +14,7 @@ import SettingCard from '../../components/SettingCard/SettingCard';
 import ChangeIcon from '../../components/ProjectEditor/ChangeIcon/ChangeIcon';
 import DropdownV2 from '../../components/FormV2/DropdownV2/DropdownV2';
 import { getUsers } from '../../api/user/user';
-import Navigation from '../../components/BoardNavigationV2/Navigation';
+import NavigationV2 from '../../components/BoardNavigationV2/NavigationV2';
 import ButtonV2 from '../../components/FormV2/ButtonV2/ButtonV2';
 import 'react-toastify/dist/ReactToastify.css';
 import Modal from '../../components/Modal/Modal';
@@ -111,7 +111,7 @@ export default function Setting() {
   return (
     <div className={[styles.settingPage, 'relative'].join(' ')} data-testid="setting-page">
       <ToastContainer style={{ width: '400px' }} />
-      <Navigation />
+      <NavigationV2 />
       <SubSettingMenu />
       <div className={styles.settingContainer}>
         <div className={styles.settingMiniContainer}>
@@ -119,7 +119,7 @@ export default function Setting() {
             <h1 className={styles.headerText}>Project Settings</h1>
             <hr className={styles.divider} />
           </header>
-          <SettingCard title="Personal Information">
+          <SettingCard title="Project Information">
             <ChangeIcon uploadSuccess={uploadSuccess} value={data.iconUrl} />
             <div className={[styles.gap, styles.row, 'flex'].join(' ')}>
               <InputV2
@@ -170,6 +170,17 @@ export default function Setting() {
             </div>
             <ButtonV2 text="SAVE CHANGES" onClick={onClickSave} loading={loading} />
           </SettingCard>
+          <SettingCard title="Delete Project">
+            <p>Delete your project and all of your source data. This is irreversible.</p>
+            <ButtonV2
+              text="DELETE"
+              danger
+              size="xs"
+              onClick={() => {
+                setShowDeleteModal(true);
+              }}
+            />
+          </SettingCard>
           <SettingCard title="Change Password">
             <div className={[styles.gap, styles.row, 'flex'].join(' ')}>
               <InputV2
@@ -190,17 +201,6 @@ export default function Setting() {
               />
             </div>
             <ButtonV2 text="SAVE CHANGES" onClick={() => {}} />
-          </SettingCard>
-          <SettingCard title="Delete Account">
-            <p>Delete your account and all of your source data. This is irreversible.</p>
-            <ButtonV2
-              text="DELETE"
-              danger
-              size="xs"
-              onClick={() => {
-                setShowDeleteModal(true);
-              }}
-            />
           </SettingCard>
         </div>
       </div>

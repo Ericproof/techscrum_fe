@@ -5,8 +5,8 @@ $nav-height: 56px;
 .container {
   display: flex;
   flex-direction: row;
-  height: calc(100vh - $nav-height);
-  overflow: hidden;
+  min-height: 100vh;
+  background: #f6f8f9;
 }
 
 .childrenContainer {

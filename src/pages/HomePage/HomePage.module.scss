@@ -326,6 +326,7 @@
         align-items: center;
         margin-bottom: 0;
         background-color: $primaryColor;
+        position: relative;
         .projectManagementContent {
           min-width: 440px;
           max-width: 500px;
@@ -1754,6 +1755,7 @@
   outline: 0;
   height: 100vh;
   background-color: #f6f8f9;
+  overflow:hidden;
 }
 .unauthorizePageContainer::before {
   background-image: url(https://themexriver.com/appilo-theme/saas-classic-dark/wp-content/themes/appilo/img/saas-classic/banner/b-shape1.png);
@@ -1784,7 +1786,7 @@
   }
   position: absolute;
   left: -300px;
-  bottom: -300px;
+  bottom: -750px;
   margin: 0;
   padding: 0;
   border: 0;
@@ -1804,7 +1806,7 @@
 
 .shape4Container {
   position: absolute;
-  right: 0%;
+  right: -25%;
   bottom: 40%;
   animation: 5s apldg_rotate_animation2 linear infinite;
   animation-direction: alternate;
@@ -1812,6 +1814,10 @@
   padding: 0;
   border: 0;
   outline: 0;
+  opacity: 0.3;
+  img{
+   max-width: 600px;
+  }
 }
 
 .textContainer {
@@ -1887,6 +1893,31 @@
   margin-top: 50px;
 }
 
+.projectManagementbgImg1{
+  position: absolute;
+  bottom: 54px;
+  left: 0;
+  z-index: 1;
+  filter: brightness(1000%);
+  width: 206px;
+  @media (max-width: 1460px) {
+    display: none;
+  }
+}
+
+.projectManagementbgImg2{
+  position: absolute;
+  top: 48px;
+  right: 0;
+  transform: rotate(180deg);
+  z-index: 1;
+  filter: brightness(1000%);
+  width: 211px;
+  @media (max-width: 1460px) {
+    display: none;
+  }
+}
+
 @-webkit-keyframes apldg_rotate_animation {
   from {
     -webkit-transform: rotate(0deg);
@@ -1909,10 +1940,10 @@
 
 @keyframes apldg_rotate_animation2 {
   from {
-    bottom: 40%;
+    bottom: 20%;
   }
   to {
-    bottom: 50%;
+    bottom: 30%;
   }
 }
 
@@ -2007,6 +2038,7 @@
   padding: 100px 0;
   max-width: 1000px;
   width:100%;
+  position: relative;
 }
 
 .colorWhite {
