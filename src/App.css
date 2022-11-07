@@ -101,7 +101,7 @@ body{
   padding: 0 40px;
 }
 .defaultModalCross{
-  color: white !important;;
+  color: white !important;
 }
 .defaultModalCross:hover{
   cursor: pointer;

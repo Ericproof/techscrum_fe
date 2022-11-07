@@ -1881,12 +1881,17 @@
 }
 
 .button {
-  border-radius: 5px;
   background: #bd68f8;
   border: none;
-  padding: 10px 30px;
-  color: white;
   text-decoration: none;
+  color:white;
+  background-color: $primaryColor;
+  padding: 16px 24px;
+  font-size: 12px;
+  border-radius: 99px;
+  max-width: 100px;
+  width:100%;
+  text-align: center;
 }
 
 .btnContainer {
@@ -2090,17 +2095,6 @@
 
 .eyebrowIcon{
     font-size: 30px !important;
-}
-
-.button{
-  color:white;
-  background-color: $primaryColor;
-  padding: 16px 24px;
-  font-size: 12px;
-  border-radius: 99px;
-  max-width: 100px;
-  width:100%;
-  text-align: center;
 }
 
 .link{

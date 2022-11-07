@@ -18,7 +18,6 @@ import AnyWhereSection from './AnyWhereSection/AnyWhereSection';
 import Prevent from './Prevent/Prevent';
 import darkCircle from '../../assets/shapeDark.png';
 import Scroll from '../../components/Scroll/Scroll';
-// import midCircle from '../../assets/shapeMid.png';
 
 export default function HomePage() {
   return (
