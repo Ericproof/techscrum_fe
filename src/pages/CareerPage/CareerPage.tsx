@@ -1,119 +1,152 @@
 import React from 'react';
+import { BsCodeSlash, BsDoorOpen } from 'react-icons/bs';
+import { FcSupport } from 'react-icons/fc';
+import { GiGrowth } from 'react-icons/gi';
+import Fade from 'react-reveal/Fade';
 import styles from './CareerPage.module.scss';
-import careerPageHero from '../../assets/careerPage/careerPageHero.png';
-import missionBg from '../../assets/careerPage/missionBg.svg';
-import customer1 from '../../assets/careerPage/customer1.png';
-import customer2 from '../../assets/careerPage/customer2.png';
-import customer3 from '../../assets/careerPage/customer3.png';
-import globalMap from '../../assets/careerPage/globalMap.svg';
-import teamValue from '../../assets/careerPage/values.png';
-import balance from '../../assets/careerPage/balance.png';
+import careerPageHero from '../../assets/undraw_teamwork_hpdk.svg';
+import teamenginerring from '../../assets/undraw_engineering_team_a7n2.svg';
+import certification from '../../assets/undraw_certification_re_ifll.svg';
 import Header from '../../components/Header/Header';
 import JobList from './components/JobList/JobList';
 import JobListFooter from './components/JobListFooter/JobListFooter';
-import CareerPerks from './components/CareerPerks/CareerPerks';
 
 export default function CareerPage() {
   return (
     <div className={styles.careerPage}>
       <Header />
-      <section>
-        <div className={styles.heroContainer}>
-          <div className={styles.heroContent}>
-            <h1 className={styles.heroTitle}>Do career-defining work with us</h1>
-            <div className={styles.heroText}>
-              Appreciation, communication, and collaboration—when it comes to working together, we
-              know a thing or two about teamwork.
+      <Fade>
+        <section>
+          <div className={[styles.heroContainer, styles.container].join(' ')}>
+            <div className={styles.heroContent}>
+              <h1 className={styles.heroTitle}>
+                A team that provide
+                <span className="primaryColor"> Growth </span> and{' '}
+                <span className="primaryColor">Support</span>
+              </h1>
+              <div className={styles.heroText}>
+                A team that that will appreciation, communication, and collaboration—when it comes
+                to working together.
+              </div>
+              <div className={styles.heroCta}>
+                <button className={styles.heroCtaBtn}>
+                  <a href="#jobList">See our open positions</a>
+                </button>
+              </div>
             </div>
-            <div className={styles.heroCta}>
-              <button className={styles.heroCtaBtn}>
-                {' '}
-                <a href="#jobList">See our open positions</a>
-              </button>
-              <p className={styles.heroCtaText}>We are hiring!</p>
+            <div className={styles.heroImage}>
+              <img src={careerPageHero} alt="hero_image" />
             </div>
           </div>
-          <div className={styles.heroImage}>
-            <img src={careerPageHero} alt="hero_image" />
+        </section>
+      </Fade>
+      <section className={styles.cultureSection}>
+        <div className={styles.container}>
+          <h2>Our culture</h2>
+          <div className={[styles.contentContainer, 'flex'].join(' ')}>
+            <ul>
+              <li>
+                <div className={styles.icon}>
+                  <FcSupport />
+                </div>
+                <h3>Support</h3>
+                <p>
+                  In a team you’ll never have to go it alone. It is important to know that the more
+                  support you provided to the team the more support you will be given back.
+                </p>
+              </li>
+              <li>
+                <div className={styles.icon}>
+                  <GiGrowth />
+                </div>
+                <h3>Growth</h3>
+                <p>
+                  Our coach/tutor not only provide pair-programming to the you and also we have an 1
+                  on 1 section for us to listen to you and how we can help.
+                </p>
+              </li>
+              <li>
+                <div className={styles.icon}>
+                  <BsDoorOpen />
+                </div>
+                <h3>Open & Transparent</h3>
+                <p>
+                  Everyone stays informed on all the latest projects, and everyone’s input is
+                  welcome.
+                </p>
+              </li>
+              <li>
+                <div className={styles.icon}>
+                  <BsCodeSlash />
+                </div>
+                <h3>Development</h3>
+                <p>
+                  To able to learn the best practices. we always keep up to date to the code quality
+                  and tools we used.
+                </p>
+              </li>
+            </ul>
+            <div className={styles.imgContainer}>
+              <img src={teamenginerring} alt="culture" />
+            </div>
           </div>
         </div>
       </section>
-      <section id="jobList">
+      <section id="jobList" className={styles.container}>
         <JobList />
       </section>
-      <section>
-        <div className={styles.careerGlobalContainer}>
-          <div className={styles.careerGlobalMap}>
-            <img src={customer1} alt="customer1" className={styles.globalCustomer1} />
-            <img src={customer2} alt="customer2" className={styles.globalCustomer2} />
-            <img src={customer3} alt="customer3" className={styles.globalCustomer3} />
-            <img src={globalMap} alt="global_map" />
-          </div>
-          <div className={styles.careerGlobalText}>
-            <h1>Our customers are all over the globe—and we are too!</h1>
-            <p>
-              We believe that work is what you do, not where you sit. Teamwork is proud to provide a{' '}
-              <span>remote-friendly</span> work environment, so whether you&apos;re based in Cork,
-              Ireland (our headquarters!) or are working from one of our many hubs around the world,
-              you&apos;ll be supported by an incredible team.
-            </p>
-          </div>
-        </div>
-      </section>
-      <section className={styles.careerMission}>
-        <div className={styles.missionContainer}>
-          <div className={styles.missionBackground}>
-            <img src={missionBg} alt="mission_background" />
-          </div>
-          <div className={styles.missionText}>
-            <h1>
-              {' '}
-              A team with a <span>mission</span>
-            </h1>
-            <p>
-              We&apos;re on a mission to become the best project management platform for client
-              services teams everywhere, but we can&apos;t do it alone.
-            </p>
-          </div>
-          <div className={styles.missionVideo}>
-            <div>video</div>
-          </div>
-        </div>
-      </section>
-      <section>
-        <div className={styles.careerTeamInfoContainer}>
-          <div className={styles.careerTeamValue}>
-            <div className={styles.careerTeamValueText}>
-              <h1>A team with values</h1>
-              <p>
-                Our name says it all. We always strive to practice what we preach by keeping our
-                values at the core of everything we do. From communication to collaboration, we
-                believe that teams (and people!) thrive when they&apos;re part of an open,
-                inclusive, and diverse workplace.
-              </p>
-            </div>
-            <div className={styles.careerTeamValueImageContainer}>
-              <img src={teamValue} alt="team_values" />
-            </div>
-          </div>
-          <div className={styles.careerTeamBalance}>
-            <div className={styles.careerTeamBalanceImageContainer}>
-              <img src={balance} alt="balance" />
-            </div>
-            <div className={styles.careerTeamBalanceText}>
-              <h1>A team with balance</h1>
-              <p>
-                We know that bringing your whole self to work not only enables you do your best, but
-                it also helps you maintain a happy, balanced life. Our team supports one another,
-                day in and day out, but we also love giving back to the community. That&apos;s why
-                we donate 1% of our profits every year to an employee-selected charity.
-              </p>
+      <section className={[styles.cultureSection, styles.benefitsSection].join(' ')}>
+        <div className={styles.container}>
+          <h2>Our benefits</h2>
+          <div className={[styles.contentContainer, 'flex'].join(' ')}>
+            <ul>
+              <li>
+                <div className={styles.icon}>
+                  <FcSupport />
+                </div>
+                <h3>Latest Tech Stack</h3>
+                <p>
+                  In the team we train you on the latest tech stack, which includes a outstanding
+                  CI/CD pipeline to ensure that you create high quality code, seniors will also do
+                  PR reviews to ensure that you are writing clean and scale code.
+                </p>
+              </li>
+              <li>
+                <div className={styles.icon}>
+                  <GiGrowth />
+                </div>
+                <h3>Growth</h3>
+                <p>
+                  Our coach/tutor not only provide pair-programming to the team and also we have an
+                  1 on 1 section for us to listen to you and how we can help.
+                </p>
+              </li>
+              <li>
+                <div className={styles.icon}>
+                  <BsDoorOpen />
+                </div>
+                <h3>Weekend off</h3>
+                <p>
+                  If the team can finish task on time. There will be free weekends. However if you
+                  wanted to learn more we are also welcome.
+                </p>
+              </li>
+              <li>
+                <div className={styles.icon}>
+                  <BsCodeSlash />
+                </div>
+                <h3>Development</h3>
+                <p>
+                  To able to learn the best practices. we always keep up to date to the code quality
+                  and tools we used.
+                </p>
+              </li>
+            </ul>
+            <div className={styles.certificationImgContainer}>
+              <img src={certification} alt="benefits" />
             </div>
           </div>
         </div>
-      </section>
-      <section>
-        <CareerPerks />
       </section>
       <section className={styles.footerSection}>
         <JobListFooter />

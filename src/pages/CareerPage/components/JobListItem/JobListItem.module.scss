@@ -1,59 +1,75 @@
-@mixin section {
-  padding: 28px 50px 28px 0;
-  max-width: 300px;
+@import "../../../../variables.scss";
+
+.careerCard{
+  max-width: 25%;
+  width: 100%;
+  padding: 1px;
+  background-color: white;
+  margin: 20px 0;
+  padding: 30px;
+  border-radius: 10px;
+  border: 1px solid #e5e5e5;
+
+  .tag{
+    padding: 5px 20px;
+
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  h3{
+    font-size: 22px;
+  }
+
+  p{
+    color:#979797;
+    font-size:14px;
+  }
+
+  ul{
+    padding: 0 20px;
+    color:$primaryColor;
+    li{
+      font-size: 14px;
+      margin: 10px 0;
+    }
+  }
+
+  .applyButtonText{
+    color: $primaryColor;
+    background: transparent;
+    padding: 10px 24px;
+    font-size: 12px;
+    border-radius: 99px;
+    border: 1px solid $primaryColor;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+  .applyButtonText:hover{
+    background: $primaryColor;
+    color:white;
+  }
 }
 
-.jobListItem {
-  border-bottom: 1px solid #e7ebf1;
-  font-size: 22px;
-  line-height: 32px;
-  font-weight: 600;
-  display: flex;
-  justify-content: space-between;
+.orange{
+  background: #EA6A36;
+  color:#FFDBCC
+}
 
-  .location {
-    @include section();
-    font-size: 20px;
-    color: #727491;
-    font-weight: 400;
-    flex: 1;
-  }
+.red{
+  background: #D30C6E;
+  color:#F1A9CE
+}
 
-  .role {
-    @include section();
-    text-decoration: none;
-    flex: 1;
-    color: #373753;
-    font-size: 22px;
-    line-height: 32px;
-    font-weight: 600;
-    &:hover {
-      color: #0091ff;
-    }
-  }
+.blue{
+  background: #0658f5;
+  color:#e3ecfb
+}
 
-  .department {
-    @include section();
-    flex: 1;
-    font-size: 20px;
-    color: #ff22b1;
-    font-weight: 400;
-  }
-  .applyButton {
-    text-decoration: none;
-    min-width: 110px;
-    @include section();
+.pupple{
+  background:$primaryColor;
+  color:#E4D6FD;
 
-    .applyButtonText {
-      background: #1d1c39;
-      border-radius: 24px;
-      color: #fff;
-      font-size: 14px;
-      line-height: 157%;
-      padding: 9px 16px;
-      font-weight: 600;
-      min-height: 27px;
-      letter-spacing: 0.25px;
-    }
-  }
 }

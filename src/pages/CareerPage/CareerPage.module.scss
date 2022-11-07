@@ -1,7 +1,8 @@
+@import "../../variables.scss";
+
 .careerPage {
   background-color: #fff;
   section {
-    max-width: 1224px;
     margin: 0 auto 120px auto;
   }
 
@@ -9,9 +10,9 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    padding: 120px 15px 0px 15px;
+    padding: 200px 15px 50px 15px;
     color: #1d1c39;
-
+    
     .heroContent {
       flex: 1;
       min-width: 400px;
@@ -38,25 +39,20 @@
         align-items: center;
         margin-top: 50px;
         .heroCtaBtn {
-          border-radius: 48px;
-          background: #ff22b1;
-          font-weight: 600;
-          line-height: 168%;
-          letter-spacing: 0.75px;
-          padding: 20px 32px;
           font-size: 19px;
-          color: #fff;
-          display: inline-flex;
-          align-items: center;
-          user-select: none;
+          color: white;
+          background-color: $primaryColor;
+          padding: 16px 24px;
+          font-size: 12px;
+          border-radius: 99px;
+          border: 1px solid $primaryColor;
           text-align: center;
-          min-height: 49px;
-          border: none;
-          cursor: pointer;
+          text-decoration: none;
           transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
           &:hover {
             box-shadow: inset 0 0 0 100px rgb(0 0 0 / 30%);
             outline: none;
+            cursor: pointer;
           }
           a {
             text-decoration: none;
@@ -76,12 +72,13 @@
   }
 
   .heroImage {
-    min-width: 400px;
-    max-width: 596px;
-    height: 554px;
+    max-width: 800px;
     display: flex;
     flex: 1;
     justify-content: flex-end;
+    img {
+      width: 100%;
+    }
   }
 
   .careerGlobalContainer {
@@ -243,10 +240,108 @@
   }
 
   .footerSection {
-    background-color: #6a84ed;
+    background-color: $primaryColor;
     color: #fff;
     max-width: 100%;
     padding: 120px 0px;
     margin-bottom: 0px;
   }
+}
+
+
+.cultureSection{
+  background-color: #071A2B;
+  position: relative;
+  color:white;
+  padding: 150px;
+
+  h2{
+    font-size: 50px;
+  }
+
+  ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 45%;
+    justify-content: space-between;
+    li{
+      width: 45%;
+      line-height: 25px;
+      margin-bottom: 30px;
+      font-size: 15px;
+    }
+  }
+
+  .icon{
+    padding: 15px;
+    background-color: white;
+    display: inline-block;
+    border-radius: 15px;
+
+    svg{
+    font-size: 35px;
+    border-radius: 10px;
+    fill:$primaryColor;
+      path{
+        fill:$primaryColor;
+      }
+    }
+  }
+
+  .imgContainer{
+    max-width: 45%;
+    background: white;
+    background: #6b6b6b;
+    padding: 100px 20px;
+    border-radius: 50px;
+    img{
+      width: 100%;
+    }  
+  }
+  .contentContainer{
+    gap: 5%;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  h3{
+      color:#a675fe;
+  }
+}
+
+.cultureSection::before{
+  background-image: url('../../assets/decration.svg');
+  position: absolute;
+  top: -149px;
+  left: 0;
+  width: 100%;
+  height: 250px;
+  transform: scaleY(-0.2);
+  content: "";
+  background-size: 100% 100%;
+}
+
+.benefitsSection{
+  margin: 0 auto 0 auto!important;
+}
+.benefitsSection::before{
+  transform: scaleX(-1) scaleY(-0.2);
+}
+
+.container{
+  max-width: 1480px;
+  margin: auto;
+}
+
+.certificationImgContainer{
+  max-width: 30%;
+  background: transparent;
+  padding: 100px 20px;
+  border-radius: 50px;
+  img{
+    width: 100%;
+  }  
 }

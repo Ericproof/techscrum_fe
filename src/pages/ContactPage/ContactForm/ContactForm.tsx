@@ -6,12 +6,12 @@ export default function ContactForm() {
   return (
     <div className={styles.container}>
       <form>
-        <h3>Get a Live Demo</h3>
+        <h3>Contact Us</h3>
         <input placeholder="Full Name *" />
         <input placeholder="Company *" />
         <input placeholder="Work Email Address *" />
         <input placeholder="Phone Number *" />
-        <button type="submit">Book a Demo</button>
+        <button type="submit">Send</button>
         <p>
           TechScrum values your privacy. By submitting this form, you acknowledge TechScrum may use
           your email in accordance with its{' '}
