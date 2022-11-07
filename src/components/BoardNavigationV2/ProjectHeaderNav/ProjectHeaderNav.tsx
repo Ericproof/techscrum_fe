@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { AiOutlineCaretDown, AiOutlineCaretRight } from 'react-icons/ai';
 import { IProjectData } from '../../../types';
 import styles from './ProjectHeaderNav.module.scss';
-import ProjectsDropdown from '../ProjectsDropdown/ProjectsDropdown';
+import ProjectsDropdownNav from '../ProjectsDropdownNav/ProjectsDropdownNav';
 
 interface IPropsNavTop {
   currentProject: IProjectData;
@@ -39,7 +39,7 @@ export default function ProjectHeaderNav(props: IPropsNavTop) {
             <span>Software project</span>
           </button>
           {showProjectDropdown && (
-            <ProjectsDropdown setShowProjectDropdown={setShowProjectDropdown} />
+            <ProjectsDropdownNav setShowProjectDropdown={setShowProjectDropdown} />
           )}
         </div>
       </div>

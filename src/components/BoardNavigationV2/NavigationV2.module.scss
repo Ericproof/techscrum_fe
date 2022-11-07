@@ -7,13 +7,14 @@ $white: rgb(245, 245, 245);
   color: $white;
   min-width: 250px;
   background-color: var(--ds-surface, $primaryColor);
-  -webkit-clip-path: polygon(0% 0%, 0% 100%, 85% 100%, 98% 85%,84% 55%,98% 25%, 88% 0%);
-  clip-path: polygon(0% 0%, 0% 100%, 85% 100%, 98% 85%,84% 55%,98% 25%, 88% 0%);
-
-  min-height: 94vh;
+  -webkit-clip-path: polygon(0% 0%, 0% 100%, 85% 100%, 98% 85%, 84% 55%, 98% 25%, 88% 0%);
+  clip-path: polygon(0% 0%, 0% 100%, 85% 100%, 98% 85%, 84% 55%, 98% 25%, 88% 0%);
+  max-height: 100vh;
   padding: 30px 12px;
-  overflow-y: overlay;
   font-family: Poppins, sans-serif;
+  overflow-y: auto;
+  position: sticky;
+  top: 0;
 }
 
 .container::-webkit-scrollbar {
