@@ -6,8 +6,12 @@ export function getTasks() {
   return axios.get(`${config.apiAddress}/projects`);
 }
 
-export function showTask(id: string) {
+export function showTask(id = '') {
   return axios.get(`${config.apiAddress}/projects/${id}`);
+}
+
+export function showTasks(projectId: string, userId = '') {
+  return axios.get(`http://localhost:8000/api/v1/projects/fetchtasks/${projectId}/${userId}`);
 }
 
 export function createTask(data: ITaskData) {
