@@ -14,25 +14,21 @@ export default function Organizing() {
         <Fade>
           <div className={[styles.businessContent].join(' ')}>
             <p className={styles.eyebrow}>
-              <BsBoxSeam className={[styles.eyebrowIcon, 'primaryColor'].join(' ')} /> Organizing
+              <BsBoxSeam className={[styles.eyebrowIcon, 'primaryColor'].join(' ')} /> Collaborating
             </p>
-            <h3>Organizing all your decision in one place</h3>
+            <h3>Collaborating with team members on work projects in a clear view</h3>
             <div className={styles.jobDoneParagraph}>
               <ul>
                 <li>
                   <TiTick />
-                  Decppision makingd
+                  Project
                 </li>
                 <li>
-                  <TiTick /> Daisdfly Sdigm
-                </li>
-                <li>
-                  <TiTick />
-                  Product Design Doc
+                  <TiTick /> Board
                 </li>
                 <li>
                   <TiTick />
-                  Backlog Issues
+                  Card
                 </li>
               </ul>
               <div className={['flex', styles.links].join(' ')}>
