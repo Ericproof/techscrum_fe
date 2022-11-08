@@ -1,4 +1,5 @@
 import React from 'react';
+import InputV2 from '../../FormV2/InputV2/InputV2';
 import styles from './ShortcutContent.module.scss';
 
 interface IShortCutContent {
@@ -22,19 +23,15 @@ export default function ShortcutContent({
     <>
       <h1>{operation} shortcut</h1>
       <div className={styles.inputContent}>
-        <p>
-          Web address<span>*</span>
-        </p>
-        <input
-          type="text"
-          name="input"
-          className={styles.inputRight}
-          placeholder="e.g. https://www.techscrumapp.com"
-          onChange={(event) => {
+        <InputV2
+          label="Web Address"
+          onValueChanged={(event) => {
             setWebValue(event.target.value);
           }}
-          value={webValue}
-          data-testid="shortcut-title"
+          defaultValue={webValue}
+          name="webValue"
+          dataTestId="shortcut-title"
+          placeHolder="e.g. https://www.techscrumapp.com"
         />
         {!!webValue && isUrlValid && (
           <p className={styles.colorRed} data-testid="invalid-url">
@@ -44,19 +41,15 @@ export default function ShortcutContent({
       </div>
       <br />
       <div className={styles.inputContent}>
-        <p>
-          Name<span>*</span>
-        </p>
-        <input
-          type="text"
-          name="input"
-          className={styles.inputRight}
-          placeholder="e.g. TechScrum website"
-          onChange={(event) => {
+        <InputV2
+          label="Name"
+          onValueChanged={(event) => {
             setNameValue(event.target.value);
           }}
-          value={value}
-          data-testid="shortcut-name"
+          defaultValue={value}
+          name="name"
+          dataTestId="shortcut-name"
+          placeHolder="e.g. TechScrum website"
         />
       </div>
       <div className={styles.proTip}>

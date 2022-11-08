@@ -14,11 +14,21 @@ interface IInputV2 {
   type?: string;
   min?: number;
   max?: number;
+  dataTestId?: string;
 }
 
 export default function InputV2(props: IInputV2) {
-  const { defaultValue, name, label, placeHolder, type, required, onValueChanged, onValueBlur } =
-    props;
+  const {
+    defaultValue,
+    name,
+    label,
+    placeHolder,
+    type,
+    required,
+    onValueChanged,
+    onValueBlur,
+    dataTestId
+  } = props;
   const [value, setValue] = useState(defaultValue);
   const [error, setError] = useState<null | string>(null);
   const [isActive, setIsActive] = useState(false);
@@ -66,6 +76,7 @@ export default function InputV2(props: IInputV2) {
         onClick={() => {
           setIsActive(true);
         }}
+        data-testid={dataTestId}
       />
       {error && <p className={styles.errorMessage}>{error}</p>}
     </div>
@@ -78,5 +89,6 @@ InputV2.defaultProps = {
   type: 'text',
   min: null,
   max: null,
-  onValueBlur: null
+  onValueBlur: null,
+  dataTestId: null
 };

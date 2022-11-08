@@ -1,3 +1,6 @@
+
+@import "../../../variables.scss";
+
 footer {
   align-items: center;
   display: flex;
@@ -12,6 +15,7 @@ footer {
   width: 100%;
   display: flex;
   justify-content: flex-end;
+  margin-top: 20px;
 }
 
 .footerContent .removeButton {
@@ -30,7 +34,7 @@ footer {
   }
 
   &:active {
-    color: rgba(0, 82, 204);
+    color: $primaryColor;
     background: rgba(179, 212, 255, 0.6);
   }
 }
@@ -49,7 +53,7 @@ footer {
   line-height: 2.28571em;
   padding: 0px 10px;
   justify-content: center;
-  color: rgb(0, 82, 204);
+  color: $primaryColor;
 }
 
 .footerContent .cancelButton:hover {
@@ -80,7 +84,7 @@ footer {
   height: 2.28571em;
   line-height: 2.28571em;
   padding: 0px 10px;
-  background: rgb(0, 82, 204);
+  background: $primaryColor;
   color: white;
 }
 
@@ -90,5 +94,5 @@ footer {
 
 .updateButton:active {
   filter: none;
-  background: rgb(7, 71, 166);
+  background: $primaryColor;
 }
