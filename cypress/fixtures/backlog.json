@@ -2,6 +2,7 @@
   "backlog": {
     "cards": [
       {
+        "priority": "Medium",
         "assignId": null,
         "title": "asdf",
         "tags": [],
@@ -38,6 +39,7 @@
         "id": "6350dbbca5c71eda4bcf78aa"
       },
       {
+        "priority": "Medium",
         "assignId": null,
         "title": "daf",
         "tags": [],
@@ -74,6 +76,7 @@
         "id": "6350dcfa560c73ef4f32e2a6"
       },
       {
+        "priority": "Medium",
         "assignId": null,
         "title": "daffdd",
         "tags": [],
@@ -114,6 +117,7 @@
   "sprints": {
     "cards": [
       {
+        "priority": "Medium",
         "assignId": null,
         "title": "this is in sprint",
         "tags": [],
@@ -141,6 +145,7 @@
         "id": "6353c85b713ef658b10d7e43"
       },
       {
+        "priority": "Medium",
         "assignId": null,
         "title": "this is also in sprint",
         "tags": [],

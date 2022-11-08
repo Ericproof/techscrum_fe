@@ -95,6 +95,12 @@ export default function BacklogSection({
       getBacklogDataApi();
     });
   };
+  const onClickChangePriority = (id: string, priority: string) => {
+    const data = { priority };
+    updateTask(id, data).then(() => {
+      getBacklogDataApi();
+    });
+  };
   return (
     <section className={styles.container}>
       <div className={styles.header}>
@@ -122,6 +128,8 @@ export default function BacklogSection({
                 status={task.status.name.toUpperCase()}
                 onClickChangeStatus={onClickChangeStatus}
                 onClickDelete={onClickDelete}
+                priority={task.priority}
+                onClickChangePriority={onClickChangePriority}
               />
             );
           })}
