@@ -11,12 +11,16 @@ interface IBacklogSection {
   backlogData: any;
   getBacklogDataApi: () => void;
   loaded: boolean;
+  userLoaded: boolean;
+  userList: any;
 }
 
 export default function BacklogSection({
   backlogData,
   getBacklogDataApi,
-  loaded
+  loaded,
+  userLoaded,
+  userList
 }: IBacklogSection) {
   const [showBacklogInput, setShowBacklogInput] = useState(false);
   const [backlogInputFocus, setBacklogInputFocus] = useState(false);
@@ -95,6 +99,12 @@ export default function BacklogSection({
       getBacklogDataApi();
     });
   };
+  const onClickChangeAssignee = (id: string, assigneeId: string) => {
+    const data = { assignId: assigneeId };
+    updateTask(id, data).then(() => {
+      getBacklogDataApi();
+    });
+  };
   return (
     <section className={styles.container}>
       <div className={styles.header}>
@@ -108,6 +118,7 @@ export default function BacklogSection({
       </div>
       <div className={styles.listContainer}>
         {loaded &&
+          userLoaded &&
           backlogData.cards.map((task) => {
             return (
               <TaskItem
@@ -122,6 +133,9 @@ export default function BacklogSection({
                 status={task.status.name.toUpperCase()}
                 onClickChangeStatus={onClickChangeStatus}
                 onClickDelete={onClickDelete}
+                onClickChangeAssignee={onClickChangeAssignee}
+                userList={userList}
+                assignee={task.assignId}
               />
             );
           })}

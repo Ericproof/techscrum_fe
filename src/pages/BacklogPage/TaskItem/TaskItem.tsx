@@ -16,6 +16,9 @@ interface ITaskInput {
   taskId: string;
   onClickChangeStatus: (id: string, status: string) => void;
   onClickDelete: (id: string) => void;
+  onClickChangeAssignee: (id: string, assigneeId: string) => void;
+  userList: any;
+  assignee: any;
 }
 export default function TaskItem({
   taskTitle,
@@ -27,7 +30,10 @@ export default function TaskItem({
   status,
   onClickChangeStatus,
   taskId,
-  onClickDelete
+  onClickDelete,
+  onClickChangeAssignee,
+  userList,
+  assignee
 }: ITaskInput) {
   const allTypes = {
     story:
@@ -129,7 +135,14 @@ export default function TaskItem({
           </div>
         )}
       </div>
-      <ToolBar status={status} taskId={taskId} onClickChangeStatus={onClickChangeStatus} />
+      <ToolBar
+        status={status}
+        taskId={taskId}
+        onClickChangeStatus={onClickChangeStatus}
+        onClickChangeAssignee={onClickChangeAssignee}
+        userList={userList}
+        assignee={assignee}
+      />
       <OptionBtn
         showOptionBtn={showOptionBtn}
         taskId={taskId}
