@@ -210,7 +210,7 @@ export default function Nav() {
               data-testid="add-shortcut"
             >
               <VscNewFile />
-              <span>Add shortcut (WIP)</span>
+              <span>Add shortcut</span>
             </button>
           )}
           {addLinkToggle &&
