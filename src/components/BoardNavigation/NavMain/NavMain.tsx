@@ -320,7 +320,7 @@ export default function NavMain(props: IPropsNavMain) {
             data-testid="add-shortcut"
           >
             <VscNewFile />
-            <span>Add shortcut</span>
+            <span>Add shortcut (WIP)</span>
           </button>
         )}
         {addLinkToggle && (

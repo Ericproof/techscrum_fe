@@ -170,7 +170,7 @@ export default function Setting() {
             </div>
             <ButtonV2 text="SAVE CHANGES" onClick={onClickSave} loading={loading} />
           </SettingCard>
-          <SettingCard title="Delete Project">
+          <SettingCard title="Delete Project (WIP)">
             <p>Delete your project and all of your source data. This is irreversible.</p>
             <ButtonV2
               text="DELETE"
@@ -181,7 +181,7 @@ export default function Setting() {
               }}
             />
           </SettingCard>
-          <SettingCard title="Change Password">
+          <SettingCard title="Change Password (WIP)">
             <div className={[styles.gap, styles.row, 'flex'].join(' ')}>
               <InputV2
                 label="New Password"
