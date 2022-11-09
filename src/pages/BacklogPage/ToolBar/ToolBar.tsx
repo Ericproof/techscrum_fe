@@ -8,11 +8,17 @@ interface IToolBar {
   status: string;
   onClickChangeStatus: (id: string, status: string) => void;
   taskId: string;
+  statusData: any;
 }
-export default function ToolBar({ status, onClickChangeStatus, taskId }: IToolBar) {
+export default function ToolBar({ status, onClickChangeStatus, taskId, statusData }: IToolBar) {
   return (
     <div className={styles.toolbar}>
-      <StatusBtn status={status} onClickChangeStatus={onClickChangeStatus} taskId={taskId} />
+      <StatusBtn
+        status={status}
+        onClickChangeStatus={onClickChangeStatus}
+        taskId={taskId}
+        statusData={statusData}
+      />
       <IconButton
         overrideStyle={styles.assignee}
         icon={<img src={Avartar} alt="avatar" />}

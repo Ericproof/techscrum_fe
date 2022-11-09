@@ -7,14 +7,10 @@ interface IToolBar {
   status: string;
   onClickChangeStatus: (id: string, status: string) => void;
   taskId: string;
+  statusData: any;
 }
-export default function StatusBtn({ status, onClickChangeStatus, taskId }: IToolBar) {
-  const allBtns = [
-    { status: 'TO DO', color: 'dropDownBtnGray' },
-    { status: 'IN PROGRESS', color: 'dropDownBtnBlue' },
-    { status: 'REVIEW', color: 'dropDownBtnBlue' },
-    { status: 'DONE', color: 'dropDownBtnGreen' }
-  ];
+export default function StatusBtn({ status, onClickChangeStatus, taskId, statusData }: IToolBar) {
+  const allBtns = statusData;
   const dropDownBtnRef = useRef<HTMLDivElement | null>(null);
 
   const [showDropDown, setShowDropDown] = useState(false);
@@ -22,9 +18,9 @@ export default function StatusBtn({ status, onClickChangeStatus, taskId }: ITool
   const dropDownClick = () => {
     setShowDropDown(!showDropDown);
   };
-  const btnClick = (name: string) => {
+  const btnClick = (statusId: string) => {
     setShowDropDown(false);
-    onClickChangeStatus(taskId, name);
+    onClickChangeStatus(taskId, statusId);
   };
   useEffect(() => {
     const handleClickOutside = (e: any) => {
@@ -42,13 +38,10 @@ export default function StatusBtn({ status, onClickChangeStatus, taskId }: ITool
       <Button
         icon={<FaChevronDown />}
         iconPosition="end"
-        overrideStyle={[
-          styles.statusBtn,
-          styles[allBtns.filter((btn) => btn.status === status)[0].color]
-        ].join(' ')}
+        overrideStyle={[styles.statusBtn, styles.dropDownBtnBlue].join(' ')}
         onClick={dropDownClick}
       >
-        {allBtns.filter((btn) => btn.status === status)[0].status}
+        {status}
       </Button>
       <div
         className={
@@ -58,22 +51,20 @@ export default function StatusBtn({ status, onClickChangeStatus, taskId }: ITool
         }
       >
         <ul className={styles.btnDropDownListContainer}>
-          {allBtns
-            .filter((btn) => btn.status !== status)
-            .map((btnInfo) => {
-              return (
-                <li key={btnInfo.status}>
-                  <Button
-                    overrideStyle={[styles.statusBtn, styles[btnInfo.color]].join(' ')}
-                    onClick={() => {
-                      btnClick(btnInfo.status);
-                    }}
-                  >
-                    {btnInfo.status}
-                  </Button>
-                </li>
-              );
-            })}
+          {allBtns.map((btnInfo) => {
+            return (
+              <li key={btnInfo.name}>
+                <Button
+                  overrideStyle={[styles.statusBtn, styles.dropDownBtnBlue].join(' ')}
+                  onClick={() => {
+                    btnClick(btnInfo.id);
+                  }}
+                >
+                  {btnInfo.name.toUpperCase()}
+                </Button>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </div>

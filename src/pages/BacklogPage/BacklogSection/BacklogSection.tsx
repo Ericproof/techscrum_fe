@@ -11,12 +11,16 @@ interface IBacklogSection {
   backlogData: any;
   getBacklogDataApi: () => void;
   loaded: boolean;
+  statusLoaded: boolean;
+  statusData: any;
 }
 
 export default function BacklogSection({
   backlogData,
   getBacklogDataApi,
-  loaded
+  loaded,
+  statusLoaded,
+  statusData
 }: IBacklogSection) {
   const [showBacklogInput, setShowBacklogInput] = useState(false);
   const [backlogInputFocus, setBacklogInputFocus] = useState(false);
@@ -83,12 +87,15 @@ export default function BacklogSection({
     setCurrentTypeOption(type);
   };
   const onClickChangeStatus = (id: string, status: string) => {
-    const data = {
-      status: status.toLowerCase()
-    };
-    updateTask(id, data).then(() => {
-      getBacklogDataApi();
-    });
+    // const data = {
+    //   status: status.toLowerCase()
+    // };
+    // updateTask(id, data).then(() => {
+    //   getBacklogDataApi();
+    // });
+
+    // eslint-disable-next-line no-console
+    console.log(id, status);
   };
   const onClickDelete = (id: string) => {
     deleteTask(id).then(() => {
@@ -108,6 +115,7 @@ export default function BacklogSection({
       </div>
       <div className={styles.listContainer}>
         {loaded &&
+          statusLoaded &&
           backlogData.cards.map((task) => {
             return (
               <TaskItem
@@ -122,6 +130,7 @@ export default function BacklogSection({
                 status={task.status.name.toUpperCase()}
                 onClickChangeStatus={onClickChangeStatus}
                 onClickDelete={onClickDelete}
+                statusData={statusData}
               />
             );
           })}
