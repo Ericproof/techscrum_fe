@@ -27,6 +27,7 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal) {
   };
   const [dailyScrumTicketData, setDailyScrumTicketData] = useState<any>([]);
   const [submitting, setSubmitting] = useState(false);
+
   useEffect(() => {
     const handleDailyScrum = async () => {
       const results = await getDailyScrumByUser(projectId, userId);
@@ -49,7 +50,6 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal) {
     };
     handleDailyScrum();
   }, [projectId, userId]);
-  useEffect(() => {}, []);
 
   const onChangeFinish = (id: string, value: boolean) => {
     setDailyScrumTicketData(
