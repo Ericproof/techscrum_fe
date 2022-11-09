@@ -33,7 +33,7 @@ export default function Nav() {
   const [operation, setOperation] = useState('');
   const [selectedLink, setSelectedLink] = useState<IShortcutData | null>(null);
   const [addLinkToggle, setAddLinkToggle] = useState(false);
-  const { boardId = '', projectId = '' } = useParams();
+  const { projectId = '' } = useParams();
   const [showBtns, setShowBtns] = useState({
     planning: true,
     tracking: true,
@@ -45,6 +45,7 @@ export default function Nav() {
   const currentProject: IProjectData = projectList.filter(
     (project: IProjectData) => project.id === projectId
   )[0];
+  const { boardId } = currentProject;
 
   const buttons = {
     planning: [
@@ -210,7 +211,7 @@ export default function Nav() {
               data-testid="add-shortcut"
             >
               <VscNewFile />
-              <span>Add shortcut (WIP)</span>
+              <span>Add shortcut</span>
             </button>
           )}
           {addLinkToggle &&

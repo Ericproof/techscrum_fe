@@ -1,28 +1,29 @@
 .backdrop {
   width: 100%;
   min-height: 100vh;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
   background-color: rgba(100, 100, 100, 0.25);
   z-index: 100;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin: auto;
+  -webkit-backdrop-filter: blur(17px);
   backdrop-filter: blur(17px);
   .modal {
     max-width: 800px;
     max-height: 80vh;
-    width: 100%;
     background-color: white;
-    padding: 40px;
     box-sizing: border-box;
     border-radius: 10px;
     overflow-y: auto;
     box-shadow: rgb(43 44 57 / 14%) 0px 6px 20px;
     border-bottom: 6px solid #6a2add;
-    position: relative;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: auto;
   }
 }
 

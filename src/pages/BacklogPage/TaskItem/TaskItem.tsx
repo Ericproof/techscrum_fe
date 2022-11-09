@@ -19,6 +19,8 @@ interface ITaskInput {
   onClickChangeAssignee: (id: string, assigneeId: string) => void;
   userList: any;
   assignee: any;
+  priority: string;
+  onClickChangePriority: (id: string, priority: string) => void;
 }
 export default function TaskItem({
   taskTitle,
@@ -33,7 +35,9 @@ export default function TaskItem({
   onClickDelete,
   onClickChangeAssignee,
   userList,
-  assignee
+  assignee,
+  priority,
+  onClickChangePriority
 }: ITaskInput) {
   const allTypes = {
     story:
@@ -142,6 +146,8 @@ export default function TaskItem({
         onClickChangeAssignee={onClickChangeAssignee}
         userList={userList}
         assignee={assignee}
+        priority={priority}
+        onClickChangePriority={onClickChangePriority}
       />
       <OptionBtn
         showOptionBtn={showOptionBtn}

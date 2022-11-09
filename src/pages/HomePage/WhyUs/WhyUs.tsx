@@ -26,22 +26,22 @@ export default function WhyUs() {
               <ul>
                 <li>
                   <TiTick />
-                  Free trial
+                  Great functionalities
                 </li>
                 <li>
-                  <TiTick /> Customized
-                </li>
-                <li>
-                  <TiTick />
-                  Increase Productive
+                  <TiTick /> Customizable workflow
                 </li>
                 <li>
                   <TiTick />
-                  Intuitive UI
+                  Clean UI/UX design
                 </li>
                 <li>
                   <TiTick />
-                  No Training Required
+                  Easy to use
+                </li>
+                <li>
+                  <TiTick />
+                  Free version available
                 </li>
               </ul>
               <div className={['flex', styles.links].join(' ')}>
