@@ -2,7 +2,7 @@ import axios from 'axios';
 import config from '../../config/config';
 
 export const getDailyScrumByUser = async (projectId = '', userId = '') => {
-  return axios.get(`http://localhost:8000/api/v1/projects/${projectId}/dailyScrums/${userId}`);
+  return axios.get(`${config.apiAddress}/projects/${projectId}/dailyScrums/${userId}`);
 };
 
 export const getDailyScrumWhenAssign = async (
