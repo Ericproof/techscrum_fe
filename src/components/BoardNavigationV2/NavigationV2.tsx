@@ -8,6 +8,8 @@ import { FiSettings } from 'react-icons/fi';
 import { IoMdList } from 'react-icons/io';
 import { FaDailymotion } from 'react-icons/fa';
 import { AiOutlineCaretDown, AiOutlineCaretRight, AiOutlineLink } from 'react-icons/ai';
+import ReactDOM from 'react-dom';
+import { ImCross } from 'react-icons/im';
 import { IProject, IProjectData, IShortcutData } from '../../types';
 import ProjectHeaderNav from './ProjectHeaderNav/ProjectHeaderNav';
 import { ProjectContext, ProjectDispatchContext } from '../../context/ProjectProvider';
@@ -15,6 +17,8 @@ import styles from './NavigationV2.module.scss';
 import checkAccess from '../../utils/helpers';
 import DailyScrum from '../DailyScrum/DailyScrum';
 import ShortcutModal from '../ShortcutModal/ShortcutModal';
+import Modal from '../Modal/Modal';
+import addshorcut from '../../assets/addshorcut.svg';
 
 interface IItem {
   name: string;
@@ -29,7 +33,7 @@ export default function Nav() {
   const [operation, setOperation] = useState('');
   const [selectedLink, setSelectedLink] = useState<IShortcutData | null>(null);
   const [addLinkToggle, setAddLinkToggle] = useState(false);
-  const { boardId = '', projectId = '' } = useParams();
+  const { projectId = '' } = useParams();
   const [showBtns, setShowBtns] = useState({
     planning: true,
     tracking: true,
@@ -41,6 +45,7 @@ export default function Nav() {
   const currentProject: IProjectData = projectList.filter(
     (project: IProjectData) => project.id === projectId
   )[0];
+  const { boardId } = currentProject;
 
   const buttons = {
     planning: [
@@ -209,24 +214,39 @@ export default function Nav() {
               <span>Add shortcut</span>
             </button>
           )}
-          {addLinkToggle && (
-            <ShortcutModal
-              operation={operation}
-              setAddLinkToggle={setAddLinkToggle}
-              addLinkToggle={addLinkToggle}
-              selectedLink={selectedLink}
-              currentProjectId={currentProject?.id}
-              shortCutAdded={() => {
-                setAddLinkToggle(false);
-                fetchProjects();
-              }}
-              shortCutUpdated={fetchProjects}
-              shortCutRemoved={() => {
-                setAddLinkToggle(false);
-                fetchProjects();
-              }}
-            />
-          )}
+          {addLinkToggle &&
+            ReactDOM.createPortal(
+              <Modal classesName={[styles.shortcutModal, 'clear'].join(' ')}>
+                <div className={['flex', 'modalHeader'].join(' ')}>
+                  <h1>Shortcut</h1>
+                  <ImCross
+                    color="#4f5366"
+                    className="defaultModalCross"
+                    onClick={() => {
+                      setAddLinkToggle(false);
+                    }}
+                  />
+                </div>
+                <img src={addshorcut} alt="shortcut" className={styles.shortcutImg} />
+                <ShortcutModal
+                  operation={operation}
+                  setAddLinkToggle={setAddLinkToggle}
+                  addLinkToggle={addLinkToggle}
+                  selectedLink={selectedLink}
+                  currentProjectId={currentProject?.id}
+                  shortCutAdded={() => {
+                    setAddLinkToggle(false);
+                    fetchProjects();
+                  }}
+                  shortCutUpdated={fetchProjects}
+                  shortCutRemoved={() => {
+                    setAddLinkToggle(false);
+                    fetchProjects();
+                  }}
+                />
+              </Modal>,
+              document.body
+            )}
         </div>
       </nav>
     </>

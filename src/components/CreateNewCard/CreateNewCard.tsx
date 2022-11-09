@@ -1,25 +1,21 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react/no-array-index-key */
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 import { createActivity } from '../../api/activity/activity';
 import styles from './CreateNewCard.module.scss';
 import { createNewTask } from '../../api/task/task';
-import { ICardData, ILabelData, IProject, IProjectData } from '../../types';
-import UserSelect from '../Form/Select/UserSelect/UserSelect';
+import { ICardData } from '../../types';
 import { upload } from '../../api/upload/upload';
 import Attach from '../BoardCard/CardLeftContent/components/Attach/Attach';
 import PhotoGallery from '../PhotoGallery/PhotoGallery';
 import { TaskTypesContext } from '../../context/TaskTypeProvider';
-import { ProjectContext } from '../../context/ProjectProvider';
 import { UserContext } from '../../context/UserInfoProvider';
 import Row from '../Grid/Row/Row';
 import InputV2 from '../FormV2/InputV2/InputV2';
 import DropdownV2 from '../FormV2/DropdownV2/DropdownV2';
 import TextAreaV2 from '../FormV2/TextAreaV2/TextAreaV2';
 import UsersFieldsV2 from '../FieldsV2/UsersFieldsV2/UsersFieldsV2';
-import MultiSelectDropdownV2 from '../FormV2/MultiSelectDropdownV2/MultiSelectDropdownV2';
 import LabelFieldsV2 from '../FieldsV2/LabelFieldsV2/LabelFieldsV2';
 
 interface Props {
@@ -31,15 +27,10 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
   const [description, setDescription] = useState('');
   const [title, setTitle] = useState('');
   const [assigneeId, setAssigneeId] = useState<any>(null);
-  const [hasError, setError] = useState(false);
   const [photoData, setPhotoData] = useState<any>([]);
   const [taskTypeId, setTaskTypeId] = useState<string>();
   const { boardId = '', projectId = '' } = useParams();
   const taskType = useContext(TaskTypesContext);
-  const projectList = useContext<IProject[]>(ProjectContext);
-  const currentProject: IProjectData[] = projectList.filter(
-    (project: IProjectData) => project.id === projectId
-  );
   const userInfo = useContext(UserContext);
 
   useEffect(() => {
@@ -100,7 +91,6 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
     createNewTask(newCard)
       .then((res) => {
         if (res.status === 201) {
-          setError(false);
           const operation = 'created';
           const userId = userInfo?.id;
           const taskId = res.data.id;
@@ -108,10 +98,10 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
           fetchNewCard({ ...res.data, statusId: res.data.status });
           return;
         }
-        setError(true);
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
       })
       .catch(() => {
-        setError(true);
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
       });
   };
 
@@ -124,6 +114,7 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
 
   return (
     <div className="defaultHeaderModalPadding">
+      <ToastContainer style={{ width: '400px' }} />
       <form onSubmit={onSave}>
         <Row defaultMargin>
           <InputV2 label="Title" name="title" onValueChanged={changeTitleHandler} defaultValue="" />
@@ -187,68 +178,6 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
             Create
           </button>
         </div>
-        {/* <div className={styles.cardContent}>
-          <p className={styles.cardStar}>Project</p>
-          <input className={styles.cardInput} disabled defaultValue={currentProject[0].name} />
-          <p className={styles.cardStar}>Card type</p>
-          <select className={styles.cardSelect} onChange={onChangeTaskType}>
-            {taskType.map((item: any) => {
-              return (
-                <option key={item.id} value={item.id}>
-                  {item.name}
-                </option>
-              );
-            })}
-          </select>
-          <p className={styles.cardStar}>Summary</p>
-          <input
-            className={styles.cardInput}
-            type="text"
-            value={title}
-            onChange={changeTitleHandler}
-            data-testid="summary"
-            required
-          />
-          <p className={styles.cardLabel}>Attachment</p>
-
-          <p className={styles.cardLabel}>Description</p>
-
-          <p className={styles.cardLabel}>Assignee</p>
-          <UserSelect onChange={onChangeAssigneeId} value={assigneeId} allowEdit />
-          <p className={styles.cardLabel} style={{ display: 'none' }}>
-            Priority
-          </p>
-          <select className={styles.cardSelect} style={{ display: 'none' }}>
-            <option value="High">High</option>
-            <option value="Medium">Medium</option>
-            <option value="Low">Low</option>
-          </select>
-          <p className={styles.cardLabel} style={{ display: 'none' }}>
-            Labels
-          </p>
-          <select
-            className={styles.cardSelect}
-            placeholder="select Label"
-            style={{ display: 'none' }}
-          >
-            <option value="backend">backend</option>
-            <option value="frontend">frontend</option>
-          </select>
-        </div>
-        {hasError && <p className={styles.error}>Error</p>}
-        <div className={styles.cardButton}>
-          <button
-            type="button"
-            className={styles.cancelButton}
-            name="close"
-            onClick={updateIsCreateNewCard}
-          >
-            Cancel
-          </button>
-          <button type="submit" className={styles.createButton} data-testid="create-issue">
-            Create
-          </button>
-        </div> */}
       </form>
     </div>
   );

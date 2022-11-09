@@ -4,6 +4,7 @@ import boardData from '../../fixtures/board.json';
 import backlogData from '../../fixtures/backlog.json';
 import backlogDataAddTask from '../../fixtures/backlogAddTask.json';
 import backlogDataChangeTitle from '../../fixtures/backlogChangeTitle.json';
+import backlogDataChangePriority from '../../fixtures/backlogChangePriority.json';
 describe('Backlog page', () => {
   beforeEach(() => {
     cy.intercept('GET', '**/projects', projectsData).as('fetch-projects');
@@ -64,5 +65,18 @@ describe('Backlog page', () => {
     cy.get('input').type('{enter}');
     cy.wait('@change-title');
     cy.wait('@fetch-backlog-3');
+  });
+  it('Test show priority', () => {
+    cy.get('[data-testid="priority-btn-6350dbbca5c71eda4bcf78aa"]').should('exist');
+    cy.get('[data-testid="priority-btn-6350dcfa560c73ef4f32e2a6"]').should('exist');
+    cy.get('[data-testid="priority-btn-6350dfbbca131ce6228f3e59"]').should('exist');
+  });
+  it('Test change priority', () => {
+    cy.intercept('PUT', '**/tasks/*', backlogDataChangePriority).as('change-priority');
+    cy.intercept('GET', '**/projects/*/backlogs', backlogDataChangePriority).as('fetch-backlog-4');
+    cy.get('[data-testid="priority-btn-6350dbbca5c71eda4bcf78aa"]').click();
+    cy.get('[data-testid="priority-dropdown-btn-6350dbbca5c71eda4bcf78aa-Highest"]').click();
+    cy.wait('@change-priority');
+    cy.wait('@fetch-backlog-4');
   });
 });

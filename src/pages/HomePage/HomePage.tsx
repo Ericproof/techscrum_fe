@@ -18,7 +18,7 @@ import AnyWhereSection from './AnyWhereSection/AnyWhereSection';
 import Prevent from './Prevent/Prevent';
 import darkCircle from '../../assets/shapeDark.png';
 import Scroll from '../../components/Scroll/Scroll';
-// import midCircle from '../../assets/shapeMid.png';
+import Tracking from './Tracking/Tracking';
 
 export default function HomePage() {
   return (
@@ -95,10 +95,13 @@ export default function HomePage() {
         </section>
 
         <section className={styles.cardsSection}>
-          <AnyWhereSection />
+          <Tracking />
           <div className="background--grey">
             <Prevent />
           </div>
+        </section>
+        <section className={styles.cardsSection}>
+          <AnyWhereSection />
         </section>
         <section className={styles.clientsSection} style={{ display: 'none' }}>
           <div className={styles.clientsContainer}>

@@ -26,6 +26,8 @@ $transition: all .25s ease-in-out;
     border-color: $textColor;
 }
 
+
+
 .errorMessage {
     position: absolute;
     left: 7px;
@@ -89,6 +91,11 @@ $transition: all .25s ease-in-out;
     text-align: left;
     line-height: 20px;
     padding: 0;
+}
+
+.inputContainer:hover label{
+    font-weight: bold;
+    color:$textColor;
 }
 
 .dropDown{

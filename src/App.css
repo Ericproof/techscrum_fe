@@ -1,6 +1,7 @@
 body{
   /* background-color: #F5F5F5; */
   background-color: white;
+  position: relative;
 }
 
 .App {
@@ -101,7 +102,7 @@ body{
   padding: 0 40px;
 }
 .defaultModalCross{
-  color: white !important;;
+  color: white !important;
 }
 .defaultModalCross:hover{
   cursor: pointer;

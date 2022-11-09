@@ -111,6 +111,12 @@ export default function SprintSection() {
     const updatedTaskList = sprintTaskList.filter((task) => task.id !== id);
     setSprintTaskList(updatedTaskList);
   };
+  const onClickChangePriority = (id: string, priority: string) => {
+    const updatedTaskList = sprintTaskList.filter(
+      (task) => task.id !== id && task.priority === priority
+    );
+    setSprintTaskList(updatedTaskList);
+  };
   return (
     <section className={[styles.container, styles.sprintContainer].join(' ')}>
       <div className={styles.header}>
@@ -138,6 +144,8 @@ export default function SprintSection() {
               status={task.status}
               onClickChangeStatus={onClickChangeStatus}
               onClickDelete={onClickDelete}
+              onClickChangePriority={onClickChangePriority}
+              priority={task.priority}
             />
           );
         })}

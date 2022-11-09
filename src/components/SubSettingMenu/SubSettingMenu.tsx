@@ -18,13 +18,13 @@ export default function SubSettingMenu() {
   const buttons = {
     planning: [
       {
-        name: 'User Profile',
+        name: '(WIP) User Profile',
         url: `/projects/${projectId}/board/${boardId}`,
         icon: <CgProfile />,
         dataTestId: 'user-profile'
       },
       {
-        name: 'Preference',
+        name: '(WIP) Preference',
         url: `/projects/${projectId}/board/${boardId}/backlog`,
         icon: <AiOutlineSetting />,
         dataTestId: 'preference'
@@ -32,14 +32,14 @@ export default function SubSettingMenu() {
     ],
     utilBtns: [
       {
-        name: 'Company Details',
+        name: '(WIP) Company Details',
         checkAccess: 'view:members',
         url: `/projects/${currentProject?.id}/members`,
         icon: <BsBriefcase />,
         dataTestId: 'company-details'
       },
       {
-        name: 'Plan & Billing',
+        name: '(WIP) Plan & Billing',
         checkAccess: 'view:settings',
         url: `/settings/${currentProject?.id}`,
         icon: <BsCreditCard />,

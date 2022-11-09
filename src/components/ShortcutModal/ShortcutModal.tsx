@@ -71,17 +71,8 @@ export default function ShortcutModal({
   };
 
   return (
-    <div className={styles.background}>
-      <div className={styles.container}>
-        <header>
-          <div className={styles.headerBanner} />
-          <div className={styles.addImage}>
-            <img
-              alt="add_image"
-              src="https://jira-frontend-static.prod.public.atl-paas.net/assets/image.46a4b7e1f40adec8b2af7eb2cd452a24.8.svg"
-            />
-          </div>
-        </header>
+    <div>
+      <div>
         <div className={styles.dialog}>
           <ShortcutContent
             operation={operation}

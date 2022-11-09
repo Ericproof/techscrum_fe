@@ -30,7 +30,7 @@ function JobListItem(props: IJobListItem) {
           return <li>{item}</li>;
         })}
       </ul>
-      <button className={styles.applyButtonText}>Apply now</button>
+      <button className={styles.applyButtonText}>Apply now (WIP)</button>
     </div>
   );
 }
