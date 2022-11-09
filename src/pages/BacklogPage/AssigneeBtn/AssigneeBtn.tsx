@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './AssigneeBtn.module.scss';
 import IconButton from '../../../components/Button/IconButton/IconButton';
-import Avartar from '../../../assets/userAvatar.png';
+import userAvatar from '../../../assets/userAvatar.png';
 
 interface IPriorityBtn {
   assignee: any;
@@ -43,8 +43,8 @@ export default function PriorityBtn({
     <div className={styles.assigneeContainer} ref={assigneeContainerRef}>
       <IconButton
         overrideStyle={styles.assignee}
-        icon={<img src={assignee ? assignee.avatarIcon : Avartar} alt="avatar" />}
-        tooltip={assignee ? assignee.name : 'unassigned'}
+        icon={<img src={assignee ? assignee.avatarIcon : userAvatar} alt="avatar" />}
+        tooltip={assignee ? assignee.name : 'Unassigned'}
         onClick={() => {
           setShowAssigneeDropdown(!showAssigneeDropdown);
         }}
@@ -54,10 +54,10 @@ export default function PriorityBtn({
           <div className={styles.inputContainer}>
             <input
               type="text"
-              placeholder={assignee ? assignee.name : 'unassigned'}
+              placeholder={assignee ? assignee.name : 'Unassigned'}
               onChange={onChangeInput}
             />
-            <img src={assignee ? assignee.avatarIcon : Avartar} alt="avatar" />
+            <img src={assignee ? assignee.avatarIcon : userAvatar} alt="avatar" />
           </div>
           <ul className={styles.assigneeDropdownList}>
             {userList
