@@ -3,12 +3,15 @@ import { useParams } from 'react-router-dom';
 import BacklogSection from './BacklogSection/BacklogSection';
 import styles from './BacklogPage.module.scss';
 import { getBacklog } from '../../api/backlog/backlog';
+import { getTypes } from '../../api/types/types';
 
 export default function BacklogPage() {
   // WIP need to communicate with backend
   const [loaded, setLoaded] = useState(false);
   const [backlogData, setBacklogData] = useState(null);
   const { projectId = '' } = useParams();
+  const [typesData, setTypesData] = useState(null);
+  const [typesLoaded, setTypesLoaded] = useState(false);
 
   const getBacklogDataApi = useCallback(() => {
     const getBacklogData = async () => {
@@ -24,6 +27,21 @@ export default function BacklogPage() {
   }, [projectId]);
 
   useEffect(() => {
+    const getTypesData = async () => {
+      try {
+        const res = await getTypes();
+        setTypesData(res);
+        // eslint-disable-next-line no-console
+        console.log(res);
+        setTypesLoaded(true);
+      } catch (e) {
+        setTypesLoaded(false);
+      }
+    };
+    getTypesData();
+  }, []);
+
+  useEffect(() => {
     getBacklogDataApi();
   }, [getBacklogDataApi]);
 
@@ -37,6 +55,8 @@ export default function BacklogPage() {
           backlogData={backlogData}
           getBacklogDataApi={getBacklogDataApi}
           loaded={loaded}
+          typesLoaded={typesLoaded}
+          typesData={typesData}
         />
       </div>
     </div>

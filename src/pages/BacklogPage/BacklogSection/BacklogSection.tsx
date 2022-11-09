@@ -11,12 +11,16 @@ interface IBacklogSection {
   backlogData: any;
   getBacklogDataApi: () => void;
   loaded: boolean;
+  typesLoaded: boolean;
+  typesData: any;
 }
 
 export default function BacklogSection({
   backlogData,
   getBacklogDataApi,
-  loaded
+  loaded,
+  typesLoaded,
+  typesData
 }: IBacklogSection) {
   const [showBacklogInput, setShowBacklogInput] = useState(false);
   const [backlogInputFocus, setBacklogInputFocus] = useState(false);
@@ -32,14 +36,9 @@ export default function BacklogSection({
       const data = {
         title: createIssueRef?.current?.value,
         status: 'to do',
-        typeId: {
-          createdAt: new Date().toISOString(),
-          name: currentTypeOption.charAt(0).toUpperCase() + currentTypeOption.slice(1),
-          slug: currentTypeOption,
-          updatedAt: new Date().toISOString(),
-          _v: 0,
-          _id: '631d94d08a05945727602cd1'
-        },
+        typeId: typesData.filter((types) => {
+          return types.slug === currentTypeOption;
+        })[0].id,
         boardId,
         projectId,
         sprintId: null
@@ -49,7 +48,7 @@ export default function BacklogSection({
       });
     }
     setShowBacklogInput(false);
-  }, [boardId, currentTypeOption, projectId, getBacklogDataApi]);
+  }, [typesData, boardId, projectId, currentTypeOption, getBacklogDataApi]);
 
   useEffect(() => {
     const handleClickOutside = (e: any) => {
@@ -114,6 +113,7 @@ export default function BacklogSection({
       </div>
       <div className={styles.listContainer}>
         {loaded &&
+          typesLoaded &&
           backlogData.cards.map((task) => {
             return (
               <TaskItem
