@@ -31,8 +31,6 @@ export default function BacklogPage() {
       try {
         const res = await getTypes();
         setTypesData(res);
-        // eslint-disable-next-line no-console
-        console.log(res);
         setTypesLoaded(true);
       } catch (e) {
         setTypesLoaded(false);
