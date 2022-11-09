@@ -1,8 +1,8 @@
-/* eslint-disable no-console */
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './AssigneeBtn.module.scss';
 import IconButton from '../../../components/Button/IconButton/IconButton';
 import userAvatar from '../../../assets/userAvatar.png';
+import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 
 interface IPriorityBtn {
   assignee: any;
@@ -16,40 +16,25 @@ export default function PriorityBtn({
   userList,
   taskId
 }: IPriorityBtn) {
-  const [showAssigneeDropdown, setShowAssigneeDropdown] = useState(false);
   const [query, setQuery] = useState('');
-  const assigneeContainerRef = useRef<HTMLDivElement | null>(null);
 
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
   };
 
-  useEffect(() => {
-    const handleClickOutside = (e: any) => {
-      if (
-        showAssigneeDropdown &&
-        !assigneeContainerRef.current?.contains(e.target as HTMLElement)
-      ) {
-        setShowAssigneeDropdown(false);
-      }
-    };
-    document.addEventListener('click', handleClickOutside);
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, [showAssigneeDropdown]);
+  const { visible, setVisible, myRef } = useOutsideAlerter(false);
 
   return (
-    <div className={styles.assigneeContainer} ref={assigneeContainerRef}>
+    <div className={styles.assigneeContainer} ref={myRef}>
       <IconButton
         overrideStyle={styles.assignee}
         icon={<img src={assignee ? assignee.avatarIcon : userAvatar} alt="avatar" />}
         tooltip={assignee ? assignee.name : 'Unassigned'}
         onClick={() => {
-          setShowAssigneeDropdown(!showAssigneeDropdown);
+          setVisible(!visible);
         }}
       />
-      {showAssigneeDropdown && (
+      {visible && (
         <div className={styles.assigneeDropdown}>
           <div className={styles.inputContainer}>
             <input
@@ -70,7 +55,7 @@ export default function PriorityBtn({
                     <button
                       onClick={() => {
                         onClickChangeAssignee(taskId, user.id);
-                        setShowAssigneeDropdown(false);
+                        setVisible(false);
                       }}
                     >
                       <img src={user.avatarIcon} alt="avatar" />
