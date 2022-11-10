@@ -6,13 +6,14 @@ import TaskTypeSelect from '../../../components/Select/TaskTypeSelect/TaskTypeSe
 import TaskItem from '../TaskItem/TaskItem';
 import styles from './BacklogSection.module.scss';
 import { addTask, updateTask, deleteTask } from '../../../api/backlog/backlog';
+import { Itypes } from '../../../types';
 
 interface IBacklogSection {
   backlogData: any;
   getBacklogDataApi: () => void;
   loaded: boolean;
   typesLoaded: boolean;
-  typesData: any;
+  typesData: Itypes[] | null;
 }
 
 export default function BacklogSection({
@@ -36,7 +37,7 @@ export default function BacklogSection({
       const data = {
         title: createIssueRef?.current?.value,
         status: 'to do',
-        typeId: typesData.filter((types) => {
+        typeId: typesData?.filter((types) => {
           return types.slug === currentTypeOption;
         })[0].id,
         boardId,

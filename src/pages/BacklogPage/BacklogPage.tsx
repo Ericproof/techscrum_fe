@@ -7,7 +7,6 @@ import { getBacklog } from '../../api/backlog/backlog';
 import { getTypes } from '../../api/types/types';
 
 export default function BacklogPage() {
-  // WIP need to communicate with backend
   const [loaded, setLoaded] = useState(false);
   const [backlogData, setBacklogData] = useState(null);
   const { projectId = '' } = useParams();
