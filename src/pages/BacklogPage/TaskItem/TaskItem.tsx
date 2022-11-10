@@ -4,6 +4,7 @@ import IconButton from '../../../components/Button/IconButton/IconButton';
 import styles from './TaskItem.module.scss';
 import ToolBar from '../ToolBar/ToolBar';
 import OptionBtn from '../OptionBtn/OptionBtn';
+import { IUserInfo, IAssign } from '../../../types';
 
 interface ITaskInput {
   taskTitle: string;
@@ -17,8 +18,8 @@ interface ITaskInput {
   onClickChangeStatus: (id: string, status: string) => void;
   onClickDelete: (id: string) => void;
   onClickChangeAssignee: (id: string, assigneeId: string) => void;
-  userList: any;
-  assignee: any;
+  userList: IUserInfo[];
+  assignee: IAssign | null;
   priority: string;
   onClickChangePriority: (id: string, priority: string) => void;
 }

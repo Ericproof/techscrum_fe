@@ -3,12 +3,13 @@ import styles from './AssigneeBtn.module.scss';
 import IconButton from '../../../components/Button/IconButton/IconButton';
 import userAvatar from '../../../assets/userAvatar.png';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
+import { IUserInfo, IAssign } from '../../../types';
 
 interface IPriorityBtn {
-  assignee: any;
+  assignee: IAssign | null;
   onClickChangeAssignee: (id: string, assigneeId: string) => void;
   taskId: string;
-  userList: any;
+  userList: IUserInfo[];
 }
 export default function PriorityBtn({
   assignee,
@@ -24,12 +25,23 @@ export default function PriorityBtn({
 
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
 
+  let name = 'Unassigned';
+  let avartar = userAvatar;
+  if (assignee) {
+    if (assignee.name) {
+      name = assignee.name;
+    }
+    if (assignee.avatarIcon) {
+      avartar = assignee.avatarIcon;
+    }
+  }
+
   return (
     <div className={styles.assigneeContainer} ref={myRef}>
       <IconButton
         overrideStyle={styles.assignee}
-        icon={<img src={assignee ? assignee.avatarIcon : userAvatar} alt="avatar" />}
-        tooltip={assignee ? assignee.name : 'Unassigned'}
+        icon={<img src={avartar} alt="avatar" />}
+        tooltip={name}
         onClick={() => {
           setVisible(!visible);
         }}
@@ -37,24 +49,22 @@ export default function PriorityBtn({
       {visible && (
         <div className={styles.assigneeDropdown}>
           <div className={styles.inputContainer}>
-            <input
-              type="text"
-              placeholder={assignee ? assignee.name : 'Unassigned'}
-              onChange={onChangeInput}
-            />
-            <img src={assignee ? assignee.avatarIcon : userAvatar} alt="avatar" />
+            <input type="text" placeholder={name} onChange={onChangeInput} />
+            <img src={avartar} alt="avatar" />
           </div>
           <ul className={styles.assigneeDropdownList}>
             {userList
-              .filter((user) => {
-                return user.name.toLowerCase().includes(query.toLowerCase());
+              .filter((user: IUserInfo) => {
+                return user.name && user.name.toLowerCase().includes(query.toLowerCase());
               })
               .map((user) => {
                 return (
                   <li key={user.id}>
                     <button
                       onClick={() => {
-                        onClickChangeAssignee(taskId, user.id);
+                        if (user.id) {
+                          onClickChangeAssignee(taskId, user.id);
+                        }
                         setVisible(false);
                       }}
                     >

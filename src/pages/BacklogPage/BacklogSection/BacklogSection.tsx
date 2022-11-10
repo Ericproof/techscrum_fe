@@ -6,13 +6,14 @@ import TaskTypeSelect from '../../../components/Select/TaskTypeSelect/TaskTypeSe
 import TaskItem from '../TaskItem/TaskItem';
 import styles from './BacklogSection.module.scss';
 import { addTask, updateTask, deleteTask } from '../../../api/backlog/backlog';
+import { IUserInfo } from '../../../types';
 
 interface IBacklogSection {
   backlogData: any;
   getBacklogDataApi: () => void;
   loaded: boolean;
   userLoaded: boolean;
-  userList: any;
+  userList: IUserInfo[];
 }
 
 export default function BacklogSection({

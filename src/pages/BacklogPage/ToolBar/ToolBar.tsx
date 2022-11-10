@@ -3,14 +3,15 @@ import styles from './ToolBar.module.scss';
 import StatusBtn from '../StatusBtn/StatusBtn';
 import AssigneeBtn from '../AssigneeBtn/AssigneeBtn';
 import PriorityBtn from '../PriorityBtn/PriorityBtn';
+import { IUserInfo, IAssign } from '../../../types';
 
 interface IToolBar {
   status: string;
   onClickChangeStatus: (id: string, status: string) => void;
   taskId: string;
   onClickChangeAssignee: (id: string, assigneeId: string) => void;
-  userList: any;
-  assignee: any;
+  userList: IUserInfo[];
+  assignee: IAssign | null;
   priority: string;
   onClickChangePriority: (id: string, priority: string) => void;
 }
