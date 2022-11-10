@@ -9,7 +9,6 @@ import { IoMdList } from 'react-icons/io';
 import { FaDailymotion } from 'react-icons/fa';
 import { AiOutlineCaretDown, AiOutlineCaretRight, AiOutlineLink } from 'react-icons/ai';
 import ReactDOM from 'react-dom';
-import { ImCross } from 'react-icons/im';
 import { IProject, IProjectData, IShortcutData } from '../../types';
 import ProjectHeaderNav from './ProjectHeaderNav/ProjectHeaderNav';
 import { ProjectContext, ProjectDispatchContext } from '../../context/ProjectProvider';
@@ -19,6 +18,7 @@ import DailyScrum from '../DailyScrum/DailyScrum';
 import ShortcutModal from '../ShortcutModal/ShortcutModal';
 import Modal from '../Modal/Modal';
 import addshorcut from '../../assets/addshorcut.svg';
+import DefaultModalHeader from '../Modal/ModalHeader/DefaultModalHeader/DefaultModalHeader';
 
 interface IItem {
   name: string;
@@ -217,16 +217,12 @@ export default function Nav() {
           {addLinkToggle &&
             ReactDOM.createPortal(
               <Modal classesName={[styles.shortcutModal, 'clear'].join(' ')}>
-                <div className={['flex', 'modalHeader'].join(' ')}>
-                  <h1>Shortcut</h1>
-                  <ImCross
-                    color="#4f5366"
-                    className="defaultModalCross"
-                    onClick={() => {
-                      setAddLinkToggle(false);
-                    }}
-                  />
-                </div>
+                <DefaultModalHeader
+                  title="Shortcut"
+                  onClickClose={() => {
+                    setAddLinkToggle(false);
+                  }}
+                />
                 <img src={addshorcut} alt="shortcut" className={styles.shortcutImg} />
                 <ShortcutModal
                   operation={operation}

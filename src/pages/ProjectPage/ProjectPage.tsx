@@ -3,19 +3,22 @@ import React, { useState, createRef, useEffect, useContext } from 'react';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { HiDotsHorizontal } from 'react-icons/hi';
 import { FiSearch } from 'react-icons/fi';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
+import { toast } from 'react-toastify';
 import styles from './ProjectPage.module.scss';
 import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
-import { deleteProject, updateProject } from '../../api/projects/projects';
+import { createProject, deleteProject, updateProject } from '../../api/projects/projects';
 import CreateNewCard from '../../components/CreateNewCard/CreateNewCard';
 import { IProject, IProjectData } from '../../types';
 import { ProjectContext, ProjectDispatchContext } from '../../context/ProjectProvider';
 import checkAccess, { clickedShowMore } from '../../utils/helpers';
 import Modal from '../../components/Modal/Modal';
+import ProjectEditor from '../../components/ProjectEditor/ProjectEditor';
+import DefaultModalHeader from '../../components/Modal/ModalHeader/DefaultModalHeader/DefaultModalHeader';
+import DefaultModalBody from '../../components/Modal/ModalBody/DefaultModalHeader/DefaultModalBody';
 
 export default function ProjectPage() {
-  const navigate = useNavigate();
   const fetchProjects = useContext(ProjectDispatchContext);
   const projectList = useContext<IProject[]>(ProjectContext);
   const [filteredProjectList, setFilteredProjectList] = useState<IProject[]>([]);
@@ -24,7 +27,8 @@ export default function ProjectPage() {
   const refProfile = projectList.map(() => createRef<HTMLDivElement>());
   const refShowMore = projectList.map(() => createRef<HTMLDivElement>());
   const [isCreateNewCard, setIsCreateNewCard] = useState(false);
-
+  const [showCreateProjectModal, setShowCreateProjectModal] = useState(false);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     fetchProjects();
   }, []);
@@ -52,13 +56,24 @@ export default function ProjectPage() {
   };
 
   const removeProject = (id: string) => {
-    deleteProject(id).then((res: AxiosResponse) => {
-      if (res.status === 204) {
-        const updateProjectList = projectList.filter((item: IProjectData) => item.id !== id);
-        fetchProjects();
-        setFilteredProjectList(updateProjectList);
-      }
-    });
+    setLoading(true);
+    deleteProject(id)
+      .then((res: AxiosResponse) => {
+        if (res.status === 204) {
+          const updateProjectList = projectList.filter((item: IProjectData) => item.id !== id);
+          fetchProjects();
+          setFilteredProjectList(updateProjectList);
+          setLoading(false);
+          toast.success('Project has been deleted', {
+            theme: 'colored',
+            className: 'primaryColorBackground'
+          });
+        }
+      })
+      .catch(() => {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+        setLoading(false);
+      });
   };
 
   const starProject = (id: string, data: IProjectData, token: string) => {
@@ -107,6 +122,27 @@ export default function ProjectPage() {
     return () => document.removeEventListener('mousedown', handleClickInside);
   });
 
+  const onClickProjectSave = (apiData: any) => {
+    setLoading(true);
+    createProject(apiData)
+      .then((res: AxiosResponse) => {
+        if (!res.data) {
+          return;
+        }
+        fetchProjects();
+        setLoading(false);
+        toast.success('Project has been created', {
+          theme: 'colored',
+          className: 'primaryColorBackground'
+        });
+        setShowCreateProjectModal(false);
+      })
+      .catch(() => {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+        setLoading(false);
+      });
+  };
+
   return (
     <>
       <ProjectHeader />
@@ -118,6 +154,26 @@ export default function ProjectPage() {
           />
         </Modal>
       )}
+      {showCreateProjectModal && (
+        <Modal fullWidth>
+          <DefaultModalHeader
+            title="Create Project"
+            onClickClose={() => {
+              setShowCreateProjectModal(false);
+            }}
+          />
+          <DefaultModalBody defaultPadding={false} classesName={styles.modalPadding}>
+            <ProjectEditor
+              showCancelBtn
+              onClickSave={onClickProjectSave}
+              onClickCancel={() => {
+                setShowCreateProjectModal(false);
+              }}
+              loading={loading}
+            />
+          </DefaultModalBody>
+        </Modal>
+      )}
       <div className={styles.projectPage}>
         <div className={styles.projectContainer}>
           <div className={styles.projectContent}>
@@ -127,7 +183,7 @@ export default function ProjectPage() {
                 <button
                   type="button"
                   className={styles.createButton}
-                  onClick={() => navigate('/create-projects')}
+                  onClick={() => setShowCreateProjectModal(true)}
                 >
                   Create project
                 </button>

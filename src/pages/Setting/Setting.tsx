@@ -3,7 +3,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import styles from './Setting.module.scss';
 import { showProject, updateProject } from '../../api/projects/projects';
 import { IOnChangeProjectLead, IProjectEditor } from '../../types';
@@ -110,7 +110,6 @@ export default function Setting() {
   }
   return (
     <div className={[styles.settingPage, 'relative'].join(' ')} data-testid="setting-page">
-      <ToastContainer style={{ width: '400px' }} />
       <NavigationV2 />
       <SubSettingMenu />
       <div className={styles.settingContainer}>

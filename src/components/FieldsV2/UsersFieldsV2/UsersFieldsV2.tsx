@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { getUsers } from '../../../api/user/user';
 import DropdownV2 from '../../FormV2/DropdownV2/DropdownV2';
 
-interface IUsersV2 {
+interface IUsersFieldsV2 {
   onChange: (e: any) => void;
   defaultValue: string | null;
   label: string;
   name: string;
 }
 
-export default function UsersV2(props: IUsersV2) {
+export default function UsersFieldsV2(props: IUsersFieldsV2) {
   const { onChange, defaultValue, name, label } = props;
   const [userList, setUserList] = useState<any>([]);
 

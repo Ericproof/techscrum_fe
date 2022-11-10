@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { DropResult } from 'react-beautiful-dnd';
-import { ImCross } from 'react-icons/im';
 import style from './Board.module.scss';
 import BoardSearch from './BoardSearch/BoardSearch';
 import BoardMain from './BoardMain/BoardMain';
@@ -15,6 +14,7 @@ import { TaskEntity } from '../../api/task/entity/task';
 import { getLabels } from '../../api/label/label';
 import { deleteActivity } from '../../api/activity/activity';
 import Modal from '../Modal/Modal';
+import DefaultModalHeader from '../Modal/ModalHeader/DefaultModalHeader/DefaultModalHeader';
 
 const onDragEnd = (
   result: DropResult,
@@ -236,16 +236,12 @@ export default function Board() {
       />
       {isCreateNewCard && (
         <Modal classesName="clear">
-          <div className={['flex', 'modalHeader'].join(' ')}>
-            <h1>Create card</h1>
-            <ImCross
-              color="#4f5366"
-              className="defaultModalCross"
-              onClick={() => {
-                setIsCreateNewCard(false);
-              }}
-            />
-          </div>
+          <DefaultModalHeader
+            title="Create Card"
+            onClickClose={() => {
+              setIsCreateNewCard(false);
+            }}
+          />
           <CreateNewCard
             fetchNewCard={fetchNewCard}
             updateIsCreateNewCard={getCreateNewCardStateFromChildren}

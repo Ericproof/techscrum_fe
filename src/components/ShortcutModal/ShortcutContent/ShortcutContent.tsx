@@ -1,5 +1,6 @@
 import React from 'react';
 import InputV2 from '../../FormV2/InputV2/InputV2';
+import Row from '../../Grid/Row/Row';
 import styles from './ShortcutContent.module.scss';
 
 interface IShortCutContent {
@@ -22,7 +23,7 @@ export default function ShortcutContent({
   return (
     <>
       <h1>{operation} shortcut</h1>
-      <div className={styles.inputContent}>
+      <Row defaultMargin>
         <InputV2
           label="Web Address"
           onValueChanged={(event) => {
@@ -38,9 +39,8 @@ export default function ShortcutContent({
             Invalid URL
           </p>
         )}
-      </div>
-      <br />
-      <div className={styles.inputContent}>
+      </Row>
+      <Row defaultMargin>
         <InputV2
           label="Name"
           onValueChanged={(event) => {
@@ -51,7 +51,7 @@ export default function ShortcutContent({
           dataTestId="shortcut-name"
           placeHolder="e.g. TechScrum website"
         />
-      </div>
+      </Row>
       <div className={styles.proTip}>
         <span>
           <strong> 😎Pro tip:</strong> Start your shortcut’s name with an emoji to customize its

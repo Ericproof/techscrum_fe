@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { createActivity } from '../../api/activity/activity';
 import styles from './CreateNewCard.module.scss';
 import { createNewTask } from '../../api/task/task';
@@ -114,7 +114,6 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
 
   return (
     <div className="defaultHeaderModalPadding">
-      <ToastContainer style={{ width: '400px' }} />
       <form onSubmit={onSave}>
         <Row defaultMargin>
           <InputV2 label="Title" name="title" onValueChanged={changeTitleHandler} defaultValue="" />
