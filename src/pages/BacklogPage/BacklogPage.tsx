@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import { useParams } from 'react-router-dom';
 import BacklogSection from './BacklogSection/BacklogSection';
 import styles from './BacklogPage.module.scss';
 import { getBacklog } from '../../api/backlog/backlog';
+import { getTypes } from '../../api/types/types';
 import { getUsers } from '../../api/user/user';
 
 export default function BacklogPage() {
@@ -11,6 +12,8 @@ export default function BacklogPage() {
   const [userLoaded, setUserLoaded] = useState(false);
   const [backlogData, setBacklogData] = useState(null);
   const { projectId = '' } = useParams();
+  const [typesData, setTypesData] = useState(null);
+  const [typesLoaded, setTypesLoaded] = useState(false);
   const [userList, setUserList] = useState<any>([]);
 
   const getBacklogDataApi = useCallback(() => {
@@ -26,6 +29,20 @@ export default function BacklogPage() {
     };
     getBacklogData();
   }, [projectId]);
+
+  useEffect(() => {
+    const getTypesData = async () => {
+      try {
+        const res = await getTypes();
+        setTypesData(res);
+        setTypesLoaded(true);
+      } catch (e) {
+        setTypesLoaded(false);
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      }
+    };
+    getTypesData();
+  }, []);
 
   useEffect(() => {
     getBacklogDataApi();
@@ -58,6 +75,8 @@ export default function BacklogPage() {
           backlogData={backlogData}
           getBacklogDataApi={getBacklogDataApi}
           loaded={loaded}
+          typesLoaded={typesLoaded}
+          typesData={typesData}
           userLoaded={userLoaded}
           userList={userList}
         />

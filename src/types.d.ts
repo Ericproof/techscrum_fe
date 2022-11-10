@@ -193,3 +193,11 @@ export interface IResetPasswordForm {
 export interface IConfig {
   [x: string]: any;
 }
+
+export interface Itypes {
+  slug: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+  id: string;
+}

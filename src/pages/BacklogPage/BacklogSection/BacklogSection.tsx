@@ -6,12 +6,14 @@ import TaskTypeSelect from '../../../components/Select/TaskTypeSelect/TaskTypeSe
 import TaskItem from '../TaskItem/TaskItem';
 import styles from './BacklogSection.module.scss';
 import { addTask, updateTask, deleteTask } from '../../../api/backlog/backlog';
-import { IUserInfo } from '../../../types';
+import { IUserInfo, Itypes } from '../../../types';
 
 interface IBacklogSection {
   backlogData: any;
   getBacklogDataApi: () => void;
   loaded: boolean;
+  typesLoaded: boolean;
+  typesData: Itypes[] | null;
   userLoaded: boolean;
   userList: IUserInfo[];
 }
@@ -20,6 +22,8 @@ export default function BacklogSection({
   backlogData,
   getBacklogDataApi,
   loaded,
+  typesLoaded,
+  typesData,
   userLoaded,
   userList
 }: IBacklogSection) {
@@ -37,14 +41,9 @@ export default function BacklogSection({
       const data = {
         title: createIssueRef?.current?.value,
         status: 'to do',
-        typeId: {
-          createdAt: new Date().toISOString(),
-          name: currentTypeOption.charAt(0).toUpperCase() + currentTypeOption.slice(1),
-          slug: currentTypeOption,
-          updatedAt: new Date().toISOString(),
-          _v: 0,
-          _id: '631d94d08a05945727602cd1'
-        },
+        typeId: typesData?.filter((types) => {
+          return types.slug === currentTypeOption;
+        })[0].id,
         boardId,
         projectId,
         sprintId: null
@@ -54,7 +53,7 @@ export default function BacklogSection({
       });
     }
     setShowBacklogInput(false);
-  }, [boardId, currentTypeOption, projectId, getBacklogDataApi]);
+  }, [typesData, boardId, projectId, currentTypeOption, getBacklogDataApi]);
 
   useEffect(() => {
     const handleClickOutside = (e: any) => {
@@ -125,6 +124,7 @@ export default function BacklogSection({
       </div>
       <div className={styles.listContainer}>
         {loaded &&
+          typesLoaded &&
           userLoaded &&
           backlogData.cards.map((task) => {
             return (
