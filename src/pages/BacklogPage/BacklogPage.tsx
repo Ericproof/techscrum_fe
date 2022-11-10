@@ -59,6 +59,7 @@ export default function BacklogPage() {
         setStatusLoaded(true);
       } catch (e) {
         setStatusLoaded(false);
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
       }
     };
     getStatusData();
