@@ -87,7 +87,7 @@
       "typeId": "631d94d08a05945727602cd1",
       "attachmentUrls": [],
       "createdAt": "2022-11-01T02:21:44.938Z",
-      "updatedAt": "2022-11-09T04:12:12.319Z",
+      "updatedAt": "2022-11-10T02:51:55.922Z",
       "__v": 8,
       "priority": "Highest"
     },
@@ -182,7 +182,7 @@
       "typeId": "631d94d08a05945727602cd1",
       "attachmentUrls": [],
       "createdAt": "2022-11-01T02:21:44.938Z",
-      "updatedAt": "2022-11-09T04:12:12.319Z",
+      "updatedAt": "2022-11-10T02:51:55.922Z",
       "__v": 8,
       "priority": "Highest"
     },
@@ -279,7 +279,7 @@
       "typeId": "631d94d08a05945727602cd1",
       "attachmentUrls": [],
       "createdAt": "2022-11-01T02:21:44.938Z",
-      "updatedAt": "2022-11-09T04:12:12.319Z",
+      "updatedAt": "2022-11-10T02:51:55.922Z",
       "__v": 8,
       "priority": "Highest"
     },
@@ -376,7 +376,7 @@
       "typeId": "631d94d08a05945727602cd1",
       "attachmentUrls": [],
       "createdAt": "2022-11-01T02:21:44.938Z",
-      "updatedAt": "2022-11-09T04:12:12.319Z",
+      "updatedAt": "2022-11-10T02:51:55.922Z",
       "__v": 8,
       "priority": "Highest"
     },
@@ -386,5 +386,488 @@
     "createdAt": "2022-11-09T04:12:11.316Z",
     "updatedAt": "2022-11-09T04:12:11.316Z",
     "id": "636b289b3415ec4373b09f75"
+  },
+  {
+    "title": "bug fix",
+    "progress": 0,
+    "isFinished": false,
+    "hasReason": false,
+    "reason": "",
+    "isNeedSupport": false,
+    "userId": {
+      "_id": "631dd53189d19ed1f532fb85",
+      "email": "kitman200220022002@gmail.com",
+      "__v": 0,
+      "active": true,
+      "activeCode": "",
+      "avatarIcon": "https://kitmanimage.s3.ap-southeast-2.amazonaws.com/1665799533694.png",
+      "createdAt": "2022-09-11T12:31:46.017Z",
+      "isAdmin": 1,
+      "projectsRoles": [
+        {
+          "projectId": "6350c09984d4276f1347d489",
+          "roleId": "631d94d08a05945727602cdf",
+          "_id": "635666c1d377d106f9a8b85d"
+        }
+      ],
+      "updatedAt": "2022-10-24T10:19:45.417Z",
+      "name": "kitman",
+      "password": "$2b$08$6ggLLlQGiXWZTQTcS2zXe.8X7zFpx5Ajz8wKaxC.R7zbrU8fAa0ra",
+      "refreshToken": "nrGHmn02Dz",
+      "abbreviation": "",
+      "jobTitle": "",
+      "location": "",
+      "userName": ""
+    },
+    "projectId": {
+      "_id": "6358c090a662585de5245a2d",
+      "name": "DEMO",
+      "key": "DEM",
+      "projectLeadId": "631dd53189d19ed1f532fb85",
+      "ownerId": "631dd53189d19ed1f532fb85",
+      "assigneeId": "1",
+      "boardId": "6358c090a662585de5245a2c",
+      "iconUrl": "https://kitmanimage.s3.ap-southeast-2.amazonaws.com/1666761128872.JPG",
+      "star": false,
+      "isDelete": false,
+      "shortcut": [
+        {
+          "name": "github👀",
+          "shortcutLink": "https://github.com/",
+          "_id": "6358c1cba662585de5245aa3"
+        },
+        {
+          "name": "google",
+          "shortcutLink": "https://www.google.com",
+          "_id": "6360d663abfec5bba0e70124"
+        },
+        {
+          "name": "google",
+          "shortcutLink": "https://www.google.com",
+          "_id": "63636b9d369cd1899d2ec5b6"
+        },
+        {
+          "name": "w3School",
+          "shortcutLink": "https://www.w3schools.com/",
+          "_id": "6364e327dc6e74f7f61db64b"
+        }
+      ],
+      "createdAt": "2022-10-26T05:07:28.626Z",
+      "updatedAt": "2022-11-04T11:14:22.323Z",
+      "__v": 0
+    },
+    "taskId": {
+      "_id": "636b3e421d8c7009d4278100",
+      "title": "bug fix",
+      "tags": [],
+      "comments": [],
+      "status": "6358c090a662585de5245a24",
+      "priority": "Medium",
+      "projectId": "6358c090a662585de5245a2d",
+      "boardId": "6358c090a662585de5245a2c",
+      "sprintId": null,
+      "storyPoint": 0,
+      "dueAt": "1970-01-01T00:00:00.000Z",
+      "reporterId": "633be6e9c94265ad05d0eca6",
+      "typeId": "631d94d08a05945727602cdb",
+      "attachmentUrls": [],
+      "createdAt": "2022-11-09T05:44:34.745Z",
+      "updatedAt": "2022-11-10T02:12:11.136Z",
+      "__v": 0,
+      "assignId": "631dd53189d19ed1f532fb85"
+    },
+    "createdDate": "10-10-2022",
+    "finishValidation": false,
+    "supportValidation": false,
+    "createdAt": "2022-11-10T01:18:38.158Z",
+    "updatedAt": "2022-11-10T01:18:38.158Z",
+    "id": "636c516e481cd4e0c950aae7"
+  },
+  {
+    "title": "bug fix",
+    "progress": 0,
+    "isFinished": false,
+    "hasReason": false,
+    "reason": "",
+    "isNeedSupport": false,
+    "userId": {
+      "_id": "631dd53189d19ed1f532fb85",
+      "email": "kitman200220022002@gmail.com",
+      "__v": 0,
+      "active": true,
+      "activeCode": "",
+      "avatarIcon": "https://kitmanimage.s3.ap-southeast-2.amazonaws.com/1665799533694.png",
+      "createdAt": "2022-09-11T12:31:46.017Z",
+      "isAdmin": 1,
+      "projectsRoles": [
+        {
+          "projectId": "6350c09984d4276f1347d489",
+          "roleId": "631d94d08a05945727602cdf",
+          "_id": "635666c1d377d106f9a8b85d"
+        }
+      ],
+      "updatedAt": "2022-10-24T10:19:45.417Z",
+      "name": "kitman",
+      "password": "$2b$08$6ggLLlQGiXWZTQTcS2zXe.8X7zFpx5Ajz8wKaxC.R7zbrU8fAa0ra",
+      "refreshToken": "nrGHmn02Dz",
+      "abbreviation": "",
+      "jobTitle": "",
+      "location": "",
+      "userName": ""
+    },
+    "projectId": {
+      "_id": "6358c090a662585de5245a2d",
+      "name": "DEMO",
+      "key": "DEM",
+      "projectLeadId": "631dd53189d19ed1f532fb85",
+      "ownerId": "631dd53189d19ed1f532fb85",
+      "assigneeId": "1",
+      "boardId": "6358c090a662585de5245a2c",
+      "iconUrl": "https://kitmanimage.s3.ap-southeast-2.amazonaws.com/1666761128872.JPG",
+      "star": false,
+      "isDelete": false,
+      "shortcut": [
+        {
+          "name": "github👀",
+          "shortcutLink": "https://github.com/",
+          "_id": "6358c1cba662585de5245aa3"
+        },
+        {
+          "name": "google",
+          "shortcutLink": "https://www.google.com",
+          "_id": "6360d663abfec5bba0e70124"
+        },
+        {
+          "name": "google",
+          "shortcutLink": "https://www.google.com",
+          "_id": "63636b9d369cd1899d2ec5b6"
+        },
+        {
+          "name": "w3School",
+          "shortcutLink": "https://www.w3schools.com/",
+          "_id": "6364e327dc6e74f7f61db64b"
+        }
+      ],
+      "createdAt": "2022-10-26T05:07:28.626Z",
+      "updatedAt": "2022-11-04T11:14:22.323Z",
+      "__v": 0
+    },
+    "taskId": {
+      "_id": "636b3e421d8c7009d4278100",
+      "title": "bug fix",
+      "tags": [],
+      "comments": [],
+      "status": "6358c090a662585de5245a24",
+      "priority": "Medium",
+      "projectId": "6358c090a662585de5245a2d",
+      "boardId": "6358c090a662585de5245a2c",
+      "sprintId": null,
+      "storyPoint": 0,
+      "dueAt": "1970-01-01T00:00:00.000Z",
+      "reporterId": "633be6e9c94265ad05d0eca6",
+      "typeId": "631d94d08a05945727602cdb",
+      "attachmentUrls": [],
+      "createdAt": "2022-11-09T05:44:34.745Z",
+      "updatedAt": "2022-11-10T02:12:11.136Z",
+      "__v": 0,
+      "assignId": "631dd53189d19ed1f532fb85"
+    },
+    "createdDate": "10-10-2022",
+    "finishValidation": false,
+    "supportValidation": false,
+    "createdAt": "2022-11-10T02:12:11.114Z",
+    "updatedAt": "2022-11-10T02:12:11.114Z",
+    "id": "636c5dfb78e0e22dba5deff6"
+  },
+  {
+    "title": "act t",
+    "progress": 0,
+    "isFinished": false,
+    "hasReason": false,
+    "reason": "",
+    "isNeedSupport": false,
+    "userId": {
+      "_id": "631dd53189d19ed1f532fb85",
+      "email": "kitman200220022002@gmail.com",
+      "__v": 0,
+      "active": true,
+      "activeCode": "",
+      "avatarIcon": "https://kitmanimage.s3.ap-southeast-2.amazonaws.com/1665799533694.png",
+      "createdAt": "2022-09-11T12:31:46.017Z",
+      "isAdmin": 1,
+      "projectsRoles": [
+        {
+          "projectId": "6350c09984d4276f1347d489",
+          "roleId": "631d94d08a05945727602cdf",
+          "_id": "635666c1d377d106f9a8b85d"
+        }
+      ],
+      "updatedAt": "2022-10-24T10:19:45.417Z",
+      "name": "kitman",
+      "password": "$2b$08$6ggLLlQGiXWZTQTcS2zXe.8X7zFpx5Ajz8wKaxC.R7zbrU8fAa0ra",
+      "refreshToken": "nrGHmn02Dz",
+      "abbreviation": "",
+      "jobTitle": "",
+      "location": "",
+      "userName": ""
+    },
+    "projectId": {
+      "_id": "6358c090a662585de5245a2d",
+      "name": "DEMO",
+      "key": "DEM",
+      "projectLeadId": "631dd53189d19ed1f532fb85",
+      "ownerId": "631dd53189d19ed1f532fb85",
+      "assigneeId": "1",
+      "boardId": "6358c090a662585de5245a2c",
+      "iconUrl": "https://kitmanimage.s3.ap-southeast-2.amazonaws.com/1666761128872.JPG",
+      "star": false,
+      "isDelete": false,
+      "shortcut": [
+        {
+          "name": "github👀",
+          "shortcutLink": "https://github.com/",
+          "_id": "6358c1cba662585de5245aa3"
+        },
+        {
+          "name": "google",
+          "shortcutLink": "https://www.google.com",
+          "_id": "6360d663abfec5bba0e70124"
+        },
+        {
+          "name": "google",
+          "shortcutLink": "https://www.google.com",
+          "_id": "63636b9d369cd1899d2ec5b6"
+        },
+        {
+          "name": "w3School",
+          "shortcutLink": "https://www.w3schools.com/",
+          "_id": "6364e327dc6e74f7f61db64b"
+        }
+      ],
+      "createdAt": "2022-10-26T05:07:28.626Z",
+      "updatedAt": "2022-11-04T11:14:22.323Z",
+      "__v": 0
+    },
+    "taskId": {
+      "_id": "636082b8526fe483f04aa9d9",
+      "title": "act t",
+      "tags": [],
+      "comments": [],
+      "status": "6358c090a662585de5245a24",
+      "projectId": "6358c090a662585de5245a2d",
+      "boardId": "6358c090a662585de5245a2c",
+      "sprintId": null,
+      "description": "test",
+      "storyPoint": 0,
+      "dueAt": "2022-11-01T02:21:35.504Z",
+      "reporterId": "631dd53189d19ed1f532fb85",
+      "assignId": "631dd53189d19ed1f532fb85",
+      "typeId": "631d94d08a05945727602cd1",
+      "attachmentUrls": [],
+      "createdAt": "2022-11-01T02:21:44.938Z",
+      "updatedAt": "2022-11-10T02:51:55.922Z",
+      "__v": 8,
+      "priority": "Highest"
+    },
+    "createdDate": "10-10-2022",
+    "finishValidation": false,
+    "supportValidation": false,
+    "createdAt": "2022-11-10T02:36:16.579Z",
+    "updatedAt": "2022-11-10T02:36:16.579Z",
+    "id": "636c63a038e168d571d8a572"
+  },
+  {
+    "title": "act t",
+    "progress": 0,
+    "isFinished": false,
+    "hasReason": false,
+    "reason": "",
+    "isNeedSupport": false,
+    "userId": {
+      "_id": "631dd53189d19ed1f532fb85",
+      "email": "kitman200220022002@gmail.com",
+      "__v": 0,
+      "active": true,
+      "activeCode": "",
+      "avatarIcon": "https://kitmanimage.s3.ap-southeast-2.amazonaws.com/1665799533694.png",
+      "createdAt": "2022-09-11T12:31:46.017Z",
+      "isAdmin": 1,
+      "projectsRoles": [
+        {
+          "projectId": "6350c09984d4276f1347d489",
+          "roleId": "631d94d08a05945727602cdf",
+          "_id": "635666c1d377d106f9a8b85d"
+        }
+      ],
+      "updatedAt": "2022-10-24T10:19:45.417Z",
+      "name": "kitman",
+      "password": "$2b$08$6ggLLlQGiXWZTQTcS2zXe.8X7zFpx5Ajz8wKaxC.R7zbrU8fAa0ra",
+      "refreshToken": "nrGHmn02Dz",
+      "abbreviation": "",
+      "jobTitle": "",
+      "location": "",
+      "userName": ""
+    },
+    "projectId": {
+      "_id": "6358c090a662585de5245a2d",
+      "name": "DEMO",
+      "key": "DEM",
+      "projectLeadId": "631dd53189d19ed1f532fb85",
+      "ownerId": "631dd53189d19ed1f532fb85",
+      "assigneeId": "1",
+      "boardId": "6358c090a662585de5245a2c",
+      "iconUrl": "https://kitmanimage.s3.ap-southeast-2.amazonaws.com/1666761128872.JPG",
+      "star": false,
+      "isDelete": false,
+      "shortcut": [
+        {
+          "name": "github👀",
+          "shortcutLink": "https://github.com/",
+          "_id": "6358c1cba662585de5245aa3"
+        },
+        {
+          "name": "google",
+          "shortcutLink": "https://www.google.com",
+          "_id": "6360d663abfec5bba0e70124"
+        },
+        {
+          "name": "google",
+          "shortcutLink": "https://www.google.com",
+          "_id": "63636b9d369cd1899d2ec5b6"
+        },
+        {
+          "name": "w3School",
+          "shortcutLink": "https://www.w3schools.com/",
+          "_id": "6364e327dc6e74f7f61db64b"
+        }
+      ],
+      "createdAt": "2022-10-26T05:07:28.626Z",
+      "updatedAt": "2022-11-04T11:14:22.323Z",
+      "__v": 0
+    },
+    "taskId": {
+      "_id": "636082b8526fe483f04aa9d9",
+      "title": "act t",
+      "tags": [],
+      "comments": [],
+      "status": "6358c090a662585de5245a24",
+      "projectId": "6358c090a662585de5245a2d",
+      "boardId": "6358c090a662585de5245a2c",
+      "sprintId": null,
+      "description": "test",
+      "storyPoint": 0,
+      "dueAt": "2022-11-01T02:21:35.504Z",
+      "reporterId": "631dd53189d19ed1f532fb85",
+      "assignId": "631dd53189d19ed1f532fb85",
+      "typeId": "631d94d08a05945727602cd1",
+      "attachmentUrls": [],
+      "createdAt": "2022-11-01T02:21:44.938Z",
+      "updatedAt": "2022-11-10T02:51:55.922Z",
+      "__v": 8,
+      "priority": "Highest"
+    },
+    "createdDate": "10-10-2022",
+    "finishValidation": false,
+    "supportValidation": false,
+    "createdAt": "2022-11-10T02:50:18.136Z",
+    "updatedAt": "2022-11-10T02:50:18.136Z",
+    "id": "636c66ea38e168d571d8a5da"
+  },
+  {
+    "title": "act t",
+    "progress": 0,
+    "isFinished": false,
+    "hasReason": false,
+    "reason": "",
+    "isNeedSupport": false,
+    "userId": {
+      "_id": "631dd53189d19ed1f532fb85",
+      "email": "kitman200220022002@gmail.com",
+      "__v": 0,
+      "active": true,
+      "activeCode": "",
+      "avatarIcon": "https://kitmanimage.s3.ap-southeast-2.amazonaws.com/1665799533694.png",
+      "createdAt": "2022-09-11T12:31:46.017Z",
+      "isAdmin": 1,
+      "projectsRoles": [
+        {
+          "projectId": "6350c09984d4276f1347d489",
+          "roleId": "631d94d08a05945727602cdf",
+          "_id": "635666c1d377d106f9a8b85d"
+        }
+      ],
+      "updatedAt": "2022-10-24T10:19:45.417Z",
+      "name": "kitman",
+      "password": "$2b$08$6ggLLlQGiXWZTQTcS2zXe.8X7zFpx5Ajz8wKaxC.R7zbrU8fAa0ra",
+      "refreshToken": "nrGHmn02Dz",
+      "abbreviation": "",
+      "jobTitle": "",
+      "location": "",
+      "userName": ""
+    },
+    "projectId": {
+      "_id": "6358c090a662585de5245a2d",
+      "name": "DEMO",
+      "key": "DEM",
+      "projectLeadId": "631dd53189d19ed1f532fb85",
+      "ownerId": "631dd53189d19ed1f532fb85",
+      "assigneeId": "1",
+      "boardId": "6358c090a662585de5245a2c",
+      "iconUrl": "https://kitmanimage.s3.ap-southeast-2.amazonaws.com/1666761128872.JPG",
+      "star": false,
+      "isDelete": false,
+      "shortcut": [
+        {
+          "name": "github👀",
+          "shortcutLink": "https://github.com/",
+          "_id": "6358c1cba662585de5245aa3"
+        },
+        {
+          "name": "google",
+          "shortcutLink": "https://www.google.com",
+          "_id": "6360d663abfec5bba0e70124"
+        },
+        {
+          "name": "google",
+          "shortcutLink": "https://www.google.com",
+          "_id": "63636b9d369cd1899d2ec5b6"
+        },
+        {
+          "name": "w3School",
+          "shortcutLink": "https://www.w3schools.com/",
+          "_id": "6364e327dc6e74f7f61db64b"
+        }
+      ],
+      "createdAt": "2022-10-26T05:07:28.626Z",
+      "updatedAt": "2022-11-04T11:14:22.323Z",
+      "__v": 0
+    },
+    "taskId": {
+      "_id": "636082b8526fe483f04aa9d9",
+      "title": "act t",
+      "tags": [],
+      "comments": [],
+      "status": "6358c090a662585de5245a24",
+      "projectId": "6358c090a662585de5245a2d",
+      "boardId": "6358c090a662585de5245a2c",
+      "sprintId": null,
+      "description": "test",
+      "storyPoint": 0,
+      "dueAt": "2022-11-01T02:21:35.504Z",
+      "reporterId": "631dd53189d19ed1f532fb85",
+      "assignId": "631dd53189d19ed1f532fb85",
+      "typeId": "631d94d08a05945727602cd1",
+      "attachmentUrls": [],
+      "createdAt": "2022-11-01T02:21:44.938Z",
+      "updatedAt": "2022-11-10T02:51:55.922Z",
+      "__v": 8,
+      "priority": "Highest"
+    },
+    "createdDate": "10-11-2022",
+    "finishValidation": false,
+    "supportValidation": false,
+    "createdAt": "2022-11-10T02:51:55.877Z",
+    "updatedAt": "2022-11-10T02:51:55.877Z",
+    "id": "636c674b38e168d571d8a619"
   }
 ]

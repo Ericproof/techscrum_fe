@@ -43,7 +43,7 @@ export default function CardRightContent({
     let month: string | number = date.getMonth();
     let day: string | number = date.getDate();
     day = day < 10 ? `0${day}` : day;
-    month = month + 1 < 10 ? `0${month + 1}` : month;
+    month = month + 1 < 10 ? `0${month + 1}` : month + 1;
     return `${day}-${month}-${year}`;
   };
 
