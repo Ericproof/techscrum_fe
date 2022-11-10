@@ -48,6 +48,7 @@ export default function BacklogSection({
         projectId,
         sprintId: null
       };
+      setCurrentTypeOption('story');
       addTask(data).then(() => {
         getBacklogDataApi();
       });
