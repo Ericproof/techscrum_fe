@@ -66,7 +66,7 @@ export default function BacklogPage() {
 
   return (
     <div className={styles.container}>
-      <ToastContainer style={{ width: '400px' }} />;
+      <ToastContainer style={{ width: '400px' }} />
       <div>
         <h1 data-testid="backlog-header">Backlog</h1>
       </div>
