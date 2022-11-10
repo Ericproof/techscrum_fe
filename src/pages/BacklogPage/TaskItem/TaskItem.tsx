@@ -4,6 +4,7 @@ import IconButton from '../../../components/Button/IconButton/IconButton';
 import styles from './TaskItem.module.scss';
 import ToolBar from '../ToolBar/ToolBar';
 import OptionBtn from '../OptionBtn/OptionBtn';
+import { IUserInfo, IAssign } from '../../../types';
 
 interface ITaskInput {
   taskTitle: string;
@@ -16,6 +17,11 @@ interface ITaskInput {
   taskId: string;
   onClickChangeStatus: (id: string, status: string) => void;
   onClickDelete: (id: string) => void;
+  onClickChangeAssignee: (id: string, assigneeId: string) => void;
+  userList: IUserInfo[];
+  assignee: IAssign | null;
+  priority: string;
+  onClickChangePriority: (id: string, priority: string) => void;
 }
 export default function TaskItem({
   taskTitle,
@@ -27,7 +33,12 @@ export default function TaskItem({
   status,
   onClickChangeStatus,
   taskId,
-  onClickDelete
+  onClickDelete,
+  onClickChangeAssignee,
+  userList,
+  assignee,
+  priority,
+  onClickChangePriority
 }: ITaskInput) {
   const allTypes = {
     story:
@@ -129,7 +140,16 @@ export default function TaskItem({
           </div>
         )}
       </div>
-      <ToolBar status={status} taskId={taskId} onClickChangeStatus={onClickChangeStatus} />
+      <ToolBar
+        status={status}
+        taskId={taskId}
+        onClickChangeStatus={onClickChangeStatus}
+        onClickChangeAssignee={onClickChangeAssignee}
+        userList={userList}
+        assignee={assignee}
+        priority={priority}
+        onClickChangePriority={onClickChangePriority}
+      />
       <OptionBtn
         showOptionBtn={showOptionBtn}
         taskId={taskId}

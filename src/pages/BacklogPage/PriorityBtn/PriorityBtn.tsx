@@ -65,6 +65,7 @@ export default function PriorityBtn({ priority, onClickChangePriority, id }: IPr
           setShowPriorityBtnDropDown(!showPriorityBtnDropDown);
           setShowPriorityBtnOutline(!showPriorityBtnOutline);
         }}
+        data-testid={`priority-btn-${id}`}
       >
         <img src={currentPriorityBtn?.imgUrl} alt="" />
       </button>
@@ -86,6 +87,7 @@ export default function PriorityBtn({ priority, onClickChangePriority, id }: IPr
                     onClick={() => {
                       onClickPriorityBtnDropDown(eachPriority);
                     }}
+                    data-testid={`priority-dropdown-btn-${id}-${eachPriority.priority}`}
                   >
                     <img src={eachPriority.imgUrl} alt={eachPriority.priority} />
                     <p>{eachPriority.priority}</p>
