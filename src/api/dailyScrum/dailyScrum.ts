@@ -1,23 +1,15 @@
 import axios from 'axios';
 import config from '../../config/config';
 
-export const getDailyScrumByUser = async (projectId = '', userId = '') => {
-  return axios.get(`${config.apiAddress}/projects/${projectId}/dailyScrums/${userId}`);
-};
-
-export const getDailyScrumWhenAssign = async (
-  projectId = '',
-  assignId = '',
-  date = '',
-  taskId = ''
+export const getDailyScrums = async (
+  projectId = 'none',
+  userId = 'none',
+  taskId = 'none',
+  date = 'none'
 ) => {
   return axios.get(
-    `${config.apiAddress}/projects/${projectId}/dailyScrums/${assignId}/date/${date}/tasks/${taskId}`
+    `${config.apiAddress}/projects/${projectId}/dailyScrums/${userId}/${taskId}/${date}`
   );
-};
-
-export const getDailyScrumByTask = async (projectId = '', taskId = '') => {
-  return axios.get(`${config.apiAddress}/projects/${projectId}/dailyScrums/tasks/${taskId}`);
 };
 
 export const createDailyScrum = async (projectId: string, data: any) => {

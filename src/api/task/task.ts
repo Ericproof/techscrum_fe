@@ -10,10 +10,6 @@ export function showTask(id = '') {
   return axios.get(`${config.apiAddress}/projects/${id}`);
 }
 
-export function showTasks(projectId: string, userId = '') {
-  return axios.get(`${config.apiAddress}/projects/fetchtasks/${projectId}/${userId}`);
-}
-
 export function createTask(data: ITaskData) {
   return axios.post(`${config.apiAddress}/projects`, data);
 }

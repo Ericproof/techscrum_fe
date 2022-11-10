@@ -11,11 +11,7 @@ import checkAccess from '../../../utils/helpers';
 import DueDatePicker from '../../DueDatePicker/DueDatePicker';
 import { UserContext } from '../../../context/UserInfoProvider';
 import { createActivity } from '../../../api/activity/activity';
-import {
-  createDailyScrum,
-  getDailyScrumByTask,
-  getDailyScrumWhenAssign
-} from '../../../api/dailyScrum/dailyScrum';
+import { createDailyScrum, getDailyScrums } from '../../../api/dailyScrum/dailyScrum';
 
 interface Props {
   taskInfo: TaskEntity;
@@ -71,9 +67,9 @@ export default function CardRightContent({
         taskId: updatedTaskInfo.id,
         createdDate
       };
-      const resultsForThisTask = await getDailyScrumByTask(projectId, taskId);
+      const resultsForThisTask = await getDailyScrums(projectId, taskId);
       if (resultsForThisTask.data.length > 0) {
-        const results = await getDailyScrumWhenAssign(projectId, assignId, createdDate, taskId);
+        const results = await getDailyScrums(projectId, assignId, createdDate, taskId);
         if (results.data.length === 0) {
           await createDailyScrum(projectId, data);
         }

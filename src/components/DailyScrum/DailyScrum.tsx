@@ -4,7 +4,7 @@ import { AiOutlineClose } from 'react-icons/ai';
 import styles from './DailyScrum.module.scss';
 import DailyScrumTicket from './DailyScrumTicket/DailyScrumTicket';
 import Modal from '../Modal/Modal';
-import { getDailyScrumByUser, updateDailyScrum } from '../../api/dailyScrum/dailyScrum';
+import { getDailyScrums, updateDailyScrum } from '../../api/dailyScrum/dailyScrum';
 import { UserContext } from '../../context/UserInfoProvider';
 
 // WIP need to add submit function
@@ -30,14 +30,14 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal) {
 
   useEffect(() => {
     const handleDailyScrum = async () => {
-      const results = await getDailyScrumByUser(projectId, userId);
+      const results = await getDailyScrums(projectId, userId);
       const dailyResult = results.data.filter((result) => {
         return result.createdDate === dateHandler(new Date());
       });
       if (dailyResult.length > 0) {
         setDailyScrumTicketData(dailyResult);
       } else {
-        const newResults = await getDailyScrumByUser(projectId, userId);
+        const newResults = await getDailyScrums(projectId, userId);
         const newDailyResults = newResults.data
           .filter((result) => {
             return result.createdDate === dateHandler(new Date());
