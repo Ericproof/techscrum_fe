@@ -7,7 +7,7 @@ import { IUserInfo, IAssign } from '../../../types';
 
 interface IToolBar {
   status: string;
-  onClickChangeStatus: (id: string, status: string) => void;
+  onClickChangeStatus: (id: string, statusId: string) => void;
   taskId: string;
   statusData: any;
   onClickChangeAssignee: (id: string, assigneeId: string) => void;

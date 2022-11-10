@@ -15,7 +15,7 @@ interface ITaskInput {
   type: string;
   status: string;
   taskId: string;
-  onClickChangeStatus: (id: string, status: string) => void;
+  onClickChangeStatus: (id: string, statusId: string) => void;
   onClickDelete: (id: string) => void;
   statusData: any;
   onClickChangeAssignee: (id: string, assigneeId: string) => void;

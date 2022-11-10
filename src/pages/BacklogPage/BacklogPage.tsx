@@ -57,9 +57,8 @@ export default function BacklogPage() {
         const res = await getStatuses(boardId);
         setStatusData(res);
         setStatusLoaded(true);
-
-        // eslint-disable-next-line no-console, no-underscore-dangle
-        // console.log(res[0]._id);
+        // eslint-disable-next-line no-console
+        console.log(res);
       } catch (e) {
         setStatusLoaded(false);
       }

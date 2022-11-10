@@ -90,16 +90,11 @@ export default function BacklogSection({
   const getCurrentTypeOption = (type: string) => {
     setCurrentTypeOption(type);
   };
-  const onClickChangeStatus = (id: string, status: string) => {
-    // const data = {
-    //   status: status.toLowerCase()
-    // };
-    // updateTask(id, data).then(() => {
-    //   getBacklogDataApi();
-    // });
-
-    // eslint-disable-next-line no-console
-    console.log(id, status);
+  const onClickChangeStatus = (id: string, statusId: string) => {
+    const data = { status: statusId };
+    updateTask(id, data).then(() => {
+      getBacklogDataApi();
+    });
   };
   const onClickDelete = (id: string) => {
     deleteTask(id).then(() => {
