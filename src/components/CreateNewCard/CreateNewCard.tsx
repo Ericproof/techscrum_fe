@@ -1,17 +1,15 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react/no-array-index-key */
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 import { createActivity } from '../../api/activity/activity';
 import styles from './CreateNewCard.module.scss';
 import { createNewTask } from '../../api/task/task';
-import { ICardData, IProject, IProjectData } from '../../types';
+import { ICardData } from '../../types';
 import { upload } from '../../api/upload/upload';
 import Attach from '../BoardCard/CardLeftContent/components/Attach/Attach';
 import PhotoGallery from '../PhotoGallery/PhotoGallery';
 import { TaskTypesContext } from '../../context/TaskTypeProvider';
-import { ProjectContext } from '../../context/ProjectProvider';
 import { UserContext } from '../../context/UserInfoProvider';
 import Row from '../Grid/Row/Row';
 import InputV2 from '../FormV2/InputV2/InputV2';
@@ -29,12 +27,10 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
   const [description, setDescription] = useState('');
   const [title, setTitle] = useState('');
   const [assigneeId, setAssigneeId] = useState<any>(null);
-  const [hasError, setError] = useState(false);
   const [photoData, setPhotoData] = useState<any>([]);
   const [taskTypeId, setTaskTypeId] = useState<string>();
   const { boardId = '', projectId = '' } = useParams();
   const taskType = useContext(TaskTypesContext);
-  const projectList = useContext<IProject[]>(ProjectContext);
   const userInfo = useContext(UserContext);
 
   useEffect(() => {
@@ -95,7 +91,6 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
     createNewTask(newCard)
       .then((res) => {
         if (res.status === 201) {
-          setError(false);
           const operation = 'created';
           const userId = userInfo?.id;
           const taskId = res.data.id;
@@ -103,10 +98,10 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
           fetchNewCard({ ...res.data, statusId: res.data.status });
           return;
         }
-        setError(true);
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
       })
       .catch(() => {
-        setError(true);
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
       });
   };
 
@@ -119,6 +114,7 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
 
   return (
     <div className="defaultHeaderModalPadding">
+      <ToastContainer style={{ width: '400px' }} />
       <form onSubmit={onSave}>
         <Row defaultMargin>
           <InputV2 label="Title" name="title" onValueChanged={changeTitleHandler} defaultValue="" />
