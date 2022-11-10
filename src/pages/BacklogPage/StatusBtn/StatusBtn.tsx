@@ -3,16 +3,15 @@ import { FaChevronDown } from 'react-icons/fa';
 import styles from './StatusBtn.module.scss';
 import Button from '../../../components/Button/Button';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
+import { IStatusBacklog } from '../../../types';
 
 interface IToolBar {
   status: string;
   onClickChangeStatus: (id: string, statusId: string) => void;
   taskId: string;
-  statusData: any;
+  statusData: IStatusBacklog[];
 }
 export default function StatusBtn({ status, onClickChangeStatus, taskId, statusData }: IToolBar) {
-  const allBtns = statusData;
-
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
 
   const dropDownClick = () => {
@@ -28,7 +27,7 @@ export default function StatusBtn({ status, onClickChangeStatus, taskId, statusD
       <Button
         icon={<FaChevronDown />}
         iconPosition="end"
-        overrideStyle={[styles.statusBtn, styles.dropDownBtnBlue].join(' ')}
+        overrideStyle={[styles.statusBtn, styles.dropDownBtnPurple].join(' ')}
         onClick={dropDownClick}
       >
         {status}
@@ -41,11 +40,11 @@ export default function StatusBtn({ status, onClickChangeStatus, taskId, statusD
         }
       >
         <ul className={styles.btnDropDownListContainer}>
-          {allBtns.map((btnInfo) => {
+          {statusData.map((btnInfo) => {
             return (
               <li key={btnInfo.name}>
                 <Button
-                  overrideStyle={[styles.statusBtn, styles.dropDownBtnBlue].join(' ')}
+                  overrideStyle={[styles.statusBtn, styles.dropDownBtnPurple].join(' ')}
                   onClick={() => {
                     btnClick(btnInfo.id);
                   }}
