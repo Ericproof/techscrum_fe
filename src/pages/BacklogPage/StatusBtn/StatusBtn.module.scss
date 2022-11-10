@@ -7,6 +7,8 @@ $btnColorBlue: rgb(31, 70, 160);
 $btnBgColorBlue: rgb(224, 235, 253);
 $btnColorGreen: rgb(42, 100, 71);
 $btnBgColorGreen: rgb(232, 251, 240);
+$btnColorPurple: rgb(98, 46, 213);
+$btnBgColorPurple: rgb(238, 232, 251);
 .statusBtnContainer {
   position: relative;
 }
@@ -26,6 +28,10 @@ $btnBgColorGreen: rgb(232, 251, 240);
 .dropDownBtnGray {
   color: $btnColorGray;
   background-color: $btnBgColorGray;
+}
+.dropDownBtnPurple {
+  color: $btnColorPurple;
+  background-color: $btnBgColorPurple;
 }
 .btnDropDownContainer {
   background-color: $bgColor;
@@ -47,7 +53,7 @@ $btnBgColorGreen: rgb(232, 251, 240);
     }
     li:hover {
       border-left: 2px solid $btnColorBlue;
-      background-color: #eaeaea;
+      background-color: #f6f6f6;
     }
   }
 }

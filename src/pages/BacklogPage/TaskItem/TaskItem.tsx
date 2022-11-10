@@ -4,7 +4,7 @@ import IconButton from '../../../components/Button/IconButton/IconButton';
 import styles from './TaskItem.module.scss';
 import ToolBar from '../ToolBar/ToolBar';
 import OptionBtn from '../OptionBtn/OptionBtn';
-import { IUserInfo, IAssign } from '../../../types';
+import { IUserInfo, IAssign, IStatusBacklog } from '../../../types';
 
 interface ITaskInput {
   taskTitle: string;
@@ -15,8 +15,9 @@ interface ITaskInput {
   type: string;
   status: string;
   taskId: string;
-  onClickChangeStatus: (id: string, status: string) => void;
+  onClickChangeStatus: (id: string, statusId: string) => void;
   onClickDelete: (id: string) => void;
+  statusData: IStatusBacklog[];
   onClickChangeAssignee: (id: string, assigneeId: string) => void;
   userList: IUserInfo[];
   assignee: IAssign | null;
@@ -34,6 +35,7 @@ export default function TaskItem({
   onClickChangeStatus,
   taskId,
   onClickDelete,
+  statusData,
   onClickChangeAssignee,
   userList,
   assignee,
@@ -144,6 +146,7 @@ export default function TaskItem({
         status={status}
         taskId={taskId}
         onClickChangeStatus={onClickChangeStatus}
+        statusData={statusData}
         onClickChangeAssignee={onClickChangeAssignee}
         userList={userList}
         assignee={assignee}

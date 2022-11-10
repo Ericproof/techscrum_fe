@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import BacklogSection from './BacklogSection/BacklogSection';
 import styles from './BacklogPage.module.scss';
 import { getBacklog } from '../../api/backlog/backlog';
+import { getStatuses } from '../../api/status/status';
 import { getTypes } from '../../api/types/types';
 import { getUsers } from '../../api/user/user';
 
@@ -11,7 +12,9 @@ export default function BacklogPage() {
   const [loaded, setLoaded] = useState(false);
   const [userLoaded, setUserLoaded] = useState(false);
   const [backlogData, setBacklogData] = useState(null);
-  const { projectId = '' } = useParams();
+  const [statusLoaded, setStatusLoaded] = useState(false);
+  const [statusData, setStatusData] = useState([]);
+  const { projectId = '', boardId = '' } = useParams();
   const [typesData, setTypesData] = useState(null);
   const [typesLoaded, setTypesLoaded] = useState(false);
   const [userList, setUserList] = useState<any>([]);
@@ -49,6 +52,20 @@ export default function BacklogPage() {
   }, [getBacklogDataApi]);
 
   useEffect(() => {
+    const getStatusData = async () => {
+      try {
+        const res = await getStatuses(boardId);
+        setStatusData(res);
+        setStatusLoaded(true);
+      } catch (e) {
+        setStatusLoaded(false);
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      }
+    };
+    getStatusData();
+  }, [boardId]);
+
+  useEffect(() => {
     const getUsersList = async () => {
       try {
         if (userList.length === 0) {
@@ -62,7 +79,7 @@ export default function BacklogPage() {
       }
     };
     getUsersList();
-  }, [userList]);
+  }, [userList.length]);
 
   return (
     <div className={styles.container}>
@@ -75,6 +92,8 @@ export default function BacklogPage() {
           backlogData={backlogData}
           getBacklogDataApi={getBacklogDataApi}
           loaded={loaded}
+          statusLoaded={statusLoaded}
+          statusData={statusData}
           typesLoaded={typesLoaded}
           typesData={typesData}
           userLoaded={userLoaded}

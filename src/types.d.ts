@@ -93,7 +93,13 @@ export interface IStatusEntity {
   order: number;
   taskList: ITaskCard[];
 }
-
+export interface IStatusBacklog {
+  id: string;
+  slug: string;
+  name: string;
+  order: number;
+  board: string;
+}
 export default interface IBoardEntity {
   id: string;
   title: string;

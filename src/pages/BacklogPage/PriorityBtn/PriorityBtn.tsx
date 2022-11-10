@@ -1,5 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import styles from './PriorityBtn.module.scss';
+import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 
 interface IPriorityBtn {
   priority: string;
@@ -24,46 +25,25 @@ export default function PriorityBtn({ priority, onClickChangePriority, id }: IPr
     }
   ];
 
-  const [showPriorityBtnDropDown, setShowPriorityBtnDropDown] = useState(false);
-  const [showPriorityBtnOutline, setShowPriorityBtnOutline] = useState(false);
   const currentPriorityBtn = allPriorities.find(
     (eachPriority) => eachPriority.priority === priority
   );
 
-  const priorityBtnContainerRef = useRef<HTMLDivElement | null>(null);
-  useEffect(() => {
-    const handleClickOutside = (e: any) => {
-      if (
-        showPriorityBtnDropDown &&
-        showPriorityBtnOutline &&
-        !priorityBtnContainerRef?.current?.contains(e.target)
-      ) {
-        setShowPriorityBtnDropDown(false);
-        setShowPriorityBtnOutline(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [showPriorityBtnDropDown, showPriorityBtnOutline]);
+  const { visible, setVisible, myRef } = useOutsideAlerter(false);
+
   const onClickPriorityBtnDropDown = (eachPriority: { priority: string; imgUrl: string }) => {
     onClickChangePriority(id, eachPriority.priority);
-    setShowPriorityBtnDropDown(false);
-    setShowPriorityBtnOutline(false);
+    setVisible(false);
   };
 
   return (
-    <div className={styles.priorityBtnContainer} ref={priorityBtnContainerRef}>
+    <div className={styles.priorityBtnContainer} ref={myRef}>
       <button
         className={
-          showPriorityBtnOutline
-            ? [styles.priorityBtn, styles.priorityBtnOutline].join(' ')
-            : styles.priorityBtn
+          visible ? [styles.priorityBtn, styles.priorityBtnOutline].join(' ') : styles.priorityBtn
         }
         onClick={() => {
-          setShowPriorityBtnDropDown(!showPriorityBtnDropDown);
-          setShowPriorityBtnOutline(!showPriorityBtnOutline);
+          setVisible(!visible);
         }}
         data-testid={`priority-btn-${id}`}
       >
@@ -71,7 +51,7 @@ export default function PriorityBtn({ priority, onClickChangePriority, id }: IPr
       </button>
       <div
         className={
-          showPriorityBtnDropDown
+          visible
             ? [styles.priorityBtnDropDown, styles.showPriorityBtnDropDown].join(' ')
             : styles.priorityBtnDropDown
         }

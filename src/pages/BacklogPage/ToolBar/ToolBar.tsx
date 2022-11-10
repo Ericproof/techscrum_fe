@@ -3,12 +3,13 @@ import styles from './ToolBar.module.scss';
 import StatusBtn from '../StatusBtn/StatusBtn';
 import AssigneeBtn from '../AssigneeBtn/AssigneeBtn';
 import PriorityBtn from '../PriorityBtn/PriorityBtn';
-import { IUserInfo, IAssign } from '../../../types';
+import { IUserInfo, IAssign, IStatusBacklog } from '../../../types';
 
 interface IToolBar {
   status: string;
-  onClickChangeStatus: (id: string, status: string) => void;
+  onClickChangeStatus: (id: string, statusId: string) => void;
   taskId: string;
+  statusData: IStatusBacklog[];
   onClickChangeAssignee: (id: string, assigneeId: string) => void;
   userList: IUserInfo[];
   assignee: IAssign | null;
@@ -23,12 +24,18 @@ export default function ToolBar({
   assignee,
   taskId,
   onClickChangePriority,
-  priority
+  priority,
+  statusData
 }: IToolBar) {
   return (
     <div className={styles.toolbar}>
       <PriorityBtn id={taskId} onClickChangePriority={onClickChangePriority} priority={priority} />
-      <StatusBtn status={status} onClickChangeStatus={onClickChangeStatus} taskId={taskId} />
+      <StatusBtn
+        status={status}
+        onClickChangeStatus={onClickChangeStatus}
+        taskId={taskId}
+        statusData={statusData}
+      />
       <AssigneeBtn
         taskId={taskId}
         onClickChangeAssignee={onClickChangeAssignee}

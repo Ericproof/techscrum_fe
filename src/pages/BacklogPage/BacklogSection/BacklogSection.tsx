@@ -6,12 +6,14 @@ import TaskTypeSelect from '../../../components/Select/TaskTypeSelect/TaskTypeSe
 import TaskItem from '../TaskItem/TaskItem';
 import styles from './BacklogSection.module.scss';
 import { addTask, updateTask, deleteTask } from '../../../api/backlog/backlog';
-import { IUserInfo, Itypes } from '../../../types';
+import { IUserInfo, Itypes, IStatusBacklog } from '../../../types';
 
 interface IBacklogSection {
   backlogData: any;
   getBacklogDataApi: () => void;
   loaded: boolean;
+  statusLoaded: boolean;
+  statusData: IStatusBacklog[];
   typesLoaded: boolean;
   typesData: Itypes[] | null;
   userLoaded: boolean;
@@ -22,6 +24,8 @@ export default function BacklogSection({
   backlogData,
   getBacklogDataApi,
   loaded,
+  statusLoaded,
+  statusData,
   typesLoaded,
   typesData,
   userLoaded,
@@ -86,10 +90,8 @@ export default function BacklogSection({
   const getCurrentTypeOption = (type: string) => {
     setCurrentTypeOption(type);
   };
-  const onClickChangeStatus = (id: string, status: string) => {
-    const data = {
-      status: status.toLowerCase()
-    };
+  const onClickChangeStatus = (id: string, statusId: string) => {
+    const data = { status: statusId };
     updateTask(id, data).then(() => {
       getBacklogDataApi();
     });
@@ -124,6 +126,7 @@ export default function BacklogSection({
       </div>
       <div className={styles.listContainer}>
         {loaded &&
+          statusLoaded &&
           typesLoaded &&
           userLoaded &&
           backlogData.cards.map((task) => {
@@ -140,6 +143,7 @@ export default function BacklogSection({
                 status={task.status.name.toUpperCase()}
                 onClickChangeStatus={onClickChangeStatus}
                 onClickDelete={onClickDelete}
+                statusData={statusData}
                 onClickChangeAssignee={onClickChangeAssignee}
                 userList={userList}
                 assignee={task.assignId}
