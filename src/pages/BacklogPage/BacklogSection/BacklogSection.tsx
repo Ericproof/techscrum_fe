@@ -6,7 +6,7 @@ import TaskTypeSelect from '../../../components/Select/TaskTypeSelect/TaskTypeSe
 import TaskItem from '../TaskItem/TaskItem';
 import styles from './BacklogSection.module.scss';
 import { addTask, updateTask, deleteTask } from '../../../api/backlog/backlog';
-import { Itypes } from '../../../types';
+import { IUserInfo, Itypes } from '../../../types';
 
 interface IBacklogSection {
   backlogData: any;
@@ -14,6 +14,8 @@ interface IBacklogSection {
   loaded: boolean;
   typesLoaded: boolean;
   typesData: Itypes[] | null;
+  userLoaded: boolean;
+  userList: IUserInfo[];
 }
 
 export default function BacklogSection({
@@ -21,7 +23,9 @@ export default function BacklogSection({
   getBacklogDataApi,
   loaded,
   typesLoaded,
-  typesData
+  typesData,
+  userLoaded,
+  userList
 }: IBacklogSection) {
   const [showBacklogInput, setShowBacklogInput] = useState(false);
   const [backlogInputFocus, setBacklogInputFocus] = useState(false);
@@ -95,6 +99,12 @@ export default function BacklogSection({
       getBacklogDataApi();
     });
   };
+  const onClickChangeAssignee = (id: string, assigneeId: string) => {
+    const data = { assignId: assigneeId };
+    updateTask(id, data).then(() => {
+      getBacklogDataApi();
+    });
+  };
   const onClickChangePriority = (id: string, priority: string) => {
     const data = { priority };
     updateTask(id, data).then(() => {
@@ -115,6 +125,7 @@ export default function BacklogSection({
       <div className={styles.listContainer}>
         {loaded &&
           typesLoaded &&
+          userLoaded &&
           backlogData.cards.map((task) => {
             return (
               <TaskItem
@@ -129,6 +140,9 @@ export default function BacklogSection({
                 status={task.status.name.toUpperCase()}
                 onClickChangeStatus={onClickChangeStatus}
                 onClickDelete={onClickDelete}
+                onClickChangeAssignee={onClickChangeAssignee}
+                userList={userList}
+                assignee={task.assignId}
                 priority={task.priority}
                 onClickChangePriority={onClickChangePriority}
               />
