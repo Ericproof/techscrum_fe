@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import React, { useContext, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { RiPencilLine } from 'react-icons/ri';
@@ -45,6 +46,15 @@ export default function Nav() {
   const currentProject: IProjectData = projectList.filter(
     (project: IProjectData) => project.id === projectId
   )[0];
+
+  if (!currentProject) {
+    return (
+      <div id="projectDropdownNav">
+        <nav className={styles.container} />
+      </div>
+    );
+  }
+
   const { boardId } = currentProject;
 
   const buttons = {

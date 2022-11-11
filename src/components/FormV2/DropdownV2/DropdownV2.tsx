@@ -16,6 +16,7 @@ interface IDropdownV2 {
   required?: boolean;
   placeHolder?: string;
   type?: 'button' | 'submit' | 'reset';
+  loading?: boolean;
 }
 
 export default function DropdownV2(props: IDropdownV2) {
@@ -28,7 +29,8 @@ export default function DropdownV2(props: IDropdownV2) {
     required,
     options,
     onValueChanged,
-    onValueBlur = null
+    onValueBlur = null,
+    loading = false
   } = props;
   const defaultPlaceHolder = placeHolder || 'None';
   const [value, setValue] = useState(defaultValue);
@@ -56,6 +58,10 @@ export default function DropdownV2(props: IDropdownV2) {
     setError(errorMessage);
     setIsActive(false);
   };
+
+  if (loading) {
+    return <div className={styles.skeleton} />;
+  }
 
   return (
     <div
@@ -121,5 +127,6 @@ DropdownV2.defaultProps = {
   placeHolder: '',
   type: 'button',
   onValueBlur: null,
-  defaultValue: null
+  defaultValue: null,
+  loading: false
 };

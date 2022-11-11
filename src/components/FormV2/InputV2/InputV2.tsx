@@ -15,6 +15,7 @@ interface IInputV2 {
   min?: number;
   max?: number;
   dataTestId?: string;
+  loading?: boolean;
 }
 
 export default function InputV2(props: IInputV2) {
@@ -27,7 +28,8 @@ export default function InputV2(props: IInputV2) {
     required,
     onValueChanged,
     onValueBlur,
-    dataTestId
+    dataTestId,
+    loading = false
   } = props;
   const [value, setValue] = useState(defaultValue);
   const [error, setError] = useState<null | string>(null);
@@ -46,6 +48,10 @@ export default function InputV2(props: IInputV2) {
     }
     setIsActive(false);
   };
+
+  if (loading) {
+    return <div className={styles.skeleton} />;
+  }
 
   return (
     <div
@@ -90,5 +96,6 @@ InputV2.defaultProps = {
   min: null,
   max: null,
   onValueBlur: null,
-  dataTestId: null
+  dataTestId: null,
+  loading: false
 };

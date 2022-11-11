@@ -105,9 +105,6 @@ export default function Setting() {
     setData({ ...data, ...updateData });
   };
 
-  if (!data) {
-    return <></>;
-  }
   return (
     <div className={[styles.settingPage, 'relative'].join(' ')} data-testid="setting-page">
       <NavigationV2 />
@@ -119,21 +116,23 @@ export default function Setting() {
             <hr className={styles.divider} />
           </header>
           <SettingCard title="Project Information">
-            <ChangeIcon uploadSuccess={uploadSuccess} value={data.iconUrl} />
+            <ChangeIcon uploadSuccess={uploadSuccess} value={data?.iconUrl} />
             <div className={[styles.gap, styles.row, 'flex'].join(' ')}>
               <InputV2
                 label="Project Name"
                 onValueChanged={onChangeName}
                 onValueBlur={() => {}}
-                defaultValue={data.name}
+                defaultValue={data?.name}
                 name="name"
+                loading={!data}
               />
               <InputV2
                 label="Project Key"
                 onValueChanged={onChange}
                 onValueBlur={() => {}}
-                defaultValue={data.key}
+                defaultValue={data?.key}
                 name="key"
+                loading={!data}
               />
             </div>
             <div className={[styles.gap, styles.row, 'flex'].join(' ')}>
@@ -141,8 +140,9 @@ export default function Setting() {
                 label="Project Lead"
                 onValueChanged={onChange}
                 onValueBlur={() => {}}
-                defaultValue={data.projectLeadId?.id}
+                defaultValue={data?.projectLeadId?.id}
                 name="projectLeadId"
+                loading={!data}
                 options={userList.map((item) => {
                   return {
                     label: item.name,
@@ -156,6 +156,7 @@ export default function Setting() {
                 onValueBlur={() => {}}
                 defaultValue=""
                 name="websiteURL"
+                loading={!data}
               />
             </div>
             <div className={[styles.gap, styles.row, 'flex'].join(' ')}>
@@ -165,6 +166,7 @@ export default function Setting() {
                 onValueBlur={() => {}}
                 defaultValue=""
                 name="description"
+                loading={!data}
               />
             </div>
             <ButtonV2 text="SAVE CHANGES" onClick={onClickSave} loading={loading} />
