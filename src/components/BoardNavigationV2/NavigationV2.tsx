@@ -142,8 +142,8 @@ export default function Nav() {
         <ProjectHeaderNav currentProject={currentProject} />
         {Object.keys(buttons).map((category) => {
           return (
-            <>
-              <div className={styles.section} key={category}>
+            <React.Fragment key={category}>
+              <div className={styles.section}>
                 {renderCategoryBtn(category)}
                 {showBtns[category] &&
                   buttons[category].map((item: IItem) => {
@@ -151,7 +151,7 @@ export default function Nav() {
                   })}
               </div>
               <div className={styles.dividingLine} />
-            </>
+            </React.Fragment>
           );
         })}
 
