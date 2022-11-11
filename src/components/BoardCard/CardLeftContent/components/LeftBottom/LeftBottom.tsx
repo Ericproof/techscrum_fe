@@ -128,7 +128,7 @@ export default function LeftBottom(props: ILeftBottom) {
         <h3>Activity</h3>
         <div className={style.showCommentButton}>
           <span>Show: </span>
-          <button type="button" onClick={onActivityClick}>
+          <button type="button" onClick={onActivityClick} data-testid="show-activity-button">
             Activities
           </button>
         </div>

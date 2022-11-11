@@ -16,13 +16,6 @@ interface ICommentItem {
 }
 
 const dateHandler = (fullDate) => {
-  const dateAndTime = fullDate.split('T');
-  const date = dateAndTime[0];
-  const YearMonthDay = date.split('-');
-  const year = YearMonthDay[0];
-  let month = YearMonthDay[1];
-  const day = YearMonthDay[2];
-  let result = '';
   const monthObj = {
     '01': 'Jan',
     '02': 'Feb',
@@ -37,33 +30,22 @@ const dateHandler = (fullDate) => {
     '11': 'Nov',
     '12': 'Dec'
   };
-  month = monthObj[month];
-  const time = dateAndTime[1];
-  const trueTime = time.split('.');
-  let hourMinSec = trueTime[0];
-  hourMinSec = hourMinSec.split(':');
-  const hour = hourMinSec[0];
-  const min = hourMinSec[1];
-  let resultTime = '';
-  if (hour <= 12) {
-    resultTime = ` ${hour}:${min} AM`;
-  } else {
-    const newHour = Number(hour) - 12;
-    if (newHour < 10) {
-      resultTime = `0${newHour}:${min} PM`;
-    } else {
-      resultTime = `${newHour}:${min} PM`;
-    }
-  }
-
-  result = `${month} ${day}, ${year} at ${resultTime}`;
-  return result;
+  const date = new Date(fullDate);
+  const year = date.getFullYear();
+  const month =
+    date.getMonth() + 1 < 10
+      ? monthObj[`0${date.getMonth() + 1}`]
+      : monthObj[`${date.getMonth() + 1}`];
+  const day = date.getDate();
+  const hour = date.getHours() < 10 ? `0${date.getHours()}` : date.getHours();
+  const minute = date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getHours();
+  return `${month} ${day}, ${year} at ${hour}:${minute}`;
 };
 
 export default function ActivityItem(props: ICommentItem) {
   const { id, userId, operation, createdAt } = props;
   return (
-    <div id={id} className={style.container}>
+    <div id={id} className={style.container} data-testid={`activity-item-${id}`}>
       <div className={style.userContainer}>
         <img className={style.avatar} src={userId.avatarIcon} alt={userId.avatarIcon} />
         <p>{userId.name}</p>
