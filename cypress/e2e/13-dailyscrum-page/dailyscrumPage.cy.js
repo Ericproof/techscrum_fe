@@ -20,9 +20,11 @@ describe('Project page', () => {
     cy.get('[data-testid="dailyscrum-header"]').should('not.exist');
   });
   it('Test should cilck no and type reason', () => {
+    cy.intercept('GET', '**/dailyScrums/*/none/none', dailyScrum).as('fetch-dailyScrums');
     cy.get('[data-testid="dailyscrum-btn"]').click();
+    cy.wait('@fetch-dailyScrums');
     cy.get('[type="radio"]').check();
-    cy.get('[data-testid="dailyscrum-reason-TEC-333"]').type('I need support');
+    cy.get('[data-testid="dailyscrum-reason-636c674b38e168d571d8a619"]').type('I need support');
   });
   it('Test cancel should close dailyscrum page', () => {
     cy.get('[data-testid="dailyscrum-btn"]').click();
@@ -30,24 +32,28 @@ describe('Project page', () => {
     cy.get('[data-testid="dailyscrum-header"]').should('not.exist');
   });
   it('Test should drag progress bar to 80%', () => {
+    cy.intercept('GET', '**/dailyScrums/*/none/none', dailyScrum).as('fetch-dailyScrums');
     const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
       window.HTMLInputElement.prototype,
       'value'
     ).set;
     cy.get('[data-testid="dailyscrum-btn"]').click();
-    cy.get('[data-testid="dailyscrum-progress-bar-TEC-333"]').then(($range) => {
+    cy.wait('@fetch-dailyScrums');
+    cy.get('[data-testid="dailyscrum-progress-bar-636c674b38e168d571d8a619"]').then(($range) => {
       const range = $range[0];
       nativeInputValueSetter.call(range, 80);
       range.dispatchEvent(new Event('change', { value: 80, bubbles: true }));
     });
-    cy.get('[data-testid="dailyscrum-progress-TEC-333"]').contains('80%');
+    cy.get('[data-testid="dailyscrum-progress-636c674b38e168d571d8a619"]').contains('80%');
   });
   it('Test should submit data', () => {
-    cy.intercept('POST', '**/projects/**/dailyScrums', dailyScrum).as('add-dailyScrums');
+    cy.intercept('GET', '**/dailyScrums/*/none/none', dailyScrum).as('fetch-dailyScrums');
+    cy.intercept('PATCH', '**/dailyScrums/*/*').as('update-dailyScrums');
     cy.get('[data-testid="dailyscrum-btn"]').click();
+    cy.wait('@fetch-dailyScrums');
     cy.get('[type="radio"]').check();
-    cy.get('[data-testid="dailyscrum-reason-TEC-333"]').type('I need support');
+    cy.get('[data-testid="dailyscrum-reason-636c674b38e168d571d8a619"]').type('I need support');
     cy.get('[data-testid="dailyscrum-submit"]').click();
-    cy.wait('@add-dailyScrums');
+    cy.wait('@update-dailyScrums');
   });
 });
