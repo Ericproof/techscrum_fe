@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { FaPen } from 'react-icons/fa';
 import IconButton from '../../../components/Button/IconButton/IconButton';
 import styles from './TaskItem.module.scss';
@@ -7,11 +7,11 @@ import { IUserInfo, IAssign, IStatusBacklog } from '../../../types';
 import PriorityBtn from '../PriorityBtn/PriorityBtn';
 import StatusBtn from '../StatusBtn/StatusBtn';
 import AssigneeBtn from '../AssigneeBtn/AssigneeBtn';
+import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 
 interface ITaskInput {
   taskTitle: string;
   issueId: string;
-  editMode: boolean;
   type: string;
   status: string;
   taskId: string;
@@ -19,7 +19,6 @@ interface ITaskInput {
   userList: IUserInfo[];
   assignee: IAssign | null;
   priority: string;
-  onClickEditId: (id: string) => void;
   onChangeTitle: (id: string, title: string) => void;
   onClickChangeAssignee: (id: string, assigneeId: string) => void;
   onClickChangeStatus: (id: string, statusId: string) => void;
@@ -29,7 +28,6 @@ interface ITaskInput {
 export default function TaskItem({
   taskTitle,
   issueId,
-  editMode,
   type,
   status,
   taskId,
@@ -37,7 +35,6 @@ export default function TaskItem({
   userList,
   assignee,
   priority,
-  onClickEditId,
   onChangeTitle,
   onClickChangeAssignee,
   onClickChangeStatus,
@@ -50,36 +47,22 @@ export default function TaskItem({
     bug: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium',
     task: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium'
   };
-  const inputRef = useRef<HTMLInputElement | null>(null);
   const [showOptionBtn, setShowOptionBtn] = useState(false);
   const [disableShowOptionBtnEffect, setDisableShowOptionBtnEffect] = useState(false);
+  const [title, setTitle] = useState(taskTitle);
 
-  const editClick = () => {
-    onClickEditId(taskId);
-  };
-  const updateTaskTitleContent = useCallback(() => {
-    if (inputRef?.current?.value) {
-      onChangeTitle(taskId, inputRef?.current?.value);
+  const updateTaskTitleContent = () => {
+    if (title.trim() !== taskTitle) {
+      onChangeTitle(taskId, title.trim());
     }
-  }, [taskId, onChangeTitle]);
+  };
 
-  useEffect(() => {
-    const handleClickOutside = (e: any) => {
-      if (editMode && !inputRef.current?.contains(e.target)) {
-        onClickEditId('-1');
-        updateTaskTitleContent();
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [editMode, onClickEditId, updateTaskTitleContent]);
+  const { visible, setVisible, myRef } = useOutsideAlerter(false, updateTaskTitleContent);
 
-  const saveKeyPress = (event) => {
+  const saveKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      onClickEditId('-1');
       updateTaskTitleContent();
+      setVisible(false);
     }
   };
   const mouseOver = () => {
@@ -108,6 +91,7 @@ export default function TaskItem({
       onFocus={() => {}}
       onBlur={() => {}}
       data-testid={'task-hover-'.concat(taskId)}
+      ref={myRef}
     >
       <div className={styles.taskInfo}>
         <div className={styles.iconContainer}>
@@ -116,27 +100,31 @@ export default function TaskItem({
         <div className={styles.taskIdContainer}>
           <p>{issueId}</p>
         </div>
-        {editMode ? (
+        {visible ? (
           <input
-            ref={inputRef}
             type="text"
             defaultValue={taskTitle}
             onKeyDown={saveKeyPress}
             className={styles.taskInput}
             data-testid={'task-title-input-'.concat(taskId)}
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
           />
         ) : (
           <div className={styles.taskTitle} data-testid={'task-'.concat(taskId)}>
             {taskTitle}
           </div>
         )}
-        {!editMode && (
+        {!visible && (
           <div className={styles.editButton}>
             <IconButton
               icon={<FaPen size={10} />}
               taskId={taskId}
               tooltip="Edit"
-              onClick={editClick}
+              onClick={() => {
+                setVisible(true);
+              }}
             />
           </div>
         )}

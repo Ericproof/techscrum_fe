@@ -29,7 +29,6 @@ export default function BacklogSection({
   userList
 }: IBacklogSection) {
   const [currentTypeOption, setCurrentTypeOption] = useState('story');
-  const [editId, setEditId] = useState('-1');
   const { boardId = '', projectId = '' } = useParams();
   const createIssueRef = useRef<HTMLInputElement | null>(null);
   const createIssueAction = () => {
@@ -52,10 +51,6 @@ export default function BacklogSection({
   };
 
   const { visible, setVisible, myRef } = useOutsideAlerter(false, createIssueAction);
-
-  const onClickEditId = (id: string) => {
-    setEditId(id);
-  };
 
   const onChangeTitle = (id: string, title: string) => {
     const data = { title };
@@ -117,8 +112,6 @@ export default function BacklogSection({
                 taskTitle={task.title}
                 taskId={task.id}
                 issueId={'TEC-'.concat(task.id.slice(task.id.length - 3))}
-                editMode={editId === task.id}
-                onClickEditId={onClickEditId}
                 onChangeTitle={onChangeTitle}
                 type={task.typeId.slug}
                 status={task.status.name.toUpperCase()}
