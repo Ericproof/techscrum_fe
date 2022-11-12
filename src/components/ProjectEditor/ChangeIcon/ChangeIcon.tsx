@@ -12,7 +12,7 @@ export default function ChangeIcon(props: IChangeIconProps) {
   const { uploadSuccess, value, loading = false } = props;
   const [modalShown, toggleModal] = useState(false);
 
-  if (loading || !value) {
+  if (loading) {
     return (
       <div className={(styles.icon, styles.changeIconContainer)}>
         <div className={styles.skeletonImg} />

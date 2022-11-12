@@ -116,7 +116,7 @@ export default function Setting() {
             <hr className={styles.divider} />
           </header>
           <SettingCard title="Project Information">
-            <ChangeIcon uploadSuccess={uploadSuccess} value={data?.iconUrl} />
+            <ChangeIcon uploadSuccess={uploadSuccess} value={data?.iconUrl} loading={!data} />
             <div className={[styles.gap, styles.row, 'flex'].join(' ')}>
               <InputV2
                 label="Project Name"

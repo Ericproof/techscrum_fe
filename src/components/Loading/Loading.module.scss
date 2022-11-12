@@ -1,16 +1,17 @@
+@import '../../variables.scss';
 /* Bouncing balls */
 .bounce {
-    width: 150px;
-    height: 150px;
+    width: 125px;
+    height: 125px;
     display: flex;
     justify-content: space-around;
     align-items: flex-end;
-  }
+}
   
   .bounce div {
-    width: 25px;
-    height: 25px;
-    background: #0077ff;
+    width: 17px;
+    height: 17px;
+    background: $primaryColor;
     border-radius: 50%;
     animation:bouncing 0.5s 
       cubic-bezier(.19, .57, .3, .98) infinite alternate;
