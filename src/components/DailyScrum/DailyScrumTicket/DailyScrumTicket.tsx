@@ -37,7 +37,7 @@ export default function DailyScrumTicket({
             min="0"
             max="100"
             step="1"
-            defaultValue="0"
+            defaultValue={progress}
             onChange={(e) => {
               onChangeProgress(id, e);
             }}
@@ -48,22 +48,7 @@ export default function DailyScrumTicket({
       </div>
       <div className={styles.finish}>
         <p>Can you finish this ticket by sprint end?</p>
-        <RadioInput
-          id="finish"
-          name={`finish/${id}`}
-          content="Yes"
-          onChange={() => {
-            onChangeFinish(id, true);
-          }}
-        />
-        <RadioInput
-          id="notFinish"
-          name={`finish/${id}`}
-          content="No"
-          onChange={() => {
-            onChangeFinish(id, false);
-          }}
-        />
+        <RadioInput id={id} name={`finish/${id}`} onChange={onChangeFinish} />
         {!finish && finishValidation && (
           <div className={styles.anyReason}>
             <p>Any reasons?</p>
@@ -82,22 +67,7 @@ export default function DailyScrumTicket({
       </div>
       <div className={styles.support}>
         <p>Do you need support to complete this ticket?</p>
-        <RadioInput
-          id="support"
-          name={`support/${id}`}
-          content="Yes"
-          onChange={() => {
-            onChangeSupport(id, true);
-          }}
-        />
-        <RadioInput
-          id="notSupport"
-          name={`support/${id}`}
-          content="No"
-          onChange={() => {
-            onChangeSupport(id, false);
-          }}
-        />
+        <RadioInput id={id} name={`support/${id}`} onChange={onChangeSupport} />
       </div>
     </div>
   );

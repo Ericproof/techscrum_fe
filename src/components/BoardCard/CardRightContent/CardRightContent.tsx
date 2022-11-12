@@ -11,6 +11,7 @@ import checkAccess from '../../../utils/helpers';
 import DueDatePicker from '../../DueDatePicker/DueDatePicker';
 import { UserContext } from '../../../context/UserInfoProvider';
 import { createActivity } from '../../../api/activity/activity';
+import { createDailyScrum, getDailyScrums } from '../../../api/dailyScrum/dailyScrum';
 
 interface Props {
   taskInfo: TaskEntity;
@@ -36,12 +37,46 @@ export default function CardRightContent({
   const operation = 'updated';
   const userId = userInfo.id;
   const taskId = taskInfo.id;
+  const dateHandler = (fullDate) => {
+    const date = new Date(fullDate);
+    const year = date.getFullYear();
+    let month: string | number = date.getMonth();
+    let day: string | number = date.getDate();
+    day = day < 10 ? `0${day}` : day;
+    month = month + 1 < 10 ? `0${month + 1}` : month + 1;
+    return `${day}-${month}-${year}`;
+  };
 
   const assigneeOnchangeEventHandler = async (e: IOnChangeProjectLead) => {
     const updatedTaskInfo = { ...taskInfo };
     updatedTaskInfo.assignId = !e.target.value ? undefined : e.target.value;
     taskStatusOnchange(updatedTaskInfo);
     await createActivity({ operation, userId, taskId });
+    const assign: any = updatedTaskInfo.assignId;
+    if (assign) {
+      const assignId = assign.id;
+      const createdDate = dateHandler(new Date());
+      const data = {
+        title: updatedTaskInfo.title,
+        progress: 0,
+        isFinished: false,
+        hasReason: false,
+        reason: '',
+        isNeedSupport: false,
+        userId: assignId,
+        taskId: updatedTaskInfo.id,
+        createdDate
+      };
+      const resultsForThisTask = await getDailyScrums(projectId, taskId);
+      if (resultsForThisTask.data.length > 0) {
+        const results = await getDailyScrums(projectId, assignId, createdDate, taskId);
+        if (results.data.length === 0) {
+          await createDailyScrum(projectId, data);
+        }
+      } else {
+        await createDailyScrum(projectId, data);
+      }
+    }
   };
 
   const monthShortNames = [

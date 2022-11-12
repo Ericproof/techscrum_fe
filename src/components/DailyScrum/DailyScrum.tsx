@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { AiOutlineClose } from 'react-icons/ai';
 import styles from './DailyScrum.module.scss';
 import DailyScrumTicket from './DailyScrumTicket/DailyScrumTicket';
 import Modal from '../Modal/Modal';
-import { createDailyScrum } from '../../api/dailyScrum/dailyScrum';
+import { getDailyScrums, updateDailyScrum } from '../../api/dailyScrum/dailyScrum';
+import { UserContext } from '../../context/UserInfoProvider';
 
 // WIP need to add submit function
 
@@ -13,31 +14,43 @@ interface IDailyScrumModal {
   projectId: string;
 }
 function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal) {
-  const date = '01/10/2022';
-  const dummyDailyScrumTicketData = [
-    {
-      id: 'TEC-333',
-      title: 'create daily scrum',
-      progress: '0',
-      reason: '',
-      finish: false,
-      support: false,
-      supportValidation: false,
-      finishValidation: false
-    },
-    {
-      id: 'TEC-334',
-      title: 'create backlog page',
-      progress: '0',
-      reason: '',
-      finish: false,
-      support: false,
-      supportValidation: false,
-      finishValidation: false
-    }
-  ];
-  const [dailyScrumTicketData, setDailyScrumTicketData] = useState(dummyDailyScrumTicketData);
+  const userInfo = useContext(UserContext);
+  const userId = userInfo.id;
+  const dateHandler = (fullDate) => {
+    const date = new Date(fullDate);
+    const year = date.getFullYear();
+    let month: string | number = date.getMonth();
+    let day: string | number = date.getDate();
+    day = day < 10 ? `0${day}` : day;
+    month = month + 1 < 10 ? `0${month + 1}` : month + 1;
+    return `${day}-${month}-${year}`;
+  };
+  const [dailyScrumTicketData, setDailyScrumTicketData] = useState<any>([]);
   const [submitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    const handleDailyScrum = async () => {
+      const results = await getDailyScrums(projectId, userId);
+      const dailyResult = results.data.filter((result) => {
+        return result.createdDate === dateHandler(new Date());
+      });
+      if (dailyResult.length > 0) {
+        setDailyScrumTicketData(dailyResult);
+      } else {
+        const newResults = await getDailyScrums(projectId, userId);
+        const newDailyResults = newResults.data
+          .filter((result) => {
+            return result.createdDate === dateHandler(new Date());
+          })
+          .filter((result) => {
+            return result.taskId.id === userId;
+          });
+        setDailyScrumTicketData(newDailyResults);
+      }
+    };
+    handleDailyScrum();
+  }, [projectId, userId]);
+
   const onChangeFinish = (id: string, value: boolean) => {
     setDailyScrumTicketData(
       dailyScrumTicketData.map((ticket) => {
@@ -81,7 +94,24 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal) {
   const onHandleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
-    await createDailyScrum(projectId, dailyScrumTicketData);
+    dailyScrumTicketData
+      .filter((ticket) => {
+        return dateHandler(ticket.createdAt) === dateHandler(new Date());
+      })
+      .map(async (ticket) => {
+        const data = {
+          progress: ticket.progress ? ticket.progress : 0,
+          isFinished: ticket.finish ? ticket.finish : false,
+          hasReason: !!ticket.reason,
+          reason: ticket.reason ? ticket.reason : '',
+          isNeedSupport: ticket.support ? ticket.support : false,
+          createdDate: dateHandler(new Date()),
+          finishValidation: ticket.finishValidation ? ticket.finishValidation : false,
+          supportValidation: ticket.supportValidation ? ticket.supportValidation : false
+        };
+        // eslint-disable-next-line no-underscore-dangle
+        await updateDailyScrum(data, projectId, userId, ticket.taskId._id);
+      });
     setSubmitting(false);
   };
   return (
@@ -96,23 +126,27 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal) {
           <AiOutlineClose />
         </button>
       </div>
-      <h4>Today: {date}</h4>
-      {dailyScrumTicketData.map((ticket) => {
-        return (
-          <DailyScrumTicket
-            key={ticket.id}
-            id={ticket.id}
-            title={ticket.title}
-            progress={ticket.progress}
-            finish={ticket.finish}
-            finishValidation={ticket.finishValidation}
-            onChangeFinish={onChangeFinish}
-            onChangeSupport={onChangeSupport}
-            onChangeReason={onChangeReason}
-            onChangeProgress={onChangeProgress}
-          />
-        );
-      })}
+      <h4>Today: {dateHandler(new Date())}</h4>
+      {dailyScrumTicketData
+        .filter((ticket) => {
+          return dateHandler(ticket.createdAt) === dateHandler(new Date());
+        })
+        .map((ticket) => {
+          return (
+            <DailyScrumTicket
+              key={ticket.id}
+              id={ticket.id}
+              title={ticket.title}
+              progress={ticket.progress}
+              finish={ticket.finish}
+              finishValidation={ticket.finishValidation}
+              onChangeFinish={onChangeFinish}
+              onChangeSupport={onChangeSupport}
+              onChangeReason={onChangeReason}
+              onChangeProgress={onChangeProgress}
+            />
+          );
+        })}
       <div className={styles.btnContainer}>
         <button
           className={styles.cancelBtn}
