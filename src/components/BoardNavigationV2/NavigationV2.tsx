@@ -20,6 +20,7 @@ import ShortcutModal from '../ShortcutModal/ShortcutModal';
 import Modal from '../Modal/Modal';
 import addshorcut from '../../assets/addshorcut.svg';
 import DefaultModalHeader from '../Modal/ModalHeader/DefaultModalHeader/DefaultModalHeader';
+import NavigationLayout from '../Navigation/NavigationLayout/NavigationLayout';
 
 interface IItem {
   name: string;
@@ -136,9 +137,8 @@ export default function Nav() {
   };
 
   return (
-    <>
-      <div id="projectDropdownNav" />
-      <nav className={styles.container}>
+    <NavigationLayout>
+      <div>
         <ProjectHeaderNav currentProject={currentProject} />
         {Object.keys(buttons).map((category) => {
           return (
@@ -254,7 +254,7 @@ export default function Nav() {
               document.body
             )}
         </div>
-      </nav>
-    </>
+      </div>
+    </NavigationLayout>
   );
 }

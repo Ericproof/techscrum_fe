@@ -2,7 +2,7 @@
 $white: rgb(245, 245, 245);
 
 .container {
-  box-sizing: border-box;
+  box-sizing: content-box;
   width: 12%;
   color: $white;
   min-width: 250px;
@@ -15,17 +15,9 @@ $white: rgb(245, 245, 245);
   overflow-y: auto;
   position: sticky;
   top: 0;
+
 }
 
-.container::-webkit-scrollbar {
-  background-color: $primaryColor;
-  width: 6px;
-}
-
-.container:hover::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.4);
-  border-radius: 10px;
-}
 
 .dividingLine {
   width: 100%;

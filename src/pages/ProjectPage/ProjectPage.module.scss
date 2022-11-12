@@ -2,15 +2,17 @@
   width: 100%;
   height: 100%;
   margin: 0;
-  margin-top: 100px;
   flex-grow: 1;
   min-width: 0px;
   transition: width 300ms cubic-bezier(0.2, 0, 0, 1) 0s;
+  display: flex;
+  min-height: 100vh;
 
   .projectContainer {
     min-width: 800px;
     margin: 0px;
     padding: 0px 40px;
+    background-color: rgb(246, 248, 249);
     .projectContent {
       font-size: 14px;
       height: inherit;
@@ -966,4 +968,40 @@
 
 .modalPadding{
   padding: 30px 80px 80px 80px;
+}
+
+.searchBtn{
+  box-sizing: border-box;
+  display: flex;
+  border-radius: 20px;
+  text-decoration: inherit;
+  outline: 0px;
+  border: 0px;
+  font-size: 15px;
+  color: rgb(245, 245, 245);
+  cursor: pointer;
+  background-color: #E5C900;
+  font-weight: 500;
+  padding: 10px 50px;
+  position: relative;
+  align-items: center;
+  margin-bottom: 20px;
+
+  svg{
+    height: 24px;
+    width: 24px;
+  }
+}
+
+.createCardIcon{
+  border-radius: 5px;
+  background-color: rgba(246, 248, 251, 0.15);
+  width: 20px;
+  height: 20px;
+  padding: 5px;
+  margin-right: 10px;
+}
+
+.createProjectBtn{
+  padding: 15px;
 }

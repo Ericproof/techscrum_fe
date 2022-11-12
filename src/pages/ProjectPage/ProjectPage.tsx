@@ -1,11 +1,21 @@
+/* eslint-disable no-console */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, createRef, useEffect, useContext } from 'react';
-import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
+import {
+  AiFillStar,
+  AiOutlineCalendar,
+  AiOutlineFolderOpen,
+  AiOutlineSearch,
+  AiOutlineStar
+} from 'react-icons/ai';
 import { HiDotsHorizontal } from 'react-icons/hi';
-import { FiSearch } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
+import { BsPeople } from 'react-icons/bs';
+import { VscChecklist } from 'react-icons/vsc';
+import { TbReportSearch } from 'react-icons/tb';
+import { IoIosAdd } from 'react-icons/io';
 import styles from './ProjectPage.module.scss';
 import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
 import { createProject, deleteProject, updateProject } from '../../api/projects/projects';
@@ -17,8 +27,49 @@ import Modal from '../../components/Modal/Modal';
 import ProjectEditor from '../../components/ProjectEditor/ProjectEditor';
 import DefaultModalHeader from '../../components/Modal/ModalHeader/DefaultModalHeader/DefaultModalHeader';
 import DefaultModalBody from '../../components/Modal/ModalBody/DefaultModalHeader/DefaultModalBody';
+import NavigationLayout from '../../components/Navigation/NavigationLayout/NavigationLayout';
+import NavigationBtn from '../../components/Navigation/NavigationBtn/NavigationBtn';
+import SubProjectMenu from './SubProjectMenu/SubProjectMenu';
+import ButtonV2 from '../../components/FormV2/ButtonV2/ButtonV2';
+
+const buttons = [
+  {
+    name: 'Projects',
+    action: () => {},
+    icon: <AiOutlineFolderOpen />,
+    dataTestId: 'projects-nav-btn'
+  },
+  {
+    name: 'My Work(WIP)',
+    url: `/my-work`,
+    icon: <VscChecklist />,
+    dataTestId: 'my-work-nav-btn'
+  },
+  {
+    name: 'Calendar(WIP)',
+    checkAccess: 'view:calendar',
+    url: `/my-calendar`,
+    icon: <AiOutlineCalendar />,
+    dataTestId: 'my-calendar-nav-btn'
+  },
+  {
+    name: 'Report(WIP)',
+    checkAccess: 'view:reports',
+    url: `/my-report`,
+    icon: <TbReportSearch />,
+    dataTestId: 'my-report-nav-btn'
+  },
+  {
+    name: 'Roles',
+    checkAccess: 'view:roles',
+    url: `/roles`,
+    icon: <BsPeople />,
+    dataTestId: 'people'
+  }
+];
 
 export default function ProjectPage() {
+  const navigate = useNavigate();
   const fetchProjects = useContext(ProjectDispatchContext);
   const projectList = useContext<IProject[]>(ProjectContext);
   const [filteredProjectList, setFilteredProjectList] = useState<IProject[]>([]);
@@ -29,6 +80,7 @@ export default function ProjectPage() {
   const [isCreateNewCard, setIsCreateNewCard] = useState(false);
   const [showCreateProjectModal, setShowCreateProjectModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [toggleSearchMenu, setToggleSearchMenu] = useState(false);
   useEffect(() => {
     fetchProjects();
   }, []);
@@ -36,18 +88,6 @@ export default function ProjectPage() {
   useEffect(() => {
     setFilteredProjectList(projectList);
   }, [projectList]);
-
-  const onChangeFilterProject = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.value) {
-      setFilteredProjectList(projectList);
-      return;
-    }
-    setFilteredProjectList(
-      projectList.filter((item) => {
-        return item.name?.toLowerCase().includes(e.target.value.toLowerCase());
-      })
-    );
-  };
 
   const setProjectStar = (id: string) => {
     const projectIndex = projectList.findIndex((project: IProjectData) => project.id === id);
@@ -174,21 +214,52 @@ export default function ProjectPage() {
           </DefaultModalBody>
         </Modal>
       )}
+
       <div className={styles.projectPage}>
+        <NavigationLayout>
+          <button
+            className={styles.searchBtn}
+            onClick={() => {
+              setToggleSearchMenu(!toggleSearchMenu);
+            }}
+          >
+            <AiOutlineSearch />
+            Search (WIP)
+          </button>
+          {buttons.map((item) => {
+            return (
+              <NavigationBtn
+                dataTestId={item.dataTestId}
+                onClick={() => {
+                  if (item.url) {
+                    navigate(item.url);
+                  }
+                }}
+              >
+                {item.icon}
+                {item.name}
+              </NavigationBtn>
+            );
+          })}
+        </NavigationLayout>
+
+        <SubProjectMenu toggleSearchMenu={toggleSearchMenu} />
+
         <div className={styles.projectContainer}>
           <div className={styles.projectContent}>
             <div className={styles.header}>
               <div className={styles.title} data-testid="project-title">
                 <h1>Projects</h1>
-                <button
-                  type="button"
-                  className={styles.createButton}
+                <ButtonV2
+                  customStyles={styles.createProjectBtn}
+                  text="New project"
                   onClick={() => setShowCreateProjectModal(true)}
-                >
-                  Create project
-                </button>
+                  icon={<IoIosAdd className={styles.createCardIcon} />}
+                  fill
+                  dataTestId="board-create-card"
+                />
               </div>
-              <div className={styles.searchBar}>
+              {/* <div className={styles.searchBar}>
                 <input
                   onChange={onChangeFilterProject}
                   name="filterProject"
@@ -199,7 +270,7 @@ export default function ProjectPage() {
                     <FiSearch />
                   </span>
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className={styles.mainContent}>
               <table aria-label="Projects details">
