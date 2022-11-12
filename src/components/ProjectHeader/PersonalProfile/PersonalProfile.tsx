@@ -6,7 +6,6 @@ import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import { IUserInfo } from '../../../types';
 import avatarImg from '../../../assets/userAvatar.png';
 import { UserDispatchContext } from '../../../context/UserInfoProvider';
-import checkAccess from '../../../utils/helpers';
 
 interface Props {
   userInfo: IUserInfo;
@@ -54,19 +53,7 @@ export default function PersonalProfile({ userInfo }: Props) {
                   </div>
                   <div className={styles.settingDetails}>
                     <div className={styles.detail}>
-                      {checkAccess('view:roles', '62dfdaeca322ef2389f9895d') && (
-                        <Link to="/roles">
-                          <div className={styles.title}>
-                            <span>Roles</span>
-                          </div>
-                        </Link>
-                      )}
                       <Link to="/me">
-                        <div className={styles.title}>
-                          <span>Profile</span>
-                        </div>
-                      </Link>
-                      <Link to="/account-settings">
                         <div className={styles.title}>
                           <span>Account settings</span>
                         </div>
