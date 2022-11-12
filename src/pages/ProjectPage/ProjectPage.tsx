@@ -72,7 +72,6 @@ export default function ProjectPage() {
   const navigate = useNavigate();
   const fetchProjects = useContext(ProjectDispatchContext);
   const projectList = useContext<IProject[]>(ProjectContext);
-  const [filteredProjectList, setFilteredProjectList] = useState<IProject[]>([]);
   const [showProjectDetails, setShowProjectDetails] = useState(-1);
   const [value, setValue] = useState(0);
   const refProfile = projectList.map(() => createRef<HTMLDivElement>());
@@ -85,10 +84,6 @@ export default function ProjectPage() {
     fetchProjects();
   }, []);
 
-  useEffect(() => {
-    setFilteredProjectList(projectList);
-  }, [projectList]);
-
   const setProjectStar = (id: string) => {
     const projectIndex = projectList.findIndex((project: IProjectData) => project.id === id);
     projectList[projectIndex].star = !projectList[projectIndex].star;
@@ -100,9 +95,7 @@ export default function ProjectPage() {
     deleteProject(id)
       .then((res: AxiosResponse) => {
         if (res.status === 204) {
-          const updateProjectList = projectList.filter((item: IProjectData) => item.id !== id);
           fetchProjects();
-          setFilteredProjectList(updateProjectList);
           setLoading(false);
           toast.success('Project has been deleted', {
             theme: 'colored',
@@ -120,7 +113,6 @@ export default function ProjectPage() {
     setProjectStar(id);
     updateProject(id, data, token).then(() => {
       fetchProjects();
-      setFilteredProjectList(projectList);
     });
   };
 
@@ -223,8 +215,8 @@ export default function ProjectPage() {
               setToggleSearchMenu(!toggleSearchMenu);
             }}
           >
-            <AiOutlineSearch />
-            Search (WIP)
+            <AiOutlineSearch className={styles.searchIcon} />
+            Search
           </button>
           {buttons.map((item) => {
             return (
@@ -243,7 +235,7 @@ export default function ProjectPage() {
           })}
         </NavigationLayout>
 
-        <SubProjectMenu toggleSearchMenu={toggleSearchMenu} />
+        <SubProjectMenu toggleSearchMenu={toggleSearchMenu} projectList={projectList} />
 
         <div className={styles.projectContainer}>
           <div className={styles.projectContent}>
@@ -299,7 +291,7 @@ export default function ProjectPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredProjectList.map((project: IProjectData, index: number) => (
+                  {projectList.map((project: IProjectData, index: number) => (
                     <tr key={project.id} className={styles.overflowVisible}>
                       <td className={[styles.star, styles.overflowVisible].join(' ')}>
                         <div
