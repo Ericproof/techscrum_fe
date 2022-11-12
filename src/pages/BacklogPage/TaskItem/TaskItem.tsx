@@ -2,44 +2,46 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { FaPen } from 'react-icons/fa';
 import IconButton from '../../../components/Button/IconButton/IconButton';
 import styles from './TaskItem.module.scss';
-import ToolBar from '../ToolBar/ToolBar';
 import OptionBtn from '../OptionBtn/OptionBtn';
 import { IUserInfo, IAssign, IStatusBacklog } from '../../../types';
+import PriorityBtn from '../PriorityBtn/PriorityBtn';
+import StatusBtn from '../StatusBtn/StatusBtn';
+import AssigneeBtn from '../AssigneeBtn/AssigneeBtn';
 
 interface ITaskInput {
   taskTitle: string;
-  id: string;
+  issueId: string;
   editMode: boolean;
-  onClickEditId: (id: string) => void;
-  onChangeTitle: (id: string, title: string) => void;
   type: string;
   status: string;
   taskId: string;
-  onClickChangeStatus: (id: string, statusId: string) => void;
-  onClickDelete: (id: string) => void;
   statusData: IStatusBacklog[];
-  onClickChangeAssignee: (id: string, assigneeId: string) => void;
   userList: IUserInfo[];
   assignee: IAssign | null;
   priority: string;
+  onClickEditId: (id: string) => void;
+  onChangeTitle: (id: string, title: string) => void;
+  onClickChangeAssignee: (id: string, assigneeId: string) => void;
+  onClickChangeStatus: (id: string, statusId: string) => void;
+  onClickDelete: (id: string) => void;
   onClickChangePriority: (id: string, priority: string) => void;
 }
 export default function TaskItem({
   taskTitle,
-  id,
+  issueId,
   editMode,
-  onClickEditId,
-  onChangeTitle,
   type,
   status,
-  onClickChangeStatus,
   taskId,
-  onClickDelete,
   statusData,
-  onClickChangeAssignee,
   userList,
   assignee,
   priority,
+  onClickEditId,
+  onChangeTitle,
+  onClickChangeAssignee,
+  onClickChangeStatus,
+  onClickDelete,
   onClickChangePriority
 }: ITaskInput) {
   const allTypes = {
@@ -80,7 +82,6 @@ export default function TaskItem({
       updateTaskTitleContent();
     }
   };
-
   const mouseOver = () => {
     if (!disableShowOptionBtnEffect) {
       setShowOptionBtn(true);
@@ -91,7 +92,6 @@ export default function TaskItem({
       setShowOptionBtn(false);
     }
   };
-
   const toggleDisableShowOptionBtnEffect = () => {
     if (!disableShowOptionBtnEffect) {
       setDisableShowOptionBtnEffect(true);
@@ -100,7 +100,6 @@ export default function TaskItem({
       setShowOptionBtn(false);
     }
   };
-
   return (
     <div
       className={styles.container}
@@ -115,7 +114,7 @@ export default function TaskItem({
           <img className={styles.icon} src={allTypes[type]} alt={type} />
         </div>
         <div className={styles.taskIdContainer}>
-          <p>{id}</p>
+          <p>{issueId}</p>
         </div>
         {editMode ? (
           <input
@@ -142,23 +141,31 @@ export default function TaskItem({
           </div>
         )}
       </div>
-      <ToolBar
-        status={status}
-        taskId={taskId}
-        onClickChangeStatus={onClickChangeStatus}
-        statusData={statusData}
-        onClickChangeAssignee={onClickChangeAssignee}
-        userList={userList}
-        assignee={assignee}
-        priority={priority}
-        onClickChangePriority={onClickChangePriority}
-      />
-      <OptionBtn
-        showOptionBtn={showOptionBtn}
-        taskId={taskId}
-        onClickDelete={onClickDelete}
-        toggleDisableShowOptionBtnEffect={toggleDisableShowOptionBtnEffect}
-      />
+      <div className={styles.toolBar}>
+        <PriorityBtn
+          taskId={taskId}
+          priority={priority}
+          onClickChangePriority={onClickChangePriority}
+        />
+        <StatusBtn
+          status={status}
+          taskId={taskId}
+          statusData={statusData}
+          onClickChangeStatus={onClickChangeStatus}
+        />
+        <AssigneeBtn
+          taskId={taskId}
+          assignee={assignee}
+          userList={userList}
+          onClickChangeAssignee={onClickChangeAssignee}
+        />
+        <OptionBtn
+          taskId={taskId}
+          showOptionBtn={showOptionBtn}
+          onClickDelete={onClickDelete}
+          toggleDisableShowOptionBtnEffect={toggleDisableShowOptionBtnEffect}
+        />
+      </div>
     </div>
   );
 }

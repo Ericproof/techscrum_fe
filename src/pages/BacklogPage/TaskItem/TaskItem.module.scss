@@ -10,8 +10,8 @@ $btnBgColorGreen: rgb(232, 251, 240);
 
 @mixin ellipsis {
   white-space: nowrap;
-  overflow: hidden;
   text-overflow: ellipsis;
+  overflow: scroll;
 }
 
 .container {
@@ -23,36 +23,43 @@ $btnBgColorGreen: rgb(232, 251, 240);
   align-items: center;
   cursor: pointer;
   height: 40px;
-  padding-right: 10px;
-}
+  font-size: 15px;
 
-.taskInfo {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  .iconContainer {
-    width: 100%;
-    max-width: 40px;
+  .toolBar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-right: 10px;
+    width: 268px;
+  }
+  .taskInfo {
+    display: flex;
+    width: calc(100% - 268px);
     height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .taskIdContainer {
-    width: 100%;
-    max-width: 70px;
-    display: flex;
-    align-items: center;
-    color: $textColor;
-    font-size: 15px;
-  }
-  .taskInput {
-    width: 70%;
-    font-size: 15px;
-    outline-color: rgb(77, 144, 254);
-    outline-style: auto;
-    outline-width: 5px;
-    margin-left: 20px;
+    .iconContainer {
+      width: 100%;
+      max-width: 40px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .taskIdContainer {
+      width: 100%;
+      max-width: 70px;
+      display: flex;
+      align-items: center;
+      color: $textColor;
+    }
+    .taskInput {
+      width: 70%;
+      font-size: 15px;
+      outline-color: rgb(77, 144, 254);
+      outline-style: auto;
+      outline-width: 5px;
+      margin-left: 7px;
+    }
   }
 }
 
@@ -66,15 +73,14 @@ $btnBgColorGreen: rgb(232, 251, 240);
   @include ellipsis;
   display: flex;
   align-items: center;
-  margin-right: 10px;
-  margin-left: 20px;
+  margin: 0px 10px;
 }
 
 .editButton {
-  flex-shrink: 0;
   visibility: hidden;
   display: flex;
   align-items: center;
+  margin-right: 10px;
 }
 
 .container:hover .editButton {
