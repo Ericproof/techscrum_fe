@@ -22,7 +22,14 @@ export default function ChangeIcon(props: IChangeIconProps) {
 
   return (
     <div className={(styles.icon, styles.changeIconContainer)}>
-      <img className={styles.profileImg} src={value} alt="project icon" />
+      <img
+        className={styles.profileImg}
+        src={
+          value ||
+          'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10411?size=xxlarge'
+        }
+        alt="project icon"
+      />
       <button
         type="button"
         data-testid="iconButton"

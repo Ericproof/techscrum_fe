@@ -5,21 +5,26 @@ $white: rgb(245, 245, 245);
   box-sizing: border-box;
   width: 100%;
   color: $white;
-  min-width: 450px;
+  max-width: 500px;
+  min-height: 100vh;
+  height: 100%;
   background-color: white;
-  padding: 30px 15px 0px 0px;
+  padding: 30px 15px 30px 70px;
   overflow-y: scroll;
   font-family: Poppins, sans-serif;
-  z-index: 0;
+  z-index: 9;
   transition: all .5s ease-in-out;
+  position: absolute;
+  top:0;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
 .showMenu{
-  margin-left: 0;
+  left: 220px;
 }
 
 .hideMenu{
-  margin-left: -490px;
+  left: -550px;
 }
 
 .container::-webkit-scrollbar{

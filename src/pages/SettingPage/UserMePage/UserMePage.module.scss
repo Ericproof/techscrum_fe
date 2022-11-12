@@ -162,3 +162,14 @@
 .row{
     margin: 24px 0;
 }
+
+.modal{
+  padding: 30px;
+  .modalBtn{
+    display: flex;
+    justify-content: flex-end;
+    button{
+        margin-left: 20px;
+    }
+  }
+}

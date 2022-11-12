@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-unused-prop-types */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getErrorMessage } from '../../../utils/formUtils';
 import styles from '../FormV2.module.scss';
 
@@ -48,6 +49,12 @@ export default function InputV2(props: IInputV2) {
     }
     setIsActive(false);
   };
+
+  useEffect(() => {
+    if (!loading) {
+      setValue(defaultValue);
+    }
+  }, [loading]);
 
   if (loading) {
     return <div className={styles.skeleton} />;

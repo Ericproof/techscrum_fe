@@ -11,6 +11,7 @@ interface IPropsButtonV2 {
   icon?: any;
   size?: 'xs' | 'md' | 'lg';
   dataTestId?: string;
+  disabled?: boolean;
 }
 
 export default function ButtonV2(props: IPropsButtonV2) {
@@ -23,7 +24,8 @@ export default function ButtonV2(props: IPropsButtonV2) {
     fill = false,
     icon = null,
     size = 'md',
-    dataTestId = ''
+    dataTestId = '',
+    disabled = false
   } = props;
   return (
     <button
@@ -36,7 +38,7 @@ export default function ButtonV2(props: IPropsButtonV2) {
         styles[size]
       ].join(' ')}
       onClick={onClick}
-      disabled={loading}
+      disabled={loading || disabled}
       data-testid={dataTestId}
     >
       {icon}
@@ -52,5 +54,6 @@ ButtonV2.defaultProps = {
   fill: false,
   icon: null,
   size: 'md',
-  dataTestId: ''
+  dataTestId: '',
+  disabled: false
 };

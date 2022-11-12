@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
 import styles from './Setting.module.scss';
-import { showProject, updateProject } from '../../api/projects/projects';
+import { deleteProject, showProject, updateProject } from '../../api/projects/projects';
 import { IOnChangeProjectLead, IProjectEditor } from '../../types';
 import { UserContext } from '../../context/UserInfoProvider';
 import SubSettingMenu from '../../components/SubSettingMenu/SubSettingMenu';
@@ -18,12 +18,14 @@ import NavigationV2 from '../../components/BoardNavigationV2/NavigationV2';
 import ButtonV2 from '../../components/FormV2/ButtonV2/ButtonV2';
 import 'react-toastify/dist/ReactToastify.css';
 import Modal from '../../components/Modal/Modal';
+import checkAccess from '../../utils/helpers';
 
 export default function Setting() {
   const navigate = useNavigate();
   const { projectId = '' } = useParams();
   const [data, setData] = useState<IProjectEditor | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [submitting, setSubmitting] = useState<boolean>(false);
   const userInfo = useContext(UserContext);
   const [userList, setUserList] = useState<any>([]);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -171,17 +173,19 @@ export default function Setting() {
             </div>
             <ButtonV2 text="SAVE CHANGES" onClick={onClickSave} loading={loading} />
           </SettingCard>
-          <SettingCard title="Delete Project (WIP)">
-            <p>Delete your project and all of your source data. This is irreversible.</p>
-            <ButtonV2
-              text="DELETE"
-              danger
-              size="xs"
-              onClick={() => {
-                setShowDeleteModal(true);
-              }}
-            />
-          </SettingCard>
+          {checkAccess('delete:projects', projectId) && (
+            <SettingCard title="Delete Project">
+              <p>Delete your project and all of your source data. This is irreversible.</p>
+              <ButtonV2
+                text="DELETE"
+                danger
+                size="xs"
+                onClick={() => {
+                  setShowDeleteModal(true);
+                }}
+              />
+            </SettingCard>
+          )}
           <SettingCard title="Change Password (WIP)">
             <div className={[styles.gap, styles.row, 'flex'].join(' ')}>
               <InputV2
@@ -209,7 +213,28 @@ export default function Setting() {
         <Modal classesName={styles.modal}>
           <p>Are you sure you want to delete the account?</p>
           <div className={styles.modalBtn}>
-            <ButtonV2 text="Confirm" danger onClick={() => {}} />
+            <ButtonV2
+              text="Confirm"
+              danger
+              onClick={() => {
+                setSubmitting(true);
+                deleteProject(projectId)
+                  .then(() => {
+                    toast.success('Project has been deleted', {
+                      theme: 'colored',
+                      className: 'primaryColorBackground'
+                    });
+                    navigate('/projects');
+                  })
+                  .catch(() => {
+                    toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+                  })
+                  .finally(() => {
+                    setSubmitting(false);
+                  });
+              }}
+              disabled={submitting}
+            />
             <ButtonV2
               text="Cancel"
               fill

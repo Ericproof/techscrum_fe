@@ -9,6 +9,8 @@
   transition: width 300ms cubic-bezier(0.2, 0, 0, 1) 0s;
   display: flex;
   min-height: 100vh;
+  position: relative;
+  background-color: rgb(246, 248, 249);
 
   .projectContainer {
     min-width: 800px;

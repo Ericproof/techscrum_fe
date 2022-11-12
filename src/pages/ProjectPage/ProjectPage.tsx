@@ -17,7 +17,6 @@ import { VscChecklist } from 'react-icons/vsc';
 import { TbReportSearch } from 'react-icons/tb';
 import { IoIosAdd } from 'react-icons/io';
 import styles from './ProjectPage.module.scss';
-import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
 import { createProject, deleteProject, updateProject } from '../../api/projects/projects';
 import CreateNewCard from '../../components/CreateNewCard/CreateNewCard';
 import { IProject, IProjectData } from '../../types';
@@ -177,7 +176,6 @@ export default function ProjectPage() {
 
   return (
     <>
-      <ProjectHeader />
       {isCreateNewCard && (
         <Modal>
           <CreateNewCard
@@ -346,7 +344,7 @@ export default function ProjectPage() {
                             <img
                               src={
                                 project.iconUrl ||
-                                'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10418?size=small'
+                                'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10411?size=xxlarge'
                               }
                               alt="icon"
                             />
