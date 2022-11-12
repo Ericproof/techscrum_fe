@@ -3,6 +3,8 @@ import { BsCodeSlash, BsDoorOpen } from 'react-icons/bs';
 import { FcSupport } from 'react-icons/fc';
 import { GiGrowth } from 'react-icons/gi';
 import Fade from 'react-reveal/Fade';
+import Zoom from 'react-reveal/Zoom';
+import Bounce from 'react-reveal/Bounce';
 import styles from './CareerPage.module.scss';
 import careerPageHero from '../../assets/undraw_teamwork_hpdk.svg';
 import teamenginerring from '../../assets/undraw_engineering_team_a7n2.svg';
@@ -44,112 +46,124 @@ export default function CareerPage() {
         <div className={styles.container}>
           <h2>Our culture</h2>
           <div className={[styles.contentContainer, 'flex'].join(' ')}>
-            <ul>
-              <li>
-                <div className={styles.icon}>
-                  <FcSupport />
-                </div>
-                <h3>Support</h3>
-                <p>
-                  In a team you’ll never have to go it alone. It is important to know that the more
-                  support you provided to the team the more support you will be given back.
-                </p>
-              </li>
-              <li>
-                <div className={styles.icon}>
-                  <GiGrowth />
-                </div>
-                <h3>Growth</h3>
-                <p>
-                  Our coach/tutor not only provide pair-programming to the you and also we have an 1
-                  on 1 section for us to listen to you and how we can help.
-                </p>
-              </li>
-              <li>
-                <div className={styles.icon}>
-                  <BsDoorOpen />
-                </div>
-                <h3>Open & Transparent</h3>
-                <p>
-                  Everyone stays informed on all the latest projects, and everyone’s input is
-                  welcome.
-                </p>
-              </li>
-              <li>
-                <div className={styles.icon}>
-                  <BsCodeSlash />
-                </div>
-                <h3>Development</h3>
-                <p>
-                  To able to learn the best practices. we always keep up to date to the code quality
-                  and tools we used.
-                </p>
-              </li>
-            </ul>
-            <div className={styles.imgContainer}>
-              <img src={teamenginerring} alt="culture" />
-            </div>
+            <Bounce left cascade>
+              <ul>
+                <li>
+                  <div className={styles.icon}>
+                    <FcSupport />
+                  </div>
+                  <h3>Support</h3>
+                  <p>
+                    In a team you’ll never have to go it alone. It is important to know that the
+                    more support you provided to the team the more support you will be given back.
+                  </p>
+                </li>
+                <li>
+                  <div className={styles.icon}>
+                    <GiGrowth />
+                  </div>
+                  <h3>Growth</h3>
+                  <p>
+                    Our coach/tutor not only provide pair-programming to the you and also we have an
+                    1 on 1 section for us to listen to you and how we can help.
+                  </p>
+                </li>
+                <li>
+                  <div className={styles.icon}>
+                    <BsDoorOpen />
+                  </div>
+                  <h3>Open & Transparent</h3>
+                  <p>
+                    Everyone stays informed on all the latest projects, and everyone’s input is
+                    welcome.
+                  </p>
+                </li>
+                <li>
+                  <div className={styles.icon}>
+                    <BsCodeSlash />
+                  </div>
+                  <h3>Development</h3>
+                  <p>
+                    To able to learn the best practices. we always keep up to date to the code
+                    quality and tools we used.
+                  </p>
+                </li>
+              </ul>
+            </Bounce>
+            <Zoom>
+              <div className={styles.imgContainer}>
+                <img src={teamenginerring} alt="culture" />
+              </div>
+            </Zoom>
           </div>
         </div>
       </section>
       <section id="jobList" className={styles.container}>
-        <JobList />
+        <Fade>
+          <JobList />
+        </Fade>
       </section>
       <section className={[styles.cultureSection, styles.benefitsSection].join(' ')}>
         <div className={styles.container}>
           <h2>Our benefits</h2>
           <div className={[styles.contentContainer, 'flex'].join(' ')}>
-            <ul>
-              <li>
-                <div className={styles.icon}>
-                  <FcSupport />
-                </div>
-                <h3>Latest Tech Stack</h3>
-                <p>
-                  In the team we train you on the latest tech stack, which includes a outstanding
-                  CI/CD pipeline to ensure that you create high quality code, seniors will also do
-                  PR reviews to ensure that you are writing clean and scale code.
-                </p>
-              </li>
-              <li>
-                <div className={styles.icon}>
-                  <GiGrowth />
-                </div>
-                <h3>Growth</h3>
-                <p>
-                  Our coach/tutor not only provide pair-programming to the team and also we have an
-                  1 on 1 section for us to listen to you and how we can help.
-                </p>
-              </li>
-              <li>
-                <div className={styles.icon}>
-                  <BsDoorOpen />
-                </div>
-                <h3>Weekend off</h3>
-                <p>
-                  If the team can finish task on time. There will be free weekends. However if you
-                  wanted to learn more we are also welcome.
-                </p>
-              </li>
-              <li>
-                <div className={styles.icon}>
-                  <BsCodeSlash />
-                </div>
-                <h3>Development</h3>
-                <p>
-                  To able to learn the best practices. we always keep up to date to the code quality
-                  and tools we used.
-                </p>
-              </li>
-            </ul>
-            <div className={styles.certificationImgContainer}>
-              <img src={certification} alt="benefits" />
-            </div>
+            <Fade cascade>
+              <ul>
+                <li>
+                  <div className={styles.icon}>
+                    <FcSupport />
+                  </div>
+                  <h3>Latest Tech Stack</h3>
+                  <p>
+                    In the team we train you on the latest tech stack, which includes a outstanding
+                    CI/CD pipeline to ensure that you create high quality code, seniors will also do
+                    PR reviews to ensure that you are writing clean and scale code.
+                  </p>
+                </li>
+                <li>
+                  <div className={styles.icon}>
+                    <GiGrowth />
+                  </div>
+                  <h3>Growth</h3>
+                  <p>
+                    Our coach/tutor not only provide pair-programming to the team and also we have
+                    an 1 on 1 section for us to listen to you and how we can help.
+                  </p>
+                </li>
+                <li>
+                  <div className={styles.icon}>
+                    <BsDoorOpen />
+                  </div>
+                  <h3>Weekend off</h3>
+                  <p>
+                    If the team can finish task on time. There will be free weekends. However if you
+                    wanted to learn more we are also welcome.
+                  </p>
+                </li>
+                <li>
+                  <div className={styles.icon}>
+                    <BsCodeSlash />
+                  </div>
+                  <h3>Development</h3>
+                  <p>
+                    To able to learn the best practices. we always keep up to date to the code
+                    quality and tools we used.
+                  </p>
+                </li>
+              </ul>
+            </Fade>
+            <Zoom>
+              <div className={styles.certificationImgContainer}>
+                <img src={certification} alt="benefits" />
+              </div>
+            </Zoom>
           </div>
         </div>
       </section>
       <section className={styles.footerSection}>
-        <JobListFooter />
+        <Fade>
+          <JobListFooter />
+        </Fade>
       </section>
     </div>
   );
