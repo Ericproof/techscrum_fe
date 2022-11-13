@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 import BacklogSection from './BacklogSection/BacklogSection';
 import styles from './BacklogPage.module.scss';
@@ -83,7 +83,6 @@ export default function BacklogPage() {
 
   return (
     <div className={styles.container}>
-      <ToastContainer style={{ width: '400px' }} />
       <div>
         <h1 data-testid="backlog-header">Backlog</h1>
       </div>
