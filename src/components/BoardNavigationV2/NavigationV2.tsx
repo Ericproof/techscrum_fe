@@ -254,6 +254,23 @@ export default function Nav() {
               document.body
             )}
         </div>
+
+        <div className={styles.dividingLine} />
+        <div className={styles.section}>
+          <button
+            className={styles.navBtn}
+            type="button"
+            onClick={() => {
+              setAddLinkToggle(!addLinkToggle);
+              setOperation('Add');
+              setSelectedLink(null);
+            }}
+            data-testid="add-shortcut"
+          >
+            <VscNewFile />
+            <span>User</span>
+          </button>
+        </div>
       </div>
     </NavigationLayout>
   );

@@ -110,8 +110,7 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal) {
           finishValidation: ticket.finishValidation ? ticket.finishValidation : false,
           supportValidation: ticket.supportValidation ? ticket.supportValidation : false
         };
-        // eslint-disable-next-line no-underscore-dangle
-        await updateDailyScrum(data, projectId, userId, ticket.taskId._id);
+        await updateDailyScrum(data, projectId, userId, ticket.taskId.id);
       });
     setSubmitting(false);
   };
