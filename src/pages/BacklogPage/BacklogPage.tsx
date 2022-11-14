@@ -12,7 +12,6 @@ import SprintSection from './SprintSection/SprintSection';
 export default function BacklogPage() {
   const [loaded, setLoaded] = useState(false);
   const [backlogData, setBacklogData] = useState(null);
-  // const [sprintData, setSprintData] = useState(null);
   const [statusData, setStatusData] = useState([]);
   const { projectId = '', boardId = '' } = useParams();
   const [typesData, setTypesData] = useState(null);
