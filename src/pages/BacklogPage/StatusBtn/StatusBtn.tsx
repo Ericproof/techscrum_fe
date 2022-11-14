@@ -7,9 +7,9 @@ import { IStatusBacklog } from '../../../types';
 
 interface IToolBar {
   status: string;
-  onClickChangeStatus: (id: string, statusId: string) => void;
   taskId: string;
   statusData: IStatusBacklog[];
+  onClickChangeStatus: (id: string, statusId: string) => void;
 }
 export default function StatusBtn({ status, onClickChangeStatus, taskId, statusData }: IToolBar) {
   const { visible, setVisible, myRef } = useOutsideAlerter(false);

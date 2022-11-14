@@ -10,14 +10,12 @@ import { getUsers } from '../../api/user/user';
 
 export default function BacklogPage() {
   const [loaded, setLoaded] = useState(false);
-  const [userLoaded, setUserLoaded] = useState(false);
   const [backlogData, setBacklogData] = useState(null);
-  const [statusLoaded, setStatusLoaded] = useState(false);
   const [statusData, setStatusData] = useState([]);
   const { projectId = '', boardId = '' } = useParams();
   const [typesData, setTypesData] = useState(null);
-  const [typesLoaded, setTypesLoaded] = useState(false);
   const [userList, setUserList] = useState<any>([]);
+  const [typeStatusUserLoaded, setTypeStatusUserLoaded] = useState(false);
 
   const getBacklogDataApi = useCallback(() => {
     const getBacklogData = async () => {
@@ -33,53 +31,28 @@ export default function BacklogPage() {
     getBacklogData();
   }, [projectId]);
 
-  useEffect(() => {
-    const getTypesData = async () => {
+  const getTypesStatusesUsersDataApi = useCallback(() => {
+    const getTypesStatusesUsersData = async () => {
       try {
-        const res = await getTypes();
+        let res = await getTypes();
         setTypesData(res);
-        setTypesLoaded(true);
-      } catch (e) {
-        setTypesLoaded(false);
-        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
-      }
-    };
-    getTypesData();
-  }, []);
-
-  useEffect(() => {
-    getBacklogDataApi();
-  }, [getBacklogDataApi]);
-
-  useEffect(() => {
-    const getStatusData = async () => {
-      try {
-        const res = await getStatuses(boardId);
+        res = await getStatuses(boardId);
         setStatusData(res);
-        setStatusLoaded(true);
+        res = await getUsers();
+        setUserList(res.data);
+        setTypeStatusUserLoaded(true);
       } catch (e) {
-        setStatusLoaded(false);
+        setTypeStatusUserLoaded(false);
         toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
       }
     };
-    getStatusData();
+    getTypesStatusesUsersData();
   }, [boardId]);
 
   useEffect(() => {
-    const getUsersList = async () => {
-      try {
-        if (userList.length === 0) {
-          const res = await getUsers();
-          setUserList(res.data);
-          setUserLoaded(true);
-        }
-      } catch (e) {
-        setUserLoaded(false);
-        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
-      }
-    };
-    getUsersList();
-  }, [userList.length]);
+    getBacklogDataApi();
+    getTypesStatusesUsersDataApi();
+  }, [getBacklogDataApi, getTypesStatusesUsersDataApi]);
 
   return (
     <div className={styles.container}>
@@ -92,12 +65,10 @@ export default function BacklogPage() {
           backlogData={backlogData}
           getBacklogDataApi={getBacklogDataApi}
           loaded={loaded}
-          statusLoaded={statusLoaded}
           statusData={statusData}
-          typesLoaded={typesLoaded}
           typesData={typesData}
-          userLoaded={userLoaded}
           userList={userList}
+          typeStatusUserLoaded={typeStatusUserLoaded}
         />
       </div>
     </div>

@@ -1,45 +1,44 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { FaPen } from 'react-icons/fa';
 import IconButton from '../../../components/Button/IconButton/IconButton';
 import styles from './TaskItem.module.scss';
-import ToolBar from '../ToolBar/ToolBar';
 import OptionBtn from '../OptionBtn/OptionBtn';
 import { IUserInfo, IAssign, IStatusBacklog } from '../../../types';
+import PriorityBtn from '../PriorityBtn/PriorityBtn';
+import StatusBtn from '../StatusBtn/StatusBtn';
+import AssigneeBtn from '../AssigneeBtn/AssigneeBtn';
+import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 
 interface ITaskInput {
   taskTitle: string;
-  id: string;
-  editMode: boolean;
-  onClickEditId: (id: string) => void;
-  onChangeTitle: (id: string, title: string) => void;
+  issueId: string;
   type: string;
   status: string;
   taskId: string;
-  onClickChangeStatus: (id: string, statusId: string) => void;
-  onClickDelete: (id: string) => void;
   statusData: IStatusBacklog[];
-  onClickChangeAssignee: (id: string, assigneeId: string) => void;
   userList: IUserInfo[];
   assignee: IAssign | null;
   priority: string;
+  onChangeTitle: (id: string, title: string) => void;
+  onClickChangeAssignee: (id: string, assigneeId: string) => void;
+  onClickChangeStatus: (id: string, statusId: string) => void;
+  onClickDelete: (id: string) => void;
   onClickChangePriority: (id: string, priority: string) => void;
 }
 export default function TaskItem({
   taskTitle,
-  id,
-  editMode,
-  onClickEditId,
-  onChangeTitle,
+  issueId,
   type,
   status,
-  onClickChangeStatus,
   taskId,
-  onClickDelete,
   statusData,
-  onClickChangeAssignee,
   userList,
   assignee,
   priority,
+  onChangeTitle,
+  onClickChangeAssignee,
+  onClickChangeStatus,
+  onClickDelete,
   onClickChangePriority
 }: ITaskInput) {
   const allTypes = {
@@ -48,39 +47,24 @@ export default function TaskItem({
     bug: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium',
     task: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium'
   };
-  const inputRef = useRef<HTMLInputElement | null>(null);
   const [showOptionBtn, setShowOptionBtn] = useState(false);
   const [disableShowOptionBtnEffect, setDisableShowOptionBtnEffect] = useState(false);
+  const [title, setTitle] = useState(taskTitle);
 
-  const editClick = () => {
-    onClickEditId(taskId);
-  };
-  const updateTaskTitleContent = useCallback(() => {
-    if (inputRef?.current?.value) {
-      onChangeTitle(taskId, inputRef?.current?.value);
+  const updateTaskTitleContent = () => {
+    if (title.trim() !== taskTitle) {
+      onChangeTitle(taskId, title.trim());
     }
-  }, [taskId, onChangeTitle]);
+  };
 
-  useEffect(() => {
-    const handleClickOutside = (e: any) => {
-      if (editMode && !inputRef.current?.contains(e.target)) {
-        onClickEditId('-1');
-        updateTaskTitleContent();
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [editMode, onClickEditId, updateTaskTitleContent]);
+  const { visible, setVisible, myRef } = useOutsideAlerter(false, updateTaskTitleContent);
 
-  const saveKeyPress = (event) => {
+  const saveKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      onClickEditId('-1');
       updateTaskTitleContent();
+      setVisible(false);
     }
   };
-
   const mouseOver = () => {
     if (!disableShowOptionBtnEffect) {
       setShowOptionBtn(true);
@@ -91,7 +75,6 @@ export default function TaskItem({
       setShowOptionBtn(false);
     }
   };
-
   const toggleDisableShowOptionBtnEffect = () => {
     if (!disableShowOptionBtnEffect) {
       setDisableShowOptionBtnEffect(true);
@@ -100,7 +83,6 @@ export default function TaskItem({
       setShowOptionBtn(false);
     }
   };
-
   return (
     <div
       className={styles.container}
@@ -109,56 +91,69 @@ export default function TaskItem({
       onFocus={() => {}}
       onBlur={() => {}}
       data-testid={'task-hover-'.concat(taskId)}
+      ref={myRef}
     >
       <div className={styles.taskInfo}>
         <div className={styles.iconContainer}>
           <img className={styles.icon} src={allTypes[type]} alt={type} />
         </div>
         <div className={styles.taskIdContainer}>
-          <p>{id}</p>
+          <p>{issueId}</p>
         </div>
-        {editMode ? (
+        {visible ? (
           <input
-            ref={inputRef}
             type="text"
             defaultValue={taskTitle}
             onKeyDown={saveKeyPress}
             className={styles.taskInput}
             data-testid={'task-title-input-'.concat(taskId)}
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
           />
         ) : (
           <div className={styles.taskTitle} data-testid={'task-'.concat(taskId)}>
             {taskTitle}
           </div>
         )}
-        {!editMode && (
+        {!visible && (
           <div className={styles.editButton}>
             <IconButton
               icon={<FaPen size={10} />}
               taskId={taskId}
               tooltip="Edit"
-              onClick={editClick}
+              onClick={() => {
+                setVisible(true);
+              }}
             />
           </div>
         )}
       </div>
-      <ToolBar
-        status={status}
-        taskId={taskId}
-        onClickChangeStatus={onClickChangeStatus}
-        statusData={statusData}
-        onClickChangeAssignee={onClickChangeAssignee}
-        userList={userList}
-        assignee={assignee}
-        priority={priority}
-        onClickChangePriority={onClickChangePriority}
-      />
-      <OptionBtn
-        showOptionBtn={showOptionBtn}
-        taskId={taskId}
-        onClickDelete={onClickDelete}
-        toggleDisableShowOptionBtnEffect={toggleDisableShowOptionBtnEffect}
-      />
+      <div className={styles.toolBar}>
+        <PriorityBtn
+          taskId={taskId}
+          priority={priority}
+          onClickChangePriority={onClickChangePriority}
+        />
+        <StatusBtn
+          status={status}
+          taskId={taskId}
+          statusData={statusData}
+          onClickChangeStatus={onClickChangeStatus}
+        />
+        <AssigneeBtn
+          taskId={taskId}
+          assignee={assignee}
+          userList={userList}
+          onClickChangeAssignee={onClickChangeAssignee}
+        />
+        <OptionBtn
+          taskId={taskId}
+          showOptionBtn={showOptionBtn}
+          onClickDelete={onClickDelete}
+          toggleDisableShowOptionBtnEffect={toggleDisableShowOptionBtnEffect}
+        />
+      </div>
     </div>
   );
 }

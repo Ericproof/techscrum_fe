@@ -65,6 +65,7 @@ export default function PriorityBtn({
                         if (user.id) {
                           onClickChangeAssignee(taskId, user.id);
                         }
+                        setQuery('');
                         setVisible(false);
                       }}
                     >
