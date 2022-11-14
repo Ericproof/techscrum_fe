@@ -15,6 +15,7 @@ import { getLabels } from '../../api/label/label';
 import { deleteActivity } from '../../api/activity/activity';
 import Modal from '../Modal/Modal';
 import DefaultModalHeader from '../Modal/ModalHeader/DefaultModalHeader/DefaultModalHeader';
+import ProjectNavigationV3 from '../ProjectNavigationV3/ProjectNavigationV3';
 
 const onDragEnd = (
   result: DropResult,
@@ -221,12 +222,13 @@ export default function Board() {
 
   return (
     <div className={style.container}>
+      <h1 className={style.header}>Project</h1>
+      <ProjectNavigationV3 />
       <BoardSearch
         updateIsCreateNewCard={getCreateNewCardStateFromChildren}
         setInputQuery={setInputQuery}
         projectId={projectId}
       />
-      <hr className={style.line} />
       <BoardMain
         columnsInfo={columnsInfo}
         onDragEventHandler={dragEventHandler}

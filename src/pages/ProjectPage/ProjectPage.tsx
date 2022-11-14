@@ -6,7 +6,8 @@ import {
   AiOutlineCalendar,
   AiOutlineFolderOpen,
   AiOutlineSearch,
-  AiOutlineStar
+  AiOutlineStar,
+  AiOutlineUser
 } from 'react-icons/ai';
 import { HiDotsHorizontal } from 'react-icons/hi';
 import { Link, useNavigate } from 'react-router-dom';
@@ -16,6 +17,9 @@ import { BsPeople } from 'react-icons/bs';
 import { VscChecklist } from 'react-icons/vsc';
 import { TbReportSearch } from 'react-icons/tb';
 import { IoIosAdd } from 'react-icons/io';
+import { FiSettings } from 'react-icons/fi';
+import ReactDOM from 'react-dom';
+import { MdList, MdLogout } from 'react-icons/md';
 import styles from './ProjectPage.module.scss';
 import { createProject, deleteProject, updateProject } from '../../api/projects/projects';
 import CreateNewCard from '../../components/CreateNewCard/CreateNewCard';
@@ -30,6 +34,8 @@ import NavigationLayout from '../../components/Navigation/NavigationLayout/Navig
 import NavigationBtn from '../../components/Navigation/NavigationBtn/NavigationBtn';
 import SubProjectMenu from './SubProjectMenu/SubProjectMenu';
 import ButtonV2 from '../../components/FormV2/ButtonV2/ButtonV2';
+import { UserContext, UserDispatchContext } from '../../context/UserInfoProvider';
+import avatarImg from '../../assets/userAvatar.png';
 
 const buttons = [
   {
@@ -79,6 +85,10 @@ export default function ProjectPage() {
   const [showCreateProjectModal, setShowCreateProjectModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [toggleSearchMenu, setToggleSearchMenu] = useState(false);
+  const [showUserSettingsModal, setShowUserSettingsModal] = useState(false);
+  const userInfo = useContext(UserContext);
+  const setUserInfo = useContext(UserDispatchContext);
+
   useEffect(() => {
     fetchProjects();
   }, []);
@@ -174,6 +184,12 @@ export default function ProjectPage() {
       });
   };
 
+  const logout = () => {
+    localStorage.clear();
+    setUserInfo({});
+    navigate('/');
+  };
+
   return (
     <>
       {isCreateNewCard && (
@@ -231,6 +247,40 @@ export default function ProjectPage() {
               </NavigationBtn>
             );
           })}
+          <NavigationBtn
+            dataTestId="user-settings"
+            classesName={styles.userSettingsBtn}
+            onClick={() => {
+              setShowUserSettingsModal(!showUserSettingsModal);
+            }}
+          >
+            <AiOutlineUser />
+            Settings
+          </NavigationBtn>
+          {showUserSettingsModal &&
+            ReactDOM.createPortal(
+              <div className={styles.userSettings}>
+                <div className={styles.item}>
+                  <img src={userInfo?.avatarIcon || avatarImg} alt="avatar" />
+                  {userInfo.name}
+                </div>
+                <hr />
+                <Link to="/me" className={styles.item}>
+                  <FiSettings />
+                  User Settings
+                </Link>
+                <div className={styles.item}>
+                  <MdList />
+                  Preferences (WIP)
+                </div>
+                <hr />
+                <button className={styles.item} onClick={logout}>
+                  <MdLogout />
+                  Logout
+                </button>
+              </div>,
+              document.body
+            )}
         </NavigationLayout>
 
         <SubProjectMenu toggleSearchMenu={toggleSearchMenu} projectList={projectList} />

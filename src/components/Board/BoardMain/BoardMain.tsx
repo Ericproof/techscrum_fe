@@ -70,7 +70,7 @@ export default function BoardMain({
                                     {item.tags?.map((tag) => {
                                       return (
                                         <div className={styles.tag} key={tag.id}>
-                                          <h1>{tag.name}</h1>
+                                          <span>{tag.name}</span>
                                         </div>
                                       );
                                     })}
