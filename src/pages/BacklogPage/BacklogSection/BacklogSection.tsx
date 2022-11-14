@@ -123,6 +123,7 @@ export default function BacklogSection({
                 assignee={task.assignId}
                 priority={task.priority}
                 onClickChangePriority={onClickChangePriority}
+                sprintId={task.sprintId}
               />
             );
           })}
