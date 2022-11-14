@@ -30,25 +30,23 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal) {
   useEffect(() => {
     const handleDailyScrum = async () => {
       try {
-        const results = await getDailyScrums(projectId, userId);
-        const dailyResult = results.data.filter((result) => {
-          return result.createdDate === dateHandler(new Date());
-        });
-        if (dailyResult.length > 0) {
-          setDailyScrumTicketData(dailyResult);
-        } else {
-          const newResults = await getDailyScrums(projectId, userId);
-          const newDailyResults = newResults.data
-            .filter((result) => {
-              return result.createdDate === dateHandler(new Date());
-            })
-            .filter((result) => {
-              return result.taskId.id === userId;
-            });
-          setDailyScrumTicketData(newDailyResults);
+        const searchCase = 'search-all';
+        const results = await getDailyScrums(
+          projectId,
+          userId,
+          'none',
+          dateHandler(new Date()),
+          searchCase
+        );
+        if (results.data.length === 0) {
+          toast('No dailyScrum data for now!', { theme: 'colored', toastId: 'dailyScrum error' });
         }
+        setDailyScrumTicketData(results.data);
       } catch (e) {
-        toast.error('No daily', { theme: 'colored', toastId: 'dailyScrum error' });
+        toast.error('Failed tp get dailyScrum data!', {
+          theme: 'colored',
+          toastId: 'dailyScrum error'
+        });
       }
     };
     handleDailyScrum();
@@ -130,26 +128,22 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal) {
         </button>
       </div>
       <h4>Today: {dateHandler(new Date())}</h4>
-      {dailyScrumTicketData
-        .filter((ticket) => {
-          return dateHandler(ticket.createdAt) === dateHandler(new Date());
-        })
-        .map((ticket) => {
-          return (
-            <DailyScrumTicket
-              key={ticket.id}
-              id={ticket.id}
-              title={ticket.title}
-              progress={ticket.progress}
-              finish={ticket.finish}
-              finishValidation={ticket.finishValidation}
-              onChangeFinish={onChangeFinish}
-              onChangeSupport={onChangeSupport}
-              onChangeReason={onChangeReason}
-              onChangeProgress={onChangeProgress}
-            />
-          );
-        })}
+      {dailyScrumTicketData.map((ticket) => {
+        return (
+          <DailyScrumTicket
+            key={ticket.id}
+            id={ticket.id}
+            title={ticket.title}
+            progress={ticket.progress}
+            finish={ticket.finish}
+            finishValidation={ticket.finishValidation}
+            onChangeFinish={onChangeFinish}
+            onChangeSupport={onChangeSupport}
+            onChangeReason={onChangeReason}
+            onChangeProgress={onChangeProgress}
+          />
+        );
+      })}
       <div className={styles.btnContainer}>
         <button
           className={styles.cancelBtn}

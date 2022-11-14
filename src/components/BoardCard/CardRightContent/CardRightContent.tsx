@@ -67,13 +67,15 @@ export default function CardRightContent({
         taskId: updatedTaskInfo.id,
         createdDate
       };
-      const resultsForThisTask = await getDailyScrums(projectId, taskId);
-      if (resultsForThisTask.data.length > 0) {
-        const results = await getDailyScrums(projectId, assignId, createdDate, taskId);
-        if (results.data.length === 0) {
-          await createDailyScrum(projectId, data);
-        }
-      } else {
+      const searchCase = 'search-by-user-task-date';
+      const resultsForThisTask = await getDailyScrums(
+        projectId,
+        'none',
+        taskId,
+        dateHandler(new Date()),
+        searchCase
+      );
+      if (resultsForThisTask.data.length === 0) {
         await createDailyScrum(projectId, data);
       }
     }
