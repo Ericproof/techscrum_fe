@@ -64,20 +64,20 @@ export default function Nav() {
         name: 'Board',
         url: `/projects/${projectId}/board/${boardId}`,
         icon: <HiViewBoards />,
-        dataTestId: 'board-btn'
+        dataTestId: 'board-btn-old'
       },
       {
         name: 'Backlog',
         url: `/projects/${projectId}/board/${boardId}/backlog`,
         icon: <IoMdList />,
-        dataTestId: 'backlog-btn'
+        dataTestId: 'backlog-btn-old'
       }
     ],
     tracking: [
       {
         name: 'Daily scrum',
         icon: <FaDailymotion />,
-        dataTestId: 'dailyscrum-btn'
+        dataTestId: 'dailyscrum-btn-old'
       }
     ],
     utility: [
@@ -86,14 +86,14 @@ export default function Nav() {
         checkAccess: 'view:members',
         url: `/projects/${currentProject?.id}/members`,
         icon: <BsFillPeopleFill />,
-        dataTestId: 'member-btn'
+        dataTestId: 'member-btn-old'
       },
       {
         name: 'Project Settings',
         checkAccess: 'view:settings',
         url: `/settings/${currentProject?.id}`,
         icon: <FiSettings />,
-        dataTestId: 'project-settings-btn'
+        dataTestId: 'project-settings-btn-old'
       }
     ]
   };

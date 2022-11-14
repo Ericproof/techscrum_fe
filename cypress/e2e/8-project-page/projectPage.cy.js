@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
 import projectsData from "../../fixtures/projects.json";
+import projectsDeletedData from "../../fixtures/projectsDeleted.json";
 
 describe('Project page', () => {
     beforeEach(() => {
@@ -22,12 +23,12 @@ describe('Project page', () => {
     })
 
     it('should search projects and find it in the project list', () => {
-        cy.wait(1000);
-        cy.get('[data-testid="filter-Project"]').click();
-        cy.get('[data-testid="filter-Project"]').clear();
-        cy.get('[data-testid="filter-Project"]').type('123');
-        cy.get('[data-testid="project-name"]').should('have.length', 2);
-        cy.get('[data-testid="project-name"]').then( items => {
+        cy.get('[data-testid="search-btn"]').click();
+        cy.get('[data-testid="search-input"]').click();
+        cy.get('[data-testid="search-input"]').clear();
+        cy.get('[data-testid="search-input"]').type('123');
+        cy.get('[data-testid="search-result"]').should('have.length', 2);
+        cy.get('[data-testid="search-result"]').then( items => {
             expect(items[0]).to.contain.text('123');
             expect(items[1]).to.contain.text('12333');
         })
@@ -41,7 +42,9 @@ describe('Project page', () => {
     it('delete a project', () => {
         cy.get('[data-testid="project-expand-button"]').eq(1).click();
         cy.get('[data-testid="project-delete"]').click();
+        cy.intercept('GET', '**/projects', projectsDeletedData).as('get-deleted-projects');
         cy.wait('@delete-projects');
+        cy.wait('@get-deleted-projects');
         cy.get('[data-testid="project-name"]').should('have.length', 3);
         cy.get('[data-testid="project-name"]').then( items => {
             expect(items[0]).to.contain.text('Evan')

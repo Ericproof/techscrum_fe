@@ -28,7 +28,7 @@ export default function SubProjectMenu(props: ISubProjectMenu) {
     return filteredResult?.map((item) => {
       return (
         <Link to={`/projects/${item.id}/board/${item.boardId}`} style={{ textDecoration: 'none' }}>
-          <div className={styles.searchItem}>
+          <div className={styles.searchItem} data-testid="search-result">
             <AiOutlineFolderOpen className={styles.icon} />
             <p>{item.name}</p>
           </div>
@@ -44,7 +44,7 @@ export default function SubProjectMenu(props: ISubProjectMenu) {
       <h1 className={styles.header}>Search</h1>
       <InputV2
         label="Search"
-        data-testId="search"
+        dataTestId="search-input"
         onValueChanged={onChangeFilterProject}
         defaultValue=""
         name="search"

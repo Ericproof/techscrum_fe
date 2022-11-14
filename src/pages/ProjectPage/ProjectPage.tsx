@@ -228,6 +228,7 @@ export default function ProjectPage() {
             onClick={() => {
               setToggleSearchMenu(!toggleSearchMenu);
             }}
+            data-testid="search-btn"
           >
             <AiOutlineSearch className={styles.searchIcon} />
             Search
