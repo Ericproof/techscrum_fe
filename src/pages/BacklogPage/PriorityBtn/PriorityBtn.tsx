@@ -5,9 +5,9 @@ import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 interface IPriorityBtn {
   priority: string;
   onClickChangePriority: (id: string, priority: string) => void;
-  id: string;
+  taskId: string;
 }
-export default function PriorityBtn({ priority, onClickChangePriority, id }: IPriorityBtn) {
+export default function PriorityBtn({ priority, onClickChangePriority, taskId }: IPriorityBtn) {
   const allPriorities = [
     {
       priority: 'Highest',
@@ -32,7 +32,7 @@ export default function PriorityBtn({ priority, onClickChangePriority, id }: IPr
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
 
   const onClickPriorityBtnDropDown = (eachPriority: { priority: string; imgUrl: string }) => {
-    onClickChangePriority(id, eachPriority.priority);
+    onClickChangePriority(taskId, eachPriority.priority);
     setVisible(false);
   };
 
@@ -45,7 +45,7 @@ export default function PriorityBtn({ priority, onClickChangePriority, id }: IPr
         onClick={() => {
           setVisible(!visible);
         }}
-        data-testid={`priority-btn-${id}`}
+        data-testid={`priority-btn-${taskId}`}
       >
         <img src={currentPriorityBtn?.imgUrl} alt="" />
       </button>
@@ -67,7 +67,7 @@ export default function PriorityBtn({ priority, onClickChangePriority, id }: IPr
                     onClick={() => {
                       onClickPriorityBtnDropDown(eachPriority);
                     }}
-                    data-testid={`priority-dropdown-btn-${id}-${eachPriority.priority}`}
+                    data-testid={`priority-dropdown-btn-${taskId}-${eachPriority.priority}`}
                   >
                     <img src={eachPriority.imgUrl} alt={eachPriority.priority} />
                     <p>{eachPriority.priority}</p>

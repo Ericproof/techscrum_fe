@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useRef, useState } from 'react';
 import { GoPlus } from 'react-icons/go';
 import { useParams } from 'react-router-dom';
 import Button from '../../../components/Button/Button';
@@ -7,16 +7,15 @@ import TaskItem from '../TaskItem/TaskItem';
 import styles from './BacklogSection.module.scss';
 import { addTask, updateTask, deleteTask } from '../../../api/backlog/backlog';
 import { IUserInfo, Itypes, IStatusBacklog } from '../../../types';
+import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 
 interface IBacklogSection {
   backlogData: any;
   getBacklogDataApi: () => void;
   loaded: boolean;
-  statusLoaded: boolean;
   statusData: IStatusBacklog[];
-  typesLoaded: boolean;
   typesData: Itypes[] | null;
-  userLoaded: boolean;
+  typeStatusUserLoaded: boolean;
   userList: IUserInfo[];
 }
 
@@ -24,23 +23,15 @@ export default function BacklogSection({
   backlogData,
   getBacklogDataApi,
   loaded,
-  statusLoaded,
+  typeStatusUserLoaded,
   statusData,
-  typesLoaded,
   typesData,
-  userLoaded,
   userList
 }: IBacklogSection) {
-  const [showBacklogInput, setShowBacklogInput] = useState(false);
-  const [backlogInputFocus, setBacklogInputFocus] = useState(false);
   const [currentTypeOption, setCurrentTypeOption] = useState('story');
-  const [editId, setEditId] = useState('-1');
   const { boardId = '', projectId = '' } = useParams();
-
-  const backlogFormRef = useRef<HTMLFormElement | null>(null);
   const createIssueRef = useRef<HTMLInputElement | null>(null);
-
-  const createIssueAction = useCallback(() => {
+  const createIssueAction = () => {
     if (createIssueRef?.current?.value) {
       const data = {
         title: createIssueRef?.current?.value,
@@ -57,24 +48,9 @@ export default function BacklogSection({
         getBacklogDataApi();
       });
     }
-    setShowBacklogInput(false);
-  }, [typesData, boardId, projectId, currentTypeOption, getBacklogDataApi]);
-
-  useEffect(() => {
-    const handleClickOutside = (e: any) => {
-      if (backlogInputFocus && !backlogFormRef.current?.contains(e.target as HTMLElement)) {
-        createIssueAction();
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [backlogInputFocus, createIssueAction]);
-
-  const onClickEditId = (id: string) => {
-    setEditId(id);
   };
+
+  const { visible, setVisible, myRef } = useOutsideAlerter(false, createIssueAction);
 
   const onChangeTitle = (id: string, title: string) => {
     const data = { title };
@@ -86,6 +62,7 @@ export default function BacklogSection({
   const onKeyDownCreateIssue = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       createIssueAction();
+      setVisible(false);
     }
   };
   const getCurrentTypeOption = (type: string) => {
@@ -127,18 +104,14 @@ export default function BacklogSection({
       </div>
       <div className={styles.listContainer}>
         {loaded &&
-          statusLoaded &&
-          typesLoaded &&
-          userLoaded &&
+          typeStatusUserLoaded &&
           backlogData.cards.map((task) => {
             return (
               <TaskItem
-                taskTitle={task.title}
                 key={task.id}
+                taskTitle={task.title}
                 taskId={task.id}
-                id={'TEC-'.concat(task.id.slice(task.id.length - 3))}
-                editMode={editId === task.id}
-                onClickEditId={onClickEditId}
+                issueId={'TEC-'.concat(task.id.slice(task.id.length - 3))}
                 onChangeTitle={onChangeTitle}
                 type={task.typeId.slug}
                 status={task.status.name.toUpperCase()}
@@ -150,13 +123,14 @@ export default function BacklogSection({
                 assignee={task.assignId}
                 priority={task.priority}
                 onClickChangePriority={onClickChangePriority}
+                sprintId={task.sprintId}
               />
             );
           })}
       </div>
-      {showBacklogInput ? (
-        <form ref={backlogFormRef}>
-          <div className={styles.formField}>
+      {visible ? (
+        <form>
+          <div className={styles.formField} ref={myRef}>
             <TaskTypeSelect onChangeType={getCurrentTypeOption} />
             <input
               className={styles.input}
@@ -164,20 +138,13 @@ export default function BacklogSection({
               name="newBacklog"
               id="newBacklog"
               data-testid="create-issue-input"
-              onFocus={() => {
-                setBacklogInputFocus(true);
-              }}
               ref={createIssueRef}
               onKeyDown={onKeyDownCreateIssue}
             />
           </div>
         </form>
       ) : (
-        <Button
-          icon={<GoPlus />}
-          overrideStyle={styles.buttonRow}
-          onClick={() => setShowBacklogInput(true)}
-        >
+        <Button icon={<GoPlus />} overrideStyle={styles.buttonRow} onClick={() => setVisible(true)}>
           <p data-testid="create-issue">Create issue</p>
         </Button>
       )}
