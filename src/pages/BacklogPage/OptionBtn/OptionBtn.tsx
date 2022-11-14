@@ -6,12 +6,14 @@ import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 interface IOptionBtn {
   taskId: string;
   showOptionBtn: boolean;
+  sprintId: string;
   onClickDelete: (id: string) => void;
   toggleDisableShowOptionBtnEffect: () => void;
 }
 export default function OptionBtn({
   taskId,
   showOptionBtn,
+  sprintId,
   onClickDelete,
   toggleDisableShowOptionBtnEffect
 }: IOptionBtn) {
@@ -67,6 +69,11 @@ export default function OptionBtn({
           <li>
             <button className={styles.dropDownBtn}>Copy issue link</button>
           </li>
+          {sprintId && (
+            <li>
+              <button className={styles.dropDownBtn}>Add to Backlog</button>
+            </li>
+          )}
           <li>
             <button
               className={styles.dropDownBtn}

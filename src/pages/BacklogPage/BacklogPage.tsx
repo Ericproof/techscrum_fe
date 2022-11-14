@@ -7,6 +7,7 @@ import { getBacklog } from '../../api/backlog/backlog';
 import { getStatuses } from '../../api/status/status';
 import { getTypes } from '../../api/types/types';
 import { getUsers } from '../../api/user/user';
+import SprintSection from './SprintSection/SprintSection';
 
 export default function BacklogPage() {
   const [loaded, setLoaded] = useState(false);
@@ -61,6 +62,15 @@ export default function BacklogPage() {
         <h1 data-testid="backlog-header">Backlog</h1>
       </div>
       <div className={styles.scrollContainer}>
+        <SprintSection
+          sprintData={{ cards: [] }}
+          getBacklogDataApi={getBacklogDataApi}
+          loaded={loaded}
+          statusData={statusData}
+          typesData={typesData}
+          userList={userList}
+          typeStatusUserLoaded={typeStatusUserLoaded}
+        />
         <BacklogSection
           backlogData={backlogData}
           getBacklogDataApi={getBacklogDataApi}

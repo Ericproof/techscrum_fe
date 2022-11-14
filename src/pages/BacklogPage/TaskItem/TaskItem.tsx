@@ -19,6 +19,7 @@ interface ITaskInput {
   userList: IUserInfo[];
   assignee: IAssign | null;
   priority: string;
+  sprintId: string;
   onChangeTitle: (id: string, title: string) => void;
   onClickChangeAssignee: (id: string, assigneeId: string) => void;
   onClickChangeStatus: (id: string, statusId: string) => void;
@@ -35,6 +36,7 @@ export default function TaskItem({
   userList,
   assignee,
   priority,
+  sprintId,
   onChangeTitle,
   onClickChangeAssignee,
   onClickChangeStatus,
@@ -152,6 +154,7 @@ export default function TaskItem({
           showOptionBtn={showOptionBtn}
           onClickDelete={onClickDelete}
           toggleDisableShowOptionBtnEffect={toggleDisableShowOptionBtnEffect}
+          sprintId={sprintId}
         />
       </div>
     </div>
