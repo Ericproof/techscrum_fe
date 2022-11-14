@@ -24,7 +24,7 @@ describe('Project page', () => {
     cy.get('[data-testid="dailyscrum-btn"]').click();
     cy.wait('@fetch-dailyScrums');
     cy.get('[type="radio"]').check();
-    cy.get('[data-testid="dailyscrum-reason-636c674b38e168d571d8a619"]').type('I need support');
+    cy.get('[data-testid="dailyscrum-reason-6370e6b83314da89eae07ec4"]').type('I need support');
   });
   it('Test cancel should close dailyscrum page', () => {
     cy.get('[data-testid="dailyscrum-btn"]').click();
@@ -39,12 +39,12 @@ describe('Project page', () => {
     ).set;
     cy.get('[data-testid="dailyscrum-btn"]').click();
     cy.wait('@fetch-dailyScrums');
-    cy.get('[data-testid="dailyscrum-progress-bar-636c674b38e168d571d8a619"]').then(($range) => {
+    cy.get('[data-testid="dailyscrum-progress-bar-6370e6b83314da89eae07ec4"]').then(($range) => {
       const range = $range[0];
       nativeInputValueSetter.call(range, 80);
       range.dispatchEvent(new Event('change', { value: 80, bubbles: true }));
     });
-    cy.get('[data-testid="dailyscrum-progress-636c674b38e168d571d8a619"]').contains('80%');
+    cy.get('[data-testid="dailyscrum-progress-6370e6b83314da89eae07ec4"]').contains('80%');
   });
   it('Test should submit data', () => {
     cy.intercept('GET', '**/dailyScrums/*/none/none', dailyScrum).as('fetch-dailyScrums');
@@ -52,7 +52,7 @@ describe('Project page', () => {
     cy.get('[data-testid="dailyscrum-btn"]').click();
     cy.wait('@fetch-dailyScrums');
     cy.get('[type="radio"]').check();
-    cy.get('[data-testid="dailyscrum-reason-636c674b38e168d571d8a619"]').type('I need support');
+    cy.get('[data-testid="dailyscrum-reason-6370e6b83314da89eae07ec4"]').type('I need support');
     cy.get('[data-testid="dailyscrum-submit"]').click();
     cy.wait('@update-dailyScrums');
   });
