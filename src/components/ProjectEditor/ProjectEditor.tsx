@@ -65,7 +65,7 @@ function ProjectEditor(props: ProjectEditorProps) {
   };
 
   const onSave = () => {
-    const apiData = { ...data };
+    const apiData = { ...data, userId: userInfo.id };
     onClickSave(apiData);
   };
 
