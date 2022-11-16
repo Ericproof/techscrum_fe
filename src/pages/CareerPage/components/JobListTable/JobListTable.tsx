@@ -8,16 +8,17 @@ const jobs = [
     department: 'Developer',
     location: 'Denver',
     total: 1,
-    desc: 'This role is suitable for people who has no previous experience in IT or either people that are switching to IT. Mainly responsible is creating static pages and doing simple functions.',
+    desc: 'This role is suitable for people who have no previous experience in IT or people that are switching to IT. Mainly responsible is creating static pages and doing simple functions.',
     list: [
-      'Have a clear idea what you wanted and a basic plan of what you need to do in this inter',
+      'Have a clear idea of what you wanted and a basic plan of what you need to do in this inter',
       'Able to ask for help when needed',
       'Effective communication skills',
       'Being a team player to achieve shared team goals',
-      'Project management process improvement.',
+      'Project management process improvement',
       'Experience in HTML',
       'Experience in CSS',
-      'Experience in Next.js(Recommend)'
+      'Experience in Next.js(Recommend)',
+      'Self-motivated'
     ],
     id: '1'
   },
@@ -28,20 +29,21 @@ const jobs = [
     total: 4,
     desc: 'This role are suitable people who are currently or finished studying IT and wanted to get a job after the bootcamp. The mainly responsible for this role is to creating and maintaining new functionality.',
     list: [
-      'Have a clear idea what you wanted and a basic plan of what you need to do in this inter',
+      'Have a clear idea of what you wanted and a basic plan of what you need to do in this inter',
       'Able to do self-research before asking Senior Devs',
       'Able to ask for help when needed',
       'Effective communication skills',
       'Exceptional problem-solving and analysis skills',
-      'An pro active attitude',
+      'A proactive attitude',
       'Experience in HTML',
       'Experience in CSS',
       'Experience in React(Recommend)',
       'Experience in Typescript(Recommend)',
       'Experience in Node.js(Recommend)',
       'Project management process improvement.',
-      'Will have chance to learn CI/CD pipeline',
-      'Will have chance to learn AWS'
+      'Will have a chance to learn CI/CD pipeline',
+      'Will have a chance to learn AWS',
+      'Self-motivated'
     ],
     id: '1'
   },
@@ -53,22 +55,23 @@ const jobs = [
     desc: 'Mainly responsible for creating and maintaining new functionality. Ensure that the teams can finish tasks on time.',
     total: 1,
     list: [
-      'Have a clear idea what you wanted and a basic plan of what you need to do in this inter',
+      'Have a clear idea of what you wanted and a basic plan of what you need to do in this inter',
       'Able to do self-research before asking Senior Devs',
       'Able to ask for help when needed',
       'Effective communication skills',
       'Exceptional problem-solving and analysis skills',
-      'An pro active attitude',
+      'A proactive attitude',
       'Experience in HTML',
       'Experience in CSS',
       'Experience in React(Recommend)',
       'Experience in Typescript(Recommend)',
       'Experience in Node.js(Recommend)',
-      'Ensure that you other team members to finish task on time',
-      'Creating a great team culture.',
-      'Project management process improvement.',
-      'Will have chance to learn CI/CD pipeline',
-      'Will have chance to learn AWS'
+      'Ensure that your other team members finish tasks on time',
+      'Creating a great team culture',
+      'Project management process improvement',
+      'Will have a chance to learn CI/CD pipeline',
+      'Will have a chance to learn AWS',
+      'Self-motivated'
     ],
     id: '4'
   },
@@ -77,16 +80,16 @@ const jobs = [
     department: 'Product',
     location: 'Cork (Remote)',
     list: [
-      'Have a clear idea what you wanted and a basic plan of what you need to do in this inter',
+      'Have a clear idea of what you wanted and a basic plan of what you need to do in this inter',
       'Assist in planning and executing the product roadmap',
-      'Develop innovative solutions to our user’s problems, delivering immediate benefit.',
+      'Develop innovative solutions to our user’s problems, delivering immediate benefits',
       'Exceptional problem-solving and analysis skills',
-      'Categorising support tickets and drawing out themes.',
-      'Briefing new product ideas into development teams.',
-      'An pro active attitude',
+      'Categorizing support tickets and drawing out themes',
+      'Briefing new product ideas to development teams',
+      'A proactive attitude',
       'Experience in using JIRA',
       'Experience in SCRUM',
-      'Self motivated',
+      'Self-motivated',
       'Algin to our core value'
     ],
     total: 1,
@@ -99,13 +102,14 @@ const jobs = [
     location: 'Cork (Remote)',
     total: 1,
     list: [
-      'Have a clear idea what you wanted and a basic plan of what you need to do in this inter',
-      'Strong creative skills.',
-      'Well-presented and personable with excellent communication and organizational skills.',
+      'Have a clear idea of what you wanted and a basic plan of what you need to do in this inter',
+      'Strong creative skills',
+      'Well-presented and personable with excellent communication and organizational skills',
       'Experience in Figma or similar',
       'Experience in PhotoShop or similar',
-      'Resilient to cope with conflicting demands and able to priortise duties, work effectively and meet deadlines.',
-      'Understand what you wanted after this inter'
+      'Resilient to cope with conflicting demands and able to prioritise duties, work effectively and meet deadlines',
+      'Understand what you wanted after this inter',
+      'Self-motivated'
     ],
     desc: 'Mainly responsible for creating and maintaining new functionality. Ensure that the teams can finish tasks on time.',
     id: '5'
@@ -117,13 +121,14 @@ const jobs = [
     total: 1,
     desc: 'Creating the website from scratch.',
     list: [
-      'Have a clear idea what you wanted and a basic plan of what you need to do in this inter',
+      'Have a clear idea of what you wanted and a basic plan of what you need to do in this inter',
       'Able to do self-research before asking Senior Devs',
       'Able to ask for help when needed',
       'Effective communication skills',
       'Exceptional problem-solving and analysis skills',
-      'Implement scalable, resilient, and secure solutions in the public cloud in AWS.',
-      'Ability to analyse and troubleshoot complex software and infrastructure issues, and develop tools/systems for task automation'
+      'Implement scalable, resilient, and secure solutions in the public cloud in AWS',
+      'Ability to analyze and troubleshoot complex software and infrastructure issues, and develop tools/systems for task automation',
+      'Self-motivated'
     ],
     id: '5'
   }
