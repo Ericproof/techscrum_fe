@@ -26,15 +26,12 @@
       }
 
       .switchButton {
-        margin-left: 10px;
         max-width: 100%;
         cursor: pointer;
         height: 1.9em;
         background-color: white;
         color: #1565cd;
-        border-width: 0px;
-        border-radius: 3px;
-        padding: 0px 4px;
+        border: 0;
         outline: none;
       }
     }
