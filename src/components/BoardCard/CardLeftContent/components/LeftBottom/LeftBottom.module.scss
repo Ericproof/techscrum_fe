@@ -25,14 +25,13 @@
         line-height: 1.42857142857143;
       }
 
-      button {
+      .switchButton {
         margin-left: 10px;
-        font-weight: 600;
         max-width: 100%;
         cursor: pointer;
         height: 1.9em;
-        background-color: var(--ds-background-selected, #505f79);
-        color: var(--ds-text-selected, #f4f5f7) !important;
+        background-color: white;
+        color: #1565cd;
         border-width: 0px;
         border-radius: 3px;
         padding: 0px 4px;
