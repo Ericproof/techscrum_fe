@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { updateMe } from '../../../api/user/user';
 import ChangeIcon from '../../../components/ProjectEditor/ChangeIcon/ChangeIcon';
 import { UserContext, UserDispatchContext } from '../../../context/UserInfoProvider';
@@ -12,6 +13,7 @@ import SubSettingMenu from '../../../components/SubSettingMenu/SubSettingMenu';
 import ButtonV2 from '../../../components/FormV2/ButtonV2/ButtonV2';
 import Modal from '../../../components/Modal/Modal';
 import MainMenuV2 from '../../MainMenuV2/MainMenuV2';
+import changePassword from '../../../api/accountSetting/changePassword';
 
 export default function UserMePage() {
   const navigate = useNavigate();
@@ -22,6 +24,9 @@ export default function UserMePage() {
   const setUserInfo = useContext(UserDispatchContext);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [submitting, setSubmitting] = useState<boolean>(false);
+  const [oldPassword, setOldPassword] = useState<string>('');
+  const [newPassword, setNewPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
 
   const onChangeUser = (e: any) => {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
@@ -52,6 +57,20 @@ export default function UserMePage() {
       setStatusCode(1);
       setTip('Something go Wrong');
       setAlertVisible(true);
+    }
+  };
+
+  const onUpdatePassword = async () => {
+    if (newPassword === confirmPassword) {
+      try {
+        const data = { oldPassword, newPassword, userInfo };
+        await changePassword(data);
+        toast('Your password has been successfully updated!');
+      } catch (e) {
+        toast.error('The current password is not correct!');
+      }
+    } else {
+      toast.error('New Password does not match confirm password, please check again!');
     }
   };
 
@@ -117,26 +136,40 @@ export default function UserMePage() {
               </div>
               <ButtonV2 text="Save Changes" onClick={onSaveMe} />
             </SettingCard>
-            <SettingCard title="Change Password (WIP)">
+            <SettingCard title="Change Password">
               <div className={[styles.gap, styles.row, 'flex'].join(' ')}>
                 <InputV2
+                  label="Old Password"
+                  onValueChanged={(e) => {
+                    setOldPassword(e.target.value);
+                  }}
+                  onValueBlur={() => {}}
+                  defaultValue=""
+                  name="oldPassword"
+                  type="password"
+                />
+                <InputV2
                   label="New Password"
-                  onValueChanged={() => {}}
+                  onValueChanged={(e) => {
+                    setNewPassword(e.target.value);
+                  }}
                   onValueBlur={() => {}}
                   defaultValue=""
                   name="newPassword"
                   type="password"
                 />
                 <InputV2
-                  label="Confirm Password"
-                  onValueChanged={() => {}}
+                  label="Confirm New Password"
+                  onValueChanged={(e) => {
+                    setConfirmPassword(e.target.value);
+                  }}
                   onValueBlur={() => {}}
                   defaultValue=""
                   name="confirmPassword"
                   type="password"
                 />
               </div>
-              <ButtonV2 text="Update" onClick={onSaveMe} />
+              <ButtonV2 text="Update" onClick={onUpdatePassword} />
             </SettingCard>
             <SettingCard title="Delete Account (WIP)">
               <p>Delete your account and all of your source data. This is irreversible.</p>
