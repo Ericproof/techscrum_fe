@@ -14,7 +14,6 @@ import DailyScrum from '../../DailyScrum/DailyScrum';
 interface IPropsNavMain {
   currentProject: IProjectData;
   shortCutAdded: () => void;
-  shortCutRemoved: () => void;
   shortCutUpdated: () => void;
 }
 
@@ -29,7 +28,7 @@ export default function NavMain(props: IPropsNavMain) {
   const [addLinkToggle, setAddLinkToggle] = useState(false);
   const { boardId = '', projectId = '' } = useParams();
 
-  const { currentProject, shortCutAdded, shortCutRemoved, shortCutUpdated } = props;
+  const { currentProject, shortCutAdded, shortCutUpdated } = props;
   return (
     <div className={styles.container}>
       <div className={styles.containerTop}>
