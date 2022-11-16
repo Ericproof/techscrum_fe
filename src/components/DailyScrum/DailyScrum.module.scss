@@ -13,6 +13,9 @@ $colorBlue: rgb(50, 115, 246);
 .dailyScrumModal {
   max-width: 45% !important;
 }
+.dailyScrumContainer {
+  padding: 40px;
+}
 .dailyScrumHeader {
   display: flex;
   height: 50px;
@@ -33,7 +36,8 @@ $colorBlue: rgb(50, 115, 246);
   }
 }
 .btnContainer {
-  width: 25%;
+  max-width: 200px;
+  width: 100%;
   height: 40px;
   display: flex;
   justify-content: space-between;
