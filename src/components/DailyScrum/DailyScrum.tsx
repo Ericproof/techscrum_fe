@@ -1,13 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { AiOutlineClose } from 'react-icons/ai';
+import { toast } from 'react-toastify';
 import styles from './DailyScrum.module.scss';
 import DailyScrumTicket from './DailyScrumTicket/DailyScrumTicket';
 import Modal from '../Modal/Modal';
 import { getDailyScrums, updateDailyScrum } from '../../api/dailyScrum/dailyScrum';
 import { UserContext } from '../../context/UserInfoProvider';
-
-// WIP need to add submit function
 
 interface IDailyScrumModal {
   onClickCloseModal: () => void;
@@ -30,22 +29,24 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal) {
 
   useEffect(() => {
     const handleDailyScrum = async () => {
-      const results = await getDailyScrums(projectId, userId);
-      const dailyResult = results.data.filter((result) => {
-        return result.createdDate === dateHandler(new Date());
-      });
-      if (dailyResult.length > 0) {
-        setDailyScrumTicketData(dailyResult);
-      } else {
-        const newResults = await getDailyScrums(projectId, userId);
-        const newDailyResults = newResults.data
-          .filter((result) => {
-            return result.createdDate === dateHandler(new Date());
-          })
-          .filter((result) => {
-            return result.taskId.id === userId;
-          });
-        setDailyScrumTicketData(newDailyResults);
+      try {
+        const searchCase = 'search-all';
+        const results = await getDailyScrums(
+          projectId,
+          userId,
+          'none',
+          dateHandler(new Date()),
+          searchCase
+        );
+        if (results.data.length === 0) {
+          toast('No dailyScrum data for now!', { theme: 'colored', toastId: 'dailyScrum error' });
+        }
+        setDailyScrumTicketData(results.data);
+      } catch (e) {
+        toast.error('Failed tp get dailyScrum data!', {
+          theme: 'colored',
+          toastId: 'dailyScrum error'
+        });
       }
     };
     handleDailyScrum();
@@ -114,7 +115,7 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal) {
     setSubmitting(false);
   };
   return (
-    <>
+    <div className={styles.dailyScrumContainer}>
       <div className={styles.dailyScrumHeader}>
         <h2 data-testid="dailyscrum-header">Daily Log</h2>
         <button
@@ -126,26 +127,22 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal) {
         </button>
       </div>
       <h4>Today: {dateHandler(new Date())}</h4>
-      {dailyScrumTicketData
-        .filter((ticket) => {
-          return dateHandler(ticket.createdAt) === dateHandler(new Date());
-        })
-        .map((ticket) => {
-          return (
-            <DailyScrumTicket
-              key={ticket.id}
-              id={ticket.id}
-              title={ticket.title}
-              progress={ticket.progress}
-              finish={ticket.finish}
-              finishValidation={ticket.finishValidation}
-              onChangeFinish={onChangeFinish}
-              onChangeSupport={onChangeSupport}
-              onChangeReason={onChangeReason}
-              onChangeProgress={onChangeProgress}
-            />
-          );
-        })}
+      {dailyScrumTicketData.map((ticket) => {
+        return (
+          <DailyScrumTicket
+            key={ticket.id}
+            id={ticket.id}
+            title={ticket.title}
+            progress={ticket.progress}
+            finish={ticket.finish}
+            finishValidation={ticket.finishValidation}
+            onChangeFinish={onChangeFinish}
+            onChangeSupport={onChangeSupport}
+            onChangeReason={onChangeReason}
+            onChangeProgress={onChangeProgress}
+          />
+        );
+      })}
       <div className={styles.btnContainer}>
         <button
           className={styles.cancelBtn}
@@ -163,7 +160,7 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal) {
           Submit
         </button>
       </div>
-    </>
+    </div>
   );
 }
 
