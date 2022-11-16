@@ -42,6 +42,7 @@ import AboutPageT2 from './pages/AboutPageT2/AboutPageT2';
 import { getDomains } from './api/domain/domain';
 import BacklogPage from './pages/BacklogPage/BacklogPage';
 import DashboardLayout from './components/DashboardLayout/DashboardLayout';
+import ShortcutPage from './pages/ShortcutPage/ShortcutPage';
 
 function App() {
   const [showPages, setShowPages] = useState(null);
@@ -95,6 +96,7 @@ function App() {
                   <Route path="/projects/:projectId/" element={<DashboardLayout />}>
                     <Route path="board/:boardId" element={<BoardPage />} />
                     <Route path="board/:boardId/backlog" element={<BacklogPage />} />
+                    <Route path="shortcuts" element={<ShortcutPage />} />
                   </Route>
                   <Route path="/settings/:projectId" element={<Setting />} />
                   <Route path="/me" element={<UserMePage />} />

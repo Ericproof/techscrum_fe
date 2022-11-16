@@ -335,10 +335,6 @@ export default function NavMain(props: IPropsNavMain) {
               shortCutAdded();
             }}
             shortCutUpdated={shortCutUpdated}
-            shortCutRemoved={() => {
-              setAddLinkToggle(false);
-              shortCutRemoved();
-            }}
           />
         )}
       </div>

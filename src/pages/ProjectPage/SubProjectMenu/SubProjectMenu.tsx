@@ -8,10 +8,11 @@ import InputV2 from '../../../components/FormV2/InputV2/InputV2';
 interface ISubProjectMenu {
   toggleSearchMenu: boolean;
   projectList: any;
+  closeModal: any;
 }
 
 export default function SubProjectMenu(props: ISubProjectMenu) {
-  const { toggleSearchMenu, projectList } = props;
+  const { toggleSearchMenu, projectList, closeModal } = props;
   const [filteredResult, setFilteredResult] = useState<any>(null);
   const onChangeFilterProject = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.value) {
@@ -27,7 +28,13 @@ export default function SubProjectMenu(props: ISubProjectMenu) {
   const renderSearchItem = () => {
     return filteredResult?.map((item) => {
       return (
-        <Link to={`/projects/${item.id}/board/${item.boardId}`} style={{ textDecoration: 'none' }}>
+        <Link
+          to={`/projects/${item.id}/board/${item.boardId}`}
+          style={{ textDecoration: 'none' }}
+          onClick={() => {
+            closeModal();
+          }}
+        >
           <div className={styles.searchItem} data-testid="search-result">
             <AiOutlineFolderOpen className={styles.icon} />
             <p>{item.name}</p>

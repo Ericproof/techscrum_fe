@@ -245,10 +245,6 @@ export default function Nav() {
                     fetchProjects();
                   }}
                   shortCutUpdated={fetchProjects}
-                  shortCutRemoved={() => {
-                    setAddLinkToggle(false);
-                    fetchProjects();
-                  }}
                 />
               </Modal>,
               document.body

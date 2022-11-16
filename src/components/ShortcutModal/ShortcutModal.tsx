@@ -11,7 +11,6 @@ interface IOperation {
   addLinkToggle: boolean;
   setAddLinkToggle: (addLinkToggle: boolean) => void;
   shortCutAdded: (data: IShortcutData) => void;
-  shortCutRemoved: () => void;
   shortCutUpdated: () => void;
   selectedLink: IShortcutData | null;
   currentProjectId: string;
@@ -24,7 +23,6 @@ export default function ShortcutModal({
   selectedLink,
   currentProjectId,
   shortCutAdded,
-  shortCutRemoved,
   shortCutUpdated
 }: IOperation) {
   const [webValue, setWebValue] = useState('');
@@ -51,8 +49,6 @@ export default function ShortcutModal({
     setWebValue(selectedLink?.shortcutLink ?? '');
     setNameValue(selectedLink?.name ?? '');
   }, [selectedLink]);
-
-  useEffect(() => {}, [webValue, nameValue]);
 
   const onClickAddShortcut = () => {
     createShortcut(currentProjectId, { name: nameValue, shortcutLink: webValue }).then((res) => {
@@ -98,9 +94,6 @@ export default function ShortcutModal({
                 <EditShortcutButtons
                   setAddLinkToggle={setAddLinkToggle}
                   addLinkToggle={addLinkToggle}
-                  shortCutRemoved={shortCutRemoved}
-                  currentProjectId={currentProjectId}
-                  shortcutId={selectedLink?.id ?? ''}
                   onClickUpdateShortcut={onClickUpdateShortcut}
                 />
               )

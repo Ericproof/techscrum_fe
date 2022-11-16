@@ -4,6 +4,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
+import { AiOutlineSetting, AiOutlineUnorderedList } from 'react-icons/ai';
+import { BsBriefcase, BsCreditCard } from 'react-icons/bs';
 import styles from './Setting.module.scss';
 import { deleteProject, showProject, updateProject } from '../../api/projects/projects';
 import { IOnChangeProjectLead, IProjectEditor } from '../../types';
@@ -14,11 +16,49 @@ import SettingCard from '../../components/SettingCard/SettingCard';
 import ChangeIcon from '../../components/ProjectEditor/ChangeIcon/ChangeIcon';
 import DropdownV2 from '../../components/FormV2/DropdownV2/DropdownV2';
 import { getUsers } from '../../api/user/user';
-import NavigationV2 from '../../components/BoardNavigationV2/NavigationV2';
 import ButtonV2 from '../../components/FormV2/ButtonV2/ButtonV2';
 import 'react-toastify/dist/ReactToastify.css';
 import Modal from '../../components/Modal/Modal';
 import checkAccess from '../../utils/helpers';
+import MainMenuV2 from '../MainMenuV2/MainMenuV2';
+
+const subMenuItem = (projectId: string) => {
+  return {
+    planning: [
+      {
+        name: 'Project Details',
+        url: `/settings/${projectId}`,
+        icon: <AiOutlineSetting />,
+        dataTestId: 'preference',
+        active: true
+      },
+      {
+        name: 'Project members',
+        checkAccess: 'view:members',
+        url: `/projects/${projectId}/members`,
+        icon: <BsBriefcase />,
+        dataTestId: 'project-members'
+      }
+    ],
+    utilBtns: [
+      {
+        name: 'Plan & Billing (WIP)',
+        checkAccess: 'view:billing',
+        url: `/billing`,
+        icon: <BsCreditCard />,
+        dataTestId: 'plan-and-billing'
+      }
+    ],
+    dailyScrumBtn: [
+      {
+        name: 'Custom Fields (WIP)',
+        url: `/custom-fields/${projectId}`,
+        icon: <AiOutlineUnorderedList />,
+        dataTestId: 'custom-fields'
+      }
+    ]
+  };
+};
 
 export default function Setting() {
   const navigate = useNavigate();
@@ -109,8 +149,8 @@ export default function Setting() {
 
   return (
     <div className={[styles.settingPage, 'relative'].join(' ')} data-testid="setting-page">
-      <NavigationV2 />
-      <SubSettingMenu />
+      <MainMenuV2 />
+      <SubSettingMenu items={subMenuItem(projectId)} />
       <div className={styles.settingContainer}>
         <div className={styles.settingMiniContainer}>
           <header>
@@ -186,32 +226,11 @@ export default function Setting() {
               />
             </SettingCard>
           )}
-          <SettingCard title="Change Password (WIP)">
-            <div className={[styles.gap, styles.row, 'flex'].join(' ')}>
-              <InputV2
-                label="New Password"
-                onValueChanged={() => {}}
-                onValueBlur={() => {}}
-                defaultValue=""
-                name="newPassword"
-                type="password"
-              />
-              <InputV2
-                label="Confirm Password"
-                onValueChanged={() => {}}
-                onValueBlur={() => {}}
-                defaultValue=""
-                name="confirmPassword"
-                type="password"
-              />
-            </div>
-            <ButtonV2 text="SAVE CHANGES" onClick={() => {}} />
-          </SettingCard>
         </div>
       </div>
       {showDeleteModal && (
         <Modal classesName={styles.modal}>
-          <p>Are you sure you want to delete the account?</p>
+          <p>Are you sure you want to delete the project?</p>
           <div className={styles.modalBtn}>
             <ButtonV2
               text="Confirm"

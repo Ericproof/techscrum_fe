@@ -7,7 +7,7 @@ import styles from '../FormV2.module.scss';
 interface IInputV2 {
   onValueChanged: (e: any) => void;
   onValueBlur?: (e: any) => void;
-  defaultValue: string;
+  defaultValue?: string;
   name: string;
   label: string;
   required?: boolean;
@@ -17,6 +17,8 @@ interface IInputV2 {
   max?: number;
   dataTestId?: string;
   loading?: boolean;
+  classes?: string | string[];
+  value?: string;
 }
 
 export default function InputV2(props: IInputV2) {
@@ -30,16 +32,18 @@ export default function InputV2(props: IInputV2) {
     onValueChanged,
     onValueBlur,
     dataTestId,
-    loading = false
+    loading = false,
+    classes,
+    value
   } = props;
-  const [value, setValue] = useState(defaultValue);
+  const [val, setVal] = useState(defaultValue);
   const [error, setError] = useState<null | string>(null);
   const [isActive, setIsActive] = useState(false);
 
   const onChanged = (e: any) => {
     const errorMessage = getErrorMessage(e, props);
     setError(errorMessage);
-    setValue(e.target.value);
+    setVal(e.target.value);
     onValueChanged(e);
   };
 
@@ -52,7 +56,7 @@ export default function InputV2(props: IInputV2) {
 
   useEffect(() => {
     if (!loading) {
-      setValue(defaultValue);
+      setVal(defaultValue);
     }
   }, [loading]);
 
@@ -66,7 +70,8 @@ export default function InputV2(props: IInputV2) {
         'relative',
         styles.inputContainer,
         error ? styles.borderRed : '',
-        isActive ? styles.borderActive : ''
+        isActive ? styles.borderActive : '',
+        classes
       ].join(' ')}
     >
       <label
@@ -81,7 +86,7 @@ export default function InputV2(props: IInputV2) {
       <input
         className={[styles.input].join(' ')}
         type={type}
-        value={value}
+        value={value || val}
         name={name}
         onChange={onChanged}
         onBlur={onBlurValue}
@@ -104,5 +109,8 @@ InputV2.defaultProps = {
   max: null,
   onValueBlur: null,
   dataTestId: null,
-  loading: false
+  loading: false,
+  classes: null,
+  value: null,
+  defaultValue: null
 };

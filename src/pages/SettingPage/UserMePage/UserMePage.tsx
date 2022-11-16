@@ -9,9 +9,9 @@ import styles from './UserMePage.module.scss';
 import SettingCard from '../../../components/SettingCard/SettingCard';
 import InputV2 from '../../../components/FormV2/InputV2/InputV2';
 import SubSettingMenu from '../../../components/SubSettingMenu/SubSettingMenu';
-import NavigationV2 from '../../../components/BoardNavigationV2/NavigationV2';
 import ButtonV2 from '../../../components/FormV2/ButtonV2/ButtonV2';
 import Modal from '../../../components/Modal/Modal';
+import MainMenuV2 from '../../MainMenuV2/MainMenuV2';
 
 export default function UserMePage() {
   const navigate = useNavigate();
@@ -65,7 +65,7 @@ export default function UserMePage() {
   return (
     <>
       <div className={styles.settingPage} data-testid="setting-page">
-        <NavigationV2 />
+        <MainMenuV2 />
         <SubSettingMenu />
         <div className={styles.settingContainer}>
           <div className={styles.settingMiniContainer}>
@@ -117,7 +117,7 @@ export default function UserMePage() {
               </div>
               <ButtonV2 text="Save Changes" onClick={onSaveMe} />
             </SettingCard>
-            <SettingCard title="Change Password">
+            <SettingCard title="Change Password (WIP)">
               <div className={[styles.gap, styles.row, 'flex'].join(' ')}>
                 <InputV2
                   label="New Password"
@@ -138,7 +138,7 @@ export default function UserMePage() {
               </div>
               <ButtonV2 text="Update" onClick={onSaveMe} />
             </SettingCard>
-            <SettingCard title="Delete Account">
+            <SettingCard title="Delete Account (WIP)">
               <p>Delete your account and all of your source data. This is irreversible.</p>
               <ButtonV2
                 text="DELETE"

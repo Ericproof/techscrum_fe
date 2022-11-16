@@ -1,30 +1,36 @@
 import React, { useContext } from 'react';
 import { useParams, NavLink } from 'react-router-dom';
 import { BsBriefcase, BsCreditCard } from 'react-icons/bs';
-import { AiOutlineSetting, AiOutlineUnorderedList } from 'react-icons/ai';
+import { AiOutlineSetting } from 'react-icons/ai';
 import { CgProfile } from 'react-icons/cg';
 import { IProject, IProjectData } from '../../types';
 
 import { ProjectContext } from '../../context/ProjectProvider';
 import styles from './SubSettingMenu.module.scss';
 
-export default function SubSettingMenu() {
+interface ISubSettingMenu {
+  items?: any;
+}
+
+export default function SubSettingMenu(props: ISubSettingMenu) {
+  const { items = null } = props;
   const { boardId = '', projectId = '' } = useParams();
   const projectList = useContext<IProject[]>(ProjectContext);
   const currentProject: IProjectData = projectList.filter(
     (project: IProjectData) => project.id === projectId
   )[0];
 
-  const buttons = {
+  const buttons = items || {
     planning: [
       {
-        name: '(WIP) User Profile',
-        url: `/projects/${projectId}/board/${boardId}`,
+        name: 'User Profile',
+        url: `/me`,
         icon: <CgProfile />,
-        dataTestId: 'user-profile'
+        dataTestId: 'user-profile',
+        active: true
       },
       {
-        name: '(WIP) Preference',
+        name: 'Preference (WIP)',
         url: `/projects/${projectId}/board/${boardId}/backlog`,
         icon: <AiOutlineSetting />,
         dataTestId: 'preference'
@@ -32,26 +38,18 @@ export default function SubSettingMenu() {
     ],
     utilBtns: [
       {
-        name: '(WIP) Company Details',
+        name: 'Company Details (WIP)',
         checkAccess: 'view:members',
         url: `/projects/${currentProject?.id}/members`,
         icon: <BsBriefcase />,
         dataTestId: 'company-details'
       },
       {
-        name: '(WIP) Plan & Billing',
+        name: 'Plan & Billing (WIP)',
         checkAccess: 'view:settings',
         url: `/settings/${currentProject?.id}`,
         icon: <BsCreditCard />,
         dataTestId: 'plan-and-billing'
-      }
-    ],
-    dailyScrumBtn: [
-      {
-        name: '(WIP)Custom Fields',
-        showDailyScrumFunction: () => {},
-        icon: <AiOutlineUnorderedList />,
-        dataTestId: 'custom-fields'
       }
     ]
   };
@@ -63,7 +61,7 @@ export default function SubSettingMenu() {
           end
           to={btn.url}
           data-testid={btn.dataTestId}
-          className={styles.navBtn}
+          className={[styles.navBtn, btn.active ? styles.active : ''].join(' ')}
           key={btn.name}
         >
           {btn.icon}
@@ -91,3 +89,7 @@ export default function SubSettingMenu() {
     </nav>
   );
 }
+
+SubSettingMenu.defaultProps = {
+  items: null
+};

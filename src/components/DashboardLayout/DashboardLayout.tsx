@@ -1,12 +1,12 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import NavigationV2 from '../BoardNavigationV2/NavigationV2';
+import MainMenuV2 from '../../pages/MainMenuV2/MainMenuV2';
 import styles from './DashboardLayout.module.scss';
 
 export default function DashboardLayout() {
   return (
     <div className={styles.container}>
-      <NavigationV2 />
+      <MainMenuV2 />
       <div className={styles.childrenContainer}>
         <Outlet />
       </div>

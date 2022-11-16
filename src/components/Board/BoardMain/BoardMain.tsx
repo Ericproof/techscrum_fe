@@ -12,6 +12,7 @@ interface Props {
   passTaskId: (itemId: string) => void;
   updateIsCreateNewCard: () => void;
   projectId: string;
+  loading: boolean;
 }
 
 export default function BoardMain({
@@ -19,9 +20,10 @@ export default function BoardMain({
   onDragEventHandler,
   passTaskId,
   updateIsCreateNewCard,
-  projectId
+  projectId,
+  loading
 }: Props) {
-  if (!columnsInfo || Object.keys(columnsInfo).length === 0) {
+  if (!columnsInfo || Object.keys(columnsInfo).length === 0 || loading) {
     return <Loading />;
   }
   return (

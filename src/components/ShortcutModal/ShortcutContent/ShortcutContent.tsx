@@ -29,7 +29,7 @@ export default function ShortcutContent({
           onValueChanged={(event) => {
             setWebValue(event.target.value);
           }}
-          defaultValue={webValue}
+          value={webValue}
           name="webValue"
           dataTestId="shortcut-title"
           placeHolder="e.g. https://www.techscrumapp.com"
@@ -46,7 +46,7 @@ export default function ShortcutContent({
           onValueChanged={(event) => {
             setNameValue(event.target.value);
           }}
-          defaultValue={value}
+          value={value}
           name="name"
           dataTestId="shortcut-name"
           placeHolder="e.g. TechScrum website"

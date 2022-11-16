@@ -1,34 +1,18 @@
 import React from 'react';
-import { deleteShortcut } from '../../../api/shortcut/shortcut';
 import styles from './EditShortcutButtons.module.scss';
 
 interface IOperation {
   addLinkToggle: boolean;
   setAddLinkToggle: (addLinkToggle: boolean) => void;
-  shortCutRemoved: () => void;
   onClickUpdateShortcut: () => void;
-  currentProjectId: string;
-  shortcutId: string;
 }
 export default function EditShortcutButtons({
   addLinkToggle,
   setAddLinkToggle,
-  shortCutRemoved,
-  onClickUpdateShortcut,
-  currentProjectId,
-  shortcutId
+  onClickUpdateShortcut
 }: IOperation) {
-  const removeShortCut = () => {
-    deleteShortcut(currentProjectId, shortcutId).then(() => {
-      shortCutRemoved();
-    });
-  };
-
   return (
     <div className={styles.footerContent}>
-      <button className={styles.removeButton} type="button" onClick={removeShortCut}>
-        <span>Remove shortcut</span>
-      </button>
       <button
         className={styles.cancelButton}
         type="button"

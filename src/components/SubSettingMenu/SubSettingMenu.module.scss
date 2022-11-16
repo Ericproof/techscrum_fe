@@ -138,3 +138,9 @@ $white: rgb(245, 245, 245);
     font-weight: 600;
     padding: 0px 0px 0px 15px;
 }
+
+.active { 
+  color: $primaryColor!important;
+  border-right: 3px solid $primaryColor!important;
+  border-radius: 0!important;
+}

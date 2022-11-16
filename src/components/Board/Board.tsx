@@ -71,6 +71,7 @@ export default function Board() {
   const [isViewTask, setIsViewTask] = useState(false);
   const [taskData, setTaskData] = useState<TaskEntity>();
   const [labels, setLabels] = useState<ILabelData[]>([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!projectId || projectId === '') {
@@ -209,11 +210,12 @@ export default function Board() {
           items: item.taskList
         };
       }
-
+      setLoading(false);
       return setColumnsInfo(columnInfoData);
     };
 
     const fetchBoardInfo = async () => {
+      setLoading(true);
       const boardInfo = await getBoard(boardId);
       fetchColumnsData(boardInfo);
     };
@@ -222,7 +224,7 @@ export default function Board() {
 
   return (
     <div className={style.container}>
-      <h1 className={style.header}>Project</h1>
+      <h1 className={style.header}>Board</h1>
       <ProjectNavigationV3 />
       <BoardSearch
         updateIsCreateNewCard={getCreateNewCardStateFromChildren}
@@ -235,6 +237,7 @@ export default function Board() {
         passTaskId={getTaskId}
         updateIsCreateNewCard={getCreateNewCardStateFromChildren}
         projectId={projectId}
+        loading={loading}
       />
       {isCreateNewCard && (
         <Modal classesName="clear">
