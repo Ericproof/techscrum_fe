@@ -27,6 +27,7 @@ interface ITaskInput {
   onClickDelete: (id: string) => void;
   onClickChangePriority: (id: string, priority: string) => void;
   onClickAddToBacklog?: (id: string) => void;
+  onClickAddToSprint?: (taskId: string, sprintId: string) => void;
 }
 export default function TaskItem({
   taskTitle,
@@ -45,7 +46,8 @@ export default function TaskItem({
   onClickChangeStatus,
   onClickDelete,
   onClickChangePriority,
-  onClickAddToBacklog
+  onClickAddToBacklog,
+  onClickAddToSprint
 }: ITaskInput) {
   const allTypes = {
     story:
@@ -160,6 +162,7 @@ export default function TaskItem({
           toggleDisableShowOptionBtnEffect={toggleDisableShowOptionBtnEffect}
           sprintId={sprintId}
           onClickAddToBacklog={onClickAddToBacklog}
+          onClickAddToSprint={onClickAddToSprint}
           sprintData={sprintData}
         />
       </div>
@@ -168,5 +171,6 @@ export default function TaskItem({
 }
 TaskItem.defaultProps = {
   onClickAddToBacklog: () => {},
+  onClickAddToSprint: () => {},
   sprintData: []
 };

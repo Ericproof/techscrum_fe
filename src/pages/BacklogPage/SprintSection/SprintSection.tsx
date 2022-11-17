@@ -11,6 +11,7 @@ import TaskItem from '../TaskItem/TaskItem';
 import { addTask, updateTask, deleteTask } from '../../../api/backlog/backlog';
 import styles from './SprintSection.module.scss';
 import { IUserInfo, Itypes, IStatusBacklog } from '../../../types';
+import CreateEditSprint from '../CreateEditSprint/CreateEditSprint';
 
 // WIP need to communicate with backend
 interface ISprintSection {
@@ -34,6 +35,7 @@ export default function SprintSection({
   sprintData
 }: ISprintSection) {
   const [currentTypeOption, setCurrentTypeOption] = useState('story');
+  const [showEditSprint, setShowEditSprint] = useState(false);
   const { boardId = '', projectId = '' } = useParams();
   const createIssueRef = useRef<HTMLInputElement | null>(null);
   const createIssueAction = () => {
@@ -110,20 +112,44 @@ export default function SprintSection({
       getBacklogDataApi();
     });
   };
+  const onClickAddToSprint = (taskId: string, sprintId: string) => {
+    const data = { sprintId };
+    updateTask(taskId, data).then(() => {
+      getBacklogDataApi();
+    });
+  };
   return (
     <section className={[styles.container, styles.sprintContainer].join(' ')}>
       <div className={styles.header}>
         <div className={styles.heading}>
           <h1>{sprint.name}</h1>
           <div className={styles.dateAndIssueCount}>
-            <div>
-              {dateWithDay(sprint.startDate)} <BsArrowRight /> {dateWithDay(sprint.endDate)}
+            <div className={styles.date}>
+              <p>{dateWithDay(sprint.startDate)}</p>
+              <BsArrowRight />
+              <p> {dateWithDay(sprint.endDate)}</p>
             </div>
             <div className={styles.issueCount}> ({loaded && sprint.taskId.length} issues)</div>
           </div>
         </div>
         <div className={styles.toolbar}>
-          <IconButton icon={<BiDotsHorizontal />} tooltip="actions" onClick={undefined} />
+          <IconButton
+            icon={<BiDotsHorizontal />}
+            tooltip="actions"
+            onClick={() => {
+              setShowEditSprint(true);
+            }}
+          />
+          {showEditSprint && (
+            <CreateEditSprint
+              type="Edit"
+              onClickCloseModal={() => {
+                setShowEditSprint(false);
+              }}
+              getBacklogDataApi={getBacklogDataApi}
+              currentSprint={sprint}
+            />
+          )}
         </div>
       </div>
       <div className={styles.listContainer}>
@@ -149,6 +175,7 @@ export default function SprintSection({
                 onClickChangePriority={onClickChangePriority}
                 sprintId={task.sprintId}
                 onClickAddToBacklog={onClickAddToBacklog}
+                onClickAddToSprint={onClickAddToSprint}
                 sprintData={sprintData}
               />
             );

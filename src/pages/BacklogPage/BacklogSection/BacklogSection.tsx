@@ -98,6 +98,12 @@ export default function BacklogSection({
   const createSprint = () => {
     setShowCreateSprint(true);
   };
+  const onClickAddToSprint = (taskId: string, sprintId: string) => {
+    const data = { sprintId };
+    updateTask(taskId, data).then(() => {
+      getBacklogDataApi();
+    });
+  };
   return (
     <section className={styles.container}>
       <div className={styles.header}>
@@ -139,6 +145,7 @@ export default function BacklogSection({
                 assignee={task.assignId}
                 priority={task.priority}
                 onClickChangePriority={onClickChangePriority}
+                onClickAddToSprint={onClickAddToSprint}
                 sprintId={task.sprintId}
                 sprintData={sprintData}
               />

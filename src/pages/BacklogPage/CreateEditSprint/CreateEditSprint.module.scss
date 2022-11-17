@@ -4,11 +4,12 @@ $colorGray: rgb(102, 106, 133);
 $colorBlue: rgb(50, 115, 246);
 $darkGray: rgb(240, 240, 240);
 $lightGray: rgb(250, 251, 252);
+$colorRed: rgb(234, 51, 35);
 
 @mixin btn {
   height: 100%;
   border-radius: 5px;
-  width: 43%;
+  width: 30%;
   cursor: pointer;
 }
 @mixin input {
@@ -127,12 +128,13 @@ $lightGray: rgb(250, 251, 252);
     }
   }
   .btnContainer {
-    max-width: 200px;
+    max-width: 300px;
     width: 100%;
     height: 40px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     margin-left: auto;
+    gap: 10px;
     .cancelBtn {
       border: 1px solid $colorGray;
       color: $colorGray;
@@ -143,6 +145,12 @@ $lightGray: rgb(250, 251, 252);
       border: none;
       color: white;
       background-color: $colorBlue;
+      @include btn();
+    }
+    .deleteBtn {
+      border: none;
+      color: white;
+      background-color: $colorRed;
       @include btn();
     }
   }

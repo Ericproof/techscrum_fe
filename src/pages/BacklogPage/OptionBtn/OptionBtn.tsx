@@ -10,6 +10,7 @@ interface IOptionBtn {
   sprintData?: any;
   onClickDelete: (id: string) => void;
   onClickAddToBacklog?: (id: string) => void;
+  onClickAddToSprint?: (taskId: string, sprintId: string) => void;
   toggleDisableShowOptionBtnEffect: () => void;
 }
 export default function OptionBtn({
@@ -19,7 +20,8 @@ export default function OptionBtn({
   sprintData,
   onClickDelete,
   toggleDisableShowOptionBtnEffect,
-  onClickAddToBacklog
+  onClickAddToBacklog,
+  onClickAddToSprint
 }: IOptionBtn) {
   const [clickOptionBtnShowStyle, setClickOptionBtnShowStyle] = useState(false);
   const [hoverOptionBtn, setHoverOptionBtn] = useState(false);
@@ -87,13 +89,26 @@ export default function OptionBtn({
               </button>
             </li>
           )}
-          {sprintData.map((sprint) => {
-            return (
-              <li key={sprint.id}>
-                <button className={styles.dropDownBtn}>Add to {sprint.name}</button>
-              </li>
-            );
-          })}
+          {sprintData
+            .filter((sprint) => {
+              return sprint.id !== sprintId;
+            })
+            .map((sprint) => {
+              return (
+                <li key={sprint.id}>
+                  <button
+                    className={styles.dropDownBtn}
+                    onClick={() => {
+                      if (onClickAddToSprint) {
+                        onClickAddToSprint(taskId, sprint.id);
+                      }
+                    }}
+                  >
+                    Add to {sprint.name}
+                  </button>
+                </li>
+              );
+            })}
           <li>
             <button
               className={styles.dropDownBtn}
@@ -113,5 +128,6 @@ export default function OptionBtn({
 
 OptionBtn.defaultProps = {
   onClickAddToBacklog: () => {},
+  onClickAddToSprint: () => {},
   sprintData: []
 };

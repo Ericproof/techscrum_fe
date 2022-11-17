@@ -13,7 +13,7 @@
   background-color: #e6e6e7;
   padding: 0.5rem;
   border-radius: 0.5rem;
-  margin-bottom: 13px;
+  margin-bottom: 20px;
 }
 
 .header {
@@ -41,6 +41,15 @@
     .issueCount {
       margin-left: 10px;
       @include ellipsis();
+    }
+    .date {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      p {
+        margin: 0;
+        padding: 0;
+      }
     }
   }
 }

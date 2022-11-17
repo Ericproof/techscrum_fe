@@ -7,26 +7,37 @@ import { DatePicker } from '@atlaskit/datetime-picker';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import styles from './CreateEditSprint.module.scss';
 import Modal from '../../../lib/Modal/Modal';
-import { createSprint } from '../../../api/sprint/sprint';
+import { createSprint, updateSprint, deleteSprint } from '../../../api/sprint/sprint';
 
 interface ICreateEditSprint {
   type: string;
   onClickCloseModal: () => void;
   getBacklogDataApi: () => void;
+  currentSprint?: any;
 }
 export default function CreateEditSprint({
   type,
   onClickCloseModal,
-  getBacklogDataApi
+  getBacklogDataApi,
+  currentSprint
 }: ICreateEditSprint) {
+  const dateWithDay = (date: Date | null) => {
+    if (date != null) {
+      const fullDate = date.toString().split('T')[0];
+      return fullDate;
+    }
+    return '';
+  };
+
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const [duration, setDuration] = useState('Custom');
-  const [sprintName, setSprintName] = useState('');
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+  const [sprintName, setSprintName] = useState(currentSprint ? currentSprint.name : '');
+  const [startDate, setStartDate] = useState(
+    currentSprint ? dateWithDay(currentSprint.startDate) : ''
+  );
+  const [endDate, setEndDate] = useState(currentSprint ? dateWithDay(currentSprint.endDate) : '');
   const [sprintGoal, setSprintGoal] = useState('');
   const { projectId = '', boardId = '' } = useParams();
-
   const durationList = ['1 week', '2 weeks', '3 weeks', 'Custom'];
 
   const onClickCreateSprint = () => {
@@ -38,6 +49,24 @@ export default function CreateEditSprint({
       endDate
     };
     createSprint(data).then(() => {
+      getBacklogDataApi();
+      onClickCloseModal();
+    });
+  };
+
+  const onClickUpdateSprint = (id: string) => {
+    const data = {
+      name: sprintName,
+      startDate,
+      endDate
+    };
+    updateSprint(id, data).then(() => {
+      getBacklogDataApi();
+      onClickCloseModal();
+    });
+  };
+  const onClickDeleteSprint = (id: string) => {
+    deleteSprint(id).then(() => {
       getBacklogDataApi();
       onClickCloseModal();
     });
@@ -141,10 +170,29 @@ export default function CreateEditSprint({
               </div>
             </div>
             <div className={styles.btnContainer}>
+              {type === 'Edit' && (
+                <button
+                  className={styles.deleteBtn}
+                  onClick={() => {
+                    onClickDeleteSprint(currentSprint.id);
+                  }}
+                >
+                  Delete
+                </button>
+              )}
               <button className={styles.cancelBtn} onClick={onClickCloseModal}>
                 Cancel
               </button>
-              <button className={styles.submitBtn} onClick={onClickCreateSprint}>
+              <button
+                className={styles.submitBtn}
+                onClick={() => {
+                  if (type === 'Create') {
+                    onClickCreateSprint();
+                  } else {
+                    onClickUpdateSprint(currentSprint.id);
+                  }
+                }}
+              >
                 {type === 'Create' ? 'Create' : 'Update'}
               </button>
             </div>
@@ -155,3 +203,6 @@ export default function CreateEditSprint({
     </>
   );
 }
+CreateEditSprint.defaultProps = {
+  currentSprint: null
+};
