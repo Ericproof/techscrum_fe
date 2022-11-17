@@ -14,6 +14,7 @@ interface ISubProjectMenu {
 export default function SubProjectMenu(props: ISubProjectMenu) {
   const { toggleSearchMenu, projectList, closeModal } = props;
   const [filteredResult, setFilteredResult] = useState<any>(null);
+  const [searchValue, setSearchValue] = useState('');
   const onChangeFilterProject = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.value) {
       setFilteredResult(null);
@@ -22,6 +23,7 @@ export default function SubProjectMenu(props: ISubProjectMenu) {
     const result = projectList.filter((item) => {
       return item.name?.toLowerCase().includes(e.target.value.toLowerCase());
     });
+    setSearchValue(e.target.value);
     setFilteredResult(result);
   };
 
@@ -32,6 +34,8 @@ export default function SubProjectMenu(props: ISubProjectMenu) {
           to={`/projects/${item.id}/board/${item.boardId}`}
           style={{ textDecoration: 'none' }}
           onClick={() => {
+            setSearchValue('');
+            setFilteredResult(null);
             closeModal();
           }}
         >
@@ -53,7 +57,7 @@ export default function SubProjectMenu(props: ISubProjectMenu) {
         label="Search"
         dataTestId="search-input"
         onValueChanged={onChangeFilterProject}
-        defaultValue=""
+        value={searchValue}
         name="search"
       />
       {filteredResult && (
