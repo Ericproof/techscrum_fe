@@ -12,6 +12,7 @@ import SprintSection from './SprintSection/SprintSection';
 export default function BacklogPage() {
   const [loaded, setLoaded] = useState(false);
   const [backlogData, setBacklogData] = useState(null);
+  const [sprintData, setSprintData] = useState([]);
   const [statusData, setStatusData] = useState([]);
   const { projectId = '', boardId = '' } = useParams();
   const [typesData, setTypesData] = useState(null);
@@ -23,6 +24,7 @@ export default function BacklogPage() {
       try {
         const res = await getBacklog(projectId);
         setBacklogData(res.backlog);
+        setSprintData(res.sprints);
         setLoaded(true);
       } catch (e) {
         setLoaded(false);
@@ -61,17 +63,26 @@ export default function BacklogPage() {
         <h1 data-testid="backlog-header">Backlog</h1>
       </div>
       <div className={styles.scrollContainer}>
-        <SprintSection
-          sprintData={{ cards: [] }}
-          getBacklogDataApi={getBacklogDataApi}
-          loaded={loaded}
-          statusData={statusData}
-          typesData={typesData}
-          userList={userList}
-          typeStatusUserLoaded={typeStatusUserLoaded}
-        />
+        {sprintData.map((sprint: any) => {
+          return (
+            <React.Fragment key={sprint.id}>
+              <SprintSection
+                sprint={sprint}
+                sprintData={sprintData}
+                getBacklogDataApi={getBacklogDataApi}
+                loaded={loaded}
+                statusData={statusData}
+                typesData={typesData}
+                userList={userList}
+                typeStatusUserLoaded={typeStatusUserLoaded}
+              />
+            </React.Fragment>
+          );
+        })}
+
         <BacklogSection
           backlogData={backlogData}
+          sprintData={sprintData}
           getBacklogDataApi={getBacklogDataApi}
           loaded={loaded}
           statusData={statusData}

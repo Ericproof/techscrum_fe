@@ -3,26 +3,48 @@
 /* eslint-disable no-console */
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
+import { useParams } from 'react-router-dom';
 import { AiOutlineClose } from 'react-icons/ai';
 import { BiChevronDown } from 'react-icons/bi';
 import { DatePicker } from '@atlaskit/datetime-picker';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import styles from './CreateEditSprint.module.scss';
 import Modal from '../../../components/Modal/Modal';
+import { createSprint } from '../../../api/sprint/sprint';
 
 interface ICreateEditSprint {
   type: string;
   onClickCloseModal: () => void;
+  getBacklogDataApi: () => void;
 }
-export default function CreateEditSprint({ type, onClickCloseModal }: ICreateEditSprint) {
+export default function CreateEditSprint({
+  type,
+  onClickCloseModal,
+  getBacklogDataApi
+}: ICreateEditSprint) {
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const [duration, setDuration] = useState('Custom');
   const [sprintName, setSprintName] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [sprintGoal, setSprintGoal] = useState('');
+  const { projectId = '', boardId = '' } = useParams();
 
   const durationList = ['1 week', '2 weeks', '3 weeks', 'Custom'];
+
+  const onClickCreateSprint = () => {
+    const data = {
+      name: sprintName,
+      projectId,
+      boardId,
+      startDate,
+      endDate
+    };
+    createSprint(data).then(() => {
+      getBacklogDataApi();
+      onClickCloseModal();
+    });
+  };
 
   return (
     <>
@@ -31,11 +53,7 @@ export default function CreateEditSprint({ type, onClickCloseModal }: ICreateEdi
           <div className={styles.createEditSprintContainer}>
             <div className={styles.createEditSprintHeader}>
               <h2>{type} Sprint</h2>
-              <button
-                className={styles.closeBtn}
-                onClick={onClickCloseModal}
-                data-testid="dailyscrum-close"
-              >
+              <button className={styles.closeBtn} onClick={onClickCloseModal}>
                 <AiOutlineClose />
               </button>
             </div>
@@ -126,14 +144,10 @@ export default function CreateEditSprint({ type, onClickCloseModal }: ICreateEdi
               </div>
             </div>
             <div className={styles.btnContainer}>
-              <button
-                className={styles.cancelBtn}
-                onClick={onClickCloseModal}
-                data-testid="dailyscrum-cancel"
-              >
+              <button className={styles.cancelBtn} onClick={onClickCloseModal}>
                 Cancel
               </button>
-              <button className={styles.submitBtn}>
+              <button className={styles.submitBtn} onClick={onClickCreateSprint}>
                 {type === 'Create' ? 'Create' : 'Update'}
               </button>
             </div>

@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { BiDotsHorizontal } from 'react-icons/bi';
 import { GoPlus } from 'react-icons/go';
 import { useParams } from 'react-router-dom';
+import { BsArrowRight } from 'react-icons/bs';
 import Button from '../../../components/Button/Button';
 import IconButton from '../../../components/Button/IconButton/IconButton';
 import TaskTypeSelect from '../../../components/Select/TaskTypeSelect/TaskTypeSelect';
@@ -13,6 +14,7 @@ import { IUserInfo, Itypes, IStatusBacklog } from '../../../types';
 
 // WIP need to communicate with backend
 interface ISprintSection {
+  sprint: any;
   sprintData: any;
   getBacklogDataApi: () => void;
   loaded: boolean;
@@ -22,13 +24,14 @@ interface ISprintSection {
   userList: IUserInfo[];
 }
 export default function SprintSection({
-  sprintData,
+  sprint,
   getBacklogDataApi,
   loaded,
   typeStatusUserLoaded,
   statusData,
   typesData,
-  userList
+  userList,
+  sprintData
 }: ISprintSection) {
   const [currentTypeOption, setCurrentTypeOption] = useState('story');
   const { boardId = '', projectId = '' } = useParams();
@@ -43,7 +46,7 @@ export default function SprintSection({
         })[0].id,
         boardId,
         projectId,
-        sprintId: null
+        sprintId: sprint.id
       };
       setCurrentTypeOption('story');
       addTask(data).then(() => {
@@ -93,12 +96,31 @@ export default function SprintSection({
       getBacklogDataApi();
     });
   };
+  const dateWithDay = (date: Date | null) => {
+    if (date != null) {
+      const fullDate = date.toString().split('T')[0];
+      const dateDataArray = fullDate.split('-');
+      return `${dateDataArray[1]}-${dateDataArray[2]}-${dateDataArray[0]}`;
+    }
+    return '';
+  };
+  const onClickAddToBacklog = (id: string) => {
+    const data = { sprintId: null };
+    updateTask(id, data).then(() => {
+      getBacklogDataApi();
+    });
+  };
   return (
     <section className={[styles.container, styles.sprintContainer].join(' ')}>
       <div className={styles.header}>
         <div className={styles.heading}>
-          <h1>Current Sprint</h1>
-          <div className={styles.issueCount}>{loaded && sprintData.cards.length} issues</div>
+          <h1>{sprint.name}</h1>
+          <div className={styles.dateAndIssueCount}>
+            <div>
+              {dateWithDay(sprint.startDate)} <BsArrowRight /> {dateWithDay(sprint.endDate)}
+            </div>
+            <div className={styles.issueCount}> ({loaded && sprint.taskId.length} issues)</div>
+          </div>
         </div>
         <div className={styles.toolbar}>
           <IconButton icon={<BiDotsHorizontal />} tooltip="actions" onClick={undefined} />
@@ -107,7 +129,7 @@ export default function SprintSection({
       <div className={styles.listContainer}>
         {loaded &&
           typeStatusUserLoaded &&
-          sprintData.cards.map((task) => {
+          sprint.taskId.map((task) => {
             return (
               <TaskItem
                 key={task.id}
@@ -126,6 +148,8 @@ export default function SprintSection({
                 priority={task.priority}
                 onClickChangePriority={onClickChangePriority}
                 sprintId={task.sprintId}
+                onClickAddToBacklog={onClickAddToBacklog}
+                sprintData={sprintData}
               />
             );
           })}

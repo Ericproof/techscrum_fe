@@ -18,6 +18,7 @@ interface IBacklogSection {
   typesData: Itypes[] | null;
   typeStatusUserLoaded: boolean;
   userList: IUserInfo[];
+  sprintData: any;
 }
 
 export default function BacklogSection({
@@ -27,7 +28,8 @@ export default function BacklogSection({
   typeStatusUserLoaded,
   statusData,
   typesData,
-  userList
+  userList,
+  sprintData
 }: IBacklogSection) {
   const [currentTypeOption, setCurrentTypeOption] = useState('story');
   const { boardId = '', projectId = '' } = useParams();
@@ -111,6 +113,7 @@ export default function BacklogSection({
               onClickCloseModal={() => {
                 setShowCreateSprint(false);
               }}
+              getBacklogDataApi={getBacklogDataApi}
             />
           )}
         </div>
@@ -137,6 +140,7 @@ export default function BacklogSection({
                 priority={task.priority}
                 onClickChangePriority={onClickChangePriority}
                 sprintId={task.sprintId}
+                sprintData={sprintData}
               />
             );
           })}
