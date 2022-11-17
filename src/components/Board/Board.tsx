@@ -110,7 +110,7 @@ export default function Board() {
       dueAt: now.toISOString()
     };
     const columns = columnsInfo;
-    columns[newCard.statusId ?? ''].items.push(newItem);
+    columns[newCard.statusId.id].items.push(newItem);
     setColumnsInfo(columns);
   };
 
