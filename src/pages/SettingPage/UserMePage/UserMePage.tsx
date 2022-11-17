@@ -61,10 +61,11 @@ export default function UserMePage() {
   };
 
   const onUpdatePassword = async () => {
+    const token = userInfo?.token;
     if (newPassword === confirmPassword) {
       try {
         const data = { oldPassword, newPassword, userInfo };
-        await changePassword(data);
+        await changePassword(data, token);
         toast('Your password has been successfully updated!');
       } catch (e) {
         toast.error('The current password is not correct!');
