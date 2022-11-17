@@ -43,7 +43,9 @@ export default function InputV2(props: IInputV2) {
   const onChanged = (e: any) => {
     const errorMessage = getErrorMessage(e, props);
     setError(errorMessage);
-    setVal(e.target.value);
+    if (!defaultValue) {
+      setVal(e.target.value);
+    }
     onValueChanged(e);
   };
 
@@ -86,7 +88,7 @@ export default function InputV2(props: IInputV2) {
       <input
         className={[styles.input].join(' ')}
         type={type}
-        value={value || val}
+        value={defaultValue ? val : value}
         name={name}
         onChange={onChanged}
         onBlur={onBlurValue}
