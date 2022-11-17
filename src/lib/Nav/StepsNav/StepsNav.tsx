@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useMatch, useResolvedPath } from 'react-router-dom';
-import styles from './LegalDocumentsNav.module.scss';
+import styles from './StepsNav.module.scss';
 
 export interface ICustomLink {
   to: string;
@@ -16,20 +16,22 @@ function CustomLink({ to, children }: ICustomLink) {
     </li>
   );
 }
+interface IStepsNav {
+  title: string;
+  items: any;
+}
+export default function StepsNav(props: IStepsNav) {
+  const { title, items } = props;
 
-export default function LegalDocumentsNav() {
   return (
     <div className={styles.navContainer}>
       <h4>
-        <CustomLink to="/">Our Legal Documents</CustomLink>
+        <CustomLink to="/">{title}</CustomLink>
       </h4>
       <ul>
-        <CustomLink to="/cookie-policy">Cookie Policy</CustomLink>
-        <CustomLink to="/gdpr">GDPR Compliance</CustomLink>
-        <CustomLink to="/privacy-policy">Privacy Policy</CustomLink>
-        <CustomLink to="/privacy-statement">Privacy Statement</CustomLink>
-        <CustomLink to="/refund-policy">Refund Policy</CustomLink>
-        <CustomLink to="/terms-of-service">Terms of Service</CustomLink>
+        {items.map((item) => {
+          return <CustomLink to={item.link}>{item.name}</CustomLink>;
+        })}
       </ul>
     </div>
   );

@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../../../components/Header/Header';
-import LegalDocumentsNav from './LegalDocumentsNav/LegalDocumentsNav';
+import { navItems } from '../../../config/pages/tac';
+import StepsNav from '../../Nav/StepsNav/StepsNav';
 import styles from './TermsAndConditionsLayout.module.scss';
 
 export interface ITermsAndConditionsLayout {
@@ -27,7 +28,7 @@ export default function TermsAndConditionsLayout({ title, children }: ITermsAndC
         <div className={styles.content}>
           <div className={styles.detailedInfo}>
             <div className={styles.childrenContainer}>{children}</div>
-            <LegalDocumentsNav />
+            <StepsNav title="Our Legal Documents" items={navItems} />
           </div>
         </div>
         <img
