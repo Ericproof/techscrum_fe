@@ -27,13 +27,12 @@ export interface ICardData {
   id?: string;
   tags?: [ILabelData];
   title: string;
-  statusId?: string;
+  statusId?: any;
   typeId?: string;
   description?: string;
   storyPoint?: number;
   dueAt?: Date | string;
   assignInfo?: IAssign;
-  statusId?: string;
   label?: string;
   boardId?: string;
   projectId?: string;
