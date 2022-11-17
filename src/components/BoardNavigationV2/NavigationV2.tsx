@@ -16,11 +16,12 @@ import { ProjectContext, ProjectDispatchContext } from '../../context/ProjectPro
 import styles from './NavigationV2.module.scss';
 import checkAccess from '../../utils/helpers';
 import DailyScrum from '../DailyScrum/DailyScrum';
-import ShortcutModal from '../ShortcutModal/ShortcutModal';
+
 import addshorcut from '../../assets/addshorcut.svg';
 import NavigationLayout from '../Navigation/NavigationLayout/NavigationLayout';
 import Modal from '../../lib/Modal/Modal';
 import DefaultModalHeader from '../../lib/Modal/ModalHeader/DefaultModalHeader/DefaultModalHeader';
+import ShortcutModal from '../Modals/ShortcutModal/ShortcutModal';
 
 interface IItem {
   name: string;

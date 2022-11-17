@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { createShortcut, updateShortcut } from '../../api/shortcut/shortcut';
-import { IShortcutData } from '../../types';
+
 import styles from './ShortcutModal.module.scss';
 import ShortcutContent from './ShortcutContent/ShortcutContent';
 import AddShortcutButtons from './AddShortcutButtons/AddShortcutButtons';
 import EditShortcutButtons from './EditShortcutButtons/EditShortcutButtons';
+import { createShortcut, updateShortcut } from '../../../api/shortcut/shortcut';
+import { IShortcutData } from '../../../types';
 
 interface IOperation {
   operation: string;
