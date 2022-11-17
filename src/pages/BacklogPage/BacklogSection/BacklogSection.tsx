@@ -8,6 +8,7 @@ import styles from './BacklogSection.module.scss';
 import { addTask, updateTask, deleteTask } from '../../../api/backlog/backlog';
 import { IUserInfo, Itypes, IStatusBacklog } from '../../../types';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
+import CreateEditSprint from '../CreateEditSprint/CreateEditSprint';
 
 interface IBacklogSection {
   backlogData: any;
@@ -30,6 +31,7 @@ export default function BacklogSection({
 }: IBacklogSection) {
   const [currentTypeOption, setCurrentTypeOption] = useState('story');
   const { boardId = '', projectId = '' } = useParams();
+  const [showCreateSprint, setShowCreateSprint] = useState(false);
   const createIssueRef = useRef<HTMLInputElement | null>(null);
   const createIssueAction = () => {
     if (createIssueRef?.current?.value) {
@@ -91,6 +93,9 @@ export default function BacklogSection({
       getBacklogDataApi();
     });
   };
+  const createSprint = () => {
+    setShowCreateSprint(true);
+  };
   return (
     <section className={styles.container}>
       <div className={styles.header}>
@@ -99,7 +104,15 @@ export default function BacklogSection({
           <div className={styles.issueCount}>{loaded && backlogData.cards.length} issues</div>
         </div>
         <div className={styles.toolbar}>
-          <Button>Create sprint</Button>
+          <Button onClick={createSprint}>Create sprint</Button>
+          {showCreateSprint && (
+            <CreateEditSprint
+              type="Create"
+              onClickCloseModal={() => {
+                setShowCreateSprint(false);
+              }}
+            />
+          )}
         </div>
       </div>
       <div className={styles.listContainer}>

@@ -1,0 +1,149 @@
+$closeBtnColor: rgb(202, 207, 227);
+$closeBtnColorHover: rgb(178, 182, 200);
+$colorGray: rgb(102, 106, 133);
+$colorBlue: rgb(50, 115, 246);
+$darkGray: rgb(240, 240, 240);
+$lightGray: rgb(250, 251, 252);
+
+@mixin btn {
+  height: 100%;
+  border-radius: 5px;
+  width: 43%;
+  cursor: pointer;
+}
+@mixin input {
+  border: 2px solid $darkGray;
+  height: 40px;
+  width: 100%;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.createEditSprintModal {
+  max-width: 40% !important;
+}
+.createEditSprintContainer {
+  padding: 40px;
+  p {
+    margin: 0;
+    padding: 0;
+  }
+  .createEditSprintHeader {
+    display: flex;
+    height: 50px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    .closeBtn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 35px;
+      color: $closeBtnColor;
+      border: none;
+      background-color: white;
+      cursor: pointer;
+    }
+    .closeBtn:hover {
+      color: $closeBtnColorHover;
+    }
+  }
+  .createEditSprintInputContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+    .inputContainer {
+      width: 50%;
+    }
+    .label {
+      color: $colorGray;
+      font-weight: bold;
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+    .textInput {
+      background-color: $lightGray;
+      @include input();
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+    .outline {
+      border: 2px solid $colorBlue;
+    }
+    .duration {
+      position: relative;
+      .selectInput {
+        @include input();
+        background-color: $darkGray;
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        justify-content: space-between;
+        cursor: pointer;
+      }
+      .dropDownDuration {
+        border: 2px solid $darkGray;
+        position: absolute;
+        z-index: 100;
+        top: 50px;
+        width: 100%;
+        height: 160px;
+        border-radius: 5px;
+        background-color: white;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        li {
+          list-style: none;
+        }
+        button {
+          width: 100%;
+          padding: 10px;
+          border: none;
+          border-left: 2px solid white;
+          cursor: pointer;
+          background-color: white;
+          text-align: left;
+        }
+        button:hover {
+          background-color: $darkGray;
+          border-left: 2px solid $colorBlue;
+        }
+      }
+    }
+    .datePicker {
+      background-color: $darkGray;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+    .textAreaInput {
+      background-color: $lightGray;
+      @include input();
+      height: 130px;
+      box-sizing: border-box;
+      resize: none;
+    }
+  }
+  .btnContainer {
+    max-width: 200px;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    margin-left: auto;
+    .cancelBtn {
+      border: 1px solid $colorGray;
+      color: $colorGray;
+      background-color: white;
+      @include btn();
+    }
+    .submitBtn {
+      border: none;
+      color: white;
+      background-color: $colorBlue;
+      @include btn();
+    }
+  }
+}
