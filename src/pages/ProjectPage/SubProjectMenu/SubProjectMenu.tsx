@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 import { AiOutlineFolderOpen } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import InputV2 from '../../../lib/FormV2/InputV2/InputV2';
 import styles from './SubProjectMenu.module.scss';
-import InputV2 from '../../../components/FormV2/InputV2/InputV2';
 
 interface ISubProjectMenu {
   toggleSearchMenu: boolean;

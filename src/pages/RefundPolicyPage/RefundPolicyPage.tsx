@@ -1,5 +1,5 @@
 import React from 'react';
-import TermsAndConditionsLayout from '../../components/TermsAndConditionsLayout/TermsAndConditionsLayout';
+import TermsAndConditionsLayout from '../../lib/Layout/TermsAndConditionsLayout/TermsAndConditionsLayout';
 import styles from './RefundPolicyPage.module.scss';
 
 export default function RefundPolicyPage() {

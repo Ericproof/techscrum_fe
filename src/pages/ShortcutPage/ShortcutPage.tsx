@@ -4,18 +4,18 @@ import ReactDOM from 'react-dom';
 import { AiOutlineLink } from 'react-icons/ai';
 import { IoIosAdd } from 'react-icons/io';
 import { useParams } from 'react-router-dom';
-import Modal from '../../components/Modal/Modal';
-import DefaultModalHeader from '../../components/Modal/ModalHeader/DefaultModalHeader/DefaultModalHeader';
 import ShortcutModal from '../../components/ShortcutModal/ShortcutModal';
 import { IProjectData, IShortcutData } from '../../types';
 import checkAccess from '../../utils/helpers';
 import styles from './ShortcutPage.module.scss';
 import addshorcut from '../../assets/addshorcut.svg';
 import { ProjectContext, ProjectDispatchContext } from '../../context/ProjectProvider';
-import InputV2 from '../../components/FormV2/InputV2/InputV2';
-import ButtonV2 from '../../components/FormV2/ButtonV2/ButtonV2';
 import { deleteShortcut } from '../../api/shortcut/shortcut';
-import ProjectNavigationV3 from '../../components/ProjectNavigationV3/ProjectNavigationV3';
+import ProjectNavigationV3 from '../../lib/ProjectNavigationV3/ProjectNavigationV3';
+import ButtonV2 from '../../lib/FormV2/ButtonV2/ButtonV2';
+import InputV2 from '../../lib/FormV2/InputV2/InputV2';
+import Modal from '../../lib/Modal/Modal';
+import DefaultModalHeader from '../../lib/Modal/ModalHeader/DefaultModalHeader/DefaultModalHeader';
 
 export default function ShortcutPage() {
   const { projectId = '' } = useParams();

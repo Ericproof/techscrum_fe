@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import MainMenuV2 from '../../pages/MainMenuV2/MainMenuV2';
+import MainMenuV2 from '../../../pages/MainMenuV2/MainMenuV2';
 import styles from './DashboardLayout.module.scss';
 
 export default function DashboardLayout() {

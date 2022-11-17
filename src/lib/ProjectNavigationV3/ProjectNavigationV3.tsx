@@ -11,7 +11,7 @@ import { VscNewFile } from 'react-icons/vsc';
 import { IProject, IProjectData } from '../../types';
 import { ProjectContext } from '../../context/ProjectProvider';
 import styles from './ProjectNavigationV3.module.scss';
-import DailyScrum from '../DailyScrum/DailyScrum';
+import DailyScrum from '../../components/DailyScrum/DailyScrum';
 import checkAccess from '../../utils/helpers';
 
 interface IItem {

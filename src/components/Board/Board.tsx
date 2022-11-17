@@ -13,9 +13,9 @@ import BoardCard from '../BoardCard/BoardCard';
 import { TaskEntity } from '../../api/task/entity/task';
 import { getLabels } from '../../api/label/label';
 import { deleteActivity } from '../../api/activity/activity';
-import Modal from '../Modal/Modal';
-import DefaultModalHeader from '../Modal/ModalHeader/DefaultModalHeader/DefaultModalHeader';
-import ProjectNavigationV3 from '../ProjectNavigationV3/ProjectNavigationV3';
+import ProjectNavigationV3 from '../../lib/ProjectNavigationV3/ProjectNavigationV3';
+import Modal from '../../lib/Modal/Modal';
+import DefaultModalHeader from '../../lib/Modal/ModalHeader/DefaultModalHeader/DefaultModalHeader';
 
 const onDragEnd = (
   result: DropResult,

@@ -2,14 +2,14 @@
 import React from 'react';
 import styles from './DefaultModalBody.module.scss';
 
-interface IPropsDefaultModalHeader {
+interface IPropsDefaultModalBody {
   defaultPadding?: boolean;
   classesName?: string | string[];
   children?: React.ReactNode;
   fullWidth?: boolean;
 }
 
-export default function DefaultModalHeader(props: IPropsDefaultModalHeader) {
+export default function DefaultModalBody(props: IPropsDefaultModalBody) {
   const { classesName, defaultPadding = true, fullWidth, children = null } = props;
   return (
     <div
@@ -24,7 +24,7 @@ export default function DefaultModalHeader(props: IPropsDefaultModalHeader) {
   );
 }
 
-DefaultModalHeader.defaultProps = {
+DefaultModalBody.defaultProps = {
   classesName: '',
   defaultPadding: true,
   children: null,
