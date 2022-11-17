@@ -28,6 +28,7 @@
     "SharedArrayBuffer": "readonly"
   },
   "rules": {
+    "react/jsx-no-useless-fragment": "off",
     "no-secrets/no-secrets": ["error", { "ignoreContent": "^https" }],
     "no-unused-vars": "error",
     "@typescript-eslint/no-explicit-any": "off",
