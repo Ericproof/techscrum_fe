@@ -9,7 +9,7 @@ import { BiChevronDown } from 'react-icons/bi';
 import { DatePicker } from '@atlaskit/datetime-picker';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import styles from './CreateEditSprint.module.scss';
-import Modal from '../../../components/Modal/Modal';
+import Modal from '../../../lib/Modal/Modal';
 import { createSprint } from '../../../api/sprint/sprint';
 
 interface ICreateEditSprint {
