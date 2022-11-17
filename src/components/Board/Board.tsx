@@ -210,7 +210,7 @@ export default function Board() {
           items: item.taskList
         };
       }
-      setLoading(false);
+
       return setColumnsInfo(columnInfoData);
     };
 
@@ -218,6 +218,7 @@ export default function Board() {
       setLoading(true);
       const boardInfo = await getBoard(boardId);
       fetchColumnsData(boardInfo);
+      setLoading(false);
     };
     fetchBoardInfo();
   }, [inputQuery, boardId]);
