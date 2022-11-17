@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../Header/Header';
+import Header from '../../../components/Header/Header';
 import LegalDocumentsNav from './LegalDocumentsNav/LegalDocumentsNav';
 import styles from './TermsAndConditionsLayout.module.scss';
 

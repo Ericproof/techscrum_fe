@@ -41,8 +41,8 @@ import AdminPage from './pages/AdminPage/AdminPage';
 import AboutPageT2 from './pages/AboutPageT2/AboutPageT2';
 import { getDomains } from './api/domain/domain';
 import BacklogPage from './pages/BacklogPage/BacklogPage';
-import DashboardLayout from './components/DashboardLayout/DashboardLayout';
 import ShortcutPage from './pages/ShortcutPage/ShortcutPage';
+import DashboardLayout from './lib/Layout/DashboardLayout/DashboardLayout';
 
 function App() {
   const [showPages, setShowPages] = useState(null);

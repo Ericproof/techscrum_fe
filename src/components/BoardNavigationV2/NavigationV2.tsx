@@ -17,10 +17,10 @@ import styles from './NavigationV2.module.scss';
 import checkAccess from '../../utils/helpers';
 import DailyScrum from '../DailyScrum/DailyScrum';
 import ShortcutModal from '../ShortcutModal/ShortcutModal';
-import Modal from '../Modal/Modal';
 import addshorcut from '../../assets/addshorcut.svg';
-import DefaultModalHeader from '../Modal/ModalHeader/DefaultModalHeader/DefaultModalHeader';
 import NavigationLayout from '../Navigation/NavigationLayout/NavigationLayout';
+import Modal from '../../lib/Modal/Modal';
+import DefaultModalHeader from '../../lib/Modal/ModalHeader/DefaultModalHeader/DefaultModalHeader';
 
 interface IItem {
   name: string;

@@ -7,11 +7,12 @@ import { UserContext, UserDispatchContext } from '../../../context/UserInfoProvi
 import Alert from '../../../components/Alert/Alert';
 import styles from './UserMePage.module.scss';
 import SettingCard from '../../../components/SettingCard/SettingCard';
-import InputV2 from '../../../components/FormV2/InputV2/InputV2';
-import SubSettingMenu from '../../../components/SubSettingMenu/SubSettingMenu';
-import ButtonV2 from '../../../components/FormV2/ButtonV2/ButtonV2';
-import Modal from '../../../components/Modal/Modal';
+
 import MainMenuV2 from '../../MainMenuV2/MainMenuV2';
+import SubSettingMenu from '../../../lib/SubSettingMenu/SubSettingMenu';
+import ButtonV2 from '../../../lib/FormV2/ButtonV2/ButtonV2';
+import InputV2 from '../../../lib/FormV2/InputV2/InputV2';
+import Modal from '../../../lib/Modal/Modal';
 
 export default function UserMePage() {
   const navigate = useNavigate();

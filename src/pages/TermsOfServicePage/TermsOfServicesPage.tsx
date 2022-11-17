@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import TermsAndConditionsLayout from '../../components/TermsAndConditionsLayout/TermsAndConditionsLayout';
+import TermsAndConditionsLayout from '../../lib/Layout/TermsAndConditionsLayout/TermsAndConditionsLayout';
 import styles from './TermsOfServicesPage.module.scss';
 
 export default function TermsOfServicePage() {

@@ -3,7 +3,7 @@ import { IoIosAdd } from 'react-icons/io';
 import styles from './BoardSearch.module.scss';
 import search from '../../../assets/search-line.svg';
 import checkAccess from '../../../utils/helpers';
-import ButtonV2 from '../../FormV2/ButtonV2/ButtonV2';
+import ButtonV2 from '../../../lib/FormV2/ButtonV2/ButtonV2';
 
 interface Props {
   updateIsCreateNewCard: () => void;

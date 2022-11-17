@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FiArrowLeft } from 'react-icons/fi';
 import { RiMoreFill } from 'react-icons/ri';
-import styles from './Modal.module.scss';
+import styles from './ChangeIconModal.module.scss';
 import uploadImage from '../../../../assets/uploadImage.png';
 import { upload } from '../../../../api/upload/upload';
 
@@ -11,7 +11,7 @@ interface IModalProps {
   uploadSuccess: (data: any) => void;
 }
 
-export default function Modal({ shown, close, uploadSuccess }: IModalProps) {
+export default function ChangeIconModal({ shown, close, uploadSuccess }: IModalProps) {
   const icons = [
     {
       id: 1,

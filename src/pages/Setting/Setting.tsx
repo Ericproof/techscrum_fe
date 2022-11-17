@@ -10,17 +10,20 @@ import styles from './Setting.module.scss';
 import { deleteProject, showProject, updateProject } from '../../api/projects/projects';
 import { IOnChangeProjectLead, IProjectEditor } from '../../types';
 import { UserContext } from '../../context/UserInfoProvider';
-import SubSettingMenu from '../../components/SubSettingMenu/SubSettingMenu';
-import InputV2 from '../../components/FormV2/InputV2/InputV2';
+
 import SettingCard from '../../components/SettingCard/SettingCard';
 import ChangeIcon from '../../components/ProjectEditor/ChangeIcon/ChangeIcon';
-import DropdownV2 from '../../components/FormV2/DropdownV2/DropdownV2';
+
 import { getUsers } from '../../api/user/user';
-import ButtonV2 from '../../components/FormV2/ButtonV2/ButtonV2';
+
 import 'react-toastify/dist/ReactToastify.css';
-import Modal from '../../components/Modal/Modal';
 import checkAccess from '../../utils/helpers';
 import MainMenuV2 from '../MainMenuV2/MainMenuV2';
+import ButtonV2 from '../../lib/FormV2/ButtonV2/ButtonV2';
+import DropdownV2 from '../../lib/FormV2/DropdownV2/DropdownV2';
+import InputV2 from '../../lib/FormV2/InputV2/InputV2';
+import SubSettingMenu from '../../lib/SubSettingMenu/SubSettingMenu';
+import Modal from '../../lib/Modal/Modal';
 
 const subMenuItem = (projectId: string) => {
   return {

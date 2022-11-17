@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './ChangeIcon.module.scss';
-import Modal from './Modal/Modal';
+import ChangeIconModal from './Modal/ChangeIconModal';
 
 interface IChangeIconProps {
   uploadSuccess: (data: any) => void;
@@ -40,7 +40,7 @@ export default function ChangeIcon(props: IChangeIconProps) {
       >
         Change
       </button>
-      <Modal
+      <ChangeIconModal
         shown={modalShown}
         close={() => {
           toggleModal(false);
