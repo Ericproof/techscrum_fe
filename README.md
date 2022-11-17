@@ -22,7 +22,7 @@ This is an example of how to list things you need to use the software and how to
 
 Below are the command that you would need to run after clone down the repo, unless to told these command usually would need to be run only once
 
-- yarn install --force
+- yarn install
 - cp .env.example .env
 
 ### Start up
