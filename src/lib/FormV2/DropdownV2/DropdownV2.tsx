@@ -63,6 +63,27 @@ export default function DropdownV2(props: IDropdownV2) {
     return <div className={styles.skeleton} />;
   }
 
+  const renderDropdown = () => {
+    return (
+      showMenu && (
+        <div className="relative">
+          <div className={defaultStyles.dropDownList}>
+            {options.length > 0 &&
+              options
+                .filter((item) => item.value !== value)
+                .map((item) => {
+                  return (
+                    <button key={item.value} onClick={() => onChangeSelect(item.value)}>
+                      {item.label}
+                    </button>
+                  );
+                })}
+          </div>
+        </div>
+      )
+    );
+  };
+
   return (
     <div
       className={[
@@ -102,22 +123,7 @@ export default function DropdownV2(props: IDropdownV2) {
 
         {error && <p className={styles.errorMessage}>{error}</p>}
       </div>
-      <div className="relative">
-        {showMenu && (
-          <div className={defaultStyles.dropDownList}>
-            {options.length > 0 &&
-              options
-                .filter((item) => item.value !== value)
-                .map((item) => {
-                  return (
-                    <button key={item.value} onClick={() => onChangeSelect(item.value)}>
-                      {item.label}
-                    </button>
-                  );
-                })}
-          </div>
-        )}
-      </div>
+      {renderDropdown()}
     </div>
   );
 }
