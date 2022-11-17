@@ -1,0 +1,106 @@
+@import "../../../../variables.scss";
+$lightColor: $primaryColor;
+
+.navContainer {
+  min-width: 220px;
+  //border: 1px solid $primaryColor;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 20px;
+  position: sticky;
+  right: 180px;
+  top: 100px;
+  max-height: 400px;
+  padding: 40px 30px;
+
+  @media (max-width: 1480px) {
+    position: unset;
+  }
+
+  h4 {
+    li {
+      list-style: none;
+
+      a {
+        text-decoration: none;
+        font-size: 22px;
+        font-weight: 700;
+        line-height: 37.5px;
+        color: rgb(40, 40, 40);
+        margin: 10px 0 0 0;
+      }
+    }
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    li {
+      border-left: 5px solid #f6f7f9;
+
+      @media (max-width: 425px) {
+        border-left: 3px solid #f6f7f9;
+      }
+
+      a {
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 55px;
+        color: #9294a2;
+        padding-left: 40px;
+        transition: all .25s ease-in-out;
+        &:hover{
+          font-weight: 600;
+          color:rgb(47, 47, 47)
+        }
+      }
+    }
+
+    .active {
+      position: relative;
+      a{
+        font-weight: 900;
+        color:$primaryColor;
+        &:hover{   
+          font-weight: 900;
+          color:$primaryColor;
+        }
+      }
+
+      &::before {
+        position: absolute;
+        content: ' ';
+        background-color: $primaryColor;
+        border-radius: 50%;
+        width: 13px;
+        height: 13px;
+        top: 20px;
+        left: -9px;
+
+        @media (min-width: 375px) {
+          width: 11px;
+          height: 11px;
+          top: 22px;
+          left: -7px;
+        }
+
+        @media (min-width: 425px) {
+          width: 11px;
+          height: 11px;
+          top: 22px;
+          left: -8px;
+        }
+      }
+
+      &::after{
+        position: absolute;
+        width: 5px;
+        height: 21px;
+        content: "";
+        top: 17px;
+        left: -5px;    
+        background: $primaryColor;  
+      }
+    }
+  }
+}

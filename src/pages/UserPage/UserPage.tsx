@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react/jsx-no-useless-fragment */
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getUser } from '../../api/user/user';

@@ -137,7 +137,7 @@ export default function LeftBottom(props: ILeftBottom) {
             type="button"
             className={style.switchButton}
             onClick={onCommentClick}
-            data-testid="show-activity-button"
+            data-testid="show-comment-button"
           >
             Comments
           </button>
@@ -145,7 +145,7 @@ export default function LeftBottom(props: ILeftBottom) {
             type="button"
             className={style.switchButton}
             onClick={onActivityClick}
-            data-testid="show-comment-button"
+            data-testid="show-activity-button"
           >
             Activities
           </button>

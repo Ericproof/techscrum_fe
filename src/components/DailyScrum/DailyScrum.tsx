@@ -4,9 +4,10 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 import styles from './DailyScrum.module.scss';
 import DailyScrumTicket from './DailyScrumTicket/DailyScrumTicket';
-import Modal from '../Modal/Modal';
+
 import { getDailyScrums, updateDailyScrum } from '../../api/dailyScrum/dailyScrum';
 import { UserContext } from '../../context/UserInfoProvider';
+import Modal from '../../lib/Modal/Modal';
 
 interface IDailyScrumModal {
   onClickCloseModal: () => void;

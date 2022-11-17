@@ -1,23 +1,18 @@
-/* eslint-disable react/jsx-no-useless-fragment */
 import React, { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { updateMe } from '../../../api/user/user';
 import ChangeIcon from '../../../components/ProjectEditor/ChangeIcon/ChangeIcon';
 import { UserContext, UserDispatchContext } from '../../../context/UserInfoProvider';
-import Alert from '../../../components/Alert/Alert';
 import styles from './UserMePage.module.scss';
 import SettingCard from '../../../components/SettingCard/SettingCard';
-import InputV2 from '../../../components/FormV2/InputV2/InputV2';
-import SubSettingMenu from '../../../components/SubSettingMenu/SubSettingMenu';
-import ButtonV2 from '../../../components/FormV2/ButtonV2/ButtonV2';
-import Modal from '../../../components/Modal/Modal';
+
 import MainMenuV2 from '../../MainMenuV2/MainMenuV2';
+import SubSettingMenu from '../../../lib/SubSettingMenu/SubSettingMenu';
+import ButtonV2 from '../../../lib/FormV2/ButtonV2/ButtonV2';
+import InputV2 from '../../../lib/FormV2/InputV2/InputV2';
+import Modal from '../../../lib/Modal/Modal';
 
 export default function UserMePage() {
-  const navigate = useNavigate();
-  const [alerVisible, setAlertVisible] = useState(false);
-  const [statusCode, setStatusCode] = useState(0);
-  const [tip, setTip] = useState('');
   const userInfo = useContext(UserContext);
   const setUserInfo = useContext(UserDispatchContext);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -44,20 +39,16 @@ export default function UserMePage() {
         },
         userInfo.token
       );
-
-      setStatusCode(0);
-      setTip('Saved');
-      setAlertVisible(true);
+      toast.success('Saved', {
+        theme: 'colored',
+        className: 'primaryColorBackground'
+      });
     } catch (e) {
-      setStatusCode(1);
-      setTip('Something go Wrong');
-      setAlertVisible(true);
+      toast.error('Something go Wrong, please try again', {
+        theme: 'colored',
+        toastId: 'toast-error'
+      });
     }
-  };
-
-  const alertConfirm = () => {
-    setAlertVisible(false);
-    if (statusCode === 0) navigate('/projects');
   };
 
   const loading = !userInfo || Object.keys(userInfo).length === 0;
@@ -173,9 +164,6 @@ export default function UserMePage() {
             />
           </div>
         </Modal>
-      )}
-      {alerVisible && (
-        <Alert statusCode={statusCode} tipContent={tip} confirmAlert={alertConfirm} />
       )}
     </>
   );
