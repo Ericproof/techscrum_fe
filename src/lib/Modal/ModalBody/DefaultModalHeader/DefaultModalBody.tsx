@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React from 'react';
 import styles from './DefaultModalBody.module.scss';
 

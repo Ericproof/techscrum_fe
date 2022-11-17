@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import styles from './ProjectsDropdownNav.module.scss';
-import { IProjectData } from '../../../types';
-import { ProjectContext } from '../../../context/ProjectProvider';
+import { ProjectContext } from '../../../../context/ProjectProvider';
+import { IProjectData } from '../../../../types';
 
 interface IProjectsDropdown {
   setShowProjectDropdown: (state: boolean) => void;

@@ -1,10 +1,8 @@
-/* eslint-disable react/jsx-no-useless-fragment */
 import React, { useState } from 'react';
-
 import { AiOutlineCaretDown, AiOutlineCaretRight } from 'react-icons/ai';
-import { IProjectData } from '../../../types';
 import styles from './ProjectHeaderNav.module.scss';
 import ProjectsDropdownNav from '../ProjectsDropdownNav/ProjectsDropdownNav';
+import { IProjectData } from '../../../../types';
 
 interface IPropsNavTop {
   currentProject: IProjectData;

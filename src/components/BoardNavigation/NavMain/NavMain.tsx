@@ -7,9 +7,9 @@ import { FiSettings } from 'react-icons/fi';
 import { FaDailymotion } from 'react-icons/fa';
 import { IProjectData, IShortcutData } from '../../../types';
 import checkAccess from '../../../utils/helpers';
-import ShortcutModal from '../../ShortcutModal/ShortcutModal';
 import styles from './NavMain.module.scss';
 import DailyScrum from '../../DailyScrum/DailyScrum';
+import ShortcutModal from '../../Modals/ShortcutModal/ShortcutModal';
 
 interface IPropsNavMain {
   currentProject: IProjectData;

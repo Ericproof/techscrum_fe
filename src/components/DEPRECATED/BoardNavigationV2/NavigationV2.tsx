@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-useless-fragment */
 import React, { useContext, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { RiPencilLine } from 'react-icons/ri';
@@ -10,17 +9,17 @@ import { IoMdList } from 'react-icons/io';
 import { FaDailymotion } from 'react-icons/fa';
 import { AiOutlineCaretDown, AiOutlineCaretRight, AiOutlineLink } from 'react-icons/ai';
 import ReactDOM from 'react-dom';
-import { IProject, IProjectData, IShortcutData } from '../../types';
 import ProjectHeaderNav from './ProjectHeaderNav/ProjectHeaderNav';
-import { ProjectContext, ProjectDispatchContext } from '../../context/ProjectProvider';
 import styles from './NavigationV2.module.scss';
-import checkAccess from '../../utils/helpers';
-import DailyScrum from '../DailyScrum/DailyScrum';
-import ShortcutModal from '../ShortcutModal/ShortcutModal';
 import addshorcut from '../../assets/addshorcut.svg';
-import NavigationLayout from '../Navigation/NavigationLayout/NavigationLayout';
-import Modal from '../../lib/Modal/Modal';
-import DefaultModalHeader from '../../lib/Modal/ModalHeader/DefaultModalHeader/DefaultModalHeader';
+import { ProjectContext, ProjectDispatchContext } from '../../../context/ProjectProvider';
+import Modal from '../../../lib/Modal/Modal';
+import DefaultModalHeader from '../../../lib/Modal/ModalHeader/DefaultModalHeader/DefaultModalHeader';
+import { IShortcutData, IProject, IProjectData } from '../../../types';
+import checkAccess from '../../../utils/helpers';
+import DailyScrum from '../../DailyScrum/DailyScrum';
+import ShortcutModal from '../../Modals/ShortcutModal/ShortcutModal';
+import NavigationLayout from '../../Navigation/NavigationLayout/NavigationLayout';
 
 interface IItem {
   name: string;

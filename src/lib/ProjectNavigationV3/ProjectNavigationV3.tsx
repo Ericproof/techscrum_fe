@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable react/jsx-no-useless-fragment */
 import React, { useContext, useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { HiViewBoards } from 'react-icons/hi';
