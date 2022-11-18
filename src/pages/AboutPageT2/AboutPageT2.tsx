@@ -5,6 +5,7 @@ import Footer from '../../components/Footer/Footer';
 import MaleAvatar from '../../assets/team2/male_avatar.svg';
 import FemaleAvatar from '../../assets/team2/female_avatar.svg';
 import styles from './AboutPageT2.module.scss';
+import Kitman from '../../assets/kitman.jpg';
 
 interface IPeople {
   name: string;
@@ -19,13 +20,16 @@ const people: IPeople[] = [
     name: 'kitman yit',
     role: 'CEO',
     gender: 'male',
+    image: Kitman,
     linkedin: 'https://www.linkedin.com/in/kitman-yiu/'
   },
   {
     name: 'berlinda wang',
     role: 'business analyst',
     gender: 'female',
-    linkedin: 'www.linkedin.com/in/wangbelinda'
+    image:
+      'https://media-exp1.licdn.com/dms/image/C5603AQEnHCjauejOlw/profile-displayphoto-shrink_400_400/0/1661415876174?e=1674086400&v=beta&t=nrU0G0UTaYiFcQuH27hRlLp8pLeT0O1h0sIyAYJSX9U',
+    linkedin: 'https://www.linkedin.com/in/wangbelinda/'
   },
   {
     name: 'hyna hua',
@@ -37,24 +41,26 @@ const people: IPeople[] = [
     name: 'david guo',
     role: 'developer',
     gender: 'male',
-    linkedin: 'www.linkedin.com/in/david-guo-au'
+    linkedin: 'https://www.linkedin.com/in/david-guo-au'
   },
   {
     name: 'joe zhou',
     role: 'developer',
     gender: 'male',
+    image:
+      'https://media-exp1.licdn.com/dms/image/C5603AQFJR_2i9aB84g/profile-displayphoto-shrink_400_400/0/1657947933253?e=1674086400&v=beta&t=yjsZhCCCTizG2mD3v6BJIQ_zLeyqtYpnGqYSuEs3Ec4',
     linkedin: 'https://www.linkedin.com/in/joe-hz/'
   },
   {
     name: 'wendy xu',
     role: 'developer',
-    gender: 'male'
+    gender: 'male',
+    linkedin: 'https://www.linkedin.com/in/chicheng-xu/'
   },
   {
     name: 'teddy xiao',
     role: 'developer',
-    gender: 'male',
-    linkedin: 'https://www.linkedin.com/in/chicheng-xu/'
+    gender: 'male'
   },
   {
     name: 'leo guo',
