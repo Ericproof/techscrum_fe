@@ -21,14 +21,31 @@ export default function CreateEditSprint({
   getBacklogDataApi,
   currentSprint
 }: ICreateEditSprint) {
-  const dateWithDay = (date: Date | null) => {
-    if (date != null) {
-      const fullDate = date.toString().split('T')[0];
+  const dateWithDay = (date: string | null) => {
+    if (date) {
+      const fullDate = date.split('T')[0];
       return fullDate;
     }
     return '';
   };
-
+  const dateAfter = (date: string, days: string) => {
+    if (date) {
+      const newDate = new Date(date);
+      if (days === '1 week') {
+        newDate.setDate(newDate.getDate() + 7);
+        return dateWithDay(newDate.toISOString());
+      }
+      if (days === '2 weeks') {
+        newDate.setDate(newDate.getDate() + 14);
+        return dateWithDay(newDate.toISOString());
+      }
+      if (days === '3 weeks') {
+        newDate.setDate(newDate.getDate() + 21);
+        return dateWithDay(newDate.toISOString());
+      }
+    }
+    return undefined;
+  };
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const [duration, setDuration] = useState('Custom');
   const [sprintName, setSprintName] = useState(currentSprint ? currentSprint.name : '');
@@ -147,7 +164,9 @@ export default function CreateEditSprint({
                     appearance="subtle"
                     dateFormat="MM-DD-YYYY"
                     placeholder="e.g 12-13-2018"
-                    value={endDate}
+                    minDate={startDate}
+                    maxDate={dateAfter(startDate, duration)}
+                    value={dateAfter(startDate, duration) ?? endDate}
                     onChange={(date) => {
                       setEndDate(date);
                     }}
