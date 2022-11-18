@@ -11,12 +11,13 @@ import Attach from '../BoardCard/CardLeftContent/components/Attach/Attach';
 import PhotoGallery from '../PhotoGallery/PhotoGallery';
 import { TaskTypesContext } from '../../context/TaskTypeProvider';
 import { UserContext } from '../../context/UserInfoProvider';
-import Row from '../Grid/Row/Row';
-import InputV2 from '../FormV2/InputV2/InputV2';
-import DropdownV2 from '../FormV2/DropdownV2/DropdownV2';
-import TextAreaV2 from '../FormV2/TextAreaV2/TextAreaV2';
-import UsersFieldsV2 from '../FieldsV2/UsersFieldsV2/UsersFieldsV2';
-import LabelFieldsV2 from '../FieldsV2/LabelFieldsV2/LabelFieldsV2';
+
+import LabelFieldsV2 from '../../lib/FieldsV2/LabelFieldsV2/LabelFieldsV2';
+import UsersFieldsV2 from '../../lib/FieldsV2/UsersFieldsV2/UsersFieldsV2';
+import DropdownV2 from '../../lib/FormV2/DropdownV2/DropdownV2';
+import TextAreaV2 from '../../lib/FormV2/TextAreaV2/TextAreaV2';
+import InputV2 from '../../lib/FormV2/InputV2/InputV2';
+import Row from '../../lib/Grid/Row/Row';
 
 interface Props {
   fetchNewCard: (newCard: ICardData) => void;

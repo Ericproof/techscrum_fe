@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-useless-fragment */
 import React from 'react';
 import styles from './NavigationLayout.module.scss';
 

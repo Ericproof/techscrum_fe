@@ -12,12 +12,13 @@ import CreateNewCard from '../../components/CreateNewCard/CreateNewCard';
 import { IProject, IProjectData } from '../../types';
 import { ProjectContext, ProjectDispatchContext } from '../../context/ProjectProvider';
 import checkAccess, { clickedShowMore } from '../../utils/helpers';
-import Modal from '../../components/Modal/Modal';
 import ProjectEditor from '../../components/ProjectEditor/ProjectEditor';
-import DefaultModalHeader from '../../components/Modal/ModalHeader/DefaultModalHeader/DefaultModalHeader';
-import DefaultModalBody from '../../components/Modal/ModalBody/DefaultModalHeader/DefaultModalBody';
-import ButtonV2 from '../../components/FormV2/ButtonV2/ButtonV2';
+
 import MainMenuV2 from '../MainMenuV2/MainMenuV2';
+import ButtonV2 from '../../lib/FormV2/ButtonV2/ButtonV2';
+import Modal from '../../lib/Modal/Modal';
+import DefaultModalHeader from '../../lib/Modal/ModalHeader/DefaultModalHeader/DefaultModalHeader';
+import DefaultModalBody from '../../lib/Modal/ModalBody/DefaultModalHeader/DefaultModalBody';
 
 export default function ProjectPage() {
   const fetchProjects = useContext(ProjectDispatchContext);

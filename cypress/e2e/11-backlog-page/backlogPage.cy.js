@@ -29,8 +29,7 @@ describe('Backlog page', () => {
     cy.intercept('POST', '**/tasks', backlogDataAddTask).as('create-issue');
     cy.intercept('GET', '**/projects/*/backlogs', backlogDataAddTask).as('fetch-backlog-2');
     cy.get('[data-testid="create-issue"]').click();
-    cy.get('[data-testid="create-issue-input"]').type('eat lunch');
-    cy.get('input').type('{enter}');
+    cy.get('[data-testid="create-issue-input"]').type('eat lunch {enter}');
     cy.wait('@create-issue');
     cy.wait('@fetch-backlog-2');
     cy.get('[data-testid="task-6350dbbca5c71eda4bcf78aa3"]').contains('eat lunch');
@@ -41,8 +40,7 @@ describe('Backlog page', () => {
     cy.intercept('POST', '**/tasks', backlogDataAddTask).as('create-issue');
     cy.intercept('GET', '**/projects/*/backlogs', backlogDataAddTask).as('fetch-backlog-2');
     cy.get('[data-testid="create-issue"]').click();
-    cy.get('[data-testid="create-issue-input"]').type('eat lunch');
-    cy.get('input').type('{enter}');
+    cy.get('[data-testid="create-issue-input"]').type('eat lunch {enter}');
     cy.wait('@create-issue');
     cy.wait('@fetch-backlog-2');
     cy.get('[data-testid="task-6350dbbca5c71eda4bcf78aa3"]').contains('eat lunch');
@@ -61,8 +59,9 @@ describe('Backlog page', () => {
     cy.intercept('GET', '**/projects/*/backlogs', backlogDataChangeTitle).as('fetch-backlog-3');
     cy.get('[data-testid="task-hover-6350dbbca5c71eda4bcf78aa"]').trigger('mouseover');
     cy.get('[data-testid="task-edit-btn-6350dbbca5c71eda4bcf78aa"]').click({ force: true });
-    cy.get('[data-testid="task-title-input-6350dbbca5c71eda4bcf78aa"]').clear().type('drink water');
-    cy.get('input').type('{enter}');
+    cy.get('[data-testid="task-title-input-6350dbbca5c71eda4bcf78aa"]')
+      .clear()
+      .type('drink water {enter}');
     cy.wait('@change-title');
     cy.wait('@fetch-backlog-3');
   });

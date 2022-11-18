@@ -6,12 +6,12 @@ import style from './CardRightContent.module.scss';
 import ReporterFields from './ReporterFields/ReporterFields';
 import LabelFields from './LabelFields/LabelFields';
 import UserSelect from '../../Form/Select/UserSelect/UserSelect';
-import Row from '../../Grid/Row/Row';
 import checkAccess from '../../../utils/helpers';
 import DueDatePicker from '../../DueDatePicker/DueDatePicker';
 import { UserContext } from '../../../context/UserInfoProvider';
 import { createActivity } from '../../../api/activity/activity';
 import { createDailyScrum, getDailyScrums } from '../../../api/dailyScrum/dailyScrum';
+import Row from '../../../lib/Grid/Row/Row';
 
 interface Props {
   taskInfo: TaskEntity;
