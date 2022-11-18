@@ -8,6 +8,7 @@ import styles from './BacklogSection.module.scss';
 import { addTask, updateTask, deleteTask } from '../../../api/backlog/backlog';
 import { IUserInfo, Itypes, IStatusBacklog } from '../../../types';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
+import CreateEditSprint from '../CreateEditSprint/CreateEditSprint';
 
 interface IBacklogSection {
   backlogData: any;
@@ -17,6 +18,7 @@ interface IBacklogSection {
   typesData: Itypes[] | null;
   typeStatusUserLoaded: boolean;
   userList: IUserInfo[];
+  sprintData: any;
 }
 
 export default function BacklogSection({
@@ -26,10 +28,12 @@ export default function BacklogSection({
   typeStatusUserLoaded,
   statusData,
   typesData,
-  userList
+  userList,
+  sprintData
 }: IBacklogSection) {
   const [currentTypeOption, setCurrentTypeOption] = useState('story');
   const { boardId = '', projectId = '' } = useParams();
+  const [showCreateSprint, setShowCreateSprint] = useState(false);
   const createIssueRef = useRef<HTMLInputElement | null>(null);
   const createIssueAction = () => {
     if (createIssueRef?.current?.value) {
@@ -91,6 +95,15 @@ export default function BacklogSection({
       getBacklogDataApi();
     });
   };
+  const createSprint = () => {
+    setShowCreateSprint(true);
+  };
+  const onClickAddToSprint = (taskId: string, sprintId: string) => {
+    const data = { sprintId };
+    updateTask(taskId, data).then(() => {
+      getBacklogDataApi();
+    });
+  };
   return (
     <section className={styles.container}>
       <div className={styles.header}>
@@ -99,7 +112,16 @@ export default function BacklogSection({
           <div className={styles.issueCount}>{loaded && backlogData.cards.length} issues</div>
         </div>
         <div className={styles.toolbar}>
-          <Button>Create sprint</Button>
+          <Button onClick={createSprint}>Create sprint</Button>
+          {showCreateSprint && (
+            <CreateEditSprint
+              type="Create"
+              onClickCloseModal={() => {
+                setShowCreateSprint(false);
+              }}
+              getBacklogDataApi={getBacklogDataApi}
+            />
+          )}
         </div>
       </div>
       <div className={styles.listContainer}>
@@ -123,7 +145,9 @@ export default function BacklogSection({
                 assignee={task.assignId}
                 priority={task.priority}
                 onClickChangePriority={onClickChangePriority}
+                onClickAddToSprint={onClickAddToSprint}
                 sprintId={task.sprintId}
+                sprintData={sprintData}
               />
             );
           })}

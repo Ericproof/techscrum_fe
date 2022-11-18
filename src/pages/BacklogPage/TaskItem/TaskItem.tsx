@@ -20,11 +20,14 @@ interface ITaskInput {
   assignee: IAssign | null;
   priority: string;
   sprintId: string;
+  sprintData?: any;
   onChangeTitle: (id: string, title: string) => void;
   onClickChangeAssignee: (id: string, assigneeId: string) => void;
   onClickChangeStatus: (id: string, statusId: string) => void;
   onClickDelete: (id: string) => void;
   onClickChangePriority: (id: string, priority: string) => void;
+  onClickAddToBacklog?: (id: string) => void;
+  onClickAddToSprint?: (taskId: string, sprintId: string) => void;
 }
 export default function TaskItem({
   taskTitle,
@@ -37,11 +40,14 @@ export default function TaskItem({
   assignee,
   priority,
   sprintId,
+  sprintData,
   onChangeTitle,
   onClickChangeAssignee,
   onClickChangeStatus,
   onClickDelete,
-  onClickChangePriority
+  onClickChangePriority,
+  onClickAddToBacklog,
+  onClickAddToSprint
 }: ITaskInput) {
   const allTypes = {
     story:
@@ -155,8 +161,16 @@ export default function TaskItem({
           onClickDelete={onClickDelete}
           toggleDisableShowOptionBtnEffect={toggleDisableShowOptionBtnEffect}
           sprintId={sprintId}
+          onClickAddToBacklog={onClickAddToBacklog}
+          onClickAddToSprint={onClickAddToSprint}
+          sprintData={sprintData}
         />
       </div>
     </div>
   );
 }
+TaskItem.defaultProps = {
+  onClickAddToBacklog: () => {},
+  onClickAddToSprint: () => {},
+  sprintData: []
+};

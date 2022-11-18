@@ -7,15 +7,21 @@ interface IOptionBtn {
   taskId: string;
   showOptionBtn: boolean;
   sprintId: string;
+  sprintData?: any;
   onClickDelete: (id: string) => void;
+  onClickAddToBacklog?: (id: string) => void;
+  onClickAddToSprint?: (taskId: string, sprintId: string) => void;
   toggleDisableShowOptionBtnEffect: () => void;
 }
 export default function OptionBtn({
   taskId,
   showOptionBtn,
   sprintId,
+  sprintData,
   onClickDelete,
-  toggleDisableShowOptionBtnEffect
+  toggleDisableShowOptionBtnEffect,
+  onClickAddToBacklog,
+  onClickAddToSprint
 }: IOptionBtn) {
   const [clickOptionBtnShowStyle, setClickOptionBtnShowStyle] = useState(false);
   const [hoverOptionBtn, setHoverOptionBtn] = useState(false);
@@ -71,9 +77,38 @@ export default function OptionBtn({
           </li>
           {sprintId && (
             <li>
-              <button className={styles.dropDownBtn}>Add to Backlog</button>
+              <button
+                className={styles.dropDownBtn}
+                onClick={() => {
+                  if (onClickAddToBacklog) {
+                    onClickAddToBacklog(taskId);
+                  }
+                }}
+              >
+                Add to Backlog
+              </button>
             </li>
           )}
+          {sprintData
+            .filter((sprint) => {
+              return sprint.id !== sprintId;
+            })
+            .map((sprint) => {
+              return (
+                <li key={sprint.id}>
+                  <button
+                    className={styles.dropDownBtn}
+                    onClick={() => {
+                      if (onClickAddToSprint) {
+                        onClickAddToSprint(taskId, sprint.id);
+                      }
+                    }}
+                  >
+                    Add to {sprint.name}
+                  </button>
+                </li>
+              );
+            })}
           <li>
             <button
               className={styles.dropDownBtn}
@@ -90,3 +125,9 @@ export default function OptionBtn({
     </div>
   );
 }
+
+OptionBtn.defaultProps = {
+  onClickAddToBacklog: () => {},
+  onClickAddToSprint: () => {},
+  sprintData: []
+};
