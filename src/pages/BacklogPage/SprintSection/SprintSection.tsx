@@ -13,7 +13,6 @@ import styles from './SprintSection.module.scss';
 import { IUserInfo, Itypes, IStatusBacklog } from '../../../types';
 import CreateEditSprint from '../CreateEditSprint/CreateEditSprint';
 
-// WIP need to communicate with backend
 interface ISprintSection {
   sprint: any;
   sprintData: any;
