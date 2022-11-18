@@ -88,6 +88,13 @@ export default function CreateEditSprint({
       onClickCloseModal();
     });
   };
+  const onClickCompleteSprint = (id: string) => {
+    const data = { isComplete: true };
+    updateSprint(id, data).then(() => {
+      getBacklogDataApi();
+      onClickCloseModal();
+    });
+  };
 
   return (
     <>
@@ -189,19 +196,29 @@ export default function CreateEditSprint({
               </div>
             </div>
             <div className={styles.btnContainer}>
-              {type === 'Edit' && (
-                <button
-                  className={styles.deleteBtn}
-                  onClick={() => {
-                    onClickDeleteSprint(currentSprint.id);
-                  }}
-                >
-                  Delete
-                </button>
-              )}
               <button className={styles.cancelBtn} onClick={onClickCloseModal}>
                 Cancel
               </button>
+              {type === 'Edit' && (
+                <>
+                  <button
+                    className={styles.deleteBtn}
+                    onClick={() => {
+                      onClickDeleteSprint(currentSprint.id);
+                    }}
+                  >
+                    Delete
+                  </button>
+                  <button
+                    className={styles.completeBtn}
+                    onClick={() => {
+                      onClickCompleteSprint(currentSprint.id);
+                    }}
+                  >
+                    Complete
+                  </button>
+                </>
+              )}
               <button
                 className={styles.submitBtn}
                 onClick={() => {

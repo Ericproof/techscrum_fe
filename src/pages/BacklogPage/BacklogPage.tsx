@@ -63,22 +63,26 @@ export default function BacklogPage() {
         <h1 data-testid="backlog-header">Backlog</h1>
       </div>
       <div className={styles.scrollContainer}>
-        {sprintData.map((sprint: any) => {
-          return (
-            <React.Fragment key={sprint.id}>
-              <SprintSection
-                sprint={sprint}
-                sprintData={sprintData}
-                getBacklogDataApi={getBacklogDataApi}
-                loaded={loaded}
-                statusData={statusData}
-                typesData={typesData}
-                userList={userList}
-                typeStatusUserLoaded={typeStatusUserLoaded}
-              />
-            </React.Fragment>
-          );
-        })}
+        {sprintData
+          .filter((sprint: any) => {
+            return !sprint.isComplete;
+          })
+          .map((sprint: any) => {
+            return (
+              <React.Fragment key={sprint.id}>
+                <SprintSection
+                  sprint={sprint}
+                  sprintData={sprintData}
+                  getBacklogDataApi={getBacklogDataApi}
+                  loaded={loaded}
+                  statusData={statusData}
+                  typesData={typesData}
+                  userList={userList}
+                  typeStatusUserLoaded={typeStatusUserLoaded}
+                />
+              </React.Fragment>
+            );
+          })}
 
         <BacklogSection
           backlogData={backlogData}
