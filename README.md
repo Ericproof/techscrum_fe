@@ -2,21 +2,22 @@
 
 ## About The Project
 
-[TechScrum](https://techscrumapp.com)
-
-Must run under http://localhost:3000 else register will return 404
+TechScrum is a project management tools which helps company to prevent delays.
 
 ### Tech Stack
 
 - React
-- Redux
-- npm
+- Typescript
+- yarn (Package Management tools)
+- Cypress (Testing)
+- Storybook (Tool for UI development)
 
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
 
 - Node
+- Yarn
 
 ### Installation
 
@@ -31,15 +32,19 @@ To able to start the server these are the following commands that would need to 
 
 - yarn start
 
-### Deployment
+### Environments
+
+- Local: http://localhost:3000(NOTE: Must run under localhost:3000 else will not work)
+
+- Testing: http://devtechscrum.s3-website-ap-southeast-2.amazonaws.com/
+
+- Production: https://techscrumapp.com
+
+### Deployment (Devops)
 
 To able to deploy this to the server, please follow this doc below
 
-https://www.notion.so/React-Frontend-37039aec81b041b8b5cea4bc80fe4b90
-
-#### Entity Point
-
-- index.html
+https://www.notion.so/Frontend-React-e424fc3e001d432eb15b4407a9fac588
 
 ## Usage
 
@@ -83,4 +88,7 @@ Use this space to list resources you find helpful and would like to give credit 
 
 ## Coding Standard
 
-- https://docs.google.com/document/d/1mmmdfmJqeM81y5cajolUOLGxRJtr_DONof82MQP9HZs/edit?usp=sharing
+- Eslint Airbnb
+- Prettier
+- Sonar
+- https://www.notion.so/Coding-Guidelines-bfa77d75476a4b19a195ddb20b02bb33
