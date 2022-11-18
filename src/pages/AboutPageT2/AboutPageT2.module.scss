@@ -43,6 +43,7 @@ $xl: 1280px;
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   border: 1px solid $primaryColor;
+  pointer-events: none;
 }
 
 .description {
@@ -54,7 +55,7 @@ $xl: 1280px;
 .personRole {
   font-size: 0.75rem;
   color: $primaryColor;
-  margin-top: 0;
+  margin-top: 0.2rem;
 }
 
 @media screen and (min-width: $md) {

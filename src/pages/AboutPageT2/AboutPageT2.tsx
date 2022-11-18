@@ -8,11 +8,21 @@ import styles from './AboutPageT2.module.scss';
 interface IPeople {
   name: string;
   image?: string;
-  role: 'developer' | 'devops';
+  role: 'CEO' | 'business analyst' | 'designer' | 'developer' | 'devops';
   gender: 'male' | 'female';
 }
 
 const people: IPeople[] = [
+  {
+    name: 'kitman yit',
+    role: 'CEO',
+    gender: 'male'
+  },
+  {
+    name: 'berlinda wang',
+    role: 'business analyst',
+    gender: 'female'
+  },
   {
     name: 'hyna hua',
     role: 'developer',
@@ -55,6 +65,11 @@ const people: IPeople[] = [
   }
 ];
 
+const devs = people
+  .slice(2)
+  .sort((a, b) => a.name.localeCompare(b.name))
+  .sort((a, b) => a.role.localeCompare(b.role));
+
 function Person(props: IPeople) {
   const { name, image, gender, role } = props;
   return (
@@ -79,8 +94,8 @@ export default function AboutPageT2() {
         <hr className={styles.line} />
         <div className={styles.peopleGrid}>
           {people
-            .sort((a, b) => a.name.localeCompare(b.name))
-            .sort((a, b) => a.role.localeCompare(b.role))
+            .slice(0, 2)
+            .concat(devs)
             .map((person) => {
               const { name, gender, image, role } = person;
               return <Person key={name} name={name} gender={gender} image={image} role={role} />;
