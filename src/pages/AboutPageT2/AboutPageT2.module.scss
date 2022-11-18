@@ -1,0 +1,76 @@
+@use '../../variables.scss' as *;
+
+$topOffset: 74px;
+$secondaryColor: #1c2a4c;
+// breakpoints
+$md: 770px;
+$lg: 920px;
+$xl: 1280px;
+
+.container {
+  width: 100%;
+  max-width: $xl;
+  margin: $topOffset auto 0 auto;
+  padding-top: 1rem;
+  text-align: center;
+}
+
+.header {
+  font-size: 1.5rem;
+  color: $secondaryColor;
+}
+
+.roleTtitle {
+  color: $secondaryColor;
+}
+
+.line {
+  width: 5rem;
+  height: 0.125rem;
+  border: none;
+  background-color: $primaryColor;
+}
+
+.peopleGrid {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 1.5rem;
+}
+
+.personImage {
+  height: 5rem;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  border: 1px solid $primaryColor;
+}
+
+.description {
+  margin: 0;
+  color: $secondaryColor;
+  text-transform: capitalize;
+}
+
+.personRole {
+  font-size: 0.75rem;
+  color: $primaryColor;
+  margin-top: 0;
+}
+
+@media screen and (min-width: $md) {
+  :root {
+    font-size: 20px;
+  }
+  .peopleGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (min-width: $lg) {
+  :root {
+    font-size: 26px;
+  }
+  .peopleGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
