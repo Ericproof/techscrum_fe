@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { GoPlus } from 'react-icons/go';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Button from '../../../components/Button/Button';
 import TaskTypeSelect from '../../../components/Select/TaskTypeSelect/TaskTypeSelect';
 import TaskItem from '../TaskItem/TaskItem';
@@ -48,9 +49,13 @@ export default function BacklogSection({
         sprintId: null
       };
       setCurrentTypeOption('story');
-      addTask(data).then(() => {
-        getBacklogDataApi();
-      });
+      addTask(data)
+        .then(() => {
+          getBacklogDataApi();
+        })
+        .catch(() => {
+          toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+        });
     }
   };
 
@@ -58,9 +63,13 @@ export default function BacklogSection({
 
   const onChangeTitle = (id: string, title: string) => {
     const data = { title };
-    updateTask(id, data).then(() => {
-      getBacklogDataApi();
-    });
+    updateTask(id, data)
+      .then(() => {
+        getBacklogDataApi();
+      })
+      .catch(() => {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      });
   };
 
   const onKeyDownCreateIssue = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -74,35 +83,55 @@ export default function BacklogSection({
   };
   const onClickChangeStatus = (id: string, statusId: string) => {
     const data = { status: statusId };
-    updateTask(id, data).then(() => {
-      getBacklogDataApi();
-    });
+    updateTask(id, data)
+      .then(() => {
+        getBacklogDataApi();
+      })
+      .catch(() => {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      });
   };
   const onClickDelete = (id: string) => {
-    deleteTask(id).then(() => {
-      getBacklogDataApi();
-    });
+    deleteTask(id)
+      .then(() => {
+        getBacklogDataApi();
+      })
+      .catch(() => {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      });
   };
   const onClickChangeAssignee = (id: string, assigneeId: string) => {
     const data = { assignId: assigneeId };
-    updateTask(id, data).then(() => {
-      getBacklogDataApi();
-    });
+    updateTask(id, data)
+      .then(() => {
+        getBacklogDataApi();
+      })
+      .catch(() => {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      });
   };
   const onClickChangePriority = (id: string, priority: string) => {
     const data = { priority };
-    updateTask(id, data).then(() => {
-      getBacklogDataApi();
-    });
+    updateTask(id, data)
+      .then(() => {
+        getBacklogDataApi();
+      })
+      .catch(() => {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      });
   };
   const createSprint = () => {
     setShowCreateSprint(true);
   };
   const onClickAddToSprint = (taskId: string, sprintId: string) => {
     const data = { sprintId };
-    updateTask(taskId, data).then(() => {
-      getBacklogDataApi();
-    });
+    updateTask(taskId, data)
+      .then(() => {
+        getBacklogDataApi();
+      })
+      .catch(() => {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      });
   };
   return (
     <section className={styles.container}>

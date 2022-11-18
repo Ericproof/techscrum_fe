@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import ReactDOM from 'react-dom';
 import { useParams } from 'react-router-dom';
 import { AiOutlineClose } from 'react-icons/ai';
 import { BiChevronDown } from 'react-icons/bi';
+import { toast } from 'react-toastify';
 import { DatePicker } from '@atlaskit/datetime-picker';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import styles from './CreateEditSprint.module.scss';
@@ -28,7 +29,7 @@ export default function CreateEditSprint({
     }
     return '';
   };
-  const dateAfter = (date: string, days: string) => {
+  const dateAfter = useCallback((date: string, days: string) => {
     if (date) {
       const newDate = new Date(date);
       if (days === '1 week') {
@@ -45,7 +46,7 @@ export default function CreateEditSprint({
       }
     }
     return undefined;
-  };
+  }, []);
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const [duration, setDuration] = useState('Custom');
   const [sprintName, setSprintName] = useState(currentSprint ? currentSprint.name : '');
@@ -53,9 +54,13 @@ export default function CreateEditSprint({
     currentSprint ? dateWithDay(currentSprint.startDate) : ''
   );
   const [endDate, setEndDate] = useState(currentSprint ? dateWithDay(currentSprint.endDate) : '');
-  const [sprintGoal, setSprintGoal] = useState('');
+  const [sprintGoal, setSprintGoal] = useState(currentSprint ? currentSprint.sprintGoal : '');
   const { projectId = '', boardId = '' } = useParams();
   const durationList = ['1 week', '2 weeks', '3 weeks', 'Custom'];
+
+  useEffect(() => {
+    setEndDate(dateAfter(startDate, duration) ?? endDate);
+  }, [dateAfter, duration, endDate, startDate]);
 
   const onClickCreateSprint = () => {
     const data = {
@@ -65,35 +70,41 @@ export default function CreateEditSprint({
       startDate,
       endDate
     };
-    createSprint(data).then(() => {
-      getBacklogDataApi();
-      onClickCloseModal();
-    });
+    createSprint(data)
+      .then(() => {
+        getBacklogDataApi();
+        onClickCloseModal();
+      })
+      .catch(() => {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      });
   };
 
   const onClickUpdateSprint = (id: string) => {
     const data = {
       name: sprintName,
       startDate,
-      endDate
+      endDate,
+      sprintGoal
     };
-    updateSprint(id, data).then(() => {
-      getBacklogDataApi();
-      onClickCloseModal();
-    });
+    updateSprint(id, data)
+      .then(() => {
+        getBacklogDataApi();
+        onClickCloseModal();
+      })
+      .catch(() => {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      });
   };
   const onClickDeleteSprint = (id: string) => {
-    deleteSprint(id).then(() => {
-      getBacklogDataApi();
-      onClickCloseModal();
-    });
-  };
-  const onClickCompleteSprint = (id: string) => {
-    const data = { isComplete: true };
-    updateSprint(id, data).then(() => {
-      getBacklogDataApi();
-      onClickCloseModal();
-    });
+    deleteSprint(id)
+      .then(() => {
+        getBacklogDataApi();
+        onClickCloseModal();
+      })
+      .catch(() => {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      });
   };
 
   return (
@@ -173,7 +184,7 @@ export default function CreateEditSprint({
                     placeholder="e.g 12-13-2018"
                     minDate={startDate}
                     maxDate={dateAfter(startDate, duration)}
-                    value={dateAfter(startDate, duration) ?? endDate}
+                    value={endDate}
                     onChange={(date) => {
                       setEndDate(date);
                     }}
@@ -200,24 +211,14 @@ export default function CreateEditSprint({
                 Cancel
               </button>
               {type === 'Edit' && (
-                <>
-                  <button
-                    className={styles.deleteBtn}
-                    onClick={() => {
-                      onClickDeleteSprint(currentSprint.id);
-                    }}
-                  >
-                    Delete
-                  </button>
-                  <button
-                    className={styles.completeBtn}
-                    onClick={() => {
-                      onClickCompleteSprint(currentSprint.id);
-                    }}
-                  >
-                    Complete
-                  </button>
-                </>
+                <button
+                  className={styles.deleteBtn}
+                  onClick={() => {
+                    onClickDeleteSprint(currentSprint.id);
+                  }}
+                >
+                  Delete
+                </button>
               )}
               <button
                 className={styles.submitBtn}

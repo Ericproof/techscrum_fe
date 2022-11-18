@@ -91,7 +91,7 @@ export default function OptionBtn({
           )}
           {sprintData
             .filter((sprint) => {
-              return sprint.id !== sprintId;
+              return sprint.id !== sprintId && !sprint.isComplete;
             })
             .map((sprint) => {
               return (

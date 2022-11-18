@@ -34,7 +34,6 @@ $borderColor: #ebecf0;
     right: 0;
     background-color: white;
     z-index: 100;
-    width: 150px;
     border: 1px solid $borderColor;
     border-radius: 5px;
     ul,
@@ -56,10 +55,11 @@ $borderColor: #ebecf0;
         background-color: white;
         border: none;
         text-align: left;
-        padding-left: 10px;
         height: 30px;
+        padding: 0px 20px 0px 10px;
         cursor: pointer;
         font-size: 15px;
+        white-space: nowrap;
       }
       .dropDownBtn:hover {
         background-color: $bgColorGray;
