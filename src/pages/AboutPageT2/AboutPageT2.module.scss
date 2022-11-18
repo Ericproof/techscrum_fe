@@ -46,16 +46,39 @@ $xl: 1280px;
   pointer-events: none;
 }
 
-.description {
-  margin: 0;
+.name {
+  margin: 0.5rem;
   color: $secondaryColor;
   text-transform: capitalize;
 }
 
-.personRole {
+.description {
+  margin: 0;
+  display: flex;
+  gap: 0.2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.role {
+  margin: 0;
   font-size: 0.75rem;
   color: $primaryColor;
-  margin-top: 0.2rem;
+}
+
+.link {
+  color: $secondaryColor;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  &:visited {
+    color: $secondaryColor;
+  }
+}
+
+.icon {
+  font-size: 0.8rem;
 }
 
 @media screen and (min-width: $md) {

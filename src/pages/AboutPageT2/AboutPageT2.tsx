@@ -1,4 +1,5 @@
 import React from 'react';
+import { AiFillLinkedin } from 'react-icons/ai';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import MaleAvatar from '../../assets/team2/male_avatar.svg';
@@ -9,6 +10,7 @@ interface IPeople {
   name: string;
   image?: string;
   role: 'CEO' | 'business analyst' | 'designer' | 'developer' | 'devops';
+  linkedin?: string;
   gender: 'male' | 'female';
 }
 
@@ -16,27 +18,32 @@ const people: IPeople[] = [
   {
     name: 'kitman yit',
     role: 'CEO',
-    gender: 'male'
+    gender: 'male',
+    linkedin: 'https://www.linkedin.com/in/kitman-yiu/'
   },
   {
     name: 'berlinda wang',
     role: 'business analyst',
-    gender: 'female'
+    gender: 'female',
+    linkedin: 'www.linkedin.com/in/wangbelinda'
   },
   {
     name: 'hyna hua',
     role: 'developer',
-    gender: 'female'
+    gender: 'female',
+    linkedin: 'https://www.linkedin.com/in/hyna-hua/'
   },
   {
     name: 'david guo',
     role: 'developer',
-    gender: 'male'
+    gender: 'male',
+    linkedin: 'www.linkedin.com/in/david-guo-au'
   },
   {
     name: 'joe zhou',
     role: 'developer',
-    gender: 'male'
+    gender: 'male',
+    linkedin: 'https://www.linkedin.com/in/joe-hz/'
   },
   {
     name: 'wendy xu',
@@ -46,22 +53,26 @@ const people: IPeople[] = [
   {
     name: 'teddy xiao',
     role: 'developer',
-    gender: 'male'
+    gender: 'male',
+    linkedin: 'https://www.linkedin.com/in/chicheng-xu/'
   },
   {
     name: 'leo guo',
     role: 'devops',
-    gender: 'male'
+    gender: 'male',
+    linkedin: 'https://www.linkedin.com/in/leo-guo/'
   },
   {
     name: 'james liu',
     role: 'devops',
-    gender: 'male'
+    gender: 'male',
+    linkedin: 'http://linkedin.com/in/james-shl'
   },
   {
     name: 'jack chen',
     role: 'devops',
-    gender: 'male'
+    gender: 'male',
+    linkedin: 'http://www.linkedin.com/in/jack-chen-156224256/'
   }
 ];
 
@@ -71,7 +82,7 @@ const devs = people
   .sort((a, b) => a.role.localeCompare(b.role));
 
 function Person(props: IPeople) {
-  const { name, image, gender, role } = props;
+  const { name, image, gender, role, linkedin } = props;
   return (
     <div>
       <img
@@ -79,8 +90,15 @@ function Person(props: IPeople) {
         src={image || (gender === 'male' ? MaleAvatar : FemaleAvatar)}
         alt={name}
       />
-      <p className={styles.description}>{name}</p>
-      <p className={[styles.description, styles.personRole].join(' ')}>{role}</p>
+      <p className={styles.name}>{name}</p>
+      <div className={styles.description}>
+        <p className={styles.role}>{role}</p>
+        {linkedin && (
+          <a className={styles.link} href={linkedin} target="_blank" rel="noreferrer">
+            <AiFillLinkedin className={styles.icon} />
+          </a>
+        )}
+      </div>
     </div>
   );
 }
@@ -97,8 +115,17 @@ export default function AboutPageT2() {
             .slice(0, 2)
             .concat(devs)
             .map((person) => {
-              const { name, gender, image, role } = person;
-              return <Person key={name} name={name} gender={gender} image={image} role={role} />;
+              const { name, gender, image, role, linkedin } = person;
+              return (
+                <Person
+                  key={name}
+                  name={name}
+                  gender={gender}
+                  image={image}
+                  role={role}
+                  linkedin={linkedin}
+                />
+              );
             })}
         </div>
       </section>
@@ -108,5 +135,6 @@ export default function AboutPageT2() {
 }
 
 Person.defaultProps = {
-  image: undefined
+  image: undefined,
+  linkedin: undefined
 };
