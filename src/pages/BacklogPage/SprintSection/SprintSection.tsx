@@ -3,6 +3,7 @@ import { BiDotsHorizontal } from 'react-icons/bi';
 import { GoPlus } from 'react-icons/go';
 import { useParams } from 'react-router-dom';
 import { BsArrowRight } from 'react-icons/bs';
+import { toast } from 'react-toastify';
 import Button from '../../../components/Button/Button';
 import IconButton from '../../../components/Button/IconButton/IconButton';
 import TaskTypeSelect from '../../../components/Select/TaskTypeSelect/TaskTypeSelect';
@@ -12,6 +13,7 @@ import { addTask, updateTask, deleteTask } from '../../../api/backlog/backlog';
 import styles from './SprintSection.module.scss';
 import { IUserInfo, Itypes, IStatusBacklog } from '../../../types';
 import CreateEditSprint from '../CreateEditSprint/CreateEditSprint';
+import { updateSprint } from '../../../api/sprint/sprint';
 
 interface ISprintSection {
   sprint: any;
@@ -46,9 +48,13 @@ export default function SprintSection({
         sprintId: sprint.id
       };
       setCurrentTypeOption('story');
-      addTask(data).then(() => {
-        getBacklogDataApi();
-      });
+      addTask(data)
+        .then(() => {
+          getBacklogDataApi();
+        })
+        .catch(() => {
+          toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+        });
     }
   };
 
@@ -56,9 +62,13 @@ export default function SprintSection({
 
   const onChangeTitle = (id: string, title: string) => {
     const data = { title };
-    updateTask(id, data).then(() => {
-      getBacklogDataApi();
-    });
+    updateTask(id, data)
+      .then(() => {
+        getBacklogDataApi();
+      })
+      .catch(() => {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      });
   };
 
   const onKeyDownCreateIssue = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -72,26 +82,42 @@ export default function SprintSection({
   };
   const onClickChangeStatus = (id: string, statusId: string) => {
     const data = { status: statusId };
-    updateTask(id, data).then(() => {
-      getBacklogDataApi();
-    });
+    updateTask(id, data)
+      .then(() => {
+        getBacklogDataApi();
+      })
+      .catch(() => {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      });
   };
   const onClickDelete = (id: string) => {
-    deleteTask(id).then(() => {
-      getBacklogDataApi();
-    });
+    deleteTask(id)
+      .then(() => {
+        getBacklogDataApi();
+      })
+      .catch(() => {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      });
   };
   const onClickChangeAssignee = (id: string, assigneeId: string) => {
     const data = { assignId: assigneeId };
-    updateTask(id, data).then(() => {
-      getBacklogDataApi();
-    });
+    updateTask(id, data)
+      .then(() => {
+        getBacklogDataApi();
+      })
+      .catch(() => {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      });
   };
   const onClickChangePriority = (id: string, priority: string) => {
     const data = { priority };
-    updateTask(id, data).then(() => {
-      getBacklogDataApi();
-    });
+    updateTask(id, data)
+      .then(() => {
+        getBacklogDataApi();
+      })
+      .catch(() => {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      });
   };
   const dateWithDay = (date: Date | null) => {
     if (date != null) {
@@ -103,15 +129,43 @@ export default function SprintSection({
   };
   const onClickAddToBacklog = (id: string) => {
     const data = { sprintId: null };
-    updateTask(id, data).then(() => {
-      getBacklogDataApi();
-    });
+    updateTask(id, data)
+      .then(() => {
+        getBacklogDataApi();
+      })
+      .catch(() => {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      });
   };
   const onClickAddToSprint = (taskId: string, sprintId: string) => {
     const data = { sprintId };
-    updateTask(taskId, data).then(() => {
-      getBacklogDataApi();
-    });
+    updateTask(taskId, data)
+      .then(() => {
+        getBacklogDataApi();
+      })
+      .catch(() => {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      });
+  };
+  const onClickStartSprint = (sprintId: string) => {
+    const data = { currentSprint: true };
+    updateSprint(sprintId, data)
+      .then(() => {
+        getBacklogDataApi();
+      })
+      .catch(() => {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      });
+  };
+  const onClickCompleteSprint = (sprintId: string) => {
+    const data = { isComplete: true, currentSprint: false };
+    updateSprint(sprintId, data)
+      .then(() => {
+        getBacklogDataApi();
+      })
+      .catch(() => {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      });
   };
   return (
     <section className={[styles.container, styles.sprintContainer].join(' ')}>
@@ -128,6 +182,23 @@ export default function SprintSection({
           </div>
         </div>
         <div className={styles.toolbar}>
+          {sprint.currentSprint ? (
+            <Button
+              onClick={() => {
+                onClickCompleteSprint(sprint.id);
+              }}
+            >
+              Complete Sprint
+            </Button>
+          ) : (
+            <Button
+              onClick={() => {
+                onClickStartSprint(sprint.id);
+              }}
+            >
+              Start Sprint
+            </Button>
+          )}
           <IconButton
             icon={<BiDotsHorizontal />}
             tooltip="actions"
@@ -135,6 +206,7 @@ export default function SprintSection({
               setShowEditSprint(true);
             }}
           />
+
           {showEditSprint && (
             <CreateEditSprint
               type="Edit"
