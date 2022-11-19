@@ -28,7 +28,7 @@ describe('login', () => {
   })
 
   it('should show error message when login is incorrect', () =>{
-    cy.get('[data-testid="email"]').type('kitmanworkk@gmail.com')
+    cy.get('[data-testid="email"]').type('kitmanworkkgmail.com')
     cy.get('[data-testid="password"]').type('1234678')
     cy.get('[data-testid="login"]').click();
     cy.get('[data-testid="login-tip"]').contains('Wrong Email or Password.')

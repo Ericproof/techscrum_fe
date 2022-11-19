@@ -38,6 +38,7 @@ export default function LeftBottom(props: ILeftBottom) {
   const [users, setUsers] = useState<MentionData[]>([]);
   const [activities, setActivities] = useState([]);
   const [showActivities, setShowActivities] = useState(false);
+  const [showComments, setShowComments] = useState(true);
 
   const fetchCommentsData = () => {
     async function fetchData() {
@@ -77,7 +78,13 @@ export default function LeftBottom(props: ILeftBottom) {
   };
 
   const onActivityClick = () => {
-    setShowActivities(!showActivities);
+    setShowActivities(true);
+    setShowComments(false);
+  };
+
+  const onCommentClick = () => {
+    setShowActivities(false);
+    setShowComments(true);
   };
 
   useEffect(() => {
@@ -125,10 +132,21 @@ export default function LeftBottom(props: ILeftBottom) {
   return (
     <div className={style.container}>
       <div className={style.activity}>
-        <h3>Activity</h3>
         <div className={style.showCommentButton}>
-          <span>Show: </span>
-          <button type="button" onClick={onActivityClick} data-testid="show-activity-button">
+          <button
+            type="button"
+            className={style.switchButton}
+            onClick={onCommentClick}
+            data-testid="show-comment-button"
+          >
+            Comments
+          </button>
+          <button
+            type="button"
+            className={style.switchButton}
+            onClick={onActivityClick}
+            data-testid="show-activity-button"
+          >
             Activities
           </button>
         </div>
@@ -151,7 +169,7 @@ export default function LeftBottom(props: ILeftBottom) {
           <br />
         )}
       </div>
-      {checkAccess('edit:tasks', projectId) && (
+      {checkAccess('edit:tasks', projectId) && showComments && (
         <div>
           <div className={style.commentInputField}>
             <Editor
@@ -163,25 +181,26 @@ export default function LeftBottom(props: ILeftBottom) {
           </div>
         </div>
       )}
-      {comments.map((item: ICommentItemData) => {
-        if (item.taskId === taskId) {
-          return (
-            <CommentItem
-              key={item.id}
-              content={item.content}
-              id={item.id}
-              senderId={item.senderId}
-              updatedAt={item.updatedAt}
-              onClickDelete={onClickDelete}
-              onClickUpdate={onClickUpdate}
-              userEmail={userEmail}
-              users={users}
-              submitting={submitting}
-            />
-          );
-        }
-        return null;
-      })}
+      {showComments &&
+        comments.map((item: ICommentItemData) => {
+          if (item.taskId === taskId) {
+            return (
+              <CommentItem
+                key={item.id}
+                content={item.content}
+                id={item.id}
+                senderId={item.senderId}
+                updatedAt={item.updatedAt}
+                onClickDelete={onClickDelete}
+                onClickUpdate={onClickUpdate}
+                userEmail={userEmail}
+                users={users}
+                submitting={submitting}
+              />
+            );
+          }
+          return null;
+        })}
     </div>
   );
 }

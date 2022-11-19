@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react/jsx-no-useless-fragment */
 import React from 'react';
 import styles from './SettingCard.module.scss';
 

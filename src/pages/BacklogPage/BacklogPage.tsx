@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 import BacklogSection from './BacklogSection/BacklogSection';
 import styles from './BacklogPage.module.scss';
@@ -8,10 +8,12 @@ import { getStatuses } from '../../api/status/status';
 import { getTypes } from '../../api/types/types';
 import { getUsers } from '../../api/user/user';
 import SprintSection from './SprintSection/SprintSection';
+import Loading from '../../components/Loading/Loading';
 
 export default function BacklogPage() {
   const [loaded, setLoaded] = useState(false);
   const [backlogData, setBacklogData] = useState(null);
+  const [sprintData, setSprintData] = useState([]);
   const [statusData, setStatusData] = useState([]);
   const { projectId = '', boardId = '' } = useParams();
   const [typesData, setTypesData] = useState(null);
@@ -23,6 +25,7 @@ export default function BacklogPage() {
       try {
         const res = await getBacklog(projectId);
         setBacklogData(res.backlog);
+        setSprintData(res.sprints);
         setLoaded(true);
       } catch (e) {
         setLoaded(false);
@@ -55,31 +58,45 @@ export default function BacklogPage() {
     getTypesStatusesUsersDataApi();
   }, [getBacklogDataApi, getTypesStatusesUsersDataApi]);
 
+  const isLoading = !loaded && !typeStatusUserLoaded;
   return (
     <div className={styles.container}>
-      <ToastContainer style={{ width: '400px' }} />
       <div>
         <h1 data-testid="backlog-header">Backlog</h1>
       </div>
+      {isLoading && <Loading />}
       <div className={styles.scrollContainer}>
-        <SprintSection
-          sprintData={{ cards: [] }}
-          getBacklogDataApi={getBacklogDataApi}
-          loaded={loaded}
-          statusData={statusData}
-          typesData={typesData}
-          userList={userList}
-          typeStatusUserLoaded={typeStatusUserLoaded}
-        />
-        <BacklogSection
-          backlogData={backlogData}
-          getBacklogDataApi={getBacklogDataApi}
-          loaded={loaded}
-          statusData={statusData}
-          typesData={typesData}
-          userList={userList}
-          typeStatusUserLoaded={typeStatusUserLoaded}
-        />
+        {!isLoading && (
+          <>
+            {sprintData
+              .filter((sprint: any) => {
+                return !sprint.isComplete;
+              })
+              .map((sprint: any) => {
+                return (
+                  <React.Fragment key={sprint.id}>
+                    <SprintSection
+                      sprint={sprint}
+                      sprintData={sprintData}
+                      getBacklogDataApi={getBacklogDataApi}
+                      statusData={statusData}
+                      typesData={typesData}
+                      userList={userList}
+                    />
+                  </React.Fragment>
+                );
+              })}
+
+            <BacklogSection
+              backlogData={backlogData}
+              sprintData={sprintData}
+              getBacklogDataApi={getBacklogDataApi}
+              statusData={statusData}
+              typesData={typesData}
+              userList={userList}
+            />
+          </>
+        )}
       </div>
     </div>
   );

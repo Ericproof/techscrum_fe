@@ -6,12 +6,12 @@ import style from './CardRightContent.module.scss';
 import ReporterFields from './ReporterFields/ReporterFields';
 import LabelFields from './LabelFields/LabelFields';
 import UserSelect from '../../Form/Select/UserSelect/UserSelect';
-import Row from '../../Grid/Row/Row';
 import checkAccess from '../../../utils/helpers';
 import DueDatePicker from '../../DueDatePicker/DueDatePicker';
 import { UserContext } from '../../../context/UserInfoProvider';
 import { createActivity } from '../../../api/activity/activity';
 import { createDailyScrum, getDailyScrums } from '../../../api/dailyScrum/dailyScrum';
+import Row from '../../../lib/Grid/Row/Row';
 
 interface Props {
   taskInfo: TaskEntity;
@@ -67,13 +67,15 @@ export default function CardRightContent({
         taskId: updatedTaskInfo.id,
         createdDate
       };
-      const resultsForThisTask = await getDailyScrums(projectId, taskId);
-      if (resultsForThisTask.data.length > 0) {
-        const results = await getDailyScrums(projectId, assignId, createdDate, taskId);
-        if (results.data.length === 0) {
-          await createDailyScrum(projectId, data);
-        }
-      } else {
+      const searchCase = 'search-by-user-task-date';
+      const resultsForThisTask = await getDailyScrums(
+        projectId,
+        'none',
+        taskId,
+        dateHandler(new Date()),
+        searchCase
+      );
+      if (resultsForThisTask.data.length === 0) {
         await createDailyScrum(projectId, data);
       }
     }

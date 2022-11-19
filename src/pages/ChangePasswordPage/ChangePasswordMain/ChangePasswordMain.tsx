@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import styles from './ChangePasswordMain.module.scss';
 import Icon from '../../../assets/logo.svg';
 import Error from '../../../assets/error.png';
 import Loading from '../../../components/Loading/Loading';
 import { getResetPasswordApplication, setPassword } from '../../../api/resetPassword/resetPassword';
 import { IResetPasswordForm } from '../../../types';
-import Alert from '../../../components/Alert/Alert';
 
 export default function RegisterMain() {
-  const navigate = useNavigate();
   /* eslint-disable no-useless-escape */
   const illegalCharacter = /[%&]/;
   const [searchParams] = useSearchParams();
@@ -24,9 +23,6 @@ export default function RegisterMain() {
   const [loading, setLoading] = useState(false);
   const [invalideTokenStatus, setInvalideTokenStatus] = useState(false);
   const [tip, setTip] = useState('');
-  const [alert, setAlert] = useState(false);
-  const [statusCode, setStatusCode] = useState(0);
-  const [tipContent, setTipContent] = useState('');
 
   useEffect(() => {
     const fetchUserEmail = async () => {
@@ -51,21 +47,19 @@ export default function RegisterMain() {
     setLoading(true);
     try {
       await setPassword(token ?? '', passwordForm.password);
-      setStatusCode(0);
-      setTipContent('Password has been changed');
+      toast.success('Password has been changed', {
+        theme: 'colored',
+        className: 'primaryColorBackground'
+      });
     } catch (e) {
-      setStatusCode(1);
-      setTipContent('Something go Wrong, please try again');
+      toast.error('Something go Wrong, please try again', {
+        theme: 'colored',
+        toastId: 'toast-error'
+      });
     } finally {
       setLoading(false);
-      setAlert(true);
     }
     return true;
-  };
-
-  const alertConfirmEventHandler = () => {
-    setAlert(false);
-    if (statusCode === 0) navigate('/login');
   };
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -141,14 +135,6 @@ export default function RegisterMain() {
           </>
         )}
       </form>
-
-      {alert && (
-        <Alert
-          statusCode={statusCode}
-          tipContent={tipContent}
-          confirmAlert={alertConfirmEventHandler}
-        />
-      )}
     </div>
   );
 }

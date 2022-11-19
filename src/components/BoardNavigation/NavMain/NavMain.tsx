@@ -7,14 +7,13 @@ import { FiSettings } from 'react-icons/fi';
 import { FaDailymotion } from 'react-icons/fa';
 import { IProjectData, IShortcutData } from '../../../types';
 import checkAccess from '../../../utils/helpers';
-import ShortcutModal from '../../ShortcutModal/ShortcutModal';
 import styles from './NavMain.module.scss';
 import DailyScrum from '../../DailyScrum/DailyScrum';
+import ShortcutModal from '../../Modals/ShortcutModal/ShortcutModal';
 
 interface IPropsNavMain {
   currentProject: IProjectData;
   shortCutAdded: () => void;
-  shortCutRemoved: () => void;
   shortCutUpdated: () => void;
 }
 
@@ -29,7 +28,7 @@ export default function NavMain(props: IPropsNavMain) {
   const [addLinkToggle, setAddLinkToggle] = useState(false);
   const { boardId = '', projectId = '' } = useParams();
 
-  const { currentProject, shortCutAdded, shortCutRemoved, shortCutUpdated } = props;
+  const { currentProject, shortCutAdded, shortCutUpdated } = props;
   return (
     <div className={styles.container}>
       <div className={styles.containerTop}>
@@ -335,10 +334,6 @@ export default function NavMain(props: IPropsNavMain) {
               shortCutAdded();
             }}
             shortCutUpdated={shortCutUpdated}
-            shortCutRemoved={() => {
-              setAddLinkToggle(false);
-              shortCutRemoved();
-            }}
           />
         )}
       </div>

@@ -21,5 +21,6 @@
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "editor.language.brackets": []
+  "editor.language.brackets": [],
+  "editor.codeActionsOnSave": ["source.addMissingImports"]
 }

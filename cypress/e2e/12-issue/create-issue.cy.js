@@ -33,8 +33,9 @@ describe('Create issue', () => {
       }).as('create-tasks');
       cy.get('[data-testid="board-create-card"]').click()
       cy.get('[data-testid="summary"]').type('sdf')
+      cy.get('[data-testid="title"]').type('title1')
       cy.get('[data-testid="create-issue"]').click();
-      cy.get('[data-testid="task-635a63d0faf98e9043c9ddf6"]');
       cy.wait('@create-tasks')
+      cy.get('[data-testid="task-635a63d0faf98e9043c9ddf6"]', {timeout:10000});
   });
 });

@@ -5,10 +5,11 @@ export const getDailyScrums = async (
   projectId = 'none',
   userId = 'none',
   taskId = 'none',
-  date = 'none'
+  date = 'none',
+  searchCase = 'none'
 ) => {
   return axios.get(
-    `${config.apiAddress}/projects/${projectId}/dailyScrums/${userId}/${taskId}/${date}`
+    `${config.apiAddress}/projects/${projectId}/dailyScrums/${userId}/${taskId}/${date}/${searchCase}`
   );
 };
 

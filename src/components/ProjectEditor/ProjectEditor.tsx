@@ -4,11 +4,11 @@ import ChangeIcon from './ChangeIcon/ChangeIcon';
 import styles from './ProjectEditor.module.scss';
 import { IOnChangeProjectLead, IProjectEditor } from '../../types';
 import { UserContext } from '../../context/UserInfoProvider';
-import InputV2 from '../FormV2/InputV2/InputV2';
-import UsersFieldsV2 from '../FieldsV2/UsersFieldsV2/UsersFieldsV2';
-import Row from '../Grid/Row/Row';
-import ButtonV2 from '../FormV2/ButtonV2/ButtonV2';
-import BtnContainer from '../Grid/BtnContainer/BtnContainer';
+import UsersFieldsV2 from '../../lib/FieldsV2/UsersFieldsV2/UsersFieldsV2';
+import ButtonV2 from '../../lib/FormV2/ButtonV2/ButtonV2';
+import InputV2 from '../../lib/FormV2/InputV2/InputV2';
+import BtnContainer from '../../lib/Grid/BtnContainer/BtnContainer';
+import Row from '../../lib/Grid/Row/Row';
 
 interface ProjectEditorProps {
   showCancelBtn?: boolean;
@@ -65,7 +65,7 @@ function ProjectEditor(props: ProjectEditorProps) {
   };
 
   const onSave = () => {
-    const apiData = { ...data };
+    const apiData = { ...data, userId: userInfo.id };
     onClickSave(apiData);
   };
 
