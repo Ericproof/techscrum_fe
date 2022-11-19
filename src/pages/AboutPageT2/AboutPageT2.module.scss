@@ -41,6 +41,10 @@ $xl: 1280px;
 .personImage {
   height: 5rem;
   aspect-ratio: 1 / 1;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -o-object-position: 50% 20%;
+     object-position: 50% 20%;
   border-radius: 50%;
   border: 1px solid $primaryColor;
   pointer-events: none;
@@ -62,7 +66,7 @@ $xl: 1280px;
 
 .role {
   margin: 0;
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   color: $primaryColor;
   text-transform: capitalize;
 }
