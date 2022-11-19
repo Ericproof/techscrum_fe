@@ -14,7 +14,7 @@ interface ButtonProps {
   /**
    * How large should the button be?
    */
-  size?: 'xs' | 'md' | 'lg(WIP)';
+  size?: 'xs' | 'md' | 'lg';
 
   /**
    * Button contents
