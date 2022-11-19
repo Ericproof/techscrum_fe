@@ -19,17 +19,13 @@ interface ISprintSection {
   sprint: any;
   sprintData: any;
   getBacklogDataApi: () => void;
-  loaded: boolean;
   statusData: IStatusBacklog[];
   typesData: Itypes[] | null;
-  typeStatusUserLoaded: boolean;
   userList: IUserInfo[];
 }
 export default function SprintSection({
   sprint,
   getBacklogDataApi,
-  loaded,
-  typeStatusUserLoaded,
   statusData,
   typesData,
   userList,
@@ -182,7 +178,7 @@ export default function SprintSection({
               <BsArrowRight />
               <p> {dateWithDay(sprint.endDate)}</p>
             </div>
-            <div className={styles.issueCount}> ({loaded && sprint.taskId.length} issues)</div>
+            <div className={styles.issueCount}> ({sprint.taskId.length} issues)</div>
           </div>
         </div>
         <div className={styles.toolbar}>
@@ -224,33 +220,31 @@ export default function SprintSection({
         </div>
       </div>
       <div className={styles.listContainer}>
-        {loaded &&
-          typeStatusUserLoaded &&
-          sprint.taskId.map((task) => {
-            return (
-              <TaskItem
-                key={task.id}
-                taskTitle={task.title}
-                taskId={task.id}
-                issueId={'TEC-'.concat(task.id.slice(task.id.length - 3))}
-                onChangeTitle={onChangeTitle}
-                type={task.typeId.slug}
-                status={task.status.name.toUpperCase()}
-                onClickChangeStatus={onClickChangeStatus}
-                onClickDelete={onClickDelete}
-                statusData={statusData}
-                onClickChangeAssignee={onClickChangeAssignee}
-                userList={userList}
-                assignee={task.assignId}
-                priority={task.priority}
-                onClickChangePriority={onClickChangePriority}
-                sprintId={task.sprintId}
-                onClickAddToBacklog={onClickAddToBacklog}
-                onClickAddToSprint={onClickAddToSprint}
-                sprintData={sprintData}
-              />
-            );
-          })}
+        {sprint.taskId.map((task) => {
+          return (
+            <TaskItem
+              key={task.id}
+              taskTitle={task.title}
+              taskId={task.id}
+              issueId={'TEC-'.concat(task.id.slice(task.id.length - 3))}
+              onChangeTitle={onChangeTitle}
+              type={task.typeId.slug}
+              status={task.status.name.toUpperCase()}
+              onClickChangeStatus={onClickChangeStatus}
+              onClickDelete={onClickDelete}
+              statusData={statusData}
+              onClickChangeAssignee={onClickChangeAssignee}
+              userList={userList}
+              assignee={task.assignId}
+              priority={task.priority}
+              onClickChangePriority={onClickChangePriority}
+              sprintId={task.sprintId}
+              onClickAddToBacklog={onClickAddToBacklog}
+              onClickAddToSprint={onClickAddToSprint}
+              sprintData={sprintData}
+            />
+          );
+        })}
       </div>
       {visible ? (
         <form>

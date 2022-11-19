@@ -8,6 +8,7 @@ import { getStatuses } from '../../api/status/status';
 import { getTypes } from '../../api/types/types';
 import { getUsers } from '../../api/user/user';
 import SprintSection from './SprintSection/SprintSection';
+import Loading from '../../components/Loading/Loading';
 
 export default function BacklogPage() {
   const [loaded, setLoaded] = useState(false);
@@ -57,43 +58,45 @@ export default function BacklogPage() {
     getTypesStatusesUsersDataApi();
   }, [getBacklogDataApi, getTypesStatusesUsersDataApi]);
 
+  const isLoading = !loaded && !typeStatusUserLoaded;
   return (
     <div className={styles.container}>
       <div>
         <h1 data-testid="backlog-header">Backlog</h1>
       </div>
+      {isLoading && <Loading />}
       <div className={styles.scrollContainer}>
-        {sprintData
-          .filter((sprint: any) => {
-            return !sprint.isComplete;
-          })
-          .map((sprint: any) => {
-            return (
-              <React.Fragment key={sprint.id}>
-                <SprintSection
-                  sprint={sprint}
-                  sprintData={sprintData}
-                  getBacklogDataApi={getBacklogDataApi}
-                  loaded={loaded}
-                  statusData={statusData}
-                  typesData={typesData}
-                  userList={userList}
-                  typeStatusUserLoaded={typeStatusUserLoaded}
-                />
-              </React.Fragment>
-            );
-          })}
+        {!isLoading && (
+          <>
+            {sprintData
+              .filter((sprint: any) => {
+                return !sprint.isComplete;
+              })
+              .map((sprint: any) => {
+                return (
+                  <React.Fragment key={sprint.id}>
+                    <SprintSection
+                      sprint={sprint}
+                      sprintData={sprintData}
+                      getBacklogDataApi={getBacklogDataApi}
+                      statusData={statusData}
+                      typesData={typesData}
+                      userList={userList}
+                    />
+                  </React.Fragment>
+                );
+              })}
 
-        <BacklogSection
-          backlogData={backlogData}
-          sprintData={sprintData}
-          getBacklogDataApi={getBacklogDataApi}
-          loaded={loaded}
-          statusData={statusData}
-          typesData={typesData}
-          userList={userList}
-          typeStatusUserLoaded={typeStatusUserLoaded}
-        />
+            <BacklogSection
+              backlogData={backlogData}
+              sprintData={sprintData}
+              getBacklogDataApi={getBacklogDataApi}
+              statusData={statusData}
+              typesData={typesData}
+              userList={userList}
+            />
+          </>
+        )}
       </div>
     </div>
   );

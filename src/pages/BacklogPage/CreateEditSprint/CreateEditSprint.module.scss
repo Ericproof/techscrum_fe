@@ -1,3 +1,4 @@
+@import '../../../variables.scss';
 $closeBtnColor: rgb(202, 207, 227);
 $closeBtnColorHover: rgb(178, 182, 200);
 $colorGray: rgb(102, 106, 133);
@@ -147,7 +148,7 @@ $colorGreen: rgb(122, 184, 79);
     .submitBtn {
       border: none;
       color: white;
-      background-color: $colorBlue;
+      background-color: $primaryColor;
       @include btn();
     }
     .deleteBtn {

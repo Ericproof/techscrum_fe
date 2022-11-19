@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import ReactDOM from 'react-dom';
 import { useParams } from 'react-router-dom';
-import { AiOutlineClose } from 'react-icons/ai';
 import { BiChevronDown } from 'react-icons/bi';
 import { toast } from 'react-toastify';
 import { DatePicker } from '@atlaskit/datetime-picker';
@@ -9,6 +8,7 @@ import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import styles from './CreateEditSprint.module.scss';
 import Modal from '../../../lib/Modal/Modal';
 import { createSprint, updateSprint, deleteSprint } from '../../../api/sprint/sprint';
+import DefaultModalHeader from '../../../lib/Modal/ModalHeader/DefaultModalHeader/DefaultModalHeader';
 
 interface ICreateEditSprint {
   type: string;
@@ -48,6 +48,7 @@ export default function CreateEditSprint({
     return undefined;
   }, []);
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
+  const [disabled, setDisabled] = useState(false);
   const [duration, setDuration] = useState('Custom');
   const [sprintName, setSprintName] = useState(currentSprint ? currentSprint.name : '');
   const [startDate, setStartDate] = useState(
@@ -111,13 +112,13 @@ export default function CreateEditSprint({
     <>
       {ReactDOM.createPortal(
         <Modal classesName={styles.createEditSprintModal}>
+          <DefaultModalHeader
+            title={`${type} Sprint`}
+            onClickClose={() => {
+              onClickCloseModal();
+            }}
+          />
           <div className={styles.createEditSprintContainer}>
-            <div className={styles.createEditSprintHeader}>
-              <h2>{type} Sprint</h2>
-              <button className={styles.closeBtn} onClick={onClickCloseModal}>
-                <AiOutlineClose />
-              </button>
-            </div>
             <div className={styles.createEditSprintInputContainer}>
               <div className={styles.inputContainer}>
                 <p className={styles.label}>Sprint Name:</p>
@@ -207,7 +208,14 @@ export default function CreateEditSprint({
               </div>
             </div>
             <div className={styles.btnContainer}>
-              <button className={styles.cancelBtn} onClick={onClickCloseModal}>
+              <button
+                className={styles.cancelBtn}
+                onClick={() => {
+                  onClickCloseModal();
+                  setDisabled(true);
+                }}
+                disabled={disabled}
+              >
                 Cancel
               </button>
               {type === 'Edit' && (
@@ -225,10 +233,13 @@ export default function CreateEditSprint({
                 onClick={() => {
                   if (type === 'Create') {
                     onClickCreateSprint();
+                    setDisabled(true);
                   } else {
                     onClickUpdateSprint(currentSprint.id);
+                    setDisabled(true);
                   }
                 }}
+                disabled={disabled}
               >
                 {type === 'Create' ? 'Create' : 'Update'}
               </button>
