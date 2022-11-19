@@ -100,8 +100,9 @@ const people: IPeople[] = [
   }
 ];
 
+// display developers first and then devops, sort by first name
 const devs = people
-  .slice(2)
+  .filter((person) => person.role === 'developer' || person.role === 'devops')
   .sort((a, b) => a.name.localeCompare(b.name))
   .sort((a, b) => a.role.localeCompare(b.role));
 
