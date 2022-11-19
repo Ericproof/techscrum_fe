@@ -7,7 +7,7 @@ interface IBulletProps {
   category: string;
   subTitle: string;
   benefits: string[];
-  icon: any;
+  icon: React.ReactNode;
   showTryFree?: boolean;
 }
 

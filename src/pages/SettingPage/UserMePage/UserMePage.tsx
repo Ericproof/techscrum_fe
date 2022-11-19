@@ -22,7 +22,7 @@ export default function UserMePage() {
   const [newPassword, setNewPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
 
-  const onChangeUser = (e: any) => {
+  const onChangeUser = (e) => {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
   };
 

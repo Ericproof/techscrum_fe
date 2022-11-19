@@ -8,7 +8,7 @@ import styles from './SubProjectMenu.module.scss';
 interface ISubProjectMenu {
   toggleSearchMenu: boolean;
   projectList: any;
-  closeModal: any;
+  closeModal: () => void;
 }
 
 export default function SubProjectMenu(props: ISubProjectMenu) {

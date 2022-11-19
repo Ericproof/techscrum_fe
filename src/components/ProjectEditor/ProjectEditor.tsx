@@ -14,7 +14,7 @@ interface ProjectEditorProps {
   showCancelBtn?: boolean;
   projectData?: IProjectEditor;
   onClickSave: (data: any) => void;
-  onClickCancel?: (e: any) => void;
+  onClickCancel?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   hasError?: boolean;
   loading?: boolean;
 }

@@ -33,7 +33,7 @@ export default function MultiSelectDropdownV2(props: IMultiSelectDropdownV2) {
     onLabelAdd,
     isDisabled
   } = props;
-  const [searchValue, setSearchValue] = useState(null);
+  const [searchValue, setSearchValue] = useState('');
   const [error, setError] = useState<null | string>(null);
   const [showMenu, setShowMenu] = useState(false);
   const [selectedItems, setSelectedItems] = useState<any>([]);
@@ -49,7 +49,7 @@ export default function MultiSelectDropdownV2(props: IMultiSelectDropdownV2) {
     onValueChanged(e);
     setShowMenu(false);
     setIsActive(false);
-    setSearchValue(null);
+    setSearchValue('');
   };
 
   const onChangeSearch = (e: any) => {
@@ -61,9 +61,9 @@ export default function MultiSelectDropdownV2(props: IMultiSelectDropdownV2) {
     onLabelDelete(itemRemove.value);
   };
 
-  const addItem = (itemAdd: any) => {
+  const addItem = (itemAdd: string) => {
     onLabelAdd(itemAdd);
-    setSearchValue(null);
+    setSearchValue('');
   };
 
   const onBlurValue = (e: any) => {

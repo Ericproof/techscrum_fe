@@ -1,24 +1,25 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from 'react';
 import { RiMoreFill } from 'react-icons/ri';
-import { TaskEntity } from '../../../api/task/entity/task';
+
 import { TaskTypesContext } from '../../../context/TaskTypeProvider';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import checkAccess from '../../../utils/helpers';
 import style from './CardHeader.module.scss';
 import { deleteDailyScrum } from '../../../api/dailyScrum/dailyScrum';
+import { ITaskEntity } from '../../../types';
 
 interface Props {
   updateIsViewTask: () => void;
-  taskInfo: TaskEntity;
+  taskInfo: ITaskEntity;
   deleteTask: () => void;
   projectId: string;
-  onSave: (data: any) => void;
+  onSave: (data: ITaskEntity) => void;
 }
 // https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium
 // https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium
 
-const TYPE: any = {
+const TYPE = {
   story:
     'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium',
   task: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium',
@@ -47,7 +48,7 @@ export default function CardHeader({
     await deleteDailyScrum(projectId, taskInfo.id);
   };
 
-  const onClickIssueType = (task: any) => {
+  const onClickIssueType = (task: ITaskEntity) => {
     const updateTaskInfo = { ...taskInfo };
     updateTaskInfo.typeId = task;
     setSelectedType(TYPE[task.slug]);

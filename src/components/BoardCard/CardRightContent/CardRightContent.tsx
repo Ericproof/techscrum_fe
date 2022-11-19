@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
-import { TaskEntity } from '../../../api/task/entity/task';
-import { IColumnsFromBackend, ILabelData, IOnChangeProjectLead } from '../../../types';
+import { IColumnsFromBackend, ILabelData, IOnChangeProjectLead, ITaskEntity } from '../../../types';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import style from './CardRightContent.module.scss';
 import ReporterFields from './ReporterFields/ReporterFields';
@@ -14,9 +13,9 @@ import { createDailyScrum, getDailyScrums } from '../../../api/dailyScrum/dailyS
 import Row from '../../../lib/Grid/Row/Row';
 
 interface Props {
-  taskInfo: TaskEntity;
+  taskInfo: ITaskEntity;
   columnsInfo: IColumnsFromBackend;
-  taskStatusOnchange: (taskInfo: TaskEntity) => void;
+  taskStatusOnchange: (taskInfo: ITaskEntity) => void;
   labels: ILabelData[];
   projectId: string;
   updateTaskTags: (tags: ILabelData[] | undefined) => void;

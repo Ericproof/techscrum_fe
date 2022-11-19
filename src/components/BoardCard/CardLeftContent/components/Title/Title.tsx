@@ -1,9 +1,9 @@
 import React from 'react';
-import { TaskEntity } from '../../../../../api/task/entity/task';
+import { ITaskEntity } from '../../../../../types';
 import styles from './Title.module.scss';
 
 interface Props {
-  taskInfo: TaskEntity;
+  taskInfo: ITaskEntity;
   focusEventHandler: () => void;
   isDisabled: boolean;
   onChangeTitle: (e: React.ChangeEvent<HTMLInputElement>) => void;

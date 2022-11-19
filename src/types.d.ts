@@ -38,6 +38,39 @@ export interface ICardData {
   projectId?: string;
 }
 
+export interface ITaskEntity {
+  status?: any;
+  id?: string;
+  title?: string;
+  tags?: ILabelData[];
+  statusId?: string;
+  projectId?: string;
+  boardId?: string;
+  typeId?: any;
+  description?: string;
+  storyPoint?: number;
+  dueAt?: Date;
+  assignId?: string;
+  reporterId?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  comments?: any;
+  attachmentUrls?: any;
+  slug?: any;
+}
+
+export interface Task {
+  title: string;
+  description: string;
+  cardType: string;
+  assignId: { userId: string; userName: string; userIcon: string };
+  label: string;
+  sprint: string;
+  storyPointEstimate: string;
+  pullRequestNumber: number;
+  reporter: { userId: string; userName: string; userIcon: string };
+}
+
 export interface IProjectEditor {
   [key: string]: any;
 }
@@ -205,4 +238,15 @@ export interface Itypes {
   createdAt: string;
   updatedAt: string;
   id: string;
+}
+
+export interface IOptions {
+  label: string;
+  value: any;
+}
+
+export interface IChangePassword {
+  oldPassword: string;
+  newPassword: string;
+  userInfo?: IUserInfo;
 }

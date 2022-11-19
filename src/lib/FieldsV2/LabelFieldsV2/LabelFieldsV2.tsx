@@ -28,7 +28,7 @@ export default function LabelFieldsV2(props: IPropsLabel) {
     }
   };
 
-  const onClickSave = async (label: any) => {
+  const onClickSave = async (label: string) => {
     if (!taskInfo.id) {
       return;
     }
