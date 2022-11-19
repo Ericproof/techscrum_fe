@@ -10,8 +10,15 @@ interface IToolBar {
   taskId: string;
   statusData: IStatusBacklog[];
   onClickChangeStatus: (id: string, statusId: string) => void;
+  showDropDownOnTop?: boolean;
 }
-export default function StatusBtn({ status, onClickChangeStatus, taskId, statusData }: IToolBar) {
+export default function StatusBtn({
+  status,
+  onClickChangeStatus,
+  taskId,
+  statusData,
+  showDropDownOnTop
+}: IToolBar) {
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
 
   const dropDownClick = () => {
@@ -35,7 +42,11 @@ export default function StatusBtn({ status, onClickChangeStatus, taskId, statusD
       <div
         className={
           visible
-            ? [styles.btnDropDownContainer, styles.showBtnDropDownContainer].join(' ')
+            ? [
+                styles.btnDropDownContainer,
+                styles.showBtnDropDownContainer,
+                showDropDownOnTop && styles.showDropDownOnTop
+              ].join(' ')
             : styles.btnDropDownContainer
         }
       >
@@ -59,3 +70,6 @@ export default function StatusBtn({ status, onClickChangeStatus, taskId, statusD
     </div>
   );
 }
+StatusBtn.defaultProps = {
+  showDropDownOnTop: false
+};

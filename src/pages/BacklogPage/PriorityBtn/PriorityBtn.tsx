@@ -6,8 +6,14 @@ interface IPriorityBtn {
   priority: string;
   onClickChangePriority: (id: string, priority: string) => void;
   taskId: string;
+  showDropDownOnTop?: boolean;
 }
-export default function PriorityBtn({ priority, onClickChangePriority, taskId }: IPriorityBtn) {
+export default function PriorityBtn({
+  priority,
+  onClickChangePriority,
+  taskId,
+  showDropDownOnTop
+}: IPriorityBtn) {
   const allPriorities = [
     {
       priority: 'Highest',
@@ -52,7 +58,11 @@ export default function PriorityBtn({ priority, onClickChangePriority, taskId }:
       <div
         className={
           visible
-            ? [styles.priorityBtnDropDown, styles.showPriorityBtnDropDown].join(' ')
+            ? [
+                styles.priorityBtnDropDown,
+                styles.showPriorityBtnDropDown,
+                showDropDownOnTop && styles.showDropDownOnTop
+              ].join(' ')
             : styles.priorityBtnDropDown
         }
       >
@@ -80,3 +90,6 @@ export default function PriorityBtn({ priority, onClickChangePriority, taskId }:
     </div>
   );
 }
+PriorityBtn.defaultProps = {
+  showDropDownOnTop: false
+};

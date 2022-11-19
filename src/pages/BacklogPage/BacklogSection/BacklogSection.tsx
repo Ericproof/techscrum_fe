@@ -150,7 +150,7 @@ export default function BacklogSection({
         </div>
       </div>
       <div className={styles.listContainer}>
-        {backlogData.cards.map((task) => {
+        {backlogData.cards.map((task, index) => {
           return (
             <TaskItem
               key={task.id}
@@ -171,6 +171,7 @@ export default function BacklogSection({
               onClickAddToSprint={onClickAddToSprint}
               sprintId={task.sprintId}
               sprintData={sprintData}
+              showDropDownOnTop={index > backlogData.cards.length - 4}
             />
           );
         })}
@@ -178,7 +179,7 @@ export default function BacklogSection({
       {visible ? (
         <form>
           <div className={styles.formField} ref={myRef}>
-            <TaskTypeSelect onChangeType={getCurrentTypeOption} />
+            <TaskTypeSelect showDropDownOnTop onChangeType={getCurrentTypeOption} />
             <input
               className={styles.input}
               type="text"

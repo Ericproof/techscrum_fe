@@ -69,4 +69,8 @@ $borderColor: #ebecf0;
   .showOptionBtnDropDown {
     display: block;
   }
+  .showDropDownOnTop {
+    top: auto;
+    bottom: 33px;
+  }
 }

@@ -46,9 +46,10 @@ function Option({ type, imgUrl, onClickOption, setClicked }: IOption) {
 
 interface ITaskTypeSelect {
   onChangeType: (type: string) => void;
+  showDropDownOnTop?: boolean;
 }
 
-export default function TaskTypeSelect({ onChangeType }: ITaskTypeSelect) {
+export default function TaskTypeSelect({ onChangeType, showDropDownOnTop }: ITaskTypeSelect) {
   const initialOption = TYPES[0];
   const [showOptions, setShowOptions] = useState(false);
   const [currentOption, setCurrentOption] = useState(initialOption);
@@ -84,6 +85,7 @@ export default function TaskTypeSelect({ onChangeType }: ITaskTypeSelect) {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
   let btnClassName = '';
   if (clicked) {
     btnClassName = [styles.buttonContainer, styles.buttonClicked].join(' ');
@@ -113,7 +115,11 @@ export default function TaskTypeSelect({ onChangeType }: ITaskTypeSelect) {
         <img className={styles.icon} src={currentOption.imgUrl} alt={currentOption.type} />
         <HiChevronDown />
       </button>
-      <div className={styles.optionsContainer}>
+      <div
+        className={[styles.optionsContainer, showDropDownOnTop && styles.showDropDownOnTop].join(
+          ' '
+        )}
+      >
         <ul className={[styles.listContainer, showOptions && styles.show].join(' ')}>
           {otherOptions.map((option) => {
             const { type, imgUrl } = option;
@@ -133,3 +139,7 @@ export default function TaskTypeSelect({ onChangeType }: ITaskTypeSelect) {
     </div>
   );
 }
+
+TaskTypeSelect.defaultProps = {
+  showDropDownOnTop: false
+};

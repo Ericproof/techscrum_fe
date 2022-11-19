@@ -21,6 +21,7 @@ interface ITaskInput {
   priority: string;
   sprintId: string;
   sprintData?: any;
+  showDropDownOnTop?: boolean;
   onChangeTitle: (id: string, title: string) => void;
   onClickChangeAssignee: (id: string, assigneeId: string) => void;
   onClickChangeStatus: (id: string, statusId: string) => void;
@@ -41,6 +42,7 @@ export default function TaskItem({
   priority,
   sprintId,
   sprintData,
+  showDropDownOnTop,
   onChangeTitle,
   onClickChangeAssignee,
   onClickChangeStatus,
@@ -141,18 +143,21 @@ export default function TaskItem({
         <PriorityBtn
           taskId={taskId}
           priority={priority}
+          showDropDownOnTop={showDropDownOnTop}
           onClickChangePriority={onClickChangePriority}
         />
         <StatusBtn
           status={status}
           taskId={taskId}
           statusData={statusData}
+          showDropDownOnTop={showDropDownOnTop}
           onClickChangeStatus={onClickChangeStatus}
         />
         <AssigneeBtn
           taskId={taskId}
           assignee={assignee}
           userList={userList}
+          showDropDownOnTop={showDropDownOnTop}
           onClickChangeAssignee={onClickChangeAssignee}
         />
         <OptionBtn
@@ -164,6 +169,7 @@ export default function TaskItem({
           onClickAddToBacklog={onClickAddToBacklog}
           onClickAddToSprint={onClickAddToSprint}
           sprintData={sprintData}
+          showDropDownOnTop={showDropDownOnTop}
         />
       </div>
     </div>
@@ -172,5 +178,6 @@ export default function TaskItem({
 TaskItem.defaultProps = {
   onClickAddToBacklog: () => {},
   onClickAddToSprint: () => {},
+  showDropDownOnTop: false,
   sprintData: []
 };

@@ -5,18 +5,20 @@ import userAvatar from '../../../assets/userAvatar.png';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import { IUserInfo, IAssign } from '../../../types';
 
-interface IPriorityBtn {
+interface IAssigneeBtn {
   assignee: IAssign | null;
   onClickChangeAssignee: (id: string, assigneeId: string) => void;
   taskId: string;
   userList: IUserInfo[];
+  showDropDownOnTop?: boolean;
 }
-export default function PriorityBtn({
+export default function AssigneeBtn({
   assignee,
   onClickChangeAssignee,
   userList,
-  taskId
-}: IPriorityBtn) {
+  taskId,
+  showDropDownOnTop
+}: IAssigneeBtn) {
   const [query, setQuery] = useState('');
 
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,7 +49,11 @@ export default function PriorityBtn({
         }}
       />
       {visible && (
-        <div className={styles.assigneeDropdown}>
+        <div
+          className={[styles.assigneeDropdown, showDropDownOnTop && styles.showDropDownOnTop].join(
+            ' '
+          )}
+        >
           <div className={styles.inputContainer}>
             <input type="text" placeholder={name} onChange={onChangeInput} />
             <img src={avartar} alt="avatar" />
@@ -81,3 +87,6 @@ export default function PriorityBtn({
     </div>
   );
 }
+AssigneeBtn.defaultProps = {
+  showDropDownOnTop: false
+};

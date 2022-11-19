@@ -70,6 +70,10 @@ $btnBgColorPurple: rgb(238, 232, 251);
     }
   }
 }
+.showDropDownOnTop {
+  top: auto;
+  bottom: 30px;
+}
 .showBtnDropDownContainer {
   display: block;
 }

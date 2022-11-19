@@ -8,6 +8,7 @@ interface IOptionBtn {
   showOptionBtn: boolean;
   sprintId: string;
   sprintData?: any;
+  showDropDownOnTop?: boolean;
   onClickDelete: (id: string) => void;
   onClickAddToBacklog?: (id: string) => void;
   onClickAddToSprint?: (taskId: string, sprintId: string) => void;
@@ -18,6 +19,7 @@ export default function OptionBtn({
   showOptionBtn,
   sprintId,
   sprintData,
+  showDropDownOnTop,
   onClickDelete,
   toggleDisableShowOptionBtnEffect,
   onClickAddToBacklog,
@@ -66,7 +68,11 @@ export default function OptionBtn({
       <div
         className={
           visible
-            ? [styles.optionBtnDropDown, styles.showOptionBtnDropDown].join(' ')
+            ? [
+                styles.optionBtnDropDown,
+                styles.showOptionBtnDropDown,
+                showDropDownOnTop && styles.showDropDownOnTop
+              ].join(' ')
             : styles.optionBtnDropDown
         }
       >
@@ -129,5 +135,6 @@ export default function OptionBtn({
 OptionBtn.defaultProps = {
   onClickAddToBacklog: () => {},
   onClickAddToSprint: () => {},
-  sprintData: []
+  sprintData: [],
+  showDropDownOnTop: false
 };
