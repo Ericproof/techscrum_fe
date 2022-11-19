@@ -6,6 +6,9 @@ import MaleAvatar from '../../assets/team2/male_avatar.svg';
 import FemaleAvatar from '../../assets/team2/female_avatar.svg';
 import styles from './AboutPageT2.module.scss';
 import Kitman from '../../assets/kitman.jpg';
+import David from '../../assets/team2/david_guo.webp';
+import Hyna from '../../assets/team2/hyna_hua.webp';
+import Shelton from '../../assets/team2/shelton_chin.webp';
 
 interface IPeople {
   name: string;
@@ -35,12 +38,14 @@ const people: IPeople[] = [
     name: 'hyna hua',
     role: 'developer',
     gender: 'female',
+    image: Hyna,
     linkedin: 'https://www.linkedin.com/in/hyna-hua/'
   },
   {
     name: 'david guo',
     role: 'developer',
     gender: 'male',
+    image: David,
     linkedin: 'https://www.linkedin.com/in/david-guo-au'
   },
   {
@@ -55,6 +60,8 @@ const people: IPeople[] = [
     name: 'wendy xu',
     role: 'developer',
     gender: 'male',
+    image:
+      'https://media-exp1.licdn.com/dms/image/D4E03AQGLeae4TQAinA/profile-displayphoto-shrink_400_400/0/1663767958415?e=1674086400&v=beta&t=QNEDdSyJY8DE1xbh22jJ1Vvf9z8bXnnw_0qyqI303xo',
     linkedin: 'https://www.linkedin.com/in/chicheng-xu/'
   },
   {
@@ -66,12 +73,16 @@ const people: IPeople[] = [
     name: 'leo guo',
     role: 'devops',
     gender: 'male',
+    image:
+      'https://media-exp1.licdn.com/dms/image/C4D03AQHFLah5SPFK2g/profile-displayphoto-shrink_400_400/0/1658472295057?e=1674086400&v=beta&t=rb-ctWyua3VbMconeTLO53iWGOHXB1_6k_6VY2m6828',
     linkedin: 'https://www.linkedin.com/in/leo-guo/'
   },
   {
     name: 'james liu',
     role: 'devops',
     gender: 'male',
+    image:
+      'https://media-exp1.licdn.com/dms/image/D5603AQFyuq0G8YDiIw/profile-displayphoto-shrink_400_400/0/1665440003951?e=1674086400&v=beta&t=OXtZDUuFP6xRnrq4X2JyKvoU5brhjQxzOdIENy-VbGg',
     linkedin: 'http://linkedin.com/in/james-shl'
   },
   {
@@ -79,6 +90,13 @@ const people: IPeople[] = [
     role: 'devops',
     gender: 'male',
     linkedin: 'http://www.linkedin.com/in/jack-chen-156224256/'
+  },
+  {
+    name: 'shelton chin',
+    role: 'devops',
+    gender: 'male',
+    image: Shelton,
+    linkedin: 'https://www.linkedin.com/in/shelton-chin/'
   }
 ];
 
