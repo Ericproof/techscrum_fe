@@ -58,13 +58,15 @@ export default function BacklogPage() {
     getTypesStatusesUsersDataApi();
   }, [getBacklogDataApi, getTypesStatusesUsersDataApi]);
 
+  const isLoading = !loaded && !typeStatusUserLoaded;
   return (
     <div className={styles.container}>
       <div>
         <h1 data-testid="backlog-header">Backlog</h1>
       </div>
+      {isLoading && <Loading />}
       <div className={styles.scrollContainer}>
-        {loaded && typeStatusUserLoaded ? (
+        {!isLoading && (
           <>
             {sprintData
               .filter((sprint: any) => {
@@ -94,8 +96,6 @@ export default function BacklogPage() {
               userList={userList}
             />
           </>
-        ) : (
-          <Loading />
         )}
       </div>
     </div>
