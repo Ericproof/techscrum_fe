@@ -83,13 +83,13 @@ const people: IPeople[] = [
     gender: 'male',
     image:
       'https://media-exp1.licdn.com/dms/image/D5603AQFyuq0G8YDiIw/profile-displayphoto-shrink_400_400/0/1665440003951?e=1674086400&v=beta&t=OXtZDUuFP6xRnrq4X2JyKvoU5brhjQxzOdIENy-VbGg',
-    linkedin: 'http://linkedin.com/in/james-shl'
+    linkedin: 'https//linkedin.com/in/james-shl'
   },
   {
     name: 'jack chen',
     role: 'devops',
     gender: 'male',
-    linkedin: 'http://www.linkedin.com/in/jack-chen-156224256/'
+    linkedin: 'https//www.linkedin.com/in/jack-chen-156224256/'
   },
   {
     name: 'shelton chin',
