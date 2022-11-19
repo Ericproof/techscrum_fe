@@ -100,6 +100,7 @@ export default function UserMePage() {
                   defaultValue={userInfo.userName || ''}
                   name="userName"
                   loading={loading}
+                  dataTestId="userName"
                 />
                 <InputV2
                   label="Full Name"
@@ -107,6 +108,7 @@ export default function UserMePage() {
                   defaultValue={userInfo.name || ''}
                   name="fullName"
                   loading={loading}
+                  dataTestId="fullName"
                 />
               </div>
               <div className={[styles.gap, styles.row, 'flex'].join(' ')}>
@@ -116,6 +118,7 @@ export default function UserMePage() {
                   defaultValue={userInfo.jobTitle || ''}
                   name="jobTitle"
                   loading={loading}
+                  dataTestId="jobTitle"
                 />
                 <InputV2
                   label="Location"
@@ -123,6 +126,7 @@ export default function UserMePage() {
                   defaultValue={userInfo.location || ''}
                   name="location"
                   loading={loading}
+                  dataTestId="location"
                 />
               </div>
               <ButtonV2 text="Save Changes" onClick={onSaveMe} />
@@ -138,6 +142,7 @@ export default function UserMePage() {
                   defaultValue=""
                   name="oldPassword"
                   type="password"
+                  dataTestId="oldPassword"
                 />
                 <InputV2
                   label="New Password"
@@ -148,6 +153,7 @@ export default function UserMePage() {
                   defaultValue=""
                   name="newPassword"
                   type="password"
+                  dataTestId="newPassword"
                 />
                 <InputV2
                   label="Confirm New Password"
@@ -158,6 +164,7 @@ export default function UserMePage() {
                   defaultValue=""
                   name="confirmPassword"
                   type="password"
+                  dataTestId="confirmPassword"
                 />
               </div>
               <ButtonV2 text="Update" onClick={onUpdatePassword} />

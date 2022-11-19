@@ -146,6 +146,7 @@ export default function ShortcutPage() {
           defaultValue=""
           name="search"
           classes={styles.searchInput}
+          dataTestId="search"
         />
         <div>
           <ButtonV2

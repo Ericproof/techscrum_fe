@@ -17,6 +17,7 @@ interface IDropdownV2 {
   placeHolder?: string;
   type?: 'button' | 'submit' | 'reset';
   loading?: boolean;
+  dataTestId?: string;
 }
 
 export default function DropdownV2(props: IDropdownV2) {
@@ -30,7 +31,8 @@ export default function DropdownV2(props: IDropdownV2) {
     options,
     onValueChanged,
     onValueBlur = null,
-    loading = false
+    loading = false,
+    dataTestId = ''
   } = props;
   const defaultPlaceHolder = placeHolder || 'None';
   const [value, setValue] = useState(defaultValue);
@@ -92,6 +94,7 @@ export default function DropdownV2(props: IDropdownV2) {
         isActive ? styles.borderActive : '',
         error ? styles.borderRed : ''
       ].join(' ')}
+      data-testid={dataTestId}
     >
       <div
         onClick={() => {
@@ -134,5 +137,6 @@ DropdownV2.defaultProps = {
   type: 'button',
   onValueBlur: null,
   defaultValue: null,
-  loading: false
+  loading: false,
+  dataTestId: null
 };

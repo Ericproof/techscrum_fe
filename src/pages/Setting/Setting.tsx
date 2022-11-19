@@ -169,6 +169,7 @@ export default function Setting() {
                 defaultValue={data?.name}
                 name="name"
                 loading={!data}
+                dataTestId="projectName"
               />
               <InputV2
                 label="Project Key"
@@ -177,11 +178,13 @@ export default function Setting() {
                 defaultValue={data?.key}
                 name="key"
                 loading={!data}
+                dataTestId="projectKey"
               />
             </div>
             <div className={[styles.gap, styles.row, 'flex'].join(' ')}>
               <DropdownV2
                 label="Project Lead"
+                dataTestId="projectLead"
                 onValueChanged={onChange}
                 onValueBlur={() => {}}
                 defaultValue={data?.projectLeadId?.id}
@@ -201,6 +204,7 @@ export default function Setting() {
                 defaultValue=""
                 name="websiteURL"
                 loading={!data}
+                dataTestId="websiteURL"
               />
             </div>
             <div className={[styles.gap, styles.row, 'flex'].join(' ')}>
@@ -211,6 +215,7 @@ export default function Setting() {
                 defaultValue=""
                 name="description"
                 loading={!data}
+                dataTestId="description"
               />
             </div>
             <ButtonV2 text="SAVE CHANGES" onClick={onClickSave} loading={loading} />

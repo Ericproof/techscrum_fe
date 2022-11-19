@@ -94,10 +94,17 @@ function ProjectEditor(props: ProjectEditorProps) {
               label="Name"
               onValueChanged={onChangeName}
               defaultValue={data.name}
+              dataTestId="name"
             />
           </Row>
           <Row defaultMargin>
-            <InputV2 name="key" label="Key" onValueChanged={onChangeName} defaultValue={data.key} />
+            <InputV2
+              name="key"
+              label="Key"
+              onValueChanged={onChangeName}
+              defaultValue={data.key}
+              dataTestId="key"
+            />
           </Row>
           {hasError && (
             <p className={styles.error} data-testid="projectError">

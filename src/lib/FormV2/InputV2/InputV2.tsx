@@ -15,7 +15,7 @@ interface IInputV2 {
   type?: string;
   min?: number;
   max?: number;
-  dataTestId?: string;
+  dataTestId: string;
   loading?: boolean;
   classes?: string | string[];
   value?: string;
@@ -110,7 +110,6 @@ InputV2.defaultProps = {
   min: null,
   max: null,
   onValueBlur: null,
-  dataTestId: null,
   loading: false,
   classes: null,
   value: null,

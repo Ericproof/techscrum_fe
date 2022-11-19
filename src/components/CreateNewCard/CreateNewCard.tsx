@@ -117,7 +117,13 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
     <div className="defaultHeaderModalPadding">
       <form onSubmit={onSave}>
         <Row defaultMargin>
-          <InputV2 label="Title" name="title" onValueChanged={changeTitleHandler} defaultValue="" />
+          <InputV2
+            label="Title"
+            name="title"
+            onValueChanged={changeTitleHandler}
+            defaultValue=""
+            dataTestId="title"
+          />
         </Row>
         <Row defaultMargin defaultGap>
           <DropdownV2
