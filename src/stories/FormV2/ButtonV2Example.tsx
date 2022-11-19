@@ -59,7 +59,6 @@ export function ButtonV2Example({
   fill = false,
   size = 'md',
   dataTestId = '',
-  backgroundColor,
   text,
   disabled,
   loading = false,
