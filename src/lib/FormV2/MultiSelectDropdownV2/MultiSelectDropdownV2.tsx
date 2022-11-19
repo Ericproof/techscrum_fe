@@ -115,7 +115,11 @@ export default function MultiSelectDropdownV2(props: IMultiSelectDropdownV2) {
     return (
       <div className={defaultStyles.dropDownList}>
         {filteredOptions.map((item) => {
-          return <button onClick={() => onChangeSelect(item)}>{item.label}</button>;
+          return (
+            <button key={item.value} onClick={() => onChangeSelect(item)}>
+              {item.label}
+            </button>
+          );
         })}
         {searchValue && !isInOptionsList && (
           <>
@@ -143,7 +147,7 @@ export default function MultiSelectDropdownV2(props: IMultiSelectDropdownV2) {
           <div className={[defaultStyles.selectedItemsList].join(' ')}>
             {selectedItems.map((item) => {
               return (
-                <div className={defaultStyles.selectedItems}>
+                <div className={defaultStyles.selectedItems} key={item.value}>
                   <p>{item.label}</p>
                   <TiDelete
                     className={defaultStyles.deleteIcon}

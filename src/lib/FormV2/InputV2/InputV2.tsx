@@ -88,7 +88,7 @@ export default function InputV2(props: IInputV2) {
       <input
         className={[styles.input].join(' ')}
         type={type}
-        value={defaultValue ? val : value}
+        value={defaultValue ? val : value || ''}
         name={name}
         onChange={onChanged}
         onBlur={onBlurValue}

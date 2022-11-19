@@ -144,6 +144,8 @@ export default function UserMePage() {
                   type="password"
                   dataTestId="oldPassword"
                 />
+              </div>
+              <div className={[styles.gap, styles.row, 'flex'].join(' ')}>
                 <InputV2
                   label="New Password"
                   onValueChanged={(e) => {

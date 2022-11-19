@@ -24,7 +24,7 @@ export default function Bullets(props: IBulletProps) {
         <ul>
           {benefits.map((item) => {
             return (
-              <li>
+              <li key={item}>
                 <TiTick />
                 {item}
               </li>
