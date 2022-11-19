@@ -55,6 +55,8 @@ export default function BacklogPage() {
   useEffect(() => {
     getBacklogDataApi();
     getTypesStatusesUsersDataApi();
+    // eslint-disable-next-line no-console
+    console.log('a');
   }, [getBacklogDataApi, getTypesStatusesUsersDataApi]);
 
   return (
