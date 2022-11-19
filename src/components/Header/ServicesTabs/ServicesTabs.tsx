@@ -51,6 +51,26 @@ const features = {
   }
 };
 
+const teams = {
+  content: {
+    title: 'Teams',
+    content: [
+      {
+        icon: AiOutlineTeam,
+        title: 'team 1',
+        description: '',
+        href: '/about'
+      },
+      {
+        icon: AiOutlineTeam,
+        title: 'team 2',
+        description: '',
+        href: '/about-t2'
+      }
+    ]
+  }
+};
+
 const solutions = {
   content: {
     title: 'For',
@@ -106,16 +126,19 @@ const solutions = {
 export default function ServicesTabs({ show }: Props) {
   const [featuresActive, setFeaturesActive] = useState(false);
   const [solutionActive, setSolutionActive] = useState(false);
+  const [teamActive, setTeamActive] = useState(false);
 
   const initial = () => {
     setFeaturesActive(false);
     setSolutionActive(false);
+    setTeamActive(false);
   };
 
   const activeMenu = (menu: string) => {
     initial();
     if (menu === 'features') setFeaturesActive(!featuresActive);
     if (menu === 'solution') setSolutionActive(!solutionActive);
+    if (menu === 'teams') setTeamActive(!teamActive);
   };
 
   return (
@@ -135,9 +158,11 @@ export default function ServicesTabs({ show }: Props) {
         <OneColumnsMenu servicesInfo={solutions} active={solutionActive} />
       </div>
       <div>
-        <Link to="/about" onClick={() => activeMenu('about')}>
+        <Link to="/#" onClick={() => activeMenu('teams')}>
           Teams
+          <MdOutlineKeyboardArrowDown />
         </Link>
+        <OneColumnsMenu servicesInfo={teams} active={teamActive} />
       </div>
       <div>
         <Link to="/careers" onClick={() => activeMenu('careers')}>
