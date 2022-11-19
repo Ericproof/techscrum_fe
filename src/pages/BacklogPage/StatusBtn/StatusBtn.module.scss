@@ -45,11 +45,23 @@ $btnBgColorPurple: rgb(238, 232, 251);
   border: 1px solid $borderColor;
   .btnDropDownListContainer {
     padding: 0;
-    overflow: hidden;
     li {
-      width: 100%;
-      padding: 5px 5px;
+      list-style: none;
+      padding: 5px 0px;
       border-left: 2px solid white;
+      .dropDownBtn {
+        width: 100%;
+        background-color: transparent;
+        padding: 0;
+        justify-content: flex-start;
+        span {
+          height: 1.5rem;
+          display: flex;
+          align-items: center;
+          padding: 0px 10px;
+          border-radius: 5px;
+        }
+      }
     }
     li:hover {
       border-left: 2px solid $btnColorBlue;
