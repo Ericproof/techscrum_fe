@@ -1,3 +1,4 @@
+@import '../../../variables.scss';
 $closeBtnColor: rgb(202, 207, 227);
 $closeBtnColorHover: rgb(178, 182, 200);
 $colorGray: rgb(102, 106, 133);
@@ -6,7 +7,6 @@ $darkGray: rgb(240, 240, 240);
 $lightGray: rgb(250, 251, 252);
 $colorRed: rgb(234, 51, 35);
 $colorGreen: rgb(122, 184, 79);
-$colorPurple: rgb(98, 46, 213);
 @mixin btn {
   height: 100%;
   border-radius: 5px;
@@ -148,7 +148,7 @@ $colorPurple: rgb(98, 46, 213);
     .submitBtn {
       border: none;
       color: white;
-      background-color: $colorPurple;
+      background-color: $primaryColor;
       @include btn();
     }
     .deleteBtn {
