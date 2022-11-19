@@ -39,6 +39,7 @@ export default function OptionBtn({
         toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
       });
     setVisible(false);
+    action();
   };
 
   const onClickAddToBacklog = (id: string) => {
@@ -51,6 +52,7 @@ export default function OptionBtn({
         toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
       });
     setVisible(false);
+    action();
   };
   const onClickAddToSprint = (id: string, sprintIdToAdd: string) => {
     const data = { sprintId: sprintIdToAdd };
@@ -62,6 +64,7 @@ export default function OptionBtn({
         toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
       });
     setVisible(false);
+    action();
   };
 
   let btnClassName = '';

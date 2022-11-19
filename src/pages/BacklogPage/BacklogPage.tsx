@@ -23,7 +23,6 @@ export default function BacklogPage() {
   const getBacklogDataApi = useCallback(() => {
     const getBacklogData = async () => {
       try {
-        setLoaded(false);
         const res = await getBacklog(projectId);
         setBacklogData(res.backlog);
         setSprintData(res.sprints);
