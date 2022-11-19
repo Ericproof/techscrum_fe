@@ -1,29 +1,42 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import styles from './AssigneeBtn.module.scss';
 import IconButton from '../../../components/Button/IconButton/IconButton';
 import userAvatar from '../../../assets/userAvatar.png';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import { IUserInfo, IAssign } from '../../../types';
+import { updateTask } from '../../../api/backlog/backlog';
 
 interface IPriorityBtn {
   assignee: IAssign | null;
-  onClickChangeAssignee: (id: string, assigneeId: string) => void;
   taskId: string;
   userList: IUserInfo[];
+  getBacklogDataApi: () => void;
 }
 export default function PriorityBtn({
   assignee,
-  onClickChangeAssignee,
   userList,
-  taskId
+  taskId,
+  getBacklogDataApi
 }: IPriorityBtn) {
   const [query, setQuery] = useState('');
+  const { visible, setVisible, myRef } = useOutsideAlerter(false);
 
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
   };
 
-  const { visible, setVisible, myRef } = useOutsideAlerter(false);
+  const onClickChangeAssignee = (id: string, assigneeId: string) => {
+    const data = { assignId: assigneeId };
+    updateTask(id, data)
+      .then(() => {
+        getBacklogDataApi();
+      })
+      .catch(() => {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      });
+    setVisible(false);
+  };
 
   let name = 'Unassigned';
   let avartar = userAvatar;

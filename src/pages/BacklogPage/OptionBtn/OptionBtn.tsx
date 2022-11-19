@@ -1,27 +1,25 @@
 import React, { useState } from 'react';
 import { BsThreeDots } from 'react-icons/bs';
+import { toast } from 'react-toastify';
 import styles from './OptionBtn.module.scss';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
+import { deleteTask, updateTask } from '../../../api/backlog/backlog';
 
 interface IOptionBtn {
   taskId: string;
   showOptionBtn: boolean;
   sprintId: string;
-  sprintData?: any;
-  onClickDelete: (id: string) => void;
-  onClickAddToBacklog?: (id: string) => void;
-  onClickAddToSprint?: (taskId: string, sprintId: string) => void;
+  sprintData: any;
   toggleDisableShowOptionBtnEffect: () => void;
+  getBacklogDataApi: () => void;
 }
 export default function OptionBtn({
   taskId,
   showOptionBtn,
   sprintId,
   sprintData,
-  onClickDelete,
   toggleDisableShowOptionBtnEffect,
-  onClickAddToBacklog,
-  onClickAddToSprint
+  getBacklogDataApi
 }: IOptionBtn) {
   const [clickOptionBtnShowStyle, setClickOptionBtnShowStyle] = useState(false);
   const [hoverOptionBtn, setHoverOptionBtn] = useState(false);
@@ -31,6 +29,43 @@ export default function OptionBtn({
     setClickOptionBtnShowStyle(false);
   };
   const { visible, setVisible, myRef } = useOutsideAlerter(false, action);
+
+  const onClickDelete = (id: string) => {
+    deleteTask(id)
+      .then(() => {
+        getBacklogDataApi();
+      })
+      .catch(() => {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      });
+    setVisible(false);
+    action();
+  };
+
+  const onClickAddToBacklog = (id: string) => {
+    const data = { sprintId: null };
+    updateTask(id, data)
+      .then(() => {
+        getBacklogDataApi();
+      })
+      .catch(() => {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      });
+    setVisible(false);
+    action();
+  };
+  const onClickAddToSprint = (id: string, sprintIdToAdd: string) => {
+    const data = { sprintId: sprintIdToAdd };
+    updateTask(id, data)
+      .then(() => {
+        getBacklogDataApi();
+      })
+      .catch(() => {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      });
+    setVisible(false);
+    action();
+  };
 
   let btnClassName = '';
   if (showOptionBtn && clickOptionBtnShowStyle) {
@@ -80,9 +115,7 @@ export default function OptionBtn({
               <button
                 className={styles.dropDownBtn}
                 onClick={() => {
-                  if (onClickAddToBacklog) {
-                    onClickAddToBacklog(taskId);
-                  }
+                  onClickAddToBacklog(taskId);
                 }}
               >
                 Add to Backlog
@@ -99,9 +132,7 @@ export default function OptionBtn({
                   <button
                     className={styles.dropDownBtn}
                     onClick={() => {
-                      if (onClickAddToSprint) {
-                        onClickAddToSprint(taskId, sprint.id);
-                      }
+                      onClickAddToSprint(taskId, sprint.id);
                     }}
                   >
                     Add to {sprint.name}
@@ -125,9 +156,3 @@ export default function OptionBtn({
     </div>
   );
 }
-
-OptionBtn.defaultProps = {
-  onClickAddToBacklog: () => {},
-  onClickAddToSprint: () => {},
-  sprintData: []
-};
