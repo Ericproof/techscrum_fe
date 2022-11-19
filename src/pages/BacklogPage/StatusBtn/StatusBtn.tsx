@@ -44,12 +44,12 @@ export default function StatusBtn({ status, onClickChangeStatus, taskId, statusD
             return (
               <li key={btnInfo.name}>
                 <Button
-                  overrideStyle={[styles.statusBtn, styles.dropDownBtnPurple].join(' ')}
+                  overrideStyle={[styles.dropDownBtn].join(' ')}
                   onClick={() => {
                     btnClick(btnInfo.id);
                   }}
                 >
-                  {btnInfo.name.toUpperCase()}
+                  <span className={styles.dropDownBtnPurple}>{btnInfo.name.toUpperCase()}</span>
                 </Button>
               </li>
             );

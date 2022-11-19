@@ -1,21 +1,17 @@
 import axios from 'axios';
-import { AccountSettingForm } from './entity/accountSetting';
 import config from '../../config/config';
 
-const changePassword = async (accountSettingFrom: AccountSettingForm) => {
-  const path = `${config.apiAddress}/account`;
-
-  const configHeader = {
+const getAuthHeader = (token: string) => {
+  return {
     headers: {
-      Authorization: `Bearer ${localStorage.getItem('access_token') ?? ''}`
+      Authorization: `Bearer ${token}`
     }
   };
+};
 
-  const data = {
-    ...accountSettingFrom
-  };
-
-  const result = await axios.patch(path, data, configHeader);
+const changePassword = async (data: any, token) => {
+  const path = `${config.apiAddress}/account/change-password`;
+  const result = await axios.patch(path, data, getAuthHeader(token));
   return result;
 };
 

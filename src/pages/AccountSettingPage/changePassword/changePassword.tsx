@@ -35,10 +35,14 @@ export default function ChangePassword({ changePasswordTipHandler }: Props) {
     }
 
     try {
-      const result = await changePassword({
-        oldPassword,
-        newPassword
-      });
+      // This page is not used in V2
+      const result = await changePassword(
+        {
+          oldPassword,
+          newPassword
+        },
+        'abc'
+      );
 
       if (result.status === 204) {
         changePasswordTipHandler('Password Change Success', 0);
