@@ -13,10 +13,8 @@ import CreateEditSprint from '../CreateEditSprint/CreateEditSprint';
 interface IBacklogSection {
   backlogData: any;
   getBacklogDataApi: () => void;
-  loaded: boolean;
   statusData: IStatusBacklog[];
   typesData: Itypes[] | null;
-  typeStatusUserLoaded: boolean;
   userList: IUserInfo[];
   sprintData: any;
 }
@@ -24,8 +22,6 @@ interface IBacklogSection {
 export default function BacklogSection({
   backlogData,
   getBacklogDataApi,
-  loaded,
-  typeStatusUserLoaded,
   statusData,
   typesData,
   userList,
@@ -109,7 +105,7 @@ export default function BacklogSection({
       <div className={styles.header}>
         <div className={styles.heading}>
           <h1>Backlog</h1>
-          <div className={styles.issueCount}>{loaded && backlogData.cards.length} issues</div>
+          <div className={styles.issueCount}>{backlogData.cards.length} issues</div>
         </div>
         <div className={styles.toolbar}>
           <Button onClick={createSprint}>Create sprint</Button>
@@ -125,32 +121,30 @@ export default function BacklogSection({
         </div>
       </div>
       <div className={styles.listContainer}>
-        {loaded &&
-          typeStatusUserLoaded &&
-          backlogData.cards.map((task) => {
-            return (
-              <TaskItem
-                key={task.id}
-                taskTitle={task.title}
-                taskId={task.id}
-                issueId={'TEC-'.concat(task.id.slice(task.id.length - 3))}
-                onChangeTitle={onChangeTitle}
-                type={task.typeId.slug}
-                status={task.status.name.toUpperCase()}
-                onClickChangeStatus={onClickChangeStatus}
-                onClickDelete={onClickDelete}
-                statusData={statusData}
-                onClickChangeAssignee={onClickChangeAssignee}
-                userList={userList}
-                assignee={task.assignId}
-                priority={task.priority}
-                onClickChangePriority={onClickChangePriority}
-                onClickAddToSprint={onClickAddToSprint}
-                sprintId={task.sprintId}
-                sprintData={sprintData}
-              />
-            );
-          })}
+        {backlogData.cards.map((task) => {
+          return (
+            <TaskItem
+              key={task.id}
+              taskTitle={task.title}
+              taskId={task.id}
+              issueId={'TEC-'.concat(task.id.slice(task.id.length - 3))}
+              onChangeTitle={onChangeTitle}
+              type={task.typeId.slug}
+              status={task.status.name.toUpperCase()}
+              onClickChangeStatus={onClickChangeStatus}
+              onClickDelete={onClickDelete}
+              statusData={statusData}
+              onClickChangeAssignee={onClickChangeAssignee}
+              userList={userList}
+              assignee={task.assignId}
+              priority={task.priority}
+              onClickChangePriority={onClickChangePriority}
+              onClickAddToSprint={onClickAddToSprint}
+              sprintId={task.sprintId}
+              sprintData={sprintData}
+            />
+          );
+        })}
       </div>
       {visible ? (
         <form>
