@@ -6,7 +6,7 @@ import Button from '../../../components/Button/Button';
 import TaskTypeSelect from '../../../components/Select/TaskTypeSelect/TaskTypeSelect';
 import TaskItem from '../TaskItem/TaskItem';
 import styles from './BacklogSection.module.scss';
-import { addTask, updateTask, deleteTask } from '../../../api/backlog/backlog';
+import { addTask } from '../../../api/backlog/backlog';
 import { IUserInfo, Itypes, IStatusBacklog } from '../../../types';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import CreateEditSprint from '../CreateEditSprint/CreateEditSprint';
@@ -32,103 +32,39 @@ export default function BacklogSection({
   const { boardId = '', projectId = '' } = useParams();
   const [showCreateSprint, setShowCreateSprint] = useState(false);
   const createIssueRef = useRef<HTMLInputElement | null>(null);
-  const createIssueAction = () => {
-    if (createIssueRef?.current?.value) {
-      const data = {
-        title: createIssueRef?.current?.value,
-        status: 'to do',
-        typeId: typesData?.filter((types) => {
-          return types.slug === currentTypeOption;
-        })[0].id,
-        boardId,
-        projectId,
-        sprintId: null
-      };
-      setCurrentTypeOption('story');
-      addTask(data)
-        .then(() => {
-          getBacklogDataApi();
-        })
-        .catch(() => {
-          toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
-        });
-    }
-  };
 
-  const { visible, setVisible, myRef } = useOutsideAlerter(false, createIssueAction);
-
-  const onChangeTitle = (id: string, title: string) => {
-    const data = { title };
-    updateTask(id, data)
-      .then(() => {
-        getBacklogDataApi();
-      })
-      .catch(() => {
-        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
-      });
-  };
+  const { visible, setVisible, myRef } = useOutsideAlerter(false);
 
   const onKeyDownCreateIssue = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      createIssueAction();
+      if (createIssueRef?.current?.value) {
+        const data = {
+          title: createIssueRef?.current?.value,
+          status: 'to do',
+          typeId: typesData?.filter((types) => {
+            return types.slug === currentTypeOption;
+          })[0].id,
+          boardId,
+          projectId,
+          sprintId: null
+        };
+        setCurrentTypeOption('story');
+        addTask(data)
+          .then(() => {
+            getBacklogDataApi();
+          })
+          .catch(() => {
+            toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+          });
+      }
       setVisible(false);
     }
   };
-  const getCurrentTypeOption = (type: string) => {
-    setCurrentTypeOption(type);
-  };
-  const onClickChangeStatus = (id: string, statusId: string) => {
-    const data = { status: statusId };
-    updateTask(id, data)
-      .then(() => {
-        getBacklogDataApi();
-      })
-      .catch(() => {
-        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
-      });
-  };
-  const onClickDelete = (id: string) => {
-    deleteTask(id)
-      .then(() => {
-        getBacklogDataApi();
-      })
-      .catch(() => {
-        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
-      });
-  };
-  const onClickChangeAssignee = (id: string, assigneeId: string) => {
-    const data = { assignId: assigneeId };
-    updateTask(id, data)
-      .then(() => {
-        getBacklogDataApi();
-      })
-      .catch(() => {
-        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
-      });
-  };
-  const onClickChangePriority = (id: string, priority: string) => {
-    const data = { priority };
-    updateTask(id, data)
-      .then(() => {
-        getBacklogDataApi();
-      })
-      .catch(() => {
-        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
-      });
-  };
+
   const createSprint = () => {
     setShowCreateSprint(true);
   };
-  const onClickAddToSprint = (taskId: string, sprintId: string) => {
-    const data = { sprintId };
-    updateTask(taskId, data)
-      .then(() => {
-        getBacklogDataApi();
-      })
-      .catch(() => {
-        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
-      });
-  };
+
   return (
     <section className={styles.container}>
       <div className={styles.header}>
@@ -153,25 +89,13 @@ export default function BacklogSection({
         {backlogData.cards.map((task, index) => {
           return (
             <TaskItem
+              task={task}
               key={task.id}
-              taskTitle={task.title}
-              taskId={task.id}
-              issueId={'TEC-'.concat(task.id.slice(task.id.length - 3))}
-              onChangeTitle={onChangeTitle}
-              type={task.typeId.slug}
-              status={task.status.name.toUpperCase()}
-              onClickChangeStatus={onClickChangeStatus}
-              onClickDelete={onClickDelete}
               statusData={statusData}
-              onClickChangeAssignee={onClickChangeAssignee}
               userList={userList}
-              assignee={task.assignId}
-              priority={task.priority}
-              onClickChangePriority={onClickChangePriority}
-              onClickAddToSprint={onClickAddToSprint}
-              sprintId={task.sprintId}
               sprintData={sprintData}
               showDropDownOnTop={index > backlogData.cards.length - 4}
+              getBacklogDataApi={getBacklogDataApi}
             />
           );
         })}
@@ -179,7 +103,7 @@ export default function BacklogSection({
       {visible ? (
         <form>
           <div className={styles.formField} ref={myRef}>
-            <TaskTypeSelect showDropDownOnTop onChangeType={getCurrentTypeOption} />
+            <TaskTypeSelect setCurrentTypeOption={setCurrentTypeOption} />
             <input
               className={styles.input}
               type="text"

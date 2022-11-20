@@ -1,55 +1,31 @@
 import React, { useState } from 'react';
 import { FaPen } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 import IconButton from '../../../components/Button/IconButton/IconButton';
 import styles from './TaskItem.module.scss';
 import OptionBtn from '../OptionBtn/OptionBtn';
-import { IUserInfo, IAssign, IStatusBacklog } from '../../../types';
+import { IUserInfo, IStatusBacklog } from '../../../types';
 import PriorityBtn from '../PriorityBtn/PriorityBtn';
 import StatusBtn from '../StatusBtn/StatusBtn';
 import AssigneeBtn from '../AssigneeBtn/AssigneeBtn';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
+import { updateTask } from '../../../api/backlog/backlog';
 
 interface ITaskInput {
-  taskTitle: string;
-  issueId: string;
-  type: string;
-  status: string;
-  taskId: string;
+  task: any;
   statusData: IStatusBacklog[];
   userList: IUserInfo[];
-  assignee: IAssign | null;
-  priority: string;
-  sprintId: string;
   sprintData?: any;
   showDropDownOnTop?: boolean;
-  onChangeTitle: (id: string, title: string) => void;
-  onClickChangeAssignee: (id: string, assigneeId: string) => void;
-  onClickChangeStatus: (id: string, statusId: string) => void;
-  onClickDelete: (id: string) => void;
-  onClickChangePriority: (id: string, priority: string) => void;
-  onClickAddToBacklog?: (id: string) => void;
-  onClickAddToSprint?: (taskId: string, sprintId: string) => void;
+  getBacklogDataApi: () => void;
 }
 export default function TaskItem({
-  taskTitle,
-  issueId,
-  type,
-  status,
-  taskId,
+  task,
   statusData,
   userList,
-  assignee,
-  priority,
-  sprintId,
   sprintData,
   showDropDownOnTop,
-  onChangeTitle,
-  onClickChangeAssignee,
-  onClickChangeStatus,
-  onClickDelete,
-  onClickChangePriority,
-  onClickAddToBacklog,
-  onClickAddToSprint
+  getBacklogDataApi
 }: ITaskInput) {
   const allTypes = {
     story:
@@ -59,15 +35,22 @@ export default function TaskItem({
   };
   const [showOptionBtn, setShowOptionBtn] = useState(false);
   const [disableShowOptionBtnEffect, setDisableShowOptionBtnEffect] = useState(false);
-  const [title, setTitle] = useState(taskTitle);
+  const [title, setTitle] = useState(task.title);
 
   const updateTaskTitleContent = () => {
-    if (title.trim() !== taskTitle) {
-      onChangeTitle(taskId, title.trim());
+    if (title.trim() !== task.title) {
+      const data = { title: title.trim() };
+      updateTask(task.id, data)
+        .then(() => {
+          getBacklogDataApi();
+        })
+        .catch(() => {
+          toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+        });
     }
   };
 
-  const { visible, setVisible, myRef } = useOutsideAlerter(false, updateTaskTitleContent);
+  const { visible, setVisible, myRef } = useOutsideAlerter(false);
 
   const saveKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
@@ -100,37 +83,37 @@ export default function TaskItem({
       onMouseOut={mouseOut}
       onFocus={() => {}}
       onBlur={() => {}}
-      data-testid={'task-hover-'.concat(taskId)}
+      data-testid={'task-hover-'.concat(task.id)}
       ref={myRef}
     >
       <div className={styles.taskInfo}>
         <div className={styles.iconContainer}>
-          <img className={styles.icon} src={allTypes[type]} alt={type} />
+          <img className={styles.icon} src={allTypes[task.typeId.slug]} alt={task.typeId.slug} />
         </div>
         <div className={styles.taskIdContainer}>
-          <p>{issueId}</p>
+          <p>{`TEC-${task.id.slice(task.id.length - 3)}`}</p>
         </div>
         {visible ? (
           <input
             type="text"
-            defaultValue={taskTitle}
+            defaultValue={task.title}
             onKeyDown={saveKeyPress}
             className={styles.taskInput}
-            data-testid={'task-title-input-'.concat(taskId)}
+            data-testid={'task-title-input-'.concat(task.id)}
             onChange={(e) => {
               setTitle(e.target.value);
             }}
           />
         ) : (
-          <div className={styles.taskTitle} data-testid={'task-'.concat(taskId)}>
-            {taskTitle}
+          <div className={styles.taskTitle} data-testid={'task-'.concat(task.id)}>
+            {task.title}
           </div>
         )}
         {!visible && (
           <div className={styles.editButton}>
             <IconButton
               icon={<FaPen size={10} />}
-              taskId={taskId}
+              taskId={task.id}
               tooltip="Edit"
               onClick={() => {
                 setVisible(true);
@@ -141,43 +124,39 @@ export default function TaskItem({
       </div>
       <div className={styles.toolBar}>
         <PriorityBtn
-          taskId={taskId}
-          priority={priority}
           showDropDownOnTop={showDropDownOnTop}
-          onClickChangePriority={onClickChangePriority}
+          taskId={task.id}
+          priority={task.priority}
+          getBacklogDataApi={getBacklogDataApi}
         />
         <StatusBtn
-          status={status}
-          taskId={taskId}
+          status={task.status.name.toUpperCase()}
+          taskId={task.id}
           statusData={statusData}
           showDropDownOnTop={showDropDownOnTop}
-          onClickChangeStatus={onClickChangeStatus}
+          getBacklogDataApi={getBacklogDataApi}
         />
         <AssigneeBtn
-          taskId={taskId}
-          assignee={assignee}
+          taskId={task.id}
+          assignee={task.assignId}
           userList={userList}
           showDropDownOnTop={showDropDownOnTop}
-          onClickChangeAssignee={onClickChangeAssignee}
+          getBacklogDataApi={getBacklogDataApi}
         />
         <OptionBtn
-          taskId={taskId}
+          taskId={task.id}
           showOptionBtn={showOptionBtn}
-          onClickDelete={onClickDelete}
           toggleDisableShowOptionBtnEffect={toggleDisableShowOptionBtnEffect}
-          sprintId={sprintId}
-          onClickAddToBacklog={onClickAddToBacklog}
-          onClickAddToSprint={onClickAddToSprint}
+          sprintId={task.sprintId}
           sprintData={sprintData}
           showDropDownOnTop={showDropDownOnTop}
+          getBacklogDataApi={getBacklogDataApi}
         />
       </div>
     </div>
   );
 }
 TaskItem.defaultProps = {
-  onClickAddToBacklog: () => {},
-  onClickAddToSprint: () => {},
   showDropDownOnTop: false,
   sprintData: []
 };

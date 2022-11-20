@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-prop-types */
 import React, { useState } from 'react';
 import { getErrorMessage } from '../../../utils/formUtils';
 import styles from '../FormV2.module.scss';
@@ -11,6 +12,7 @@ interface ITextAreaV2 {
   required?: boolean;
   placeHolder?: string;
   dataTestId?: string;
+  loading?: boolean;
 }
 
 export default function TextAreaV2(props: ITextAreaV2) {
@@ -81,5 +83,6 @@ TextAreaV2.defaultProps = {
   required: false,
   placeHolder: '',
   onValueBlur: null,
-  dataTestId: null
+  dataTestId: null,
+  loading: false
 };

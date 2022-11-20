@@ -1,23 +1,25 @@
 import React from 'react';
 import { FaChevronDown } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 import styles from './StatusBtn.module.scss';
 import Button from '../../../components/Button/Button';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import { IStatusBacklog } from '../../../types';
+import { updateTask } from '../../../api/backlog/backlog';
 
 interface IToolBar {
   status: string;
   taskId: string;
   statusData: IStatusBacklog[];
-  onClickChangeStatus: (id: string, statusId: string) => void;
+  getBacklogDataApi: () => void;
   showDropDownOnTop?: boolean;
 }
 export default function StatusBtn({
   status,
-  onClickChangeStatus,
   taskId,
   statusData,
-  showDropDownOnTop
+  showDropDownOnTop,
+  getBacklogDataApi
 }: IToolBar) {
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
 
@@ -25,8 +27,15 @@ export default function StatusBtn({
     setVisible(!visible);
   };
   const btnClick = (statusId: string) => {
+    const data = { status: statusId };
+    updateTask(taskId, data)
+      .then(() => {
+        getBacklogDataApi();
+      })
+      .catch(() => {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      });
     setVisible(false);
-    onClickChangeStatus(taskId, statusId);
   };
 
   return (
