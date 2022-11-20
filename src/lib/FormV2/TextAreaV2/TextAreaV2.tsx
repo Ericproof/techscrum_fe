@@ -4,8 +4,8 @@ import { getErrorMessage } from '../../../utils/formUtils';
 import styles from '../FormV2.module.scss';
 
 interface ITextAreaV2 {
-  onValueChanged: (e: any) => void;
-  onValueBlur?: (e: any) => void;
+  onValueChanged: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onValueBlur?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   defaultValue: string;
   name: string;
   label: string;
@@ -30,14 +30,14 @@ export default function TextAreaV2(props: ITextAreaV2) {
   const [error, setError] = useState<null | string>(null);
   const [isActive, setIsActive] = useState(false);
 
-  const onChanged = (e: any) => {
+  const onChanged = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const errorMessage = getErrorMessage(e, props);
     setError(errorMessage);
     setValue(e.target.value);
     onValueChanged(e);
   };
 
-  const onBlurValue = (e: any) => {
+  const onBlurValue = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (onValueBlur) {
       onValueBlur(e);
     }

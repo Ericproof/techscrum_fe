@@ -8,7 +8,7 @@ import defaultStyles from './DropdownV2.module.scss';
 
 interface IDropdownV2 {
   onValueChanged: (e: any) => void;
-  onValueBlur?: (e: any) => void;
+  onValueBlur?: (e: React.ChangeEvent<HTMLButtonElement>) => void;
   defaultValue?: string | null;
   name: string;
   options: any;
@@ -52,7 +52,7 @@ export default function DropdownV2(props: IDropdownV2) {
     setIsActive(false);
   };
 
-  const onBlurValue = (e: any) => {
+  const onBlurValue = (e: React.ChangeEvent<HTMLButtonElement>) => {
     if (onValueBlur) {
       onValueBlur(e);
     }

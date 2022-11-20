@@ -46,11 +46,11 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
     title: ''
   });
 
-  const onChangeAssigneeId = (e: any) => {
+  const onChangeAssigneeId = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAssigneeId(e.target.value);
   };
 
-  const onChangeTaskType = (e: any) => {
+  const onChangeTaskType = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTaskTypeId(e.target.value);
   };
 
@@ -67,7 +67,10 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
     setPhotoData(updatePhotoData);
   };
 
-  const uploadFile = (e: any) => {
+  const uploadFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) {
+      return;
+    }
     const uploadData = new FormData();
     uploadData.append('photos', e.target.files[0]);
     upload(uploadData).then((res: any) => {

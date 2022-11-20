@@ -9,9 +9,9 @@ import defaultStyles from './MultiSelectDropdownV2.module.scss';
 
 interface IMultiSelectDropdownV2 {
   onValueChanged: (e: any) => void;
-  onValueBlur?: (e: any) => void;
+  onValueBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onLabelDelete: (e: any) => void;
-  onLabelAdd: (e: any) => void;
+  onLabelAdd: (e: string) => void;
   name: string;
   options: any;
   label: string;
@@ -52,7 +52,7 @@ export default function MultiSelectDropdownV2(props: IMultiSelectDropdownV2) {
     setSearchValue('');
   };
 
-  const onChangeSearch = (e: any) => {
+  const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
   };
 
@@ -66,7 +66,7 @@ export default function MultiSelectDropdownV2(props: IMultiSelectDropdownV2) {
     setSearchValue('');
   };
 
-  const onBlurValue = (e: any) => {
+  const onBlurValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (onValueBlur) {
       onValueBlur(e);
     }

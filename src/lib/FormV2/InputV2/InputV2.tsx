@@ -5,8 +5,8 @@ import { getErrorMessage } from '../../../utils/formUtils';
 import styles from '../FormV2.module.scss';
 
 interface IInputV2 {
-  onValueChanged: (e: any) => void;
-  onValueBlur?: (e: any) => void;
+  onValueChanged: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onValueBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   defaultValue?: string;
   name: string;
   label: string;
@@ -40,7 +40,7 @@ export default function InputV2(props: IInputV2) {
   const [error, setError] = useState<null | string>(null);
   const [isActive, setIsActive] = useState(false);
 
-  const onChanged = (e: any) => {
+  const onChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     const errorMessage = getErrorMessage(e, props);
     setError(errorMessage);
     if (!defaultValue) {
@@ -49,7 +49,7 @@ export default function InputV2(props: IInputV2) {
     onValueChanged(e);
   };
 
-  const onBlurValue = (e: any) => {
+  const onBlurValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (onValueBlur) {
       onValueBlur(e);
     }
@@ -88,7 +88,7 @@ export default function InputV2(props: IInputV2) {
       <input
         className={[styles.input].join(' ')}
         type={type}
-        value={defaultValue ? val : value || ''}
+        value={defaultValue ? val : value}
         name={name}
         onChange={onChanged}
         onBlur={onBlurValue}

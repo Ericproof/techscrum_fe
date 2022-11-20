@@ -105,7 +105,7 @@ export default function ProjectPage() {
     return () => document.removeEventListener('mousedown', handleClickInside);
   });
 
-  const onClickProjectSave = (apiData: any) => {
+  const onClickProjectSave = (apiData: IProjectData) => {
     setLoading(true);
     createProject(apiData)
       .then((res: AxiosResponse) => {

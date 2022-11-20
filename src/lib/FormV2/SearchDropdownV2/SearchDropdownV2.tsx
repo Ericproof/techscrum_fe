@@ -19,7 +19,7 @@ export default function DropdownV2(props: IDropdownV2) {
     setShowList(false);
   };
 
-  const onChangeHandler = (e: any) => {
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
     setIsSearching(true);
   };

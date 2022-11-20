@@ -93,7 +93,7 @@ function ProjectEditor(props: ProjectEditorProps) {
               name="name"
               label="Name"
               onValueChanged={onChangeName}
-              defaultValue={data.name}
+              value={data.name}
               dataTestId="name"
             />
           </Row>
@@ -101,8 +101,8 @@ function ProjectEditor(props: ProjectEditorProps) {
             <InputV2
               name="key"
               label="Key"
-              onValueChanged={onChangeName}
-              defaultValue={data.key}
+              onValueChanged={() => {}}
+              value={data.key}
               dataTestId="key"
             />
           </Row>
