@@ -173,7 +173,9 @@ export default function UserMePage() {
               <ButtonV2 text="Update" onClick={onUpdatePassword} />
             </SettingCard>
             <SettingCard title="Delete Account (WIP)">
-              <p>Delete your account and all of your source data. This is irreversible.</p>
+              <p className={styles.p}>
+                Delete your account and all of your source data. This is irreversible.
+              </p>
               <ButtonV2
                 text="DELETE"
                 danger

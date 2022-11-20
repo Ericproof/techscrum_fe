@@ -57,13 +57,13 @@ const teams = {
     content: [
       {
         icon: AiOutlineTeam,
-        title: 'team 1',
+        title: 'Team 1',
         description: '',
         href: '/about'
       },
       {
         icon: AiOutlineTeam,
-        title: 'team 2',
+        title: 'Team 2',
         description: '',
         href: '/about-t2'
       }

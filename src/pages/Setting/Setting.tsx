@@ -219,7 +219,9 @@ export default function Setting() {
           </SettingCard>
           {checkAccess('delete:projects', projectId) && (
             <SettingCard title="Delete Project">
-              <p>Delete your project and all of your source data. This is irreversible.</p>
+              <p className={styles.p}>
+                Delete your project and all of your source data. This is irreversible.
+              </p>
               <ButtonV2
                 text="DELETE"
                 danger
