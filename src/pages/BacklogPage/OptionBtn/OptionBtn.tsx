@@ -9,6 +9,7 @@ interface IOptionBtn {
   taskId: string;
   showOptionBtn: boolean;
   sprintId: string;
+  showDropDownOnTop?: boolean;
   sprintData: any;
   toggleDisableShowOptionBtnEffect: () => void;
   getBacklogDataApi: () => void;
@@ -18,6 +19,7 @@ export default function OptionBtn({
   showOptionBtn,
   sprintId,
   sprintData,
+  showDropDownOnTop,
   toggleDisableShowOptionBtnEffect,
   getBacklogDataApi
 }: IOptionBtn) {
@@ -101,7 +103,11 @@ export default function OptionBtn({
       <div
         className={
           visible
-            ? [styles.optionBtnDropDown, styles.showOptionBtnDropDown].join(' ')
+            ? [
+                styles.optionBtnDropDown,
+                styles.showOptionBtnDropDown,
+                showDropDownOnTop && styles.showDropDownOnTop
+              ].join(' ')
             : styles.optionBtnDropDown
         }
       >
@@ -156,3 +162,7 @@ export default function OptionBtn({
     </div>
   );
 }
+
+OptionBtn.defaultProps = {
+  showDropDownOnTop: false
+};

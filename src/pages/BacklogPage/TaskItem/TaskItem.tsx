@@ -16,6 +16,7 @@ interface ITaskInput {
   statusData: IStatusBacklog[];
   userList: IUserInfo[];
   sprintData?: any;
+  showDropDownOnTop?: boolean;
   getBacklogDataApi: () => void;
 }
 export default function TaskItem({
@@ -23,6 +24,7 @@ export default function TaskItem({
   statusData,
   userList,
   sprintData,
+  showDropDownOnTop,
   getBacklogDataApi
 }: ITaskInput) {
   const allTypes = {
@@ -122,6 +124,7 @@ export default function TaskItem({
       </div>
       <div className={styles.toolBar}>
         <PriorityBtn
+          showDropDownOnTop={showDropDownOnTop}
           taskId={task.id}
           priority={task.priority}
           getBacklogDataApi={getBacklogDataApi}
@@ -130,12 +133,14 @@ export default function TaskItem({
           status={task.status.name.toUpperCase()}
           taskId={task.id}
           statusData={statusData}
+          showDropDownOnTop={showDropDownOnTop}
           getBacklogDataApi={getBacklogDataApi}
         />
         <AssigneeBtn
           taskId={task.id}
           assignee={task.assignId}
           userList={userList}
+          showDropDownOnTop={showDropDownOnTop}
           getBacklogDataApi={getBacklogDataApi}
         />
         <OptionBtn
@@ -144,6 +149,7 @@ export default function TaskItem({
           toggleDisableShowOptionBtnEffect={toggleDisableShowOptionBtnEffect}
           sprintId={task.sprintId}
           sprintData={sprintData}
+          showDropDownOnTop={showDropDownOnTop}
           getBacklogDataApi={getBacklogDataApi}
         />
       </div>
@@ -151,5 +157,6 @@ export default function TaskItem({
   );
 }
 TaskItem.defaultProps = {
+  showDropDownOnTop: false,
   sprintData: []
 };

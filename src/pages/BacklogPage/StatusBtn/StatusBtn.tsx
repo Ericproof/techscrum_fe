@@ -12,8 +12,15 @@ interface IToolBar {
   taskId: string;
   statusData: IStatusBacklog[];
   getBacklogDataApi: () => void;
+  showDropDownOnTop?: boolean;
 }
-export default function StatusBtn({ status, taskId, statusData, getBacklogDataApi }: IToolBar) {
+export default function StatusBtn({
+  status,
+  taskId,
+  statusData,
+  showDropDownOnTop,
+  getBacklogDataApi
+}: IToolBar) {
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
 
   const dropDownClick = () => {
@@ -44,7 +51,11 @@ export default function StatusBtn({ status, taskId, statusData, getBacklogDataAp
       <div
         className={
           visible
-            ? [styles.btnDropDownContainer, styles.showBtnDropDownContainer].join(' ')
+            ? [
+                styles.btnDropDownContainer,
+                styles.showBtnDropDownContainer,
+                showDropDownOnTop && styles.showDropDownOnTop
+              ].join(' ')
             : styles.btnDropDownContainer
         }
       >
@@ -68,3 +79,6 @@ export default function StatusBtn({ status, taskId, statusData, getBacklogDataAp
     </div>
   );
 }
+StatusBtn.defaultProps = {
+  showDropDownOnTop: false
+};

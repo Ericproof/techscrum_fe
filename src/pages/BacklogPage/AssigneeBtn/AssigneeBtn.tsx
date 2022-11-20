@@ -7,18 +7,20 @@ import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import { IUserInfo, IAssign } from '../../../types';
 import { updateTask } from '../../../api/backlog/backlog';
 
-interface IPriorityBtn {
+interface IAssigneeBtn {
   assignee: IAssign | null;
   taskId: string;
   userList: IUserInfo[];
+  showDropDownOnTop?: boolean;
   getBacklogDataApi: () => void;
 }
-export default function PriorityBtn({
+export default function AssigneeBtn({
   assignee,
   userList,
   taskId,
+  showDropDownOnTop,
   getBacklogDataApi
-}: IPriorityBtn) {
+}: IAssigneeBtn) {
   const [query, setQuery] = useState('');
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
 
@@ -60,7 +62,11 @@ export default function PriorityBtn({
         }}
       />
       {visible && (
-        <div className={styles.assigneeDropdown}>
+        <div
+          className={[styles.assigneeDropdown, showDropDownOnTop && styles.showDropDownOnTop].join(
+            ' '
+          )}
+        >
           <div className={styles.inputContainer}>
             <input type="text" placeholder={name} onChange={onChangeInput} />
             <img src={avartar} alt="avatar" />
@@ -94,3 +100,6 @@ export default function PriorityBtn({
     </div>
   );
 }
+AssigneeBtn.defaultProps = {
+  showDropDownOnTop: false
+};

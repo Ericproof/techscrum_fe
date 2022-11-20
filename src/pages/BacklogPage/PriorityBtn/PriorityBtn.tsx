@@ -8,8 +8,15 @@ interface IPriorityBtn {
   priority: string;
   getBacklogDataApi: () => void;
   taskId: string;
+  showDropDownOnTop?: boolean;
 }
-export default function PriorityBtn({ priority, taskId, getBacklogDataApi }: IPriorityBtn) {
+
+export default function PriorityBtn({
+  priority,
+  taskId,
+  getBacklogDataApi,
+  showDropDownOnTop
+}: IPriorityBtn) {
   const allPriorities = [
     {
       priority: 'Highest',
@@ -61,7 +68,11 @@ export default function PriorityBtn({ priority, taskId, getBacklogDataApi }: IPr
       <div
         className={
           visible
-            ? [styles.priorityBtnDropDown, styles.showPriorityBtnDropDown].join(' ')
+            ? [
+                styles.priorityBtnDropDown,
+                styles.showPriorityBtnDropDown,
+                showDropDownOnTop && styles.showDropDownOnTop
+              ].join(' ')
             : styles.priorityBtnDropDown
         }
       >
@@ -89,3 +100,6 @@ export default function PriorityBtn({ priority, taskId, getBacklogDataApi }: IPr
     </div>
   );
 }
+PriorityBtn.defaultProps = {
+  showDropDownOnTop: false
+};
