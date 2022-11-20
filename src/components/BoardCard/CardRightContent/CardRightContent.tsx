@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { TaskEntity } from '../../../api/task/entity/task';
 import { IColumnsFromBackend, ILabelData, IOnChangeProjectLead } from '../../../types';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
@@ -6,9 +6,12 @@ import style from './CardRightContent.module.scss';
 import ReporterFields from './ReporterFields/ReporterFields';
 import LabelFields from './LabelFields/LabelFields';
 import UserSelect from '../../Form/Select/UserSelect/UserSelect';
-import Row from '../../Grid/Row/Row';
 import checkAccess from '../../../utils/helpers';
 import DueDatePicker from '../../DueDatePicker/DueDatePicker';
+import { UserContext } from '../../../context/UserInfoProvider';
+import { createActivity } from '../../../api/activity/activity';
+import { createDailyScrum, getDailyScrums } from '../../../api/dailyScrum/dailyScrum';
+import Row from '../../../lib/Grid/Row/Row';
 
 interface Props {
   taskInfo: TaskEntity;
@@ -30,11 +33,52 @@ export default function CardRightContent({
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const handleClickOutside = () => setVisible(true);
   const editAccess = checkAccess('edit:tasks', projectId);
+  const userInfo = useContext(UserContext);
+  const operation = 'updated';
+  const userId = userInfo.id;
+  const taskId = taskInfo.id;
+  const dateHandler = (fullDate) => {
+    const date = new Date(fullDate);
+    const year = date.getFullYear();
+    let month: string | number = date.getMonth();
+    let day: string | number = date.getDate();
+    day = day < 10 ? `0${day}` : day;
+    month = month + 1 < 10 ? `0${month + 1}` : month + 1;
+    return `${day}-${month}-${year}`;
+  };
 
-  const assigneeOnchangeEventHandler = (e: IOnChangeProjectLead) => {
+  const assigneeOnchangeEventHandler = async (e: IOnChangeProjectLead) => {
     const updatedTaskInfo = { ...taskInfo };
     updatedTaskInfo.assignId = !e.target.value ? undefined : e.target.value;
     taskStatusOnchange(updatedTaskInfo);
+    await createActivity({ operation, userId, taskId });
+    const assign: any = updatedTaskInfo.assignId;
+    if (assign) {
+      const assignId = assign.id;
+      const createdDate = dateHandler(new Date());
+      const data = {
+        title: updatedTaskInfo.title,
+        progress: 0,
+        isFinished: false,
+        hasReason: false,
+        reason: '',
+        isNeedSupport: false,
+        userId: assignId,
+        taskId: updatedTaskInfo.id,
+        createdDate
+      };
+      const searchCase = 'search-by-user-task-date';
+      const resultsForThisTask = await getDailyScrums(
+        projectId,
+        'none',
+        taskId,
+        dateHandler(new Date()),
+        searchCase
+      );
+      if (resultsForThisTask.data.length === 0) {
+        await createDailyScrum(projectId, data);
+      }
+    }
   };
 
   const monthShortNames = [

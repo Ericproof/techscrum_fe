@@ -1,178 +1,180 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useRef, useState } from 'react';
 import { BiDotsHorizontal } from 'react-icons/bi';
 import { GoPlus } from 'react-icons/go';
+import { useParams } from 'react-router-dom';
+import { BsArrowRight } from 'react-icons/bs';
+import { toast } from 'react-toastify';
 import Button from '../../../components/Button/Button';
 import IconButton from '../../../components/Button/IconButton/IconButton';
 import TaskTypeSelect from '../../../components/Select/TaskTypeSelect/TaskTypeSelect';
+import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import TaskItem from '../TaskItem/TaskItem';
+import { addTask } from '../../../api/backlog/backlog';
 import styles from './SprintSection.module.scss';
-// WIP need to communicate with backend
+import { IUserInfo, Itypes, IStatusBacklog } from '../../../types';
+import CreateEditSprint from '../CreateEditSprint/CreateEditSprint';
+import { updateSprint } from '../../../api/sprint/sprint';
 
-export default function SprintSection() {
-  const dummyTaskList = [
-    {
-      id: 'TEC-318',
-      title: 'Task 1',
-      type: 'story',
-      status: 'TO DO',
-      priority: 'Highest'
-    },
-    {
-      id: 'TEC-319',
-      title: 'Task 2',
-      type: 'bug',
-      status: 'TO DO',
-      priority: 'Medium'
-    },
-    {
-      id: 'TEC-320',
-      title: 'Task 3',
-      type: 'task',
-      status: 'TESTING',
-      priority: 'Lowest'
-    }
-  ];
-
-  const [sprintTaskList, setSprintTaskList] = useState(dummyTaskList);
-  const [showSprintInput, setShowSprintInput] = useState(false);
-  const [sprintInputFocus, setSprintInputFocus] = useState(false);
+interface ISprintSection {
+  sprint: any;
+  sprintData: any;
+  statusData: IStatusBacklog[];
+  typesData: Itypes[] | null;
+  userList: IUserInfo[];
+  getBacklogDataApi: () => void;
+}
+export default function SprintSection({
+  sprint,
+  statusData,
+  typesData,
+  userList,
+  sprintData,
+  getBacklogDataApi
+}: ISprintSection) {
   const [currentTypeOption, setCurrentTypeOption] = useState('story');
-  const sprintFormRef = useRef<HTMLFormElement | null>(null);
+  const [showEditSprint, setShowEditSprint] = useState(false);
+  const { boardId = '', projectId = '' } = useParams();
   const createIssueRef = useRef<HTMLInputElement | null>(null);
 
-  const [editId, setEditId] = useState('-1');
-
-  const getCurrentTypeOption = (type: string) => {
-    setCurrentTypeOption(type);
-  };
-  const createIssueAction = useCallback(() => {
-    if (createIssueRef?.current?.value) {
-      const id = 'TEC-'.concat(
-        (+sprintTaskList[sprintTaskList.length - 1].id.split('-')[1] + 1).toString()
-      );
-      setSprintTaskList([
-        ...sprintTaskList,
-        {
-          id,
-          title: createIssueRef?.current?.value,
-          type: currentTypeOption,
-          status: 'TO DO',
-          priority: 'Medium'
-        }
-      ]);
-      setCurrentTypeOption('story');
-    }
-    setShowSprintInput(false);
-  }, [currentTypeOption, sprintTaskList]);
-
-  useEffect(() => {
-    const handleClickOutside = (e: any) => {
-      if (sprintInputFocus && !sprintFormRef.current?.contains(e.target)) {
-        createIssueAction();
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [createIssueAction, currentTypeOption, sprintInputFocus, sprintTaskList]);
-
-  const onClickEditId = (id: string) => {
-    setEditId(id);
-  };
-  const onChangeTitle = (id: string, title: string) => {
-    const updatedTaskList = sprintTaskList.map((task) => {
-      if (task.id === id) {
-        return {
-          ...task,
-          title
-        };
-      }
-      return task;
-    });
-    setSprintTaskList(updatedTaskList);
-  };
+  const { visible, setVisible, myRef } = useOutsideAlerter(false);
 
   const onKeyDownCreateIssue = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      createIssueAction();
+      if (createIssueRef?.current?.value) {
+        const data = {
+          title: createIssueRef?.current?.value,
+          status: 'to do',
+          typeId: typesData?.filter((types) => {
+            return types.slug === currentTypeOption;
+          })[0].id,
+          boardId,
+          projectId,
+          sprintId: sprint.id
+        };
+        setCurrentTypeOption('story');
+        addTask(data)
+          .then(() => {
+            getBacklogDataApi();
+          })
+          .catch(() => {
+            toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+          });
+      }
+      setVisible(false);
     }
   };
-  const onClickChangeStatus = (id: string, status: string) => {
-    const updatedTaskList = sprintTaskList.map((task) => {
-      if (task.id === id) {
-        return { ...task, status };
-      }
-      return task;
-    });
-    setSprintTaskList(updatedTaskList);
+
+  const dateWithDay = (date: Date | null) => {
+    if (date != null) {
+      const fullDate = date.toString().split('T')[0];
+      const dateDataArray = fullDate.split('-');
+      return `${dateDataArray[1]}-${dateDataArray[2]}-${dateDataArray[0]}`;
+    }
+    return '';
   };
-  const onClickChangePriority = (id: string, priority: string) => {
-    const updatedTaskList = sprintTaskList.map((task) => {
-      if (task.id === id) {
-        return { ...task, priority };
-      }
-      return task;
-    });
-    setSprintTaskList(updatedTaskList);
+
+  const onClickStartSprint = (sprintId: string) => {
+    const data = { currentSprint: true };
+    updateSprint(sprintId, data)
+      .then(() => {
+        getBacklogDataApi();
+      })
+      .catch(() => {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      });
   };
-  const onClickDelete = (id: string) => {
-    const updatedTaskList = sprintTaskList.filter((task) => task.id !== id);
-    setSprintTaskList(updatedTaskList);
+  const onClickCompleteSprint = (sprintId: string) => {
+    const data = { isComplete: true, currentSprint: false };
+    updateSprint(sprintId, data)
+      .then(() => {
+        getBacklogDataApi();
+      })
+      .catch(() => {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      });
   };
   return (
     <section className={[styles.container, styles.sprintContainer].join(' ')}>
       <div className={styles.header}>
         <div className={styles.heading}>
-          <h1>Current Sprint</h1>
-          <div className={styles.issueCount}>{sprintTaskList.length} issues</div>
+          <h1>{sprint.name}</h1>
+          <div className={styles.dateAndIssueCount}>
+            <div className={styles.date}>
+              <p>{dateWithDay(sprint.startDate)}</p>
+              <BsArrowRight />
+              <p> {dateWithDay(sprint.endDate)}</p>
+            </div>
+            <div className={styles.issueCount}> ({sprint.taskId.length} issues)</div>
+          </div>
         </div>
         <div className={styles.toolbar}>
-          <Button>Create sprint</Button>
-          <IconButton icon={<BiDotsHorizontal />} tooltip="actions" onClick={undefined} />
+          {sprint.currentSprint ? (
+            <Button
+              onClick={() => {
+                onClickCompleteSprint(sprint.id);
+              }}
+            >
+              Complete Sprint
+            </Button>
+          ) : (
+            <Button
+              onClick={() => {
+                onClickStartSprint(sprint.id);
+              }}
+            >
+              Start Sprint
+            </Button>
+          )}
+          <IconButton
+            icon={<BiDotsHorizontal />}
+            tooltip="actions"
+            onClick={() => {
+              setShowEditSprint(true);
+            }}
+          />
+
+          {showEditSprint && (
+            <CreateEditSprint
+              type="Edit"
+              onClickCloseModal={() => {
+                setShowEditSprint(false);
+              }}
+              getBacklogDataApi={getBacklogDataApi}
+              currentSprint={sprint}
+            />
+          )}
         </div>
       </div>
       <div className={styles.listContainer}>
-        {sprintTaskList.map((task) => {
+        {sprint.taskId.map((task) => {
           return (
             <TaskItem
-              taskTitle={task.title}
               key={task.id}
-              id={task.id}
-              editMode={editId === task.id}
-              onClickEditId={onClickEditId}
-              onChangeTitle={onChangeTitle}
-              type={task.type}
-              status={task.status}
-              onClickChangeStatus={onClickChangeStatus}
-              priority={task.priority}
-              onClickChangePriority={onClickChangePriority}
-              onClickDelete={onClickDelete}
+              task={task}
+              sprintData={sprintData}
+              statusData={statusData}
+              userList={userList}
+              getBacklogDataApi={getBacklogDataApi}
             />
           );
         })}
       </div>
-      {showSprintInput ? (
-        <form ref={sprintFormRef}>
-          <div className={styles.formField}>
-            <TaskTypeSelect onChangeType={getCurrentTypeOption} />
+      {visible ? (
+        <form>
+          <div className={styles.formField} ref={myRef}>
+            <TaskTypeSelect setCurrentTypeOption={setCurrentTypeOption} />
             <input
               className={styles.input}
               type="text"
               name="newTask"
               id="newTask"
-              onFocus={() => setSprintInputFocus(true)}
               onKeyDown={onKeyDownCreateIssue}
               ref={createIssueRef}
             />
           </div>
         </form>
       ) : (
-        <Button
-          icon={<GoPlus />}
-          overrideStyle={styles.buttonRow}
-          onClick={() => setShowSprintInput(true)}
-        >
+        <Button icon={<GoPlus />} overrideStyle={styles.buttonRow} onClick={() => setVisible(true)}>
           Create issue
         </Button>
       )}

@@ -17,7 +17,6 @@ $activeBgColor: #d3e3fc;
   color: $btnTextColor;
   position: relative;
   cursor: pointer;
-
   .tooltip {
     position: absolute;
     top: 100%;
@@ -26,9 +25,9 @@ $activeBgColor: #d3e3fc;
     color: $tooltipTextColor;
     padding: 0.2rem 0.5rem;
     border-radius: 0.25rem;
-    text-transform: capitalize;
     visibility: hidden;
     z-index: 1;
+    white-space: nowrap;
   }
 
   &:hover {

@@ -6,7 +6,7 @@ export function getTasks() {
   return axios.get(`${config.apiAddress}/projects`);
 }
 
-export function showTask(id: string) {
+export function showTask(id = '') {
   return axios.get(`${config.apiAddress}/projects/${id}`);
 }
 
@@ -31,9 +31,21 @@ export function updateTask(taskId: string, data: ITaskData) {
   if (typeof data.assignId !== 'string') {
     copyData.assignId = !data.assignId ? null : data.assignId.id;
   }
+  if (typeof data.status !== 'string') {
+    copyData.status = data?.status?.id;
+  }
+  if (typeof data.reporterId !== 'string') {
+    copyData.reporterId = data?.reporterId?.id;
+  }
+
   if (typeof data.typeId !== 'string') {
     copyData.typeId = data?.typeId?.id;
   }
+
+  copyData.tags = data.tags.map((item) => {
+    return typeof item !== 'string' ? item.id : item;
+  });
+
   return axios.put(`${config.apiAddress}/tasks/${taskId}`, copyData);
 }
 

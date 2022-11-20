@@ -8,6 +8,7 @@ import Attach from './components/Attach/Attach';
 import Description from './components/Description/Description';
 import LeftBottom from './components/LeftBottom/LeftBottom';
 import Title from './components/Title/Title';
+import { createActivity } from '../../../api/activity/activity';
 
 interface Props {
   taskInfo: TaskEntity;
@@ -35,11 +36,15 @@ export default function CardLeftContent({
   }, [taskInfo]);
 
   const onFocusEventHandler = () => setVisible(true);
-  const onSaveProcessing = (e: React.FormEvent) => {
+  const onSaveProcessing = async (e: React.FormEvent) => {
     e.preventDefault();
     const updatedTaskInfo = { ...taskInfo, title, description: desc };
     onSave(updatedTaskInfo);
     setVisible(false);
+    const operation = 'updated';
+    const userId = userInfo.id;
+    const taskId = taskInfo.id;
+    await createActivity({ operation, userId, taskId });
   };
   const onResetHandler = () => setVisible(false);
 
@@ -49,8 +54,13 @@ export default function CardLeftContent({
 
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
-    const updatedTaskInfo = { ...taskInfo, title: e.target.value, description: desc };
-    onSave(updatedTaskInfo);
+  };
+
+  const onBlurHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value !== taskInfo.title) {
+      const updatedTaskInfo = { ...taskInfo, title: e.target.value, description: desc };
+      onSave(updatedTaskInfo);
+    }
   };
 
   return (
@@ -61,6 +71,7 @@ export default function CardLeftContent({
           focusEventHandler={onFocusEventHandler}
           isDisabled={!checkAccess('edit:tasks', projectId)}
           onChangeTitle={onChangeTitle}
+          onBlurHandler={onBlurHandler}
           value={title}
         />
         {checkAccess('edit:tasks', projectId) && <Attach onChangeAttachment={uploadFile} />}

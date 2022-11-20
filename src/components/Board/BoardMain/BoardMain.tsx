@@ -12,6 +12,7 @@ interface Props {
   passTaskId: (itemId: string) => void;
   updateIsCreateNewCard: () => void;
   projectId: string;
+  loading: boolean;
 }
 
 export default function BoardMain({
@@ -19,9 +20,10 @@ export default function BoardMain({
   onDragEventHandler,
   passTaskId,
   updateIsCreateNewCard,
-  projectId
+  projectId,
+  loading
 }: Props) {
-  if (!columnsInfo || Object.keys(columnsInfo).length === 0) {
+  if (!columnsInfo || Object.keys(columnsInfo).length === 0 || loading) {
     return <Loading />;
   }
   return (
@@ -70,12 +72,22 @@ export default function BoardMain({
                                     {item.tags?.map((tag) => {
                                       return (
                                         <div className={styles.tag} key={tag.id}>
-                                          <h1>{tag.name}</h1>
+                                          <span>{tag.name}</span>
                                         </div>
                                       );
                                     })}
                                   </span>
-                                  <p>{item.title ?? ''}</p>
+                                  <p>
+                                    {item?.title &&
+                                      item.title
+                                        .split(' ')
+                                        .map((word: string) => {
+                                          return word.length > 27
+                                            ? `${word.substring(0, 27)}...`
+                                            : word;
+                                        })
+                                        .join(' ')}
+                                  </p>
                                   <div className={styles.cardFooter}>
                                     <div className={styles.cardFooterLeft}>
                                       <span>

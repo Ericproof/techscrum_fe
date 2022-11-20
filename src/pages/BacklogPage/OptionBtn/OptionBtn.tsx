@@ -1,36 +1,73 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { BsThreeDots } from 'react-icons/bs';
+import { toast } from 'react-toastify';
 import styles from './OptionBtn.module.scss';
+import useOutsideAlerter from '../../../hooks/OutsideAlerter';
+import { deleteTask, updateTask } from '../../../api/backlog/backlog';
 
 interface IOptionBtn {
+  taskId: string;
   showOptionBtn: boolean;
-  id: string;
-  onClickDelete: (id: string) => void;
+  sprintId: string;
+  showDropDownOnTop?: boolean;
+  sprintData: any;
   toggleDisableShowOptionBtnEffect: () => void;
+  getBacklogDataApi: () => void;
 }
 export default function OptionBtn({
+  taskId,
   showOptionBtn,
-  id,
-  onClickDelete,
-  toggleDisableShowOptionBtnEffect
+  sprintId,
+  sprintData,
+  showDropDownOnTop,
+  toggleDisableShowOptionBtnEffect,
+  getBacklogDataApi
 }: IOptionBtn) {
-  const [showOptionDropDownBtns, setShowOptionDropDownBtns] = useState(false);
   const [clickOptionBtnShowStyle, setClickOptionBtnShowStyle] = useState(false);
   const [hoverOptionBtn, setHoverOptionBtn] = useState(false);
-  const optionBtnRef = useRef<HTMLDivElement | null>(null);
-  useEffect(() => {
-    const handleClickOutside = (e: any) => {
-      if (showOptionDropDownBtns && !optionBtnRef?.current?.contains(e.target)) {
-        setShowOptionDropDownBtns(false);
-        toggleDisableShowOptionBtnEffect();
-        setClickOptionBtnShowStyle(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [showOptionDropDownBtns, toggleDisableShowOptionBtnEffect]);
+
+  const action = () => {
+    toggleDisableShowOptionBtnEffect();
+    setClickOptionBtnShowStyle(false);
+  };
+  const { visible, setVisible, myRef } = useOutsideAlerter(false, action);
+
+  const onClickDelete = (id: string) => {
+    deleteTask(id)
+      .then(() => {
+        getBacklogDataApi();
+      })
+      .catch(() => {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      });
+    setVisible(false);
+    action();
+  };
+
+  const onClickAddToBacklog = (id: string) => {
+    const data = { sprintId: null };
+    updateTask(id, data)
+      .then(() => {
+        getBacklogDataApi();
+      })
+      .catch(() => {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      });
+    setVisible(false);
+    action();
+  };
+  const onClickAddToSprint = (id: string, sprintIdToAdd: string) => {
+    const data = { sprintId: sprintIdToAdd };
+    updateTask(id, data)
+      .then(() => {
+        getBacklogDataApi();
+      })
+      .catch(() => {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      });
+    setVisible(false);
+    action();
+  };
 
   let btnClassName = '';
   if (showOptionBtn && clickOptionBtnShowStyle) {
@@ -43,11 +80,11 @@ export default function OptionBtn({
     btnClassName = styles.optionBtn;
   }
   return (
-    <div className={styles.optionBtnContainer} ref={optionBtnRef}>
+    <div className={styles.optionBtnContainer} ref={myRef}>
       <button
         className={btnClassName}
         onClick={() => {
-          setShowOptionDropDownBtns(!showOptionDropDownBtns);
+          setVisible(!visible);
           setClickOptionBtnShowStyle(!clickOptionBtnShowStyle);
           toggleDisableShowOptionBtnEffect();
         }}
@@ -59,13 +96,18 @@ export default function OptionBtn({
         }}
         onBlur={() => {}}
         onFocus={() => {}}
+        data-testid={'hover-show-option-btn-'.concat(taskId)}
       >
         <BsThreeDots />
       </button>
       <div
         className={
-          showOptionDropDownBtns
-            ? [styles.optionBtnDropDown, styles.showOptionBtnDropDown].join(' ')
+          visible
+            ? [
+                styles.optionBtnDropDown,
+                styles.showOptionBtnDropDown,
+                showDropDownOnTop && styles.showDropDownOnTop
+              ].join(' ')
             : styles.optionBtnDropDown
         }
       >
@@ -74,12 +116,43 @@ export default function OptionBtn({
           <li>
             <button className={styles.dropDownBtn}>Copy issue link</button>
           </li>
+          {sprintId && (
+            <li>
+              <button
+                className={styles.dropDownBtn}
+                onClick={() => {
+                  onClickAddToBacklog(taskId);
+                }}
+              >
+                Add to Backlog
+              </button>
+            </li>
+          )}
+          {sprintData
+            .filter((sprint) => {
+              return sprint.id !== sprintId && !sprint.isComplete;
+            })
+            .map((sprint) => {
+              return (
+                <li key={sprint.id}>
+                  <button
+                    className={styles.dropDownBtn}
+                    onClick={() => {
+                      onClickAddToSprint(taskId, sprint.id);
+                    }}
+                  >
+                    Add to {sprint.name}
+                  </button>
+                </li>
+              );
+            })}
           <li>
             <button
               className={styles.dropDownBtn}
               onClick={() => {
-                onClickDelete(id);
+                onClickDelete(taskId);
               }}
+              data-testid={'delete-task-'.concat(taskId)}
             >
               Delete
             </button>
@@ -89,3 +162,7 @@ export default function OptionBtn({
     </div>
   );
 }
+
+OptionBtn.defaultProps = {
+  showDropDownOnTop: false
+};

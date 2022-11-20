@@ -7,6 +7,7 @@ interface Props {
   focusEventHandler: () => void;
   isDisabled: boolean;
   onChangeTitle: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlurHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value: string | undefined;
 }
 
@@ -15,6 +16,7 @@ export default function Title({
   focusEventHandler,
   isDisabled,
   onChangeTitle,
+  onBlurHandler,
   value
 }: Props) {
   return (
@@ -28,6 +30,7 @@ export default function Title({
           onFocus={focusEventHandler}
           disabled={isDisabled}
           onChange={onChangeTitle}
+          onBlur={onBlurHandler}
           value={value}
         />
       </label>

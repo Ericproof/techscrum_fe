@@ -71,6 +71,10 @@ $borderColor: #ebecf0;
       }
     }
   }
+  .showDropDownOnTop {
+    top: auto;
+    bottom: 33px;
+  }
   .showPriorityBtnDropDown {
     display: block;
   }

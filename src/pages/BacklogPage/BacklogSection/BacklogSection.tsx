@@ -1,178 +1,123 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useRef, useState } from 'react';
 import { GoPlus } from 'react-icons/go';
+import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Button from '../../../components/Button/Button';
 import TaskTypeSelect from '../../../components/Select/TaskTypeSelect/TaskTypeSelect';
 import TaskItem from '../TaskItem/TaskItem';
 import styles from './BacklogSection.module.scss';
-// WIP more function will be added
+import { addTask } from '../../../api/backlog/backlog';
+import { IUserInfo, Itypes, IStatusBacklog } from '../../../types';
+import useOutsideAlerter from '../../../hooks/OutsideAlerter';
+import CreateEditSprint from '../CreateEditSprint/CreateEditSprint';
 
-export default function BacklogSection() {
-  const dummyTaskList = [
-    {
-      id: 'TEC-315',
-      title: 'Task 1',
-      type: 'story',
-      status: 'TO DO',
-      priority: 'Medium'
-    },
-    {
-      id: 'TEC-316',
-      title: 'Task 2',
-      type: 'bug',
-      status: 'TO DO',
-      priority: 'Medium'
-    },
-    {
-      id: 'TEC-317',
-      title: 'Task 3',
-      type: 'task',
-      status: 'TO DO',
-      priority: 'Medium'
-    }
-  ];
+interface IBacklogSection {
+  backlogData: any;
+  getBacklogDataApi: () => void;
+  statusData: IStatusBacklog[];
+  typesData: Itypes[] | null;
+  userList: IUserInfo[];
+  sprintData: any;
+}
 
-  const [showBacklogInput, setShowBacklogInput] = useState(false);
-  const [backlogInputFocus, setBacklogInputFocus] = useState(false);
+export default function BacklogSection({
+  backlogData,
+  getBacklogDataApi,
+  statusData,
+  typesData,
+  userList,
+  sprintData
+}: IBacklogSection) {
   const [currentTypeOption, setCurrentTypeOption] = useState('story');
-
-  const [editId, setEditId] = useState('-1');
-  const [taskList, setTaskList] = useState(dummyTaskList);
-
-  const backlogFormRef = useRef<HTMLFormElement | null>(null);
+  const { boardId = '', projectId = '' } = useParams();
+  const [showCreateSprint, setShowCreateSprint] = useState(false);
   const createIssueRef = useRef<HTMLInputElement | null>(null);
 
-  const createIssueAction = useCallback(() => {
-    if (createIssueRef?.current?.value) {
-      const id = 'TEC-'.concat((+taskList[taskList.length - 1].id.split('-')[1] + 1).toString());
-      setTaskList([
-        ...taskList,
-        {
-          id,
-          title: createIssueRef?.current?.value,
-          type: currentTypeOption,
-          status: 'TO DO',
-          priority: 'Medium'
-        }
-      ]);
-      setCurrentTypeOption('story');
-    }
-    setShowBacklogInput(false);
-  }, [currentTypeOption, taskList]);
-
-  useEffect(() => {
-    const handleClickOutside = (e: any) => {
-      if (backlogInputFocus && !backlogFormRef.current?.contains(e.target as HTMLElement)) {
-        createIssueAction();
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [backlogInputFocus, createIssueAction, taskList]);
-
-  const onClickEditId = (id: string) => {
-    setEditId(id);
-  };
-
-  const onChangeTitle = (id: string, title: string) => {
-    const updatedTaskList = taskList.map((task) => {
-      if (task.id === id) {
-        return {
-          ...task,
-          title
-        };
-      }
-      return task;
-    });
-    setTaskList(updatedTaskList);
-  };
+  const { visible, setVisible, myRef } = useOutsideAlerter(false);
 
   const onKeyDownCreateIssue = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      createIssueAction();
+      if (createIssueRef?.current?.value) {
+        const data = {
+          title: createIssueRef?.current?.value,
+          status: 'to do',
+          typeId: typesData?.filter((types) => {
+            return types.slug === currentTypeOption;
+          })[0].id,
+          boardId,
+          projectId,
+          sprintId: null
+        };
+        setCurrentTypeOption('story');
+        addTask(data)
+          .then(() => {
+            getBacklogDataApi();
+          })
+          .catch(() => {
+            toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+          });
+      }
+      setVisible(false);
     }
   };
-  const getCurrentTypeOption = (type: string) => {
-    setCurrentTypeOption(type);
+
+  const createSprint = () => {
+    setShowCreateSprint(true);
   };
-  const onClickChangeStatus = (id: string, status: string) => {
-    const updatedTaskList = taskList.map((task) => {
-      if (task.id === id) {
-        return { ...task, status };
-      }
-      return task;
-    });
-    setTaskList(updatedTaskList);
-  };
-  const onClickChangePriority = (id: string, priority: string) => {
-    const updatedTaskList = taskList.map((task) => {
-      if (task.id === id) {
-        return { ...task, priority };
-      }
-      return task;
-    });
-    setTaskList(updatedTaskList);
-  };
-  const onClickDelete = (id: string) => {
-    const updatedTaskList = taskList.filter((task) => task.id !== id);
-    setTaskList(updatedTaskList);
-  };
+
   return (
     <section className={styles.container}>
       <div className={styles.header}>
         <div className={styles.heading}>
           <h1>Backlog</h1>
-          <div className={styles.issueCount}>{taskList.length} issues</div>
+          <div className={styles.issueCount}>{backlogData.cards.length} issues</div>
         </div>
         <div className={styles.toolbar}>
-          <Button>Create sprint</Button>
+          <Button onClick={createSprint}>Create sprint</Button>
+          {showCreateSprint && (
+            <CreateEditSprint
+              type="Create"
+              onClickCloseModal={() => {
+                setShowCreateSprint(false);
+              }}
+              getBacklogDataApi={getBacklogDataApi}
+            />
+          )}
         </div>
       </div>
       <div className={styles.listContainer}>
-        {taskList.map((task) => {
+        {backlogData.cards.map((task, index) => {
           return (
             <TaskItem
-              taskTitle={task.title}
+              task={task}
               key={task.id}
-              id={task.id}
-              editMode={editId === task.id}
-              onClickEditId={onClickEditId}
-              onChangeTitle={onChangeTitle}
-              type={task.type}
-              status={task.status}
-              onClickChangeStatus={onClickChangeStatus}
-              priority={task.priority}
-              onClickChangePriority={onClickChangePriority}
-              onClickDelete={onClickDelete}
+              statusData={statusData}
+              userList={userList}
+              sprintData={sprintData}
+              showDropDownOnTop={index > backlogData.cards.length - 4}
+              getBacklogDataApi={getBacklogDataApi}
             />
           );
         })}
       </div>
-      {showBacklogInput ? (
-        <form ref={backlogFormRef}>
-          <div className={styles.formField}>
-            <TaskTypeSelect onChangeType={getCurrentTypeOption} />
+      {visible ? (
+        <form>
+          <div className={styles.formField} ref={myRef}>
+            <TaskTypeSelect showDropDownOnTop setCurrentTypeOption={setCurrentTypeOption} />
             <input
               className={styles.input}
               type="text"
               name="newBacklog"
               id="newBacklog"
-              onFocus={() => {
-                setBacklogInputFocus(true);
-              }}
+              data-testid="create-issue-input"
               ref={createIssueRef}
               onKeyDown={onKeyDownCreateIssue}
             />
           </div>
         </form>
       ) : (
-        <Button
-          icon={<GoPlus />}
-          overrideStyle={styles.buttonRow}
-          onClick={() => setShowBacklogInput(true)}
-        >
-          Create issue
+        <Button icon={<GoPlus />} overrideStyle={styles.buttonRow} onClick={() => setVisible(true)}>
+          <p data-testid="create-issue">Create issue</p>
         </Button>
       )}
     </section>

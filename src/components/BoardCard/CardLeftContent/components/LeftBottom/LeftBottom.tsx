@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { MentionData } from '@draft-js-plugins/mention';
 import {
@@ -7,11 +8,18 @@ import {
   updateComment
 } from '../../../../../api/comment/comment';
 import { getUsers } from '../../../../../api/user/user';
-import { ICommentData, ICommentItemData } from '../../../../../types';
+import {
+  ICommentData,
+  ICommentItemData,
+  IActivityData,
+  IActivityItemData
+} from '../../../../../types';
 import checkAccess from '../../../../../utils/helpers';
 import CommentItem from './components/CommentItem/CommentItem';
 import Editor from './components/Editor/Editor';
 import style from './LeftBottom.module.scss';
+import ActivityItem from './components/ActivityItem/ActivityItem';
+import { getActivity } from '../../../../../api/activity/activity';
 
 interface ILeftBottom {
   userId?: string;
@@ -26,7 +34,11 @@ export default function LeftBottom(props: ILeftBottom) {
   const [deleteState, setDeleteState] = useState(false);
   const [updateState, setUpdateState] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
   const [users, setUsers] = useState<MentionData[]>([]);
+  const [activities, setActivities] = useState([]);
+  const [showActivities, setShowActivities] = useState(false);
+  const [showComments, setShowComments] = useState(true);
 
   const fetchCommentsData = () => {
     async function fetchData() {
@@ -49,9 +61,37 @@ export default function LeftBottom(props: ILeftBottom) {
   };
 
   const onClickPublish = async (content) => {
+    setSubmitting(true);
     await createComment({ taskId, senderId: userId, content });
     setSaveState(true);
+    setSubmitting(false);
   };
+
+  const fetchActivityData = () => {
+    async function fetchData() {
+      await getActivity(taskId).then((data: IActivityData) => {
+        const result = data.data;
+        setActivities(result);
+      });
+    }
+    fetchData();
+  };
+
+  const onActivityClick = () => {
+    setShowActivities(true);
+    setShowComments(false);
+  };
+
+  const onCommentClick = () => {
+    setShowActivities(false);
+    setShowComments(true);
+  };
+
+  useEffect(() => {
+    if (showActivities) {
+      fetchActivityData();
+    }
+  }, [showActivities]);
 
   useEffect(() => {
     if (isLoading) {
@@ -92,37 +132,75 @@ export default function LeftBottom(props: ILeftBottom) {
   return (
     <div className={style.container}>
       <div className={style.activity}>
-        <h3>Activity</h3>
         <div className={style.showCommentButton}>
-          <span>Show: </span>
-          <button type="button">Comments</button>
+          <button
+            type="button"
+            className={style.switchButton}
+            onClick={onCommentClick}
+            data-testid="show-comment-button"
+          >
+            Comments
+          </button>
+          <button
+            type="button"
+            className={style.switchButton}
+            onClick={onActivityClick}
+            data-testid="show-activity-button"
+          >
+            Activities
+          </button>
         </div>
+        {showActivities ? (
+          activities.map((item: IActivityItemData) => {
+            if (item.taskId === taskId) {
+              return (
+                <ActivityItem
+                  key={item.id}
+                  id={item.id}
+                  userId={item.userId}
+                  operation={item.operation}
+                  createdAt={item.createdAt}
+                />
+              );
+            }
+            return null;
+          })
+        ) : (
+          <br />
+        )}
       </div>
-      {checkAccess('edit:tasks', projectId) && (
+      {checkAccess('edit:tasks', projectId) && showComments && (
         <div>
           <div className={style.commentInputField}>
-            <Editor onClickPublish={onClickPublish} users={users} imageInputId="insertImage" />
+            <Editor
+              submitting={submitting}
+              onClickPublish={onClickPublish}
+              users={users}
+              imageInputId="insertImage"
+            />
           </div>
         </div>
       )}
-      {comments.map((item: ICommentItemData) => {
-        if (item.taskId === taskId) {
-          return (
-            <CommentItem
-              key={item.id}
-              content={item.content}
-              id={item.id}
-              senderId={item.senderId}
-              updatedAt={item.updatedAt}
-              onClickDelete={onClickDelete}
-              onClickUpdate={onClickUpdate}
-              userEmail={userEmail}
-              users={users}
-            />
-          );
-        }
-        return null;
-      })}
+      {showComments &&
+        comments.map((item: ICommentItemData) => {
+          if (item.taskId === taskId) {
+            return (
+              <CommentItem
+                key={item.id}
+                content={item.content}
+                id={item.id}
+                senderId={item.senderId}
+                updatedAt={item.updatedAt}
+                onClickDelete={onClickDelete}
+                onClickUpdate={onClickUpdate}
+                userEmail={userEmail}
+                users={users}
+                submitting={submitting}
+              />
+            );
+          }
+          return null;
+        })}
     </div>
   );
 }

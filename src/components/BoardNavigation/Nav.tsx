@@ -22,7 +22,6 @@ export default function Nav() {
       <NavMain
         currentProject={currentProject[0]}
         shortCutAdded={fetchProjectsList}
-        shortCutRemoved={fetchProjectsList}
         shortCutUpdated={fetchProjectsList}
       />
     </nav>

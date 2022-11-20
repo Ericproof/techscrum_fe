@@ -1,3 +1,5 @@
+@import "../../variables.scss";
+
 .error {
   color: red;
   font-size: 25px;
@@ -170,7 +172,7 @@ p.cardStar:after {
   text-decoration: none;
   outline: none;
   color: #fff;
-  background-color: #0052cc;
+  background-color: $primaryColor;
   border: none;
   margin-left: 20px;
   border-radius: 4px;

@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState, Dispatch } from 'react';
+import { IoIosAdd } from 'react-icons/io';
 import styles from './BoardSearch.module.scss';
 import search from '../../../assets/search-line.svg';
 import checkAccess from '../../../utils/helpers';
+import ButtonV2 from '../../../lib/FormV2/ButtonV2/ButtonV2';
 
 interface Props {
   updateIsCreateNewCard: () => void;
@@ -116,14 +118,13 @@ export default function BoardSearch({ updateIsCreateNewCard, setInputQuery, proj
         </ul>
       </fieldset>
       {checkAccess('add:tasks', projectId) && (
-        <button
-          type="button"
-          className={styles.createButton}
+        <ButtonV2
+          text="ADD NEW"
           onClick={updateIsCreateNewCard}
-          data-testid="board-create-card"
-        >
-          Create card
-        </button>
+          icon={<IoIosAdd className={styles.createCardIcon} />}
+          fill
+          dataTestId="board-create-card"
+        />
       )}
     </div>
   );

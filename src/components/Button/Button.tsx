@@ -6,7 +6,7 @@ export interface IButton {
   iconPosition?: 'start' | 'end';
   overrideStyle?: string;
   onClick?: () => void;
-  children: string;
+  children: React.ReactNode | string;
 }
 
 export default function Button({

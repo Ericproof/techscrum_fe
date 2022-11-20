@@ -26,14 +26,13 @@ export interface ITaskData {
 export interface ICardData {
   id?: string;
   tags?: [ILabelData];
-  title?: string;
-  statusId?: string;
+  title: string;
+  statusId?: any;
   typeId?: string;
   description?: string;
   storyPoint?: number;
   dueAt?: Date | string;
   assignInfo?: IAssign;
-  statusId?: string;
   label?: string;
   boardId?: string;
   projectId?: string;
@@ -68,7 +67,7 @@ export interface IItemFromBackend {
 export interface ITaskCard {
   id?: string;
   tags?: [ILabelData];
-  title?: string;
+  title: string;
   statusId?: string;
   typeId?: string;
   description?: string;
@@ -93,7 +92,13 @@ export interface IStatusEntity {
   order: number;
   taskList: ITaskCard[];
 }
-
+export interface IStatusBacklog {
+  id: string;
+  slug: string;
+  name: string;
+  order: number;
+  board: string;
+}
 export default interface IBoardEntity {
   id: string;
   title: string;
@@ -179,10 +184,25 @@ export interface ICommentItemData {
   [x: string]: any;
 }
 
+export interface IActivityData {
+  [x: string]: any;
+}
+export interface IActivityItemData {
+  [x: string]: any;
+}
+
 export interface IResetPasswordForm {
   email: stirng;
 }
 
 export interface IConfig {
   [x: string]: any;
+}
+
+export interface Itypes {
+  slug: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+  id: string;
 }

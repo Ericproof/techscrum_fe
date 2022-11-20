@@ -19,6 +19,7 @@ interface ICommentItem {
   onClickUpdate: (id: string, commentContent: string) => void;
   userEmail: string;
   users: MentionData[];
+  submitting: boolean;
 }
 const monthShortNames = [
   'Jan',
@@ -50,8 +51,17 @@ const dateWithTimestamp = (d: Date | null) => {
 };
 
 export default function CommentItem(props: ICommentItem) {
-  const { content, id, senderId, updatedAt, onClickDelete, onClickUpdate, userEmail, users } =
-    props;
+  const {
+    content,
+    id,
+    senderId,
+    updatedAt,
+    onClickDelete,
+    onClickUpdate,
+    userEmail,
+    users,
+    submitting
+  } = props;
 
   const [readOnly, setReadOnly] = useState(true);
 
@@ -74,6 +84,7 @@ export default function CommentItem(props: ICommentItem) {
         </div>
         <div className={style.commentBody}>
           <Edit
+            submitting={submitting}
             content={content}
             readOnly={readOnly}
             onClickPublish={onClickPublish}

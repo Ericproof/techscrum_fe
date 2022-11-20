@@ -1,19 +1,22 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import ChangeIcon from './ChangeIcon/ChangeIcon';
-import ChangeKey from './ChangeKey/ChangeKey';
-import ChangeName from './ChangeName/ChangeName';
 import styles from './ProjectEditor.module.scss';
-import ProjectLead from './ProjectLead/ProjectLead';
 import { IOnChangeProjectLead, IProjectEditor } from '../../types';
 import { UserContext } from '../../context/UserInfoProvider';
+import UsersFieldsV2 from '../../lib/FieldsV2/UsersFieldsV2/UsersFieldsV2';
+import ButtonV2 from '../../lib/FormV2/ButtonV2/ButtonV2';
+import InputV2 from '../../lib/FormV2/InputV2/InputV2';
+import BtnContainer from '../../lib/Grid/BtnContainer/BtnContainer';
+import Row from '../../lib/Grid/Row/Row';
 
 interface ProjectEditorProps {
   showCancelBtn?: boolean;
   projectData?: IProjectEditor;
   onClickSave: (data: any) => void;
-  hasError: boolean;
+  onClickCancel?: (e: any) => void;
+  hasError?: boolean;
+  loading?: boolean;
 }
 
 function ProjectEditor(props: ProjectEditorProps) {
@@ -24,7 +27,6 @@ function ProjectEditor(props: ProjectEditorProps) {
     assigneeId: 1,
     iconUrl: ''
   });
-  const navigate = useNavigate();
   const userInfo = useContext(UserContext);
 
   useEffect(() => {
@@ -34,7 +36,14 @@ function ProjectEditor(props: ProjectEditorProps) {
     setData({ ...data, projectLeadId: userInfo });
   }, [userInfo.id]);
 
-  const { showCancelBtn = false, projectData, onClickSave, hasError } = props;
+  const {
+    showCancelBtn = false,
+    projectData,
+    onClickSave,
+    hasError,
+    onClickCancel = () => {},
+    loading
+  } = props;
   const onChange = (e: IOnChangeProjectLead) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
@@ -55,10 +64,8 @@ function ProjectEditor(props: ProjectEditorProps) {
     setData({ ...data, ...updateData });
   };
 
-  const onSave = (e: React.SyntheticEvent) => {
-    e.preventDefault();
-    const apiData = { ...data };
-    apiData.projectLeadId = data.projectLeadId?.id;
+  const onSave = () => {
+    const apiData = { ...data, userId: userInfo.id };
     onClickSave(apiData);
   };
 
@@ -73,28 +80,43 @@ function ProjectEditor(props: ProjectEditorProps) {
       <div className={styles.editContainer}>
         <form>
           <ChangeIcon uploadSuccess={uploadSuccess} value={data.iconUrl} />
-          <ChangeName value={data.name} onChange={onChangeName} />
-          <ChangeKey value={data.key} onChange={onChange} />
-          <ProjectLead value={data.projectLeadId} onChange={onChange} />
+          <Row defaultMargin>
+            <UsersFieldsV2
+              onChange={onChange}
+              defaultValue={data.projectLeadId}
+              label="Project Lead"
+              name="projectLeadId"
+            />
+          </Row>
+          <Row defaultMargin>
+            <InputV2
+              name="name"
+              label="Name"
+              onValueChanged={onChangeName}
+              defaultValue={data.name}
+            />
+          </Row>
+          <Row defaultMargin>
+            <InputV2 name="key" label="Key" onValueChanged={onChangeName} defaultValue={data.key} />
+          </Row>
           {hasError && (
             <p className={styles.error} data-testid="projectError">
               Error
             </p>
           )}
-          <button className={styles.saveBtn} type="submit" data-testid="save" onClick={onSave}>
-            Save
-          </button>
-          {showCancelBtn && (
-            <button
-              className={styles.cancelBtn}
-              type="button"
-              onClick={() => {
-                navigate(-1);
-              }}
-            >
-              Cancel
-            </button>
-          )}
+          <Row>
+            <BtnContainer>
+              <ButtonV2 text="Save" onClick={onSave} dataTestId="save" fill loading={loading} />
+              {showCancelBtn && (
+                <ButtonV2
+                  text="Cancel"
+                  onClick={onClickCancel}
+                  dataTestId="cancel"
+                  loading={loading}
+                />
+              )}
+            </BtnContainer>
+          </Row>
         </form>
       </div>
     </div>
@@ -103,7 +125,10 @@ function ProjectEditor(props: ProjectEditorProps) {
 
 ProjectEditor.defaultProps = {
   showCancelBtn: false,
-  projectData: null
+  projectData: null,
+  hasError: false,
+  onClickCancel: () => {},
+  loading: false
 };
 
 export default ProjectEditor;

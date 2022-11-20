@@ -1,6 +1,6 @@
-/* eslint-disable react/jsx-no-useless-fragment */
 import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import HomePage from './pages/HomePage/HomePage';
 import RegisterPage from './pages/Register/RegisterPage';
 import LoginPage from './pages/Login/LoginPage';
@@ -40,7 +40,8 @@ import AdminPage from './pages/AdminPage/AdminPage';
 import AboutPageT2 from './pages/AboutPageT2/AboutPageT2';
 import { getDomains } from './api/domain/domain';
 import BacklogPage from './pages/BacklogPage/BacklogPage';
-import DashboardLayout from './components/DashboardLayout/DashboardLayout';
+import ShortcutPage from './pages/ShortcutPage/ShortcutPage';
+import DashboardLayout from './lib/Layout/DashboardLayout/DashboardLayout';
 
 function App() {
   const [showPages, setShowPages] = useState(null);
@@ -64,55 +65,65 @@ function App() {
   };
 
   return (
-    <UserProvider>
-      <RolesProvider>
-        <ProjectProvider>
-          <TaskTypesProvider>
-            <Routes>
-              {showPages && <Route path="/register" element={<RegisterPage />} />}
-              {showPages && <Route path="/admin" element={<AdminPage />} />}
-              <Route path="/faq" element={<FAQPage />} />
-              <Route path="/verify" element={<VerifyPage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/" element={getHomePage()} />
-              <Route path="/login/reset-password" element={<ResetPasswordPage />} />
-              <Route path="/login/change-password" element={<ChangePasswordPage />} />
-              <Route path="/cookie-policy" element={<CookiePolicyPage />} />
-              <Route path="/gdpr" element={<GdprPage />} />
-              <Route path="/terms-of-service" element={<TermsOfServicePage />} />
-              <Route path="/privacy-statement" element={<PrivacyStatementPage />} />
-              <Route path="/refund-policy" element={<RefundPolicyPage />} />
-              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-              <Route path="/about-t2" element={<AboutPageT2 />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/careers" element={<CareerPage />} />
-              <Route path="/security-page" element={<SecurityPage />} />
-              <Route path="/errorPage" element={<ErrorPage />} />
-              <Route path="" element={<AuthenticationRoute />}>
-                <Route path="/projects/:projectId/" element={<DashboardLayout />}>
-                  <Route path="board/:boardId" element={<BoardPage />} />
-                  <Route path="board/:boardId/backlog" element={<BacklogPage />} />
+    <>
+      <ToastContainer style={{ width: '400px' }} />
+      <UserProvider>
+        <RolesProvider>
+          <ProjectProvider>
+            <TaskTypesProvider>
+              <Routes>
+                {showPages && <Route path="/register" element={<RegisterPage />} />}
+                {showPages && <Route path="/admin" element={<AdminPage />} />}
+                <Route path="/faq" element={<FAQPage />} />
+                <Route path="/verify" element={<VerifyPage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/" element={getHomePage()} />
+                <Route path="/login/reset-password" element={<ResetPasswordPage />} />
+                <Route path="/login/change-password" element={<ChangePasswordPage />} />
+                <Route path="/cookie-policy" element={<CookiePolicyPage />} />
+                <Route path="/gdpr" element={<GdprPage />} />
+                <Route path="/terms-of-service" element={<TermsOfServicePage />} />
+                <Route path="/privacy-statement" element={<PrivacyStatementPage />} />
+                <Route path="/refund-policy" element={<RefundPolicyPage />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/about-t2" element={<AboutPageT2 />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/careers" element={<CareerPage />} />
+                <Route path="/security-page" element={<SecurityPage />} />
+                <Route path="/errorPage" element={<ErrorPage />} />
+                <Route path="" element={<AuthenticationRoute />}>
+                  <Route path="/projects/:projectId/" element={<DashboardLayout />}>
+                    <Route path="board/:boardId" element={<BoardPage />} />
+                    <Route path="board/:boardId/backlog" element={<BacklogPage />} />
+                    <Route path="shortcuts" element={<ShortcutPage />} />
+                  </Route>
+                  <Route path="/settings/:projectId" element={<Setting />} />
+                  <Route path="/me" element={<UserMePage />} />
+                  <Route path="/user/:id" element={<UserPage />} />
+                  <Route path="/access" element={<AccessPage />} />
+                  <Route path="/projects" element={<ProjectPage />} />
+                  <Route path="/create-projects" element={<CreateProject />} />
+                  <Route path="/account-settings" element={<AccountSettingsPage />} />
+                  <Route
+                    path="/account-settings/change-password"
+                    element={<AccountSettingsPage />}
+                  />
+                  <Route
+                    path="/account-settings/delete-account"
+                    element={<AccountSettingsPage />}
+                  />
+                  <Route path="/projects/:projectId/members" element={<ProjectMembersPage />} />
+                  <Route path="/roles" element={<RolePage />} />
                 </Route>
-                <Route path="/settings/:projectId" element={<Setting />} />
-                <Route path="/me" element={<UserMePage />} />
-                <Route path="/user/:id" element={<UserPage />} />
-                <Route path="/access" element={<AccessPage />} />
-                <Route path="/projects" element={<ProjectPage />} />
-                <Route path="/create-projects" element={<CreateProject />} />
-                <Route path="/account-settings" element={<AccountSettingsPage />} />
-                <Route path="/account-settings/change-password" element={<AccountSettingsPage />} />
-                <Route path="/account-settings/delete-account" element={<AccountSettingsPage />} />
-                <Route path="/projects/:projectId/members" element={<ProjectMembersPage />} />
-                <Route path="/roles" element={<RolePage />} />
-              </Route>
-              <Route path="/unauthorize" element={<UnauthorizePage />} />
-              <Route path="/contact" element={<ContactPage />} />
-              <Route path="*" element={<ErrorPage />} />
-            </Routes>
-          </TaskTypesProvider>
-        </ProjectProvider>
-      </RolesProvider>
-    </UserProvider>
+                <Route path="/unauthorize" element={<UnauthorizePage />} />
+                <Route path="/contact" element={<ContactPage />} />
+                <Route path="*" element={<ErrorPage />} />
+              </Routes>
+            </TaskTypesProvider>
+          </ProjectProvider>
+        </RolesProvider>
+      </UserProvider>
+    </>
   );
 }
 export default App;

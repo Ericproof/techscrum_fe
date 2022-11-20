@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { TiDelete } from 'react-icons/ti';
 import { createLabel, removeLabel } from '../../../../api/label/label';
 import useOutsideAlerter from '../../../../hooks/OutsideAlerter';
 import { TaskEntity } from '../../../../api/task/entity/task';
 import styles from './LabelFields.module.scss';
 import { ILabelData } from '../../../../types';
+import { createActivity } from '../../../../api/activity/activity';
+import { UserContext } from '../../../../context/UserInfoProvider';
 
 interface IPropsLabel {
   labels: ILabelData[];
@@ -21,6 +23,10 @@ export default function LabelFields(props: IPropsLabel) {
   const [dropDownTaskList, setDropDownTaskList] = useState(labels);
   const [inputLabel, setInputLabel] = useState<string>('');
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
+  const userInfo = useContext(UserContext);
+  const operation = 'updated';
+  const userId = userInfo.id;
+  const taskId = taskInfo.id;
   const handleClickOutside = () => {
     setInputLabel('');
     setVisible(true);
@@ -58,6 +64,7 @@ export default function LabelFields(props: IPropsLabel) {
         const newLabelList = selectedTaskLabelList.filter((item) => item.name !== label.name);
         setSelectedTaskLabelList(newLabelList);
         updateTaskTags(newLabelList);
+        await createActivity({ operation, userId, taskId });
       }
     }
   };
@@ -94,6 +101,7 @@ export default function LabelFields(props: IPropsLabel) {
     }
     addLabelToSelectedTaskLabelList({ ...res.data });
     setInputLabel('');
+    await createActivity({ operation, userId, taskId });
   };
 
   const onChangeInputLabel = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,12 +1,22 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
+import { toast } from 'react-toastify';
 import styles from './PriorityBtn.module.scss';
+import useOutsideAlerter from '../../../hooks/OutsideAlerter';
+import { updateTask } from '../../../api/backlog/backlog';
 
 interface IPriorityBtn {
   priority: string;
-  onClickChangePriority: (id: string, priority: string) => void;
-  id: string;
+  getBacklogDataApi: () => void;
+  taskId: string;
+  showDropDownOnTop?: boolean;
 }
-export default function PriorityBtn({ priority, onClickChangePriority, id }: IPriorityBtn) {
+
+export default function PriorityBtn({
+  priority,
+  taskId,
+  getBacklogDataApi,
+  showDropDownOnTop
+}: IPriorityBtn) {
   const allPriorities = [
     {
       priority: 'Highest',
@@ -24,54 +34,45 @@ export default function PriorityBtn({ priority, onClickChangePriority, id }: IPr
     }
   ];
 
-  const [showPriorityBtnDropDown, setShowPriorityBtnDropDown] = useState(false);
-  const [showPriorityBtnOutline, setShowPriorityBtnOutline] = useState(false);
   const currentPriorityBtn = allPriorities.find(
     (eachPriority) => eachPriority.priority === priority
   );
 
-  const priorityBtnContainerRef = useRef<HTMLDivElement | null>(null);
-  useEffect(() => {
-    const handleClickOutside = (e: any) => {
-      if (
-        showPriorityBtnDropDown &&
-        showPriorityBtnOutline &&
-        !priorityBtnContainerRef?.current?.contains(e.target)
-      ) {
-        setShowPriorityBtnDropDown(false);
-        setShowPriorityBtnOutline(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [showPriorityBtnDropDown, showPriorityBtnOutline]);
+  const { visible, setVisible, myRef } = useOutsideAlerter(false);
+
   const onClickPriorityBtnDropDown = (eachPriority: { priority: string; imgUrl: string }) => {
-    onClickChangePriority(id, eachPriority.priority);
-    setShowPriorityBtnDropDown(false);
-    setShowPriorityBtnOutline(false);
+    const data = { priority: eachPriority.priority };
+    updateTask(taskId, data)
+      .then(() => {
+        getBacklogDataApi();
+      })
+      .catch(() => {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      });
+    setVisible(false);
   };
 
   return (
-    <div className={styles.priorityBtnContainer} ref={priorityBtnContainerRef}>
+    <div className={styles.priorityBtnContainer} ref={myRef}>
       <button
         className={
-          showPriorityBtnOutline
-            ? [styles.priorityBtn, styles.priorityBtnOutline].join(' ')
-            : styles.priorityBtn
+          visible ? [styles.priorityBtn, styles.priorityBtnOutline].join(' ') : styles.priorityBtn
         }
         onClick={() => {
-          setShowPriorityBtnDropDown(!showPriorityBtnDropDown);
-          setShowPriorityBtnOutline(!showPriorityBtnOutline);
+          setVisible(!visible);
         }}
+        data-testid={`priority-btn-${taskId}`}
       >
         <img src={currentPriorityBtn?.imgUrl} alt="" />
       </button>
       <div
         className={
-          showPriorityBtnDropDown
-            ? [styles.priorityBtnDropDown, styles.showPriorityBtnDropDown].join(' ')
+          visible
+            ? [
+                styles.priorityBtnDropDown,
+                styles.showPriorityBtnDropDown,
+                showDropDownOnTop && styles.showDropDownOnTop
+              ].join(' ')
             : styles.priorityBtnDropDown
         }
       >
@@ -86,6 +87,7 @@ export default function PriorityBtn({ priority, onClickChangePriority, id }: IPr
                     onClick={() => {
                       onClickPriorityBtnDropDown(eachPriority);
                     }}
+                    data-testid={`priority-dropdown-btn-${taskId}-${eachPriority.priority}`}
                   >
                     <img src={eachPriority.imgUrl} alt={eachPriority.priority} />
                     <p>{eachPriority.priority}</p>
@@ -98,3 +100,6 @@ export default function PriorityBtn({ priority, onClickChangePriority, id }: IPr
     </div>
   );
 }
+PriorityBtn.defaultProps = {
+  showDropDownOnTop: false
+};

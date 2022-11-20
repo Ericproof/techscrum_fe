@@ -6,6 +6,7 @@ import { TaskTypesContext } from '../../../context/TaskTypeProvider';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import checkAccess from '../../../utils/helpers';
 import style from './CardHeader.module.scss';
+import { deleteDailyScrum } from '../../../api/dailyScrum/dailyScrum';
 
 interface Props {
   updateIsViewTask: () => void;
@@ -41,6 +42,10 @@ export default function CardHeader({
   useEffect(() => {
     setSelectedType(TYPE[taskInfo?.typeId?.slug]);
   }, [taskInfo.id]);
+
+  const onDeleteDailyScrum = async () => {
+    await deleteDailyScrum(projectId, taskInfo.id);
+  };
 
   const onClickIssueType = (task: any) => {
     const updateTaskInfo = { ...taskInfo };
@@ -102,6 +107,7 @@ export default function CardHeader({
                   type="button"
                   onClick={() => {
                     deleteTask();
+                    onDeleteDailyScrum();
                     handleClickOutside();
                   }}
                 >

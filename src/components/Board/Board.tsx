@@ -12,6 +12,10 @@ import IBoardEntity, { IColumnsFromBackend, ICardData, ILabelData, ITaskCard } f
 import BoardCard from '../BoardCard/BoardCard';
 import { TaskEntity } from '../../api/task/entity/task';
 import { getLabels } from '../../api/label/label';
+import { deleteActivity } from '../../api/activity/activity';
+import ProjectNavigationV3 from '../../lib/ProjectNavigationV3/ProjectNavigationV3';
+import Modal from '../../lib/Modal/Modal';
+import DefaultModalHeader from '../../lib/Modal/ModalHeader/DefaultModalHeader/DefaultModalHeader';
 
 const onDragEnd = (
   result: DropResult,
@@ -67,6 +71,7 @@ export default function Board() {
   const [isViewTask, setIsViewTask] = useState(false);
   const [taskData, setTaskData] = useState<TaskEntity>();
   const [labels, setLabels] = useState<ILabelData[]>([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!projectId || projectId === '') {
@@ -105,7 +110,7 @@ export default function Board() {
       dueAt: now.toISOString()
     };
     const columns = columnsInfo;
-    columns[newCard.statusId ?? ''].items.push(newItem);
+    columns[newCard.statusId.id].items.push(newItem);
     setColumnsInfo(columns);
   };
 
@@ -171,6 +176,7 @@ export default function Board() {
               updatedColumns[item.statusId].items.splice(index, 1);
             }
           });
+          await deleteActivity(taskData.id);
         }
         setColumnsInfo(updatedColumns);
         setTaskData(undefined);
@@ -209,14 +215,18 @@ export default function Board() {
     };
 
     const fetchBoardInfo = async () => {
+      setLoading(true);
       const boardInfo = await getBoard(boardId);
       fetchColumnsData(boardInfo);
+      setLoading(false);
     };
     fetchBoardInfo();
   }, [inputQuery, boardId]);
 
   return (
     <div className={style.container}>
+      <h1 className={style.header}>Board</h1>
+      <ProjectNavigationV3 />
       <BoardSearch
         updateIsCreateNewCard={getCreateNewCardStateFromChildren}
         setInputQuery={setInputQuery}
@@ -228,12 +238,21 @@ export default function Board() {
         passTaskId={getTaskId}
         updateIsCreateNewCard={getCreateNewCardStateFromChildren}
         projectId={projectId}
+        loading={loading}
       />
       {isCreateNewCard && (
-        <CreateNewCard
-          fetchNewCard={fetchNewCard}
-          updateIsCreateNewCard={getCreateNewCardStateFromChildren}
-        />
+        <Modal classesName="clear">
+          <DefaultModalHeader
+            title="Create Card"
+            onClickClose={() => {
+              setIsCreateNewCard(false);
+            }}
+          />
+          <CreateNewCard
+            fetchNewCard={fetchNewCard}
+            updateIsCreateNewCard={getCreateNewCardStateFromChildren}
+          />
+        </Modal>
       )}
       {isViewTask && (
         <BoardCard

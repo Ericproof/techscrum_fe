@@ -1,19 +1,26 @@
 import React, { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { updateMe } from '../../../api/user/user';
 import ChangeIcon from '../../../components/ProjectEditor/ChangeIcon/ChangeIcon';
-import ProjectHeader from '../../../components/ProjectHeader/ProjectHeader';
 import { UserContext, UserDispatchContext } from '../../../context/UserInfoProvider';
-import Alert from '../../../components/Alert/Alert';
 import styles from './UserMePage.module.scss';
+import SettingCard from '../../../components/SettingCard/SettingCard';
+
+import MainMenuV2 from '../../MainMenuV2/MainMenuV2';
+import SubSettingMenu from '../../../lib/SubSettingMenu/SubSettingMenu';
+import ButtonV2 from '../../../lib/FormV2/ButtonV2/ButtonV2';
+import InputV2 from '../../../lib/FormV2/InputV2/InputV2';
+import Modal from '../../../lib/Modal/Modal';
+import changePassword from '../../../api/accountSetting/changePassword';
 
 export default function UserMePage() {
-  const navigate = useNavigate();
-  const [alerVisible, setAlertVisible] = useState(false);
-  const [statusCode, setStatusCode] = useState(0);
-  const [tip, setTip] = useState('');
   const userInfo = useContext(UserContext);
   const setUserInfo = useContext(UserDispatchContext);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [submitting, setSubmitting] = useState<boolean>(false);
+  const [oldPassword, setOldPassword] = useState<string>('');
+  const [newPassword, setNewPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
 
   const onChangeUser = (e: any) => {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
@@ -36,110 +43,161 @@ export default function UserMePage() {
         },
         userInfo.token
       );
-
-      setStatusCode(0);
-      setTip('Saved');
-      setAlertVisible(true);
+      toast.success('Saved', {
+        theme: 'colored',
+        className: 'primaryColorBackground'
+      });
     } catch (e) {
-      setStatusCode(1);
-      setTip('Something go Wrong');
-      setAlertVisible(true);
+      toast.error('Something go Wrong, please try again', {
+        theme: 'colored',
+        toastId: 'toast-error'
+      });
     }
   };
 
-  const alertConfirm = () => {
-    setAlertVisible(false);
-    if (statusCode === 0) navigate('/projects');
+  const onUpdatePassword = async () => {
+    const token = userInfo?.token;
+    if (newPassword === confirmPassword) {
+      try {
+        const data = { oldPassword, newPassword, userInfo };
+        await changePassword(data, token);
+        toast('Your password has been successfully updated!');
+      } catch (e) {
+        toast.error('The current password is not correct!');
+      }
+    } else {
+      toast.error('New Password does not match confirm password, please check again!');
+    }
   };
+
+  const loading = !userInfo || Object.keys(userInfo).length === 0;
 
   return (
     <>
-      {alerVisible && (
-        <Alert statusCode={statusCode} tipContent={tip} confirmAlert={alertConfirm} />
-      )}
-      <ProjectHeader />
-      <div className={styles.userPageContainer}>
-        <div className={styles.userForm}>
-          <div className={styles.userBar}>
-            <h2>Personal Profile</h2>
-          </div>
-          <div className={styles.userIconAndInfo}>
-            <div className={styles.userIcon}>
-              <div className={styles.picBorder}>
-                <ChangeIcon
-                  value={
-                    userInfo?.avatarIcon ||
-                    'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'
-                  }
-                  uploadSuccess={(photoData: any) => {
-                    onChangeUser({ target: { name: 'avatarIcon', value: photoData[0].location } });
-                  }}
+      <div className={styles.settingPage} data-testid="setting-page">
+        <MainMenuV2 />
+        <SubSettingMenu />
+        <div className={styles.settingContainer}>
+          <div className={styles.settingMiniContainer}>
+            <header>
+              <h1 className={styles.headerText}>User Profile</h1>
+              <hr className={styles.divider} />
+            </header>
+            <SettingCard title="Personal Information">
+              <ChangeIcon
+                value={
+                  userInfo?.avatarIcon ||
+                  'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'
+                }
+                uploadSuccess={(photoData: any) => {
+                  onChangeUser({ target: { name: 'avatarIcon', value: photoData[0].location } });
+                }}
+              />
+              <div className={[styles.gap, styles.row, 'flex'].join(' ')}>
+                <InputV2
+                  label="User Name"
+                  onValueChanged={onChangeUser}
+                  defaultValue={userInfo.userName || ''}
+                  name="userName"
+                  loading={loading}
+                />
+                <InputV2
+                  label="Full Name"
+                  onValueChanged={onChangeUser}
+                  defaultValue={userInfo.name || ''}
+                  name="fullName"
+                  loading={loading}
                 />
               </div>
-              <br />
-            </div>
-            <div className={styles.userInfo}>
-              <form>
-                <div className={styles.userInput}>
-                  <label htmlFor="User Name">
-                    User Name
-                    <br />
-                    <input
-                      className={styles.proIcon}
-                      name="User name"
-                      placeholder="User Name"
-                      defaultValue={userInfo.userName}
-                      onChange={onChangeUser}
-                    />
-                  </label>
-                </div>
-                <div className={styles.userInput}>
-                  <label htmlFor="Full Name">
-                    Full Name
-                    <br />
-                    <input
-                      className={styles.proIcon}
-                      name="Full Name"
-                      placeholder="Full Name"
-                      defaultValue={userInfo.name}
-                      onChange={onChangeUser}
-                    />
-                  </label>
-                </div>
-                <div className={styles.userInput}>
-                  <label htmlFor="Job Title">
-                    Job Title
-                    <br />
-                    <input
-                      className={styles.proIcon}
-                      name="Job Title"
-                      placeholder="Job Title"
-                      defaultValue={userInfo.jobTitle}
-                      onChange={onChangeUser}
-                    />
-                  </label>
-                </div>
-                <div className={styles.userInput}>
-                  <label htmlFor="Location">
-                    Location
-                    <br />
-                    <input
-                      className={styles.proIcon}
-                      name="Location"
-                      placeholder="Location"
-                      defaultValue={userInfo.location}
-                      onChange={onChangeUser}
-                    />
-                  </label>
-                </div>
-                <button className={styles.submit} type="button" onClick={onSaveMe}>
-                  Save Changes
-                </button>
-              </form>
-            </div>
+              <div className={[styles.gap, styles.row, 'flex'].join(' ')}>
+                <InputV2
+                  label="Job Title"
+                  onValueChanged={onChangeUser}
+                  defaultValue={userInfo.jobTitle || ''}
+                  name="jobTitle"
+                  loading={loading}
+                />
+                <InputV2
+                  label="Location"
+                  onValueChanged={onChangeUser}
+                  defaultValue={userInfo.location || ''}
+                  name="location"
+                  loading={loading}
+                />
+              </div>
+              <ButtonV2 text="Save Changes" onClick={onSaveMe} />
+            </SettingCard>
+            <SettingCard title="Change Password">
+              <div className={[styles.gap, styles.row, 'flex'].join(' ')}>
+                <InputV2
+                  label="Old Password"
+                  onValueChanged={(e) => {
+                    setOldPassword(e.target.value);
+                  }}
+                  onValueBlur={() => {}}
+                  defaultValue=""
+                  name="oldPassword"
+                  type="password"
+                />
+                <InputV2
+                  label="New Password"
+                  onValueChanged={(e) => {
+                    setNewPassword(e.target.value);
+                  }}
+                  onValueBlur={() => {}}
+                  defaultValue=""
+                  name="newPassword"
+                  type="password"
+                />
+                <InputV2
+                  label="Confirm New Password"
+                  onValueChanged={(e) => {
+                    setConfirmPassword(e.target.value);
+                  }}
+                  onValueBlur={() => {}}
+                  defaultValue=""
+                  name="confirmPassword"
+                  type="password"
+                />
+              </div>
+              <ButtonV2 text="Update" onClick={onUpdatePassword} />
+            </SettingCard>
+            <SettingCard title="Delete Account (WIP)">
+              <p>Delete your account and all of your source data. This is irreversible.</p>
+              <ButtonV2
+                text="DELETE"
+                danger
+                size="xs"
+                onClick={() => {
+                  setShowDeleteModal(true);
+                }}
+              />
+            </SettingCard>
           </div>
         </div>
       </div>
+      {showDeleteModal && (
+        <Modal classesName={styles.modal}>
+          <p>Are you sure you want to delete the account?</p>
+          <div className={styles.modalBtn}>
+            <ButtonV2
+              text="Confirm"
+              danger
+              onClick={() => {
+                setSubmitting(true);
+              }}
+              disabled={submitting}
+            />
+            <ButtonV2
+              text="Cancel"
+              fill
+              onClick={() => {
+                setShowDeleteModal(false);
+              }}
+            />
+          </div>
+        </Modal>
+      )}
     </>
   );
 }
