@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import { TiDelete } from 'react-icons/ti';
+import { IOptions } from '../../../types';
 import { getErrorMessage } from '../../../utils/formUtils';
 import styles from '../FormV2.module.scss';
 import defaultStyles from './MultiSelectDropdownV2.module.scss';
@@ -13,7 +14,7 @@ interface IMultiSelectDropdownV2 {
   onLabelDelete: (e: any) => void;
   onLabelAdd: (e: string) => void;
   name: string;
-  options: any;
+  options: IOptions[];
   label: string;
   required?: boolean;
   placeHolder?: string;

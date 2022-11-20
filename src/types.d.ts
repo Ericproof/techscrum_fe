@@ -243,6 +243,7 @@ export interface Itypes {
 export interface IOptions {
   label: string;
   value: any;
+  icon?: any;
 }
 
 export interface IChangePassword {

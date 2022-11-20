@@ -101,7 +101,10 @@ export default function ChangeIconModal({ shown, close, uploadSuccess }: IModalP
     </li>
   ));
 
-  const uploadFile = (e: any) => {
+  const uploadFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) {
+      return;
+    }
     const data = new FormData();
     data.append('photos', e.target.files[0]);
     upload(data).then((res: any) => {

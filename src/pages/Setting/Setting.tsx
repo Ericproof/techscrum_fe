@@ -7,14 +7,11 @@ import { AiOutlineSetting, AiOutlineUnorderedList } from 'react-icons/ai';
 import { BsBriefcase, BsCreditCard } from 'react-icons/bs';
 import styles from './Setting.module.scss';
 import { deleteProject, showProject, updateProject } from '../../api/projects/projects';
-import { IOnChangeProjectLead, IProjectEditor } from '../../types';
+import { IOnChangeProjectLead, IProjectData, IProjectEditor } from '../../types';
 import { UserContext } from '../../context/UserInfoProvider';
-
 import SettingCard from '../../components/SettingCard/SettingCard';
 import ChangeIcon from '../../components/ProjectEditor/ChangeIcon/ChangeIcon';
-
 import { getUsers } from '../../api/user/user';
-
 import 'react-toastify/dist/ReactToastify.css';
 import checkAccess from '../../utils/helpers';
 import MainMenuV2 from '../MainMenuV2/MainMenuV2';
@@ -101,7 +98,7 @@ export default function Setting() {
     getUsersList();
   }, [userList]);
 
-  const update = (updateData: any) => {
+  const update = (updateData: IProjectData) => {
     const token = userInfo?.token || '';
     setLoading(true);
     updateProject(projectId, updateData, token)

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getUsers } from '../../../../api/user/user';
 import useOutsideAlerter from '../../../../hooks/OutsideAlerter';
-import { IOnChangeProjectLead } from '../../../../types';
+import { IOnChangeProjectLead, IUserInfo } from '../../../../types';
 
 import styles from './UserSelect.module.scss';
 
@@ -39,8 +39,8 @@ export default function UserSelect(props: IUserSelect) {
     getUsersList();
   }, [userList, query]);
 
-  const onClickUser = (user: string | null) => {
-    onChange({ target: { name: 'projectLeadId', value: user } });
+  const onClickUser = (user: IUserInfo | null) => {
+    onChange({ target: { name: 'projectLeadId', value: user?.id || '' } });
     setVisible(false);
     if (user) {
       setCurrentUser(user);
@@ -109,7 +109,7 @@ export default function UserSelect(props: IUserSelect) {
                   </button>
                 </li>
                 {queryUserList.map(
-                  (user: any) =>
+                  (user: IUserInfo) =>
                     user.name !== currentUser.name && (
                       <li key={user.id}>
                         <button
