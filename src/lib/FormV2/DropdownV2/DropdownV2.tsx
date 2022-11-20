@@ -2,12 +2,13 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react';
 import { RiArrowDropDownLine } from 'react-icons/ri';
+import { IMinEvent } from '../../../types';
 import { getErrorMessage } from '../../../utils/formUtils';
 import styles from '../FormV2.module.scss';
 import defaultStyles from './DropdownV2.module.scss';
 
 interface IDropdownV2 {
-  onValueChanged: (e: any) => void;
+  onValueChanged: (e: IMinEvent) => void;
   onValueBlur?: (e: React.ChangeEvent<HTMLButtonElement>) => void;
   defaultValue?: string | null;
   name: string;

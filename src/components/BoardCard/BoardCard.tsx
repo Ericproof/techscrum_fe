@@ -47,7 +47,7 @@ export default function BoardCard({
     setTaskInfo(updateTaskInfo);
     onSave(updateTaskInfo);
     const operation = 'updated';
-    const userId = userInfo.id;
+    const userId = userInfo?.id;
     const taskId = taskInfo?.id;
     await createActivity({ operation, userId, taskId });
   };
@@ -58,12 +58,15 @@ export default function BoardCard({
     setTaskInfo(updateTaskInfo);
     onSave(updateTaskInfo);
     const operation = 'updated';
-    const userId = userInfo.id;
+    const userId = userInfo?.id;
     const taskId = taskInfo?.id;
     await createActivity({ operation, userId, taskId });
   };
 
-  const uploadFile = (e: any) => {
+  const uploadFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) {
+      return;
+    }
     const uploadData = new FormData();
     uploadData.append('photos', e.target.files[0]);
     upload(uploadData).then((res: any) => {

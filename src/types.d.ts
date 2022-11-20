@@ -171,7 +171,7 @@ export interface IOnChangeTaskAssignee {
 }
 
 export interface IProjectRole {
-  id?: string;
+  id: string;
   projectId: string;
   roleId: string;
 }
@@ -191,20 +191,20 @@ export interface IUserInfo {
 }
 
 export interface IPermission {
-  id?: string;
+  id: string;
   slug?: string;
   description?: string;
 }
 
 export interface IRole {
-  id?: string;
+  id: string;
   name?: string;
   slug?: string;
   permission?: IPermission[];
 }
 
 export interface IPermissions {
-  id?: string;
+  id: string;
   slug?: string;
   description?: string;
 }
@@ -249,4 +249,11 @@ export interface IChangePassword {
   oldPassword: string;
   newPassword: string;
   userInfo?: IUserInfo;
+}
+
+export interface IMinEvent {
+  target: {
+    value: string;
+    name: string;
+  };
 }

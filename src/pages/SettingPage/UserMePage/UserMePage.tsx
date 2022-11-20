@@ -34,6 +34,7 @@ export default function UserMePage() {
     try {
       await updateMe(
         {
+          id: userInfo.id,
           name: userInfo.name,
           avatarIcon: userInfo?.avatarIcon,
           userName: userInfo.userName,

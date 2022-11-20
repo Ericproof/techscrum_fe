@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { createActivity } from '../../api/activity/activity';
 import styles from './CreateNewCard.module.scss';
 import { createNewTask } from '../../api/task/task';
-import { ICardData } from '../../types';
+import { ICardData, IMinEvent } from '../../types';
 import { upload } from '../../api/upload/upload';
 import Attach from '../BoardCard/CardLeftContent/components/Attach/Attach';
 import PhotoGallery from '../PhotoGallery/PhotoGallery';
@@ -46,11 +46,11 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
     title: ''
   });
 
-  const onChangeAssigneeId = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeAssigneeId = (e: IMinEvent) => {
     setAssigneeId(e.target.value);
   };
 
-  const onChangeTaskType = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeTaskType = (e: IMinEvent) => {
     setTaskTypeId(e.target.value);
   };
 

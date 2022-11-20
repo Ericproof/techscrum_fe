@@ -13,7 +13,7 @@ import Row from '../../lib/Grid/Row/Row';
 interface ProjectEditorProps {
   showCancelBtn?: boolean;
   projectData?: IProjectEditor;
-  onClickSave: (data: any) => void;
+  onClickSave: (data: IProjectEditor) => void;
   onClickCancel?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   hasError?: boolean;
   loading?: boolean;

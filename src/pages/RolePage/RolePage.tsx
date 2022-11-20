@@ -12,7 +12,7 @@ export default function ProjectMembersPage() {
   const [roles, setRoles] = useState<IRole[]>([]);
   const [permissions, setPermissions] = useState<IPermissions[]>([]);
   const [selectedPermissions, setSelectedPermissions] = useState<IPermissions[]>([]);
-  const [showPermissionOptions, setShowPermissionOptions] = useState(-1);
+  const [showPermissionOptions, setShowPermissionOptions] = useState('-1');
   const refRole = roles.map(() => createRef<HTMLDivElement>());
   const refShowMore = roles.map(() => createRef<HTMLDivElement>());
 
@@ -69,7 +69,7 @@ export default function ProjectMembersPage() {
 
   const handleClickInside = (e: MouseEvent) => {
     if (!clickedShowMore(e, refShowMore)) {
-      setShowPermissionOptions(-1);
+      setShowPermissionOptions('-1');
     }
   };
 
@@ -95,7 +95,7 @@ export default function ProjectMembersPage() {
                       <th className={styles.roles}>
                         <span>Roles</span>
                       </th>
-                      {roles.map((role: IRole) => (
+                      {roles.map((role) => (
                         <th key={role.id} className={styles.types}>
                           <span>{role.name}</span>
                         </th>
@@ -107,7 +107,7 @@ export default function ProjectMembersPage() {
                       <td className={styles.permission}>
                         <span>Permission</span>
                       </td>
-                      {roles.map((role: any, index: number) => (
+                      {roles.map((role, index) => (
                         <td key={role.id}>
                           <div
                             onMouseOver={(e: React.MouseEvent<HTMLDivElement>) =>
@@ -137,7 +137,7 @@ export default function ProjectMembersPage() {
                                           }
                                           onClickAddPermission(role.id, item.id);
                                           onChangeSelectedPermissions(item);
-                                          setShowPermissionOptions(-1);
+                                          setShowPermissionOptions('-1');
                                         }}
                                       >
                                         {item.description}
@@ -148,7 +148,7 @@ export default function ProjectMembersPage() {
                               </div>
                             )}
                             <div className={styles.selectedPermissions}>
-                              {role.permission.map((item: IPermissions) => (
+                              {role?.permission?.map((item: IPermissions) => (
                                 <div key={item.id} className={styles.editSelectedSection}>
                                   <span>{item.slug}</span>
                                   <TiDelete
