@@ -176,6 +176,7 @@ export default function ProjectPage() {
                   removeProject(deleteProjectId);
                 }}
                 disabled={submitting}
+                dataTestId="confirm-delete"
               />
               <ButtonV2
                 text="Cancel"
@@ -183,6 +184,7 @@ export default function ProjectPage() {
                 onClick={() => {
                   setShowDeleteModal(false);
                 }}
+                dataTestId="confirm-cancel"
               />
             </div>
           </Modal>
