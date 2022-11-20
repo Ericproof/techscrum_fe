@@ -103,7 +103,7 @@ export default function BacklogSection({
       {visible ? (
         <form>
           <div className={styles.formField} ref={myRef}>
-            <TaskTypeSelect setCurrentTypeOption={setCurrentTypeOption} />
+            <TaskTypeSelect showDropDownOnTop setCurrentTypeOption={setCurrentTypeOption} />
             <input
               className={styles.input}
               type="text"
