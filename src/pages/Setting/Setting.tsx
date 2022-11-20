@@ -163,7 +163,7 @@ export default function Setting() {
                 label="Project Name"
                 onValueChanged={onChangeName}
                 onValueBlur={() => {}}
-                defaultValue={data?.name}
+                value={data?.name}
                 name="name"
                 loading={!data}
                 dataTestId="projectName"
@@ -172,7 +172,7 @@ export default function Setting() {
                 label="Project Key"
                 onValueChanged={onChange}
                 onValueBlur={() => {}}
-                defaultValue={data?.key}
+                value={data?.key}
                 name="key"
                 loading={!data}
                 dataTestId="projectKey"
