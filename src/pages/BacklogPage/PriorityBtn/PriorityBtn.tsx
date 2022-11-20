@@ -1,13 +1,22 @@
 import React from 'react';
+import { toast } from 'react-toastify';
 import styles from './PriorityBtn.module.scss';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
+import { updateTask } from '../../../api/backlog/backlog';
 
 interface IPriorityBtn {
   priority: string;
-  onClickChangePriority: (id: string, priority: string) => void;
+  getBacklogDataApi: () => void;
   taskId: string;
+  showDropDownOnTop?: boolean;
 }
-export default function PriorityBtn({ priority, onClickChangePriority, taskId }: IPriorityBtn) {
+
+export default function PriorityBtn({
+  priority,
+  taskId,
+  getBacklogDataApi,
+  showDropDownOnTop
+}: IPriorityBtn) {
   const allPriorities = [
     {
       priority: 'Highest',
@@ -32,7 +41,14 @@ export default function PriorityBtn({ priority, onClickChangePriority, taskId }:
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
 
   const onClickPriorityBtnDropDown = (eachPriority: { priority: string; imgUrl: string }) => {
-    onClickChangePriority(taskId, eachPriority.priority);
+    const data = { priority: eachPriority.priority };
+    updateTask(taskId, data)
+      .then(() => {
+        getBacklogDataApi();
+      })
+      .catch(() => {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      });
     setVisible(false);
   };
 
@@ -52,7 +68,11 @@ export default function PriorityBtn({ priority, onClickChangePriority, taskId }:
       <div
         className={
           visible
-            ? [styles.priorityBtnDropDown, styles.showPriorityBtnDropDown].join(' ')
+            ? [
+                styles.priorityBtnDropDown,
+                styles.showPriorityBtnDropDown,
+                showDropDownOnTop && styles.showDropDownOnTop
+              ].join(' ')
             : styles.priorityBtnDropDown
         }
       >
@@ -80,3 +100,6 @@ export default function PriorityBtn({ priority, onClickChangePriority, taskId }:
     </div>
   );
 }
+PriorityBtn.defaultProps = {
+  showDropDownOnTop: false
+};

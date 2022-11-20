@@ -58,15 +58,15 @@ export default function BacklogPage() {
     getTypesStatusesUsersDataApi();
   }, [getBacklogDataApi, getTypesStatusesUsersDataApi]);
 
-  const isLoading = !loaded && !typeStatusUserLoaded;
+  const finishLoading = loaded && typeStatusUserLoaded;
   return (
     <div className={styles.container}>
       <div>
         <h1 data-testid="backlog-header">Backlog</h1>
       </div>
-      {isLoading && <Loading />}
+      {!finishLoading && <Loading />}
       <div className={styles.scrollContainer}>
-        {!isLoading && (
+        {finishLoading && (
           <>
             {sprintData
               .filter((sprint: any) => {
