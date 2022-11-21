@@ -76,12 +76,13 @@ Emil (Junqian Su)
 Implement UI and functions of login, logout, register, forget password, member page, part of board page, projects page, account setting page, shortcut
 Test: Forget Password
 
+David Guo - Implement dailyscrum, backlog page, modal component, FAQ page, fix bug, APIs, refactoring
+
 ## License
 
 ## Contact
 
 Kitman Yiu - [Kitman Yiu](www.kitmanyiu.com)
-David Guo - Implement dailyscrum, backlog page, modal component, FAQ page, fix bug, APIs, refactoring
 
 ## Acknowledgments
 
