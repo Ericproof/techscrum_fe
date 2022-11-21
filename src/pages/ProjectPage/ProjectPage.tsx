@@ -29,7 +29,10 @@ export default function ProjectPage() {
   const refShowMore = projectList.map(() => createRef<HTMLDivElement>());
   const [isCreateNewCard, setIsCreateNewCard] = useState(false);
   const [showCreateProjectModal, setShowCreateProjectModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [submitting, setSubmitting] = useState<boolean>(false);
+  const [deleteProjectId, setDeleteProjectId] = useState<string>('');
 
   useEffect(() => {
     fetchProjects();
@@ -57,6 +60,10 @@ export default function ProjectPage() {
       .catch(() => {
         toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
         setLoading(false);
+      })
+      .finally(() => {
+        setShowDeleteModal(false);
+        setSubmitting(false);
       });
   };
 
@@ -105,7 +112,7 @@ export default function ProjectPage() {
     return () => document.removeEventListener('mousedown', handleClickInside);
   });
 
-  const onClickProjectSave = (apiData: any) => {
+  const onClickProjectSave = (apiData: IProjectData) => {
     setLoading(true);
     createProject(apiData)
       .then((res: AxiosResponse) => {
@@ -157,6 +164,31 @@ export default function ProjectPage() {
             </DefaultModalBody>
           </Modal>
         )}
+        {showDeleteModal && (
+          <Modal classesName={styles.modal}>
+            <p>Are you sure you want to delete the project?</p>
+            <div className={styles.modalBtn}>
+              <ButtonV2
+                text="Confirm"
+                danger
+                onClick={() => {
+                  setSubmitting(true);
+                  removeProject(deleteProjectId);
+                }}
+                disabled={submitting}
+                dataTestId="confirm-delete"
+              />
+              <ButtonV2
+                text="Cancel"
+                fill
+                onClick={() => {
+                  setShowDeleteModal(false);
+                }}
+                dataTestId="confirm-cancel"
+              />
+            </div>
+          </Modal>
+        )}
       </>
     );
   };
@@ -196,8 +228,11 @@ export default function ProjectPage() {
             {checkAccess('delete:projects', projectId) && (
               <button
                 type="button"
-                onClick={() => removeProject(projectId)}
                 data-testid="project-delete"
+                onClick={() => {
+                  setDeleteProjectId(projectId);
+                  setShowDeleteModal(true);
+                }}
               >
                 Delete Project
               </button>

@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { createActivity } from '../../api/activity/activity';
 import styles from './CreateNewCard.module.scss';
 import { createNewTask } from '../../api/task/task';
-import { ICardData } from '../../types';
+import { ICardData, IMinEvent } from '../../types';
 import { upload } from '../../api/upload/upload';
 import Attach from '../BoardCard/CardLeftContent/components/Attach/Attach';
 import PhotoGallery from '../PhotoGallery/PhotoGallery';
@@ -46,11 +46,11 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
     title: ''
   });
 
-  const onChangeAssigneeId = (e: any) => {
+  const onChangeAssigneeId = (e: IMinEvent) => {
     setAssigneeId(e.target.value);
   };
 
-  const onChangeTaskType = (e: any) => {
+  const onChangeTaskType = (e: IMinEvent) => {
     setTaskTypeId(e.target.value);
   };
 
@@ -67,7 +67,10 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
     setPhotoData(updatePhotoData);
   };
 
-  const uploadFile = (e: any) => {
+  const uploadFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) {
+      return;
+    }
     const uploadData = new FormData();
     uploadData.append('photos', e.target.files[0]);
     upload(uploadData).then((res: any) => {
@@ -117,7 +120,13 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
     <div className="defaultHeaderModalPadding">
       <form onSubmit={onSave}>
         <Row defaultMargin>
-          <InputV2 label="Title" name="title" onValueChanged={changeTitleHandler} defaultValue="" />
+          <InputV2
+            label="Title"
+            name="title"
+            onValueChanged={changeTitleHandler}
+            defaultValue=""
+            dataTestId="title"
+          />
         </Row>
         <Row defaultMargin defaultGap>
           <DropdownV2

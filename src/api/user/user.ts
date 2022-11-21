@@ -1,6 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
 import config from '../../config/config';
+import { IUserInfo } from '../../types';
 
 const getAuthHeader = (token: string) => {
   return {
@@ -18,6 +19,6 @@ export function getUsers() {
   return axios.get(`${config.apiAddress}/users`);
 }
 
-export function updateMe(data: any, token: string) {
+export function updateMe(data: IUserInfo, token: string) {
   return axios.put(`${config.apiAddress}/account/me`, data, getAuthHeader(token));
 }

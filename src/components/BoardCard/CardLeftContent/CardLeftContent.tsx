@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { TaskEntity } from '../../../api/task/entity/task';
 import { UserContext } from '../../../context/UserInfoProvider';
 import checkAccess from '../../../utils/helpers';
 import PhotoGallery from '../../PhotoGallery/PhotoGallery';
@@ -9,10 +8,11 @@ import Description from './components/Description/Description';
 import LeftBottom from './components/LeftBottom/LeftBottom';
 import Title from './components/Title/Title';
 import { createActivity } from '../../../api/activity/activity';
+import { ITaskEntity } from '../../../types';
 
 interface Props {
-  taskInfo: TaskEntity;
-  onSave: (updatedTaskInfo: TaskEntity) => void;
+  taskInfo: ITaskEntity;
+  onSave: (updatedTaskInfo: ITaskEntity) => void;
   removeAttachment: (url: string) => void;
   uploadFile: (e: React.ChangeEvent<HTMLInputElement>) => void;
   projectId: string;

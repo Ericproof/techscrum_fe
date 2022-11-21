@@ -30,7 +30,7 @@ export default function Certifications() {
   ];
 
   const faqComponent = objs.map((obj) => {
-    return <FAQComponent title={obj.title} content={obj.content} />;
+    return <FAQComponent key={obj.title} title={obj.title} content={obj.content} />;
   });
 
   return (

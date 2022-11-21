@@ -8,7 +8,7 @@ export function getActivity(taskId = '') {
 export function createActivity(data: {
   operation: string;
   userId: string | undefined;
-  taskId: any;
+  taskId: string | undefined;
 }) {
   return axios.post(`${config.apiAddress}/activities`, data);
 }

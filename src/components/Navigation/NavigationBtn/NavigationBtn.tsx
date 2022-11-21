@@ -3,7 +3,7 @@ import styles from './NavigationBtn.module.scss';
 
 export interface INavigationBtn {
   dataTestId: string;
-  onClick: (e: any) => void;
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   children: React.ReactNode | string;
   classesName?: string | string[];
 }
