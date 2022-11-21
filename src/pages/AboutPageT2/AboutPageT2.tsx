@@ -28,7 +28,7 @@ const people: IPeople[] = [
     linkedin: 'https://www.linkedin.com/in/kitman-yiu/'
   },
   {
-    name: 'berlinda wang',
+    name: 'belinda wang',
     role: 'business analyst',
     gender: 'female',
     image:
