@@ -33,12 +33,13 @@ $lightColor: $primaryColor;
   }
   @media (max-width: 375px) {
     min-width: 110px;
+    max-height: 280px;
     right: 9px;
   }
   @media (max-width: 360px) {
     min-width: 98px;
     padding: 10px 18px;
-    max-height: 208px;
+    max-height: 224px;
     right: 20px;
   }
   h4 {
