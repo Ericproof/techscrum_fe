@@ -94,11 +94,11 @@ $lightColor: $primaryColor;
       @media (max-width: 768px) {
         max-width: 625px;
       }
-      @media (max-width: 425px) {
-        max-width: 300px;
-      }
       @media (max-width: 600px) {
         gap: 8%;
+      }
+      @media (max-width: 425px) {
+        max-width: 300px;
       }
       @media (max-width: 360px) {
         max-width: 200px;
