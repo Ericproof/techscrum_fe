@@ -44,15 +44,19 @@ export default function ChangePassword({ changePasswordTipHandler }: Props) {
         'abc'
       );
 
-      if (result.status === 204) {
+      if (!result) {
+        changePasswordTipHandler('Something go Wrong, Please contact Administrator', 1);
+      }
+
+      if (result?.status === 204) {
         changePasswordTipHandler('Password Change Success', 0);
         return;
       }
-      if (result.status === 404) {
+      if (result?.status === 404) {
         changePasswordTipHandler('Cannot Connect Service', 1);
         return;
       }
-      if (result.status === 406) {
+      if (result?.status === 406) {
         changePasswordTipHandler('Validation Error', 1);
         return;
       }

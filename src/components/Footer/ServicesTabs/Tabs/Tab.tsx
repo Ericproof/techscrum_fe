@@ -18,7 +18,7 @@ export default function tab({ services }: Props) {
       </h1>
       <ul>
         {services.contents.map((serviceItem) => (
-          <li>
+          <li key={serviceItem.href}>
             <Link to={serviceItem.href}>{serviceItem.item}</Link>
           </li>
         ))}

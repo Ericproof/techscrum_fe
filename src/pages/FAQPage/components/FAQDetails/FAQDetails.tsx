@@ -15,7 +15,7 @@ export default function FAQDetails(props: IMember) {
           <div className={styles.infoContainer}>
             {links.map((link) => {
               return (
-                <div className={styles.singleInfoContainer}>
+                <div key={link} className={styles.singleInfoContainer}>
                   <p>{link}</p>
                 </div>
               );

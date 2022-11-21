@@ -8,9 +8,14 @@ import BoardMain from './BoardMain/BoardMain';
 import CreateNewCard from '../CreateNewCard/CreateNewCard';
 import { getBoard } from '../../api/board/board';
 import { updateTaskStatus, fetchTask, updateTask, removeTask } from '../../api/task/task';
-import IBoardEntity, { IColumnsFromBackend, ICardData, ILabelData, ITaskCard } from '../../types';
+import IBoardEntity, {
+  IColumnsFromBackend,
+  ICardData,
+  ILabelData,
+  ITaskCard,
+  ITaskEntity
+} from '../../types';
 import BoardCard from '../BoardCard/BoardCard';
-import { TaskEntity } from '../../api/task/entity/task';
 import { getLabels } from '../../api/label/label';
 import { deleteActivity } from '../../api/activity/activity';
 import ProjectNavigationV3 from '../../lib/ProjectNavigationV3/ProjectNavigationV3';
@@ -69,7 +74,7 @@ export default function Board() {
   const { boardId = '', projectId = '' } = useParams();
   const [isCreateNewCard, setIsCreateNewCard] = useState(false);
   const [isViewTask, setIsViewTask] = useState(false);
-  const [taskData, setTaskData] = useState<TaskEntity>();
+  const [taskData, setTaskData] = useState<ITaskEntity>();
   const [labels, setLabels] = useState<ILabelData[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -144,7 +149,7 @@ export default function Board() {
     setTaskData(updatedTaskInfo);
   };
 
-  const updateTaskInfo = async (newTaskInfo: TaskEntity) => {
+  const updateTaskInfo = async (newTaskInfo: ITaskEntity) => {
     try {
       if (newTaskInfo.id !== undefined) {
         await updateTask(newTaskInfo.id, newTaskInfo);

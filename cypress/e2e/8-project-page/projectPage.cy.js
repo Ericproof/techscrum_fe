@@ -42,6 +42,7 @@ describe('Project page', () => {
     it('delete a project', () => {
         cy.get('[data-testid="project-expand-button"]').eq(1).click();
         cy.get('[data-testid="project-delete"]').click();
+        cy.get('[data-testid="confirm-delete"]').click();
         cy.intercept('GET', '**/projects', projectsDeletedData).as('get-deleted-projects');
         cy.wait('@delete-projects');
         cy.wait('@get-deleted-projects');

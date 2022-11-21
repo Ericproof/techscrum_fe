@@ -44,6 +44,7 @@ export default function AboutPage() {
           {developers.map((member) => {
             return (
               <MemberItem
+                key={member.name}
                 image={member.image}
                 name={member.name}
                 position={member.position}
@@ -62,6 +63,7 @@ export default function AboutPage() {
           {DevOps.map((member) => {
             return (
               <MemberItem
+                key={member.name}
                 image={member.image}
                 name={member.name}
                 position={member.position}

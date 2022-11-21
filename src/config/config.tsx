@@ -1,6 +1,7 @@
+/* eslint-disable no-console */
 /* eslint-disable no-param-reassign */
 /* eslint-disable import/no-import-module-exports */
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 
 export default {
   apiAddress:
@@ -14,7 +15,11 @@ const alphaApi = axios.create({
   }
 });
 
-alphaApi.interceptors.request.use((config: any) => {
+alphaApi.interceptors.request.use((config: AxiosRequestConfig) => {
+  if (!config.headers) {
+    console.error('Cannot find header');
+    return config;
+  }
   const token = localStorage.getItem('access_token');
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;

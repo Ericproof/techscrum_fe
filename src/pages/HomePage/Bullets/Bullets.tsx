@@ -7,7 +7,7 @@ interface IBulletProps {
   category: string;
   subTitle: string;
   benefits: string[];
-  icon: any;
+  icon: React.ReactNode;
   showTryFree?: boolean;
 }
 
@@ -24,7 +24,7 @@ export default function Bullets(props: IBulletProps) {
         <ul>
           {benefits.map((item) => {
             return (
-              <li>
+              <li key={item}>
                 <TiTick />
                 {item}
               </li>

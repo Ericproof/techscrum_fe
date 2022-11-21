@@ -5,6 +5,7 @@
 import React from 'react';
 import DropdownV2 from '../../lib/FormV2/DropdownV2/DropdownV2';
 import InputV2 from '../../lib/FormV2/InputV2/InputV2';
+import { IOptions } from '../../types';
 
 interface ButtonProps {
   label: string;
@@ -17,7 +18,7 @@ interface ButtonProps {
 
   name?: string;
 
-  options?: any;
+  options?: IOptions[];
 }
 
 /**

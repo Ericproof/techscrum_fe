@@ -22,7 +22,7 @@ export default function UserMePage() {
   const [newPassword, setNewPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
 
-  const onChangeUser = (e: any) => {
+  const onChangeUser = (e) => {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
   };
 
@@ -34,6 +34,7 @@ export default function UserMePage() {
     try {
       await updateMe(
         {
+          id: userInfo.id,
           name: userInfo.name,
           avatarIcon: userInfo?.avatarIcon,
           userName: userInfo.userName,
@@ -100,6 +101,7 @@ export default function UserMePage() {
                   defaultValue={userInfo.userName || ''}
                   name="userName"
                   loading={loading}
+                  dataTestId="userName"
                 />
                 <InputV2
                   label="Full Name"
@@ -107,6 +109,7 @@ export default function UserMePage() {
                   defaultValue={userInfo.name || ''}
                   name="fullName"
                   loading={loading}
+                  dataTestId="fullName"
                 />
               </div>
               <div className={[styles.gap, styles.row, 'flex'].join(' ')}>
@@ -116,6 +119,7 @@ export default function UserMePage() {
                   defaultValue={userInfo.jobTitle || ''}
                   name="jobTitle"
                   loading={loading}
+                  dataTestId="jobTitle"
                 />
                 <InputV2
                   label="Location"
@@ -123,6 +127,7 @@ export default function UserMePage() {
                   defaultValue={userInfo.location || ''}
                   name="location"
                   loading={loading}
+                  dataTestId="location"
                 />
               </div>
               <ButtonV2 text="Save Changes" onClick={onSaveMe} />
@@ -138,7 +143,10 @@ export default function UserMePage() {
                   defaultValue=""
                   name="oldPassword"
                   type="password"
+                  dataTestId="oldPassword"
                 />
+              </div>
+              <div className={[styles.gap, styles.row, 'flex'].join(' ')}>
                 <InputV2
                   label="New Password"
                   onValueChanged={(e) => {
@@ -148,6 +156,7 @@ export default function UserMePage() {
                   defaultValue=""
                   name="newPassword"
                   type="password"
+                  dataTestId="newPassword"
                 />
                 <InputV2
                   label="Confirm New Password"
@@ -158,12 +167,15 @@ export default function UserMePage() {
                   defaultValue=""
                   name="confirmPassword"
                   type="password"
+                  dataTestId="confirmPassword"
                 />
               </div>
               <ButtonV2 text="Update" onClick={onUpdatePassword} />
             </SettingCard>
             <SettingCard title="Delete Account (WIP)">
-              <p>Delete your account and all of your source data. This is irreversible.</p>
+              <p className={styles.p}>
+                Delete your account and all of your source data. This is irreversible.
+              </p>
               <ButtonV2
                 text="DELETE"
                 danger

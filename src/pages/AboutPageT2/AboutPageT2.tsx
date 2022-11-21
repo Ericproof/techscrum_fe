@@ -9,6 +9,7 @@ import Kitman from '../../assets/kitman.jpg';
 import David from '../../assets/team2/david_guo.webp';
 import Hyna from '../../assets/team2/hyna_hua.webp';
 import Shelton from '../../assets/team2/shelton_chin.webp';
+import xin from '../../assets/team2/1610041017811.jpg';
 
 interface IPeople {
   name: string;
@@ -20,7 +21,7 @@ interface IPeople {
 
 const people: IPeople[] = [
   {
-    name: 'kitman yit',
+    name: 'kitman yiu',
     role: 'CEO',
     gender: 'male',
     image: Kitman,
@@ -97,14 +98,21 @@ const people: IPeople[] = [
     gender: 'male',
     image: Shelton,
     linkedin: 'https://www.linkedin.com/in/shelton-chin/'
+  },
+  {
+    name: 'Xiaoxin Wang',
+    role: 'designer',
+    gender: 'female',
+    image: xin,
+    linkedin: 'https://www.linkedin.com/in/xiaoxin-wang-b1099118b/'
   }
 ];
 
 // display developers first and then devops, sort by first name
-const devs = people
-  .filter((person) => person.role === 'developer' || person.role === 'devops')
-  .sort((a, b) => a.name.localeCompare(b.name))
-  .sort((a, b) => a.role.localeCompare(b.role));
+// const devs = people
+//   .filter((person) => person.role === 'developer' || person.role === 'devops')
+//   .sort((a, b) => a.name.localeCompare(b.name))
+//   .sort((a, b) => a.role.localeCompare(b.role));
 
 function Person(props: IPeople) {
   const { name, image, gender, role, linkedin } = props;
@@ -136,22 +144,19 @@ export default function AboutPageT2() {
         <h1 className={styles.header}>People who make it happen</h1>
         <hr className={styles.line} />
         <div className={styles.peopleGrid}>
-          {people
-            .slice(0, 2)
-            .concat(devs)
-            .map((person) => {
-              const { name, gender, image, role, linkedin } = person;
-              return (
-                <Person
-                  key={name}
-                  name={name}
-                  gender={gender}
-                  image={image}
-                  role={role}
-                  linkedin={linkedin}
-                />
-              );
-            })}
+          {people.map((person) => {
+            const { name, gender, image, role, linkedin } = person;
+            return (
+              <Person
+                key={name}
+                name={name}
+                gender={gender}
+                image={image}
+                role={role}
+                linkedin={linkedin}
+              />
+            );
+          })}
         </div>
       </section>
       <Footer />

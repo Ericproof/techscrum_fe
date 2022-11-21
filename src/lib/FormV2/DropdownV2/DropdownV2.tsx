@@ -2,21 +2,23 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react';
 import { RiArrowDropDownLine } from 'react-icons/ri';
+import { IMinEvent, IOptions } from '../../../types';
 import { getErrorMessage } from '../../../utils/formUtils';
 import styles from '../FormV2.module.scss';
 import defaultStyles from './DropdownV2.module.scss';
 
 interface IDropdownV2 {
-  onValueChanged: (e: any) => void;
-  onValueBlur?: (e: any) => void;
+  onValueChanged: (e: IMinEvent) => void;
+  onValueBlur?: (e: React.ChangeEvent<HTMLButtonElement>) => void;
   defaultValue?: string | null;
   name: string;
-  options: any;
+  options: IOptions[];
   label: string;
   required?: boolean;
   placeHolder?: string;
   type?: 'button' | 'submit' | 'reset';
   loading?: boolean;
+  dataTestId?: string;
 }
 
 export default function DropdownV2(props: IDropdownV2) {
@@ -30,7 +32,8 @@ export default function DropdownV2(props: IDropdownV2) {
     options,
     onValueChanged,
     onValueBlur = null,
-    loading = false
+    loading = false,
+    dataTestId = ''
   } = props;
   const defaultPlaceHolder = placeHolder || 'None';
   const [value, setValue] = useState(defaultValue);
@@ -50,7 +53,7 @@ export default function DropdownV2(props: IDropdownV2) {
     setIsActive(false);
   };
 
-  const onBlurValue = (e: any) => {
+  const onBlurValue = (e: React.ChangeEvent<HTMLButtonElement>) => {
     if (onValueBlur) {
       onValueBlur(e);
     }
@@ -92,6 +95,7 @@ export default function DropdownV2(props: IDropdownV2) {
         isActive ? styles.borderActive : '',
         error ? styles.borderRed : ''
       ].join(' ')}
+      data-testid={dataTestId}
     >
       <div
         onClick={() => {
@@ -134,5 +138,6 @@ DropdownV2.defaultProps = {
   type: 'button',
   onValueBlur: null,
   defaultValue: null,
-  loading: false
+  loading: false,
+  dataTestId: null
 };

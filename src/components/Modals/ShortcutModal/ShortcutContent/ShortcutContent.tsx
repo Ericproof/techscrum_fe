@@ -23,7 +23,7 @@ export default function ShortcutContent({
 }: IShortCutContent) {
   return (
     <>
-      <h1>{operation} shortcut</h1>
+      <h1 className={styles.headerTitle}>{operation} shortcut</h1>
       <Row defaultMargin>
         <InputV2
           label="Web Address"

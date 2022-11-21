@@ -13,8 +13,8 @@ import Row from '../../lib/Grid/Row/Row';
 interface ProjectEditorProps {
   showCancelBtn?: boolean;
   projectData?: IProjectEditor;
-  onClickSave: (data: any) => void;
-  onClickCancel?: (e: any) => void;
+  onClickSave: (data: IProjectEditor) => void;
+  onClickCancel?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   hasError?: boolean;
   loading?: boolean;
 }
@@ -93,11 +93,18 @@ function ProjectEditor(props: ProjectEditorProps) {
               name="name"
               label="Name"
               onValueChanged={onChangeName}
-              defaultValue={data.name}
+              value={data.name}
+              dataTestId="name"
             />
           </Row>
           <Row defaultMargin>
-            <InputV2 name="key" label="Key" onValueChanged={onChangeName} defaultValue={data.key} />
+            <InputV2
+              name="key"
+              label="Key"
+              onValueChanged={() => {}}
+              value={data.key}
+              dataTestId="key"
+            />
           </Row>
           {hasError && (
             <p className={styles.error} data-testid="projectError">
