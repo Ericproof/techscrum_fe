@@ -2,7 +2,12 @@
   "title": "123",
   "tags": [],
   "comments": [],
-  "status": "63565445d377d106f9a8b608",
+  "status": {
+    "id": "63565445d377d106f9a8b608",
+    "name": "to do",
+    "slug": "to-do",
+    "order": 0
+  },
   "projectId": "63565445d377d106f9a8b611",
   "boardId": "63565445d377d106f9a8b610",
   "sprintId": null,

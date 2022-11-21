@@ -1,29 +1,44 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import styles from './AssigneeBtn.module.scss';
 import IconButton from '../../../components/Button/IconButton/IconButton';
 import userAvatar from '../../../assets/userAvatar.png';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import { IUserInfo, IAssign } from '../../../types';
+import { updateTask } from '../../../api/backlog/backlog';
 
-interface IPriorityBtn {
+interface IAssigneeBtn {
   assignee: IAssign | null;
-  onClickChangeAssignee: (id: string, assigneeId: string) => void;
   taskId: string;
   userList: IUserInfo[];
+  showDropDownOnTop?: boolean;
+  getBacklogDataApi: () => void;
 }
-export default function PriorityBtn({
+export default function AssigneeBtn({
   assignee,
-  onClickChangeAssignee,
   userList,
-  taskId
-}: IPriorityBtn) {
+  taskId,
+  showDropDownOnTop,
+  getBacklogDataApi
+}: IAssigneeBtn) {
   const [query, setQuery] = useState('');
+  const { visible, setVisible, myRef } = useOutsideAlerter(false);
 
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
   };
 
-  const { visible, setVisible, myRef } = useOutsideAlerter(false);
+  const onClickChangeAssignee = (id: string, assigneeId: string) => {
+    const data = { assignId: assigneeId };
+    updateTask(id, data)
+      .then(() => {
+        getBacklogDataApi();
+      })
+      .catch(() => {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      });
+    setVisible(false);
+  };
 
   let name = 'Unassigned';
   let avartar = userAvatar;
@@ -47,7 +62,11 @@ export default function PriorityBtn({
         }}
       />
       {visible && (
-        <div className={styles.assigneeDropdown}>
+        <div
+          className={[styles.assigneeDropdown, showDropDownOnTop && styles.showDropDownOnTop].join(
+            ' '
+          )}
+        >
           <div className={styles.inputContainer}>
             <input type="text" placeholder={name} onChange={onChangeInput} />
             <img src={avartar} alt="avatar" />
@@ -81,3 +100,6 @@ export default function PriorityBtn({
     </div>
   );
 }
+AssigneeBtn.defaultProps = {
+  showDropDownOnTop: false
+};

@@ -11,12 +11,16 @@ import SubSettingMenu from '../../../lib/SubSettingMenu/SubSettingMenu';
 import ButtonV2 from '../../../lib/FormV2/ButtonV2/ButtonV2';
 import InputV2 from '../../../lib/FormV2/InputV2/InputV2';
 import Modal from '../../../lib/Modal/Modal';
+import changePassword from '../../../api/accountSetting/changePassword';
 
 export default function UserMePage() {
   const userInfo = useContext(UserContext);
   const setUserInfo = useContext(UserDispatchContext);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [submitting, setSubmitting] = useState<boolean>(false);
+  const [oldPassword, setOldPassword] = useState<string>('');
+  const [newPassword, setNewPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
 
   const onChangeUser = (e: any) => {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
@@ -48,6 +52,21 @@ export default function UserMePage() {
         theme: 'colored',
         toastId: 'toast-error'
       });
+    }
+  };
+
+  const onUpdatePassword = async () => {
+    const token = userInfo?.token;
+    if (newPassword === confirmPassword) {
+      try {
+        const data = { oldPassword, newPassword, userInfo };
+        await changePassword(data, token);
+        toast('Your password has been successfully updated!');
+      } catch (e) {
+        toast.error('The current password is not correct!');
+      }
+    } else {
+      toast.error('New Password does not match confirm password, please check again!');
     }
   };
 
@@ -108,26 +127,40 @@ export default function UserMePage() {
               </div>
               <ButtonV2 text="Save Changes" onClick={onSaveMe} />
             </SettingCard>
-            <SettingCard title="Change Password (WIP)">
+            <SettingCard title="Change Password">
               <div className={[styles.gap, styles.row, 'flex'].join(' ')}>
                 <InputV2
+                  label="Old Password"
+                  onValueChanged={(e) => {
+                    setOldPassword(e.target.value);
+                  }}
+                  onValueBlur={() => {}}
+                  defaultValue=""
+                  name="oldPassword"
+                  type="password"
+                />
+                <InputV2
                   label="New Password"
-                  onValueChanged={() => {}}
+                  onValueChanged={(e) => {
+                    setNewPassword(e.target.value);
+                  }}
                   onValueBlur={() => {}}
                   defaultValue=""
                   name="newPassword"
                   type="password"
                 />
                 <InputV2
-                  label="Confirm Password"
-                  onValueChanged={() => {}}
+                  label="Confirm New Password"
+                  onValueChanged={(e) => {
+                    setConfirmPassword(e.target.value);
+                  }}
                   onValueBlur={() => {}}
                   defaultValue=""
                   name="confirmPassword"
                   type="password"
                 />
               </div>
-              <ButtonV2 text="Update" onClick={onSaveMe} />
+              <ButtonV2 text="Update" onClick={onUpdatePassword} />
             </SettingCard>
             <SettingCard title="Delete Account (WIP)">
               <p>Delete your account and all of your source data. This is irreversible.</p>
