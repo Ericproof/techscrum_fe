@@ -118,7 +118,10 @@ function Editor(props: IEditor) {
       emptyEditor();
     }
   };
-  function uploadFile(e: any) {
+  function uploadFile(e: React.ChangeEvent<HTMLInputElement>) {
+    if (!e.target.files) {
+      return;
+    }
     const uploadData = new FormData();
     uploadData.append('photos', e.target.files[0]);
 

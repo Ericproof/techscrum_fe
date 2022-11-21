@@ -3,12 +3,12 @@ import styles from './ButtonV2.module.scss';
 
 interface IPropsButtonV2 {
   text: string;
-  onClick: (e: any) => void;
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   customStyles?: string;
   danger?: boolean;
   loading?: boolean;
   fill?: boolean;
-  icon?: any;
+  icon?: React.ReactNode;
   size?: 'xs' | 'md' | 'lg';
   dataTestId?: string;
   disabled?: boolean;

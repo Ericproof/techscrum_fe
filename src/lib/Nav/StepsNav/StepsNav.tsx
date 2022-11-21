@@ -30,7 +30,11 @@ export default function StepsNav(props: IStepsNav) {
       </h4>
       <ul>
         {items.map((item) => {
-          return <CustomLink to={item.link}>{item.name}</CustomLink>;
+          return (
+            <CustomLink key={item.link} to={item.link}>
+              {item.name}
+            </CustomLink>
+          );
         })}
       </ul>
     </div>

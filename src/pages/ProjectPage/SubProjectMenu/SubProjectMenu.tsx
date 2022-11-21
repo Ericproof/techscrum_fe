@@ -8,7 +8,7 @@ import styles from './SubProjectMenu.module.scss';
 interface ISubProjectMenu {
   toggleSearchMenu: boolean;
   projectList: any;
-  closeModal: any;
+  closeModal: () => void;
 }
 
 export default function SubProjectMenu(props: ISubProjectMenu) {
@@ -31,6 +31,7 @@ export default function SubProjectMenu(props: ISubProjectMenu) {
     return filteredResult?.map((item) => {
       return (
         <Link
+          key={item.id}
           to={`/projects/${item.id}/board/${item.boardId}`}
           style={{ textDecoration: 'none' }}
           onClick={() => {

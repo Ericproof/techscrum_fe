@@ -1,10 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from 'react';
+import { IOptions } from '../../../types';
 
 interface IDropdownV2 {
   onValueChanged: (label: string, value: string) => void;
   defaultValue: string;
-  options: any;
+  options: IOptions[];
 }
 
 export default function DropdownV2(props: IDropdownV2) {
@@ -13,13 +14,13 @@ export default function DropdownV2(props: IDropdownV2) {
   const [isSearching, setIsSearching] = useState(false);
   const [showList, setShowList] = useState(false);
 
-  const onClickDropdownHandler = (val: string, name: string) => {
+  const onClickDropdownHandler = (val: string, label: string) => {
     setValue(val);
-    onValueChanged(val, name);
+    onValueChanged(val, label);
     setShowList(false);
   };
 
-  const onChangeHandler = (e: any) => {
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
     setIsSearching(true);
   };
@@ -50,11 +51,11 @@ export default function DropdownV2(props: IDropdownV2) {
       />
       {showList && (
         <div>
-          {filteredList.map((item: any) => {
+          {filteredList.map((item) => {
             return (
               <button
                 key={item.value}
-                onClick={() => onClickDropdownHandler(item.value, item.name)}
+                onClick={() => onClickDropdownHandler(item.value, item.label)}
               >
                 {item.icon}
                 {item.label}

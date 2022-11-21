@@ -7,6 +7,7 @@ $nav-height: 56px;
   flex-direction: row;
   min-height: 100vh;
   background: #f6f8f9;
+
 }
 
 .childrenContainer {
@@ -14,4 +15,5 @@ $nav-height: 56px;
   min-width: $children-min-width;
   height: 100%;
   min-height: $children-min-height;
+  padding-left: 128px;
 }

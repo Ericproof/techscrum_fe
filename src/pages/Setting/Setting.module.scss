@@ -10,7 +10,7 @@
 }
 
 .settingMiniContainer{
-    max-width: 800px;
+    max-width: 1080px;
     margin: auto;
 }
 
@@ -51,6 +51,7 @@
     padding: 40px;
     p{
         margin: 20px 0 50px 0;
+        font-size: 18px;
     }
 }
 
@@ -60,4 +61,10 @@
     button{
         margin-left: 20px;
     }
+}
+
+
+.p{
+    font-size: 14px;
+    font-weight: bold;
 }

@@ -1,16 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { AxiosResponse } from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getUser } from '../../api/user/user';
 import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
+import { IUserInfo } from '../../types';
 import styles from './UserPage.module.scss';
 
 export default function UserPage() {
   const { id = '' } = useParams();
-  const [userInfo, setUserInfo] = useState<any>();
+  const [userInfo, setUserInfo] = useState<IUserInfo>();
 
   useEffect(() => {
-    getUser(id).then((res: any) => {
+    getUser(id).then((res: AxiosResponse<IUserInfo>) => {
       setUserInfo(res.data);
     });
   }, []);

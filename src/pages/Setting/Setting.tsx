@@ -7,14 +7,11 @@ import { AiOutlineSetting, AiOutlineUnorderedList } from 'react-icons/ai';
 import { BsBriefcase, BsCreditCard } from 'react-icons/bs';
 import styles from './Setting.module.scss';
 import { deleteProject, showProject, updateProject } from '../../api/projects/projects';
-import { IOnChangeProjectLead, IProjectEditor } from '../../types';
+import { IOnChangeProjectLead, IProjectData, IProjectEditor } from '../../types';
 import { UserContext } from '../../context/UserInfoProvider';
-
 import SettingCard from '../../components/SettingCard/SettingCard';
 import ChangeIcon from '../../components/ProjectEditor/ChangeIcon/ChangeIcon';
-
 import { getUsers } from '../../api/user/user';
-
 import 'react-toastify/dist/ReactToastify.css';
 import checkAccess from '../../utils/helpers';
 import MainMenuV2 from '../MainMenuV2/MainMenuV2';
@@ -101,7 +98,7 @@ export default function Setting() {
     getUsersList();
   }, [userList]);
 
-  const update = (updateData: any) => {
+  const update = (updateData: IProjectData) => {
     const token = userInfo?.token || '';
     setLoading(true);
     updateProject(projectId, updateData, token)
@@ -166,22 +163,25 @@ export default function Setting() {
                 label="Project Name"
                 onValueChanged={onChangeName}
                 onValueBlur={() => {}}
-                defaultValue={data?.name}
+                value={data?.name}
                 name="name"
                 loading={!data}
+                dataTestId="projectName"
               />
               <InputV2
                 label="Project Key"
                 onValueChanged={onChange}
                 onValueBlur={() => {}}
-                defaultValue={data?.key}
+                value={data?.key}
                 name="key"
                 loading={!data}
+                dataTestId="projectKey"
               />
             </div>
             <div className={[styles.gap, styles.row, 'flex'].join(' ')}>
               <DropdownV2
                 label="Project Lead"
+                dataTestId="projectLead"
                 onValueChanged={onChange}
                 onValueBlur={() => {}}
                 defaultValue={data?.projectLeadId?.id}
@@ -201,6 +201,7 @@ export default function Setting() {
                 defaultValue=""
                 name="websiteURL"
                 loading={!data}
+                dataTestId="websiteURL"
               />
             </div>
             <div className={[styles.gap, styles.row, 'flex'].join(' ')}>
@@ -211,13 +212,16 @@ export default function Setting() {
                 defaultValue=""
                 name="description"
                 loading={!data}
+                dataTestId="description"
               />
             </div>
             <ButtonV2 text="SAVE CHANGES" onClick={onClickSave} loading={loading} />
           </SettingCard>
           {checkAccess('delete:projects', projectId) && (
             <SettingCard title="Delete Project">
-              <p>Delete your project and all of your source data. This is irreversible.</p>
+              <p className={styles.p}>
+                Delete your project and all of your source data. This is irreversible.
+              </p>
               <ButtonV2
                 text="DELETE"
                 danger

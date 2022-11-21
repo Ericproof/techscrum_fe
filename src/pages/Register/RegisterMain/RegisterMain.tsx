@@ -109,7 +109,7 @@ export default function RegisterMain() {
     nameRecorder = name;
   };
 
-  const onChangeAppName = (e: any) => {
+  const onChangeAppName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAppName(e.target.value);
   };
 
