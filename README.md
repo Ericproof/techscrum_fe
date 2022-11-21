@@ -81,6 +81,7 @@ Test: Forget Password
 ## Contact
 
 Kitman Yiu - [Kitman Yiu](www.kitmanyiu.com)
+David Guo - Implement dailyscrum, backlog page, modal component, FAQ page, fix bug, APIs, refactoring
 
 ## Acknowledgments
 
