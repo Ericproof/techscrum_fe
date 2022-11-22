@@ -56,7 +56,7 @@ export default function UserSelect(props: IUserSelect) {
     if (queryUserList.length > 0) {
       if (initialUser) {
         if (value) {
-          setCurrentUser({ name: value.name });
+          setCurrentUser({ name: value.name, avatarIcon: value.avatarIcon });
         } else {
           const unassignedUser = {
             name: 'Unassigned'
@@ -139,7 +139,7 @@ export default function UserSelect(props: IUserSelect) {
           <button className={styles.leadInputClose} type="button" onClick={handleClickOutside}>
             <img
               src={
-                currentUser?.avatarIcon ||
+                currentUser.avatarIcon ||
                 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'
               }
               alt="avatar"
