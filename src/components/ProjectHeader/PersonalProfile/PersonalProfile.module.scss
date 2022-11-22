@@ -1,3 +1,5 @@
+$max_size: 768px;
+
 .rightSection {
   align-items: center;
   display: flex;
@@ -102,6 +104,11 @@
     );
     overflow: hidden;
     left: 0;
+    @media (max-width: $max_size) {
+      transform: none;
+      inset: 32px auto auto 0px;
+      left: 10px;
+    }
 
     .settingContainer {
       min-width: 234px;
