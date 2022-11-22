@@ -24,7 +24,7 @@ import { ProjectContext } from '../../context/ProjectProvider';
 const buttons = [
   {
     name: 'Projects',
-    action: () => {},
+    url: `/projects`,
     icon: <AiOutlineFolderOpen />,
     dataTestId: 'projects-nav-btn'
   },
@@ -116,6 +116,7 @@ export default function MainMenuV2() {
         {buttons.map((item) => {
           return (
             <NavigationBtn
+              key={item.name}
               dataTestId={item.dataTestId}
               onClick={() => {
                 if (item.url) {

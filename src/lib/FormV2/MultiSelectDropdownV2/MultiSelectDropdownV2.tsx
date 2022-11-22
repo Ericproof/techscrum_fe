@@ -3,17 +3,18 @@
 import React, { useState } from 'react';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import { TiDelete } from 'react-icons/ti';
+import { IOptions } from '../../../types';
 import { getErrorMessage } from '../../../utils/formUtils';
 import styles from '../FormV2.module.scss';
 import defaultStyles from './MultiSelectDropdownV2.module.scss';
 
 interface IMultiSelectDropdownV2 {
   onValueChanged: (e: any) => void;
-  onValueBlur?: (e: any) => void;
+  onValueBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onLabelDelete: (e: any) => void;
-  onLabelAdd: (e: any) => void;
+  onLabelAdd: (e: string) => void;
   name: string;
-  options: any;
+  options: IOptions[];
   label: string;
   required?: boolean;
   placeHolder?: string;
@@ -33,7 +34,7 @@ export default function MultiSelectDropdownV2(props: IMultiSelectDropdownV2) {
     onLabelAdd,
     isDisabled
   } = props;
-  const [searchValue, setSearchValue] = useState(null);
+  const [searchValue, setSearchValue] = useState('');
   const [error, setError] = useState<null | string>(null);
   const [showMenu, setShowMenu] = useState(false);
   const [selectedItems, setSelectedItems] = useState<any>([]);
@@ -49,10 +50,10 @@ export default function MultiSelectDropdownV2(props: IMultiSelectDropdownV2) {
     onValueChanged(e);
     setShowMenu(false);
     setIsActive(false);
-    setSearchValue(null);
+    setSearchValue('');
   };
 
-  const onChangeSearch = (e: any) => {
+  const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
   };
 
@@ -61,12 +62,12 @@ export default function MultiSelectDropdownV2(props: IMultiSelectDropdownV2) {
     onLabelDelete(itemRemove.value);
   };
 
-  const addItem = (itemAdd: any) => {
+  const addItem = (itemAdd: string) => {
     onLabelAdd(itemAdd);
-    setSearchValue(null);
+    setSearchValue('');
   };
 
-  const onBlurValue = (e: any) => {
+  const onBlurValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (onValueBlur) {
       onValueBlur(e);
     }
@@ -115,7 +116,11 @@ export default function MultiSelectDropdownV2(props: IMultiSelectDropdownV2) {
     return (
       <div className={defaultStyles.dropDownList}>
         {filteredOptions.map((item) => {
-          return <button onClick={() => onChangeSelect(item)}>{item.label}</button>;
+          return (
+            <button key={item.value} onClick={() => onChangeSelect(item)}>
+              {item.label}
+            </button>
+          );
         })}
         {searchValue && !isInOptionsList && (
           <>
@@ -143,7 +148,7 @@ export default function MultiSelectDropdownV2(props: IMultiSelectDropdownV2) {
           <div className={[defaultStyles.selectedItemsList].join(' ')}>
             {selectedItems.map((item) => {
               return (
-                <div className={defaultStyles.selectedItems}>
+                <div className={defaultStyles.selectedItems} key={item.value}>
                   <p>{item.label}</p>
                   <TiDelete
                     className={defaultStyles.deleteIcon}

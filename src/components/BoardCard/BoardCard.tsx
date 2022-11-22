@@ -2,8 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import CardHeader from './CardHeader/CardHeader';
 import CardLeftContent from './CardLeftContent/CardLeftContent';
 import CardRightContent from './CardRightContent/CardRightContent';
-import { TaskEntity } from '../../api/task/entity/task';
-import { IColumnsFromBackend, ILabelData } from '../../types';
+import { IColumnsFromBackend, ILabelData, ITaskEntity } from '../../types';
 import styles from './BoardCard.module.scss';
 import { upload } from '../../api/upload/upload';
 import { createActivity } from '../../api/activity/activity';
@@ -11,8 +10,8 @@ import { UserContext } from '../../context/UserInfoProvider';
 
 interface Props {
   columnsInfo: IColumnsFromBackend;
-  taskData: TaskEntity | undefined;
-  onSave: (updatedTaskInfo: TaskEntity) => void;
+  taskData: ITaskEntity | undefined;
+  onSave: (updatedTaskInfo: ITaskEntity) => void;
   updateIsViewTask: () => void;
   deleteTask: () => void;
   labels: ILabelData[];
@@ -30,7 +29,7 @@ export default function BoardCard({
   projectId,
   updateTaskTags
 }: Props) {
-  const [taskInfo, setTaskInfo] = useState<TaskEntity | null>(null);
+  const [taskInfo, setTaskInfo] = useState<ITaskEntity | null>(null);
   const userInfo = useContext(UserContext);
 
   useEffect(() => {
@@ -48,7 +47,7 @@ export default function BoardCard({
     setTaskInfo(updateTaskInfo);
     onSave(updateTaskInfo);
     const operation = 'updated';
-    const userId = userInfo.id;
+    const userId = userInfo?.id;
     const taskId = taskInfo?.id;
     await createActivity({ operation, userId, taskId });
   };
@@ -59,12 +58,15 @@ export default function BoardCard({
     setTaskInfo(updateTaskInfo);
     onSave(updateTaskInfo);
     const operation = 'updated';
-    const userId = userInfo.id;
+    const userId = userInfo?.id;
     const taskId = taskInfo?.id;
     await createActivity({ operation, userId, taskId });
   };
 
-  const uploadFile = (e: any) => {
+  const uploadFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) {
+      return;
+    }
     const uploadData = new FormData();
     uploadData.append('photos', e.target.files[0]);
     upload(uploadData).then((res: any) => {

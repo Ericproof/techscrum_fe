@@ -27,7 +27,7 @@ function JobListItem(props: IJobListItem) {
       <p className={styles.department}>{desc}</p>
       <ul>
         {list?.map((item) => {
-          return <li>{item}</li>;
+          return <li key={item}>{item}</li>;
         })}
       </ul>
       <button className={styles.applyButtonText}>Apply now (WIP)</button>

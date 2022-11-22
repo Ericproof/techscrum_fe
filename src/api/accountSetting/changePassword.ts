@@ -1,5 +1,7 @@
+/* eslint-disable consistent-return */
 import axios from 'axios';
 import config from '../../config/config';
+import { IChangePassword } from '../../types';
 
 const getAuthHeader = (token: string) => {
   return {
@@ -9,7 +11,10 @@ const getAuthHeader = (token: string) => {
   };
 };
 
-const changePassword = async (data: any, token) => {
+const changePassword = async (data: IChangePassword, token: string | undefined) => {
+  if (!token) {
+    return;
+  }
   const path = `${config.apiAddress}/account/change-password`;
   const result = await axios.patch(path, data, getAuthHeader(token));
   return result;

@@ -15,8 +15,8 @@ export default function ErrorAlert({ statusCode, tipContent, confirmAlert }: Pro
   };
 
   const iconList = [
-    <img className={styles.successTik} src={checkIcon} alt="Success Tik" />,
-    <ImCross color="#8B0000" />
+    <img className={styles.successTik} src={checkIcon} alt="Success Tik" key="success" />,
+    <ImCross color="#8B0000" key="cross-icon" />
   ];
 
   return (

@@ -2,15 +2,14 @@ import React, { useEffect, useState, useContext } from 'react';
 import { TiDelete } from 'react-icons/ti';
 import { createLabel, removeLabel } from '../../../../api/label/label';
 import useOutsideAlerter from '../../../../hooks/OutsideAlerter';
-import { TaskEntity } from '../../../../api/task/entity/task';
 import styles from './LabelFields.module.scss';
-import { ILabelData } from '../../../../types';
+import { ILabelData, ITaskEntity } from '../../../../types';
 import { createActivity } from '../../../../api/activity/activity';
 import { UserContext } from '../../../../context/UserInfoProvider';
 
 interface IPropsLabel {
   labels: ILabelData[];
-  taskInfo: TaskEntity;
+  taskInfo: ITaskEntity;
   isDisabled: boolean;
   updateTaskTags: (tags: ILabelData[] | undefined) => void;
 }

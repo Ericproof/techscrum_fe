@@ -1,9 +1,9 @@
 import React from 'react';
-import { TaskEntity } from '../../../../../api/task/entity/task';
+import { ITaskEntity } from '../../../../../types';
 import style from './Description.module.scss';
 
 interface Props {
-  taskInfo: TaskEntity;
+  taskInfo: ITaskEntity;
   focusEventHandler: () => void;
   isDisabled: boolean;
   onChangeDesc: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;

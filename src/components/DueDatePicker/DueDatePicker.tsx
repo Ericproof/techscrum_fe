@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import { DatePicker } from '@atlaskit/datetime-picker';
-import { TaskEntity } from '../../api/task/entity/task';
 import { UserContext } from '../../context/UserInfoProvider';
 import { createActivity } from '../../api/activity/activity';
+import { ITaskEntity } from '../../types';
 
 interface Props {
-  taskInfo: TaskEntity;
-  dueDateOnchange: (taskInfo: TaskEntity) => void;
+  taskInfo: ITaskEntity;
+  dueDateOnchange: (taskInfo: ITaskEntity) => void;
   isDisabled: boolean;
 }
 
