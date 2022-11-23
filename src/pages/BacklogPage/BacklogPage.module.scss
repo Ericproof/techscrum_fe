@@ -2,11 +2,15 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding: 0px 15px;
+  padding: 30px 20px 0 0;
+  .header {
+    margin: 0 0 0 30px;
+  }
 }
 
 .scrollContainer {
   flex: 1;
   overflow: auto;
   padding-bottom: 3rem;
+  padding-left: 20px;
 }
