@@ -30,9 +30,17 @@
         cursor: pointer;
         height: 1.9em;
         background-color: white;
-        color: #1565cd;
         border: 0;
         outline: none;
+        font-weight: bold;
+      }
+
+      .showContents {
+        color: #1565cd;
+      }
+
+      .hideContents {
+        color: gray;
       }
     }
   }
