@@ -51,9 +51,8 @@ export default function CardRightContent({
     updatedTaskInfo.assignId = !e.target.value ? undefined : e.target.value;
     taskStatusOnchange(updatedTaskInfo);
     await createActivity({ operation, userId, taskId });
-    const assign: any = updatedTaskInfo.assignId;
-    if (assign) {
-      const assignId = assign;
+    const { assignId } = updatedTaskInfo;
+    if (assignId) {
       const createdDate = dateHandler(new Date());
       const data = {
         title: updatedTaskInfo.title,
