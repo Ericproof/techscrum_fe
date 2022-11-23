@@ -18,7 +18,7 @@ export default function UserSelect(props: IUserSelect) {
   const handleClickOutside = () => setVisible(true);
   const [query, setQuery] = useState('');
   const [queryUserList, setQueryUserList] = useState<any>([]);
-  const [currentUser, setCurrentUser] = useState<any>('');
+  const [currentSelectedUser, setCurrentSelectedUser] = useState<any>('');
   const [initialUser, setInitialUser] = useState(true);
 
   useEffect(() => {
@@ -43,12 +43,12 @@ export default function UserSelect(props: IUserSelect) {
     onChange({ target: { name: 'projectLeadId', value: user?.id || '' } });
     setVisible(false);
     if (user) {
-      setCurrentUser(user);
+      setCurrentSelectedUser(user);
     } else {
       const unassignedUser = {
         name: 'Unassigned'
       };
-      setCurrentUser(unassignedUser);
+      setCurrentSelectedUser(unassignedUser);
     }
   };
 
@@ -56,12 +56,12 @@ export default function UserSelect(props: IUserSelect) {
     if (queryUserList.length > 0) {
       if (initialUser) {
         if (value) {
-          setCurrentUser({ name: value.name, avatarIcon: value.avatarIcon });
+          setCurrentSelectedUser({ name: value.name, avatarIcon: value.avatarIcon });
         } else {
           const unassignedUser = {
             name: 'Unassigned'
           };
-          setCurrentUser(unassignedUser);
+          setCurrentSelectedUser(unassignedUser);
         }
       }
       setInitialUser(false);
@@ -86,7 +86,7 @@ export default function UserSelect(props: IUserSelect) {
                 dir="auto"
                 type="Text"
                 onChange={(e) => setQuery(e.target.value)}
-                value={currentUser.name}
+                value={currentSelectedUser.name}
               />
               <button className={styles.optionToggle} type="button" onClick={handleClickOutside}>
                 <i role="button" aria-label="openDropdown" tabIndex={0} />
@@ -110,7 +110,7 @@ export default function UserSelect(props: IUserSelect) {
                 </li>
                 {queryUserList.map(
                   (user: IUserInfo) =>
-                    user.name !== currentUser.name && (
+                    user.name !== currentSelectedUser.name && (
                       <li key={user.id}>
                         <button
                           type="button"
@@ -139,12 +139,12 @@ export default function UserSelect(props: IUserSelect) {
           <button className={styles.leadInputClose} type="button" onClick={handleClickOutside}>
             <img
               src={
-                currentUser.avatarIcon ||
+                currentSelectedUser.avatarIcon ||
                 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'
               }
               alt="avatar"
             />
-            <span>{currentUser.name}</span>
+            <span>{currentSelectedUser.name}</span>
           </button>
         )}
       </div>
