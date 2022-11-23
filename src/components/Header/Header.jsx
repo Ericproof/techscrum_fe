@@ -16,7 +16,7 @@ export default function Header() {
   return (
     <nav className={`${styles.navNormal} ${toggle ? styles.navActive : ''}`}>
       <div className={styles.container}>
-        <Link to="/#">
+        <Link to="/#" className={styles.logo}>
           <Icon />
         </Link>
         <ServiceTabs show={toggle} />
