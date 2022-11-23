@@ -32,13 +32,7 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal) {
     const handleDailyScrum = async () => {
       try {
         const searchCase = 'search-all';
-        const results = await getDailyScrums(
-          projectId,
-          userId,
-          'none',
-          dateHandler(new Date()),
-          searchCase
-        );
+        const results = await getDailyScrums(projectId, userId, 'none', 'none', searchCase);
         if (results.data.length === 0) {
           toast('No dailyScrum data for now!', { theme: 'colored', toastId: 'dailyScrum error' });
         }
