@@ -46,7 +46,9 @@ export default function BacklogSection({
           })[0].id,
           boardId,
           projectId,
-          sprintId: null
+          sprintId: null,
+          dueAt: new Date(),
+          description: ''
         };
         setCurrentTypeOption('story');
         addTask(data)

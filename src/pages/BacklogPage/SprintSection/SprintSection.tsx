@@ -49,7 +49,9 @@ export default function SprintSection({
           })[0].id,
           boardId,
           projectId,
-          sprintId: sprint.id
+          sprintId: sprint.id,
+          dueAt: new Date(),
+          description: ''
         };
         setCurrentTypeOption('story');
         addTask(data)
