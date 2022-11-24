@@ -156,10 +156,9 @@ export default function Board() {
       updatedNewTaskInfo.typeId = newTaskInfo.typeId.id;
       updatedNewTaskInfo.reporterId = newTaskInfo.reporterId;
       updatedNewTaskInfo.sprintId = newTaskInfo.sprintId ? newTaskInfo.sprintId.id : null;
-
-      if (newTaskInfo.id !== undefined) {
-        await updateTask(newTaskInfo.id, newTaskInfo);
-        showUpdatedTask(newTaskInfo);
+      if (updatedNewTaskInfo.id !== undefined) {
+        await updateTask(updatedNewTaskInfo.id, updatedNewTaskInfo);
+        showUpdatedTask(updatedNewTaskInfo);
       }
     } catch (e) {
       getViewTaskStateFromChildren();
