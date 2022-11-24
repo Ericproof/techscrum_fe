@@ -151,6 +151,12 @@ export default function Board() {
 
   const updateTaskInfo = async (newTaskInfo: ITaskEntity) => {
     try {
+      const updatedNewTaskInfo = JSON.parse(JSON.stringify(newTaskInfo));
+      updatedNewTaskInfo.status = newTaskInfo.status.id;
+      updatedNewTaskInfo.typeId = newTaskInfo.typeId.id;
+      updatedNewTaskInfo.reporterId = newTaskInfo.reporterId;
+      updatedNewTaskInfo.sprintId = newTaskInfo.sprintId ? newTaskInfo.sprintId.id : null;
+
       if (newTaskInfo.id !== undefined) {
         await updateTask(newTaskInfo.id, newTaskInfo);
         showUpdatedTask(newTaskInfo);

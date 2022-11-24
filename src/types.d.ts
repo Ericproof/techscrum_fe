@@ -54,6 +54,7 @@ export interface ITaskEntity {
   reporterId?: string;
   createdAt?: Date;
   updatedAt?: Date;
+  sprintId?: any;
   comments?: any;
   attachmentUrls?: any;
   slug?: any;
