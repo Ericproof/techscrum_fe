@@ -163,6 +163,7 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
             defaultValue={null}
             label="Assignee"
             name="assignee"
+            required={false}
           />
         </Row>
         <Attach onChangeAttachment={uploadFile} />

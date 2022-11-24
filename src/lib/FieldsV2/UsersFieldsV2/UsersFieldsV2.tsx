@@ -7,10 +7,11 @@ interface IUsersFieldsV2 {
   defaultValue: string | null;
   label: string;
   name: string;
+  required: boolean;
 }
 
 export default function UsersFieldsV2(props: IUsersFieldsV2) {
-  const { onChange, defaultValue, name, label } = props;
+  const { onChange, defaultValue, name, label, required } = props;
   const [userList, setUserList] = useState<any>([]);
 
   useEffect(() => {
@@ -30,7 +31,7 @@ export default function UsersFieldsV2(props: IUsersFieldsV2) {
       onValueBlur={() => {}}
       defaultValue={defaultValue}
       name={name}
-      required
+      required={required}
       options={userList.map((item) => {
         return {
           label: item.name,
