@@ -11,7 +11,7 @@ $btnBgColorGreen: rgb(232, 251, 240);
 @mixin ellipsis {
   white-space: nowrap;
   text-overflow: ellipsis;
-  overflow: scroll;
+  overflow-x: scroll;
 }
 
 .container {
@@ -24,6 +24,24 @@ $btnBgColorGreen: rgb(232, 251, 240);
   cursor: pointer;
   height: 40px;
   font-size: 15px;
+
+  ::-webkit-scrollbar {
+    height: 3px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: white;
+    margin-bottom: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: white;
+    border-radius: 13px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 
   .toolBar {
     display: flex;
