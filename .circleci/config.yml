@@ -20,7 +20,7 @@ executors:
       - image: 'cypress/browsers:node16.14.2-slim-chrome100-ff99-edge'
 
 jobs:
-  build_react_app:
+  build_production:
     docker:
       - image: cimg/node:16.17.0-browsers
     working_directory: ~/repo
@@ -137,7 +137,7 @@ workflows:
           browser: chrome
           start: yarn start
           record: true
-      - build_react_app:
+      - build_production:
           requires:
             - code_qa
             - security_check
