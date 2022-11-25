@@ -88,7 +88,7 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
       projectId,
       tag: [],
       typeId: taskTypeId,
-      assignId: assigneeId?.id,
+      assignId: assigneeId,
       attachmentUrls: photoData
     };
 
