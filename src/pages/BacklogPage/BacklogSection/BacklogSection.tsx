@@ -67,6 +67,20 @@ export default function BacklogSection({
     setShowCreateSprint(true);
   };
 
+  const calculateShowDropDownTop = () => {
+    if (sprintData.length > 3) {
+      return true;
+    }
+    let totalTask = 0;
+    sprintData.forEach((sprint) => {
+      sprint.taskId.forEach(() => {
+        totalTask += 1;
+      });
+    });
+    totalTask += backlogData.cards.length;
+    return totalTask > 8;
+  };
+
   return (
     <section className={styles.container}>
       <div className={styles.header}>
@@ -96,7 +110,7 @@ export default function BacklogSection({
               statusData={statusData}
               userList={userList}
               sprintData={sprintData}
-              showDropDownOnTop={index > backlogData.cards.length - 4}
+              showDropDownOnTop={calculateShowDropDownTop() && index > backlogData.cards.length - 4}
               getBacklogDataApi={getBacklogDataApi}
             />
           );
@@ -105,7 +119,10 @@ export default function BacklogSection({
       {visible ? (
         <form>
           <div className={styles.formField} ref={myRef}>
-            <TaskTypeSelect showDropDownOnTop setCurrentTypeOption={setCurrentTypeOption} />
+            <TaskTypeSelect
+              showDropDownOnTop={calculateShowDropDownTop()}
+              setCurrentTypeOption={setCurrentTypeOption}
+            />
             <input
               className={styles.input}
               type="text"
