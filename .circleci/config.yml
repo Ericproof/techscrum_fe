@@ -69,7 +69,7 @@ jobs:
       - run: yarn build
       - aws-s3/copy:
           from: build/
-          to: s3://devtechscrum
+          to: s3://dev.techscrumapp.com
           arguments: --recursive
   security_check:
     docker:
