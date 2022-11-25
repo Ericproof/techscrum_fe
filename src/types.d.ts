@@ -54,10 +54,24 @@ export interface ITaskEntity {
   reporterId?: string;
   createdAt?: Date;
   updatedAt?: Date;
-  sprintId?: any;
+  sprintId?: ISprint;
   comments?: any;
   attachmentUrls?: any;
   slug?: any;
+}
+
+export interface ISprint {
+  id?: string;
+  name?: string;
+  startDate?: string;
+  endDate?: string;
+  description?: string;
+  currentSprint?: boolean;
+  isComplete?: boolean;
+  projectId?: string;
+  sprintGoal?: string;
+  boardId?: string;
+  taskId?: string[];
 }
 
 export interface Task {
