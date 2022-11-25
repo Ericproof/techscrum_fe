@@ -45,7 +45,7 @@ jobs:
           to: s3://techscrumapp.com
           arguments: --recursive
       - aws-cloudfront/invalidate:
-          distribution_id: E1V3T62UIWQDQ2
+          distribution_id: E28E7CS1KHPD0K
           paths: /*
   build_staging:
     docker:
@@ -72,7 +72,7 @@ jobs:
           to: s3://staging.techscrumapp.com
           arguments: --recursive
       - aws-cloudfront/invalidate:
-          distribution_id: E1V3T62UIWQDQ2
+          distribution_id: E28E7CS1KHPD0K
           paths: /*
   build_dev:
     docker:
@@ -99,7 +99,7 @@ jobs:
           to: s3://dev.techscrumapp.com
           arguments: --recursive
       - aws-cloudfront/invalidate:
-          distribution_id: E1V3T62UIWQDQ2
+          distribution_id: E28E7CS1KHPD0K
           paths: /*
   security_check:
     docker:
