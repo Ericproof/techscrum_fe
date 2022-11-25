@@ -1,16 +1,11 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable react/require-default-props */
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import DropdownV2 from '../../lib/FormV2/DropdownV2/DropdownV2';
-import InputV2 from '../../lib/FormV2/InputV2/InputV2';
 import { IOptions } from '../../types';
 
 interface ButtonProps {
   label: string;
 
-  onClick?: () => void;
+  onClick?: (e) => void;
 
   dataTestId?: string;
 
@@ -29,21 +24,23 @@ export function DropdownV2Example({
   label,
   loading = false,
   name = 'dropdownV2',
-  ...props
+  onClick,
+  options = [
+    { label: '1', value: '1' },
+    { label: '2', value: '2' },
+    { label: '3', value: '3' },
+    { label: '4', value: '4' }
+  ]
 }: ButtonProps) {
   return (
     <DropdownV2
+      dataTestId={dataTestId}
       label={label}
       loading={loading}
-      onValueChanged={() => {}}
+      onValueChanged={onClick}
       name={name}
       defaultValue="1"
-      options={[
-        { label: '1', value: '1' },
-        { label: '2', value: '2' },
-        { label: '3', value: '3' },
-        { label: '4', value: '4' }
-      ]}
+      options={options}
     />
   );
 }
