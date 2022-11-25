@@ -1,11 +1,11 @@
 import React from 'react';
 import DropdownV2 from '../../lib/FormV2/DropdownV2/DropdownV2';
-import { IOptions } from '../../types';
+import { IMinEvent, IOptions } from '../../types';
 
 interface ButtonProps {
   label: string;
 
-  onClick?: (e) => void;
+  onClick: (e: IMinEvent) => void;
 
   dataTestId?: string;
 
