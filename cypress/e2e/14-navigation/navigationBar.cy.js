@@ -21,6 +21,5 @@ describe('Project page', () => {
   });
   it('Test tasks in project', () => {
     cy.get('[data-testid="task-63565485d377d106f9a8b643"]').should('be.exist');
-    // cy.get('[data-testid="project-dropdown"]').should('be.exist');
   });
 });
