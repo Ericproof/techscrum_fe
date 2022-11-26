@@ -19,8 +19,8 @@ describe('Project page', () => {
     cy.get('[data-testid="board-btn"]').click();
     cy.get('[data-testid="board-create-card"]').should('be.exist');
   });
-  it('Test project drop down', () => {
-    cy.get('[data-testid="show-project-dropdown-btn"]').click();
-    cy.get('[data-testid="project-dropdown"]').should('be.exist');
+  it('Test tasks in project', () => {
+    cy.get('[data-testid="task-63565485d377d106f9a8b643"]').should('be.exist');
+    // cy.get('[data-testid="project-dropdown"]').should('be.exist');
   });
 });

@@ -14,7 +14,7 @@ import 'cypress-file-upload';
 describe('/create-projects', () => {
   beforeEach(() => {
     cy.visit('/login');
-    cy.login('1411231067@qq.com', '12345678');
+    cy.login('kitman200220022002@gmail.com', '12345678');
     cy.visit('/create-projects');
   });
 
@@ -30,6 +30,8 @@ describe('/create-projects', () => {
     cy.get('[data-testid="projectError"]').contains('Error');
   });
 
+  //other tests are fixed, but for this one, the module called cypress-file-upload is no longer exists
+  // should this one be deleted?
   it('can change icon', () => {
     const pic = 'testPicture.jpg';
     cy.get('[data-testid="iconButton"]').click();

@@ -1,22 +1,17 @@
-[
-  {
-    "id": "TEC-333",
-    "title": "create daily scrum",
-    "progress": "0",
-    "reason": "I need support",
-    "finish": false,
-    "support": false,
-    "supportValidation": false,
-    "finishValidation": false
-  },
-  {
-    "id": "TEC-334",
-    "title": "create backlog page",
-    "progress": "0",
-    "reason": "",
-    "finish": false,
-    "support": false,
-    "supportValidation": false,
-    "finishValidation": false
-  }
-]
+{
+  "title": "test create new task",
+  "progress": 0,
+  "isFinished": false,
+  "hasReason": false,
+  "reason": "",
+  "isNeedSupport": false,
+  "userId": "631dd53189d19ed1f532fb85",
+  "projectId": "6358c090a662585de5245a2d",
+  "taskId": "637f0b7f0453a42fa842b018",
+  "createdDate": "26-11-2022",
+  "finishValidation": false,
+  "supportValidation": false,
+  "createdAt": "2022-11-26T08:59:00.146Z",
+  "updatedAt": "2022-11-26T11:22:39.347Z",
+  "id": "6381d554a6c3f10a7e8ae2d5"
+}
