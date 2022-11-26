@@ -4,7 +4,6 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 import styles from './DailyScrum.module.scss';
 import DailyScrumTicket from './DailyScrumTicket/DailyScrumTicket';
-
 import { getDailyScrums, updateDailyScrum } from '../../api/dailyScrum/dailyScrum';
 import { UserContext } from '../../context/UserInfoProvider';
 import Modal from '../../lib/Modal/Modal';
@@ -88,26 +87,38 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal) {
     );
   };
   const onHandleSubmit = async (e) => {
-    e.preventDefault();
-    setSubmitting(true);
-    dailyScrumTicketData
-      .filter((ticket) => {
-        return dateHandler(ticket.createdAt) === dateHandler(new Date());
-      })
-      .map(async (ticket) => {
-        const data = {
-          progress: ticket.progress ? ticket.progress : 0,
-          isFinished: ticket.finish ? ticket.finish : false,
-          hasReason: !!ticket.reason,
-          reason: ticket.reason ? ticket.reason : '',
-          isNeedSupport: ticket.support ? ticket.support : false,
-          createdDate: dateHandler(new Date()),
-          finishValidation: ticket.finishValidation ? ticket.finishValidation : false,
-          supportValidation: ticket.supportValidation ? ticket.supportValidation : false
-        };
-        await updateDailyScrum(data, projectId, userId, ticket.taskId.id);
+    try {
+      e.preventDefault();
+      setSubmitting(true);
+      dailyScrumTicketData
+        .filter((ticket) => {
+          return dateHandler(ticket.createdAt) === dateHandler(new Date());
+        })
+        .map(async (ticket) => {
+          const data = {
+            progress: ticket.progress ? ticket.progress : 0,
+            isFinished: ticket.finish ? ticket.finish : false,
+            hasReason: !!ticket.reason,
+            reason: ticket.reason ? ticket.reason : '',
+            isNeedSupport: ticket.support ? ticket.support : false,
+            createdDate: dateHandler(new Date()),
+            finishValidation: ticket.finishValidation ? ticket.finishValidation : false,
+            supportValidation: ticket.supportValidation ? ticket.supportValidation : false
+          };
+          await updateDailyScrum(data, projectId, userId, ticket.taskId.id);
+        });
+      toast.success('Submit successful!', {
+        theme: 'colored',
+        className: 'primaryColorBackground',
+        toastId: 'dailyScrum success'
       });
-    setSubmitting(false);
+      setSubmitting(false);
+    } catch (error) {
+      toast.error('Temporarily server error, please try again later!', {
+        theme: 'colored',
+        toastId: 'dailyScrum error'
+      });
+    }
   };
   return (
     <div className={styles.dailyScrumContainer}>
