@@ -68,17 +68,25 @@ export default function BacklogSection({
   };
 
   const calculateShowDropDownTop = () => {
-    if (sprintData.length > 3) {
+    let totalIncompleteSprint = 0;
+    sprintData.forEach((sprint) => {
+      if (!sprint.isComplete) {
+        totalIncompleteSprint += 1;
+      }
+    });
+    if (totalIncompleteSprint > 3) {
       return true;
     }
     let totalTask = 0;
     sprintData.forEach((sprint) => {
-      sprint.taskId.forEach(() => {
-        totalTask += 1;
-      });
+      if (!sprint.isComplete) {
+        sprint.taskId.forEach(() => {
+          totalTask += 1;
+        });
+      }
     });
     totalTask += backlogData.cards.length;
-    return totalTask > 8;
+    return totalTask > 7;
   };
 
   return (
@@ -110,7 +118,7 @@ export default function BacklogSection({
               statusData={statusData}
               userList={userList}
               sprintData={sprintData}
-              showDropDownOnTop={calculateShowDropDownTop() && index > backlogData.cards.length - 4}
+              showDropDownOnTop={calculateShowDropDownTop() && index > backlogData.cards.length - 6}
               getBacklogDataApi={getBacklogDataApi}
             />
           );

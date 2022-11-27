@@ -46,7 +46,7 @@ export default function HomePage() {
           </span>
           <div className={styles.textContainer}>
             <h1 className={styles.header} data-testid="header-text">
-              An Agile software that prevent <span className="primaryColor">delays.</span>
+              An Agile software that prevents <span className="primaryColor">delays.</span>
             </h1>
             <p className={styles.text}>Manage your project from start to finish with TechScrum</p>
             <p className={styles.text}>No credit required.</p>
