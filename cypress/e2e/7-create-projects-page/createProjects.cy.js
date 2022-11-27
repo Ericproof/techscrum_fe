@@ -1,38 +1,32 @@
 /// <reference types="cypress" />
+
 import 'cypress-file-upload';
-// Welcome to Cypress!
-//
-// This spec file contains a variety of sample tests
-// for a todo list app that are designed to demonstrate
-// the power of writing tests in Cypress.
-//
-// To learn more about how Cypress works and
-// what makes it such an awesome testing tool,
-// please read our getting started guide:
-// https://on.cypress.io/introduction-to-cypress
+import addProject from '../../fixtures/addProject.json';
 
 describe('/create-projects', () => {
   beforeEach(() => {
     cy.visit('/login');
     cy.login('kitman200220022002@gmail.com', '12345678');
-    cy.visit('/create-projects');
   });
 
   it('should have project details', () => {
+    cy.intercept('POST', '**/projects', addProject).as('create-project');
+    cy.get('[data-testid="board-create-card"]').click();
     cy.get('[data-testid="name"]').type('techscrum');
     cy.get('[data-testid="key"]').type('TEC');
     cy.get('[data-testid="save"]').click();
+    cy.wait('@create-project');
   });
 
-  it('should have error message when create without name', () => {
+  it('should not close window when create without name', () => {
+    cy.get('[data-testid="board-create-card"]').click();
     cy.get('[data-testid="name"]').type(' ');
     cy.get('[data-testid="save"]').click();
-    cy.get('[data-testid="projectError"]').contains('Error');
+    cy.get('[data-testid="save"]').should('exist');
   });
 
-  //other tests are fixed, but for this one, the module called cypress-file-upload is no longer exists
-  // should this one be deleted?
   it('can change icon', () => {
+    cy.get('[data-testid="board-create-card"]').click();
     const pic = 'testPicture.jpg';
     cy.get('[data-testid="iconButton"]').click();
     cy.get('[data-testid="picInput"]').attachFile(pic);

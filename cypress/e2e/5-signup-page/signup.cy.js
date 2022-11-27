@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+import register from '../../fixtures/register.json';
 
 describe('signup', () => {
   beforeEach(() => {
@@ -23,9 +24,9 @@ describe('signup', () => {
 
   //others have been fixed except this one, as I have no right to access the response data thus I can not mock data
   it('should show the email logo', () => {
-    cy.intercept('POST', '**/register/*').as('register-account');
-    cy.get('[data-testid="name"]').type('315521793@qq.com');
-    cy.get('[data-testid="email"]').type('315521793@qq.com');
+    cy.intercept('POST', '**/register/*', register).as('register-account');
+    cy.get('[data-testid="name"]').type('3155217931111@qq.com');
+    cy.get('[data-testid="email"]').type('3155217931111@qq.com');
     cy.get('[data-testid="register"]').click();
     cy.wait('@register-account');
     cy.get('[data-testid="email-tip"]', { timeout: 20000 }).contains(
