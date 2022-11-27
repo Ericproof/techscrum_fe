@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-syntax */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { DropResult } from 'react-beautiful-dnd';
 import style from './Board.module.scss';
@@ -49,7 +49,7 @@ const onDragEnd = (
         items: destItems
       }
     });
-    updateTaskStatus(result.draggableId, destination.droppableId, destination.index);
+    updateTaskStatus(result.draggableId, destination.droppableId);
     return true;
   }
 
@@ -64,7 +64,7 @@ const onDragEnd = (
       items: copiedItems
     }
   });
-  updateTaskStatus(result.draggableId, source.droppableId, destination.index);
+  updateTaskStatus(result.draggableId, source.droppableId);
   return true;
 };
 
@@ -77,6 +77,51 @@ export default function Board() {
   const [taskData, setTaskData] = useState<ITaskEntity>();
   const [labels, setLabels] = useState<ILabelData[]>([]);
   const [loading, setLoading] = useState(false);
+
+  const fetchColumnsData = useCallback(
+    (boardInfo: IBoardEntity) => {
+      const columnInfoData: IColumnsFromBackend = {};
+
+      if (inputQuery) {
+        for (const item of boardInfo.taskStatus) {
+          columnInfoData[item.id] = {
+            name: item.name,
+            slug: item.slug,
+            order: item.order,
+            items: item.taskList.filter((task) =>
+              task.title?.toLowerCase().includes(inputQuery.toLowerCase())
+            )
+          };
+        }
+        return setColumnsInfo(columnInfoData);
+      }
+
+      for (const item of boardInfo.taskStatus) {
+        columnInfoData[item.id] = {
+          name: item.name,
+          slug: item.slug,
+          order: item.order,
+          items: item.taskList
+        };
+      }
+
+      return setColumnsInfo(columnInfoData);
+    },
+    [inputQuery]
+  );
+  const fetchBoardInfo = useCallback(() => {
+    const fetchBoard = async () => {
+      setLoading(true);
+      const boardInfo = await getBoard(boardId);
+      fetchColumnsData(boardInfo);
+      setLoading(false);
+    };
+    fetchBoard();
+  }, [boardId, fetchColumnsData]);
+
+  useEffect(() => {
+    fetchBoardInfo();
+  }, [inputQuery, boardId, fetchColumnsData, fetchBoardInfo]);
 
   useEffect(() => {
     if (!projectId || projectId === '') {
@@ -93,6 +138,7 @@ export default function Board() {
 
   const getViewTaskStateFromChildren = () => {
     setIsViewTask(!isViewTask);
+    fetchBoardInfo();
   };
 
   const getTaskId = async (itemId: string) => {
@@ -151,9 +197,14 @@ export default function Board() {
 
   const updateTaskInfo = async (newTaskInfo: ITaskEntity) => {
     try {
-      if (newTaskInfo.id !== undefined) {
-        await updateTask(newTaskInfo.id, newTaskInfo);
-        showUpdatedTask(newTaskInfo);
+      const updatedNewTaskInfo = JSON.parse(JSON.stringify(newTaskInfo));
+      updatedNewTaskInfo.status = newTaskInfo.status.id;
+      updatedNewTaskInfo.typeId = newTaskInfo.typeId.id;
+      updatedNewTaskInfo.reporterId = newTaskInfo.reporterId;
+      updatedNewTaskInfo.sprintId = newTaskInfo.sprintId ? newTaskInfo.sprintId.id : null;
+      if (updatedNewTaskInfo.id !== undefined) {
+        await updateTask(updatedNewTaskInfo.id, updatedNewTaskInfo);
+        showUpdatedTask(updatedNewTaskInfo);
       }
     } catch (e) {
       getViewTaskStateFromChildren();
@@ -173,7 +224,6 @@ export default function Board() {
       } finally {
         getViewTaskStateFromChildren();
         const updatedColumns = { ...columnsInfo };
-        // WIP temporarily fix the columns not updated after deleting a task
         const task = { ...taskData, statusId: taskData.status.id };
         if (task.statusId !== undefined) {
           columnsInfo[task.statusId].items.forEach((item, index) => {
@@ -183,50 +233,11 @@ export default function Board() {
           });
           await deleteActivity(taskData.id);
         }
-        setColumnsInfo(updatedColumns);
+        fetchBoardInfo();
         setTaskData(undefined);
       }
     }
   };
-
-  useEffect(() => {
-    const fetchColumnsData = (boardInfo: IBoardEntity) => {
-      const columnInfoData: IColumnsFromBackend = {};
-
-      if (inputQuery) {
-        for (const item of boardInfo.taskStatus) {
-          columnInfoData[item.id] = {
-            name: item.name,
-            slug: item.slug,
-            order: item.order,
-            items: item.taskList.filter((task) =>
-              task.title?.toLowerCase().includes(inputQuery.toLowerCase())
-            )
-          };
-        }
-        return setColumnsInfo(columnInfoData);
-      }
-
-      for (const item of boardInfo.taskStatus) {
-        columnInfoData[item.id] = {
-          name: item.name,
-          slug: item.slug,
-          order: item.order,
-          items: item.taskList
-        };
-      }
-
-      return setColumnsInfo(columnInfoData);
-    };
-
-    const fetchBoardInfo = async () => {
-      setLoading(true);
-      const boardInfo = await getBoard(boardId);
-      fetchColumnsData(boardInfo);
-      setLoading(false);
-    };
-    fetchBoardInfo();
-  }, [inputQuery, boardId]);
 
   return (
     <div className={style.container}>

@@ -9,6 +9,7 @@ import { getTypes } from '../../api/types/types';
 import { getUsers } from '../../api/user/user';
 import SprintSection from './SprintSection/SprintSection';
 import Loading from '../../components/Loading/Loading';
+import ProjectNavigationV3 from '../../lib/ProjectNavigationV3/ProjectNavigationV3';
 
 export default function BacklogPage() {
   const [loaded, setLoaded] = useState(false);
@@ -61,9 +62,10 @@ export default function BacklogPage() {
   const finishLoading = loaded && typeStatusUserLoaded;
   return (
     <div className={styles.container}>
-      <div>
-        <h1 data-testid="backlog-header">Backlog</h1>
-      </div>
+      <h1 className={styles.header} data-testid="backlog-header">
+        Backlog
+      </h1>
+      <ProjectNavigationV3 />
       {!finishLoading && <Loading />}
       <div className={styles.scrollContainer}>
         {finishLoading && (

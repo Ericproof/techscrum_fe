@@ -135,7 +135,9 @@ export default function LeftBottom(props: ILeftBottom) {
         <div className={style.showCommentButton}>
           <button
             type="button"
-            className={style.switchButton}
+            className={`${style.switchButton} ${
+              showComments ? style.showContents : style.hideContents
+            }`}
             onClick={onCommentClick}
             data-testid="show-comment-button"
           >
@@ -143,7 +145,9 @@ export default function LeftBottom(props: ILeftBottom) {
           </button>
           <button
             type="button"
-            className={style.switchButton}
+            className={`${style.switchButton} ${
+              showActivities ? style.showContents : style.hideContents
+            }`}
             onClick={onActivityClick}
             data-testid="show-activity-button"
           >
