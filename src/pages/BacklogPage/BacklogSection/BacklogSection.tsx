@@ -110,7 +110,7 @@ export default function BacklogSection({
               statusData={statusData}
               userList={userList}
               sprintData={sprintData}
-              showDropDownOnTop={calculateShowDropDownTop() && index > backlogData.cards.length - 4}
+              showDropDownOnTop={calculateShowDropDownTop() && index > backlogData.cards.length - 6}
               getBacklogDataApi={getBacklogDataApi}
             />
           );
