@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import ChangeIcon from './ChangeIcon/ChangeIcon';
 import styles from './ProjectEditor.module.scss';
 import { IOnChangeProjectLead, IProjectEditor } from '../../types';
@@ -28,6 +29,7 @@ function ProjectEditor(props: ProjectEditorProps) {
     iconUrl: ''
   });
   const userInfo = useContext(UserContext);
+  const [projectLeader, setProjectLeader] = useState('');
 
   useEffect(() => {
     if (!userInfo) {
@@ -45,6 +47,9 @@ function ProjectEditor(props: ProjectEditorProps) {
     loading
   } = props;
   const onChange = (e: IOnChangeProjectLead) => {
+    if (e.target.value) {
+      setProjectLeader(e.target.value);
+    }
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
@@ -65,8 +70,12 @@ function ProjectEditor(props: ProjectEditorProps) {
   };
 
   const onSave = () => {
-    const apiData = { ...data, userId: userInfo.id };
-    onClickSave(apiData);
+    if (projectLeader !== '') {
+      const apiData = { ...data, userId: userInfo.id };
+      onClickSave(apiData);
+    } else {
+      toast.error('Please select a project leader!');
+    }
   };
 
   const uploadSuccess = (photoData: any) => {
