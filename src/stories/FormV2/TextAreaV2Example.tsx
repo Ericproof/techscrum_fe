@@ -3,7 +3,6 @@
 /* eslint-disable react/require-default-props */
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import InputV2 from '../../lib/FormV2/InputV2/InputV2';
 import TextAreaV2 from '../../lib/FormV2/TextAreaV2/TextAreaV2';
 
 interface ButtonProps {

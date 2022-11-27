@@ -28,7 +28,7 @@ export default function AssigneeBtn({
     setQuery(e.target.value);
   };
 
-  const onClickChangeAssignee = (id: string, assigneeId: string) => {
+  const onClickChangeAssignee = (id: string, assigneeId: string | null) => {
     const data = { assignId: assigneeId };
     updateTask(id, data)
       .then(() => {
@@ -72,6 +72,16 @@ export default function AssigneeBtn({
             <img src={avartar} alt="avatar" />
           </div>
           <ul className={styles.assigneeDropdownList}>
+            <li>
+              <button
+                onClick={() => {
+                  onClickChangeAssignee(taskId, null);
+                }}
+              >
+                <img src={userAvatar} alt="avatar" />
+                Unassigned
+              </button>
+            </li>
             {userList
               .filter((user: IUserInfo) => {
                 return user.name && user.name.toLowerCase().includes(query.toLowerCase());

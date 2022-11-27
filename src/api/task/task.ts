@@ -49,8 +49,8 @@ export function updateTask(taskId: string, data: ITaskData) {
   return axios.put(`${config.apiAddress}/tasks/${taskId}`, copyData);
 }
 
-export function updateTaskStatus(taskId: string, status: string, targetIndex: number) {
-  return axios.put(`${config.apiAddress}/tasks/${taskId}`, { status, targetIndex });
+export function updateTaskStatus(taskId: string, status: string) {
+  return axios.put(`${config.apiAddress}/tasks/${taskId}`, { status });
 }
 
 export function removeTask(taskId: string) {

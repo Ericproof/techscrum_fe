@@ -86,6 +86,7 @@ function ProjectEditor(props: ProjectEditorProps) {
               defaultValue={data.projectLeadId}
               label="Project Lead"
               name="projectLeadId"
+              required
             />
           </Row>
           <Row defaultMargin>

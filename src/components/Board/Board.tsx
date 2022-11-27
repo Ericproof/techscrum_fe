@@ -49,7 +49,7 @@ const onDragEnd = (
         items: destItems
       }
     });
-    updateTaskStatus(result.draggableId, destination.droppableId, destination.index);
+    updateTaskStatus(result.draggableId, destination.droppableId);
     return true;
   }
 
@@ -64,7 +64,7 @@ const onDragEnd = (
       items: copiedItems
     }
   });
-  updateTaskStatus(result.draggableId, source.droppableId, destination.index);
+  updateTaskStatus(result.draggableId, source.droppableId);
   return true;
 };
 
