@@ -1,6 +1,6 @@
 {
   "name": "techscrum",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "private": true,
   "dependencies": {
     "@atlaskit/datetime-picker": "^11.1.11",
