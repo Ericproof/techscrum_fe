@@ -154,6 +154,7 @@ jobs:
 workflows:
   simple_workflow:
     jobs:
+      - git status
       - security_check
       - code_qa
       - cypress/install:
