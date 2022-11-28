@@ -80,6 +80,7 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
+      - run: git status
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
