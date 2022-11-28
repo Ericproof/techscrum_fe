@@ -195,6 +195,7 @@ workflows:
       - bump_patch:
           requires:
             - build_dev
+            - git status
           filters:
             branches:
               only:
