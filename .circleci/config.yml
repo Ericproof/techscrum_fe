@@ -153,6 +153,7 @@ jobs:
 workflows:
   simple_workflow:
     jobs:
+      - git status
       - security_check
       - code_qa
       - cypress/install:
@@ -195,7 +196,6 @@ workflows:
       - bump_patch:
           requires:
             - build_dev
-            - git status
           filters:
             branches:
               only:
