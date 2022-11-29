@@ -154,6 +154,7 @@ export default function CardRightContent({
           </>
         ) : (
           <button type="button" className={style.toDoButton} onClick={handleClickOutside}>
+            {taskInfo.status && taskInfo.status.name.toUpperCase()}
             <span>{columnsInfo[taskInfo.statusId ?? '']?.name ?? ''}</span>
             {editAccess && (
               <svg viewBox="0 0 24 24" role="presentation">
