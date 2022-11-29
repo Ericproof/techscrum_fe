@@ -21,6 +21,6 @@ describe('login', () => {
   });
 
   it('should able to see text', () => {
-    cy.get('[data-testid="header-text"]').contains('An Agile software that prevents delays.');
+    cy.get('[data-testid="header-text"]').contains('An agile software that prevents delays.');
   });
 });
