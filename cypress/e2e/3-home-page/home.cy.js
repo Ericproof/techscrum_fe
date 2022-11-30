@@ -13,14 +13,14 @@
 
 describe('login', () => {
   beforeEach(() => {
-    cy.intercept("GET","**/api/v1/domains",{
-  statusCode: 200,
-  body: true,
-})
-    cy.visit('/')
-  })
+    cy.intercept('GET', '**/api/v1/domains', {
+      statusCode: 200,
+      body: true
+    });
+    cy.visit('/');
+  });
 
   it('should able to see text', () => {
-    cy.get('[data-testid="header-text"]').contains('An Agile software that prevent delays.')
-  })
-})
+    cy.get('[data-testid="header-text"]').contains('An agile software that prevents delays.');
+  });
+});
