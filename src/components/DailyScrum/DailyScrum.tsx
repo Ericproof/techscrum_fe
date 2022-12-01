@@ -112,6 +112,7 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal) {
         className: 'primaryColorBackground',
         toastId: 'dailyScrum success'
       });
+      onClickCloseModal();
       setSubmitting(false);
     } catch (error) {
       toast.error('Temporarily server error, please try again later!', {
