@@ -145,7 +145,30 @@ export interface IStatusBacklog {
   slug: string;
   name: string;
   order: number;
-  board: string;
+  board?: string;
+}
+export interface ITaskBacklog {
+  assignId?: IUserInfo | null;
+  attachmentUrls?: [];
+  boardId?: string;
+  comments?: [];
+  createdAt?: string;
+  description?: string;
+  dueAt?: string;
+  id?: string;
+  priority?: string;
+  projectId?: string;
+  reporterId?: IUserInfo | null;
+  sprintId?: string | null;
+  status?: IStatusBacklog;
+  storyPoint?: number;
+  tags?: [];
+  title?: string;
+  typeId?: ITypes;
+  updatedAt?: string;
+}
+export interface IBacklogData {
+  cards?: ITaskBacklog[];
 }
 export default interface IBoardEntity {
   id: string;
@@ -247,7 +270,7 @@ export interface IConfig {
   [x: string]: any;
 }
 
-export interface Itypes {
+export interface ITypes {
   slug: string;
   name: string;
   createdAt: string;
