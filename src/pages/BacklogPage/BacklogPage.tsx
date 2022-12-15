@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import BacklogSection from './BacklogSection/BacklogSection';
 import styles from './BacklogPage.module.scss';
-import { getBacklog, updateTask } from '../../api/backlog/backlog';
+import { getBacklog, updateTask, updateBacklogOrder } from '../../api/backlog/backlog';
 import { getStatuses } from '../../api/status/status';
 import { getTypes } from '../../api/types/types';
 import { getUsers } from '../../api/user/user';
@@ -28,6 +28,8 @@ export default function BacklogPage() {
         const res = await getBacklog(projectId);
         setBacklogData(res.backlog);
         setSprintData(res.sprints);
+        // eslint-disable-next-line no-console
+        console.log(res);
         setLoaded(true);
       } catch (e) {
         setLoaded(false);
@@ -68,27 +70,36 @@ export default function BacklogPage() {
   };
   const onDragEventHandler = (result: DropResult) => {
     const { destination, source } = result;
+    const destinationData = { sprintId: null, data: [] };
+    const originData = { sprintId: null, data: [] };
     let currentItem: any = null;
     const updatedBacklogData = { ...backlogData };
     const updatedSprintData = [...sprintData];
     if (source?.droppableId === 'backlog') {
       [currentItem] = updatedBacklogData.cards.splice(source?.index, 1);
+      originData.data = updatedBacklogData.cards.map((task) => task.id);
     } else {
       updatedSprintData.forEach((sprint) => {
         if (sprint.id === source?.droppableId) {
           [currentItem] = sprint.taskId.splice(source?.index, 1);
+          originData.sprintId = sprint.id;
+          originData.data = sprint.taskId.map((task) => task.id);
         }
       });
     }
+
     if (currentItem) {
       if (destination?.droppableId === 'backlog') {
         currentItem.sprintId = null;
         updatedBacklogData.cards.splice(destination?.index, 0, currentItem);
+        destinationData.data = updatedBacklogData.cards.map((task) => task.id);
       } else {
         currentItem.sprintId = destination?.droppableId ?? null;
         updatedSprintData.forEach((sprint) => {
           if (sprint.id === destination?.droppableId) {
             sprint.taskId.splice(destination?.index, 0, currentItem);
+            destinationData.sprintId = sprint.id;
+            destinationData.data = sprint.taskId.map((task) => task.id);
           }
         });
       }
@@ -101,9 +112,13 @@ export default function BacklogPage() {
         updateTaskSprintIdApi(currentItem.id, destination?.droppableId ?? null);
       }
     }
+
+    updateBacklogOrder(projectId, { origin: originData, destination: destinationData });
+
     setBacklogData(updatedBacklogData);
     setSprintData(updatedSprintData);
   };
+
   return (
     <div className={styles.container}>
       <h1 className={styles.header} data-testid="backlog-header">
