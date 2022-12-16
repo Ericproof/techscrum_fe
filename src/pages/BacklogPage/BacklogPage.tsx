@@ -28,8 +28,6 @@ export default function BacklogPage() {
         const res = await getBacklog(projectId);
         setBacklogData(res.backlog);
         setSprintData(res.sprints);
-        // eslint-disable-next-line no-console
-        console.log(res);
         setLoaded(true);
       } catch (e) {
         setLoaded(false);
