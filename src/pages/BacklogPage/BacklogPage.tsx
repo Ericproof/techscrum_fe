@@ -8,6 +8,7 @@ import { getBacklog, updateTask } from '../../api/backlog/backlog';
 import { getStatuses } from '../../api/status/status';
 import { getTypes } from '../../api/types/types';
 import { getUsers } from '../../api/user/user';
+import { showProject } from '../../api/projects/projects';
 import SprintSection from './SprintSection/SprintSection';
 import Loading from '../../components/Loading/Loading';
 import ProjectNavigationV3 from '../../lib/ProjectNavigationV3/ProjectNavigationV3';
@@ -20,7 +21,8 @@ export default function BacklogPage() {
   const { projectId = '', boardId = '' } = useParams();
   const [typesData, setTypesData] = useState(null);
   const [userList, setUserList] = useState<any>([]);
-  const [typeStatusUserLoaded, setTypeStatusUserLoaded] = useState(false);
+  const [otherDataLoaded, setOtherDataLoaded] = useState(false);
+  const [projectKey, setProjectKey] = useState('');
 
   const getBacklogDataApi = useCallback(() => {
     const getBacklogData = async () => {
@@ -37,8 +39,8 @@ export default function BacklogPage() {
     getBacklogData();
   }, [projectId]);
 
-  const getTypesStatusesUsersDataApi = useCallback(() => {
-    const getTypesStatusesUsersData = async () => {
+  const getOtherDataApi = useCallback(() => {
+    const getOtherData = async () => {
       try {
         let res = await getTypes();
         setTypesData(res);
@@ -46,21 +48,23 @@ export default function BacklogPage() {
         setStatusData(res);
         res = await getUsers();
         setUserList(res.data);
-        setTypeStatusUserLoaded(true);
+        res = await showProject(projectId, localStorage.getItem('access_token') ?? '');
+        setProjectKey(res.data.key);
+        setOtherDataLoaded(true);
       } catch (e) {
-        setTypeStatusUserLoaded(false);
+        setOtherDataLoaded(false);
         toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
       }
     };
-    getTypesStatusesUsersData();
-  }, [boardId]);
+    getOtherData();
+  }, [boardId, projectId]);
 
   useEffect(() => {
     getBacklogDataApi();
-    getTypesStatusesUsersDataApi();
-  }, [getBacklogDataApi, getTypesStatusesUsersDataApi]);
+    getOtherDataApi();
+  }, [getBacklogDataApi, getOtherDataApi]);
 
-  const finishLoading = loaded && typeStatusUserLoaded;
+  const finishLoading = loaded && otherDataLoaded;
 
   const updateTaskSprintIdApi = (id: string, sprintId: string | null) => {
     const data = { sprintId };
@@ -133,6 +137,7 @@ export default function BacklogPage() {
                         statusData={statusData}
                         typesData={typesData}
                         userList={userList}
+                        projectKey={projectKey}
                       />
                     </React.Fragment>
                   );
@@ -144,6 +149,7 @@ export default function BacklogPage() {
                 statusData={statusData}
                 typesData={typesData}
                 userList={userList}
+                projectKey={projectKey}
               />
             </>
           )}

@@ -19,6 +19,7 @@ interface IBacklogSection {
   typesData: ITypes[] | null;
   userList: IUserInfo[];
   sprintData: any;
+  projectKey: string;
 }
 
 export default function BacklogSection({
@@ -27,7 +28,8 @@ export default function BacklogSection({
   statusData,
   typesData,
   userList,
-  sprintData
+  sprintData,
+  projectKey
 }: IBacklogSection) {
   const [currentTypeOption, setCurrentTypeOption] = useState('story');
   const { boardId = '', projectId = '' } = useParams();
@@ -132,6 +134,7 @@ export default function BacklogSection({
                         >
                           <TaskItem
                             task={task}
+                            projectKey={projectKey}
                             statusData={statusData}
                             userList={userList}
                             sprintData={sprintData}
