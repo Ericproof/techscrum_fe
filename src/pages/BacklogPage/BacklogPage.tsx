@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useEffect, useState, useCallback } from 'react';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
@@ -70,41 +71,70 @@ export default function BacklogPage() {
     const data = { sprintId };
     updateTask(id, data);
   };
-  const onDragEventHandler = (result: DropResult) => {
-    const { destination, source } = result;
+  const removeFromSourceOnDrag = (source, originBacklogData, originSprintData) => {
     let currentItem: any = null;
-    const updatedBacklogData = { ...backlogData };
-    const updatedSprintData = [...sprintData];
+    const removedBacklogData = { ...originBacklogData };
+    const removedSprintData = [...originSprintData];
     if (source?.droppableId === 'backlog') {
-      [currentItem] = updatedBacklogData.cards.splice(source?.index, 1);
+      [currentItem] = removedBacklogData.cards.splice(source?.index, 1);
     } else {
-      updatedSprintData.forEach((sprint) => {
+      removedSprintData.forEach((sprint) => {
         if (sprint.id === source?.droppableId) {
           [currentItem] = sprint.taskId.splice(source?.index, 1);
         }
       });
     }
+    return { currentItem, removedBacklogData, removedSprintData };
+  };
+  const addToDestinationOnDrag = (
+    destination,
+    removedBacklogData,
+    removedSprintData,
+    currentItem
+  ) => {
+    const updatedCurrentItem = { ...currentItem };
+    const updatedBacklogData = { ...removedBacklogData };
+    const updatedSprintData = [...removedSprintData];
     if (currentItem) {
       if (destination?.droppableId === 'backlog') {
-        currentItem.sprintId = null;
-        updatedBacklogData.cards.splice(destination?.index, 0, currentItem);
+        updatedCurrentItem.sprintId = null;
+        updatedBacklogData.cards.splice(destination?.index, 0, updatedCurrentItem);
       } else {
-        currentItem.sprintId = destination?.droppableId ?? null;
+        updatedCurrentItem.sprintId = destination?.droppableId ?? null;
         updatedSprintData.forEach((sprint) => {
           if (sprint.id === destination?.droppableId) {
-            sprint.taskId.splice(destination?.index, 0, currentItem);
+            sprint.taskId.splice(destination?.index, 0, updatedCurrentItem);
           }
         });
       }
     }
+    return { updatedCurrentItem, updatedBacklogData, updatedSprintData };
+  };
+  const onDragEventHandler = (result: DropResult) => {
+    const { destination, source } = result;
 
-    if (destination?.droppableId !== source?.droppableId && currentItem) {
+    const { currentItem, removedBacklogData, removedSprintData } = removeFromSourceOnDrag(
+      source,
+      { ...backlogData },
+      [...sprintData]
+    );
+
+    const { updatedCurrentItem, updatedBacklogData, updatedSprintData } = addToDestinationOnDrag(
+      destination,
+      removedBacklogData,
+      removedSprintData,
+      currentItem
+    );
+
+    if (destination?.droppableId !== source?.droppableId && updatedCurrentItem) {
       if (destination?.droppableId === 'backlog') {
-        updateTaskSprintIdApi(currentItem.id, null);
+        updateTaskSprintIdApi(updatedCurrentItem.id, null);
       } else {
-        updateTaskSprintIdApi(currentItem.id, destination?.droppableId ?? null);
+        updateTaskSprintIdApi(updatedCurrentItem.id, destination?.droppableId ?? null);
       }
     }
+    console.log(updatedBacklogData);
+    console.log(updatedSprintData);
     setBacklogData(updatedBacklogData);
     setSprintData(updatedSprintData);
   };
