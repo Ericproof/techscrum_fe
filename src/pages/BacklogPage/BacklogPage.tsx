@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { useEffect, useState, useCallback } from 'react';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
@@ -133,8 +132,6 @@ export default function BacklogPage() {
         updateTaskSprintIdApi(updatedCurrentItem.id, destination?.droppableId ?? null);
       }
     }
-    console.log(updatedBacklogData);
-    console.log(updatedSprintData);
     setBacklogData(updatedBacklogData);
     setSprintData(updatedSprintData);
   };
