@@ -52,6 +52,34 @@
   }
 }
 
+.borderForSuccessPage {
+  border-bottom: 6px, solid, white;
+}
+
+.close {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 5px; 
+  margin-top: 5px; 
+}
+
+.close:hover {
+  cursor: pointer;
+}
+
+.modalPadding {
+  padding: 30px 80px 80px 80px;
+}
+
+.iconPosition {
+  text-align: center;
+  color: greenyellow;
+}
+
+.messagePosition {
+  text-align: center;
+}
+
 .orange{
   background: #EA6A36;
   color:#FFDBCC

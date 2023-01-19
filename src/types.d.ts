@@ -13,6 +13,10 @@ export interface IProjectData {
   [x: string]: any;
 }
 
+export interface IJobApplyData {
+  [x: string]: any;
+}
+
 export interface IShortcutData {
   id?: string;
   name?: string;
@@ -87,6 +91,10 @@ export interface Task {
 }
 
 export interface IProjectEditor {
+  [key: string]: any;
+}
+
+export interface IJobApplyEditor {
   [key: string]: any;
 }
 

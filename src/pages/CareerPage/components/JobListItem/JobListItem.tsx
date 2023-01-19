@@ -1,5 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { TiTick } from 'react-icons/ti';
+import { ImCross } from 'react-icons/im';
 import styles from './JobListItem.module.scss';
+import Modal from '../../../../lib/Modal/Modal';
+import DefaultModalHeader from '../../../../lib/Modal/ModalHeader/DefaultModalHeader/DefaultModalHeader';
+import DefaultModalBody from '../../../../lib/Modal/ModalBody/DefaultModalHeader/DefaultModalBody';
+import JobEditor from '../../../../components/JobEditor/JobEditor';
+import { IJobApplyData } from '../../../../types';
 
 interface IJobListItem {
   title: string;
@@ -18,6 +25,17 @@ const tagClassesMap = {
 
 function JobListItem(props: IJobListItem) {
   const { title, id, desc, list, department } = props;
+
+  const [showApplyNowModal, setShowApplyNowModal] = useState(false);
+  const [showSuccessPage, setShowSuccessPage] = useState(false);
+
+  const onClickJobApplySend = (apiData: IJobApplyData) => {};
+
+  const onClckClose = () => {
+    setShowSuccessPage(false);
+    setShowApplyNowModal(false);
+  };
+
   return (
     <div className={styles.careerCard} id={id}>
       <span className={[styles.tag, tagClassesMap[department.toLocaleLowerCase()]].join(' ')}>
@@ -30,7 +48,48 @@ function JobListItem(props: IJobListItem) {
           return <li key={item}>{item}</li>;
         })}
       </ul>
-      <button className={styles.applyButtonText}>Apply now (WIP)</button>
+      <button
+        className={styles.applyButtonText}
+        onClick={() => setShowApplyNowModal(true)}
+        data-testid="applyButton"
+      >
+        Apply now
+      </button>
+      {showApplyNowModal && (
+        <Modal>
+          <DefaultModalHeader
+            title="Apply Now"
+            onClickClose={() => {
+              setShowApplyNowModal(false);
+            }}
+          />
+          <DefaultModalBody defaultPadding={false} classesName={styles.modalPadding}>
+            <JobEditor
+              redirectPage={setShowSuccessPage}
+              showCancelBtn
+              onClickSend={onClickJobApplySend}
+              onClickCancel={() => {
+                setShowApplyNowModal(false);
+              }}
+            />
+          </DefaultModalBody>
+        </Modal>
+      )}
+      {showSuccessPage && (
+        <Modal fullWidth classesName={styles.borderForSuccessPage}>
+          <div className={styles.close}>
+            <ImCross color="#4f5366" onClick={onClckClose} />
+          </div>
+          <DefaultModalBody defaultPadding={false} classesName={styles.modalPadding}>
+            <div className={styles.iconPosition}>
+              <TiTick size={200} />
+            </div>
+            <div className={styles.messagePosition}>
+              <h1>We have receive your application, we will get to you as soon as possible</h1>
+            </div>
+          </DefaultModalBody>
+        </Modal>
+      )}
     </div>
   );
 }
