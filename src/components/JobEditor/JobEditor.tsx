@@ -83,7 +83,7 @@ function JobEditor(props: JobEditorProps) {
               <InputV2
                 name="full name"
                 label="Full Name"
-                dataTestId="name"
+                dataTestId="full-name"
                 onValueChanged={onChangeName}
               />
             </Row>

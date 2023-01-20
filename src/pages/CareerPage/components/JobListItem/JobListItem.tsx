@@ -51,12 +51,12 @@ function JobListItem(props: IJobListItem) {
       <button
         className={styles.applyButtonText}
         onClick={() => setShowApplyNowModal(true)}
-        data-testid="applyButton"
+        data-testid="apply-button"
       >
         Apply now
       </button>
       {showApplyNowModal && (
-        <Modal>
+        <Modal data-testid="job-apply-modal">
           <DefaultModalHeader
             title="Apply Now"
             onClickClose={() => {
