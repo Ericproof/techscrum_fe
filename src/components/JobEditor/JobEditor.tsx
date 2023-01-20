@@ -23,8 +23,10 @@ function JobEditor(props: JobEditorProps) {
     workEmailAddress: '',
     phoneNumber: ''
   });
+  const { fullName, company, workEmailAddress, phoneNumber } = data;
 
   useEffect(() => {}, [data]);
+
   const [workingEmail, setWorkingEmail] = useState('');
 
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,6 +87,7 @@ function JobEditor(props: JobEditorProps) {
                 label="Full Name"
                 dataTestId="full-name"
                 onValueChanged={onChangeName}
+                value={fullName || ''}
               />
             </Row>
             <Row defaultMargin>
@@ -93,6 +96,7 @@ function JobEditor(props: JobEditorProps) {
                 label="Company"
                 dataTestId=""
                 onValueChanged={onChangeCompany}
+                value={company || ''}
               />
             </Row>
             <Row defaultMargin>
@@ -101,6 +105,7 @@ function JobEditor(props: JobEditorProps) {
                 label="Work Email Address"
                 dataTestId=""
                 onValueChanged={onChangeEmailAddress}
+                value={workEmailAddress || ''}
               />
             </Row>
             <Row defaultMargin>
@@ -109,6 +114,7 @@ function JobEditor(props: JobEditorProps) {
                 label="Phone Number"
                 dataTestId=""
                 onValueChanged={onChangePhoneNumber}
+                value={phoneNumber || ''}
               />
             </Row>
           </div>

@@ -6,7 +6,6 @@ import Modal from '../../../../lib/Modal/Modal';
 import DefaultModalHeader from '../../../../lib/Modal/ModalHeader/DefaultModalHeader/DefaultModalHeader';
 import DefaultModalBody from '../../../../lib/Modal/ModalBody/DefaultModalHeader/DefaultModalBody';
 import JobEditor from '../../../../components/JobEditor/JobEditor';
-import { IJobApplyData } from '../../../../types';
 
 interface IJobListItem {
   title: string;
@@ -29,7 +28,7 @@ function JobListItem(props: IJobListItem) {
   const [showApplyNowModal, setShowApplyNowModal] = useState(false);
   const [showSuccessPage, setShowSuccessPage] = useState(false);
 
-  const onClickJobApplySend = (apiData: IJobApplyData) => {};
+  const onClickJobApplySend = () => {};
 
   const onClckClose = () => {
     setShowSuccessPage(false);
@@ -49,6 +48,7 @@ function JobListItem(props: IJobListItem) {
         })}
       </ul>
       <button
+        key={id}
         className={styles.applyButtonText}
         onClick={() => setShowApplyNowModal(true)}
         data-testid="apply-button"
