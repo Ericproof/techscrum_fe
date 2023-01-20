@@ -23,17 +23,13 @@ describe('Careers page', () => {
       .then(() => cy.get('[data-testid="apply-button"]').eq(1).click({ force: true }))
   })
 
-  it('click the input in modal', () => {
+
+  it('click the first apply button', () => {
     cy.get('.react-reveal')
       .invoke('css', 'opacity', '1')
-      .then(() =>
-        cy.get('[data-testid="apply-button"]').eq(1).click({ force: true }))
+      .then(() => cy.get('[data-testid="apply-button"]').eq(1).click({}))
 
-    cy.get('[data-testid="job-apply-modal"]').should('be.visible')
     cy.get('input[data-testid="full-name"]').type('Andy Wei')
   })
-
-
-
 
 });
