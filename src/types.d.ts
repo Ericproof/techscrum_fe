@@ -13,10 +13,6 @@ export interface IProjectData {
   [x: string]: any;
 }
 
-export interface IJobApplyData {
-  [x: string]: any;
-}
-
 export interface IShortcutData {
   id?: string;
   name?: string;
@@ -95,7 +91,10 @@ export interface IProjectEditor {
 }
 
 export interface IJobApplyEditor {
-  [key: string]: any;
+  fullName: string;
+  company: string;
+  workEmailAddress: string;
+  phoneNumber: string;
 }
 
 export interface ILabelData {

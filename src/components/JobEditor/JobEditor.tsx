@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import ButtonV2 from '../../lib/FormV2/ButtonV2/ButtonV2';
 import InputV2 from '../../lib/FormV2/InputV2/InputV2';
@@ -23,39 +23,44 @@ function JobEditor(props: JobEditorProps) {
     workEmailAddress: '',
     phoneNumber: ''
   });
+
   const { fullName, company, workEmailAddress, phoneNumber } = data;
 
-  useEffect(() => {}, [data]);
+  const [emailAddress, setEmailAddress] = useState('');
 
-  const [workingEmail, setWorkingEmail] = useState('');
+  const jobInputs = {
+    fullName: (value) => {
+      const updateData = {
+        fullName: value
+      };
+      setData({ ...data, ...updateData });
+    },
 
-  const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const updateData = {
-      fullName: e.target.value
-    };
-    setData({ ...data, ...updateData });
+    company: (value) => {
+      const updateData = {
+        company: value
+      };
+      setData({ ...data, ...updateData });
+    },
+
+    workEmailAddress: (value) => {
+      const updateData = {
+        workEmailAddress: value
+      };
+      setEmailAddress(value);
+      setData({ ...data, ...updateData });
+    },
+
+    phoneNumber: (value) => {
+      const updateData = {
+        phoneNumber: value
+      };
+      setData({ ...data, ...updateData });
+    }
   };
 
-  const onChangeCompany = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const updateData = {
-      company: e.target.value
-    };
-    setData({ ...data, ...updateData });
-  };
-
-  const onChangeEmailAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const updateData = {
-      workEmailAddress: e.target.value
-    };
-    setWorkingEmail(e.target.value);
-    setData({ ...data, ...updateData });
-  };
-
-  const onChangePhoneNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const updateData = {
-      phoneNumber: e.target.value
-    };
-    setData({ ...data, ...updateData });
+  const handleInput = (name: string, e: React.ChangeEvent<HTMLInputElement>) => {
+    jobInputs[name](e.currentTarget.value);
   };
 
   const {
@@ -68,11 +73,11 @@ function JobEditor(props: JobEditorProps) {
   } = props;
 
   const onSend = () => {
-    if (workingEmail !== '') {
+    if (!emailAddress) {
+      toast.error('Please type your work email address');
+    } else {
       redirectPage(true);
       onClickSend(data);
-    } else {
-      toast.error('Please type your work email address');
     }
   };
 
@@ -86,7 +91,9 @@ function JobEditor(props: JobEditorProps) {
                 name="full name"
                 label="Full Name"
                 dataTestId="full-name"
-                onValueChanged={onChangeName}
+                onValueChanged={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  handleInput('fullName', e)
+                }
                 value={fullName || ''}
               />
             </Row>
@@ -95,7 +102,9 @@ function JobEditor(props: JobEditorProps) {
                 name="company"
                 label="Company"
                 dataTestId=""
-                onValueChanged={onChangeCompany}
+                onValueChanged={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  handleInput('company', e)
+                }
                 value={company || ''}
               />
             </Row>
@@ -104,7 +113,9 @@ function JobEditor(props: JobEditorProps) {
                 name="work email address"
                 label="Work Email Address"
                 dataTestId=""
-                onValueChanged={onChangeEmailAddress}
+                onValueChanged={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  handleInput('workEmailAddress', e)
+                }
                 value={workEmailAddress || ''}
               />
             </Row>
@@ -113,7 +124,9 @@ function JobEditor(props: JobEditorProps) {
                 name="phone number"
                 label="Phone Number"
                 dataTestId=""
-                onValueChanged={onChangePhoneNumber}
+                onValueChanged={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  handleInput('phoneNumber', e)
+                }
                 value={phoneNumber || ''}
               />
             </Row>

@@ -18,13 +18,15 @@ describe('Careers page', () => {
   })
 
   it('click the first apply button', () => {
+    cy.scrollTo(250, 2550)
     cy.get('.react-reveal')
       .invoke('css', 'opacity', '1')
-      .then(() => cy.get('[data-testid="apply-button"]').eq(1).click({ force: true }))
+      .then(() => cy.get('[data-testid="apply-button"]').eq(1).click({}))
   })
 
 
   it('click the first apply button', () => {
+    cy.scrollTo(250, 2550)
     cy.get('.react-reveal')
       .invoke('css', 'opacity', '1')
       .then(() => cy.get('[data-testid="apply-button"]').eq(1).click({}))
