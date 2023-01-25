@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
 import ButtonV2 from '../../lib/FormV2/ButtonV2/ButtonV2';
 import InputV2 from '../../lib/FormV2/InputV2/InputV2';
@@ -28,40 +28,15 @@ function JobEditor(props: JobEditorProps) {
 
   const [emailAddress, setEmailAddress] = useState('');
 
-  const jobInputs = {
-    fullName: (value) => {
-      const updateData = {
-        fullName: value
-      };
-      setData({ ...data, ...updateData });
+  const handleInput = useMemo(
+    () => (name: string, e: React.ChangeEvent<HTMLInputElement>) => {
+      setData({ ...data, [name]: e.currentTarget.value });
+      if (name === 'workEmailAddress') {
+        setEmailAddress(e.currentTarget.value);
+      }
     },
-
-    company: (value) => {
-      const updateData = {
-        company: value
-      };
-      setData({ ...data, ...updateData });
-    },
-
-    workEmailAddress: (value) => {
-      const updateData = {
-        workEmailAddress: value
-      };
-      setEmailAddress(value);
-      setData({ ...data, ...updateData });
-    },
-
-    phoneNumber: (value) => {
-      const updateData = {
-        phoneNumber: value
-      };
-      setData({ ...data, ...updateData });
-    }
-  };
-
-  const handleInput = (name: string, e: React.ChangeEvent<HTMLInputElement>) => {
-    jobInputs[name](e.currentTarget.value);
-  };
+    [data]
+  );
 
   const {
     redirectPage,

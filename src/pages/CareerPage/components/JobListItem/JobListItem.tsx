@@ -3,9 +3,8 @@ import { TiTick } from 'react-icons/ti';
 import { ImCross } from 'react-icons/im';
 import styles from './JobListItem.module.scss';
 import Modal from '../../../../lib/Modal/Modal';
-import DefaultModalHeader from '../../../../lib/Modal/ModalHeader/DefaultModalHeader/DefaultModalHeader';
 import DefaultModalBody from '../../../../lib/Modal/ModalBody/DefaultModalHeader/DefaultModalBody';
-import JobEditor from '../../../../components/JobEditor/JobEditor';
+import ApplyNowModal from '../../../../components/ApplyNowModal/ApplyNowModal';
 
 interface IJobListItem {
   title: string;
@@ -56,24 +55,11 @@ function JobListItem(props: IJobListItem) {
         Apply now
       </button>
       {showApplyNowModal && (
-        <Modal data-testid="job-apply-modal">
-          <DefaultModalHeader
-            title="Apply Now"
-            onClickClose={() => {
-              setShowApplyNowModal(false);
-            }}
-          />
-          <DefaultModalBody defaultPadding={false} classesName={styles.modalPadding}>
-            <JobEditor
-              redirectPage={setShowSuccessPage}
-              showCancelBtn
-              onClickSend={onClickJobApplySend}
-              onClickCancel={() => {
-                setShowApplyNowModal(false);
-              }}
-            />
-          </DefaultModalBody>
-        </Modal>
+        <ApplyNowModal
+          setShowApplyNowModal={setShowApplyNowModal}
+          setShowSuccessPage={setShowSuccessPage}
+          onClickJobApplySend={onClickJobApplySend}
+        />
       )}
       {showSuccessPage && (
         <Modal fullWidth classesName={styles.borderForSuccessPage}>
