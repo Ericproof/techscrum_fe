@@ -40,3 +40,9 @@ export const deleteTask = async (id: string) => {
   const response = await axios.delete(path, configHeader);
   return response.data;
 };
+
+export const updateBacklogOrder = async (projectId: string, data: object) => {
+  const path = `${config.apiAddress}/projects/${projectId}/backlogs/updateOrder`;
+  const response = await axios.put(path, data);
+  return response.data;
+};
