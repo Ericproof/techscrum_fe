@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import BacklogSection from './BacklogSection/BacklogSection';
 import styles from './BacklogPage.module.scss';
-import { getBacklog, updateTask } from '../../api/backlog/backlog';
+import { getBacklog, updateTask, updateBacklogOrder } from '../../api/backlog/backlog';
 import { getStatuses } from '../../api/status/status';
 import { getTypes } from '../../api/types/types';
 import { getUsers } from '../../api/user/user';
@@ -70,71 +70,53 @@ export default function BacklogPage() {
     const data = { sprintId };
     updateTask(id, data);
   };
-  const removeFromSourceOnDrag = (source, originBacklogData, originSprintData) => {
+  const onDragEventHandler = (result: DropResult) => {
+    const { destination, source } = result;
+    const destinationData = { sprintId: null, data: [] };
+    const originData = { sprintId: null, data: [] };
     let currentItem: any = null;
-    const removedBacklogData = { ...originBacklogData };
-    const removedSprintData = [...originSprintData];
+    const updatedBacklogData = { ...backlogData };
+    const updatedSprintData = [...sprintData];
     if (source?.droppableId === 'backlog') {
-      [currentItem] = removedBacklogData.cards.splice(source?.index, 1);
+      [currentItem] = updatedBacklogData.cards.splice(source?.index, 1);
+      originData.data = updatedBacklogData.cards.map((task) => task.id);
     } else {
-      removedSprintData.forEach((sprint) => {
+      updatedSprintData.forEach((sprint) => {
         if (sprint.id === source?.droppableId) {
           [currentItem] = sprint.taskId.splice(source?.index, 1);
+          originData.sprintId = sprint.id;
+          originData.data = sprint.taskId.map((task) => task.id);
         }
       });
     }
-    return { currentItem, removedBacklogData, removedSprintData };
-  };
-  const addToDestinationOnDrag = (
-    destination,
-    removedBacklogData,
-    removedSprintData,
-    currentItem
-  ) => {
-    const updatedCurrentItem = { ...currentItem };
-    const updatedBacklogData = { ...removedBacklogData };
-    const updatedSprintData = [...removedSprintData];
     if (currentItem) {
       if (destination?.droppableId === 'backlog') {
-        updatedCurrentItem.sprintId = null;
-        updatedBacklogData.cards.splice(destination?.index, 0, updatedCurrentItem);
+        currentItem.sprintId = null;
+        updatedBacklogData.cards.splice(destination?.index, 0, currentItem);
+        destinationData.data = updatedBacklogData.cards.map((task) => task.id);
       } else {
-        updatedCurrentItem.sprintId = destination?.droppableId ?? null;
+        currentItem.sprintId = destination?.droppableId ?? null;
         updatedSprintData.forEach((sprint) => {
           if (sprint.id === destination?.droppableId) {
-            sprint.taskId.splice(destination?.index, 0, updatedCurrentItem);
+            sprint.taskId.splice(destination?.index, 0, currentItem);
+            destinationData.sprintId = sprint.id;
+            destinationData.data = sprint.taskId.map((task) => task.id);
           }
         });
       }
     }
-    return { updatedCurrentItem, updatedBacklogData, updatedSprintData };
-  };
-  const onDragEventHandler = (result: DropResult) => {
-    const { destination, source } = result;
-
-    const { currentItem, removedBacklogData, removedSprintData } = removeFromSourceOnDrag(
-      source,
-      { ...backlogData },
-      [...sprintData]
-    );
-
-    const { updatedCurrentItem, updatedBacklogData, updatedSprintData } = addToDestinationOnDrag(
-      destination,
-      removedBacklogData,
-      removedSprintData,
-      currentItem
-    );
-
-    if (destination?.droppableId !== source?.droppableId && updatedCurrentItem) {
+    if (destination?.droppableId !== source?.droppableId && currentItem) {
       if (destination?.droppableId === 'backlog') {
-        updateTaskSprintIdApi(updatedCurrentItem.id, null);
+        updateTaskSprintIdApi(currentItem.id, null);
       } else {
-        updateTaskSprintIdApi(updatedCurrentItem.id, destination?.droppableId ?? null);
+        updateTaskSprintIdApi(currentItem.id, destination?.droppableId ?? null);
       }
     }
+    updateBacklogOrder(projectId, { origin: originData, destination: destinationData });
     setBacklogData(updatedBacklogData);
     setSprintData(updatedSprintData);
   };
+
   return (
     <div className={styles.container}>
       <h1 className={styles.header} data-testid="backlog-header">
