@@ -45,7 +45,7 @@ const jobs = [
       'Will have a chance to learn AWS',
       'Self-motivated'
     ],
-    id: '1'
+    id: '2'
   },
 
   {
@@ -73,7 +73,7 @@ const jobs = [
       'Will have a chance to learn AWS',
       'Self-motivated'
     ],
-    id: '4'
+    id: '3'
   },
   {
     title: 'Project Manager(Intern)',
@@ -94,7 +94,7 @@ const jobs = [
     ],
     total: 1,
     desc: 'Mainly responsible for creating and maintaining new functionality. Ensure that the teams can finish tasks on time.',
-    id: '5'
+    id: '4'
   },
   {
     title: 'Designer(Intern)',
@@ -130,7 +130,7 @@ const jobs = [
       'Ability to analyze and troubleshoot complex software and infrastructure issues, and develop tools/systems for task automation',
       'Self-motivated'
     ],
-    id: '5'
+    id: '6'
   }
 ];
 function JobListTable() {
