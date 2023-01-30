@@ -76,7 +76,7 @@ function JobEditor(props: JobEditorProps) {
               <InputV2
                 name="company"
                 label="Company"
-                dataTestId=""
+                dataTestId="company"
                 onValueChanged={(e: React.ChangeEvent<HTMLInputElement>) =>
                   handleInput('company', e)
                 }
@@ -87,7 +87,7 @@ function JobEditor(props: JobEditorProps) {
               <InputV2
                 name="work email address"
                 label="Work Email Address"
-                dataTestId=""
+                dataTestId="work-email"
                 onValueChanged={(e: React.ChangeEvent<HTMLInputElement>) =>
                   handleInput('workEmailAddress', e)
                 }
@@ -98,7 +98,7 @@ function JobEditor(props: JobEditorProps) {
               <InputV2
                 name="phone number"
                 label="Phone Number"
-                dataTestId=""
+                dataTestId="phone-number"
                 onValueChanged={(e: React.ChangeEvent<HTMLInputElement>) =>
                   handleInput('phoneNumber', e)
                 }
@@ -113,7 +113,7 @@ function JobEditor(props: JobEditorProps) {
           )}
           <Row>
             <BtnContainer>
-              <ButtonV2 text="Send" onClick={onSend} dataTestId="save" fill loading={loading} />
+              <ButtonV2 text="Send" onClick={onSend} dataTestId="send" fill loading={loading} />
               {showCancelBtn && (
                 <ButtonV2
                   text="Cancel"
