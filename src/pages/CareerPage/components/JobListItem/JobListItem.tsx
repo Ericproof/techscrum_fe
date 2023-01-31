@@ -88,7 +88,7 @@ function JobListItem(props: IJobListItem) {
       >
         Apply now
       </button>
-      {renderModals()}
+      {showApplyNowModal && renderModals()}
     </div>
   );
 }
