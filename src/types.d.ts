@@ -90,6 +90,13 @@ export interface IProjectEditor {
   [key: string]: any;
 }
 
+export interface IJobApplyEditor {
+  fullName: string;
+  company: string;
+  workEmailAddress: string;
+  phoneNumber: string;
+}
+
 export interface ILabelData {
   id?: string;
   name?: string;
