@@ -21,7 +21,7 @@ export default function BacklogPage() {
   const { projectId = '', boardId = '' } = useParams();
   const [typesData, setTypesData] = useState(null);
   const [userList, setUserList] = useState<any>([]);
-  const [otherDataLoaded, setOtherDataLoaded] = useState(false);
+  const [projectDataLoaded, setProjectDataLoaded] = useState(false);
   const [projectKey, setProjectKey] = useState('');
 
   const getBacklogDataApi = useCallback(() => {
@@ -39,8 +39,8 @@ export default function BacklogPage() {
     getBacklogData();
   }, [projectId]);
 
-  const getOtherDataApi = useCallback(() => {
-    const getOtherData = async () => {
+  const getProjectDataApi = useCallback(() => {
+    const getProjectData = async () => {
       try {
         let res = await getTypes();
         setTypesData(res);
@@ -50,21 +50,21 @@ export default function BacklogPage() {
         setUserList(res.data);
         res = await showProject(projectId, localStorage.getItem('access_token') ?? '');
         setProjectKey(res.data.key);
-        setOtherDataLoaded(true);
+        setProjectDataLoaded(true);
       } catch (e) {
-        setOtherDataLoaded(false);
+        setProjectDataLoaded(false);
         toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
       }
     };
-    getOtherData();
+    getProjectData();
   }, [boardId, projectId]);
 
   useEffect(() => {
     getBacklogDataApi();
-    getOtherDataApi();
-  }, [getBacklogDataApi, getOtherDataApi]);
+    getProjectDataApi();
+  }, [getBacklogDataApi, getProjectDataApi]);
 
-  const finishLoading = loaded && otherDataLoaded;
+  const finishLoading = loaded && projectDataLoaded;
 
   const updateTaskSprintIdApi = (id: string, sprintId: string | null) => {
     const data = { sprintId };
