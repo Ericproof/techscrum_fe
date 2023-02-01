@@ -23,6 +23,7 @@ interface ISprintSection {
   typesData: ITypes[] | null;
   userList: IUserInfo[];
   getBacklogDataApi: () => void;
+  projectKey: string;
 }
 export default function SprintSection({
   sprint,
@@ -30,7 +31,8 @@ export default function SprintSection({
   typesData,
   userList,
   sprintData,
-  getBacklogDataApi
+  getBacklogDataApi,
+  projectKey
 }: ISprintSection) {
   const [currentTypeOption, setCurrentTypeOption] = useState('story');
   const [showEditSprint, setShowEditSprint] = useState(false);
@@ -170,11 +172,11 @@ export default function SprintSection({
                             aria-hidden="true"
                           >
                             <TaskItem
-                              key={task.id}
                               task={task}
-                              sprintData={sprintData}
+                              projectKey={projectKey}
                               statusData={statusData}
                               userList={userList}
+                              sprintData={sprintData}
                               getBacklogDataApi={getBacklogDataApi}
                             />
                           </div>
