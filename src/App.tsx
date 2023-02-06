@@ -42,6 +42,7 @@ import { getDomains } from './api/domain/domain';
 import BacklogPage from './pages/BacklogPage/BacklogPage';
 import ShortcutPage from './pages/ShortcutPage/ShortcutPage';
 import DashboardLayout from './lib/Layout/DashboardLayout/DashboardLayout';
+import PricePage from './pages/PricePage/PricePage';
 
 function App() {
   const [showPages, setShowPages] = useState(null);
@@ -117,6 +118,7 @@ function App() {
                 </Route>
                 <Route path="/unauthorize" element={<UnauthorizePage />} />
                 <Route path="/contact" element={<ContactPage />} />
+                <Route path="/price" element={<PricePage />} />
                 <Route path="*" element={<ErrorPage />} />
               </Routes>
             </TaskTypesProvider>
