@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import styles from './TrailHeading.module.scss';
 
-function TrialHeading() {
-  const [isChecked, setIsChecked] = useState(false);
+interface ITrialHeadingProps {
+  isChecked: boolean;
+  setIsChecked: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function TrialHeading(props: ITrialHeadingProps) {
+  const { isChecked, setIsChecked } = props;
 
   const handleClick = () => {
     setIsChecked((ischecked) => !ischecked);
@@ -20,7 +25,7 @@ function TrialHeading() {
         </h5>
       </div>
       <div className={styles.option}>
-        <p className={styles.month}>Monthly</p>
+        <p className={`${styles.month} ${isChecked ? styles.true : styles.false}`}>Monthly</p>
         <label htmlFor="switch">
           <input
             id="switch"
@@ -40,7 +45,7 @@ function TrialHeading() {
           </div>
         </label>
 
-        <div className={styles.year}>
+        <div className={`${styles.year} ${isChecked ? styles.true : styles.false}`}>
           <span>Yearly</span>
           <span className={styles.info}>(Save up to 60%)</span>
         </div>
