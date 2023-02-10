@@ -17,22 +17,10 @@ const plans = {
         action: 'Sign Up',
         buy_action: '',
         includes: [
-          {
-            id: 0,
-            content: '100 entries'
-          },
-          {
-            id: 1,
-            content: '1 user license'
-          },
-          {
-            id: 2,
-            content: '1 custom field'
-          },
-          {
-            id: 3,
-            content: 'Help center and email support'
-          }
+          '100 entries',
+          '1 user license',
+          '1 custom field',
+          'Help center and email support'
         ],
         note: ''
       },
@@ -48,30 +36,12 @@ const plans = {
         action: 'Start Trial',
         buy_action: 'Buy Now',
         includes: [
-          {
-            id: 0,
-            content: '2,000 entries'
-          },
-          {
-            id: 1,
-            content: '2 user licenses'
-          },
-          {
-            id: 2,
-            content: '10 custom fields'
-          },
-          {
-            id: 3,
-            content: 'Help center and email support'
-          },
-          {
-            id: 4,
-            content: 'Unlimited QR code label generation'
-          },
-          {
-            id: 5,
-            content: 'In-app barcode scanner'
-          }
+          '2,000 entries',
+          '2 user licenses',
+          '10 custom fields',
+          'Help center and email support',
+          'Unlimited QR code label generation',
+          'In-app barcode scanner'
         ],
         note: 'Offer available to new customers only. Discounted pricing applies only to first year of subscription.'
       },
@@ -87,34 +57,13 @@ const plans = {
         action: 'Start Trial',
         buy_action: 'Buy Now',
         includes: [
-          {
-            id: 0,
-            content: '10,000 entries'
-          },
-          {
-            id: 1,
-            content: '5 user license'
-          },
-          {
-            id: 2,
-            content: '25 custom field'
-          },
-          {
-            id: 3,
-            content: 'Priority email support'
-          },
-          {
-            id: 4,
-            content: 'Unlimited QR code & barcode label generation'
-          },
-          {
-            id: 5,
-            content: 'In-app barcode scanner'
-          },
-          {
-            id: 6,
-            content: 'Use external/handheld scanners'
-          }
+          '10,000 entries',
+          '5 user license',
+          '25 custom field',
+          'Priority email support',
+          'Unlimited QR code & barcode label generation,',
+          'In-app barcode scanner',
+          'Use external/handheld scanners'
         ],
         note: ''
       },
@@ -130,42 +79,15 @@ const plans = {
         action: 'Contact Us',
         buy_action: '',
         includes: [
-          {
-            id: 0,
-            content: 'Unlimited entries'
-          },
-          {
-            id: 1,
-            content: '10+ user licenses'
-          },
-          {
-            id: 2,
-            content: 'Unlimited custom fields'
-          },
-          {
-            id: 3,
-            content: 'Scheduled phone support and custom training'
-          },
-          {
-            id: 4,
-            content: 'Unlimited QR code & barcode label generation'
-          },
-          {
-            id: 5,
-            content: 'In-app barcode scanner'
-          },
-          {
-            id: 6,
-            content: 'Use external/handheld scanners'
-          },
-          {
-            id: 7,
-            content: 'API Access'
-          },
-          {
-            id: 8,
-            content: 'SSO'
-          }
+          'Unlimited entries',
+          '10+ user licenses',
+          'Unlimited custom fields',
+          'Scheduled phone support and custom training',
+          'Unlimited QR code & barcode label generation',
+          'In-app barcode scanner',
+          'Use external/handheld scanners',
+          'API Access',
+          'SSO'
         ],
         note: ''
       }
@@ -238,8 +160,8 @@ function PlanOption(props: IPlanOptionProps) {
             <h3 className={styles.include}>Includes:</h3>
             <ul className={styles.ul}>
               {plan.includes.map((include) => (
-                <li key={include.id} className={styles.term}>
-                  {include.content}
+                <li key={include} className={styles.term}>
+                  {include}
                 </li>
               ))}
             </ul>
