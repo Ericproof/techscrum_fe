@@ -6,6 +6,7 @@ const plans = {
     title: 'Plans',
     content: [
       {
+        id: 0,
         plan: 'Free',
         popularity: '',
         description: 'Perfect for individuals or new businesses.',
@@ -16,14 +17,27 @@ const plans = {
         action: 'Sign Up',
         buy_action: '',
         includes: [
-          '100 entries',
-          '1 user license',
-          '1 custom field',
-          'Help center and email support'
+          {
+            id: 0,
+            content: '100 entries'
+          },
+          {
+            id: 1,
+            content: '1 user license'
+          },
+          {
+            id: 2,
+            content: '1 custom field'
+          },
+          {
+            id: 3,
+            content: 'Help center and email support'
+          }
         ],
         note: ''
       },
       {
+        id: 1,
         plan: 'Advanced',
         popularity: '',
         description: 'Affordable tools small businesses need to manage their inventory and assets.',
@@ -34,16 +48,35 @@ const plans = {
         action: 'Start Trial',
         buy_action: 'Buy Now',
         includes: [
-          '2,000 entries',
-          '2 user licenses',
-          '10 custom fields',
-          'Help center and email support',
-          'Unlimited QR code label generation',
-          'In-app barcode scanner'
+          {
+            id: 0,
+            content: '2,000 entries'
+          },
+          {
+            id: 1,
+            content: '2 user licenses'
+          },
+          {
+            id: 2,
+            content: '10 custom fields'
+          },
+          {
+            id: 3,
+            content: 'Help center and email support'
+          },
+          {
+            id: 4,
+            content: 'Unlimited QR code label generation'
+          },
+          {
+            id: 5,
+            content: 'In-app barcode scanner'
+          }
         ],
         note: 'Offer available to new customers only. Discounted pricing applies only to first year of subscription.'
       },
       {
+        id: 2,
         plan: 'Ultra',
         popularity: 'Most Popular',
         description: 'Scalable inventory solution for growing businesses.',
@@ -54,17 +87,39 @@ const plans = {
         action: 'Start Trial',
         buy_action: 'Buy Now',
         includes: [
-          '10,000 entries',
-          '5 user license',
-          '25 custom field',
-          'Priority email support',
-          'Unlimited QR code & barcode label generation,',
-          'In-app barcode scanner',
-          'Use external/handheld scanners'
+          {
+            id: 0,
+            content: '10,000 entries'
+          },
+          {
+            id: 1,
+            content: '5 user license'
+          },
+          {
+            id: 2,
+            content: '25 custom field'
+          },
+          {
+            id: 3,
+            content: 'Priority email support'
+          },
+          {
+            id: 4,
+            content: 'Unlimited QR code & barcode label generation'
+          },
+          {
+            id: 5,
+            content: 'In-app barcode scanner'
+          },
+          {
+            id: 6,
+            content: 'Use external/handheld scanners'
+          }
         ],
         note: ''
       },
       {
+        id: 3,
         plan: 'Enterprise',
         popularity: '',
         description: 'For organizations that need additional security, control, and support.',
@@ -75,15 +130,42 @@ const plans = {
         action: 'Contact Us',
         buy_action: '',
         includes: [
-          'Unlimited entries',
-          '10+ user licenses',
-          'Unlimited custom fields',
-          'Scheduled phone support and custom training',
-          'Unlimited QR code & barcode label generation',
-          'In-app barcode scanner',
-          'Use external/handheld scanners',
-          'API Access',
-          'SSO'
+          {
+            id: 0,
+            content: 'Unlimited entries'
+          },
+          {
+            id: 1,
+            content: '10+ user licenses'
+          },
+          {
+            id: 2,
+            content: 'Unlimited custom fields'
+          },
+          {
+            id: 3,
+            content: 'Scheduled phone support and custom training'
+          },
+          {
+            id: 4,
+            content: 'Unlimited QR code & barcode label generation'
+          },
+          {
+            id: 5,
+            content: 'In-app barcode scanner'
+          },
+          {
+            id: 6,
+            content: 'Use external/handheld scanners'
+          },
+          {
+            id: 7,
+            content: 'API Access'
+          },
+          {
+            id: 8,
+            content: 'SSO'
+          }
         ],
         note: ''
       }
@@ -106,8 +188,8 @@ function PlanOption(props: IPlanOptionProps) {
 
   return (
     <div className={styles.group}>
-      {content.content.map((plan, index) => (
-        <div key={index} className={styles.card}>
+      {content.content.map((plan) => (
+        <div key={plan.id} className={styles.card}>
           <h1 className={styles.plan}>
             {plan.plan} {plan.popularity && <span>{plan.popularity}</span>}
           </h1>
@@ -116,10 +198,20 @@ function PlanOption(props: IPlanOptionProps) {
 
           <div className={styles.discount}>
             <div className={styles.price}>
-              {plan.monthly_price && !isChecked && (
-                <span className={styles.monthly_price}>{plan.monthly_price}</span>
+              {plan.yearly_price && !plan.monthly_price && (
+                <span className={styles.yearly_price}>{plan.yearly_price}</span>
               )}
-              <span className={styles.yearly_price}>{plan.yearly_price}</span>
+              {plan.yearly_price && plan.monthly_price && !isChecked && (
+                <>
+                  <span className={styles.monthly_price}>{plan.monthly_price}</span>
+                  <span className={styles.yearly_price}>{plan.yearly_price}</span>
+                </>
+              )}
+              {plan.monthly_price && isChecked ? (
+                <span className={styles.yearly_price}>{plan.monthly_price}</span>
+              ) : (
+                <></>
+              )}
             </div>
             {plan.yearly_discount_information && !isChecked ? (
               <div className={styles.yearly_discount_information}>
@@ -145,9 +237,9 @@ function PlanOption(props: IPlanOptionProps) {
           <div className={styles.service}>
             <h3 className={styles.include}>Includes:</h3>
             <ul className={styles.ul}>
-              {plan.includes.map((include, idx) => (
-                <li key={idx} className={styles.term}>
-                  {include}
+              {plan.includes.map((include) => (
+                <li key={include.id} className={styles.term}>
+                  {include.content}
                 </li>
               ))}
             </ul>
