@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './PlanTable.module.scss';
 import PlanTableBody from './PlanTableBody/PlanTableBody';
-import PlanTableHeader from './PlanTableHeader/PlanTableHeader.js';
+import PlanTableHeader from './PlanTableHeader/PlanTableHeader';
 
 const plans = {
   content: {
