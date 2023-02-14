@@ -1,0 +1,44 @@
+.container {
+  margin: 75px auto 0 auto;
+  text-align: center;
+  width: 100%;
+  max-width: 1280px;
+  padding: 15px 0;
+
+  h2 {
+    font-size: 96px;
+    font-weight: 300;
+    margin: 25px 0px;
+  }
+
+  .positionFilter {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+    justify-content: center;
+    list-style-type: none;
+
+    li {
+      padding: 2px 7px;
+      cursor: pointer;
+      text-transform: uppercase;
+      font-weight: 600;
+      font-size: 18px;
+      letter-spacing: 0.11em;
+      line-height: 1.3em;
+      margin: 25px 50px;
+      transition: 0.8s;
+      text-align: center;
+    }
+
+    li:hover {
+      background: #d5d5d5;
+    }
+
+    .active {
+      background: #a67feb;
+      color: white;
+    }
+  }
+}
