@@ -10,15 +10,16 @@ interface IStaff {
   description?: string;
   gender: 'male' | 'female';
   position: 'ceo' | 'business analyst' | 'developer';
+  closeDetail: () => void;
 }
 
 function StaffDetail(props: IStaff) {
-  const { name, image, gender, position, description } = props;
+  const { name, image, gender, position, description, closeDetail } = props;
   const imageShow = image || (gender === 'male' ? MaleAvatar : FemaleAvatar);
   return (
     <div className={styles['intro-container']}>
-      <div className={styles.closeBtn}>
-        <AiFillCloseSquare style={{ fontSize: '50px' }} />
+      <div className={styles.closeBtn} role="presentation">
+        <AiFillCloseSquare onClick={closeDetail} style={{ fontSize: '50px' }} />
       </div>
       <div className={styles['inner-container']}>
         <div className={styles['detail-img']}>
