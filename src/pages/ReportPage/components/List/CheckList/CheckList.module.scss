@@ -1,0 +1,18 @@
+@import '../../../styles/variables.scss';
+@import '../List.module.scss';
+
+.checkList {
+  @include reset-list;
+  padding-inline-start: $size-28;
+  margin-block-end: $size-40;
+
+  .listItem {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+    font-size: $size-13;
+    line-height: $size-24;
+    margin-block-end: 8px;
+  }
+}

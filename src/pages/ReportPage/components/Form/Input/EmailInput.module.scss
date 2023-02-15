@@ -1,0 +1,22 @@
+@import '../../../styles/variables.scss';
+.emailInput {
+  padding-inline: $size-18;
+  display: flex;
+  flex-direction: column;
+  margin-block-end: $size-35;
+  input {
+    all: unset;
+
+    padding: $size-16 $size-22;
+    font-weight: 400;
+    font-size: $size-14;
+    line-height: $size-16;
+    color: $color-grey-0;
+    max-height: $size-55;
+
+    border: 1px solid rgba(185, 190, 199, 0.6); // grey-2
+    border-radius: 9px;
+    box-shadow: 0 19px 25px rgb(10 10 51 / 4%);
+    transition: 0.2s;
+  }
+}
