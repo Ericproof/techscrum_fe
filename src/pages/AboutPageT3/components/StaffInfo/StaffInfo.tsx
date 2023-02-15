@@ -8,6 +8,7 @@ interface IStaff {
   image?: string;
   gender: 'male' | 'female';
   position: 'ceo' | 'business analyst' | 'developer';
+  openDetail: (e: any) => void;
 }
 
 function StaffInfo(props: IStaff) {

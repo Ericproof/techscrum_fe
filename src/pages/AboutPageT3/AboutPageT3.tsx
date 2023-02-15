@@ -110,7 +110,6 @@ function AboutPageT3() {
 
   const openDetailHander = (e) => {
     e.preventDefault();
-    console.log('abc');
     setOpenDetail(!openDetail);
   };
 
