@@ -1,0 +1,63 @@
+.intro-container {
+  width: 100%;
+  max-width: 720px;
+  top: 50%;
+  left: 50%;
+  z-index: 10;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 30px rgb(0 0 0 / 20%);
+  background-color: #FFF;
+  border-color: #FFF;
+
+  .inner-container {
+    width: 100%;
+    padding: 6% 6% 3% 6%;
+    text-align: left;
+
+    .detail-img {
+      float: right;
+      width: 200px;
+      margin-top: -135px;
+      margin-right: -20px;
+
+      .staffImg {
+        width: 100%;
+        object-position: 50% 20%;
+        border-radius: 50%;
+        object-fit: cover;
+        aspect-ratio: 1/1;
+        transition: all 0.4s;
+        box-shadow: 0 2.4rem 4.8rem rgb(0 0 0 / 8%);
+        margin-bottom: 16px;
+      }
+    }
+
+    .detail-header {
+      .staffName {
+        font-family: 'industry';
+        line-height: 1em;
+        font-weight: 300;
+        font-size: 48px;
+        text-transform: capitalize;
+      }
+
+      .position {
+        font-family: 'freight-sans-pro';
+        font-weight: 600;
+        font-size: 16px;
+        letter-spacing: 1.8px;
+        line-height: 1.3em;
+        text-transform: uppercase;
+        color: #6a2add;
+      }
+    }
+
+    .detail-intro {
+      padding-top: 34px;
+      font-size: 24px;
+      line-height: 40px;
+      font-weight: 300;
+    }
+  }
+}

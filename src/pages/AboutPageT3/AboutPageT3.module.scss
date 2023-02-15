@@ -1,3 +1,9 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 .container {
   margin: 75px auto 0 auto;
   text-align: center;
@@ -9,6 +15,18 @@
     font-size: 96px;
     font-weight: 300;
     margin: 25px 0px;
+  }
+
+  .listContainer {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    padding: 16px;
+
+    .staffContainer {
+      width: 100%;
+      margin-bottom: 12px;
+    }
   }
 
   .positionFilter {
@@ -37,7 +55,7 @@
     }
 
     .active {
-      background: #a67feb;
+      background: #976ae7;
       color: white;
     }
   }

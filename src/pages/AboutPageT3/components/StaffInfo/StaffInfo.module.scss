@@ -1,0 +1,30 @@
+.staffImg {
+  width: 80%;
+  object-position: 50% 20%;
+  border-radius: 50%;
+  object-fit: cover;
+  aspect-ratio: 1/1;
+  transition: all 0.4s;
+  box-shadow: 0 2.4rem 4.8rem rgb(0 0 0 / 8%);
+  margin-bottom: 16px;
+}
+
+.staffImg:hover {
+  transform: scale(1.1);
+}
+
+.infoContainer {
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1.8px;
+  font-size: 24px;
+
+  h4 {
+    margin-bottom: 7px;
+  }
+
+  .position {
+    font-size: 14px;
+    color: #6a2add;
+  }
+}
