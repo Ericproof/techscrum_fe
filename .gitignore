@@ -25,6 +25,9 @@ node_modules
 .vscode
 settings.json
 
+yarn.lock
+package-lock.json
+
 # cypress
 /cypress/screenshots
 /cypress/videos
