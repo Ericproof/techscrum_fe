@@ -1,4 +1,8 @@
-@import '../../variables.scss';
+@use '../../variables.scss' as *;
+
+.page {
+  background-color: #f6f8f9;
+}
 
 .unauthorizePageContainer {
   background-repeat: no-repeat;
@@ -7,7 +11,6 @@
   border: 0;
   outline: 0;
   height: 100vh;
-  background-color: #f6f8f9;
   overflow: hidden;
 }
 
@@ -79,49 +82,26 @@
   top: 20%;
   left: 50%;
   transform: translateX(-50%);
-  width: 90%;
+  width: 95%;
   max-width: 1220px;
-
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  min-height: 800px;
+  gap: 2rem;
+  align-items: center;
+
   .content {
     text-align: left;
-    flex: 1 1 auto;
+    flex: 1.5 1.5 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
   .demo {
     flex: 1 1 auto;
     aspect-ratio: 1.6;
     display: block;
-    
   }
 }
 
-// .container {
-//   position: absolute;
-//   top: 10%;
-//   left: 20%;
-//   right: 0;
-//   bottom: 0;
-
-//   max-width: 80%;
-//   height: 500px;
-//   text-align: center;
-//   @media (max-width: 1280px) {
-//     top: 15%;
-//     left: 10%;
-//   }
-//   @media (max-width: 550px) {
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     justify-content: center;
-//     top: 20%;
-//     left: 0;
-//     max-width: 100%;
-//   }
-// }
 
 .header {
   color: #4f5366;
@@ -143,7 +123,7 @@
 
 .text {
   color: #2a1737;
-  font-size: 18px;
+  font-size: 16px;
   @media (max-width: 768px) {
     font-size: 16px;
   }
@@ -155,6 +135,54 @@
   }
   @media (max-width: 320px) {
     font-size: 12px;
+  }
+}
+
+.flex_col {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.email__wrapper {
+  position: relative;
+  .email__input {
+    border: none;
+    font-size: 1rem;
+    max-height: 50px;
+    padding: 20px 46px 18px;
+    border-radius: 4px;
+    border-left: 5px solid #fd71af;
+    box-shadow: 0 10px 25px rgb(0 0 0 / 15%);
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .email__icon {
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    color: #fd71af;
+  }
+}
+
+.start__btn {
+  border: none;
+  font: 800 14px/16px Axiforma, Arial, serif;
+  color: white;
+  width: 100%;
+  max-width: fit-content;
+  height: 50px;
+  padding: 2px 30px 0;
+  background: hsl(261, 72%, 52%);
+  border-radius: 4px;
+  box-shadow: 0 10px 25px rgb(123 104 238 / 50%);
+  cursor: pointer;
+  &:hover {
+    background: hsl(261, 72%, 45%);
   }
 }
 

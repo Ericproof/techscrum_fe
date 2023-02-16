@@ -1,0 +1,74 @@
+@use '../../variables.scss' as *;
+
+.section {
+  overflow: hidden;
+  padding: 2rem 0;
+  .container {
+    margin: 0 auto;
+    width: 95%;
+    max-width: 1220px;
+    display: flex;
+    gap: 2rem;
+
+    .content {
+      text-align: left;
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      .header__before {
+        font-size: 14px;
+        font-weight: bold;
+        color: $primaryColor;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+      .header {
+        margin: 0;
+        color: #4f5366;
+        font-size: 50px;
+        &::after {
+          display: block;
+          max-width: 80px;
+          height: 5px;
+          border-radius: 7px;
+          content: '';
+          margin-top: 2rem;
+          background: linear-gradient(90deg, $primaryColor 100%, #7b68ee 0);
+        }
+      }
+    }
+    .demo {
+      position: relative;
+      align-self: flex-start;
+      flex: 1 1 auto;
+      aspect-ratio: 1.6;
+      display: block;
+      padding: 2rem 4rem;
+      margin: auto;
+      background-image: url('../../assets/bg__with-dotted.svg');
+
+      .diamondShape {
+        position: absolute;
+        right: 0;
+        z-index: 1;
+        transform: translate(50%, -10%);
+        width: 500px;
+        aspect-ratio: 1;
+      }
+    }
+  }
+}
+
+.section__right {
+  .container {
+    flex-direction: row-reverse;
+    .demo {
+      .diamondShape {
+        left: 0;
+        transform: translate(-30%, -10%);
+      }
+    }
+  }
+}
