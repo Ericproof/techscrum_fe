@@ -2,7 +2,6 @@
 .sectionWrapper {
   border-radius: $size-18;
   padding: $size-24;
-  padding-bottom: $size-65 + $size-24;
   position: relative;
 
   div h2 {
@@ -25,4 +24,13 @@
 
 .bgPurple {
   background-color: #f8f7fe;
+}
+
+.bgDefault {
+  background-color: transparent;
+  box-shadow: 0 15px 45px rgb(16 30 54 / 16%);
+}
+
+.extended {
+  padding-bottom: $size-65 + $size-24;
 }

@@ -19,7 +19,7 @@ function BottomButton({ btnTitle, trailingIcon, isShowIcon }: Props) {
 
 BottomButton.defaultProps = {
   isShowIcon: true,
-  trailingIcon: <HiArrowNarrowRight color="7b68ee" size={20} />
+  trailingIcon: <HiArrowNarrowRight color="#7b68ee" size={20} />
 };
 
 export default BottomButton;

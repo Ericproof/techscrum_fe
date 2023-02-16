@@ -4,17 +4,17 @@ import styles from './PrimaryButton.module.scss';
 
 interface Props {
   btnTitle: string;
-  btnBackgroundColor?: 'green' | 'brand' | 'blue' | 'pink' | '';
-  fullWidth?: boolean;
+  btnBackgroundColor?: 'green' | 'brand' | 'blue' | 'pink' | 'default' | '';
+  isFullWidth?: boolean;
 }
 
-function PrimaryButton({ btnTitle, btnBackgroundColor, fullWidth }: Props) {
+function PrimaryButton({ btnTitle, btnBackgroundColor, isFullWidth }: Props) {
   return (
     <button
       className={[
         styles.buttonPrimary,
         styles[`btnColor${capitalise(btnBackgroundColor as string)}`],
-        styles[fullWidth ? 'btnFullWidth' : '']
+        styles[isFullWidth ? 'btnFullWidth' : '']
       ].join(' ')}
     >
       {btnTitle}
@@ -23,8 +23,8 @@ function PrimaryButton({ btnTitle, btnBackgroundColor, fullWidth }: Props) {
 }
 
 PrimaryButton.defaultProps = {
-  btnBackgroundColor: 'brand',
-  fullWidth: false
+  btnBackgroundColor: 'default',
+  isFullWidth: false
 };
 
 export default PrimaryButton;

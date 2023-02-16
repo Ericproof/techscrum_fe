@@ -10,19 +10,22 @@
   text-transform: capitalize;
   margin-block-start: $size-16;
   padding-inline: $size-32;
-  border-radius: 9px;
+  border-radius: 4px;
   color: $color-white;
   height: $size-50;
   font-weight: 800;
   font-size: $size-16;
   line-height: $size-16;
   min-width: 170px;
+
+  align-self: flex-start;
 }
 
 .btnColorDefault {
   background-color: $color-white;
   border: 1px solid $color-white;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  color: $color-brand;
 }
 
 .btnColorGreen {
@@ -51,4 +54,5 @@
 
 .btnFullWidth {
   min-width: 100%;
+  align-self: stretch;
 }

@@ -4,15 +4,18 @@ import styles from './SectionWrapper.module.scss';
 
 interface Props {
   children: React.ReactNode;
-  backgroundColor?: string;
+  backgroundColor?: 'blue' | 'pink' | 'purple' | 'green' | 'default' | '';
+  extended?: boolean;
 }
 
-function SectionWrapper({ children, backgroundColor }: Props) {
+function SectionWrapper({ children, backgroundColor, extended }: Props) {
   return (
     <div
-      className={[styles.sectionWrapper, styles[`bg${capitalise(backgroundColor as string)}`]].join(
-        ' '
-      )}
+      className={[
+        styles.sectionWrapper,
+        styles[`bg${capitalise(backgroundColor as string)}`],
+        styles[extended ? 'extended' : '']
+      ].join(' ')}
     >
       {children}
     </div>
@@ -20,7 +23,8 @@ function SectionWrapper({ children, backgroundColor }: Props) {
 }
 
 SectionWrapper.defaultProps = {
-  backgroundColor: ''
+  backgroundColor: '',
+  extended: false
 };
 
 export default SectionWrapper;

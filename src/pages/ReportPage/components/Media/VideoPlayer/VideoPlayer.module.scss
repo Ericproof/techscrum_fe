@@ -1,0 +1,18 @@
+@import '../../../styles/variables.scss';
+
+.playerWrapper {
+  border-radius: 5px;
+  box-shadow: 0 1px 11px rgb(0 0 0 / 15%);
+  height: auto;
+  width: 100%;
+  max-width: 960px;
+  margin: $size-32 auto 0;
+  //   background-color: $color-green-dark;
+  display: flex;
+  justify-content: center;
+
+  .videoPlayer {
+    max-width: 100%;
+    width: 960px;
+  }
+}

@@ -1,32 +1,19 @@
 import React from 'react';
-import BottomButton from '../components/Button/BottomButton/BottomButton';
-import PrimaryButton from '../components/Button/PrimaryButton/PrimaryButton';
-
-import SectionWrapper from '../components/Card/SectionWrapper/SectionWrapper';
-// import EmailInput from '../components/Form/Input/EmailInput';
-
-// import CheckList from '../components/List/CheckList/CheckList';
-// import HorizontalList from '../components/List/HorizontalList/HorizontalList';
+import EmailInput from '../components/Form/Input/EmailInput';
+import VideoPlayer from '../components/Media/VideoPlayer/VideoPlayer';
 import HeroTitle from '../components/Text/HeroTitle/HeroTitle';
-
-// const contentList = [
-//   'manage tasks, workflows, & goals',
-//   'collaborate in Docs & Whiteboards',
-//   'save time with no-code automations'
-// ];
-
-// const replaceList = ['asana', 'monday', 'jira'];
+import Paragraph from '../components/Text/Paragraph/Paragraph';
 
 function GetStartSection() {
   return (
-    <SectionWrapper backgroundColor="purple">
-      <HeroTitle mainTitleText="bring your ideas to life with Whiteboards" centerText />
-      {/* <CheckList list={contentList} />
-      <EmailInput />
-      <HorizontalList listTitle="replace" list={replaceList} /> */}
-      <PrimaryButton btnTitle="Get Started" />
-      <BottomButton btnTitle="Get started" />
-    </SectionWrapper>
+    <div>
+      <HeroTitle mainTitleText="create the perfect Agile workflow with Board view" />
+      <Paragraph>
+        Build a flexible Kanban system to visualize your work and improve project management.
+      </Paragraph>
+      <EmailInput isShowInputIcon isFullWidth isButtonShrink />
+      <VideoPlayer />
+    </div>
   );
 }
 

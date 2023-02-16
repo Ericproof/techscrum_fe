@@ -6,15 +6,41 @@ import styles from './CheckList.module.scss';
 interface Props {
   list: string[];
   prefixIcon?: JSX.Element;
+  isShowIconContainer?: boolean;
+  containerBgColor?: 'pink' | 'blue' | 'brand' | 'green' | 'default' | '';
+  isHaveLeadingPadding?: boolean;
 }
 
-function CheckList({ list, prefixIcon }: Props) {
+function CheckList({
+  list,
+  prefixIcon,
+  isShowIconContainer,
+  containerBgColor,
+  isHaveLeadingPadding
+}: Props) {
   return (
-    <ul className={styles.checkList}>
+    <ul
+      className={[styles.checkList, styles[!isHaveLeadingPadding ? 'noLeadingPadding' : '']].join(
+        ' '
+      )}
+    >
       {list.map((text) => (
         <li key={crypto.randomUUID()} className={styles.listItem}>
-          {prefixIcon}
-          {capitalise(text)}
+          <>
+            {isShowIconContainer ? (
+              <div
+                className={[
+                  styles.iconContainer,
+                  styles[`iconContainer${capitalise(containerBgColor as string)}`]
+                ].join(' ')}
+              >
+                {prefixIcon}
+              </div>
+            ) : (
+              <>{prefixIcon}</>
+            )}
+            <p>{capitalise(text)}</p>
+          </>
         </li>
       ))}
     </ul>
@@ -22,7 +48,10 @@ function CheckList({ list, prefixIcon }: Props) {
 }
 
 CheckList.defaultProps = {
-  prefixIcon: <AiOutlineCheckCircle color="green" size={20} />
+  prefixIcon: <AiOutlineCheckCircle color="green" size={20} />,
+  isShowIconContainer: false,
+  containerBgColor: 'default',
+  isHaveLeadingPadding: true
 };
 
 export default CheckList;

@@ -5,9 +5,34 @@
     margin-top: $size-18;
     margin-bottom: $size-16;
 
-    @media screen and (max-width: 600px) {
+    font-size: $size-50;
+    line-height: $size-65;
+
+    @media screen and (max-width: 1200px) {
+      font-size: $size-45;
+      line-height: $size-65;
+    }
+
+    @media screen and (max-width: 1000px) {
       font-size: $size-40;
       line-height: $size-50;
+    }
+
+    @media screen and (max-width: 768px) {
+      font-size: $size-35;
+      line-height: $size-50;
+    }
+
+    @media screen and (max-width: 600px) {
+      font-size: $size-35;
+      line-height: $size-50;
+    }
+  }
+
+  .shrinkH2 {
+    @media screen and (max-width: 600px) {
+      font-size: $size-28;
+      line-height: $size-40;
     }
   }
 
@@ -21,6 +46,10 @@
 
   .textCenter {
     text-align: center;
+  }
+
+  .textColorYellow {
+    color: $color-yellow-dark;
   }
 
   .textColorGreen {
