@@ -3,7 +3,8 @@ $padding-left: 10px;
 .container {
   box-sizing: border-box;
   flex: 0 1 calc(36.0195% + 18px);
-  padding: 0px 30px 32px 0px;
+  //padding: 0px 30px 32px 0px;
+  margin: 30px;
   .statusSection {
     min-width: 35%;
     .toDoButton {

@@ -1,11 +1,12 @@
-@import "../../../variables.scss";
+@import '../../../variables.scss';
 
 .container {
-  padding: 0px 32px 32px 32px;
+  //padding: 0px 32px 32px 32px;
   display: flex;
   flex-direction: column;
-  overflow: scroll;
-  width: 50%;
+  //overflow: scroll;
+  //width: 80%;
+  margin: 30px;
   .footerContent {
     margin-top: 10px;
     width: 100%;
