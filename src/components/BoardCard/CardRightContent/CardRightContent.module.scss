@@ -144,6 +144,16 @@ $padding-left: 10px;
       position: relative;
     }
 
+    .type {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 12px;
+      align-items: center;
+      font-size: 14px;
+      font-weight: 500;
+      color: #38465e;
+    }
+
     .dueDate {
       display: flex;
       flex-direction: row;

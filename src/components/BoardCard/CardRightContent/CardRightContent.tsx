@@ -115,64 +115,85 @@ export default function CardRightContent({
 
   return (
     <div className={style.container}>
-      <div ref={myRef} className={style.statusSection}>
-        {visible && editAccess ? (
-          <>
-            <button type="button" className={style.toDoButton} onClick={handleClickOutside}>
-              <span>{columnsInfo[taskInfo.statusId ?? ''].name ?? ''}</span>
-              <svg viewBox="0 0 24 24" role="presentation">
-                <path
-                  d="M8.292 10.293a1.009 1.009 0 000 1.419l2.939 2.965c.218.215.5.322.779.322s.556-.107.769-.322l2.93-2.955a1.01 1.01 0 000-1.419.987.987 0 00-1.406 0l-2.298 2.317-2.307-2.327a.99.99 0 00-1.406 0z"
-                  fill="currentColor"
-                  fillRule="evenodd"
-                />
-              </svg>
-            </button>
-            <div className={style.dropdownSection}>
-              <ul>
-                {Object.entries(columnsInfo).map(([id, column]) => {
-                  return (
-                    <li key={id}>
-                      <button
-                        type="button"
-                        name="status"
-                        className={style.statusOptions}
-                        onClick={() => {
-                          setVisible(false);
-                          const updatedTaskInfo = { ...taskInfo };
-                          updatedTaskInfo.statusId = id;
-                          taskStatusOnchange(updatedTaskInfo);
-                        }}
-                      >
-                        <span>{column.name}</span>
-                      </button>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          </>
-        ) : (
-          <button type="button" className={style.toDoButton} onClick={handleClickOutside}>
-            {taskInfo.status && taskInfo.status.name.toUpperCase()}
-            <span>{columnsInfo[taskInfo.statusId ?? '']?.name ?? ''}</span>
-            {editAccess && (
-              <svg viewBox="0 0 24 24" role="presentation">
-                <path
-                  d="M8.292 10.293a1.009 1.009 0 000 1.419l2.939 2.965c.218.215.5.322.779.322s.556-.107.769-.322l2.93-2.955a1.01 1.01 0 000-1.419.987.987 0 00-1.406 0l-2.298 2.317-2.307-2.327a.99.99 0 00-1.406 0z"
-                  fill="currentColor"
-                  fillRule="evenodd"
-                />
-              </svg>
-            )}
-          </button>
-        )}
-      </div>
       <div className={style.box}>
         <div className={style.detail}>
           <span>Detail</span>
         </div>
         <div className={style.boxBody}>
+          <div className={style.type}>
+            <div>Type</div>
+            <div>story</div>
+          </div>
+          <div className={style.type}>
+            <div>Status</div>
+            <div ref={myRef} className={style.statusSection}>
+              {visible && editAccess ? (
+                <>
+                  <button type="button" className={style.toDoButton} onClick={handleClickOutside}>
+                    {taskInfo.status && taskInfo.status.name.toUpperCase()}
+                    <svg viewBox="0 0 24 24" role="presentation">
+                      <path
+                        d="M8.292 10.293a1.009 1.009 0 000 1.419l2.939 2.965c.218.215.5.322.779.322s.556-.107.769-.322l2.93-2.955a1.01 1.01 0 000-1.419.987.987 0 00-1.406 0l-2.298 2.317-2.307-2.327a.99.99 0 00-1.406 0z"
+                        fill="currentColor"
+                        fillRule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                  <div className={style.dropdownSection}>
+                    <ul>
+                      {Object.entries(columnsInfo).map(([id, column]) => {
+                        return (
+                          <li key={id}>
+                            <button
+                              type="button"
+                              name="status"
+                              className={style.statusOptions}
+                              onClick={() => {
+                                setVisible(false);
+                                const updatedTaskInfo = { ...taskInfo };
+                                updatedTaskInfo.statusId = id;
+                                const { items, ...rest } = column;
+                                updatedTaskInfo.status = { ...rest, id };
+                                taskStatusOnchange(updatedTaskInfo);
+                              }}
+                            >
+                              <span>{column.name}</span>
+                            </button>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                </>
+              ) : (
+                <button type="button" className={style.toDoButton} onClick={handleClickOutside}>
+                  {taskInfo.status && taskInfo.status.name.toUpperCase()}
+                  {editAccess && (
+                    <svg viewBox="0 0 24 24" role="presentation">
+                      <path
+                        d="M8.292 10.293a1.009 1.009 0 000 1.419l2.939 2.965c.218.215.5.322.779.322s.556-.107.769-.322l2.93-2.955a1.01 1.01 0 000-1.419.987.987 0 00-1.406 0l-2.298 2.317-2.307-2.327a.99.99 0 00-1.406 0z"
+                        fill="currentColor"
+                        fillRule="evenodd"
+                      />
+                    </svg>
+                  )}
+                </button>
+              )}
+            </div>
+          </div>
+          <div className={style.dueDate}>
+            <div>Due date</div>
+            <DueDatePicker
+              taskInfo={taskInfo}
+              dueDateOnchange={taskStatusOnchange}
+              isDisabled={editAccess}
+            />
+          </div>
+          <div className={style.type}>
+            <div>Priority</div>
+            <div>High</div>
+          </div>
+          <ReporterFields reporterInfo={taskInfo.reporterId ?? {}} />
           <Row classesName={style.fieldMargin}>
             <div className={['fullWidth', style.label].join(' ')}>Assignee</div>
             <UserSelect
@@ -187,15 +208,6 @@ export default function CardRightContent({
             isDisabled={!editAccess}
             updateTaskTags={updateTaskTags}
           />
-          <div className={style.dueDate}>
-            <div>Due date</div>
-            <DueDatePicker
-              taskInfo={taskInfo}
-              dueDateOnchange={taskStatusOnchange}
-              isDisabled={editAccess}
-            />
-          </div>
-          <ReporterFields reporterInfo={taskInfo.reporterId ?? {}} />
         </div>
       </div>
       <div className={style.createAndUpdateDate}>
