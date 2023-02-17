@@ -1,4 +1,4 @@
-* {
+.outterContainer * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -33,10 +33,18 @@
   max-width: 1280px;
   padding: 15px 0;
 
+  @media (max-width: 768px) {
+    padding: 0px 30px;
+  }
+
   h2 {
     font-size: 96px;
     font-weight: 300;
     margin: 25px 0px;
+
+    @media (max-width: 768px) {
+      font-size: 48px;
+    }
   }
 
   .listContainer {
@@ -45,9 +53,40 @@
     gap: 16px;
     padding: 16px;
 
+    @media (max-width: 1040px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media (max-width: 850px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+      gap: 0px;
+    }
+
     .staffContainer {
       width: 100%;
       margin-bottom: 12px;
+    }
+  }
+
+  .positionSelector {
+    display: none;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      display: block;
+      padding: 12px;
+      text-transform: uppercase;
+      font-weight: 600;
+      font-size: 18px;
+      letter-spacing: 0.095em;
+      border: 2px solid;
+      border-radius: 6px;
+      border-color: #976ae7;
     }
   }
 
@@ -58,6 +97,10 @@
 
     justify-content: center;
     list-style-type: none;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
 
     li {
       padding: 2px 7px;
@@ -70,6 +113,10 @@
       margin: 25px 50px;
       transition: 0.8s;
       text-align: center;
+
+      @media (max-width: 850px) {
+        margin: 25px 30px;
+      }
     }
 
     li:hover {
@@ -79,6 +126,10 @@
     .active {
       background: #976ae7;
       color: white;
+    }
+
+    .active:hover {
+      background: #976ae7;
     }
   }
 }

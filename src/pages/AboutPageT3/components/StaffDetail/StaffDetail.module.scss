@@ -3,12 +3,16 @@
   max-width: 720px;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 10;
   position: fixed;
-  transform: translate(-50%, -50%);
   box-shadow: 0 0 30px rgb(0 0 0 / 20%);
   background-color: #FFF;
   border-color: #FFF;
+
+  @media (max-width: 768px) {
+    width: 90%;
+  }
 
   .inner-container {
     width: 100%;
@@ -56,10 +60,16 @@
 
     .detail-intro {
       padding-top: 34px;
+      padding-bottom: 10px;
       font-size: 24px;
       line-height: 40px;
       font-weight: 300;
       white-space: pre-line;
     }
   }
+}
+
+.icon {
+  text-decoration: none;
+  color: #007297;
 }

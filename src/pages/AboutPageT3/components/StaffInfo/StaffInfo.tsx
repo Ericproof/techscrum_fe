@@ -6,8 +6,8 @@ import styles from './StaffInfo.module.scss';
 interface IStaffInfo {
   name: string;
   image?: string;
-  gender: 'male' | 'female';
-  position: 'ceo' | 'business analyst' | 'developer';
+  gender: string;
+  position: string;
   openDetail: (name: string) => void;
 }
 
@@ -15,7 +15,7 @@ function StaffInfo(props: IStaffInfo) {
   const { name, image, gender, position, openDetail } = props;
   const imageShow = image || (gender === 'male' ? MaleAvatar : FemaleAvatar);
   return (
-    <>
+    <div className={styles.staffContainer}>
       <div role="presentation" onClick={() => openDetail(name)}>
         <img className={styles.staffImg} src={imageShow} alt={name} />
       </div>
@@ -23,7 +23,7 @@ function StaffInfo(props: IStaffInfo) {
         <h4>{name}</h4>
         <p className={styles.position}>{position}</p>
       </div>
-    </>
+    </div>
   );
 }
 

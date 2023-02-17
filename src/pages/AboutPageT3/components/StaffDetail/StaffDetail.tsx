@@ -1,5 +1,5 @@
 import React from 'react';
-import { AiFillCloseSquare } from 'react-icons/ai';
+import { AiFillCloseSquare, AiFillLinkedin } from 'react-icons/ai';
 import styles from './StaffDetail.module.scss';
 import MaleAvatar from '../../../../assets/team2/male_avatar.svg';
 import FemaleAvatar from '../../../../assets/team2/female_avatar.svg';
@@ -8,13 +8,14 @@ interface IStaff {
   name: string;
   image?: string;
   description?: string;
-  gender: 'male' | 'female';
-  position: 'ceo' | 'business analyst' | 'developer';
+  linkedin?: string;
+  gender: string;
+  position: string;
   closeDetail: () => void;
 }
 
 function StaffDetail(props: IStaff) {
-  const { name, image, gender, position, description, closeDetail } = props;
+  const { name, image, gender, position, description, linkedin, closeDetail } = props;
   const imageShow = image || (gender === 'male' ? MaleAvatar : FemaleAvatar);
   return (
     <div className={styles['intro-container']}>
@@ -32,6 +33,11 @@ function StaffDetail(props: IStaff) {
         <div className={styles['detail-intro']}>
           <p>{description}</p>
         </div>
+        <div>
+          <a href={linkedin} className={styles.icon}>
+            <AiFillLinkedin style={{ fontSize: '35px', color: '#868e96' }} />
+          </a>
+        </div>
       </div>
     </div>
   );
@@ -39,7 +45,8 @@ function StaffDetail(props: IStaff) {
 
 StaffDetail.defaultProps = {
   image: undefined,
-  description: undefined
+  description: undefined,
+  linkedin: undefined
 };
 
 export default StaffDetail;

@@ -10,6 +10,9 @@ import David from '../../assets/team2/david_guo.webp';
 import Hyna from '../../assets/team2/hyna_hua.webp';
 import joe from '../../assets/team3/joe.jpg';
 import angela from '../../assets/team3/angela.jpg';
+import charles from '../../assets/team3/charles.jpg';
+import wendy from '../../assets/team3/wendy.png';
+import andy from '../../assets/team3/andy.jpg';
 
 interface IStaff {
   name: string;
@@ -40,22 +43,18 @@ const staffs: IStaff[] = [
   {
     name: 'wendy xu',
     linkedin: 'https://www.linkedin.com/in/chicheng-xu/',
+    image: wendy,
     gender: 'male',
     position: 'developer'
   },
   {
     name: 'hyna hua',
     image: Hyna,
+    description:
+      'Hyna Hua is a highly motivated and detail-oriented Business Analyst with experience in gathering, analyzing and documenting business requirements, identifying gaps, and developing innovative solutions to improve business operations. Proficient in software development life cycle and project management, with excellent communication skills and a proven ability to work collaboratively with diverse teams.',
     linkedin: 'https://www.linkedin.com/in/hyna-hua/',
     gender: 'female',
     position: 'business analyst'
-  },
-  {
-    name: 'Jason',
-    description: ``,
-    linkedin: 'https://www.linkedin.com/in/david-guo-au',
-    gender: 'male',
-    position: 'developer'
   },
   {
     name: 'Angela Liu',
@@ -77,21 +76,31 @@ const staffs: IStaff[] = [
     image: joe
   },
   {
-    name: 'Andy Wei',
-    linkedin: 'https://www.linkedin.com/in/zhou-anthony-tian-19b017143/',
+    name: 'Charles Xing',
+    description: `I am an IT beginner. I have always been fascinated by technology and its potential to transform our lives, and I am eager to learn more about the field and start building my skills.`,
+    image: charles,
+    linkedin: 'linkedin.com/in/bin-xing-722336230',
     gender: 'male',
     position: 'developer'
   },
   {
-    name: 'Charles',
-    description: ``,
-    linkedin: 'https://www.linkedin.com/in/david-guo-au',
+    name: 'Andy Wei',
+    description:
+      'I graduated from the University of New South Wales with a degree in Computer Science and worked on both front-end and back-end. I am interested in learning new technologies.',
+    linkedin: 'https://www.linkedin.com/in/zifan-wei/',
+    image: andy,
+    gender: 'male',
+    position: 'developer'
+  },
+  {
+    name: 'Jason',
     gender: 'male',
     position: 'developer'
   },
   {
     name: 'Zijun Li',
-    description: ``,
+    description:
+      'A web developer with good goal orientation and a strong desire for web development. Recent graduates who have acquired most of the modern web development skills through on-campus learning and off-campus self-study. Passionate about learning about emerging technologies and experimenting with developing projects using them. 3 years of programming experience with great analytical and problem-solving skills. Effective team player with a strong sense of responsibility and people skills.',
     linkedin: 'https://www.linkedin.com/in/david-guo-au',
     gender: 'male',
     position: 'developer'
@@ -153,6 +162,14 @@ function AboutPageT3() {
     );
   });
 
+  const positionSelector = positions.map((position) => {
+    return (
+      <option key={position} value={position}>
+        {position}
+      </option>
+    );
+  });
+
   const selectedPosition = staffs
     .filter((staff) => {
       if (activeBtn === 'all') {
@@ -179,6 +196,7 @@ function AboutPageT3() {
     <StaffDetail
       name={detailStaff.name}
       image={detailStaff.image}
+      linkedin={detailStaff.linkedin}
       closeDetail={closeDetailHandler}
       gender={detailStaff.gender}
       position={detailStaff.position}
@@ -195,6 +213,15 @@ function AboutPageT3() {
         </h2>
         <div>
           <ul className={styles.positionFilter}>{positionNav}</ul>
+          <select
+            className={styles.positionSelector}
+            onChange={(e) => {
+              setActiveBtn(e.target.value);
+            }}
+            value={activeBtn}
+          >
+            {positionSelector}
+          </select>
         </div>
         <div className={styles.listContainer}>{selectedPosition}</div>
       </div>
