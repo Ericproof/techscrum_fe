@@ -1,8 +1,10 @@
 @import '../../../styles/variables.scss';
 .emailInput {
-  padding-inline: $size-18;
+  padding-inline: $size-18; // default inline padding
   display: flex;
   flex-direction: column;
+
+  max-width: $size-40 * 9;
 
   .inputWrapper {
     display: flex;
@@ -18,7 +20,7 @@
       flex: 1;
 
       padding: $size-16 $size-22;
-      font-weight: 400;
+      font-weight: 500;
       font-size: $size-14;
       line-height: $size-16;
       color: $color-grey-0;
@@ -28,6 +30,13 @@
       border-radius: inherit;
       box-shadow: 0 19px 25px rgb(10 10 51 / 4%);
       transition: 0.2s;
+
+      &::placeholder {
+        color: $color-grey-2;
+        font-weight: 500;
+        font-size: $size-16;
+        line-height: $size-18;
+      }
     }
 
     input.iconInput {

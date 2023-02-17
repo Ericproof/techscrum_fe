@@ -8,10 +8,10 @@ interface Props {
   isMainTextShrink?: boolean;
   subTitleText?: string;
   isShowSubTitle?: boolean;
-  subTitleColor?: 'green' | 'purple' | 'blue' | 'yellow' | '';
+  subTitleColor?: 'green' | 'purple' | 'blue' | 'yellow' | 'pink' | '';
   centerText?: boolean;
   isShowUnderline?: boolean;
-  underlineColor?: 'green' | 'purple' | 'blue' | 'yellow' | '';
+  underlineColor?: 'green' | 'purple' | 'blue' | 'yellow' | 'pink' | '';
 }
 
 function HeroTitle({
@@ -47,7 +47,7 @@ function HeroTitle({
           {capitalise(mainTitleText)}.
         </h2>
       </div>
-      {isShowUnderline && <Breakline color={underlineColor as string} />}
+      {isShowUnderline && <Breakline color={underlineColor as string} isCenter={centerText} />}
     </>
   );
 }
