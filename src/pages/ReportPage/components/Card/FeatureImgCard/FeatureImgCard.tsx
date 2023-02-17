@@ -23,7 +23,7 @@ function FeatureImgCard({ cardTitle, imgSrc, list, cardThemeColor }: Props) {
       <div className={styles.cardImgWrapper}>
         <img src={imgSrc} alt="feature1" loading="lazy" />
       </div>
-      <HeroTitle mainTitleText={cardTitle} />
+      <HeroTitle mainTitleText={cardTitle} isMainTextShrink />
       <CheckList
         list={list}
         prefixIcon={<TiTick color={cardThemeColor === 'default' ? 'black' : 'white'} size={18} />}

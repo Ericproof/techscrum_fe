@@ -7,6 +7,12 @@
   border-radius: 4px;
   position: relative;
 
+  align-self: stretch;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
   &::before {
     content: '';
     inset-block: 0;

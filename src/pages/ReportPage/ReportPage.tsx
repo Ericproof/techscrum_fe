@@ -13,8 +13,19 @@ import useWindowSize from './hooks/useWindowSize';
 import BasicFlex from './layout/BasicFlex/BasicFlex';
 import styles from './ReportPage.module.scss';
 
+const BREAKPOINTS = {
+  '1200': 1200,
+  '1000': 1000,
+  '768': 768,
+  '600': 600
+};
+
 function ReportPage() {
-  const { width } = useWindowSize();
+  const { width } = useWindowSize(); // this hooks will only be accepted in layout level component
+
+  const isDeskTop = width > BREAKPOINTS[768];
+  const isMobile = width < BREAKPOINTS[600];
+
   return (
     <>
       <Header />
@@ -31,7 +42,7 @@ function ReportPage() {
           </div>
           <div>
             <Space power={2} />
-            {width < 768 && <Space power={width < 600 ? 1 : 2} />}
+            {!isDeskTop && <Space power={isMobile ? 1 : 2} />}
             <VideoPlayer videoSrc="https://clickup.com/videos/features/kanban-board/board-view-agile-inventory.mp4" />
           </div>
         </BasicFlex>
@@ -42,23 +53,24 @@ function ReportPage() {
           <VideoPlayer
             videoSrc="https://clickup.com/videos/features/kanban-board/board-view-grouping.mp4"
             isHaveBackground
-            isShowDiamond={width > 768}
+            isShowDiamond={isDeskTop}
             diamondColor="pink"
+            diamondPosition="right"
           />
           <div>
             <HeroTitle
+              isMainTextShrink
               mainTitleText="see all your Boards in one view"
               isShowSubTitle
               subTitleText="everything view"
-              isShowUnderline
               subTitleColor="pink"
+              isShowUnderline
               underlineColor="pink"
-              isMainTextShrink
-              centerText={!(width > 768)}
+              centerText={!isDeskTop}
             />
 
             <Space power={3} />
-            <Paragraph centerText={!(width > 768)}>
+            <Paragraph centerText={!isDeskTop}>
               Arrange your columns to analyze projects from any angle. Group by status, assignee,
               priority, and more.
             </Paragraph>

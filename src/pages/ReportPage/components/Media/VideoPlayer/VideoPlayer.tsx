@@ -8,15 +8,16 @@ interface Props {
   isHaveBackground?: boolean;
   isShowDiamond?: boolean;
   diamondColor?: 'pink' | 'brand' | 'blue' | 'green' | 'yellow' | 'default';
+  diamondPosition?: 'left' | 'right' | 'default';
 }
 
 function VideoPlayer({
   videoSrc,
   isHaveBackground,
-
   posterSrc,
   isShowDiamond,
-  diamondColor
+  diamondColor,
+  diamondPosition
 }: Props) {
   return (
     <div
@@ -24,7 +25,14 @@ function VideoPlayer({
         styles.playerWrapper,
         styles[isHaveBackground ? `playerWrapperWithBg` : ''],
         styles[isShowDiamond ? `playerWrapperWithDiamond` : ''],
-        styles[isShowDiamond ? `playerWrapperWithDiamond${capitalise(diamondColor as string)}` : '']
+        styles[
+          isShowDiamond ? `playerWrapperWithDiamond${capitalise(diamondColor as string)}` : ''
+        ],
+        styles[
+          isShowDiamond
+            ? `playerWrapperWithDiamondPosition${capitalise(diamondPosition as string)}`
+            : ''
+        ]
       ].join(' ')}
     >
       <video className={styles.videoPlayer} autoPlay loop muted playsInline poster={posterSrc}>
@@ -40,7 +48,8 @@ VideoPlayer.defaultProps = {
   posterSrc:
     'https://clickup.com/images/poster-images/videos/features/kanban-board/board-view-agile-inventory.png',
   isShowDiamond: false,
-  diamondColor: 'default'
+  diamondColor: 'default',
+  diamondPosition: 'default'
 };
 
 export default VideoPlayer;

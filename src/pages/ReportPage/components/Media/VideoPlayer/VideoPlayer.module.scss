@@ -42,45 +42,43 @@
     &Yellow::after {
       background: url('https://clickup.com/images/diamonds/yellow-diamond.svg') no-repeat top
         left/contain;
-      left: 95%;
     }
 
     &Blue::after {
       background: url('https://clickup.com/images/diamonds/blue-diamond.svg') no-repeat top
         left/contain;
-      left: 95%;
     }
 
     &Brand::after {
       background: url('https://clickup.com/images/diamonds/purple-diamond.svg') no-repeat top
         left/contain;
-      left: 95%;
     }
 
     &Pink::after {
       background: url('https://clickup.com/images/diamonds/pink-diamond.svg') no-repeat top
         left/contain;
-      left: 8%;
     }
 
     &Green::after {
       background: url('https://clickup.com/images/diamonds/green-diamond.svg') no-repeat top
         left/contain;
-      left: 95%;
     }
 
     &Default::after {
       background: url('https://clickup.com/images/diamonds/purple-diamond.svg') no-repeat top
         left/contain;
+    }
+
+    &PositionLeft::after {
       left: 95%;
     }
 
-    &Left::after {
-      left: 95%;
+    &PositionRight::after {
+      left: 8%;
     }
 
-    &Right::after {
-      left: 95%;
+    &PositionDefault::after {
+      left: 40%;
     }
   }
 

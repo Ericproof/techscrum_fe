@@ -30,6 +30,24 @@
   }
 
   .shrinkH2 {
+    font-size: $size-45;
+    line-height: $size-55;
+
+    @media screen and (max-width: 1200px) {
+      font-size: $size-40;
+      line-height: $size-50;
+    }
+
+    @media screen and (max-width: 1000px) {
+      font-size: $size-32;
+      line-height: $size-45;
+    }
+
+    @media screen and (max-width: 768px) {
+      font-size: $size-28;
+      line-height: $size-40;
+    }
+
     @media screen and (max-width: 600px) {
       font-size: $size-28;
       line-height: $size-40;

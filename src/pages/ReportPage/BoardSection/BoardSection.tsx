@@ -34,6 +34,7 @@ function BoardSection() {
         isHaveBackground
         isShowDiamond={width > 768}
         diamondColor="default"
+        diamondPosition="left"
       />
     </BasicFlex>
   );
