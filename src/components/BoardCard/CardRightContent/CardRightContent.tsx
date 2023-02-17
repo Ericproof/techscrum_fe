@@ -1,4 +1,9 @@
 import React, { useContext } from 'react';
+import { CgArrowRightR } from 'react-icons/cg';
+import { MdOutlineBookmarkBorder } from 'react-icons/md';
+import { RiFlag2Line } from 'react-icons/ri';
+import { BsPeople } from 'react-icons/bs';
+import { AiOutlineCalendar } from 'react-icons/ai';
 import { IColumnsFromBackend, ILabelData, IOnChangeProjectLead, ITaskEntity } from '../../../types';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import style from './CardRightContent.module.scss';
@@ -79,35 +84,35 @@ export default function CardRightContent({
     }
   };
 
-  const monthShortNames = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec'
-  ];
+  // const monthShortNames = [
+  //   'Jan',
+  //   'Feb',
+  //   'Mar',
+  //   'Apr',
+  //   'May',
+  //   'Jun',
+  //   'Jul',
+  //   'Aug',
+  //   'Sep',
+  //   'Oct',
+  //   'Nov',
+  //   'Dec'
+  // ];
 
-  const dateWithTimestamp = (d: Date | null) => {
-    if (d != null) {
-      const date = d.toString().split('T')[0];
-      const dateDataArray = date.split('-');
-      const time = d.toString().split('T')[1].split(':');
-      const hour = Number(time[0]);
-      time[0] = hour > 12 ? `${hour - 12}` : `${hour}`;
-      const period = hour < 12 ? 'AM' : 'PM';
-      return `${monthShortNames[Number(dateDataArray[1]) - 1]} ${dateDataArray[2]}, ${
-        dateDataArray[0]
-      } at ${time[0]}:${time[1]} ${period}`;
-    }
-    return '';
-  };
+  // const dateWithTimestamp = (d: Date | null) => {
+  //   if (d != null) {
+  //     const date = d.toString().split('T')[0];
+  //     const dateDataArray = date.split('-');
+  //     const time = d.toString().split('T')[1].split(':');
+  //     const hour = Number(time[0]);
+  //     time[0] = hour > 12 ? `${hour - 12}` : `${hour}`;
+  //     const period = hour < 12 ? 'AM' : 'PM';
+  //     return `${monthShortNames[Number(dateDataArray[1]) - 1]} ${dateDataArray[2]}, ${
+  //       dateDataArray[0]
+  //     } at ${time[0]}:${time[1]} ${period}`;
+  //   }
+  //   return '';
+  // };
 
   if (!taskInfo) {
     return <div />;
@@ -116,16 +121,19 @@ export default function CardRightContent({
   return (
     <div className={style.container}>
       <div className={style.box}>
-        <div className={style.detail}>
-          <span>Detail</span>
-        </div>
         <div className={style.boxBody}>
           <div className={style.type}>
-            <div>Type</div>
+            <div>
+              <CgArrowRightR />
+              Type
+            </div>
             <div>story</div>
           </div>
           <div className={style.type}>
-            <div>Status</div>
+            <div>
+              <MdOutlineBookmarkBorder />
+              Status
+            </div>
             <div ref={myRef} className={style.statusSection}>
               {visible && editAccess ? (
                 <>
@@ -182,7 +190,10 @@ export default function CardRightContent({
             </div>
           </div>
           <div className={style.dueDate}>
-            <div>Due date</div>
+            <div>
+              <AiOutlineCalendar />
+              Due date
+            </div>
             <DueDatePicker
               taskInfo={taskInfo}
               dueDateOnchange={taskStatusOnchange}
@@ -190,12 +201,18 @@ export default function CardRightContent({
             />
           </div>
           <div className={style.type}>
-            <div>Priority</div>
+            <div>
+              <RiFlag2Line />
+              Priority
+            </div>
             <div>High</div>
           </div>
           <ReporterFields reporterInfo={taskInfo.reporterId ?? {}} />
           <Row classesName={style.fieldMargin}>
-            <div className={['fullWidth', style.label].join(' ')}>Assignee</div>
+            <div className={['fullWidth', style.label].join(' ')}>
+              <BsPeople />
+              Assignee
+            </div>
             <UserSelect
               onChange={assigneeOnchangeEventHandler}
               value={taskInfo.assignId}
@@ -209,10 +226,6 @@ export default function CardRightContent({
             updateTaskTags={updateTaskTags}
           />
         </div>
-      </div>
-      <div className={style.createAndUpdateDate}>
-        <span>Created {dateWithTimestamp(taskInfo.createdAt ?? null)}</span>
-        <span>Updated {dateWithTimestamp(taskInfo.updatedAt ?? null)}</span>
       </div>
     </div>
   );

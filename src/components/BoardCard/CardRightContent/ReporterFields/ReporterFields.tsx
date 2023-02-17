@@ -1,4 +1,5 @@
 import React from 'react';
+import { BsPerson } from 'react-icons/bs';
 import styles from './ReporterFields.module.scss';
 
 interface ITaskRelator {
@@ -8,7 +9,10 @@ interface ITaskRelator {
 export default function ReporterFields({ reporterInfo }: ITaskRelator) {
   return (
     <div className={styles.reporter}>
-      <div>Reporter</div>
+      <div>
+        <BsPerson />
+        Reporter
+      </div>
       <div className={styles.leadDropdownContainer}>
         <button className={styles.leadInputClose} type="button">
           <img

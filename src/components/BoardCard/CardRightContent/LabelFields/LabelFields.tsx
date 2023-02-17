@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { TiDelete } from 'react-icons/ti';
+import { MdOutlineBookmarkBorder } from 'react-icons/md';
 import { createLabel, removeLabel } from '../../../../api/label/label';
 import useOutsideAlerter from '../../../../hooks/OutsideAlerter';
 import styles from './LabelFields.module.scss';
@@ -110,7 +111,10 @@ export default function LabelFields(props: IPropsLabel) {
   const hasItem = dropDownTaskList.length > 0;
   return (
     <div className={styles.label}>
-      <div>Labels</div>
+      <div>
+        <MdOutlineBookmarkBorder />
+        Labels
+      </div>
       <div ref={myRef} className={styles.labelDropdownContainer}>
         {visible && !isDisabled ? (
           <div className={styles.labelDropdownOpen}>
