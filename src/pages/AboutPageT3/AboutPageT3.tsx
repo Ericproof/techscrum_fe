@@ -13,6 +13,8 @@ import angela from '../../assets/team3/angela.jpg';
 import charles from '../../assets/team3/charles.jpg';
 import wendy from '../../assets/team3/wendy.png';
 import andy from '../../assets/team3/andy.jpg';
+import jason from '../../assets/team3/jason.jpg';
+import zijun from '../../assets/team3/zijun.png';
 
 interface IStaff {
   name: string;
@@ -95,13 +97,15 @@ const staffs: IStaff[] = [
   {
     name: 'Jason',
     gender: 'male',
+    image: jason,
     position: 'developer'
   },
   {
     name: 'Zijun Li',
     description:
       'A web developer with good goal orientation and a strong desire for web development. Recent graduates who have acquired most of the modern web development skills through on-campus learning and off-campus self-study. Passionate about learning about emerging technologies and experimenting with developing projects using them. 3 years of programming experience with great analytical and problem-solving skills. Effective team player with a strong sense of responsibility and people skills.',
-    linkedin: 'https://www.linkedin.com/in/david-guo-au',
+    linkedin: 'https://www.linkedin.com/in/zijun-li-au/',
+    image: zijun,
     gender: 'male',
     position: 'developer'
   }
