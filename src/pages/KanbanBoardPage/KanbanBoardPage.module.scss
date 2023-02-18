@@ -79,9 +79,9 @@
 
 .hero {
   position: absolute;
-  top: 20%;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   width: 95%;
   max-width: 1220px;
   display: flex;
@@ -102,11 +102,19 @@
   }
 }
 
+.header__before {
+  font-size: 14px;
+  font-weight: bold;
+  color: $primaryColor;
+  letter-spacing: 2px;
+  margin: 0;
+  text-transform: uppercase;
+}
 
 .header {
   color: #4f5366;
   font-size: 50px;
-  margin: 40px 0;
+  margin: 0;
   @media (max-width: 1024px) {
     font-size: 45px;
   }
@@ -144,28 +152,29 @@
   gap: 1rem;
 }
 
-.email__wrapper {
-  position: relative;
-  .email__input {
-    border: none;
-    font-size: 1rem;
-    max-height: 50px;
-    padding: 20px 46px 18px;
-    border-radius: 4px;
-    border-left: 5px solid #fd71af;
-    box-shadow: 0 10px 25px rgb(0 0 0 / 15%);
-    &:focus {
-      outline: none;
+.form {
+  .email__wrapper {
+    position: relative;
+    .email__input {
+      border: none;
+      font-size: 1rem;
+      height: 50px;
+      padding: 0 46px;
+      border-radius: 4px;
+      border-left: 5px solid #fd71af;
+      box-shadow: 0 10px 25px rgb(0 0 0 / 15%);
+      &:focus {
+        outline: none;
+      }
     }
-  }
-
-  .email__icon {
-    position: absolute;
-    top: 50%;
-    left: 5%;
-    transform: translateY(-50%);
-    font-size: 1.5rem;
-    color: #fd71af;
+    .email__icon {
+      position: absolute;
+      top: 50%;
+      left: 5%;
+      transform: translateY(-50%);
+      font-size: 1.5rem;
+      color: #fd71af;
+    }
   }
 }
 
@@ -183,6 +192,127 @@
   cursor: pointer;
   &:hover {
     background: hsl(261, 72%, 45%);
+  }
+}
+
+.section_two {
+  padding-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  .container {
+    display: flex;
+    gap: 2rem;
+    width: 95%;
+    max-width: 1220px;
+    .card {
+      background-color: white;
+      margin-top: 2rem;
+      padding: 2rem;
+      border-radius: 0 1rem 1rem 0;
+      border-left: 5px solid $primaryColor;
+      box-shadow: 0 10px 25px rgb(0 0 0 / 15%);
+      img {
+        display: block;
+        margin: -4rem auto 0 auto;
+        width: 90%;
+        aspect-ratio: 1.6;
+        border-radius: 1rem;
+        max-width: 400px;
+      }
+      h3 {
+        color: #4f5366;
+        font-size: 2rem;
+      }
+      ul {
+        list-style: none;
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        li {
+          display: flex;
+          align-items: center;
+          line-height: 1.2;
+          .listIcon {
+            color: white;
+            background-color: $primaryColor;
+            padding: 0.5em;
+            border-radius: 5px;
+            margin-right: 1rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+.section_two {
+  .container {
+    .card.pink {
+      border-left: 5px solid #fd71af;
+      ul {
+        li {
+          .listIcon {
+            background-color: #fd71af;
+          }
+        }
+      }
+    }
+  }
+}
+
+.supportSection {
+  .card {
+    padding: 2rem;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    max-width: 1220px;
+    margin: 2rem auto;
+    border-radius: 1rem;
+    background-image: url('../../assets/bg__with-dotted.svg');
+    h2 {
+      width: 60%;
+      color: #4f5366;
+      font-size: 2rem;
+      margin: 0;
+    }
+    .form__row {
+      width: 40%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  .flexContainer {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2rem;
+    max-width: 1220px;
+    margin: 2rem auto;
+    justify-content: space-between;
+    .flex__row {
+      display: flex;
+      align-items: center;
+      .imgIcons {
+        width: 45px;
+        aspect-ratio: 1;
+        margin-right: 1rem;
+      }
+      p {
+        font-size: 1.2rem;
+        a {
+          text-decoration: none;
+          font-weight: bold;
+          cursor: pointer;
+          :hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
   }
 }
 

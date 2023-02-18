@@ -9,7 +9,6 @@
     max-width: 1220px;
     display: flex;
     gap: 2rem;
-
     .content {
       text-align: left;
       flex: 1 1 auto;
@@ -67,7 +66,7 @@
     .demo {
       .diamondShape {
         left: 0;
-        transform: translate(-30%, -10%);
+        transform: translate(-30%, -15%);
       }
     }
   }

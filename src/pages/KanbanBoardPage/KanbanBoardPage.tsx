@@ -1,6 +1,6 @@
 import React from 'react';
 import Fade from 'react-reveal/Fade';
-import { HiOutlineMailOpen } from 'react-icons/hi';
+import { HiOutlineMailOpen, HiCheck } from 'react-icons/hi';
 import Header from '../../components/Header/Header';
 import shapeLight from '../../assets/shapeLight.png';
 import demoVideoOne from '../../assets/demoVideoOne.mp4';
@@ -8,6 +8,7 @@ import darkCircle from '../../assets/shapeDark.png';
 import styles from './KanbanBoardPage.module.scss';
 import DemoVideo from '../../components/DemoVideo/DemoVideo';
 import FeatureSection from '../../components/FeatureSection/FeatureSection';
+import PolicyMediaTabs from '../../components/Footer/PolicyMediaTabs/PolicyMediaTabs';
 
 const featureSectionPropsObjs = [
   {
@@ -61,7 +62,7 @@ export default function KanbanBoardPage() {
           <span className={styles.shape4Container}>
             <img src={darkCircle} alt="" />
           </span>
-          <div className={styles.hero}>
+          <section className={styles.hero}>
             <div className={styles.content}>
               <h1 className={styles.header} data-testid="header-text">
                 Create the perfect Agile workflow with Board view.
@@ -70,7 +71,7 @@ export default function KanbanBoardPage() {
                 Build a flexible Kanban system to visualize your work and improve project
                 management.
               </p>
-              <form className={styles.flex_col}>
+              <form className={`${styles.form} ${styles.flex_col}`}>
                 <div className={styles.email__wrapper}>
                   <input
                     type="email"
@@ -88,7 +89,7 @@ export default function KanbanBoardPage() {
             <div className={styles.demo}>
               <DemoVideo src={demoVideoOne} />
             </div>
-          </div>
+          </section>
         </div>
       </Fade>
       {featureSectionPropsObjs.map((e, i) => (
@@ -100,6 +101,108 @@ export default function KanbanBoardPage() {
           layout={i % 2 === 0 ? 'left' : 'right'}
         />
       ))}
+      <section className={styles.section_two}>
+        <p className={styles.header__before}>visualize</p>
+        <h2 className={styles.header}>Organize work and assess bandwidth.</h2>
+        <div className={styles.container}>
+          <div className={styles.card}>
+            <img
+              src="https://clickup.com/images/features/kanban-board/board-view-fiter.png"
+              alt="demo"
+            />
+            <h3>Stay on track with sorting and filtering.</h3>
+            <ul>
+              <li>
+                <HiCheck className={styles.listIcon} />
+                <span>Sort tasks in a column by due date, priority, and more</span>
+              </li>
+              <li>
+                <HiCheck className={styles.listIcon} />
+                <span>Filter tasks by assignee to only see your work</span>
+              </li>
+              <li>
+                <HiCheck className={styles.listIcon} />
+                <span>Add filtered views to your Favorites for future reference</span>
+              </li>
+            </ul>
+          </div>
+          <div className={`${styles.card} ${styles.pink}`}>
+            <img
+              src="https://clickup.com/images/features/kanban-board/board-view-fiter.png"
+              alt="demo"
+            />
+            <h3>Monitor capacity with Work in Progress Limits.</h3>
+            <ul>
+              <li>
+                <HiCheck className={styles.listIcon} />
+                <span>Easily see when there&#39;s too much work in a status</span>
+              </li>
+              <li>
+                <HiCheck className={styles.listIcon} />
+                <span>Measure workload by sprint points, time estimates, and more</span>
+              </li>
+              <li>
+                <HiCheck className={styles.listIcon} />
+                <span>Spot bottlenecks at a glance to ship projects faster</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <section className={styles.supportSection}>
+        <div className={styles.card}>
+          <h2>Save one day every week with TechScrum&#39;s Board view.</h2>
+          <form className={`${styles.form} ${styles.form__row}`}>
+            <div className={styles.email__wrapper}>
+              <input
+                type="email"
+                className={styles.email__input}
+                placeholder="Your work email"
+                required
+              />
+              <HiOutlineMailOpen className={styles.email__icon} />
+            </div>
+            <button type="submit" className={styles.start__btn}>
+              Get Started
+            </button>
+          </form>
+        </div>
+        <div className={styles.flexContainer}>
+          <div className={styles.flex__row}>
+            <img
+              className={styles.imgIcons}
+              src="https://clickup.com/images/kindness/free-training.svg"
+              alt="icons"
+            />
+            <p>
+              <a href="/">Free training</a> & 24-hour support
+            </p>
+          </div>
+          <div className={styles.flex__row}>
+            <img
+              className={styles.imgIcons}
+              src="https://clickup.com/images/kindness/security.svg"
+              alt="icons"
+            />
+            <p>
+              Serious about <a href="/">security & privacy</a>
+            </p>
+          </div>
+          <div className={styles.flex__row}>
+            <img
+              className={styles.imgIcons}
+              src="https://clickup.com/images/kindness/uptime.svg"
+              alt="icons"
+            />
+            <p>
+              <a href="/">Highest levels of uptime</a> the last 12 months
+            </p>
+          </div>
+        </div>
+      </section>
+      <footer style={{ flexWrap: 'wrap' }}>
+        <PolicyMediaTabs />
+      </footer>
     </div>
   );
 }
