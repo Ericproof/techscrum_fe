@@ -1,0 +1,86 @@
+@import '../../../variables.scss';
+@import '../base.scss';
+
+.homeSection {
+  position: relative;
+  overflow: hidden;
+  min-height: 705px;
+  &::before {
+    background-image: url(https://themexriver.com/appilo-theme/saas-classic-dark/wp-content/themes/appilo/img/saas-classic/banner/b-shape1.png);
+    background-position: 100% 0;
+    background-repeat: no-repeat;
+    background-size: 90%;
+    content: '';
+    height: 100vh;
+    position: absolute;
+    right: 0;
+    top: 2%;
+    width: 100%;
+    z-index: -1;
+  }
+}
+
+.wrapper {
+  margin: 12vw auto 0;
+  padding: 0 10px 15px;
+  max-width: 1220px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.homeLeft {
+  width: 46%;
+  padding-left: 20px;
+}
+
+.heading {
+  margin: 0;
+  @include headingLarge;
+  text-align: left;
+}
+
+.homeRight {
+  width: 58%;
+  overflow: hidden;
+  padding: 20px;
+}
+
+.subTitle {
+  color: #7c828d;
+  margin: 5px auto 25px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 29px;
+  font-family: $fontPrimaryFamily;
+}
+
+@media screen and (max-width: 1200px) {
+  .heading {
+    @include headingMedium;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+    flex-direction: column;
+    padding: 0 25px;
+    @include borderBox;
+    margin: 180px auto 0;
+  }
+  .homeLeft {
+    width: 100%;
+    padding: 0;
+  }
+  .homeRight {
+    width: 100%;
+    padding: 0;
+    margin-top: 50px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .heading {
+    @include headingSmall;
+  }
+}
