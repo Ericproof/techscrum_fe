@@ -18,6 +18,8 @@ import {
 import FeatureImgCard from './components/Card/FeatureImgCard/FeatureImgCard';
 import SectionWrapper from './components/Card/SectionWrapper/SectionWrapper';
 
+type ReportPageColors = '' | 'purple' | 'pink' | 'blue' | 'green' | 'yellow' | undefined;
+
 function ReportPage() {
   const { width } = useWindowSize(); // this hooks will only be accepted in layout level component
 
@@ -58,12 +60,8 @@ function ReportPage() {
                   isShowSubTitle
                   subTitleText={SUB_TITLE_TEXT}
                   isShowUnderline
-                  subTitleColor={
-                    THEME_COLOR as '' | 'purple' | 'pink' | 'blue' | 'green' | 'yellow' | undefined
-                  }
-                  underlineColor={
-                    THEME_COLOR as '' | 'purple' | 'pink' | 'blue' | 'green' | 'yellow' | undefined
-                  }
+                  subTitleColor={THEME_COLOR as ReportPageColors}
+                  underlineColor={THEME_COLOR as ReportPageColors}
                   isMainTextShrink
                   centerText={!isDeskTop}
                 />
@@ -96,16 +94,7 @@ function ReportPage() {
             isShowSubTitle
             subTitleText={FEATURE_SECTION_DATA.SECTION_TITLE_SUB_TEXT}
             centerText
-            subTitleColor={
-              FEATURE_SECTION_DATA.SECTION_TITLE_SUB_COLOR as
-                | ''
-                | 'purple'
-                | 'pink'
-                | 'blue'
-                | 'green'
-                | 'yellow'
-                | undefined
-            }
+            subTitleColor={FEATURE_SECTION_DATA.SECTION_TITLE_SUB_COLOR as ReportPageColors}
             isMainTextShrink
           />
           <Space power={3} />
