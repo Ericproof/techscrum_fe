@@ -111,9 +111,9 @@ export default function LabelFields(props: IPropsLabel) {
   const hasItem = dropDownTaskList.length > 0;
   return (
     <div className={styles.label}>
-      <div>
-        <MdOutlineBookmarkBorder />
-        Labels
+      <div className={styles.leftContent}>
+        <MdOutlineBookmarkBorder className={styles.reactIcon} />
+        <div>Labels</div>
       </div>
       <div ref={myRef} className={styles.labelDropdownContainer}>
         {visible && !isDisabled ? (

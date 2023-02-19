@@ -3,6 +3,15 @@
   flex-direction: row;
   margin-bottom: 12px;
   align-items: center;
+
+  .leftContent {
+    display: flex;
+    align-items: center;
+    .reactIcon {
+      margin-right: 5px;
+    }
+  }
+
   & > div:nth-of-type(1) {
     box-sizing: border-box;
     width: 100%;

@@ -156,6 +156,73 @@ $padding-left: 10px;
         width: 50%;
         line-height: 1;
       }
+      .leftContent {
+        display: flex;
+        align-items: center;
+        .reactIcon {
+          margin-right: 5px;
+        }
+      }
+      .rightContent {
+        display: flex;
+        align-items: center;
+        position: relative;
+        .priorityImg {
+          height: 17px;
+          width: 17px;
+        }
+        .taskTypeList {
+          position: absolute;
+          box-shadow: var(
+            --ds-shadow-overlay,
+            0 4px 8px -2px rgba(9, 30, 66, 0.25),
+            0 0 1px rgba(9, 30, 66, 0.31)
+          );
+          top: 25px;
+          z-index: 9999;
+          border-radius: 3px;
+          background: white;
+          min-width: 200px;
+          box-sizing: border-box;
+          .typeListTitle {
+            font-size: 9px;
+            font-weight: bolder;
+            color: #5e6c84;
+            padding-left: 20px;
+          }
+          .typeListOption {
+            display: flex;
+            align-items: center;
+            border: none;
+            background: none;
+            width: 100%;
+            font-size: 5px;
+            font-weight: normal;
+            color: black;
+            padding: 10px 0 10px 20px;
+            cursor: pointer;
+            img {
+              margin-right: 10px;
+            }
+          }
+          .typeListOption:hover {
+            background: rgba(9, 30, 66, 0.08);
+            border-radius: 3px;
+          }
+        }
+      }
+      .storyIcon {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        border: none;
+        background: none;
+        img {
+          width: 18px;
+          height: 18px;
+          padding-right: 5px;
+        }
+      }
     }
 
     .dueDate {
@@ -164,6 +231,8 @@ $padding-left: 10px;
       margin-bottom: 12px;
       align-items: center;
       & > div:nth-of-type(1) {
+        display: flex;
+        align-items: center;
         box-sizing: border-box;
         width: 100%;
         padding-top: 8px;
@@ -171,6 +240,9 @@ $padding-left: 10px;
         color: var(--ds-text-subtle, #38465e);
         font-size: 14px;
         font-weight: 500;
+        .reactIcon {
+          margin-right: 5px;
+        }
       }
 
       & > div:nth-of-type(2) {
@@ -239,6 +311,8 @@ $padding-left: 10px;
 }
 
 .label {
+  display: flex;
+  align-items: center;
   box-sizing: border-box;
   width: 100%;
   padding-top: 8px;
@@ -246,4 +320,7 @@ $padding-left: 10px;
   color: #38465e;
   font-size: 14px;
   font-weight: 500;
+  .reactIcon {
+    margin-right: 5px;
+  }
 }

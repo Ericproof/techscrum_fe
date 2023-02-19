@@ -9,9 +9,9 @@ interface ITaskRelator {
 export default function ReporterFields({ reporterInfo }: ITaskRelator) {
   return (
     <div className={styles.reporter}>
-      <div>
-        <BsPerson />
-        Reporter
+      <div className={styles.leftContent}>
+        <BsPerson className={styles.reactIcon} />
+        <div>Reporter</div>
       </div>
       <div className={styles.leadDropdownContainer}>
         <button className={styles.leadInputClose} type="button">

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { CgArrowRightR } from 'react-icons/cg';
 import { MdOutlineBookmarkBorder } from 'react-icons/md';
 import { RiFlag2Line } from 'react-icons/ri';
@@ -13,6 +13,7 @@ import UserSelect from '../../Form/Select/UserSelect/UserSelect';
 import checkAccess from '../../../utils/helpers';
 import DueDatePicker from '../../DueDatePicker/DueDatePicker';
 import { UserContext } from '../../../context/UserInfoProvider';
+import { TaskTypesContext } from '../../../context/TaskTypeProvider';
 import { createActivity } from '../../../api/activity/activity';
 import { createDailyScrum, getDailyScrums } from '../../../api/dailyScrum/dailyScrum';
 import Row from '../../../lib/Grid/Row/Row';
@@ -24,6 +25,7 @@ interface Props {
   labels: ILabelData[];
   projectId: string;
   updateTaskTags: (tags: ILabelData[] | undefined) => void;
+  onSave: (data: ITaskEntity) => void;
 }
 
 export default function CardRightContent({
@@ -32,8 +34,23 @@ export default function CardRightContent({
   taskStatusOnchange,
   labels,
   projectId,
-  updateTaskTags
+  updateTaskTags,
+  onSave
 }: Props) {
+  const TYPE = {
+    story:
+      'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium',
+    task: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium',
+    bug: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium'
+  };
+  const PRIORITY = {
+    Highest: 'https://010001.atlassian.net/images/icons/priorities/highest.svg',
+    High: 'https://010001.atlassian.net/images/icons/priorities/high.svg',
+    Medium: 'https://010001.atlassian.net/images/icons/priorities/medium.svg',
+    Low: 'https://010001.atlassian.net/images/icons/priorities/low.svg',
+    Lowest: 'https://010001.atlassian.net/images/icons/priorities/lowest.svg'
+  };
+  const priorityOptions = ['Highest', 'High', 'Medium', 'Low', 'Lowest'];
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
   const handleClickOutside = () => setVisible(true);
   const editAccess = checkAccess('edit:tasks', projectId);
@@ -41,6 +58,14 @@ export default function CardRightContent({
   const operation = 'updated';
   const userId = userInfo.id;
   const taskId = taskInfo.id;
+  const [showSelectDropDown, setShowSelectDropDown] = useState(false);
+  const [showPriorityDropDown, setShowPriorityDropDown] = useState(false);
+  const [selectedTypeIcon, setSelectedTypeIcon] = useState(TYPE[taskInfo.typeId.slug]);
+  const [selectedType, setSelectedType] = useState(taskInfo.typeId.slug);
+  const [selectedPriorityIcon, setSelectedPriorityIcon] = useState(PRIORITY[taskInfo.priority]);
+  const [selectedPriority, setSelectedPriority] = useState(taskInfo.priority);
+  const taskTypes = useContext(TaskTypesContext);
+
   const dateHandler = (fullDate) => {
     const date = new Date(fullDate);
     const year = date.getFullYear();
@@ -84,6 +109,24 @@ export default function CardRightContent({
     }
   };
 
+  const onClickIssueType = (task: ITaskEntity) => {
+    const updateTaskInfo = { ...taskInfo };
+    updateTaskInfo.typeId = task;
+    setSelectedTypeIcon(TYPE[task.slug]);
+    setSelectedType(task.slug);
+    setShowSelectDropDown(false);
+    onSave(updateTaskInfo);
+  };
+
+  const onClickPriorityOption = (task: string) => {
+    const updateTaskInfo = { ...taskInfo };
+    updateTaskInfo.priority = task;
+    setSelectedPriorityIcon(PRIORITY[task]);
+    setSelectedPriority(task);
+    setShowPriorityDropDown(false);
+    onSave(updateTaskInfo);
+  };
+
   // const monthShortNames = [
   //   'Jan',
   //   'Feb',
@@ -123,16 +166,50 @@ export default function CardRightContent({
       <div className={style.box}>
         <div className={style.boxBody}>
           <div className={style.type}>
-            <div>
-              <CgArrowRightR />
-              Type
+            <div className={style.leftContent}>
+              <CgArrowRightR className={style.reactIcon} />
+              <div>Type</div>
             </div>
-            <div>story</div>
+            <div className={style.rightContent}>
+              <div>
+                <button
+                  className={style.storyIcon}
+                  type="button"
+                  onClick={() => {
+                    setShowSelectDropDown((prevState) => !prevState);
+                  }}
+                >
+                  <img src={selectedTypeIcon} alt="Story" />
+                  <div>{selectedType}</div>
+                </button>
+              </div>
+              {showSelectDropDown && checkAccess('edit:tasks', projectId) && (
+                <div className={style.taskTypeList}>
+                  <p className={style.typeListTitle}>CHANGE ISSUE TYPE</p>
+                  {taskTypes.map((taskType) => {
+                    const src = TYPE[taskType.slug];
+                    const alt = taskType.slug;
+                    return (
+                      <button
+                        className={style.typeListOption}
+                        key={taskType.id}
+                        onClick={() => {
+                          onClickIssueType(taskType);
+                        }}
+                      >
+                        <img src={src} alt={alt} />
+                        <p>{taskType.name}</p>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
           </div>
           <div className={style.type}>
-            <div>
-              <MdOutlineBookmarkBorder />
-              Status
+            <div className={style.leftContent}>
+              <MdOutlineBookmarkBorder className={style.reactIcon} />
+              <div>Status</div>
             </div>
             <div ref={myRef} className={style.statusSection}>
               {visible && editAccess ? (
@@ -190,9 +267,9 @@ export default function CardRightContent({
             </div>
           </div>
           <div className={style.dueDate}>
-            <div>
-              <AiOutlineCalendar />
-              Due date
+            <div className={style.leftContent}>
+              <AiOutlineCalendar className={style.reactIcon} />
+              <div>Due date</div>
             </div>
             <DueDatePicker
               taskInfo={taskInfo}
@@ -201,17 +278,51 @@ export default function CardRightContent({
             />
           </div>
           <div className={style.type}>
-            <div>
-              <RiFlag2Line />
-              Priority
+            <div className={style.leftContent}>
+              <RiFlag2Line className={style.reactIcon} />
+              <div>Priority</div>
             </div>
-            <div>High</div>
+            <div className={style.rightContent}>
+              <button
+                className={style.storyIcon}
+                type="button"
+                onClick={() => {
+                  setShowPriorityDropDown((prevState) => !prevState);
+                }}
+              >
+                <img
+                  className={style.priorityImg}
+                  src={selectedPriorityIcon}
+                  alt={taskInfo.priority}
+                />
+                <div>{selectedPriority}</div>
+              </button>
+              {showPriorityDropDown && checkAccess('edit:tasks', projectId) && (
+                <div className={style.taskTypeList}>
+                  {priorityOptions.map((priorityOption) => {
+                    const src = PRIORITY[priorityOption];
+                    return (
+                      // eslint-disable-next-line react/jsx-key
+                      <button
+                        className={style.typeListOption}
+                        onClick={() => {
+                          onClickPriorityOption(priorityOption);
+                        }}
+                      >
+                        <img className={style.priorityImg} src={src} alt={priorityOption} />
+                        {priorityOption}
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
           </div>
           <ReporterFields reporterInfo={taskInfo.reporterId ?? {}} />
           <Row classesName={style.fieldMargin}>
             <div className={['fullWidth', style.label].join(' ')}>
-              <BsPeople />
-              Assignee
+              <BsPeople className={style.reactIcon} />
+              <div>Assignee</div>
             </div>
             <UserSelect
               onChange={assigneeOnchangeEventHandler}

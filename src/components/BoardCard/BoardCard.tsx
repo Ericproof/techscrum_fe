@@ -123,6 +123,7 @@ export default function BoardCard({
             labels={labels}
             projectId={projectId}
             updateTaskTags={updateTaskTags}
+            onSave={onSave}
           />
           <CardLeftContent
             taskInfo={taskInfo}
