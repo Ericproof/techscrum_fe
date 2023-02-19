@@ -1,4 +1,6 @@
-const REUSABLE_SECTION_TEXT = [
+import { ITextPart } from './ReusableSection/TextPart/TextPart';
+
+const REUSABLE_SECTION_TEXT: ITextPart[] = [
   {
     subtitle: 'Flexible Grouping',
     heading: 'Group your Boards your way.',

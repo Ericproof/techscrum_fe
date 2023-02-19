@@ -1,6 +1,5 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import styles from './MyWorkPage.module.scss';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import ReusableSection from './ReusableSection/ReusableSection';
@@ -8,9 +7,8 @@ import HomeSection from './HomeSection/HomeSection';
 import REUSABLE_SECTION_TEXT from './constant';
 
 export default function MyWorkPage() {
- 
   return (
-    <div className={styles.myWorkPage}>
+    <>
       <Header />
       <HomeSection />
       {}
@@ -27,6 +25,6 @@ export default function MyWorkPage() {
         );
       })}
       <Footer />
-    </div>
+    </>
   );
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './TextPart.module.scss';
 
-interface ITextPart {
+export interface ITextPart {
   subtitle: string;
   heading: string;
   text: string;

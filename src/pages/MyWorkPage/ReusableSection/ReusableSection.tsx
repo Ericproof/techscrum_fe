@@ -1,14 +1,12 @@
 import React from 'react';
 import styles from './ReusableSection.module.scss';
-import TextPart from './TextPart/TextPart';
+import TextPart, { ITextPart } from './TextPart/TextPart';
 import ImagePart from './ImagePart/ImagePart';
 
-interface IReusableSection {
+interface IReusableSection extends ITextPart {
   isImageRight: boolean;
-  subtitle: string;
-  heading: string;
-  text: string;
 }
+
 export default function ReusableSection(props: IReusableSection) {
   const { isImageRight, subtitle, heading, text } = props;
   const reusableSectionClass = isImageRight
