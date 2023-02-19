@@ -65,16 +65,16 @@ function ReportPage() {
                     THEME_COLOR as '' | 'purple' | 'pink' | 'blue' | 'green' | 'yellow' | undefined
                   }
                   isMainTextShrink
-                  centerText={!(width > 768)}
+                  centerText={!isDeskTop}
                 />
 
                 <Space power={3} />
-                <Paragraph centerText={!(width > 768)}>{DESCRIPTION}</Paragraph>
+                <Paragraph centerText={!isDeskTop}>{DESCRIPTION}</Paragraph>
               </div>
               <VideoPlayer
                 videoSrc={VIDEO_URL}
                 isHaveBackground
-                isShowDiamond={width > 768}
+                isShowDiamond={isDeskTop}
                 diamondColor={
                   THEME_COLOR as
                     | 'default'
