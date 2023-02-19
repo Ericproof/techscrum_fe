@@ -13,6 +13,10 @@
   flex-direction: column;
   justify-content: space-between;
 
+  @media screen and (max-width: 768px) {
+    margin-bottom: $size-70; // this is in fact against my design principles, just for a quick fix
+  }
+
   &::before {
     content: '';
     inset-block: 0;

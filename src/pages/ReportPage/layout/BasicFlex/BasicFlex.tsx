@@ -4,17 +4,19 @@ import styles from './BasicFlex.module.scss';
 
 interface Props {
   children: React.ReactNode;
-  flexGrowRatio?: 'even' | 'toRight' | 'toLeft';
+  flexGrowRatio?: 'even' | 'moreOnRight' | 'moreOnLeft';
   gap?: 'small' | 'medium' | 'large';
+  isFlexReverse?: boolean;
 }
 
-function BasicFlex({ children, flexGrowRatio, gap }: Props) {
+function BasicFlex({ children, flexGrowRatio, gap, isFlexReverse }: Props) {
   return (
     <div
       className={[
         styles.basicFlex,
         styles[`basicFlex${capitalise(flexGrowRatio as string)}`],
-        styles[`basicFlex${capitalise(gap as string)}`]
+        styles[`basicFlex${capitalise(gap as string)}`],
+        styles[`basicFlex${capitalise(isFlexReverse ? 'reverse' : '')}`]
       ].join(' ')}
     >
       {children}
@@ -24,7 +26,8 @@ function BasicFlex({ children, flexGrowRatio, gap }: Props) {
 
 BasicFlex.defaultProps = {
   flexGrowRatio: 'even',
-  gap: 'small'
+  gap: 'small',
+  isFlexReverse: false
 };
 
 export default BasicFlex;

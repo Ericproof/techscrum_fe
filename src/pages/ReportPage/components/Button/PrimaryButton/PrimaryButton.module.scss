@@ -18,6 +18,8 @@
   line-height: $size-16;
   min-width: 170px;
 
+  gap: $size-14;
+
   align-self: flex-start;
 }
 
@@ -50,6 +52,12 @@
   background-color: $color-pink;
   border: 1px solid $color-pink;
   box-shadow: 0 10px 25px rgba(253, 113, 175, 0.5);
+}
+
+.btnColorInherit {
+  background-color: inherit;
+  border: 1px solid inherit;
+  box-shadow: unset;
 }
 
 .btnFullWidth {

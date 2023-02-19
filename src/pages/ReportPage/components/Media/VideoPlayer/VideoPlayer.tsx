@@ -7,7 +7,7 @@ interface Props {
   posterSrc?: string;
   isHaveBackground?: boolean;
   isShowDiamond?: boolean;
-  diamondColor?: 'pink' | 'brand' | 'blue' | 'green' | 'yellow' | 'default';
+  diamondColor?: 'pink' | 'purple' | 'blue' | 'green' | 'yellow' | 'default';
   diamondPosition?: 'left' | 'right' | 'default';
 }
 

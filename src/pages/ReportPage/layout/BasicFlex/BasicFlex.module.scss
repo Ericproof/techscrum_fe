@@ -22,19 +22,19 @@
     flex: 1;
   }
 
-  &ToRight > *:first-child {
+  &MoreOnRight > *:first-child {
     flex: 4;
   }
 
-  &ToRight > *:last-child {
+  &MoreOnRight > *:last-child {
     flex: 3;
   }
 
-  &ToLeft > *:first-child {
+  &MoreOnLeft > *:first-child {
     flex: 3;
   }
 
-  &ToLeft > *:last-child {
+  &MoreOnLeft > *:last-child {
     flex: 4;
   }
 
@@ -48,5 +48,9 @@
 
   &Large {
     gap: $size-65;
+  }
+
+  &Reverse {
+    flex-direction: row-reverse;
   }
 }

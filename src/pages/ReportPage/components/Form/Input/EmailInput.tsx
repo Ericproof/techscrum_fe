@@ -6,9 +6,10 @@ import styles from './EmailInput.module.scss';
 interface Props {
   isShowInputIcon?: boolean;
   iconColor?: string;
-  btnBackgroundColor?: 'green' | 'brand' | 'blue' | 'pink' | 'default' | '';
+  btnBackgroundColor?: 'green' | 'brand' | 'blue' | 'pink' | 'default' | 'inherit' | '';
   isFullWidth?: boolean;
   isButtonShrink?: boolean;
+  isInputAndBtnOnSameRow?: boolean;
 }
 
 function EmailInput({
@@ -16,10 +17,17 @@ function EmailInput({
   iconColor,
   btnBackgroundColor,
   isFullWidth,
-  isButtonShrink
+  isButtonShrink,
+  isInputAndBtnOnSameRow
 }: Props) {
   return (
-    <div className={[styles.emailInput, styles[isFullWidth ? 'fullWidth' : '']].join(' ')}>
+    <div
+      className={[
+        styles.emailInput,
+        styles[isFullWidth ? 'fullWidth' : ''],
+        styles[isInputAndBtnOnSameRow ? `inputAndBtnSameRow` : '']
+      ].join(' ')}
+    >
       <div className={styles.inputWrapper}>
         {isShowInputIcon && <HiOutlineMailOpen color={iconColor} size={20} />}
         {isShowInputIcon ? (
@@ -42,7 +50,8 @@ EmailInput.defaultProps = {
   iconColor: 'pink',
   btnBackgroundColor: 'brand',
   isFullWidth: false,
-  isButtonShrink: false
+  isButtonShrink: false,
+  isInputAndBtnOnSameRow: false
 };
 
 export default EmailInput;

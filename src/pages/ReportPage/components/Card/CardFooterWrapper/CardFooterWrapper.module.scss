@@ -1,9 +1,6 @@
 @import '../../../styles/variables.scss';
-@import '../Button.module.scss';
 
-.buttonBottom {
-  @include reset-button;
-
+.cardFooterWrapper {
   cursor: pointer;
 
   position: absolute;
@@ -17,12 +14,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: $size-14;
 
   background: rgba(123, 104, 238, 0.05);
-
-  font-size: $size-14;
-  line-height: $size-16;
-  font-weight: 700;
-  text-transform: capitalize;
 }

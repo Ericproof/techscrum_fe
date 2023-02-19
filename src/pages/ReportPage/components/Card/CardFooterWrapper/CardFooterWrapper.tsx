@@ -8,18 +8,18 @@ interface Props {
   isShowIcon?: boolean;
 }
 
-function BottomButton({ btnTitle, trailingIcon, isShowIcon }: Props) {
+function CardFooterWrapper({ btnTitle, trailingIcon, isShowIcon }: Props) {
   return (
-    <button className={styles.buttonBottom}>
+    <button className={styles.cardFooterWrapper}>
       {btnTitle}
       {isShowIcon && trailingIcon}
     </button>
   );
 }
 
-BottomButton.defaultProps = {
+CardFooterWrapper.defaultProps = {
   isShowIcon: true,
   trailingIcon: <HiArrowNarrowRight color="#7b68ee" size={20} />
 };
 
-export default BottomButton;
+export default CardFooterWrapper;

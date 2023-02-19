@@ -49,7 +49,7 @@
         left/contain;
     }
 
-    &Brand::after {
+    &Purple::after {
       background: url('https://clickup.com/images/diamonds/purple-diamond.svg') no-repeat top
         left/contain;
     }
@@ -89,5 +89,10 @@
     box-shadow: 0 1px 11px rgb(0 0 0 / 15%);
     position: relative;
     z-index: 1;
+    transition: 0.2s;
+
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 }
