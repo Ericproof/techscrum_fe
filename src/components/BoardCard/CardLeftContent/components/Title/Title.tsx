@@ -21,11 +21,12 @@ export default function Title({
 }: Props) {
   return (
     <div className={styles.cardTitle}>
-      <label htmlFor="title">
+      <label htmlFor="title" data-testid="card-title">
         <input
           type="text"
           id="title"
           name="title"
+          data-testid="card-title-input"
           defaultValue={taskInfo.title}
           onFocus={focusEventHandler}
           disabled={isDisabled}

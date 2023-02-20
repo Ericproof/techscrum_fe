@@ -76,6 +76,13 @@ export default function CardRightContent({
     return `${day}-${month}-${year}`;
   };
 
+  const reporterOnchangeEventHandler = async (e: IOnChangeProjectLead) => {
+    const updatedTaskInfo = { ...taskInfo };
+    updatedTaskInfo.reporterId = !e.target.value ? undefined : e.target.value;
+    taskStatusOnchange(updatedTaskInfo);
+    await createActivity({ operation, userId, taskId });
+  };
+
   const assigneeOnchangeEventHandler = async (e: IOnChangeProjectLead) => {
     const updatedTaskInfo = { ...taskInfo };
     updatedTaskInfo.assignId = !e.target.value ? undefined : e.target.value;
@@ -127,36 +134,6 @@ export default function CardRightContent({
     onSave(updateTaskInfo);
   };
 
-  // const monthShortNames = [
-  //   'Jan',
-  //   'Feb',
-  //   'Mar',
-  //   'Apr',
-  //   'May',
-  //   'Jun',
-  //   'Jul',
-  //   'Aug',
-  //   'Sep',
-  //   'Oct',
-  //   'Nov',
-  //   'Dec'
-  // ];
-
-  // const dateWithTimestamp = (d: Date | null) => {
-  //   if (d != null) {
-  //     const date = d.toString().split('T')[0];
-  //     const dateDataArray = date.split('-');
-  //     const time = d.toString().split('T')[1].split(':');
-  //     const hour = Number(time[0]);
-  //     time[0] = hour > 12 ? `${hour - 12}` : `${hour}`;
-  //     const period = hour < 12 ? 'AM' : 'PM';
-  //     return `${monthShortNames[Number(dateDataArray[1]) - 1]} ${dateDataArray[2]}, ${
-  //       dateDataArray[0]
-  //     } at ${time[0]}:${time[1]} ${period}`;
-  //   }
-  //   return '';
-  // };
-
   if (!taskInfo) {
     return <div />;
   }
@@ -174,6 +151,7 @@ export default function CardRightContent({
               <div>
                 <button
                   className={style.storyIcon}
+                  data-testid="card-type-button"
                   type="button"
                   onClick={() => {
                     setShowSelectDropDown((prevState) => !prevState);
@@ -192,6 +170,7 @@ export default function CardRightContent({
                     return (
                       <button
                         className={style.typeListOption}
+                        data-testid="card-type-selection"
                         key={taskType.id}
                         onClick={() => {
                           onClickIssueType(taskType);
@@ -214,7 +193,12 @@ export default function CardRightContent({
             <div ref={myRef} className={style.statusSection}>
               {visible && editAccess ? (
                 <>
-                  <button type="button" className={style.toDoButton} onClick={handleClickOutside}>
+                  <button
+                    type="button"
+                    className={style.toDoButton}
+                    onClick={handleClickOutside}
+                    data-testid="card-status-button"
+                  >
                     {taskInfo.status && taskInfo.status.name.toUpperCase()}
                     <svg viewBox="0 0 24 24" role="presentation">
                       <path
@@ -233,6 +217,7 @@ export default function CardRightContent({
                               type="button"
                               name="status"
                               className={style.statusOptions}
+                              data-testid="card-status-selection"
                               onClick={() => {
                                 setVisible(false);
                                 const updatedTaskInfo = { ...taskInfo };
@@ -251,7 +236,12 @@ export default function CardRightContent({
                   </div>
                 </>
               ) : (
-                <button type="button" className={style.toDoButton} onClick={handleClickOutside}>
+                <button
+                  type="button"
+                  className={style.toDoButton}
+                  onClick={handleClickOutside}
+                  data-testid="card-status-button"
+                >
                   {taskInfo.status && taskInfo.status.name.toUpperCase()}
                   {editAccess && (
                     <svg viewBox="0 0 24 24" role="presentation">
@@ -285,6 +275,7 @@ export default function CardRightContent({
             <div className={style.rightContent}>
               <button
                 className={style.storyIcon}
+                data-testid="card-priority-button"
                 type="button"
                 onClick={() => {
                   setShowPriorityDropDown((prevState) => !prevState);
@@ -305,6 +296,7 @@ export default function CardRightContent({
                       // eslint-disable-next-line react/jsx-key
                       <button
                         className={style.typeListOption}
+                        data-testid="card-priority-selection"
                         onClick={() => {
                           onClickPriorityOption(priorityOption);
                         }}
@@ -318,7 +310,11 @@ export default function CardRightContent({
               )}
             </div>
           </div>
-          <ReporterFields reporterInfo={taskInfo.reporterId ?? {}} />
+          <ReporterFields
+            taskInfo={taskInfo}
+            projectId={projectId}
+            reporterOnchangeEventHandler={reporterOnchangeEventHandler}
+          />
           <Row classesName={style.fieldMargin}>
             <div className={['fullWidth', style.label].join(' ')}>
               <BsPeople className={style.reactIcon} />

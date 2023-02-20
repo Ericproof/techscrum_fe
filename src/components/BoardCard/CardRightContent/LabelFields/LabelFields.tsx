@@ -113,7 +113,7 @@ export default function LabelFields(props: IPropsLabel) {
     <div className={styles.label}>
       <div className={styles.leftContent}>
         <MdOutlineBookmarkBorder className={styles.reactIcon} />
-        <div>Labels</div>
+        <div data-testid="card-label-text">Labels</div>
       </div>
       <div ref={myRef} className={styles.labelDropdownContainer}>
         {visible && !isDisabled ? (
@@ -132,7 +132,11 @@ export default function LabelFields(props: IPropsLabel) {
                     </div>
                   );
                 })}
-              <input onChange={onChangeInputLabel} value={inputLabel} />
+              <input
+                onChange={onChangeInputLabel}
+                value={inputLabel}
+                data-testid="card-label-input"
+              />
             </div>
             <div className={styles.labelMenu}>
               <ul>
@@ -141,6 +145,7 @@ export default function LabelFields(props: IPropsLabel) {
                   <li key={label.id}>
                     <button
                       type="button"
+                      data-testid="card-label-button"
                       onClick={() => {
                         addLabelToSelectedTaskLabelList(label);
                         setInputLabel('');
@@ -162,7 +167,12 @@ export default function LabelFields(props: IPropsLabel) {
             </div>
           </div>
         ) : (
-          <button className={styles.labelInputClose} type="button" onClick={handleClickOutside}>
+          <button
+            className={styles.labelInputClose}
+            type="button"
+            data-testid="card-label-button"
+            onClick={handleClickOutside}
+          >
             {selectedTaskLabelList !== undefined &&
               selectedTaskLabelList?.map((item: ILabelData, index: number) => {
                 return <span key={item.id ?? index}>{item.name ?? ''}</span>;
