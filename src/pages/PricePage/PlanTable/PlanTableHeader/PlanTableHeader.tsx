@@ -1,4 +1,5 @@
 import React from 'react';
+import { createPayment } from '../../../../api/price/price';
 import styles from './PlanTableHeader.module.scss';
 
 interface IPlanTableHeaderProps {
@@ -8,6 +9,26 @@ interface IPlanTableHeaderProps {
 
 function PlanTableHeader(props: IPlanTableHeaderProps) {
   const { plans, isCheck } = props;
+
+  const handleButtonClick = async (id) => {
+    let price;
+    if (id === 1) {
+      if (isCheck) {
+        price = 49;
+      } else {
+        price = 29;
+      }
+    }
+    if (id === 2) {
+      if (isCheck) {
+        price = 149;
+      } else {
+        price = 59;
+      }
+    }
+    await createPayment({ price });
+  };
+
   return (
     <>
       <thead className={styles.head}>
@@ -24,8 +45,14 @@ function PlanTableHeader(props: IPlanTableHeaderProps) {
               )}
               {plan.yearly_price && !plan.monthly_price && <span>{plan.yearly_price}</span>}
 
-              <button className={styles.action}>{plan.action}</button>
-              {plan.buy_action && <button className={styles.buy_action}>{plan.buy_action}</button>}
+              <button className={styles.action} onClick={() => handleButtonClick(plan.id)}>
+                {plan.action}
+              </button>
+              {plan.buy_action && (
+                <button className={styles.buy_action} onClick={() => handleButtonClick(plan.id)}>
+                  {plan.buy_action}
+                </button>
+              )}
             </th>
           ))}
         </tr>

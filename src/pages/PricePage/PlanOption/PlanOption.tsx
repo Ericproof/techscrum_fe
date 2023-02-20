@@ -110,10 +110,22 @@ function PlanOption(props: IPlanOptionProps) {
   };
 
   const handleButtonClick = async (id) => {
-    if (id === 1 || id === 2) {
-      const price = 400;
-      await createPayment({ price });
+    let price;
+    if (id === 1) {
+      if (isChecked) {
+        price = 49;
+      } else {
+        price = 29;
+      }
     }
+    if (id === 2) {
+      if (isChecked) {
+        price = 149;
+      } else {
+        price = 59;
+      }
+    }
+    await createPayment({ price });
   };
 
   return (
@@ -163,7 +175,11 @@ function PlanOption(props: IPlanOptionProps) {
             <button className={styles.action} onClick={() => handleButtonClick(plan.id)}>
               {plan.action}
             </button>
-            {plan.buy_action && <button className={styles.buy_action}>{plan.buy_action}</button>}
+            {plan.buy_action && (
+              <button className={styles.buy_action} onClick={() => handleButtonClick(plan.id)}>
+                {plan.buy_action}
+              </button>
+            )}
           </div>
 
           <div className={styles.service}>
