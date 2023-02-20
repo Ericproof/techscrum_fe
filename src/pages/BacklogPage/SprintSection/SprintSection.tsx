@@ -4,6 +4,7 @@ import { GoPlus } from 'react-icons/go';
 import { useParams } from 'react-router-dom';
 import { BsArrowRight } from 'react-icons/bs';
 import { toast } from 'react-toastify';
+import { Droppable, Draggable } from 'react-beautiful-dnd';
 import Button from '../../../components/Button/Button';
 import IconButton from '../../../components/Button/IconButton/IconButton';
 import TaskTypeSelect from '../../../components/Select/TaskTypeSelect/TaskTypeSelect';
@@ -11,7 +12,7 @@ import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import TaskItem from '../TaskItem/TaskItem';
 import { addTask } from '../../../api/backlog/backlog';
 import styles from './SprintSection.module.scss';
-import { IUserInfo, Itypes, IStatusBacklog } from '../../../types';
+import { IUserInfo, ITypes, IStatusBacklog } from '../../../types';
 import CreateEditSprint from '../CreateEditSprint/CreateEditSprint';
 import { updateSprint } from '../../../api/sprint/sprint';
 
@@ -19,9 +20,10 @@ interface ISprintSection {
   sprint: any;
   sprintData: any;
   statusData: IStatusBacklog[];
-  typesData: Itypes[] | null;
+  typesData: ITypes[] | null;
   userList: IUserInfo[];
   getBacklogDataApi: () => void;
+  projectKey: string;
 }
 export default function SprintSection({
   sprint,
@@ -29,7 +31,8 @@ export default function SprintSection({
   typesData,
   userList,
   sprintData,
-  getBacklogDataApi
+  getBacklogDataApi,
+  projectKey
 }: ISprintSection) {
   const [currentTypeOption, setCurrentTypeOption] = useState('story');
   const [showEditSprint, setShowEditSprint] = useState(false);
@@ -95,6 +98,7 @@ export default function SprintSection({
         toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
       });
   };
+
   return (
     <section className={[styles.container, styles.sprintContainer].join(' ')}>
       <div className={styles.header}>
@@ -148,18 +152,44 @@ export default function SprintSection({
         </div>
       </div>
       <div className={styles.listContainer}>
-        {sprint.taskId.map((task) => {
-          return (
-            <TaskItem
-              key={task.id}
-              task={task}
-              sprintData={sprintData}
-              statusData={statusData}
-              userList={userList}
-              getBacklogDataApi={getBacklogDataApi}
-            />
-          );
-        })}
+        <Droppable droppableId={sprint.id}>
+          {(provided) => {
+            return (
+              <div
+                /* eslint-disable react/jsx-props-no-spreading */
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+              >
+                {sprint.taskId.map((task, index) => {
+                  return (
+                    <Draggable key={task.id} draggableId={task.id ?? ''} index={index}>
+                      {(provided2) => {
+                        return (
+                          <div
+                            ref={provided2.innerRef}
+                            {...provided2.dragHandleProps}
+                            {...provided2.draggableProps}
+                            aria-hidden="true"
+                          >
+                            <TaskItem
+                              task={task}
+                              projectKey={projectKey}
+                              statusData={statusData}
+                              userList={userList}
+                              sprintData={sprintData}
+                              getBacklogDataApi={getBacklogDataApi}
+                            />
+                          </div>
+                        );
+                      }}
+                    </Draggable>
+                  );
+                })}
+                {provided.placeholder}
+              </div>
+            );
+          }}
+        </Droppable>
       </div>
       {visible ? (
         <form>

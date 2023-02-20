@@ -174,6 +174,9 @@ export default function ServicesTabs({ show }: Props) {
           Book a demo
         </Link>
       </div>
+      <div>
+        <Link to="/price">Price</Link>
+      </div>
     </div>
   );
 }

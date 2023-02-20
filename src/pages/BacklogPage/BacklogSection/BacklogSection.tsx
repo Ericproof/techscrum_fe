@@ -2,12 +2,13 @@ import React, { useRef, useState } from 'react';
 import { GoPlus } from 'react-icons/go';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { Draggable, Droppable } from 'react-beautiful-dnd';
 import Button from '../../../components/Button/Button';
 import TaskTypeSelect from '../../../components/Select/TaskTypeSelect/TaskTypeSelect';
 import TaskItem from '../TaskItem/TaskItem';
 import styles from './BacklogSection.module.scss';
 import { addTask } from '../../../api/backlog/backlog';
-import { IUserInfo, Itypes, IStatusBacklog } from '../../../types';
+import { IUserInfo, ITypes, IStatusBacklog } from '../../../types';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import CreateEditSprint from '../CreateEditSprint/CreateEditSprint';
 
@@ -15,9 +16,10 @@ interface IBacklogSection {
   backlogData: any;
   getBacklogDataApi: () => void;
   statusData: IStatusBacklog[];
-  typesData: Itypes[] | null;
+  typesData: ITypes[] | null;
   userList: IUserInfo[];
   sprintData: any;
+  projectKey: string;
 }
 
 export default function BacklogSection({
@@ -26,7 +28,8 @@ export default function BacklogSection({
   statusData,
   typesData,
   userList,
-  sprintData
+  sprintData,
+  projectKey
 }: IBacklogSection) {
   const [currentTypeOption, setCurrentTypeOption] = useState('story');
   const { boardId = '', projectId = '' } = useParams();
@@ -109,21 +112,48 @@ export default function BacklogSection({
           )}
         </div>
       </div>
-      <div className={styles.listContainer}>
-        {backlogData.cards.map((task, index) => {
+
+      <Droppable droppableId="backlog">
+        {(provided) => {
           return (
-            <TaskItem
-              task={task}
-              key={task.id}
-              statusData={statusData}
-              userList={userList}
-              sprintData={sprintData}
-              showDropDownOnTop={calculateShowDropDownTop() && index > backlogData.cards.length - 6}
-              getBacklogDataApi={getBacklogDataApi}
-            />
+            <div
+              /* eslint-disable react/jsx-props-no-spreading */
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+            >
+              {backlogData.cards.map((task, index) => {
+                return (
+                  <Draggable key={task.id} draggableId={task.id ?? ''} index={index}>
+                    {(provided2) => {
+                      return (
+                        <div
+                          ref={provided2.innerRef}
+                          {...provided2.dragHandleProps}
+                          {...provided2.draggableProps}
+                          aria-hidden="true"
+                        >
+                          <TaskItem
+                            task={task}
+                            projectKey={projectKey}
+                            statusData={statusData}
+                            userList={userList}
+                            sprintData={sprintData}
+                            showDropDownOnTop={
+                              calculateShowDropDownTop() && index > backlogData.cards.length - 6
+                            }
+                            getBacklogDataApi={getBacklogDataApi}
+                          />
+                        </div>
+                      );
+                    }}
+                  </Draggable>
+                );
+              })}
+              {provided.placeholder}
+            </div>
           );
-        })}
-      </div>
+        }}
+      </Droppable>
       {visible ? (
         <form>
           <div className={styles.formField} ref={myRef}>
