@@ -105,25 +105,20 @@ function PlanOption(props: IPlanOptionProps) {
   const { isChecked, setIsChecked } = props;
   const { content } = plans;
 
+  const ADVANCED_ID = 1;
+  const ULTRA_ID = 2;
+
   const handleClick = () => {
     setIsChecked((ischecked) => !ischecked);
   };
 
   const handleButtonClick = async (id: number) => {
     let price;
-    if (id === 1) {
-      if (isChecked) {
-        price = 49;
-      } else {
-        price = 29;
-      }
+    if (id === ADVANCED_ID) {
+      price = isChecked ? 49 : 29;
     }
-    if (id === 2) {
-      if (isChecked) {
-        price = 149;
-      } else {
-        price = 59;
-      }
+    if (id === ULTRA_ID) {
+      price = isChecked ? 149 : 59;
     }
     createPayment({ price });
   };

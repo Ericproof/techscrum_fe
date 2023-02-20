@@ -10,21 +10,16 @@ interface IPlanTableHeaderProps {
 function PlanTableHeader(props: IPlanTableHeaderProps) {
   const { plans, isCheck } = props;
 
+  const ADVANCED_ID = 1;
+  const ULTRA_ID = 2;
+
   const handleButtonClick = async (id: number) => {
     let price;
-    if (id === 1) {
-      if (isCheck) {
-        price = 49;
-      } else {
-        price = 29;
-      }
+    if (id === ADVANCED_ID) {
+      price = isCheck ? 49 : 29;
     }
-    if (id === 2) {
-      if (isCheck) {
-        price = 149;
-      } else {
-        price = 59;
-      }
+    if (id === ULTRA_ID) {
+      price = isCheck ? 149 : 59;
     }
     createPayment({ price });
   };
