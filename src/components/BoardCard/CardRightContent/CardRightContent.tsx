@@ -4,6 +4,7 @@ import { MdOutlineBookmarkBorder } from 'react-icons/md';
 import { RiFlag2Line } from 'react-icons/ri';
 import { BsPeople } from 'react-icons/bs';
 import { AiOutlineCalendar } from 'react-icons/ai';
+import { v4 as uuid } from 'uuid';
 import { IColumnsFromBackend, ILabelData, IOnChangeProjectLead, ITaskEntity } from '../../../types';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import style from './CardRightContent.module.scss';
@@ -293,8 +294,8 @@ export default function CardRightContent({
                   {priorityOptions.map((priorityOption) => {
                     const src = PRIORITY[priorityOption];
                     return (
-                      // eslint-disable-next-line react/jsx-key
                       <button
+                        key={uuid()}
                         className={style.typeListOption}
                         data-testid="card-priority-selection"
                         onClick={() => {
