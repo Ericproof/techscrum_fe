@@ -1,4 +1,5 @@
 import React from 'react';
+import { createPayment } from '../../../api/price/price';
 import styles from './PlanOption.module.scss';
 
 const plans = {
@@ -108,6 +109,13 @@ function PlanOption(props: IPlanOptionProps) {
     setIsChecked((ischecked) => !ischecked);
   };
 
+  const handleButtonClick = async (id) => {
+    if (id === 1 || id === 2) {
+      const price = 400;
+      await createPayment({ price });
+    }
+  };
+
   return (
     <div className={styles.group}>
       {content.content.map((plan) => (
@@ -152,7 +160,9 @@ function PlanOption(props: IPlanOptionProps) {
           </div>
 
           <div className={styles.buttons}>
-            <button className={styles.action}>{plan.action}</button>
+            <button className={styles.action} onClick={() => handleButtonClick(plan.id)}>
+              {plan.action}
+            </button>
             {plan.buy_action && <button className={styles.buy_action}>{plan.buy_action}</button>}
           </div>
 
