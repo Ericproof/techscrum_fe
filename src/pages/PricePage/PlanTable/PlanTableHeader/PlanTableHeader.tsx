@@ -10,7 +10,7 @@ interface IPlanTableHeaderProps {
 function PlanTableHeader(props: IPlanTableHeaderProps) {
   const { plans, isCheck } = props;
 
-  const handleButtonClick = async (id) => {
+  const handleButtonClick = async (id: number) => {
     let price;
     if (id === 1) {
       if (isCheck) {
@@ -26,7 +26,7 @@ function PlanTableHeader(props: IPlanTableHeaderProps) {
         price = 59;
       }
     }
-    await createPayment({ price });
+    createPayment({ price });
   };
 
   return (

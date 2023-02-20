@@ -109,7 +109,7 @@ function PlanOption(props: IPlanOptionProps) {
     setIsChecked((ischecked) => !ischecked);
   };
 
-  const handleButtonClick = async (id) => {
+  const handleButtonClick = async (id: number) => {
     let price;
     if (id === 1) {
       if (isChecked) {
@@ -125,7 +125,7 @@ function PlanOption(props: IPlanOptionProps) {
         price = 59;
       }
     }
-    await createPayment({ price });
+    createPayment({ price });
   };
 
   return (
