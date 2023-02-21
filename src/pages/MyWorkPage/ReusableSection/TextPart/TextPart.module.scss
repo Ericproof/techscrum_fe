@@ -7,14 +7,14 @@
   text-align: left;
   .subtitle {
     color: $primaryColor;
-    font: 800 11px/12px $fontPrimaryFamily;
+    font: 800 11px/12px 'Roboto', sans-serif;
     letter-spacing: 2px;
     text-transform: uppercase;
     margin: 0;
   }
   .text {
     color: #7c828d;
-    font: 400 14px/25px $fontPrimaryFamily;
+    font: 400 14px/25px 'Roboto', sans-serif;
     margin: 15px auto;
     max-width: 1000px;
   }
