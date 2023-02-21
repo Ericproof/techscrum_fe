@@ -8,14 +8,13 @@
   .leftContent {
     display: flex;
     align-items: center;
+    width: 50%;
     .reactIcon {
       margin-right: 5px;
     }
   }
 
   & > div:nth-of-type(1) {
-    box-sizing: border-box;
-    width: 100%;
     line-height: 1;
     color: var(--ds-text-subtle, #38465e);
     font-size: 14px;
@@ -174,7 +173,6 @@
       flex-wrap: wrap;
       gap: 5px;
       span {
-        margin-left: 10px;
         display: inline-flex;
         font-size: 14px;
         justify-content: center;

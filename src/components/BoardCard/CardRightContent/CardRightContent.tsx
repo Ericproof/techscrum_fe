@@ -317,7 +317,7 @@ export default function CardRightContent({
             reporterOnchangeEventHandler={reporterOnchangeEventHandler}
           />
           <Row classesName={style.fieldMargin}>
-            <div className={['fullWidth', style.label].join(' ')}>
+            <div className={style.label}>
               <BsPeople className={style.reactIcon} />
               <div>Assignee</div>
             </div>

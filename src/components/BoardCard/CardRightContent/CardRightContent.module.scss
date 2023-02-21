@@ -149,15 +149,12 @@ $padding-left: 10px;
       font-size: 14px;
       font-weight: 500;
       color: #38465e;
-      padding-top: 8px;
       height: 44px;
-      div:nth-of-type(1) {
-        width: 50%;
-        line-height: 1;
-      }
       .leftContent {
         display: flex;
         align-items: center;
+        width: 33%;
+        line-height: 1;
         .reactIcon {
           margin-right: 5px;
         }
@@ -229,12 +226,12 @@ $padding-left: 10px;
       flex-direction: row;
       margin-bottom: 12px;
       align-items: center;
+      justify-content: center;
       & > div:nth-of-type(1) {
         display: flex;
         align-items: center;
         box-sizing: border-box;
-        width: 100%;
-        padding-top: 8px;
+        width: 50%;
         line-height: 1;
         color: var(--ds-text-subtle, #38465e);
         font-size: 14px;
@@ -246,7 +243,6 @@ $padding-left: 10px;
 
       & > div:nth-of-type(2) {
         font-size: 14px;
-        margin-top: 6px;
         line-height: 1;
         width: 100%;
         display: inline-block;
@@ -307,18 +303,18 @@ $padding-left: 10px;
 }
 .fieldMargin {
   margin-bottom: 12px;
+  max-height: 44px;
 }
 
 .label {
   display: flex;
-  align-items: center;
   box-sizing: border-box;
-  width: 100%;
-  padding-top: 8px;
+  width: 50%;
   line-height: 1;
   color: #38465e;
   font-size: 14px;
   font-weight: 500;
+  align-items: center;
   .reactIcon {
     margin-right: 5px;
   }
