@@ -139,17 +139,16 @@ function AboutPageT3() {
   };
 
   const closeDetailHandler = () => {
-    if (openDetail) {
-      setOpenDetail(false);
-      setDetailStaff({
-        name: '',
-        image: '',
-        description: ``,
-        linkedin: '',
-        gender: 'male',
-        position: 'ceo'
-      });
-    }
+    if (!openDetail) return;
+    setOpenDetail(false);
+    setDetailStaff({
+      name: '',
+      image: '',
+      description: ``,
+      linkedin: '',
+      gender: 'male',
+      position: 'ceo'
+    });
   };
 
   const positionNav = positions.map((position) => {
@@ -176,10 +175,7 @@ function AboutPageT3() {
 
   const selectedPosition = staffs
     .filter((staff) => {
-      if (activeBtn === 'all') {
-        return staff;
-      }
-      return staff.position === activeBtn;
+      return activeBtn === 'all' ? staff : staff.position === activeBtn;
     })
     .map((staff) => {
       const { name, gender, image, position } = staff;
