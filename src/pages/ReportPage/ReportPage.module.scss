@@ -1,0 +1,28 @@
+@import './styles/variables.scss';
+
+.mainWrapper {
+  margin-top: $size-80 * 1.2; // For the floating top nav
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: $size-50 * 3;
+  overflow-x: hidden;
+
+  @media screen and (max-width: 768px) {
+    gap: $size-50;
+  }
+
+  &::before {
+    background-image: url(https://themexriver.com/appilo-theme/saas-classic-dark/wp-content/themes/appilo/img/saas-classic/banner/b-shape1.png);
+    right: 0;
+    width: 100%;
+    content: '';
+    top: -$size-80 * 1.2;
+    height: 100vh;
+    position: absolute;
+    background-position: right top;
+    background-repeat: no-repeat;
+    background-size: 90%;
+  }
+}
