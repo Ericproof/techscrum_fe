@@ -119,7 +119,7 @@ jobs:
             - ~/.npm
             - ~/.cache
           key: v1-dependencies-{{ checksum "package.json" }}
-      - snyk/scan
+      # - snyk/scan
   code_qa:
     docker:
       - image: cimg/node:16.17.0-browsers

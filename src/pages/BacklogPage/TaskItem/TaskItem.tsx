@@ -18,6 +18,7 @@ interface ITaskInput {
   sprintData?: any;
   showDropDownOnTop?: boolean;
   getBacklogDataApi: () => void;
+  projectKey: string;
 }
 export default function TaskItem({
   task,
@@ -25,7 +26,8 @@ export default function TaskItem({
   userList,
   sprintData,
   showDropDownOnTop,
-  getBacklogDataApi
+  getBacklogDataApi,
+  projectKey
 }: ITaskInput) {
   const allTypes = {
     story:
@@ -91,7 +93,7 @@ export default function TaskItem({
           <img className={styles.icon} src={allTypes[task.typeId.slug]} alt={task.typeId.slug} />
         </div>
         <div className={styles.taskIdContainer}>
-          <p>{`TEC-${task.id.slice(task.id.length - 3)}`}</p>
+          <p>{`${projectKey}-${task.id.slice(task.id.length - 3)}`}</p>
         </div>
         {visible ? (
           <input

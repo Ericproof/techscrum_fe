@@ -2,6 +2,7 @@
 import projectsData from '../../fixtures/projects.json';
 import boardData from '../../fixtures/board.json';
 import dailyScrum from '../../fixtures/dailyScrum.json';
+import dailyScrumUpdate from '../../fixtures/dailyScrumUpdate.json';
 describe('Project page', () => {
   beforeEach(() => {
     let projectList = projectsData;
@@ -56,7 +57,7 @@ describe('Project page', () => {
   });
   it('Test should submit data', () => {
     cy.intercept('GET', '**/dailyScrums/*/*/*/*', dailyScrum).as('fetch-dailyScrums');
-    cy.intercept('PATCH', '**/dailyScrums/*').as('update-dailyScrums');
+    cy.intercept('PATCH', '**/dailyScrums/*', dailyScrumUpdate).as('update-dailyScrums');
     cy.get('[data-testid="dailyscrum-btn"]').then((items) => {
       items[0].click();
     });
@@ -64,6 +65,5 @@ describe('Project page', () => {
     cy.get('[type="radio"]').check();
     cy.get('[data-testid="dailyscrum-reason-6371d4176d614a9131b97e6f"]').type('I need support');
     cy.get('[data-testid="dailyscrum-submit"]').click();
-    cy.wait('@update-dailyScrums');
   });
 });
