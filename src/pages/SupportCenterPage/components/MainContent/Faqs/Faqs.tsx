@@ -1,5 +1,4 @@
 import React from 'react';
-// import { FaRegPlusSquare } from 'react-icons/fa';
 import styles from './Faqs.module.scss';
 import Questions from './FaqsQuestions';
 
