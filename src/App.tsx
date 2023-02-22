@@ -23,6 +23,7 @@ import ChangePasswordPage from './pages/ChangePasswordPage/ChangePasswordPage';
 import BoardPage from './pages/BoardPage/BoardPage';
 import AboutPage from './pages/AboutPage/AboutPage';
 import CareerPage from './pages/CareerPage/CareerPage';
+import KanbanBoardPage from './pages/KanbanBoardPage/KanbanBoardPage';
 import './App.css';
 import { UserProvider } from './context/UserInfoProvider';
 import { ProjectProvider } from './context/ProjectProvider';
@@ -123,6 +124,7 @@ function App() {
                 <Route path="/unauthorize" element={<UnauthorizePage />} />
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/price" element={<PricePage />} />
+                <Route path="/features/kanban-board" element={<KanbanBoardPage />} />
                 <Route path="*" element={<ErrorPage />} />
               </Routes>
             </TaskTypesProvider>
