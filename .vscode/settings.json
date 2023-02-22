@@ -13,10 +13,10 @@
   "editor.formatOnSave": true,
   "gitlens.currentLine.dateFormat": "",
   "[typescriptreact]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   },
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"

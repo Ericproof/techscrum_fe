@@ -7,7 +7,9 @@ export default function ContactForm() {
     <div className={styles.container}>
       <form>
         <h3>Contact Us</h3>
-        <input placeholder="Full Name *" />
+        <div>
+          <input id="email" name="Full Name" className="textfield__input" type="text" />
+        </div>
         <input placeholder="Company *" />
         <input placeholder="Work Email Address *" />
         <input placeholder="Phone Number *" />
