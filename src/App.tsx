@@ -23,6 +23,7 @@ import ChangePasswordPage from './pages/ChangePasswordPage/ChangePasswordPage';
 import BoardPage from './pages/BoardPage/BoardPage';
 import AboutPage from './pages/AboutPage/AboutPage';
 import CareerPage from './pages/CareerPage/CareerPage';
+import KanbanBoardPage from './pages/KanbanBoardPage/KanbanBoardPage';
 import './App.css';
 import { UserProvider } from './context/UserInfoProvider';
 import { ProjectProvider } from './context/ProjectProvider';
@@ -38,6 +39,7 @@ import AuthenticationRoute from './routes/AuthenticationRoute';
 import SecurityPage from './pages/SecurityPage/SecurityPage';
 import AdminPage from './pages/AdminPage/AdminPage';
 import AboutPageT2 from './pages/AboutPageT2/AboutPageT2';
+import AboutPageT3 from './pages/AboutPageT3/AboutPageT3';
 import { getDomains } from './api/domain/domain';
 import BacklogPage from './pages/BacklogPage/BacklogPage';
 import ShortcutPage from './pages/ShortcutPage/ShortcutPage';
@@ -91,6 +93,7 @@ function App() {
                 <Route path="/refund-policy" element={<RefundPolicyPage />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/about-t2" element={<AboutPageT2 />} />
+                <Route path="/about-t3" element={<AboutPageT3 />} />
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/careers" element={<CareerPage />} />
                 <Route path="/security-page" element={<SecurityPage />} />
@@ -122,6 +125,7 @@ function App() {
                 <Route path="/unauthorize" element={<UnauthorizePage />} />
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/price" element={<PricePage />} />
+                <Route path="/features/kanban-board" element={<KanbanBoardPage />} />
                 <Route path="*" element={<ErrorPage />} />
                 <Route path="/support-center" element={<SupportCenterPage />} />
               </Routes>
