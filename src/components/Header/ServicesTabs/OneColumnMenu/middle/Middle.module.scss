@@ -18,6 +18,7 @@ div.middle {
     flex-wrap: wrap;
     align-items: flex-start;
     div {
+      flex-direction: row;
       margin-top: 20px;
       width: 48%;
       a {
