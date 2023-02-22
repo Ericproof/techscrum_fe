@@ -1,10 +1,11 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
+import { AiOutlineSearch } from 'react-icons/ai';
 import BacklogSection from './BacklogSection/BacklogSection';
 import styles from './BacklogPage.module.scss';
-import { getBacklog, updateTask, updateBacklogOrder } from '../../api/backlog/backlog';
+import { getBacklog, updateBacklogOrder, updateTask } from '../../api/backlog/backlog';
 import { getStatuses } from '../../api/status/status';
 import { getTypes } from '../../api/types/types';
 import { getUsers } from '../../api/user/user';
@@ -12,6 +13,7 @@ import { showProject } from '../../api/projects/projects';
 import SprintSection from './SprintSection/SprintSection';
 import Loading from '../../components/Loading/Loading';
 import ProjectNavigationV3 from '../../lib/ProjectNavigationV3/ProjectNavigationV3';
+import BacklogUserFilter from '../../components/Backlog/BacklogUserFilter/BacklogUserFilter';
 
 export default function BacklogPage() {
   const [loaded, setLoaded] = useState(false);
@@ -23,6 +25,28 @@ export default function BacklogPage() {
   const [userList, setUserList] = useState<any>([]);
   const [projectDataLoaded, setProjectDataLoaded] = useState(false);
   const [projectKey, setProjectKey] = useState('');
+  // const [selectedUsers, setSelectedUsers] = useState<any[]>([]);
+
+  // const handleUserFilterSelect = (user) => {
+  //   let isExits = false;
+  //   // eslint-disable-next-line no-restricted-syntax
+  //   for (const singleUser of selectedUsers) {
+  //     if (singleUser.id === user.id) {
+  //       isExits = true;
+  //     }
+  //   }
+  //   if (isExits) {
+  //     setSelectedUsers(selectedUsers.filter((selectedUser) => selectedUser.id !== user.id));
+  //   }
+  //   if (!isExits) {
+  //     setSelectedUsers([...selectedUsers, user]);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   // eslint-disable-next-line no-console
+  //   console.log(selectedUsers);
+  // }, [selectedUsers]);
 
   const getBacklogDataApi = useCallback(() => {
     const getBacklogData = async () => {
@@ -132,6 +156,17 @@ export default function BacklogPage() {
         >
           {finishLoading && (
             <>
+              <div className={styles.BacklogSearchFilter}>
+                <div className={styles.BacklogSearchArea}>
+                  <input className={styles.BacklogSearchBar} type="text" />
+                  <AiOutlineSearch className={styles.BacklogSearchIcon} />
+                </div>
+                <div className={styles.BacklogFilterArea}>
+                  {userList.map((user) => (
+                    <BacklogUserFilter key={user.id} user={user} />
+                  ))}
+                </div>
+              </div>
               {sprintData
                 .filter((sprint: any) => {
                   return !sprint.isComplete;

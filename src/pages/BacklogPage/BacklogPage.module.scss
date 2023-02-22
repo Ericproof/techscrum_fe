@@ -13,3 +13,59 @@
   padding-bottom: 3rem;
   padding-left: 20px;
 }
+
+.BacklogSearchFilter {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+
+  .BacklogSearchArea {
+    position: relative;
+
+    .BacklogSearchBar {
+      background-color: #dfe1e6;
+      border: 0;
+      height: 30px;
+      border-radius: 5px;
+    }
+
+    .BacklogSearchIcon {
+      position: absolute;
+      right: 12px;
+      top: 8px;
+    }
+  }
+
+  .BacklogFilterArea {
+    margin-left: 20px;
+    display: flex;
+
+    .backlogUser {
+      button {
+        background: none;
+        border: none;
+
+        .backlogUserIcon {
+          height: 30px;
+          border-radius: 100%;
+          margin: 2px;
+        }
+
+        .backlogUserIcon:hover {
+          cursor: pointer;
+        }
+
+        .backlogUserIconWithBorder {
+          height: 30px;
+          border-radius: 100%;
+          margin: 2px;
+          box-shadow: 0 0 0 2px #0052cc;
+        }
+
+        .backlogUserIconWithBorder:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
