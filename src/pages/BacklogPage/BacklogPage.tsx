@@ -14,6 +14,7 @@ import SprintSection from './SprintSection/SprintSection';
 import Loading from '../../components/Loading/Loading';
 import ProjectNavigationV3 from '../../lib/ProjectNavigationV3/ProjectNavigationV3';
 import BacklogUserFilter from '../../components/Backlog/BacklogUserFilter/BacklogUserFilter';
+import BacklogUserFilterDropdown from '../../components/Backlog/BacklogUserFilterDropdown/BacklogUserFilterDropdown';
 
 export default function BacklogPage() {
   const [loaded, setLoaded] = useState(false);
@@ -25,28 +26,19 @@ export default function BacklogPage() {
   const [userList, setUserList] = useState<any>([]);
   const [projectDataLoaded, setProjectDataLoaded] = useState(false);
   const [projectKey, setProjectKey] = useState('');
-  // const [selectedUsers, setSelectedUsers] = useState<any[]>([]);
+  const [selectedUsers, setSelectedUsers] = useState<any[]>([]);
+  const chaneSelectedUsers = (isExist, user) => {
+    if (!isExist) {
+      setSelectedUsers([...selectedUsers, user]);
+    } else {
+      setSelectedUsers(selectedUsers.filter((selectedUser) => selectedUser.id !== user.id));
+    }
+  };
 
-  // const handleUserFilterSelect = (user) => {
-  //   let isExits = false;
-  //   // eslint-disable-next-line no-restricted-syntax
-  //   for (const singleUser of selectedUsers) {
-  //     if (singleUser.id === user.id) {
-  //       isExits = true;
-  //     }
-  //   }
-  //   if (isExits) {
-  //     setSelectedUsers(selectedUsers.filter((selectedUser) => selectedUser.id !== user.id));
-  //   }
-  //   if (!isExits) {
-  //     setSelectedUsers([...selectedUsers, user]);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   // eslint-disable-next-line no-console
-  //   console.log(selectedUsers);
-  // }, [selectedUsers]);
+  useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.log(selectedUsers);
+  }, [selectedUsers]);
 
   const getBacklogDataApi = useCallback(() => {
     const getBacklogData = async () => {
@@ -162,9 +154,21 @@ export default function BacklogPage() {
                   <AiOutlineSearch className={styles.BacklogSearchIcon} />
                 </div>
                 <div className={styles.BacklogFilterArea}>
-                  {userList.map((user) => (
-                    <BacklogUserFilter key={user.id} user={user} />
+                  {userList.slice(0, 4).map((user) => (
+                    <BacklogUserFilter
+                      selectedUsers={selectedUsers}
+                      changeSelectedUsers={chaneSelectedUsers}
+                      key={user.id}
+                      user={user}
+                    />
                   ))}
+                  {userList.length > 4 && (
+                    <BacklogUserFilterDropdown
+                      selectedUsers={selectedUsers}
+                      changeSelectedUsers={chaneSelectedUsers}
+                      users={userList.slice(4)}
+                    />
+                  )}
                 </div>
               </div>
               {sprintData
