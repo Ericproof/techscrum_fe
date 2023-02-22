@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState, createRef } from 'react';
 import { TiDelete } from 'react-icons/ti';
-import { updateRole, removePermission } from '../../api/role/role';
+import { updateRole, deletePermission } from '../../api/role/role';
 import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
 import config from '../../config/config';
 import { IPermissions, IRole } from '../../types';
@@ -43,7 +43,7 @@ export default function ProjectMembersPage() {
 
   const removePermissionFromList = async (roleId: string, permissionId: string) => {
     try {
-      await removePermission(roleId, permissionId);
+      await deletePermission(roleId, permissionId);
     } finally {
       if (selectedPermissions !== undefined && Array.isArray(selectedPermissions)) {
         setSelectedPermissions(

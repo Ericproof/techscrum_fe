@@ -10,16 +10,18 @@ import { getRoles } from '../../api/role/role';
 import styles from './RolePage.module.scss';
 
 function RolePage() {
-  const [loader, setLoader] = useState(false);
+  // const [loader, setLoader] = useState(false);
   const [roles, setRoles] = useState<IRole[]>([]);
   useEffect(() => {
     (async () => {
       try {
         const res = await getRoles();
+        // eslint-disable-next-line no-console
+        console.log(res);
         setRoles(res);
-        setLoader(true);
+        // setLoader(true);
       } catch (err) {
-        setLoader(false);
+        // setLoader(false);
         toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
       }
     })();

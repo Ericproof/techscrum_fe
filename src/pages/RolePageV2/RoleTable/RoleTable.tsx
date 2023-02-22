@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './RoleTable.module.scss';
 import { IRole } from '../../../types';
+import PermissionSelector from '../PermissionSelector/PermissionSelector';
 
 interface IRoleTable {
   roles: IRole[];
@@ -8,6 +9,7 @@ interface IRoleTable {
 
 function RoleTable(props: IRoleTable) {
   const { roles } = props;
+
   return (
     <table className={styles['roles-table-container']}>
       <thead>
@@ -22,7 +24,12 @@ function RoleTable(props: IRoleTable) {
         <tr>
           <th className={styles.permissions}>Permissions</th>
           {roles.map((role) => {
-            return <th key={role.id}>permission list</th>;
+            const { permission } = role;
+            return (
+              <th key={role.id}>
+                <PermissionSelector permission={permission} />
+              </th>
+            );
           })}
         </tr>
       </tbody>
