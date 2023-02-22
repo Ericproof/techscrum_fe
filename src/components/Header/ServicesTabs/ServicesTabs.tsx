@@ -66,6 +66,12 @@ const teams = {
         title: 'Team 2',
         description: '',
         href: '/about-t2'
+      },
+      {
+        icon: AiOutlineTeam,
+        title: 'Team 3',
+        description: '',
+        href: '/about-t3'
       }
     ]
   }

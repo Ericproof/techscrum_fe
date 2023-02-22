@@ -38,6 +38,7 @@ import AuthenticationRoute from './routes/AuthenticationRoute';
 import SecurityPage from './pages/SecurityPage/SecurityPage';
 import AdminPage from './pages/AdminPage/AdminPage';
 import AboutPageT2 from './pages/AboutPageT2/AboutPageT2';
+import AboutPageT3 from './pages/AboutPageT3/AboutPageT3';
 import { getDomains } from './api/domain/domain';
 import BacklogPage from './pages/BacklogPage/BacklogPage';
 import ShortcutPage from './pages/ShortcutPage/ShortcutPage';
@@ -90,6 +91,7 @@ function App() {
                 <Route path="/refund-policy" element={<RefundPolicyPage />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/about-t2" element={<AboutPageT2 />} />
+                <Route path="/about-t3" element={<AboutPageT3 />} />
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/careers" element={<CareerPage />} />
                 <Route path="/security-page" element={<SecurityPage />} />
