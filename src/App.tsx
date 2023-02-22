@@ -43,6 +43,7 @@ import BacklogPage from './pages/BacklogPage/BacklogPage';
 import ShortcutPage from './pages/ShortcutPage/ShortcutPage';
 import DashboardLayout from './lib/Layout/DashboardLayout/DashboardLayout';
 import PricePage from './pages/PricePage/PricePage';
+import ReportPage from './pages/ReportPage/ReportPage';
 
 function App() {
   const [showPages, setShowPages] = useState(null);
@@ -80,6 +81,7 @@ function App() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/" element={getHomePage()} />
                 <Route path="/login/reset-password" element={<ResetPasswordPage />} />
+                <Route path="/report" element={<ReportPage />} />
                 <Route path="/login/change-password" element={<ChangePasswordPage />} />
                 <Route path="/cookie-policy" element={<CookiePolicyPage />} />
                 <Route path="/gdpr" element={<GdprPage />} />
