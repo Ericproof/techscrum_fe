@@ -1,14 +1,26 @@
 import React from 'react';
 import styles from './RoleTable.module.scss';
 import { IRole } from '../../../types';
-import PermissionSelector from '../PermissionSelector/PermissionSelector';
 
 interface IRoleTable {
   roles: IRole[];
+  openEditHandler: () => void;
 }
 
 function RoleTable(props: IRoleTable) {
-  const { roles } = props;
+  const { roles, openEditHandler } = props;
+
+  // // eslint-disable-next-line no-unused-vars
+  // const permissionList = role?.permission?.map((item) => {
+  //   // eslint-disable-next-line no-console
+  //   // console.log(item.slug?.split(':')[1] === 'projects');
+  //   return (
+  //     <label key={item.id} htmlFor={item.slug}>
+  //       <input type="checkbox" id={item.slug} />
+  //       {item.description}
+  //     </label>
+  //   );
+  // });
 
   return (
     <table className={styles['roles-table-container']}>
@@ -27,7 +39,16 @@ function RoleTable(props: IRoleTable) {
             const { permission } = role;
             return (
               <th key={role.id}>
-                <PermissionSelector permission={permission} />
+                {permission?.map((item) => {
+                  // eslint-disable-next-line no-console
+                  // console.log(item.slug?.split(':')[1] === 'projects');
+                  return (
+                    <div key={item.id}>
+                      <p>{item.description}</p>
+                    </div>
+                  );
+                })}
+                <button onClick={openEditHandler}>edit permissions</button>
               </th>
             );
           })}

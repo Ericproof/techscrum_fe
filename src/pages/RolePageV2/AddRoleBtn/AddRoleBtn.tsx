@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { GrAdd, GrFormCheckmark, GrFormClose } from 'react-icons/gr';
-// eslint-disable-next-line no-unused-vars
-import { text } from 'stream/consumers';
 import styles from './AddRoleBtn.module.scss';
 
 function AddRoleBtn() {
@@ -14,13 +12,17 @@ function AddRoleBtn() {
     </div>
   );
 
+  const addRoleHandler = () => {
+    setPopupWindow(false);
+  };
+
   const popupLayout = popupWindow && (
     <div className={styles['popup-window']}>
       <input name="roleName" />
-      <button>
+      <button onClick={addRoleHandler}>
         <GrFormCheckmark />
       </button>
-      <button onClick={() => setPopupWindow(true)}>
+      <button onClick={() => setPopupWindow(false)}>
         <GrFormClose />
       </button>
     </div>

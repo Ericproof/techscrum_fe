@@ -115,9 +115,9 @@ function App() {
                     element={<AccountSettingsPage />}
                   />
                   <Route path="/projects/:projectId/members" element={<ProjectMembersPage />} />
-                  <Route path="/roles" element={<RolePage />} />
-                  <Route path="/rolesV2" element={<RolePageV2 />} />
                 </Route>
+                <Route path="/roles" element={<RolePage />} />
+                <Route path="/rolesV2" element={<RolePageV2 />} />
                 <Route path="/unauthorize" element={<UnauthorizePage />} />
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/price" element={<PricePage />} />

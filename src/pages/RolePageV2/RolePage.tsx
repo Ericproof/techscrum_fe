@@ -3,8 +3,8 @@ import { toast } from 'react-toastify';
 // import components
 import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
 import RoleTable from './RoleTable/RoleTable';
+import PermissionSelector from './PermissionSelector/PermissionSelector';
 import AddRoleBtn from './AddRoleBtn/AddRoleBtn';
-// import config from '../../config/config';
 import { IRole } from '../../types';
 import { getRoles } from '../../api/role/role';
 import styles from './RolePage.module.scss';
@@ -12,6 +12,7 @@ import styles from './RolePage.module.scss';
 function RolePage() {
   // const [loader, setLoader] = useState(false);
   const [roles, setRoles] = useState<IRole[]>([]);
+  const [openEdit, setOpenEdit] = useState(false);
   useEffect(() => {
     (async () => {
       try {
@@ -27,6 +28,10 @@ function RolePage() {
     })();
   }, []);
 
+  const openEditHandler = () => {
+    setOpenEdit(true);
+  };
+
   return (
     <>
       <ProjectHeader />
@@ -35,7 +40,8 @@ function RolePage() {
           <h1>Manage Roles</h1>
           <AddRoleBtn />
         </div>
-        <RoleTable roles={roles} />
+        <RoleTable roles={roles} openEditHandler={openEditHandler} />
+        {openEdit && <PermissionSelector />}
       </div>
     </>
   );
