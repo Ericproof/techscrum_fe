@@ -3,7 +3,6 @@ import Fade from 'react-reveal/Fade';
 import { HiOutlineMailOpen, HiCheck } from 'react-icons/hi';
 import Header from '../../components/Header/Header';
 import shapeLight from '../../assets/shapeLight.png';
-import demoVideoOne from '../../assets/demoVideoOne.mp4';
 import darkCircle from '../../assets/shapeDark.png';
 import styles from './KanbanBoardPage.module.scss';
 import DemoVideo from '../../components/DemoVideo/DemoVideo';
@@ -87,7 +86,7 @@ export default function KanbanBoardPage() {
               </form>
             </div>
             <div className={styles.demo}>
-              <DemoVideo src={demoVideoOne} />
+              <DemoVideo src="https://clickup.com/videos/features/kanban-board/board-view-agile-inventory.mp4" />
             </div>
           </section>
         </div>
