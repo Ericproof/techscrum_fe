@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { DropResult } from 'react-beautiful-dnd';
+import { toast } from 'react-toastify';
 import style from './Board.module.scss';
 import BoardSearch from './BoardSearch/BoardSearch';
 import BoardMain from './BoardMain/BoardMain';
@@ -21,6 +22,7 @@ import { deleteActivity } from '../../api/activity/activity';
 import ProjectNavigationV3 from '../../lib/ProjectNavigationV3/ProjectNavigationV3';
 import Modal from '../../lib/Modal/Modal';
 import DefaultModalHeader from '../../lib/Modal/ModalHeader/DefaultModalHeader/DefaultModalHeader';
+import { getUsers } from '../../api/user/user';
 
 const onDragEnd = (
   result: DropResult,
@@ -77,6 +79,37 @@ export default function Board() {
   const [taskData, setTaskData] = useState<ITaskEntity>();
   const [labels, setLabels] = useState<ILabelData[]>([]);
   const [loading, setLoading] = useState(false);
+  const [userList, setUserList] = useState([]);
+  const [selectedUsers, setSelectedUsers] = useState<any[]>([]);
+
+  const chaneSelectedUsers = (isExist, user) => {
+    if (!isExist) {
+      setSelectedUsers([...selectedUsers, user]);
+    } else {
+      setSelectedUsers(selectedUsers.filter((selectedUser) => selectedUser.id !== user.id));
+    }
+  };
+
+  const getProjectDataApi = useCallback(() => {
+    const getProjectData = async () => {
+      try {
+        const res = await getUsers();
+        setUserList(res.data);
+      } catch (e) {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      }
+    };
+    getProjectData();
+  }, []);
+
+  useEffect(() => {
+    getProjectDataApi();
+  }, [getProjectDataApi]);
+
+  useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.log(selectedUsers);
+  }, [selectedUsers]);
 
   const fetchColumnsData = useCallback(
     (boardInfo: IBoardEntity) => {
@@ -247,6 +280,9 @@ export default function Board() {
         updateIsCreateNewCard={getCreateNewCardStateFromChildren}
         setInputQuery={setInputQuery}
         projectId={projectId}
+        selectedUsers={selectedUsers}
+        changeSelectedUsers={chaneSelectedUsers}
+        userList={userList}
       />
       <BoardMain
         columnsInfo={columnsInfo}

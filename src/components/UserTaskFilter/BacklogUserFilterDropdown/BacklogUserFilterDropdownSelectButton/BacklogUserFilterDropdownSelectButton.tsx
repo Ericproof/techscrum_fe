@@ -1,6 +1,6 @@
 import { BiCheckbox, BiCheckboxChecked } from 'react-icons/bi';
 import React, { useState } from 'react';
-import styles from '../../../../pages/BacklogPage/BacklogPage.module.scss';
+import styles from '../../UserTaskFilter.module.scss';
 
 interface IBacklogUserFilterDropdownSelectButton {
   user: any;

@@ -4,13 +4,24 @@ import styles from './BoardSearch.module.scss';
 import search from '../../../assets/search-line.svg';
 import checkAccess from '../../../utils/helpers';
 import ButtonV2 from '../../../lib/FormV2/ButtonV2/ButtonV2';
+import UserTaskFilter from '../../UserTaskFilter/UserTaskFilter';
 
 interface Props {
   updateIsCreateNewCard: () => void;
   setInputQuery: Dispatch<string>;
   projectId: string;
+  selectedUsers: any;
+  changeSelectedUsers: any;
+  userList: any;
 }
-export default function BoardSearch({ updateIsCreateNewCard, setInputQuery, projectId }: Props) {
+export default function BoardSearch({
+  updateIsCreateNewCard,
+  setInputQuery,
+  projectId,
+  selectedUsers,
+  changeSelectedUsers,
+  userList
+}: Props) {
   const avatars = [
     { id: 1, name: 'avatar1', url: '' },
     { id: 2, name: 'avatar2', url: '' },
@@ -70,6 +81,11 @@ export default function BoardSearch({ updateIsCreateNewCard, setInputQuery, proj
           />
         </span>
       </div>
+      <UserTaskFilter
+        selectedUsers={selectedUsers}
+        changeSelectedUsers={changeSelectedUsers}
+        userList={userList}
+      />
       <fieldset style={{ display: 'none' }}>
         <ul className={styles.avatarContainer} id="myList">
           {avatars.map((avatar) => (

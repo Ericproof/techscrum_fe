@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import { AiOutlineSearch } from 'react-icons/ai';
 import BacklogSection from './BacklogSection/BacklogSection';
+import UserTaskFilter from '../../components/UserTaskFilter/UserTaskFilter';
 import styles from './BacklogPage.module.scss';
 import { getBacklog, updateBacklogOrder, updateTask } from '../../api/backlog/backlog';
 import { getStatuses } from '../../api/status/status';
@@ -13,8 +14,6 @@ import { showProject } from '../../api/projects/projects';
 import SprintSection from './SprintSection/SprintSection';
 import Loading from '../../components/Loading/Loading';
 import ProjectNavigationV3 from '../../lib/ProjectNavigationV3/ProjectNavigationV3';
-import BacklogUserFilter from '../../components/Backlog/BacklogUserFilter/BacklogUserFilter';
-import BacklogUserFilterDropdown from '../../components/Backlog/BacklogUserFilterDropdown/BacklogUserFilterDropdown';
 
 export default function BacklogPage() {
   const [loaded, setLoaded] = useState(false);
@@ -153,23 +152,11 @@ export default function BacklogPage() {
                   <input className={styles.BacklogSearchBar} type="text" />
                   <AiOutlineSearch className={styles.BacklogSearchIcon} />
                 </div>
-                <div className={styles.BacklogFilterArea}>
-                  {userList.slice(0, 4).map((user) => (
-                    <BacklogUserFilter
-                      selectedUsers={selectedUsers}
-                      changeSelectedUsers={chaneSelectedUsers}
-                      key={user.id}
-                      user={user}
-                    />
-                  ))}
-                  {userList.length > 4 && (
-                    <BacklogUserFilterDropdown
-                      selectedUsers={selectedUsers}
-                      changeSelectedUsers={chaneSelectedUsers}
-                      users={userList.slice(4)}
-                    />
-                  )}
-                </div>
+                <UserTaskFilter
+                  selectedUsers={selectedUsers}
+                  changeSelectedUsers={chaneSelectedUsers}
+                  userList={userList}
+                />
               </div>
               {sprintData
                 .filter((sprint: any) => {
