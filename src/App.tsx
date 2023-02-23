@@ -47,6 +47,7 @@ import DashboardLayout from './lib/Layout/DashboardLayout/DashboardLayout';
 import PricePage from './pages/PricePage/PricePage';
 import MyWorkPage from './pages/MyWorkPage/MyWorkPage';
 import ReportPage from './pages/ReportPage/ReportPage';
+import SupportCenterPage from './pages/SupportCenterPage/SupportCenterPage';
 
 function App() {
   const [showPages, setShowPages] = useState(null);
@@ -128,6 +129,7 @@ function App() {
                 <Route path="/price" element={<PricePage />} />
                 <Route path="/features/kanban-board" element={<KanbanBoardPage />} />
                 <Route path="*" element={<ErrorPage />} />
+                <Route path="/support-center" element={<SupportCenterPage />} />
               </Routes>
             </TaskTypesProvider>
           </ProjectProvider>
