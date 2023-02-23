@@ -34,10 +34,39 @@ export default function BacklogPage() {
     }
   };
 
-  useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log(selectedUsers);
-  }, [selectedUsers]);
+  // useEffect(() => {
+  //   let filterCase = '';
+  //   selectedUsers.forEach((selectedUser) => {
+  //     filterCase = filterCase.concat(`-${selectedUser.id}`);
+  //   });
+  //   filterCase = filterCase.slice(1);
+  //   const filterBacklogData = async () => {
+  //     const res = await filterBacklog(projectId, filterCase);
+  //     setBacklogData(res.backlog);
+  //   };
+  //   filterBacklogData();
+  // }, [projectId, selectedUsers]);
+
+  // useEffect(() => {
+  //   if (selectedUsers.length > 0) {
+  //     if (backlogData.cards) {
+  //       const filteredCards = backlogData.cards.filter((singleData) =>
+  //         selectedUsers.some((selectedUser) => {
+  //           if (selectedUser.id === null) {
+  //             return false;
+  //           }
+  //           return singleData.assignId?.id === selectedUser.id;
+  //         })
+  //       );
+  //       const filteredBacklogData = {
+  //         cards: filteredCards
+  //       };
+  //       // eslint-disable-next-line no-console
+  //       console.log(filteredBacklogData.cards);
+  //       setBacklogData(filteredBacklogData);
+  //     }
+  //   }
+  // }, [backlogData.cards, selectedUsers]);
 
   const getBacklogDataApi = useCallback(() => {
     const getBacklogData = async () => {

@@ -1,6 +1,5 @@
 import React from 'react';
 import DemoVideo from '../DemoVideo/DemoVideo';
-import demoVideoOne from '../../assets/demoVideoOne.mp4';
 import diamondShape from '../../assets/purple-diamond.svg';
 import styles from './FeatureSection.module.scss';
 
@@ -37,7 +36,7 @@ function FeatureSection(props: IFeatureSectionProps) {
           <p className={styles.text}>{desc}</p>
         </div>
         <div className={styles.demo}>
-          <DemoVideo src={demoVideoOne} />
+          <DemoVideo src="#" />
           <img src={diamondShape} alt="diamondShape" className={styles.diamondShape} />
         </div>
       </div>

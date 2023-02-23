@@ -8,6 +8,16 @@ export const getBacklog = async (projectId: string) => {
   return response.data;
 };
 
+export const filterBacklog = async (projectId: string, filterCase: string) => {
+  let filter = filterCase;
+  if (filter === '') {
+    filter = 'all';
+  }
+  const path = `http://localhost:8000/api/v1/projects/${projectId}/backlogs/${filter}`;
+  const response = await axios.get(path);
+  return response.data;
+};
+
 export const addTask = async (data: object) => {
   const configHeader = {
     headers: {
