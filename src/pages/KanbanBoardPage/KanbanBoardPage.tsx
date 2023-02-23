@@ -86,7 +86,7 @@ export default function KanbanBoardPage() {
               </form>
             </div>
             <div className={styles.demo}>
-              <DemoVideo src="#" />
+              <DemoVideo src="https://clickup.com/videos/features/kanban-board/board-view-agile-inventory.mp4" />
             </div>
           </section>
         </div>

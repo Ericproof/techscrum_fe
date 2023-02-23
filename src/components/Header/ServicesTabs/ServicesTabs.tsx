@@ -10,7 +10,12 @@ import {
   AiTwotoneSwitcher,
   AiOutlineAliwangwang
 } from 'react-icons/ai';
-import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
+import {
+  MdOutlineKeyboardArrowDown,
+  MdWorkOutline,
+  MdLaptopChromebook,
+  MdOutlineContactSupport
+} from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import styles from './ServicesTabs.module.scss';
 import OneColumnsMenu from './OneColumnMenu/OneColumnMenu';
@@ -129,15 +134,43 @@ const solutions = {
   }
 };
 
+const resources = {
+  content: {
+    title: 'resources',
+    content: [
+      {
+        icon: MdWorkOutline,
+        title: 'Careers',
+        description: 'A team that provides Growth and Support',
+        href: '/#'
+      },
+      {
+        icon: MdLaptopChromebook,
+        title: 'Book a demo',
+        description: 'Learn the basic features of TechScrum',
+        href: '/#'
+      },
+      {
+        icon: MdOutlineContactSupport,
+        title: 'Support Center',
+        description: 'Get the direct help Get the direct help',
+        href: '/support-center'
+      }
+    ]
+  }
+};
+
 export default function ServicesTabs({ show }: Props) {
   const [featuresActive, setFeaturesActive] = useState(false);
   const [solutionActive, setSolutionActive] = useState(false);
   const [teamActive, setTeamActive] = useState(false);
+  const [resourcesActive, setResourcesActive] = useState(false);
 
   const initial = () => {
     setFeaturesActive(false);
     setSolutionActive(false);
     setTeamActive(false);
+    setResourcesActive(false);
   };
 
   const activeMenu = (menu: string) => {
@@ -145,6 +178,7 @@ export default function ServicesTabs({ show }: Props) {
     if (menu === 'features') setFeaturesActive(!featuresActive);
     if (menu === 'solution') setSolutionActive(!solutionActive);
     if (menu === 'teams') setTeamActive(!teamActive);
+    if (menu === 'resources') setResourcesActive(!resourcesActive);
   };
 
   return (
@@ -170,15 +204,13 @@ export default function ServicesTabs({ show }: Props) {
         </Link>
         <OneColumnsMenu servicesInfo={teams} active={teamActive} />
       </div>
+
       <div>
-        <Link to="/careers" onClick={() => activeMenu('careers')}>
-          Careers
+        <Link to="/#" onClick={() => activeMenu('resources')}>
+          Resources
+          <MdOutlineKeyboardArrowDown />
         </Link>
-      </div>
-      <div>
-        <Link to="/contact" onClick={() => activeMenu('contact')}>
-          Book a demo
-        </Link>
+        <OneColumnsMenu servicesInfo={resources} active={resourcesActive} />
       </div>
       <div>
         <Link to="/price">Price</Link>
