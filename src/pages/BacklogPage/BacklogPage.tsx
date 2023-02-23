@@ -47,26 +47,30 @@ export default function BacklogPage() {
   //   filterBacklogData();
   // }, [projectId, selectedUsers]);
 
-  // useEffect(() => {
-  //   if (selectedUsers.length > 0) {
-  //     if (backlogData.cards) {
-  //       const filteredCards = backlogData.cards.filter((singleData) =>
-  //         selectedUsers.some((selectedUser) => {
-  //           if (selectedUser.id === null) {
-  //             return false;
-  //           }
-  //           return singleData.assignId?.id === selectedUser.id;
-  //         })
-  //       );
-  //       const filteredBacklogData = {
-  //         cards: filteredCards
-  //       };
-  //       // eslint-disable-next-line no-console
-  //       console.log(filteredBacklogData.cards);
-  //       setBacklogData(filteredBacklogData);
-  //     }
-  //   }
-  // }, [backlogData.cards, selectedUsers]);
+  useEffect(() => {
+    const backlogFilter = async () => {
+      const backlogDataForFilter = await getBacklog(projectId);
+      if (selectedUsers.length > 0) {
+        if (backlogDataForFilter.backlog.cards) {
+          const filteredCards = backlogDataForFilter.backlog.cards.filter((singleData) =>
+            selectedUsers.some((selectedUser) => {
+              if (selectedUser.id === null) {
+                return false;
+              }
+              return singleData.assignId?.id === selectedUser.id;
+            })
+          );
+          const filteredBacklogData = {
+            cards: filteredCards
+          };
+          setBacklogData(filteredBacklogData);
+        }
+      } else {
+        setBacklogData(backlogDataForFilter.backlog);
+      }
+    };
+    backlogFilter();
+  }, [projectId, selectedUsers]);
 
   const getBacklogDataApi = useCallback(() => {
     const getBacklogData = async () => {
