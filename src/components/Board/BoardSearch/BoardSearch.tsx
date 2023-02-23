@@ -81,11 +81,13 @@ export default function BoardSearch({
           />
         </span>
       </div>
-      <UserTaskFilter
-        selectedUsers={selectedUsers}
-        changeSelectedUsers={changeSelectedUsers}
-        userList={userList}
-      />
+      <div className={styles.userTaskFilterContainer}>
+        <UserTaskFilter
+          selectedUsers={selectedUsers}
+          changeSelectedUsers={changeSelectedUsers}
+          userList={userList}
+        />
+      </div>
       <fieldset style={{ display: 'none' }}>
         <ul className={styles.avatarContainer} id="myList">
           {avatars.map((avatar) => (
@@ -134,13 +136,15 @@ export default function BoardSearch({
         </ul>
       </fieldset>
       {checkAccess('add:tasks', projectId) && (
-        <ButtonV2
-          text="ADD NEW"
-          onClick={updateIsCreateNewCard}
-          icon={<IoIosAdd className={styles.createCardIcon} />}
-          fill
-          dataTestId="board-create-card"
-        />
+        <div className={styles.addNewButtonContainer}>
+          <ButtonV2
+            text="ADD NEW"
+            onClick={updateIsCreateNewCard}
+            icon={<IoIosAdd className={styles.createCardIcon} />}
+            fill
+            dataTestId="board-create-card"
+          />
+        </div>
       )}
     </div>
   );

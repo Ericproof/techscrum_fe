@@ -1,4 +1,4 @@
-@import "../../../variables.scss";
+@import '../../../variables.scss';
 
 .variable {
   display: inline-flex;
@@ -40,7 +40,7 @@
   }
 }
 .searchBarContainer {
-  margin: 25px  0 0 0;
+  margin: 25px 0 0 0;
   padding: 0% 3%;
   z-index: 1;
   display: flex;
@@ -233,11 +233,17 @@
   }
 }
 
-
-.createCardIcon{
+.createCardIcon {
   border-radius: 5px;
   background-color: rgba(246, 248, 251, 0.15);
   width: 20px;
   height: 20px;
   padding: 5px;
+}
+
+.addNewButtonContainer {
+  margin-left: auto;
+  @media (max-width: 800px) {
+    margin-left: 0;
+  }
 }

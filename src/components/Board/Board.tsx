@@ -106,14 +106,26 @@ export default function Board() {
     getProjectDataApi();
   }, [getProjectDataApi]);
 
-  useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log(selectedUsers);
-  }, [selectedUsers]);
-
   const fetchColumnsData = useCallback(
     (boardInfo: IBoardEntity) => {
       const columnInfoData: IColumnsFromBackend = {};
+
+      if (selectedUsers.length > 0) {
+        for (const item of boardInfo.taskStatus) {
+          columnInfoData[item.id] = {
+            name: item.name,
+            slug: item.slug,
+            order: item.order,
+            items: item.taskList.filter((task) => {
+              if (task.assignId === null) {
+                return false;
+              }
+              return selectedUsers.some((selectedUser) => selectedUser.id === task.assignId.id);
+            })
+          };
+        }
+        return setColumnsInfo(columnInfoData);
+      }
 
       if (inputQuery) {
         for (const item of boardInfo.taskStatus) {
@@ -140,7 +152,7 @@ export default function Board() {
 
       return setColumnsInfo(columnInfoData);
     },
-    [inputQuery]
+    [inputQuery, selectedUsers]
   );
   const fetchBoardInfo = useCallback(() => {
     const fetchBoard = async () => {
