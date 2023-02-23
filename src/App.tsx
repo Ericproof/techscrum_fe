@@ -45,6 +45,7 @@ import BacklogPage from './pages/BacklogPage/BacklogPage';
 import ShortcutPage from './pages/ShortcutPage/ShortcutPage';
 import DashboardLayout from './lib/Layout/DashboardLayout/DashboardLayout';
 import PricePage from './pages/PricePage/PricePage';
+import MyWorkPage from './pages/MyWorkPage/MyWorkPage';
 import ReportPage from './pages/ReportPage/ReportPage';
 
 function App() {
@@ -97,6 +98,7 @@ function App() {
                 <Route path="/careers" element={<CareerPage />} />
                 <Route path="/security-page" element={<SecurityPage />} />
                 <Route path="/errorPage" element={<ErrorPage />} />
+                <Route path="/my-work" element={<MyWorkPage />} />
                 <Route path="" element={<AuthenticationRoute />}>
                   <Route path="/projects/:projectId/" element={<DashboardLayout />}>
                     <Route path="board/:boardId" element={<BoardPage />} />
