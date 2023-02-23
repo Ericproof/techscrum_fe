@@ -10,7 +10,7 @@ interface IInputV3 {
   onBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   identifier: string;
   label: string;
-  type: 'text' | 'email' | 'password';
+  type: 'text' | 'email' | 'password' | 'tel';
   defaultValue?: string;
   required?: boolean;
   placeHolder?: string;
@@ -39,12 +39,10 @@ export default function InputV3(props: IInputV3) {
   const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
-    if (regex && value) {
+    if (regex && value.length) {
       setIsValid(regex.test(value));
-
-      console.log(isValid);
     }
-  }, [regex, value, isValid]);
+  }, [regex, value]);
 
   const onBlurHandler = () => {
     if (!value) {
@@ -63,7 +61,7 @@ export default function InputV3(props: IInputV3) {
         </label>
         <input
           id={identifier}
-          className={styles.input}
+          className={isValid ? styles.input : `${styles.input} ${styles.input__error}`}
           type={type}
           data-cy={`${identifier}-input-cy`}
           value={value}

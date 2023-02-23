@@ -9,6 +9,9 @@ export const initState = {
 };
 
 export const enum ReducerActionTypes {
+  SetFullName,
+  SetCompany,
+  SetPhone,
   SetEmail
 }
 
@@ -19,6 +22,12 @@ type ReducerAction = {
 
 export function reducer(state: typeof initState, action: ReducerAction) {
   switch (action.type) {
+    case ReducerActionTypes.SetFullName:
+      return { ...state, fullName: action.payload ?? '' };
+    case ReducerActionTypes.SetCompany:
+      return { ...state, company: action.payload ?? '' };
+    case ReducerActionTypes.SetPhone:
+      return { ...state, phone: action.payload ?? '' };
     case ReducerActionTypes.SetEmail:
       return { ...state, email: action.payload ?? '' };
     default:

@@ -28,15 +28,19 @@
     width: 100%;
     box-sizing: border-box;
     border: none;
+    border-radius: 0.5rem;
     outline: none;
     background-color: transparent;
     padding: 2.25em 1em 1em;
   }
+  .input__error {
+    background-color: pink;
+  }
 }
 
 .errMsg {
-  margin:0 1rem;
+  margin: 0 1rem;
   line-height: 1.5;
   font-size: 0.75rem;
-  color: gray;
+  color: red;
 }

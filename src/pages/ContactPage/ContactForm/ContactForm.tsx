@@ -7,10 +7,33 @@ import InputV3 from './InputV3';
 import styles from './ContactForm.module.scss';
 import { reducer, ReducerActionTypes, initState } from './ContactFormReducer';
 
+const FULLNAME_REGEX = /^[a-z ,.'-]+$/i;
+const PHONE_REGEX = /^[0-9]{10}$/;
 const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 
 export default function ContactForm() {
   const [reducerState, dispatch] = useReducer(reducer, initState);
+
+  const handleFullNameInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({
+      type: ReducerActionTypes.SetFullName,
+      payload: e.target.value
+    });
+  };
+
+  const handleCompanyInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({
+      type: ReducerActionTypes.SetCompany,
+      payload: e.target.value
+    });
+  };
+
+  const handlePhoneInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({
+      type: ReducerActionTypes.SetPhone,
+      payload: e.target.value
+    });
+  };
 
   const handleEmailInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch({
@@ -21,7 +44,12 @@ export default function ContactForm() {
 
   const submitHandler = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    const contactMessageObj = { email: reducerState.email };
+    const contactMessageObj = {
+      fullName: reducerState.fullName,
+      company: reducerState.company,
+      phone: reducerState.phone,
+      email: reducerState.email
+    };
     console.log(contactMessageObj);
   };
 
@@ -47,7 +75,32 @@ export default function ContactForm() {
             </select>
           </label>
         </div>
-
+        <InputV3
+          value={reducerState.fullName}
+          onChange={handleFullNameInput}
+          type="text"
+          label="Full name *"
+          identifier="fullName"
+          regex={FULLNAME_REGEX}
+          errMsg="Field required, lettes only, seperated with spaces."
+        />
+        <InputV3
+          value={reducerState.company}
+          onChange={handleCompanyInput}
+          type="text"
+          label="Company *"
+          identifier="company"
+          errMsg="Field required, ensure the validity of your company."
+        />
+        <InputV3
+          value={reducerState.phone}
+          onChange={handlePhoneInput}
+          type="tel"
+          label="Phone Number *"
+          identifier="phoneNumber"
+          regex={PHONE_REGEX}
+          errMsg="Field required, 10 Digit Phone Number."
+        />
         <InputV3
           value={reducerState.email}
           onChange={handleEmailInput}
@@ -55,7 +108,7 @@ export default function ContactForm() {
           label="Email address *"
           identifier="email"
           regex={EMAIL_REGEX}
-          errMsg="Field required, must be a valid email"
+          errMsg="Field required, must be a valid email."
         />
 
         <button className={styles.contactForm} type="submit">
