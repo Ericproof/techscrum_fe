@@ -26,7 +26,7 @@ Below are the command that you would need to run after clone down the repo, unle
 - yarn install
 - cp .env.example .env
 
-### Start up
+### Start up 
 
 To able to start the server these are the following commands that would need to be run
 
