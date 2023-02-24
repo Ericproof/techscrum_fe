@@ -118,17 +118,10 @@ export default function Board() {
           if (task.assignId === null) {
             return false;
           }
-          if (queryInput && userInput.length === 0) {
-            return task.title?.toLowerCase().includes(queryInput.toLowerCase());
-          }
-          if (!queryInput && userInput.length > 0) {
-            return userInput.some((selectedUser) => {
-              return selectedUser.id === task.assignId.id;
-            });
-          }
           return (
-            task.title?.toLowerCase().includes(queryInput.toLowerCase()) &&
-            userInput.some((selectedUser) => selectedUser.id === task.assignId.id)
+            (queryInput === 0 || task.title?.toLowerCase().includes(queryInput.toLowerCase())) &&
+            (userInput.length === 0 ||
+              userInput.some((selectedUser) => selectedUser.id === task.assignId.id))
           );
         });
       };
