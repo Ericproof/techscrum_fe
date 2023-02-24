@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState, Dispatch } from 'react';
+import React, { useState, Dispatch } from 'react';
 import { IoIosAdd } from 'react-icons/io';
 import styles from './BoardSearch.module.scss';
-import search from '../../../assets/search-line.svg';
 import checkAccess from '../../../utils/helpers';
 import ButtonV2 from '../../../lib/FormV2/ButtonV2/ButtonV2';
 import UserTaskFilter from '../../UserTaskFilter/UserTaskFilter';
+import SearchForBoard from '../../SearchForBoard/SearchForBoard';
 
 interface Props {
   updateIsCreateNewCard: () => void;
@@ -33,54 +33,14 @@ export default function BoardSearch({
   const [activeAvatars, setActiveAvatars] = useState<boolean>(false);
 
   const [inputState, setInputState] = useState<boolean>(false);
-  const myRef = useRef<HTMLInputElement>(null);
-
-  const handleClickOutside = (e: MouseEvent) => {
-    const target = e.target as HTMLDivElement;
-
-    const val: string = myRef.current?.value.trim() ?? '';
-
-    if (!val.length && myRef.current !== null && !myRef.current.contains(target)) {
-      setInputState(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
-  });
 
   return (
     <div className={styles.searchBarContainer}>
-      <div
-        className={
-          inputState
-            ? `${styles.inputContainer} ${styles.inputContainerPlus}`
-            : styles.inputContainer
-        }
-      >
-        <input
-          type="text"
-          name="search"
-          ref={myRef}
-          placeholder={inputState ? 'Search this board' : ''}
-          onClick={() => {
-            setInputState(true);
-          }}
-          onChange={(event) => setInputQuery(event.target.value)}
-          data-testid="board-search"
-        />
-        <span>
-          <img
-            className={
-              styles.inputImg ||
-              'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'
-            }
-            src={search}
-            alt="search"
-          />
-        </span>
-      </div>
+      <SearchForBoard
+        inputState={inputState}
+        setInputQuery={setInputQuery}
+        setInputState={setInputState}
+      />
       <div className={styles.userTaskFilterContainer}>
         <UserTaskFilter
           selectedUsers={selectedUsers}

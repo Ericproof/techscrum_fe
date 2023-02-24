@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
-import { AiOutlineSearch } from 'react-icons/ai';
+// import { AiOutlineSearch } from 'react-icons/ai';
 import BacklogSection from './BacklogSection/BacklogSection';
 import UserTaskFilter from '../../components/UserTaskFilter/UserTaskFilter';
 import styles from './BacklogPage.module.scss';
@@ -14,6 +14,7 @@ import { showProject } from '../../api/projects/projects';
 import SprintSection from './SprintSection/SprintSection';
 import Loading from '../../components/Loading/Loading';
 import ProjectNavigationV3 from '../../lib/ProjectNavigationV3/ProjectNavigationV3';
+import SearchForBoard from '../../components/SearchForBoard/SearchForBoard';
 
 export default function BacklogPage() {
   const [loaded, setLoaded] = useState(false);
@@ -26,6 +27,14 @@ export default function BacklogPage() {
   const [projectDataLoaded, setProjectDataLoaded] = useState(false);
   const [projectKey, setProjectKey] = useState('');
   const [selectedUsers, setSelectedUsers] = useState<any[]>([]);
+  const [inputState, setInputState] = useState<boolean>(false);
+  const [inputQuery, setInputQuery] = useState<string>('');
+
+  useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.log(inputQuery);
+  }, [inputQuery]);
+
   const chaneSelectedUsers = (isExist, user) => {
     if (!isExist) {
       setSelectedUsers([...selectedUsers, user]);
@@ -142,6 +151,7 @@ export default function BacklogPage() {
     const data = { sprintId };
     updateTask(id, data);
   };
+
   const onDragEventHandler = (result: DropResult) => {
     const { destination, source } = result;
     const destinationData = { sprintId: null, data: [] };
@@ -206,8 +216,11 @@ export default function BacklogPage() {
             <>
               <div className={styles.BacklogSearchFilter}>
                 <div className={styles.BacklogSearchArea}>
-                  <input className={styles.BacklogSearchBar} type="text" />
-                  <AiOutlineSearch className={styles.BacklogSearchIcon} />
+                  <SearchForBoard
+                    inputState={inputState}
+                    setInputQuery={setInputQuery}
+                    setInputState={setInputState}
+                  />
                 </div>
                 <UserTaskFilter
                   selectedUsers={selectedUsers}
