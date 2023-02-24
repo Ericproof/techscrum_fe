@@ -71,8 +71,6 @@ export default function BacklogPage() {
         sprintDataForFilter.forEach((singleSprintDataFilter) => {
           if (singleSprintDataFilter) {
             if (!singleSprintDataFilter.isComplete) {
-              // eslint-disable-next-line no-console
-              console.log(singleSprintDataFilter);
               const tasks = singleSprintDataFilter.taskId.filter((task) => {
                 return selectedUsers.some((selectedUser) => {
                   if (selectedUser.id === null) {
