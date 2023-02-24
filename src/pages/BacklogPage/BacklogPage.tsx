@@ -46,14 +46,11 @@ export default function BacklogPage() {
         if (backlogDataForFilter.cards) {
           const filteredBacklog = backlogDataForFilter.cards.filter((singleData) =>
             selectedUsers.some((selectedUser) => {
-              if (!inputQuery) {
-                if (selectedUser.id === null) {
-                  return false;
-                }
-                return singleData.assignId?.id === selectedUser.id;
-              }
               if (selectedUser.id === null) {
                 return false;
+              }
+              if (!inputQuery) {
+                return singleData.assignId?.id === selectedUser.id;
               }
               return (
                 singleData.assignId?.id === selectedUser.id &&
@@ -72,20 +69,14 @@ export default function BacklogPage() {
             if (!singleSprintDataFilter.isComplete) {
               const tasks = singleSprintDataFilter.taskId.filter((task) => {
                 return selectedUsers.some((selectedUser) => {
-                  if (!inputQuery) {
-                    if (selectedUser.id === null) {
-                      return false;
-                    }
-                    if (task.assignId === null) {
-                      return false;
-                    }
-                    return task.assignId.id === selectedUser.id;
-                  }
                   if (selectedUser.id === null) {
                     return false;
                   }
                   if (task.assignId === null) {
                     return false;
+                  }
+                  if (!inputQuery) {
+                    return task.assignId.id === selectedUser.id;
                   }
                   return (
                     task.assignId.id === selectedUser.id &&
