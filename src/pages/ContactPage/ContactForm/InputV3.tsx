@@ -4,22 +4,31 @@
 import React, { useEffect, useState } from 'react';
 import styles from './InputV3.module.scss';
 
-interface IInputV3 {
+type TInputV3 = {
   value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   identifier: string;
   label: string;
-  type: 'text' | 'email' | 'password' | 'tel';
+  tagType?: 'input' | 'textarea';
+  type?: 'text' | 'email' | 'password' | 'tel';
   defaultValue?: string;
   required?: boolean;
   placeHolder?: string;
   regex?: RegExp;
   errMsg?: string;
   classes?: string | string[];
-}
+} & (
+  | {
+      tagType?: 'input';
+      onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    }
+  | {
+      tagType: 'textarea';
+      onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+    }
+);
 
-export default function InputV3(props: IInputV3) {
+export default function InputV3(props: TInputV3) {
   const {
     value,
     onChange,
@@ -27,6 +36,7 @@ export default function InputV3(props: IInputV3) {
     label,
     identifier,
     type,
+    tagType,
     defaultValue,
     required,
     placeHolder,
@@ -42,11 +52,15 @@ export default function InputV3(props: IInputV3) {
     if (regex && value.length) {
       setIsValid(regex.test(value));
     }
+    if (!regex && value.length) {
+      setIsValid(true);
+    }
   }, [regex, value]);
 
   const onBlurHandler = () => {
     if (!value) {
       setIsFocused(false);
+      setIsValid(false);
     }
   };
 
@@ -59,19 +73,35 @@ export default function InputV3(props: IInputV3) {
         >
           {label}
         </label>
-        <input
-          id={identifier}
-          className={isValid ? styles.input : `${styles.input} ${styles.input__error}`}
-          type={type}
-          data-cy={`${identifier}-input-cy`}
-          value={value}
-          autoComplete="off"
-          onChange={onChange}
-          onFocus={() => setIsFocused(true)}
-          onBlur={onBlurHandler}
-          aria-invalid={isValid ? 'false' : 'true'}
-          aria-describedby={`${identifier}-accessible-msg`}
-        />
+        {tagType === 'input' && (
+          <input
+            id={identifier}
+            className={isValid ? styles.input : `${styles.input} ${styles.input__error}`}
+            type={type}
+            data-cy={`${identifier}-input-cy`}
+            value={value}
+            autoComplete="off"
+            onChange={onChange}
+            onFocus={() => setIsFocused(true)}
+            onBlur={onBlurHandler}
+            aria-invalid={isValid ? 'false' : 'true'}
+            aria-describedby={`${identifier}-accessible-msg`}
+          />
+        )}
+        {tagType === 'textarea' && (
+          <textarea
+            id={identifier}
+            className={isValid ? styles.input : `${styles.input} ${styles.input__error}`}
+            data-cy={`${identifier}-input-cy`}
+            value={value}
+            autoComplete="off"
+            onChange={onChange}
+            onFocus={() => setIsFocused(true)}
+            onBlur={onBlurHandler}
+            aria-invalid={isValid ? 'false' : 'true'}
+            aria-describedby={`${identifier}-accessible-msg`}
+          />
+        )}
       </div>
       {!isValid && (
         <p id={`${identifier}-accessible-msg`} className={styles.errMsg}>
@@ -87,6 +117,8 @@ InputV3.defaultProps = {
   onBlur: null,
   defaultValue: null,
   placeHolder: null,
+  tagType: 'input',
+  type: 'text',
   regex: null,
   errMsg: null,
   classes: null

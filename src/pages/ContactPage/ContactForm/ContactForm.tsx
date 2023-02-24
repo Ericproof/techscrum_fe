@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
-import React, { useReducer } from 'react';
+import React, { useReducer, useState } from 'react';
 import { Link } from 'react-router-dom';
 import InputV3 from './InputV3';
 import styles from './ContactForm.module.scss';
@@ -12,7 +12,12 @@ const PHONE_REGEX = /^[0-9]{10}$/;
 const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 
 export default function ContactForm() {
+  const [title, setTitle] = useState('');
   const [reducerState, dispatch] = useReducer(reducer, initState);
+
+  const handleTitleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setTitle(e.target.value);
+  };
 
   const handleFullNameInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch({
@@ -42,13 +47,22 @@ export default function ContactForm() {
     });
   };
 
+  const handleMsgInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    dispatch({
+      type: ReducerActionTypes.SetMsg,
+      payload: e.target.value
+    });
+  };
+
   const submitHandler = (e: React.SyntheticEvent) => {
     e.preventDefault();
     const contactMessageObj = {
+      title,
       fullName: reducerState.fullName,
       company: reducerState.company,
       phone: reducerState.phone,
-      email: reducerState.email
+      email: reducerState.email,
+      message: reducerState.msg
     };
     console.log(contactMessageObj);
   };
@@ -58,14 +72,16 @@ export default function ContactForm() {
       <form className={styles.contactForm} onSubmit={submitHandler}>
         <h3 className={styles.title}>Contact Us</h3>
         <div className={styles.inputField}>
-          <label htmlFor="enquiryTypes">
+          <label htmlFor="enquiryTitles">
             What&#39;s up *
-            <select name="enquiryTypes" id="enquiryTypes">
-              <option value="Just saying hi!">Just saying hi!</option>
+            <select name="enquiryTitles" id="enquiryTitles" onChange={handleTitleSelect}>
+              <option value="Just saying hi!" selected>
+                Just saying hi!
+              </option>
               <option value="I'd like to request a feature">
                 I&#39;d like to request a feature
               </option>
-              <option value="I have a question about billing" selected>
+              <option value="I have a question about billing">
                 I have a question about billing
               </option>
               <option value="I'm confused about how something works">
@@ -109,6 +125,15 @@ export default function ContactForm() {
           identifier="email"
           regex={EMAIL_REGEX}
           errMsg="Field required, must be a valid email."
+        />
+        <InputV3
+          value={reducerState.msg}
+          onChange={handleMsgInput}
+          type="text"
+          label="Any more info you can provide *"
+          identifier="contactMsg"
+          tagType="textarea"
+          errMsg="Field required, thanks for your message."
         />
 
         <button className={styles.contactForm} type="submit">

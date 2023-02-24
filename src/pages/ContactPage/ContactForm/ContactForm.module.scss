@@ -48,8 +48,8 @@
     .inputField {
       padding: 1rem;
       background-color: #f7f7f7;
-      border-radius: 1rem;
-      border: 0.5px solid $textPrimaryColor;
+      border-radius: 0.5rem;
+      border: 1px solid rgba(0, 0, 0, 0.1);
       &:hover {
         border-color: $primaryColor;
       }
@@ -82,8 +82,8 @@
       font-size: 1rem;
       line-height: 1.5;
       letter-spacing: 0.75px;
-      padding: 16px 24px;   
-      width:100%;
+      padding: 16px 24px;
+      width: 100%;
       align-items: center;
       border: none;
       cursor: pointer;
