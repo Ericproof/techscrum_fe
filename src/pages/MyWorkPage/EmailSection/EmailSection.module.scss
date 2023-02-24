@@ -2,10 +2,13 @@
 
 .container {
   margin-top: 0;
-  padding: 50px 0 25px;
+  padding: 25px 0;
   z-index: 1;
   position: relative;
   color: #292d34;
+  @media screen and (max-width: 768px) {
+    padding: 0;
+  }
 }
 
 .emailSection {
@@ -14,6 +17,10 @@
   width: 100%;
   margin: 0 auto;
   position: relative;
+  @include borderBox;
+  @media screen and (max-width: 1200px) {
+    padding: 0 25px;
+  }
 }
 
 .wrapper {
@@ -28,6 +35,12 @@
   -webkit-box-align: center;
   align-items: center;
   @include borderBox;
+  @media screen and (max-width: 1000px) {
+    flex-direction: column;
+  }
+  @media screen and (max-width: 600px) {
+    padding: 25px;
+  }
 }
 
 .header {
@@ -36,12 +49,19 @@
   margin: 0;
   text-align: left;
   font: 800 27px/48px 'Roboto', sans-serif;
+  @media screen and (max-width: 1000px) {
+    text-align: center;
+  }
+  @media screen and (max-width: 600px) {
+    margin-bottom: 30px;
+  }
 }
 
 .form {
   display: flex;
   align-items: center;
-  width: 42%;
+  max-width: 485px;
+  width: 100%;
   &::after {
     content: '';
     display: block;
@@ -53,10 +73,17 @@
     top: 0;
     z-index: 0;
   }
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+  }
 }
 
 .form input {
   z-index: 1;
+  @media screen and (max-width: 600px) {
+    max-width: 300px;
+    width: 100%;
+  }
 }
 
 .form button {
@@ -64,5 +91,9 @@
   border-bottom-left-radius: 0;
   &::after {
     display: none;
+  }
+  @media screen and (max-width: 600px) {
+    max-width: 300px;
+    margin: 15px 0 0 0;
   }
 }

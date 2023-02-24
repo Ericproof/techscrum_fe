@@ -15,13 +15,21 @@
   justify-content: space-between;
   margin: 75px 0 90px;
   -webkit-box-pack: justify;
+  @media screen and (max-width: 1200px) {
+    padding: 0 25px;
+  }
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+  @media screen and (max-width: 500px) {
+    padding: 0;
+  }
 }
 
 .header {
   text-align: center;
-  font: 800 50px/69px 'Roboto', sans-serif;
   margin: 20px 0 15px;
-  color: $textPrimaryColor;
+  @include headingLarge;
 }
 
 .subHeader {
@@ -31,4 +39,16 @@
   letter-spacing: 2px;
   text-transform: uppercase;
   margin: 0;
+}
+
+@media screen and (max-width: 1200px) {
+  .header {
+    @include headingMedium;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .header {
+    @include headingSmall;
+  }
 }

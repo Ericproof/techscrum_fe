@@ -1,6 +1,6 @@
 .wrapper {
   max-width: 1200px;
-  padding: 35px 0;
+  padding: 35px 25px;
   -webkit-box-pack: justify;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -8,8 +8,13 @@
   -webkit-box-align: center;
   align-items: center;
   margin: 0 auto;
-  width: 100%;
   position: relative;
+  @media screen and (max-width: 1200px) {
+    justify-content: center;
+  }
+  @media screen and (max-width: 768px) {
+    justify-content: start;
+  }
 }
 
 .item {
@@ -28,6 +33,9 @@
   a {
     text-decoration: none;
     color: inherit;
+  }
+  @media screen and (max-width: 1200px) {
+    margin: 15px;
   }
 }
 
