@@ -49,10 +49,12 @@ export default function BacklogPage() {
 
   useEffect(() => {
     const backlogFilter = async () => {
-      const backlogDataForFilter = await getBacklog(projectId);
+      const dataForFilter = await getBacklog(projectId);
+      const backlogDataForFilter = dataForFilter.backlog;
+      const sprintDataForFilter = dataForFilter.sprints;
       if (selectedUsers.length > 0) {
-        if (backlogDataForFilter.backlog.cards) {
-          const filteredCards = backlogDataForFilter.backlog.cards.filter((singleData) =>
+        if (backlogDataForFilter.cards) {
+          const filteredBacklog = backlogDataForFilter.cards.filter((singleData) =>
             selectedUsers.some((selectedUser) => {
               if (selectedUser.id === null) {
                 return false;
@@ -61,12 +63,36 @@ export default function BacklogPage() {
             })
           );
           const filteredBacklogData = {
-            cards: filteredCards
+            cards: filteredBacklog
           };
           setBacklogData(filteredBacklogData);
         }
+        const filteredSprints: any[] = [];
+        sprintDataForFilter.forEach((singleSprintDataFilter) => {
+          if (singleSprintDataFilter) {
+            if (!singleSprintDataFilter.isComplete) {
+              // eslint-disable-next-line no-console
+              console.log(singleSprintDataFilter);
+              const tasks = singleSprintDataFilter.taskId.filter((task) => {
+                return selectedUsers.some((selectedUser) => {
+                  if (selectedUser.id === null) {
+                    return false;
+                  }
+                  if (task.assignId === null) {
+                    return false;
+                  }
+                  return task.assignId.id === selectedUser.id;
+                });
+              });
+              const filteredSprint = { ...singleSprintDataFilter, taskId: tasks };
+              filteredSprints.push(filteredSprint);
+            }
+          }
+        });
+        setSprintData(filteredSprints);
       } else {
-        setBacklogData(backlogDataForFilter.backlog);
+        setBacklogData(backlogDataForFilter);
+        setSprintData(sprintDataForFilter);
       }
     };
     backlogFilter();
