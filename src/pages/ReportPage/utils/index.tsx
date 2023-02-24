@@ -12,3 +12,13 @@ export const BREAKPOINTS = {
   '768': 768,
   '600': 600
 };
+
+export const breakText = (originalText: string, subText: string): string[] => {
+  const firstBreakpoint: number = originalText.indexOf(subText);
+
+  const firstPiece: string = originalText.slice(0, firstBreakpoint);
+
+  const lastPiece: string = originalText.slice(firstBreakpoint + subText.length);
+
+  return [firstPiece, subText, lastPiece].filter((item) => item);
+};
