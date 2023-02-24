@@ -40,78 +40,42 @@ export default function BacklogPage() {
   useEffect(() => {
     const backlogFilter = async () => {
       const dataForFilter = await getBacklog(projectId);
-      const backlogDataForFilter = dataForFilter.backlog;
       const sprintDataForFilter = dataForFilter.sprints;
-      if (selectedUsers.length > 0) {
-        if (backlogDataForFilter.cards) {
-          const filteredBacklog = backlogDataForFilter.cards.filter((singleData) =>
-            selectedUsers.some((selectedUser) => {
-              if (selectedUser.id === null) {
-                return false;
-              }
-              if (!inputQuery) {
-                return singleData.assignId?.id === selectedUser.id;
-              }
-              return (
-                singleData.assignId?.id === selectedUser.id &&
-                singleData.title.toLowerCase().includes(inputQuery.toLowerCase())
-              );
-            })
+      const sprintsNotCompleted = sprintDataForFilter.filter((singleSprint) => {
+        return singleSprint.isComplete === false;
+      });
+
+      const BacklogFilter = (inputList, userInput, queryInput) => {
+        return inputList.filter((singleCard) => {
+          if (!queryInput && !userInput) {
+            return true;
+          }
+          if (singleCard.assignId === null) {
+            return false;
+          }
+          return (
+            (queryInput === 0 ||
+              singleCard.title?.toLowerCase().includes(queryInput.toLowerCase())) &&
+            (userInput.length === 0 ||
+              userInput.some((selectedUser) => selectedUser.id === singleCard.assignId.id))
           );
-          const filteredBacklogData = {
-            cards: filteredBacklog
-          };
-          setBacklogData(filteredBacklogData);
-        }
-        const filteredSprints: any[] = [];
-        sprintDataForFilter.forEach((singleSprintDataFilter) => {
-          if (singleSprintDataFilter) {
-            if (!singleSprintDataFilter.isComplete) {
-              const tasks = singleSprintDataFilter.taskId.filter((task) => {
-                return selectedUsers.some((selectedUser) => {
-                  if (selectedUser.id === null) {
-                    return false;
-                  }
-                  if (task.assignId === null) {
-                    return false;
-                  }
-                  if (!inputQuery) {
-                    return task.assignId.id === selectedUser.id;
-                  }
-                  return (
-                    task.assignId.id === selectedUser.id &&
-                    task.title.toLowerCase().includes(inputQuery.toLowerCase())
-                  );
-                });
-              });
-              const filteredSprint = { ...singleSprintDataFilter, taskId: tasks };
-              filteredSprints.push(filteredSprint);
-            }
-          }
         });
-        setSprintData(filteredSprints);
-      } else if (inputQuery) {
-        const filteredBacklog = {
-          cards: backlogDataForFilter.cards.filter((singleBacklog) =>
-            singleBacklog.title.toLowerCase().includes(inputQuery.toLowerCase())
-          )
+      };
+
+      const filteredBacklogData = {
+        cards: BacklogFilter(dataForFilter.backlog.cards, selectedUsers, inputQuery)
+      };
+      const filteredSprints: any[] = [];
+      sprintsNotCompleted.forEach((sprintNotCompleted) => {
+        const singleNotCompletedSprint = {
+          ...sprintNotCompleted,
+          taskId: BacklogFilter(sprintNotCompleted.taskId, selectedUsers, inputQuery)
         };
-        const qualifiedSprints: any[] = [];
-        sprintDataForFilter.forEach((singleSprintData) => {
-          if (!singleSprintData.isComplete) {
-            const filteredTask = singleSprintData.taskId.filter((task) =>
-              task.title.toLowerCase().includes(inputQuery.toLowerCase())
-            );
-            const filteredSprint = { ...singleSprintData, taskId: filteredTask };
-            qualifiedSprints.push(filteredSprint);
-          }
-        });
-        setBacklogData(filteredBacklog);
-        setSprintData(qualifiedSprints);
-      } else {
-        setBacklogData(backlogDataForFilter);
-        setSprintData(sprintDataForFilter);
-      }
+        filteredSprints.push(singleNotCompletedSprint);
+      });
+
+      setBacklogData(filteredBacklogData);
+      setSprintData(filteredSprints);
     };
     backlogFilter();
   }, [projectId, inputQuery, selectedUsers]);
