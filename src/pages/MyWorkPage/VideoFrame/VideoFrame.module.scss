@@ -6,4 +6,7 @@
   transition: 0.3s;
   block-size: auto;
   display: block;
+  @media screen and (max-width: 768px) {
+    max-width: 100%;
+  }
 }
