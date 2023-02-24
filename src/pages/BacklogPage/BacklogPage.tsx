@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
-// import { AiOutlineSearch } from 'react-icons/ai';
 import BacklogSection from './BacklogSection/BacklogSection';
 import UserTaskFilter from '../../components/UserTaskFilter/UserTaskFilter';
 import styles from './BacklogPage.module.scss';
@@ -30,11 +29,6 @@ export default function BacklogPage() {
   const [inputState, setInputState] = useState<boolean>(false);
   const [inputQuery, setInputQuery] = useState<string>('');
 
-  useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log(inputQuery);
-  }, [inputQuery]);
-
   const chaneSelectedUsers = (isExist, user) => {
     if (!isExist) {
       setSelectedUsers([...selectedUsers, user]);
@@ -42,19 +36,6 @@ export default function BacklogPage() {
       setSelectedUsers(selectedUsers.filter((selectedUser) => selectedUser.id !== user.id));
     }
   };
-
-  // useEffect(() => {
-  //   let filterCase = '';
-  //   selectedUsers.forEach((selectedUser) => {
-  //     filterCase = filterCase.concat(`-${selectedUser.id}`);
-  //   });
-  //   filterCase = filterCase.slice(1);
-  //   const filterBacklogData = async () => {
-  //     const res = await filterBacklog(projectId, filterCase);
-  //     setBacklogData(res.backlog);
-  //   };
-  //   filterBacklogData();
-  // }, [projectId, selectedUsers]);
 
   useEffect(() => {
     const backlogFilter = async () => {
@@ -65,10 +46,19 @@ export default function BacklogPage() {
         if (backlogDataForFilter.cards) {
           const filteredBacklog = backlogDataForFilter.cards.filter((singleData) =>
             selectedUsers.some((selectedUser) => {
+              if (!inputQuery) {
+                if (selectedUser.id === null) {
+                  return false;
+                }
+                return singleData.assignId?.id === selectedUser.id;
+              }
               if (selectedUser.id === null) {
                 return false;
               }
-              return singleData.assignId?.id === selectedUser.id;
+              return (
+                singleData.assignId?.id === selectedUser.id &&
+                singleData.title.toLowerCase().includes(inputQuery.toLowerCase())
+              );
             })
           );
           const filteredBacklogData = {
@@ -82,13 +72,25 @@ export default function BacklogPage() {
             if (!singleSprintDataFilter.isComplete) {
               const tasks = singleSprintDataFilter.taskId.filter((task) => {
                 return selectedUsers.some((selectedUser) => {
+                  if (!inputQuery) {
+                    if (selectedUser.id === null) {
+                      return false;
+                    }
+                    if (task.assignId === null) {
+                      return false;
+                    }
+                    return task.assignId.id === selectedUser.id;
+                  }
                   if (selectedUser.id === null) {
                     return false;
                   }
                   if (task.assignId === null) {
                     return false;
                   }
-                  return task.assignId.id === selectedUser.id;
+                  return (
+                    task.assignId.id === selectedUser.id &&
+                    task.title.toLowerCase().includes(inputQuery.toLowerCase())
+                  );
                 });
               });
               const filteredSprint = { ...singleSprintDataFilter, taskId: tasks };
@@ -97,13 +99,31 @@ export default function BacklogPage() {
           }
         });
         setSprintData(filteredSprints);
+      } else if (inputQuery) {
+        const filteredBacklog = {
+          cards: backlogDataForFilter.cards.filter((singleBacklog) =>
+            singleBacklog.title.toLowerCase().includes(inputQuery.toLowerCase())
+          )
+        };
+        const qualifiedSprints: any[] = [];
+        sprintDataForFilter.forEach((singleSprintData) => {
+          if (!singleSprintData.isComplete) {
+            const filteredTask = singleSprintData.taskId.filter((task) =>
+              task.title.toLowerCase().includes(inputQuery.toLowerCase())
+            );
+            const filteredSprint = { ...singleSprintData, taskId: filteredTask };
+            qualifiedSprints.push(filteredSprint);
+          }
+        });
+        setBacklogData(filteredBacklog);
+        setSprintData(qualifiedSprints);
       } else {
         setBacklogData(backlogDataForFilter);
         setSprintData(sprintDataForFilter);
       }
     };
     backlogFilter();
-  }, [projectId, selectedUsers]);
+  }, [projectId, inputQuery, selectedUsers]);
 
   const getBacklogDataApi = useCallback(() => {
     const getBacklogData = async () => {

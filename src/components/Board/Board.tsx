@@ -117,10 +117,19 @@ export default function Board() {
             slug: item.slug,
             order: item.order,
             items: item.taskList.filter((task) => {
+              if (!inputQuery) {
+                if (task.assignId === null) {
+                  return false;
+                }
+                return selectedUsers.some((selectedUser) => selectedUser.id === task.assignId.id);
+              }
               if (task.assignId === null) {
                 return false;
               }
-              return selectedUsers.some((selectedUser) => selectedUser.id === task.assignId.id);
+              return (
+                task.title?.toLowerCase().includes(inputQuery.toLowerCase()) &&
+                selectedUsers.some((selectedUser) => selectedUser.id === task.assignId.id)
+              );
             })
           };
         }
