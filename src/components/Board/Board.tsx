@@ -111,23 +111,27 @@ export default function Board() {
       const columnInfoData: IColumnsFromBackend = {};
 
       if (selectedUsers.length > 0) {
+        const taskListFilter = (taskList, userInput, queryInput) => {
+          return taskList.filter((task) => {
+            if (task.assignId === null) {
+              return false;
+            }
+            if (!queryInput) {
+              return userInput.some((selectedUser) => selectedUser.id === task.assignId.id);
+            }
+            return (
+              task.title?.toLowerCase().includes(queryInput.toLowerCase()) &&
+              userInput.some((selectedUser) => selectedUser.id === task.assignId.id)
+            );
+          });
+        };
+
         for (const item of boardInfo.taskStatus) {
           columnInfoData[item.id] = {
             name: item.name,
             slug: item.slug,
             order: item.order,
-            items: item.taskList.filter((task) => {
-              if (task.assignId === null) {
-                return false;
-              }
-              if (!inputQuery) {
-                return selectedUsers.some((selectedUser) => selectedUser.id === task.assignId.id);
-              }
-              return (
-                task.title?.toLowerCase().includes(inputQuery.toLowerCase()) &&
-                selectedUsers.some((selectedUser) => selectedUser.id === task.assignId.id)
-              );
-            })
+            items: taskListFilter(item.taskList, selectedUsers, inputQuery)
           };
         }
         return setColumnsInfo(columnInfoData);
