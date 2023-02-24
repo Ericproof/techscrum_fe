@@ -99,7 +99,7 @@ function App() {
                 <Route path="/careers" element={<CareerPage />} />
                 <Route path="/security-page" element={<SecurityPage />} />
                 <Route path="/errorPage" element={<ErrorPage />} />
-                <Route path="/my-work" element={<MyWorkPage />} />
+                <Route path="/features/my-work" element={<MyWorkPage />} />
                 <Route path="" element={<AuthenticationRoute />}>
                   <Route path="/projects/:projectId/" element={<DashboardLayout />}>
                     <Route path="board/:boardId" element={<BoardPage />} />
