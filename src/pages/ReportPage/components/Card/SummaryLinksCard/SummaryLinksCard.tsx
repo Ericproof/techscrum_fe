@@ -20,7 +20,6 @@ function SummaryLinksCard({ summaryLinksData }: Props) {
           <div className={styles.flex__row} key={crypto.randomUUID().toString() + summaryText}>
             <img className={styles.imgIcons} src={iconImgSrc} alt="icons" />
             {breakText(summaryText as string, linkText as string).map((item) => {
-              window.console.log(item);
               if (item === linkText) {
                 return (
                   <a href="/" key={crypto.randomUUID()}>
