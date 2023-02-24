@@ -1,0 +1,68 @@
+@import '../base.scss';
+
+.container {
+  margin-top: 0;
+  padding: 50px 0 25px;
+  z-index: 1;
+  position: relative;
+  color: #292d34;
+}
+
+.emailSection {
+  padding: 0;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.wrapper {
+  background: #fff;
+  width: 100%;
+  box-shadow: 0 15px 45px rgb(16 30 54 / 16%);
+  border-radius: 9px;
+  padding: 35px 45px;
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  align-items: center;
+  @include borderBox;
+}
+
+.header {
+  letter-spacing: 0.42px;
+  color: #333;
+  margin: 0;
+  text-align: left;
+  font: 800 27px/48px 'Roboto', sans-serif;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  width: 42%;
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    right: 0;
+    height: 100%;
+    width: 50%;
+    background: url(https://clickup.com/images/v2/dots.svg) repeat center/auto;
+    top: 0;
+    z-index: 0;
+  }
+}
+
+.form input {
+  z-index: 1;
+}
+
+.form button {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  &::after {
+    display: none;
+  }
+}
