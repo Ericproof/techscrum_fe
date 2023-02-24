@@ -33,7 +33,7 @@ function StaffDetail(props: IStaff) {
         <div className={styles['detail-intro']}>
           <p>{description}</p>
         </div>
-        <div>
+        <div className={styles['icon-container']}>
           <a href={linkedin} className={styles.icon}>
             <AiFillLinkedin style={{ fontSize: '35px', color: '#868e96' }} />
           </a>
