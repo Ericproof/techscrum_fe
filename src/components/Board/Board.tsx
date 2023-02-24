@@ -110,56 +110,37 @@ export default function Board() {
     (boardInfo: IBoardEntity) => {
       const columnInfoData: IColumnsFromBackend = {};
 
-      if (selectedUsers.length > 0) {
-        const taskListFilter = (taskList, userInput, queryInput) => {
-          return taskList.filter((task) => {
-            if (task.assignId === null) {
-              return false;
-            }
-            if (!queryInput) {
-              return userInput.some((selectedUser) => selectedUser.id === task.assignId.id);
-            }
-            return (
-              task.title?.toLowerCase().includes(queryInput.toLowerCase()) &&
-              userInput.some((selectedUser) => selectedUser.id === task.assignId.id)
-            );
-          });
-        };
-
-        for (const item of boardInfo.taskStatus) {
-          columnInfoData[item.id] = {
-            name: item.name,
-            slug: item.slug,
-            order: item.order,
-            items: taskListFilter(item.taskList, selectedUsers, inputQuery)
-          };
-        }
-        return setColumnsInfo(columnInfoData);
-      }
-
-      if (inputQuery) {
-        for (const item of boardInfo.taskStatus) {
-          columnInfoData[item.id] = {
-            name: item.name,
-            slug: item.slug,
-            order: item.order,
-            items: item.taskList.filter((task) =>
-              task.title?.toLowerCase().includes(inputQuery.toLowerCase())
-            )
-          };
-        }
-        return setColumnsInfo(columnInfoData);
-      }
+      const taskListFilter = (taskList, userInput, queryInput) => {
+        return taskList.filter((task) => {
+          if (!queryInput && userInput.length === 0) {
+            return true;
+          }
+          if (task.assignId === null) {
+            return false;
+          }
+          if (queryInput && userInput.length === 0) {
+            return task.title?.toLowerCase().includes(queryInput.toLowerCase());
+          }
+          if (!queryInput && userInput.length > 0) {
+            return userInput.some((selectedUser) => {
+              return selectedUser.id === task.assignId.id;
+            });
+          }
+          return (
+            task.title?.toLowerCase().includes(queryInput.toLowerCase()) &&
+            userInput.some((selectedUser) => selectedUser.id === task.assignId.id)
+          );
+        });
+      };
 
       for (const item of boardInfo.taskStatus) {
         columnInfoData[item.id] = {
           name: item.name,
           slug: item.slug,
           order: item.order,
-          items: item.taskList
+          items: taskListFilter(item.taskList, selectedUsers, inputQuery)
         };
       }
-
       return setColumnsInfo(columnInfoData);
     },
     [inputQuery, selectedUsers]
