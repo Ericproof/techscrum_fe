@@ -115,6 +115,8 @@ function App() {
                     element={<AccountSettingsPage />}
                   />
                   <Route path="/projects/:projectId/members" element={<ProjectMembersPage />} />
+                  {/* 合理的流程 */}
+                  <Route path="/projects/:projectId/rolesV2" element={<RolePageV2 />} />
                 </Route>
                 <Route path="/roles" element={<RolePage />} />
                 <Route path="/rolesV2" element={<RolePageV2 />} />

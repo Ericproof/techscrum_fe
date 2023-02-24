@@ -78,7 +78,7 @@ export default function ProjectMembersPage() {
       <ProjectMemberHeader />
       <div className={styles.projectMemberMain}>
         <ProjectMemberNav />
-        <ProjectMemberTitle setInviteFormVisible={setInviteFormVisible} />
+        <ProjectMemberTitle setInviteFormVisible={setInviteFormVisible} projectId={projectId} />
         {loadingStatus ? (
           <Loading />
         ) : (

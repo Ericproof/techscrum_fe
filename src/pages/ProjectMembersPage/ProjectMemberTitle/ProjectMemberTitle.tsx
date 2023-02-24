@@ -4,16 +4,18 @@ import styles from './ProjectMemberTitle.module.scss';
 
 interface Props {
   setInviteFormVisible: Dispatch<boolean>;
+  projectId: string;
 }
 
-export default function ProjectMemberHeader({ setInviteFormVisible }: Props) {
+export default function ProjectMemberTitle({ setInviteFormVisible, projectId }: Props) {
   const navigate = useNavigate();
+
   return (
     <div className={styles.projectMemberHeaderContainer}>
       <h1>Access</h1>
       <div>
         <button onClick={() => setInviteFormVisible(true)}>Add Member</button>
-        <button onClick={() => navigate('/roles')}>Manage Role</button>
+        <button onClick={() => navigate(`/projects/${projectId}/rolesV2`)}>Manage Role</button>
       </div>
     </div>
   );

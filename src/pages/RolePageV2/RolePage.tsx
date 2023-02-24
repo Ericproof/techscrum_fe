@@ -8,6 +8,7 @@ import AddRoleBtn from './AddRoleBtn/AddRoleBtn';
 import { IRole } from '../../types';
 import { getRoles } from '../../api/role/role';
 import styles from './RolePage.module.scss';
+import RoleNav from './RoleNav/roleNav';
 
 function RolePage() {
   // const [loader, setLoader] = useState(false);
@@ -36,6 +37,7 @@ function RolePage() {
     <>
       <ProjectHeader />
       <div className={styles['main-container']}>
+        <RoleNav />
         <div className={styles['header-container']}>
           <h1>Manage Roles</h1>
           <AddRoleBtn />
