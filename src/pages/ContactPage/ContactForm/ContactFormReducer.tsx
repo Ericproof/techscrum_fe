@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 export const initState = {
-  enquiryType: '',
   fullName: '',
   company: '',
   phone: '',
@@ -13,7 +12,8 @@ export const enum ReducerActionTypes {
   SetCompany,
   SetPhone,
   SetEmail,
-  SetMsg
+  SetMsg,
+  FormReset
 }
 
 type ReducerAction = {
@@ -33,6 +33,8 @@ export function reducer(state: typeof initState, action: ReducerAction) {
       return { ...state, email: action.payload ?? '' };
     case ReducerActionTypes.SetMsg:
       return { ...state, msg: action.payload ?? '' };
+    case ReducerActionTypes.FormReset:
+      return initState;
     default:
       return state;
   }

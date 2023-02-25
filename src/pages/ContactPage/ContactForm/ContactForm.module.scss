@@ -13,27 +13,7 @@
   @media (max-width: 1279px) {
     max-width: 450px;
   }
-  @media (max-width: 991px) {
-    width: 100%;
-  }
-  @media (max-width: 570px) {
-    max-width: 400px;
-  }
-  @media (max-width: 510px) {
-    max-width: 350px;
-  }
-  @media (max-width: 450px) {
-    max-width: 300px;
-  }
-  @media (max-width: 375px) {
-    max-width: 250px;
-  }
-  @media (max-width: 320px) {
-    max-width: 200px;
-  }
-  @media (max-width: 280px) {
-    max-width: 150px;
-  }
+
   .contactForm {
     display: flex;
     flex-direction: column;
@@ -44,7 +24,6 @@
     input {
       font-family: inherit;
     }
-
     .inputField {
       padding: 1rem;
       background-color: #f7f7f7;
@@ -66,6 +45,7 @@
       font-size: 32px;
       line-height: 115%;
       font-weight: 400;
+      text-align: center;
       @media (max-width: 997px) {
         font-size: 26px;
       }
@@ -108,5 +88,42 @@
         letter-spacing: 0.25px;
       }
     }
+    .errMsg {
+      text-align: center;
+      margin: 0 1rem;
+      line-height: 1.5;
+      font-size: 0.75rem;
+      color: red;
+    }
+    .loading{
+      text-align: center;
+      margin: 0 1rem;
+      line-height: 1.5;
+      font-size: 0.75rem;
+      color: $primaryColor;
+    }
   }
+}
+
+
+.close {
+  display: flex;
+  justify-content: flex-end;
+  margin:0.5em;
+}
+
+.close:hover {
+  cursor: pointer;
+}
+
+.modalPadding {
+  padding: 30px 80px 80px 80px;
+}
+
+.iconPosition {
+  text-align: center;
+}
+
+.messagePosition {
+  text-align: center;
 }
