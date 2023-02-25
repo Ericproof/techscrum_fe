@@ -47,7 +47,7 @@ export default function InviteMemberFloatForm({ roles, inviteMember }: Props) {
           <button type="button" onClick={() => eventHandler(false)}>
             Cancel
           </button>
-          <button type="submit" onClick={() => eventHandler(true)}>
+          <button type="button" onClick={() => eventHandler(true)}>
             Add
           </button>
         </div>

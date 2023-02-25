@@ -1,9 +1,8 @@
 import axios from 'axios';
 import config from '../../config/config';
 
-// 正确
-export const getRoles = async () => {
-  const path = `${config.apiAddress}/roles`;
+export const getRoles = async (projectId: string) => {
+  const path = `${config.apiAddress}/projects/${projectId}/roles`;
   const response = await axios.get(path);
   return response.data;
 };

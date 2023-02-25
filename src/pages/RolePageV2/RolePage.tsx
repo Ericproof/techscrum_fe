@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 // import components
+import { useParams } from 'react-router-dom';
 import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
 import RoleTable from './RoleTable/RoleTable';
 import PermissionSelector from './PermissionSelector/PermissionSelector';
@@ -12,12 +13,13 @@ import RoleNav from './RoleNav/roleNav';
 
 function RolePage() {
   // const [loader, setLoader] = useState(false);
+  const { projectId = '' } = useParams();
   const [roles, setRoles] = useState<IRole[]>([]);
   const [openEdit, setOpenEdit] = useState(false);
   useEffect(() => {
     (async () => {
       try {
-        const res = await getRoles();
+        const res = await getRoles(projectId);
         // eslint-disable-next-line no-console
         console.log(res);
         setRoles(res);
@@ -27,7 +29,7 @@ function RolePage() {
         toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
       }
     })();
-  }, []);
+  }, [projectId]);
 
   const openEditHandler = () => {
     setOpenEdit(true);

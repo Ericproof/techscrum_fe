@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './ProjectMemberPage.module.scss';
 import ProjectMemberHeader from '../../components/ProjectHeader/ProjectHeader';
@@ -10,7 +9,7 @@ import InviteMemberFloatForm from './InviteMemberFloatForm/InviteMemberFloatForm
 import { IUserInfo, IRole } from '../../types';
 import Loading from '../../components/Loading/Loading';
 import { getMembers, inviteMember, updateMemberRole, removeMember } from '../../api/member/member';
-import { getRole } from '../../api/role/role';
+import { getRoles } from '../../api/role/role';
 
 export default function ProjectMembersPage() {
   const { projectId = '' } = useParams();
@@ -19,7 +18,8 @@ export default function ProjectMembersPage() {
   const [inviteFormVisible, setInviteFormVisible] = useState(false);
   const [loadingStatus, setLoadingStatus] = useState(false);
 
-  const fetchMembers = async () => {
+  // 待测试
+  const fetchMembers = useCallback(async () => {
     try {
       setLoadingStatus(true);
       const res = await getMembers(projectId);
@@ -29,14 +29,14 @@ export default function ProjectMembersPage() {
     } finally {
       setLoadingStatus(false);
     }
-  };
+  }, [projectId]);
 
   useEffect(() => {
     const fetchRoles = async () => {
       try {
         setLoadingStatus(true);
-        const res = await getRole();
-        setRoles(res.data);
+        const res = await getRoles(projectId);
+        setRoles(res);
       } catch (e) {
         setMembers([]);
       } finally {
@@ -45,7 +45,7 @@ export default function ProjectMembersPage() {
     };
     fetchRoles();
     fetchMembers();
-  }, []);
+  }, [projectId, fetchMembers]);
 
   const onChangeProjectRole = async (e: React.ChangeEvent<HTMLSelectElement>, userId: string) => {
     const roleId = e.target.value;
