@@ -15,9 +15,16 @@ import { reducer, ReducerActionTypes, initState } from './ContactFormReducer';
 const FULLNAME_REGEX = /^[a-z ,.'-]+$/i;
 const PHONE_REGEX = /^[0-9]{10}$/;
 const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+const enquiryTitles = [
+  `Just saying hi!`,
+  `I'd like to request a feature`,
+  `I have a question about billing`,
+  `I'm confused about how something works`,
+  `Other`
+];
 
 export default function ContactForm() {
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState(enquiryTitles[0]);
   const [isFormValid, setIsFormValid] = useState(true);
   const [loading, setLoading] = useState(false);
   const [reqStatus, setReqStatus] = useState(201);
@@ -63,7 +70,7 @@ export default function ContactForm() {
     });
   };
 
-  const submitHandler = (e: React.SyntheticEvent) => {
+  const submitHandler = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     // here check if obj valid
     const isAllFilled = Object.values(reducerState).every((item) => item.length > 0);
@@ -82,6 +89,19 @@ export default function ContactForm() {
     dispatch({ type: ReducerActionTypes.FormReset });
     setLoading(true);
     // post request starting here
+    try {
+      const response = await fetch('http://localhost:8000/api/v1/emailus', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(contactMessageObj)
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
     setTimeout(() => {
       setLoading(false);
       setModal(true);
@@ -100,19 +120,11 @@ export default function ContactForm() {
             <label htmlFor="enquiryTitles">
               What&#39;s up *
               <select name="enquiryTitles" id="enquiryTitles" onChange={handleTitleSelect}>
-                <option value="Just saying hi!" selected>
-                  Just saying hi!
-                </option>
-                <option value="I'd like to request a feature">
-                  I&#39;d like to request a feature
-                </option>
-                <option value="I have a question about billing">
-                  I have a question about billing
-                </option>
-                <option value="I'm confused about how something works">
-                  I&#39;m confused about how something works
-                </option>
-                <option value="Other">Other</option>
+                {enquiryTitles.map((e) => (
+                  <option key={e} value={e}>
+                    {e}
+                  </option>
+                ))}
               </select>
             </label>
           </div>
@@ -152,7 +164,7 @@ export default function ContactForm() {
             errMsg="Field required, must be a valid email."
           />
           <InputV3
-            value={reducerState.msg}
+            value={reducerState.message}
             onChange={handleMsgInput}
             type="text"
             label="Any more info you can provide *"
@@ -190,7 +202,7 @@ export default function ContactForm() {
               </div>
               <div className={styles.messagePosition}>
                 {reqStatus === 200 ? (
-                  <h2>We have receive your application, we will get to you as soon as possible</h2>
+                  <h2>Thanks for contacting us from this page, we will reply via email asap.</h2>
                 ) : (
                   <h2>Some error happened, we will try to fix it soon</h2>
                 )}

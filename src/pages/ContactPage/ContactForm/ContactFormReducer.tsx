@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 export const initState = {
-  fullName: '',
-  company: '',
-  phone: '',
-  email: '',
-  msg: ''
+  fullName: 'zhou tian',
+  company: 'hello',
+  phone: '1234567890',
+  email: 'noreply@techscrumapp.com',
+  message: 'testing'
 };
 
 export const enum ReducerActionTypes {
@@ -32,7 +32,7 @@ export function reducer(state: typeof initState, action: ReducerAction) {
     case ReducerActionTypes.SetEmail:
       return { ...state, email: action.payload ?? '' };
     case ReducerActionTypes.SetMsg:
-      return { ...state, msg: action.payload ?? '' };
+      return { ...state, message: action.payload ?? '' };
     case ReducerActionTypes.FormReset:
       return initState;
     default:
