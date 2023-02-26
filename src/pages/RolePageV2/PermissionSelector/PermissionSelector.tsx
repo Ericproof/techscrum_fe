@@ -1,44 +1,27 @@
-import React from 'react';
+/* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { addRole } from '../../../api/role/role';
 // import styles from './PermissionSelector.module.scss';
 
-function PermissionSelector() {
-  // const [permission, setPermission] = useState({
-  //   projects: {
-  //     view: false,
-  //     edit: false,
-  //     delete: false,
-  //     create: false
-  //   },
-  //   broads: {
-  //     view: false,
-  //     edit: false,
-  //     delete: false,
-  //     create: false
-  //   },
-  //   members: {
-  //     view: false,
-  //     edit: false,
-  //     delete: false,
-  //     create: false
-  //   },
-  //   roles: {
-  //     view: false,
-  //     edit: false,3123123
-  //     delete: false,
-  //     create: false
-  //   }
-  // });12312312312312312
+interface IProps {
+  setName: boolean;
+  // permissions: Array<string | undefined> | undefined;
+}
 
-  // const permissionTypes = Object.entries(permission);
+function PermissionSelector(props: IProps) {
+  const { setName } = props;
+  const { projectId = '' } = useParams();
+  const [roleName, setRoleName] = useState('');
 
-  // eslint-disable-next-line no-unused-vars
   const permissionTypes = [
-    'Projects',
-    'Broads',
-    'Members',
-    'Roles',
-    'Shortcuts',
-    'Tasks',
+    'projects',
+    'boards',
+    'members',
+    'roles',
+    'shortcuts',
+    'tasks',
     'settings'
   ];
 
@@ -53,56 +36,29 @@ function PermissionSelector() {
         newPermissions.push(input.id);
       }
     });
-
-    // eslint-disable-next-line no-console
-    console.log(newPermissions);
-    // const view = event.target.elements;
-    // // eslint-disable-next-line no-console
-    // console.log(view);
-    // // eslint-disable-next-line no-console
-    // console.log(event.target.elements[0].id);
+    // console.log(projectId, roleName, newPermissions);
+    addRole(projectId, roleName, newPermissions);
   };
-
-  // const inputHandler = (event) => {
-  //   const { target } = event;
-  //   const value = target.checked;
-  //   // eslint-disable-next-line no-console
-  //   console.log(event);
-  //   // eslint-disable-next-line no-console
-  //   console.log(value);
-  // };
-
-  // filter((item) => item.slug?.split(':')[2] === 'projects')
-
-  // eslint-disable-next-line no-unused-vars
-  // const permissionList = permission?.map((item) => {
-  //   // eslint-disable-next-line no-console
-  //   // console.log(item.slug?.split(':')[1] === 'projects');
-  //   return (
-  //     <label key={item.id} htmlFor={item.slug}>
-  //       <input type="checkbox" id={item.slug} />
-  //       {item.description}
-  //     </label>
-  //   );
-  // });
-
-  // // eslint-disable-next-line no-console
-  // console.log(permission);
 
   return (
     <form onSubmit={submitHandler}>
-      {
+      {setName && (
+        <label htmlFor="roleName">
+          Role name:
+          <input
+            name="roleName"
+            onChange={(e) => {
+              setRoleName(e.target.value);
+            }}
+          />
+        </label>
+      )}
+      {/* {
         // permissionList
         permissionTypes.map((type) => {
           return (
             <div key={type}>
               <p>{`${type}:`}</p>
-              {/* {Object.entries(type[1]).map((operation) => (
-                <label key={`${operation[0]}-view`} htmlFor={`${operation[0]}-view`}>
-                  <input type="checkbox" id={`${operation[0]}-view`} />
-                  {operation}
-                </label>
-              ))} */}
               <label htmlFor={`view:${type}`}>
                 <input type="checkbox" id={`view:${type}`} />
                 View
@@ -122,7 +78,22 @@ function PermissionSelector() {
             </div>
           );
         })
-      }
+      } */}
+      <div>
+        <p>projects</p>
+        <label htmlFor="631d94d08a05945727602ce7">
+          <input type="checkbox" id="631d94d08a05945727602ce7" />
+          View
+        </label>
+        <label htmlFor="631d94d08a05945727602ce8">
+          <input type="checkbox" id="631d94d08a05945727602ce8" />
+          Edit
+        </label>
+        <label htmlFor="631d94d08a05945727602ce9">
+          <input type="checkbox" id="631d94d08a05945727602ce9" />
+          Delete
+        </label>
+      </div>
       <input type="submit" value="Submit" />
     </form>
   );

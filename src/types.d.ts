@@ -245,7 +245,7 @@ export interface IRole {
   id: string;
   name?: string;
   slug?: string;
-  permission?: IPermission[];
+  permission: IPermission[];
 }
 
 export interface IPermissions {

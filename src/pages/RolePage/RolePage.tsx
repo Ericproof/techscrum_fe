@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState, createRef } from 'react';
 import { TiDelete } from 'react-icons/ti';
-import { updateRole, deletePermission } from '../../api/role/role';
+// import { updateRole } from '../../api/role/role';
 import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
 import config from '../../config/config';
 import { IPermissions, IRole } from '../../types';
@@ -33,25 +33,25 @@ export default function ProjectMembersPage() {
     getPermissions();
   }, [permissions]);
 
-  const onClickAddPermission = (roleId: string, permissionId: string) => {
-    updateRole(roleId, permissionId);
-  };
+  // const onClickAddPermission = (roleId: string, permissionId: string) => {
+  //   updateRole(roleId, permissionId);
+  // };
 
   const onChangeSelectedPermissions = (item: IPermissions) => {
     setSelectedPermissions(selectedPermissions.concat(item));
   };
 
-  const removePermissionFromList = async (roleId: string, permissionId: string) => {
-    try {
-      await deletePermission(roleId, permissionId);
-    } finally {
-      if (selectedPermissions !== undefined && Array.isArray(selectedPermissions)) {
-        setSelectedPermissions(
-          selectedPermissions.filter((item: IPermissions) => item.id !== permissionId)
-        );
-      }
-    }
-  };
+  // const removePermissionFromList = async (roleId: string, permissionId: string) => {
+  //   try {
+  //     await deletePermission(roleId, permissionId);
+  //   } finally {
+  //     if (selectedPermissions !== undefined && Array.isArray(selectedPermissions)) {
+  //       setSelectedPermissions(
+  //         selectedPermissions.filter((item: IPermissions) => item.id !== permissionId)
+  //       );
+  //     }
+  //   }
+  // };
 
   const viewDetailPosition = (e: React.MouseEvent<HTMLDivElement>, id: number) => {
     const mouseDetailPosition = e.currentTarget.getBoundingClientRect();
@@ -135,7 +135,7 @@ export default function ProjectMembersPage() {
                                           if (!item.id) {
                                             return;
                                           }
-                                          onClickAddPermission(role.id, item.id);
+                                          // onClickAddPermission(role.id, item.id);
                                           onChangeSelectedPermissions(item);
                                           setShowPermissionOptions('-1');
                                         }}
@@ -153,10 +153,10 @@ export default function ProjectMembersPage() {
                                   <span>{item.slug}</span>
                                   <TiDelete
                                     onClick={() => {
-                                      if (!item.id) {
-                                        return;
-                                      }
-                                      removePermissionFromList(role.id, item.id);
+                                      // if (!item.id) {
+                                      //   return;
+                                      // }
+                                      // removePermissionFromList(role.id, item.id);
                                     }}
                                   />
                                 </div>
