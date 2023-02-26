@@ -1,15 +1,16 @@
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { toast } from 'react-toastify';
-// import components
 import { useParams } from 'react-router-dom';
+// import components
+import Loading from '../../components/Loading/Loading';
 import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
 import RoleTable from './RoleTable/RoleTable';
 import PermissionSelector from './PermissionSelector/PermissionSelector';
 import AddRoleBtn from './AddRoleBtn/AddRoleBtn';
 import { IRole } from '../../types';
-import { getRoles } from '../../api/role/role';
+import { getRoles, addRole } from '../../api/role/role';
 import styles from './RolePage.module.scss';
 import RoleNav from './RoleNav/roleNav';
 
@@ -30,30 +31,44 @@ function RolePage() {
   // edit role
   const [openEdit, setOpenEdit] = useState(false);
   const [editName, setEditName] = useState(false);
-
+  console.log(loader);
   // const [roleState, dispatchRole] = useReducer(roleReducer, { roleName: '', permission: [] });
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const res = await getRoles(projectId);
-        setRoles(res);
-        setLoader(true);
-      } catch (err) {
-        setLoader(false);
-        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
-      }
-    })();
+  const fetchRoles = useCallback(async () => {
+    try {
+      setLoader(true);
+      const res = await getRoles(projectId);
+      setRoles(res);
+    } catch (err) {
+      setLoader(false);
+      toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+    } finally {
+      setLoader(false);
+    }
   }, [projectId]);
+
+  useEffect(() => {
+    fetchRoles();
+  }, [fetchRoles]);
 
   const newRoleHandler = () => {
     setOpenEdit(true);
     setEditName(true);
   };
 
-  const submitEditHandler = () => {
+  const submitEditHandler = async (roleName: string, permissions: Array<string>) => {
     setOpenEdit(false);
     setEditName(false);
+    try {
+      setLoader(true);
+      await addRole(projectId, roleName, permissions);
+      // setRoles(res);
+    } catch (err) {
+      setLoader(false);
+      toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+    } finally {
+      fetchRoles();
+    }
   };
 
   // const permissions = roles
@@ -73,8 +88,10 @@ function RolePage() {
           <h1>Manage Roles</h1>
           <AddRoleBtn addRole={newRoleHandler} />
         </div>
-        <RoleTable roles={roles} />
-        {openEdit && <PermissionSelector setName={editName} />}
+        {loader ? <Loading /> : <RoleTable roles={roles} />}
+        {openEdit && (
+          <PermissionSelector setName={editName} submitRoleHandler={submitEditHandler} />
+        )}
       </div>
     </>
   );

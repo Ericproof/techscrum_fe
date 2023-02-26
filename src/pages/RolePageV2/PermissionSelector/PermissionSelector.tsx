@@ -1,29 +1,16 @@
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { addRole } from '../../../api/role/role';
 // import styles from './PermissionSelector.module.scss';
 
 interface IProps {
   setName: boolean;
-  // permissions: Array<string | undefined> | undefined;
+  submitRoleHandler: (roleName: string, permissions: Array<string>) => void;
 }
 
 function PermissionSelector(props: IProps) {
-  const { setName } = props;
-  const { projectId = '' } = useParams();
+  const { setName, submitRoleHandler } = props;
   const [roleName, setRoleName] = useState('');
-
-  const permissionTypes = [
-    'projects',
-    'boards',
-    'members',
-    'roles',
-    'shortcuts',
-    'tasks',
-    'settings'
-  ];
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -36,8 +23,7 @@ function PermissionSelector(props: IProps) {
         newPermissions.push(input.id);
       }
     });
-    // console.log(projectId, roleName, newPermissions);
-    addRole(projectId, roleName, newPermissions);
+    submitRoleHandler(roleName, newPermissions);
   };
 
   return (
