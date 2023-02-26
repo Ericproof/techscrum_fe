@@ -1,15 +1,16 @@
 import React, { useEffect, useRef } from 'react';
-import styles from '../Board/BoardSearch/BoardSearch.module.scss';
+import styles from './SearchForBoard.module.scss';
 import search from '../../assets/search-line.svg';
 
 interface ISearchForBoard {
   inputState: any;
   setInputState: any;
   setInputQuery: any;
+  page: string;
 }
 
 export default function SearchForBoard(props: ISearchForBoard) {
-  const { inputState, setInputState, setInputQuery } = props;
+  const { inputState, setInputState, setInputQuery, page } = props;
 
   const myRef = useRef<HTMLInputElement>(null);
 
@@ -38,7 +39,7 @@ export default function SearchForBoard(props: ISearchForBoard) {
         type="text"
         name="search"
         ref={myRef}
-        placeholder={inputState ? 'Search this board' : ''}
+        placeholder={inputState ? `search ${page}` : ''}
         onClick={() => {
           setInputState(true);
         }}

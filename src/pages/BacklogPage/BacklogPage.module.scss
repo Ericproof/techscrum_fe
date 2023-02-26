@@ -17,10 +17,11 @@
 .BacklogSearchFilter {
   display: flex;
   align-items: center;
-  margin-bottom: 25px;
+  margin: 25px 0 35px 0;
 
   .BacklogSearchArea {
     position: relative;
+    padding-right: 10px;
 
     .BacklogSearchBar {
       background-color: #dfe1e6;

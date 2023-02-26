@@ -28,6 +28,7 @@ export default function BacklogPage() {
   const [selectedUsers, setSelectedUsers] = useState<any[]>([]);
   const [inputState, setInputState] = useState<boolean>(false);
   const [inputQuery, setInputQuery] = useState<string>('');
+  const page = 'backlog';
 
   const chaneSelectedUsers = (isExist, user) => {
     if (!isExist) {
@@ -195,6 +196,7 @@ export default function BacklogPage() {
                     inputState={inputState}
                     setInputQuery={setInputQuery}
                     setInputState={setInputState}
+                    page={page}
                   />
                 </div>
                 <UserTaskFilter

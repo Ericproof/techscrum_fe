@@ -28,6 +28,7 @@ export default function BoardSearch({
     { id: 3, name: 'avatar3', url: '' },
     { id: 4, name: 'avatar4', url: '' }
   ];
+  const page = 'board';
 
   const [activeAvatarsID, setActiveAvatarsID] = useState<number>();
   const [activeAvatars, setActiveAvatars] = useState<boolean>(false);
@@ -36,11 +37,14 @@ export default function BoardSearch({
 
   return (
     <div className={styles.searchBarContainer}>
-      <SearchForBoard
-        inputState={inputState}
-        setInputQuery={setInputQuery}
-        setInputState={setInputState}
-      />
+      <div className={styles.searchInputContainer}>
+        <SearchForBoard
+          inputState={inputState}
+          setInputQuery={setInputQuery}
+          setInputState={setInputState}
+          page={page}
+        />
+      </div>
       <div className={styles.userTaskFilterContainer}>
         <UserTaskFilter
           selectedUsers={selectedUsers}
