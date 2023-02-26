@@ -1,17 +1,13 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import styles from './InputV3.module.scss';
 
 type TInputV3 = {
   value: string;
-  onBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   identifier: string;
   label: string;
   tagType?: 'input' | 'textarea';
   type?: 'text' | 'email' | 'password' | 'tel';
-  defaultValue?: string;
   required?: boolean;
   placeHolder?: string;
   regex?: RegExp;
@@ -32,12 +28,10 @@ export default function InputV3(props: TInputV3) {
   const {
     value,
     onChange,
-    onBlur,
     label,
     identifier,
     type,
     tagType,
-    defaultValue,
     required,
     placeHolder,
     regex,
@@ -65,8 +59,8 @@ export default function InputV3(props: TInputV3) {
   };
 
   return (
-    <div>
-      <div className={styles.inputField}>
+    <>
+      <div className={[styles.inputField, classes].join(' ')}>
         <label
           htmlFor={identifier}
           className={isFocused ? `${styles.label} ${styles.label__focused}` : styles.label}
@@ -80,12 +74,14 @@ export default function InputV3(props: TInputV3) {
             type={type}
             data-cy={`${identifier}-input-cy`}
             value={value}
+            placeholder={placeHolder}
             autoComplete="off"
             onChange={onChange}
             onFocus={() => setIsFocused(true)}
             onBlur={onBlurHandler}
             aria-invalid={isValid ? 'false' : 'true'}
             aria-describedby={`${identifier}-accessible-msg`}
+            required={required}
           />
         )}
         {tagType === 'textarea' && (
@@ -100,6 +96,7 @@ export default function InputV3(props: TInputV3) {
             onBlur={onBlurHandler}
             aria-invalid={isValid ? 'false' : 'true'}
             aria-describedby={`${identifier}-accessible-msg`}
+            required={required}
           />
         )}
       </div>
@@ -108,14 +105,12 @@ export default function InputV3(props: TInputV3) {
           {errMsg}
         </p>
       )}
-    </div>
+    </>
   );
 }
 
 InputV3.defaultProps = {
   required: false,
-  onBlur: null,
-  defaultValue: null,
   placeHolder: null,
   tagType: 'input',
   type: 'text',

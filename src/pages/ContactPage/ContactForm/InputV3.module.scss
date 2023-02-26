@@ -24,6 +24,7 @@
     color: gray;
   }
   .input {
+    display: block;
     font-size: 1rem;
     width: 100%;
     box-sizing: border-box;
@@ -35,6 +36,9 @@
   }
   .input__error {
     background-color: pink;
+  }
+  textarea {
+    resize: none;
   }
 }
 

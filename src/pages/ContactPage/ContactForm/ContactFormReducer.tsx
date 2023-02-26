@@ -1,11 +1,22 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-export const initState = {
-  fullName: 'zhou tian',
-  company: 'hello',
-  phone: '1234567890',
-  email: 'noreply@techscrumapp.com',
-  message: 'testing'
+
+// const testData = {
+//   fullName: 'test user',
+//   company: 'JR Academy',
+//   phone: '0406199393',
+//   email: 'userTest@example.com',
+//   message: 'Hi, just want to thank all your brilliant developers!'
+// };
+
+const initData = {
+  fullName: '',
+  company: '',
+  phone: '',
+  email: '',
+  message: ''
 };
+
+export const initState = initData;
 
 export const enum ReducerActionTypes {
   SetFullName,

@@ -36,7 +36,7 @@ export default function ContactPage() {
                     <b>Phone</b>
                     <p className={styles.info1}>Mon-Fri from 9am to 5pm.</p>
                     <p className={styles.info}>
-                      <p>Work in progress (WIP)</p>
+                      <span>Work in progress (WIP)</span>
                     </p>
                   </div>
                 </li>

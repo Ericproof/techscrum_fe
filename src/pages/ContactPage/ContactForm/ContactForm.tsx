@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 import React, { useReducer, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ReactDOM from 'react-dom';
@@ -27,8 +24,8 @@ export default function ContactForm() {
   const [title, setTitle] = useState(enquiryTitles[0]);
   const [isFormValid, setIsFormValid] = useState(true);
   const [loading, setLoading] = useState(false);
-  const [reqStatus, setReqStatus] = useState(201);
-  const [modal, setModal] = useState(true);
+  const [isEmailSuccess, setIsEmailSuccess] = useState(true);
+  const [modal, setModal] = useState(false);
   const [reducerState, dispatch] = useReducer(reducer, initState);
 
   const handleTitleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -79,16 +76,17 @@ export default function ContactForm() {
       PHONE_REGEX.test(reducerState.phone),
       EMAIL_REGEX.test(reducerState.email)
     ].every((each) => each);
+
     if (!isAllFilled || !isAllRegexPassed) {
       setIsFormValid(false);
       return;
     }
+
     setIsFormValid(true);
     const contactMessageObj = { ...reducerState, title };
-    console.log(contactMessageObj);
     dispatch({ type: ReducerActionTypes.FormReset });
     setLoading(true);
-    // post request starting here
+
     try {
       const response = await fetch('http://localhost:8000/api/v1/emailus', {
         method: 'POST',
@@ -97,16 +95,18 @@ export default function ContactForm() {
         },
         body: JSON.stringify(contactMessageObj)
       });
-      const data = await response.json();
-      console.log(data);
-    } catch (err) {
-      console.log(err);
-    }
-    setTimeout(() => {
-      setLoading(false);
+      if (response.ok) {
+        setIsEmailSuccess(true);
+      } else {
+        setIsEmailSuccess(false);
+      }
       setModal(true);
-      // get request status and set it here
-    }, 2000);
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -194,14 +194,14 @@ export default function ContactForm() {
             </div>
             <DefaultModalBody defaultPadding={false} classesName={styles.modalPadding}>
               <div className={styles.iconPosition}>
-                {reqStatus === 200 ? (
+                {isEmailSuccess ? (
                   <TiTick size={200} color="yellowgreen" />
                 ) : (
                   <TiTimes size={200} color="orangered" />
                 )}
               </div>
               <div className={styles.messagePosition}>
-                {reqStatus === 200 ? (
+                {isEmailSuccess ? (
                   <h2>Thanks for contacting us from this page, we will reply via email asap.</h2>
                 ) : (
                   <h2>Some error happened, we will try to fix it soon</h2>
