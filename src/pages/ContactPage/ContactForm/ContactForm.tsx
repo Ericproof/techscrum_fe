@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useReducer, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ReactDOM from 'react-dom';
@@ -8,6 +9,7 @@ import DefaultModalBody from '../../../lib/Modal/ModalBody/DefaultModalHeader/De
 import InputV3 from './InputV3';
 import styles from './ContactForm.module.scss';
 import { reducer, ReducerActionTypes, initState } from './ContactFormReducer';
+import { sendEmail } from '../../../api/contact/contact';
 
 const FULLNAME_REGEX = /^[a-z ,.'-]+$/i;
 const PHONE_REGEX = /^[0-9]{10}$/;
@@ -88,14 +90,10 @@ export default function ContactForm() {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:8000/api/v1/emailus', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(contactMessageObj)
-      });
-      if (response.ok) {
+      const response = await sendEmail(contactMessageObj);
+      // eslint-disable-next-line no-console
+      console.log(response);
+      if (response.status === 202) {
         setIsEmailSuccess(true);
       } else {
         setIsEmailSuccess(false);
@@ -114,8 +112,16 @@ export default function ContactForm() {
       <div className={styles.container}>
         <form className={styles.contactForm} onSubmit={submitHandler}>
           <h3 className={styles.title}>Contact Us</h3>
-          {!isFormValid && <p className={styles.errMsg}>Please valid your form.</p>}
-          {loading && <p className={styles.loading}>Receiving...</p>}
+          {!isFormValid && (
+            <p className={styles.errMsg} data-cy="form-error-msg">
+              Please valid your form.
+            </p>
+          )}
+          {loading && (
+            <p className={styles.loading} data-cy="form-loading-msg">
+              Receiving...
+            </p>
+          )}
           <div className={styles.inputField}>
             <label htmlFor="enquiryTitles">
               What&#39;s up *
@@ -133,7 +139,7 @@ export default function ContactForm() {
             onChange={handleFullNameInput}
             type="text"
             label="Full name *"
-            identifier="fullName"
+            identifier="name"
             regex={FULLNAME_REGEX}
             errMsg="Field required, lettes only, seperated with spaces."
           />
@@ -150,7 +156,7 @@ export default function ContactForm() {
             onChange={handlePhoneInput}
             type="tel"
             label="Phone Number *"
-            identifier="phoneNumber"
+            identifier="phone"
             regex={PHONE_REGEX}
             errMsg="Field required, 10 Digit Phone Number."
           />
@@ -168,11 +174,11 @@ export default function ContactForm() {
             onChange={handleMsgInput}
             type="text"
             label="Any more info you can provide *"
-            identifier="contactMsg"
+            identifier="message"
             tagType="textarea"
             errMsg="Field required, thanks for your message."
           />
-          <button className={styles.contactForm} type="submit">
+          <button className={styles.contactForm} type="submit" data-cy="sub-btn">
             Send
           </button>
           <p className={styles.desc}>
@@ -188,7 +194,7 @@ export default function ContactForm() {
 
       {modal &&
         ReactDOM.createPortal(
-          <Modal fullWidth data-testid="modal">
+          <Modal fullWidth data-cy="modal">
             <div className={styles.close}>
               <ImCross onClick={() => setModal(false)} />
             </div>
@@ -202,7 +208,9 @@ export default function ContactForm() {
               </div>
               <div className={styles.messagePosition}>
                 {isEmailSuccess ? (
-                  <h2>Thanks for contacting us from this page, we will reply via email asap.</h2>
+                  <h2 data-cy="success-msg">
+                    Thanks for contacting us from this page, we will reply via email asap.
+                  </h2>
                 ) : (
                   <h2>Some error happened, we will try to fix it soon</h2>
                 )}

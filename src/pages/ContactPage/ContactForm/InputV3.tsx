@@ -72,7 +72,7 @@ export default function InputV3(props: TInputV3) {
             id={identifier}
             className={isValid ? styles.input : `${styles.input} ${styles.input__error}`}
             type={type}
-            data-cy={`${identifier}-input-cy`}
+            data-cy={`${identifier}-input`}
             value={value}
             placeholder={placeHolder}
             autoComplete="off"
@@ -88,7 +88,7 @@ export default function InputV3(props: TInputV3) {
           <textarea
             id={identifier}
             className={isValid ? styles.input : `${styles.input} ${styles.input__error}`}
-            data-cy={`${identifier}-input-cy`}
+            data-cy={`${identifier}-input`}
             value={value}
             autoComplete="off"
             onChange={onChange}
