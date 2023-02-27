@@ -36,7 +36,7 @@ describe('form', () => {
     });
     cy.get('[data-cy="sub-btn"]').click();
     cy.intercept('POST', '**/emailus', {
-      statusCode: 202,
+      status: 202,
       body: true
     });
     cy.get('[data-cy="success-msg"]').should('be.visible');
