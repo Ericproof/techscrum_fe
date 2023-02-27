@@ -1,5 +1,5 @@
 import React from 'react';
-import { createPayment } from '../../../api/price/price';
+import { createAdvancedPayment, createUltraPayment } from '../../../api/price/price';
 import styles from './PlanOption.module.scss';
 
 const plans = {
@@ -116,11 +116,12 @@ function PlanOption(props: IPlanOptionProps) {
     let price;
     if (id === ADVANCED_ID) {
       price = isChecked ? 49 : 29;
+      createAdvancedPayment({ price });
     }
     if (id === ULTRA_ID) {
       price = isChecked ? 149 : 59;
+      createUltraPayment({ price });
     }
-    createPayment({ price });
   };
 
   return (

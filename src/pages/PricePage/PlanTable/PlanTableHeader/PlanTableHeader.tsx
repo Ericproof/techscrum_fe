@@ -1,5 +1,5 @@
 import React from 'react';
-import { createPayment } from '../../../../api/price/price';
+import { createAdvancedPayment, createUltraPayment } from '../../../../api/price/price';
 import styles from './PlanTableHeader.module.scss';
 
 interface IPlanTableHeaderProps {
@@ -17,11 +17,12 @@ function PlanTableHeader(props: IPlanTableHeaderProps) {
     let price;
     if (id === ADVANCED_ID) {
       price = isCheck ? 49 : 29;
+      createAdvancedPayment({ price });
     }
     if (id === ULTRA_ID) {
       price = isCheck ? 149 : 59;
+      createUltraPayment({ price });
     }
-    createPayment({ price });
   };
 
   return (
