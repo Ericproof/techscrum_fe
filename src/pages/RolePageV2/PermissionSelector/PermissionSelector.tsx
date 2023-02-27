@@ -1,16 +1,66 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
+import { getPermissions } from '../../../api/role/role';
+import { IPermissions } from '../../../types';
 // import styles from './PermissionSelector.module.scss';
 
 interface IProps {
-  setName: boolean;
-  submitRoleHandler: (roleName: string, permissions: Array<string>) => void;
+  setName: string;
+  submitRoleHandler: (role: string, permissions: Array<string>, newRole: boolean) => void;
 }
 
 function PermissionSelector(props: IProps) {
+  // setName === 'EDIT' or 'roleId'
   const { setName, submitRoleHandler } = props;
   const [roleName, setRoleName] = useState('');
+  const [permissions, setPermissions] = useState<IPermissions[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await getPermissions();
+        setPermissions(res);
+      } catch (err) {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      }
+    })();
+  }, []);
+
+  const operationList = [
+    'projects',
+    'boards',
+    'members',
+    'roles',
+    'shortcuts',
+    'tasks',
+    'settings'
+  ];
+
+  // eslint-disable-next-line @typescript-eslint/no-shadow
+  const operationFilter = (operation: string, permissions: Array<any>) => {
+    return permissions
+      .filter((permission) => {
+        const seperation = permission?.slug.split(':');
+        return seperation[1] === operation;
+      })
+      .map((permission) => {
+        return (
+          <label key={permission.id} htmlFor={permission.id}>
+            <input type="checkbox" id={permission.id} />
+            {permission.description}
+          </label>
+        );
+      });
+  };
+
+  // const editForm = permissions.map((permission) => {
+  //   return (
+  //     <label key={permission.id} htmlFor={permission.id}>
+  //       <input type="checkbox" id={permission.id} />
+  //       {permission.description}
+  //     </label>
+  //   );
+  // });
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -19,16 +69,19 @@ function PermissionSelector(props: IProps) {
     const newPermissions: string[] = [];
     Array.prototype.forEach.call(view, (input) => {
       if (input.checked) {
-        // eslint-disable-next-line no-console
         newPermissions.push(input.id);
       }
     });
-    submitRoleHandler(roleName, newPermissions);
+    if (setName === 'EDIT') {
+      submitRoleHandler(roleName, newPermissions, true);
+    } else {
+      submitRoleHandler(setName, newPermissions, false);
+    }
   };
 
   return (
     <form onSubmit={submitHandler}>
-      {setName && (
+      {setName === 'EDIT' && (
         <label htmlFor="roleName">
           Role name:
           <input
@@ -66,19 +119,14 @@ function PermissionSelector(props: IProps) {
         })
       } */}
       <div>
-        <p>projects</p>
-        <label htmlFor="631d94d08a05945727602ce7">
-          <input type="checkbox" id="631d94d08a05945727602ce7" />
-          View
-        </label>
-        <label htmlFor="631d94d08a05945727602ce8">
-          <input type="checkbox" id="631d94d08a05945727602ce8" />
-          Edit
-        </label>
-        <label htmlFor="631d94d08a05945727602ce9">
-          <input type="checkbox" id="631d94d08a05945727602ce9" />
-          Delete
-        </label>
+        {operationList.map((el) => {
+          return (
+            <div key={el}>
+              <p>{`${el}:`}</p>
+              {operationFilter(el, permissions)}
+            </div>
+          );
+        })}
       </div>
       <input type="submit" value="Submit" />
     </form>

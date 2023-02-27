@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useCallback } from 'react';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
@@ -10,7 +8,7 @@ import RoleTable from './RoleTable/RoleTable';
 import PermissionSelector from './PermissionSelector/PermissionSelector';
 import AddRoleBtn from './AddRoleBtn/AddRoleBtn';
 import { IRole } from '../../types';
-import { getRoles, addRole } from '../../api/role/role';
+import { getRoles, addRole, updateRole } from '../../api/role/role';
 import styles from './RolePage.module.scss';
 import RoleNav from './RoleNav/roleNav';
 
@@ -30,8 +28,7 @@ function RolePage() {
   const [roles, setRoles] = useState<IRole[]>([]);
   // edit role
   const [openEdit, setOpenEdit] = useState(false);
-  const [editName, setEditName] = useState(false);
-  console.log(loader);
+  const [editRole, setEditName] = useState('');
   // const [roleState, dispatchRole] = useReducer(roleReducer, { roleName: '', permission: [] });
 
   const fetchRoles = useCallback(async () => {
@@ -53,15 +50,19 @@ function RolePage() {
 
   const newRoleHandler = () => {
     setOpenEdit(true);
-    setEditName(true);
+    setEditName('EDIT');
   };
 
-  const submitEditHandler = async (roleName: string, permissions: Array<string>) => {
+  const submitEditHandler = async (role: string, permissions: Array<string>, newRole: boolean) => {
     setOpenEdit(false);
-    setEditName(false);
+    setEditName('');
     try {
       setLoader(true);
-      await addRole(projectId, roleName, permissions);
+      if (newRole) {
+        await addRole(projectId, role, permissions);
+      } else {
+        await updateRole(projectId, role, permissions);
+      }
       // setRoles(res);
     } catch (err) {
       setLoader(false);
@@ -90,7 +91,7 @@ function RolePage() {
         </div>
         {loader ? <Loading /> : <RoleTable roles={roles} />}
         {openEdit && (
-          <PermissionSelector setName={editName} submitRoleHandler={submitEditHandler} />
+          <PermissionSelector setName={editRole} submitRoleHandler={submitEditHandler} />
         )}
       </div>
     </>

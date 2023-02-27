@@ -25,6 +25,12 @@ export const deleteRole = async (projectId: string, roleId: string, permissions:
   return response.data;
 };
 
+export const getPermissions = async () => {
+  const path = `${config.apiAddress}/permissions`;
+  const response = await axios.get(path);
+  return response.data;
+};
+
 // ----------------------------------- version2 ^ --------------------------
 // export const getPermission = async () => {
 //   const path = `${config.apiAddress}/permissions`;
