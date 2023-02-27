@@ -51,11 +51,10 @@ export default function BacklogPage() {
           if (!queryInput && !userInput) {
             return true;
           }
-          if (singleCard.assignId === null && queryInput === null) {
-            return false;
-          }
-          if (singleCard.assignId === null && queryInput !== null && selectedUsers.length > 0) {
-            return false;
+          if (singleCard.assignId === null) {
+            if (queryInput !== null && selectedUsers.length > 0) {
+              return false;
+            }
           }
           return (
             (queryInput === 0 ||
