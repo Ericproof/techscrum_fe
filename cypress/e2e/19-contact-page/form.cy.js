@@ -34,11 +34,11 @@ describe('form', () => {
     cy.get('[data-cy="message-input"]').type('Hi, This message is from cypress testing', {
       force: true
     });
-    cy.get('[data-cy="sub-btn"]').click();
     cy.intercept('POST', '**/emailus', {
-      status: 202,
-      body: true
-    });
+      status: 202
+    }).as('send-email');
+    cy.get('[data-cy="sub-btn"]').click();
+    cy.wait('@send-email');
     cy.get('[data-cy="success-msg"]').should('be.visible');
   });
 });

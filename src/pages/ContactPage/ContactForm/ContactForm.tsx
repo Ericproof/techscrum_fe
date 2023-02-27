@@ -93,10 +93,9 @@ export default function ContactForm() {
       setModal(true);
       if (response.status === 202) {
         setIsEmailSuccess(true);
-      } else {
-        setIsEmailSuccess(false);
       }
     } catch (err) {
+      setIsEmailSuccess(false);
       // eslint-disable-next-line no-console
       console.log(err);
     } finally {
