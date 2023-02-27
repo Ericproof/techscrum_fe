@@ -115,7 +115,10 @@ export default function Board() {
           if (!queryInput && userInput.length === 0) {
             return true;
           }
-          if (task.assignId === null) {
+          if (task.assignId === null && queryInput === null) {
+            return false;
+          }
+          if (task.assignId === null && queryInput !== null && selectedUsers.length > 0) {
             return false;
           }
           return (
