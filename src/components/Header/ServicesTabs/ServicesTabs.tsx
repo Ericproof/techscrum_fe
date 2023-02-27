@@ -142,7 +142,7 @@ const resources = {
         icon: MdWorkOutline,
         title: 'Careers',
         description: 'A team that provides Growth and Support',
-        href: '/#'
+        href: '/careers'
       },
       {
         icon: MdLaptopChromebook,
