@@ -1,13 +1,4 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-
-// const testData = {
-//   fullName: 'test user',
-//   company: 'JR Academy',
-//   phone: '0406199393',
-//   email: 'userTest@example.com',
-//   message: 'Hi, just want to thank all your brilliant developers!'
-// };
-
 const initData = {
   fullName: '',
   company: '',
