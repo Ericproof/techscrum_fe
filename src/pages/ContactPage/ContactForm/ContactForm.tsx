@@ -90,12 +90,12 @@ export default function ContactForm() {
 
     try {
       const response = await sendEmail(contactMessageObj);
+      setModal(true);
       if (response.status === 202) {
         setIsEmailSuccess(true);
       } else {
         setIsEmailSuccess(false);
       }
-      setModal(true);
     } catch (err) {
       // eslint-disable-next-line no-console
       console.log(err);

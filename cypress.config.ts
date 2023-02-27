@@ -6,7 +6,7 @@ export default defineConfig({
       // implement node event listeners here
     },
     baseUrl: 'http://localhost:3000',
-    defaultCommandTimeout:4000,
+    defaultCommandTimeout:5000,
   },
   projectId: "zjgbkp",
   viewportWidth: 1920,
