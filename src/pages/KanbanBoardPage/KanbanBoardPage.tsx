@@ -11,29 +11,29 @@ import Footer from '../../components/Footer/Footer';
 
 const featureSectionPropsObjs = [
   {
-    subTitle: 'flexible grouping',
-    title: 'Group your Boards your way.',
-    desc: 'Arrange your columns to analyze projects from any angle. Group by status, assignee, priority, and more.'
+    subTitle: 'Visualizing Information',
+    title: 'Visual representation',
+    desc: "You will be provided with a clear visual representation of the work that needs to be done, the work that is in progress, and the work that has been completed. Your team members will quickly understand the project's current status and what needs to be done next."
   },
   {
-    subTitle: 'everything view',
-    title: 'See all your Boards in one view.',
-    desc: 'Get an overview of where all your team projects stand at a glance with Everything view. See multiple workflows in one view, even if they have different statuses.'
+    subTitle: 'Adapting to Change with Ease',
+    title: 'Agility through Flexibility',
+    desc: "Your board will be flexible enough to adapt to your team's needs. Adding, removing, or rearranging tasks should be easy as priorities change. Your board should also allow updating tasks' detailed information to match your team's specific needs."
   },
   {
-    subTitle: 'custom statuses',
-    title: 'Visualize any process with Custom Statuses.',
-    desc: 'Create unique statuses for any workflow, from sprints to multi-stage processes. Add new statuses or edit existing ones directly in Board view.'
+    subTitle: 'Flexible arrangement',
+    title: 'Arrange your Board your way',
+    desc: 'Arrange your Board to analyse tasks from different perspectives - status, assignee and more.'
   },
   {
-    subTitle: 'drag & drop',
-    title: 'Drag-and-drop your updates.',
-    desc: 'Quickly move tasks through workflows and adjust priorities. Drag and drop a task into any status and move the task up or down to change the priority of the task.'
+    subTitle: 'Custom status',
+    title: 'Visualize any process with Custom Statuses',
+    desc: 'Define and create your unique statuses for any workflow, from sprints to multi-stage processes. Add new statuses or edit existing ones directly in Board view.'
   },
   {
-    subTitle: 'bulk action toolbar',
-    title: 'Make quick changes in bulk.',
-    desc: 'Save time making task updates in bulk with the Bulk Action Toolbar. Add assignees, change statuses, and delete tasks, all without leaving Board view.'
+    subTitle: 'Drag & Drop',
+    title: 'Drag-and-drop your updates',
+    desc: 'Quickly prioritize tasks, adjust the progress of your project, and move tasks between different columns in your Board. It helps you save time and reduce the need for manual data entry, and ultimately streamline your workflow and optimize your productivity.'
   }
 ];
 
