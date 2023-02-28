@@ -5,7 +5,12 @@ import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import BacklogSection from './BacklogSection/BacklogSection';
 import UserTaskFilter from '../../components/UserTaskFilter/UserTaskFilter';
 import styles from './BacklogPage.module.scss';
-import { getBacklog, updateBacklogOrder, updateTask } from '../../api/backlog/backlog';
+import {
+  filterBacklog,
+  getBacklog,
+  updateBacklogOrder,
+  updateTask
+} from '../../api/backlog/backlog';
 import { getStatuses } from '../../api/status/status';
 import { getTypes } from '../../api/types/types';
 import { getUsers } from '../../api/user/user';
@@ -39,47 +44,19 @@ export default function BacklogPage() {
   };
 
   useEffect(() => {
-    const backlogFilter = async () => {
-      const dataForFilter = await getBacklog(projectId);
-      const sprintDataForFilter = dataForFilter.sprints;
-      const sprintsNotCompleted = sprintDataForFilter.filter((singleSprint) => {
-        return singleSprint.isComplete === false;
-      });
-
-      const BacklogFilter = (inputList, userInput, queryInput) => {
-        return inputList.filter((singleCard) => {
-          if (!queryInput && !userInput) {
-            return true;
-          }
-          if (singleCard.assignId === null && queryInput !== null && selectedUsers.length > 0) {
-            return false;
-          }
-          return (
-            (queryInput === 0 ||
-              singleCard.title?.toLowerCase().includes(queryInput.toLowerCase())) &&
-            (userInput.length === 0 ||
-              userInput.some((selectedUser) => selectedUser.id === singleCard.assignId.id))
-          );
-        });
-      };
-
-      const filteredBacklogData = {
-        cards: BacklogFilter(dataForFilter.backlog.cards, selectedUsers, inputQuery)
-      };
-      const filteredSprints: any[] = [];
-      sprintsNotCompleted.forEach((sprintNotCompleted) => {
-        const singleNotCompletedSprint = {
-          ...sprintNotCompleted,
-          taskId: BacklogFilter(sprintNotCompleted.taskId, selectedUsers, inputQuery)
-        };
-        filteredSprints.push(singleNotCompletedSprint);
-      });
-
-      setBacklogData(filteredBacklogData);
-      setSprintData(filteredSprints);
+    const inputCase = inputQuery;
+    let userCase = '';
+    selectedUsers.forEach((selectedUser) => {
+      userCase = userCase.concat(`-${selectedUser.id}`);
+    });
+    userCase = userCase.slice(1);
+    const filterBacklogData = async () => {
+      const res = await filterBacklog(projectId, inputCase, userCase);
+      setBacklogData(res.backlog);
+      setSprintData(res.sprints);
     };
-    backlogFilter();
-  }, [projectId, inputQuery, selectedUsers]);
+    filterBacklogData();
+  }, [inputQuery, projectId, selectedUsers]);
 
   const getBacklogDataApi = useCallback(() => {
     const getBacklogData = async () => {

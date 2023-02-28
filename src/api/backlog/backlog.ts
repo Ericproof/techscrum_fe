@@ -8,12 +8,16 @@ export const getBacklog = async (projectId: string) => {
   return response.data;
 };
 
-export const filterBacklog = async (projectId: string, filterCase: string) => {
-  let filter = filterCase;
-  if (filter === '') {
-    filter = 'all';
+export const filterBacklog = async (projectId: string, input: string, users: string) => {
+  let inputCase = input;
+  let userCase = users;
+  if (users === '') {
+    userCase = 'all';
   }
-  const path = `http://localhost:8000/api/v1/projects/${projectId}/backlogs/${filter}`;
+  if (input === '') {
+    inputCase = 'all';
+  }
+  const path = `http://localhost:8000/api/v1/projects/${projectId}/backlogs/${inputCase}/${userCase}`;
   const response = await axios.get(path);
   return response.data;
 };
