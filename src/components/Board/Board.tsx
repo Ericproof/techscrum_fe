@@ -187,8 +187,8 @@ export default function Board() {
 
   const showUpdatedTask = (updatedTaskInfo: any) => {
     const updatedColumns = { ...columnsInfo };
-    if (updatedTaskInfo?.statusId && taskData?.statusId) {
-      columnsInfo[taskData.statusId].items.forEach((item, index) => {
+    if (updatedTaskInfo?.statusId && taskData?.status.id) {
+      columnsInfo[taskData.status.id].items.forEach((item, index) => {
         if (
           item.id === updatedTaskInfo.id &&
           updatedTaskInfo.title !== undefined &&
@@ -220,7 +220,7 @@ export default function Board() {
       updatedNewTaskInfo.sprintId = newTaskInfo.sprintId ? newTaskInfo.sprintId.id : null;
       if (updatedNewTaskInfo.id !== undefined) {
         await updateTask(updatedNewTaskInfo.id, updatedNewTaskInfo);
-        showUpdatedTask(updatedNewTaskInfo);
+        showUpdatedTask({ ...newTaskInfo, status: newTaskInfo.status });
       }
     } catch (e) {
       getViewTaskStateFromChildren();

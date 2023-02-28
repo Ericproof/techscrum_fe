@@ -2,10 +2,19 @@
   display: flex;
   flex-direction: row;
   margin-bottom: 12px;
+  height: 44px;
+  align-items: center;
+
+  .leftContent {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    .reactIcon {
+      margin-right: 5px;
+    }
+  }
+
   & > div:nth-of-type(1) {
-    box-sizing: border-box;
-    width: 100%;
-    padding-top: 8px;
     line-height: 1;
     color: var(--ds-text-subtle, #38465e);
     font-size: 14px;
@@ -35,6 +44,8 @@
       width: 100%;
       max-width: 200px;
       flex-direction: column;
+      position: relative;
+      top: 90px;
       .labelOptions {
         display: flex;
         flex-direction: row;
@@ -162,7 +173,6 @@
       flex-wrap: wrap;
       gap: 5px;
       span {
-        margin-left: 10px;
         display: inline-flex;
         font-size: 14px;
         justify-content: center;
