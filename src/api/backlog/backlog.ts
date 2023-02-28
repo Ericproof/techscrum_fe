@@ -17,7 +17,7 @@ export const filterBacklog = async (projectId: string, input: string, users: str
   if (users === '') {
     userCase = 'all';
   }
-  const path = `http://localhost:8000/api/v1/projects/${projectId}/backlogs/${inputCase}/${userCase}`;
+  const path = `${config.apiAddress}/projects/${projectId}/backlogs/${inputCase}/${userCase}`;
   const response = await axios.get(path);
   return response.data;
 };
