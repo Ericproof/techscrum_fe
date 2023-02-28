@@ -11,11 +11,11 @@ export const getBacklog = async (projectId: string) => {
 export const filterBacklog = async (projectId: string, input: string, users: string) => {
   let inputCase = input;
   let userCase = users;
-  if (users === '') {
-    userCase = 'all';
-  }
   if (input === '') {
     inputCase = 'all';
+  }
+  if (users === '') {
+    userCase = 'all';
   }
   const path = `http://localhost:8000/api/v1/projects/${projectId}/backlogs/${inputCase}/${userCase}`;
   const response = await axios.get(path);

@@ -106,47 +106,34 @@ export default function Board() {
     getProjectDataApi();
   }, [getProjectDataApi]);
 
-  const fetchColumnsData = useCallback(
-    (boardInfo: IBoardEntity) => {
-      const columnInfoData: IColumnsFromBackend = {};
+  const fetchColumnsData = useCallback((boardInfo: IBoardEntity) => {
+    const columnInfoData: IColumnsFromBackend = {};
 
-      const taskListFilter = (taskList, userInput, queryInput) => {
-        return taskList.filter((task) => {
-          if (!queryInput && userInput.length === 0) {
-            return true;
-          }
-          if (task.assignId === null && queryInput !== null && selectedUsers.length > 0) {
-            return false;
-          }
-          return (
-            (queryInput === 0 || task.title?.toLowerCase().includes(queryInput.toLowerCase())) &&
-            (userInput.length === 0 ||
-              userInput.some((selectedUser) => selectedUser.id === task.assignId.id))
-          );
-        });
+    for (const item of boardInfo.taskStatus) {
+      columnInfoData[item.id] = {
+        name: item.name,
+        slug: item.slug,
+        order: item.order,
+        items: item.taskList
       };
+    }
+    return setColumnsInfo(columnInfoData);
+  }, []);
 
-      for (const item of boardInfo.taskStatus) {
-        columnInfoData[item.id] = {
-          name: item.name,
-          slug: item.slug,
-          order: item.order,
-          items: taskListFilter(item.taskList, selectedUsers, inputQuery)
-        };
-      }
-      return setColumnsInfo(columnInfoData);
-    },
-    [inputQuery, selectedUsers]
-  );
   const fetchBoardInfo = useCallback(() => {
     const fetchBoard = async () => {
       setLoading(true);
-      const boardInfo = await getBoard(boardId);
+      let userCase = '';
+      selectedUsers.forEach((selectedUser) => {
+        userCase = userCase.concat(`-${selectedUser.id}`);
+      });
+      userCase = userCase.slice(1);
+      const boardInfo = await getBoard(boardId, inputQuery, userCase);
       fetchColumnsData(boardInfo);
       setLoading(false);
     };
     fetchBoard();
-  }, [boardId, fetchColumnsData]);
+  }, [boardId, fetchColumnsData, inputQuery, selectedUsers]);
 
   useEffect(() => {
     fetchBoardInfo();
