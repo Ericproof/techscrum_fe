@@ -3,7 +3,6 @@ import {
   AiOutlineFieldTime,
   AiOutlineBarChart,
   AiOutlineLaptop,
-  AiOutlineUserAdd,
   AiOutlineDisconnect,
   AiOutlineTeam,
   AiOutlineFundProjectionScreen,
@@ -29,28 +28,22 @@ const features = {
     title: 'Features',
     content: [
       {
-        icon: AiOutlineFieldTime,
-        title: 'Resource Management',
-        description: 'Manage your team&apos;s short team and long term resources',
-        href: '/#'
-      },
-      {
         icon: AiOutlineBarChart,
         title: 'Kanban boards',
-        description: 'Automate your workflow and visualiza project tasks',
-        href: '/#'
+        description: 'Optimize your workflow and visualiza project tasks',
+        href: '/features/kanban-board'
+      },
+      {
+        icon: AiOutlineFieldTime,
+        title: 'Report',
+        description: 'Track delay and achieve goals based on improvement report',
+        href: '/features/report'
       },
       {
         icon: AiOutlineLaptop,
-        title: 'Time Tracking',
-        description: 'Deliver a more collaborative client experience',
-        href: '/#'
-      },
-      {
-        icon: AiOutlineUserAdd,
-        title: 'Unlimited client users',
-        description: 'Deliver a more collaborative client experience',
-        href: '/#'
+        title: 'My work',
+        description: 'Stay flexible and prioritize your work',
+        href: '/features/my-work'
       }
     ]
   }

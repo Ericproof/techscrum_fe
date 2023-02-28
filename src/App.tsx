@@ -85,7 +85,7 @@ function App() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/" element={getHomePage()} />
                 <Route path="/login/reset-password" element={<ResetPasswordPage />} />
-                <Route path="/report" element={<ReportPage />} />
+                <Route path="/features/report" element={<ReportPage />} />
                 <Route path="/login/change-password" element={<ChangePasswordPage />} />
                 <Route path="/cookie-policy" element={<CookiePolicyPage />} />
                 <Route path="/gdpr" element={<GdprPage />} />
@@ -99,7 +99,7 @@ function App() {
                 <Route path="/careers" element={<CareerPage />} />
                 <Route path="/security-page" element={<SecurityPage />} />
                 <Route path="/errorPage" element={<ErrorPage />} />
-                <Route path="/my-work" element={<MyWorkPage />} />
+                <Route path="/features/my-work" element={<MyWorkPage />} />
                 <Route path="" element={<AuthenticationRoute />}>
                   <Route path="/projects/:projectId/" element={<DashboardLayout />}>
                     <Route path="board/:boardId" element={<BoardPage />} />
