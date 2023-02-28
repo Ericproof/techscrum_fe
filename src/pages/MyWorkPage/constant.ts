@@ -1,4 +1,5 @@
 import { ITextPart } from './ReusableSection/TextPart/TextPart';
+import { IVisualizeCard } from './VisualizeSection/VisualizeCard/VisualizeCard';
 
 const REUSABLE_SECTION_TEXT: ITextPart[] = [
   {
@@ -18,4 +19,26 @@ const REUSABLE_SECTION_TEXT: ITextPart[] = [
   }
 ];
 
+const VISUALIZE_CARD_TEXT: IVisualizeCard[] = [
+  {
+    listTitle: 'Stay on track with sorting and filtering.',
+    listItemText: [
+      'Sort tasks in a column by due date, priority, and more',
+      'Filter tasks by assignee to only see your work',
+      'Add filtered views to your Favorites for future reference'
+    ],
+    imageUrl: 'https://clickup.com/images/features/kanban-board/board-view-fiter.png'
+  },
+  {
+    listTitle: 'Monitor capacity with Work in Progress Limits.',
+    listItemText: [
+      "Easily see when there's too much work in a status",
+      'Measure workload by sprint points, time estimates, and more',
+      'Spot bottlenecks at a glance to ship projects faster'
+    ],
+    imageUrl: 'https://clickup.com/images/features/kanban-board/board-view-limits.png'
+  }
+];
+
 export default REUSABLE_SECTION_TEXT;
+export { VISUALIZE_CARD_TEXT };

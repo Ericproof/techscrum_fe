@@ -598,7 +598,9 @@
                           rgb(9 30 66 / 31%) 0px 0px 1px;
                         z-index: 100;
                         padding: 24px;
-                        top: -170px;
+                        top: -50%;
+                        left: 30px;
+                        transform: translateY(-50%);
                         &::before {
                           position: absolute;
                           content: ' ';
@@ -687,11 +689,8 @@
                             flex-direction: column;
                             min-height: 136px;
                             .avatar {
-                              // width: 100px;
-                              // height: 100px;
                               position: relative;
                               outline: 0;
-                              // background-color: #ffffff;
                               border-radius: 50%;
                               display: flex;
                               align-items: center;

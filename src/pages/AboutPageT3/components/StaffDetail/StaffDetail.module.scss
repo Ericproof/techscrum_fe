@@ -7,23 +7,34 @@
   z-index: 10;
   position: fixed;
   box-shadow: 0 0 30px rgb(0 0 0 / 20%);
-  background-color: #FFF;
-  border-color: #FFF;
+  background-color: #fff;
+  border-color: #fff;
 
   @media (max-width: 768px) {
     width: 90%;
+    height: 65%;
+    top: 58%;
   }
 
   .inner-container {
     width: 100%;
     padding: 6% 6% 3% 6%;
     text-align: left;
+    @media (max-width: 768px) {
+      height: 80%;
+    }
 
     .detail-img {
       float: right;
       width: 200px;
       margin-top: -135px;
       margin-right: -20px;
+
+      @media (max-width: 768px) {
+        width: 35%;
+        margin-top: -110px;
+        margin-right: 0px;
+      }
 
       .staffImg {
         width: 100%;
@@ -34,6 +45,10 @@
         transition: all 0.4s;
         box-shadow: 0 2.4rem 4.8rem rgb(0 0 0 / 8%);
         margin-bottom: 16px;
+
+        @media (max-width: 768px) {
+          margin-bottom: 0px;
+        }
       }
     }
 
@@ -63,6 +78,21 @@
       line-height: 40px;
       font-weight: 300;
       white-space: pre-line;
+
+      @media (max-width: 768px) {
+        display: block;
+        overflow: scroll;
+        height: 75%;
+        padding-top: 10px;
+        padding-bottom: 5px;
+      }
+
+      p {
+        @media (max-width: 768px) {
+          font-size: 16px;
+          line-height: 175%;
+        }
+      }
     }
   }
 }

@@ -12,10 +12,10 @@
   },
   "editor.formatOnSave": true,
   "gitlens.currentLine.dateFormat": "",
-  "[typescript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
-  },
   "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[html]": {
