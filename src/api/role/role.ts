@@ -19,9 +19,9 @@ export const updateRole = async (projectId: string, roleId: string, permissions:
   return response.data;
 };
 
-export const deleteRole = async (projectId: string, roleId: string, permissions: Array<string>) => {
+export const deleteRole = async (projectId: string, roleId: string) => {
   const path = `${config.apiAddress}/projects/${projectId}/roles/${roleId}`;
-  const response = await axios.put(path, { permissions });
+  const response = await axios.delete(path);
   return response.data;
 };
 

@@ -5,4 +5,35 @@
   tbody {
     border-bottom: 2px solid #dfe1e6;
   }
+
+  .moreBtn-container {
+    position: relative;
+    display: inline-block;
+
+    button {
+      background-color: #4caf50;
+      color: white;
+      padding: 16px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .drop-down {
+      display: none;
+      position: absolute;
+      left: 100%;
+      top: 0%;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  .moreBtn-container:hover {
+    .drop-down {
+      display: block;
+    }
+  }
 }

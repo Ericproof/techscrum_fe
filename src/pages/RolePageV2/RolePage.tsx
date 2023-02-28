@@ -8,7 +8,7 @@ import RoleTable from './RoleTable/RoleTable';
 import PermissionSelector from './PermissionSelector/PermissionSelector';
 import AddRoleBtn from './AddRoleBtn/AddRoleBtn';
 import { IRole } from '../../types';
-import { getRoles, addRole, updateRole } from '../../api/role/role';
+import { getRoles, addRole, updateRole, deleteRole } from '../../api/role/role';
 import styles from './RolePage.module.scss';
 import RoleNav from './RoleNav/roleNav';
 
@@ -26,7 +26,6 @@ function RolePage() {
   const [loader, setLoader] = useState(false);
   const { projectId = '' } = useParams();
   const [roles, setRoles] = useState<IRole[]>([]);
-  // edit role
   const [openEdit, setOpenEdit] = useState(false);
   const [editRole, setEditName] = useState('');
   // const [roleState, dispatchRole] = useReducer(roleReducer, { roleName: '', permission: [] });
@@ -51,6 +50,24 @@ function RolePage() {
   const newRoleHandler = () => {
     setOpenEdit(true);
     setEditName('EDIT');
+  };
+
+  const editRoleHandler = (roleId: string) => {
+    setOpenEdit(true);
+    setEditName(roleId);
+  };
+
+  const deleteRoleHanlder = async (roleId: string) => {
+    setEditName('');
+    try {
+      setLoader(true);
+      await deleteRole(projectId, roleId);
+    } catch (err) {
+      setLoader(false);
+      toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+    } finally {
+      fetchRoles();
+    }
   };
 
   const submitEditHandler = async (role: string, permissions: Array<string>, newRole: boolean) => {
@@ -89,7 +106,11 @@ function RolePage() {
           <h1>Manage Roles</h1>
           <AddRoleBtn addRole={newRoleHandler} />
         </div>
-        {loader ? <Loading /> : <RoleTable roles={roles} />}
+        {loader ? (
+          <Loading />
+        ) : (
+          <RoleTable roles={roles} editRole={editRoleHandler} deleteRole={deleteRoleHanlder} />
+        )}
         {openEdit && (
           <PermissionSelector setName={editRole} submitRoleHandler={submitEditHandler} />
         )}
