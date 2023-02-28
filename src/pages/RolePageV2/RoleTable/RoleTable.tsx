@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { GrMore, GrAddCircle } from 'react-icons/gr';
+import { GrAddCircle } from 'react-icons/gr';
+import { HiDotsHorizontal } from 'react-icons/hi';
 import { ImCancelCircle } from 'react-icons/im';
 import styles from './RoleTable.module.scss';
 import { IRole } from '../../../types';
@@ -65,8 +66,8 @@ function RoleTable(props: IRoleTable) {
   return (
     <table className={styles['roles-table-container']}>
       <thead>
-        <tr>
-          <th className={styles.roles}>Roles</th>
+        <tr className={styles['role-header']}>
+          <th>Roles</th>
           {operationList.map((el) => {
             return <th key={el}>{el}</th>;
           })}
@@ -75,14 +76,14 @@ function RoleTable(props: IRoleTable) {
       <tbody>
         {roles.map((role) => {
           return (
-            <tr key={role.id}>
+            <tr className={styles['role-body']} key={role.id}>
               <th className={styles.permissions}>{role.name}</th>
               {operationList.map((el) => {
                 return <th key={el}>{operationFilter(el, role.permission)}</th>;
               })}
-              <div className={styles['moreBtn-container']}>
+              <th className={styles['moreBtn-container']}>
                 <button value={role.id} onMouseEnter={openMoreHandler}>
-                  <GrMore />
+                  <HiDotsHorizontal color="white" size="20px" />
                 </button>
                 <ul className={styles['drop-down']}>
                   <li>
@@ -96,7 +97,7 @@ function RoleTable(props: IRoleTable) {
                     </button>
                   </li>
                 </ul>
-              </div>
+              </th>
             </tr>
           );
         })}

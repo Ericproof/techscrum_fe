@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { GrAdd } from 'react-icons/gr';
+import { HiPlusSm } from 'react-icons/hi';
 import styles from './AddRoleBtn.module.scss';
 
 interface IAddRoleBtn {
@@ -12,16 +12,10 @@ function AddRoleBtn(props: IAddRoleBtn) {
   // const [newRole, setNewRole] = useState('');
   // const [popupWindow, setPopupWindow] = useState(false);
 
-  const buttonNotice = isShown && (
-    <div className={styles['notice-container']}>
-      <p>Create New Role</p>
-    </div>
-  );
-
-  const addRoleHandler = () => {
-    // setPopupWindow(false);
-    addRole();
-  };
+  // const addRoleHandler = () => {
+  //   // setPopupWindow(false);
+  //   addRole();
+  // };
 
   // const popupLayout = popupWindow && (
   //   <div className={styles['popup-window']}>
@@ -34,17 +28,22 @@ function AddRoleBtn(props: IAddRoleBtn) {
   //     </button>
   //   </div>
   // );
+  const buttonNotice = isShown && (
+    <div className={styles['notice-container']}>
+      <p>Create New Role</p>
+    </div>
+  );
 
   return (
     <div>
       <div className={styles['addBtn-container']}>
         <button
           className={styles.addBtn}
-          onClick={addRoleHandler}
+          onClick={() => addRole()}
           onMouseEnter={() => setIsShown(true)}
           onMouseLeave={() => setIsShown(false)}
         >
-          <GrAdd />
+          <HiPlusSm color="white" size="25px" />
         </button>
         {buttonNotice}
       </div>

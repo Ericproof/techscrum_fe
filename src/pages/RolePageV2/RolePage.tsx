@@ -27,7 +27,7 @@ function RolePage() {
   const { projectId = '' } = useParams();
   const [roles, setRoles] = useState<IRole[]>([]);
   const [openEdit, setOpenEdit] = useState(false);
-  const [editRole, setEditName] = useState('');
+  const [editRole, setEditRole] = useState('');
   // const [roleState, dispatchRole] = useReducer(roleReducer, { roleName: '', permission: [] });
 
   const fetchRoles = useCallback(async () => {
@@ -49,16 +49,16 @@ function RolePage() {
 
   const newRoleHandler = () => {
     setOpenEdit(true);
-    setEditName('EDIT');
+    setEditRole('EDIT');
   };
 
   const editRoleHandler = (roleId: string) => {
     setOpenEdit(true);
-    setEditName(roleId);
+    setEditRole(roleId);
   };
 
   const deleteRoleHanlder = async (roleId: string) => {
-    setEditName('');
+    setEditRole('');
     try {
       setLoader(true);
       await deleteRole(projectId, roleId);
@@ -72,7 +72,7 @@ function RolePage() {
 
   const submitEditHandler = async (role: string, permissions: Array<string>, newRole: boolean) => {
     setOpenEdit(false);
-    setEditName('');
+    setEditRole('');
     try {
       setLoader(true);
       if (newRole) {

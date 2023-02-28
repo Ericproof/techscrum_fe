@@ -17,4 +17,26 @@
     font-weight: 800;
     font-size: 4px;
   }
+
+  .icon {
+    color: #ffffff;
+  }
+
+  .addBtn {
+    margin: 3px;
+    align-items: center;
+    border-width: 0px;
+    border-radius: 6px;
+    display: inline-flex;
+    background: #0052cc;
+    cursor: pointer;
+    height: 32px;
+    padding: 0px 10px;
+    color: #ffffff;
+    transition: all 0.3s;
+  }
+
+  .addBtn:hover {
+    background-color: #0042a3;
+  }
 }

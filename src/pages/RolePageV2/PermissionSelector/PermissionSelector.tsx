@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { getPermissions } from '../../../api/role/role';
 import { IPermissions } from '../../../types';
-// import styles from './PermissionSelector.module.scss';
 
 interface IProps {
   setName: string;
@@ -92,32 +91,6 @@ function PermissionSelector(props: IProps) {
           />
         </label>
       )}
-      {/* {
-        // permissionList
-        permissionTypes.map((type) => {
-          return (
-            <div key={type}>
-              <p>{`${type}:`}</p>
-              <label htmlFor={`view:${type}`}>
-                <input type="checkbox" id={`view:${type}`} />
-                View
-              </label>
-              <label htmlFor={`edit:${type}`}>
-                <input type="checkbox" id={`edit:${type}`} />
-                Edit
-              </label>
-              <label htmlFor={`delete:${type}`}>
-                <input type="checkbox" id={`delete:${type}`} />
-                Delete
-              </label>
-              <label htmlFor={`boards:${type}`}>
-                <input type="checkbox" id={`boards:${type}`} />
-                Create
-              </label>
-            </div>
-          );
-        })
-      } */}
       <div>
         {operationList.map((el) => {
           return (
@@ -134,3 +107,28 @@ function PermissionSelector(props: IProps) {
 }
 
 export default PermissionSelector;
+
+// permissionList
+// permissionTypes.map((type) => {
+//   return (
+//     <div key={type}>
+//       <p>{`${type}:`}</p>
+//       <label htmlFor={`view:${type}`}>
+//         <input type="checkbox" id={`view:${type}`} />
+//         View
+//       </label>
+//       <label htmlFor={`edit:${type}`}>
+//         <input type="checkbox" id={`edit:${type}`} />
+//         Edit
+//       </label>
+//       <label htmlFor={`delete:${type}`}>
+//         <input type="checkbox" id={`delete:${type}`} />
+//         Delete
+//       </label>
+//       <label htmlFor={`boards:${type}`}>
+//         <input type="checkbox" id={`boards:${type}`} />
+//         Create
+//       </label>
+//     </div>
+//   );
+// })
