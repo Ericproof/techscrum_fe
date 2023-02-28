@@ -120,6 +120,7 @@ export interface IItemFromBackend {
   id: string;
 }
 export interface ITaskCard {
+  assignId?: any;
   id?: string;
   tags?: [ILabelData];
   title: string;
