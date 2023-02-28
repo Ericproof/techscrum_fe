@@ -148,7 +148,7 @@ const resources = {
         icon: MdLaptopChromebook,
         title: 'Book a demo',
         description: 'Learn the basic features of TechScrum',
-        href: '/#'
+        href: '/contact'
       },
       {
         icon: MdOutlineContactSupport,
