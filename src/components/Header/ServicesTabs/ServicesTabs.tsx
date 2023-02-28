@@ -135,13 +135,13 @@ const resources = {
         icon: MdWorkOutline,
         title: 'Careers',
         description: 'A team that provides Growth and Support',
-        href: '/#'
+        href: '/careers'
       },
       {
         icon: MdLaptopChromebook,
         title: 'Book a demo',
         description: 'Learn the basic features of TechScrum',
-        href: '/#'
+        href: '/contact'
       },
       {
         icon: MdOutlineContactSupport,

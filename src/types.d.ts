@@ -58,6 +58,7 @@ export interface ITaskEntity {
   comments?: any;
   attachmentUrls?: any;
   slug?: any;
+  priority?: any;
 }
 
 export interface ISprint {
@@ -120,6 +121,7 @@ export interface IItemFromBackend {
   id: string;
 }
 export interface ITaskCard {
+  assignId?: any;
   id?: string;
   tags?: [ILabelData];
   title: string;

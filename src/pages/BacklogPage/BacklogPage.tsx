@@ -1,10 +1,16 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import BacklogSection from './BacklogSection/BacklogSection';
+import UserTaskFilter from '../../components/UserTaskFilter/UserTaskFilter';
 import styles from './BacklogPage.module.scss';
-import { getBacklog, updateTask, updateBacklogOrder } from '../../api/backlog/backlog';
+import {
+  filterBacklog,
+  getBacklog,
+  updateBacklogOrder,
+  updateTask
+} from '../../api/backlog/backlog';
 import { getStatuses } from '../../api/status/status';
 import { getTypes } from '../../api/types/types';
 import { getUsers } from '../../api/user/user';
@@ -12,6 +18,7 @@ import { showProject } from '../../api/projects/projects';
 import SprintSection from './SprintSection/SprintSection';
 import Loading from '../../components/Loading/Loading';
 import ProjectNavigationV3 from '../../lib/ProjectNavigationV3/ProjectNavigationV3';
+import SearchForBoard from '../../components/SearchForBoard/SearchForBoard';
 
 export default function BacklogPage() {
   const [loaded, setLoaded] = useState(false);
@@ -23,6 +30,33 @@ export default function BacklogPage() {
   const [userList, setUserList] = useState<any>([]);
   const [projectDataLoaded, setProjectDataLoaded] = useState(false);
   const [projectKey, setProjectKey] = useState('');
+  const [selectedUsers, setSelectedUsers] = useState<any[]>([]);
+  const [inputState, setInputState] = useState<boolean>(false);
+  const [inputQuery, setInputQuery] = useState<string>('');
+  const page = 'backlog';
+
+  const chaneSelectedUsers = (isExist, user) => {
+    if (!isExist) {
+      setSelectedUsers([...selectedUsers, user]);
+    } else {
+      setSelectedUsers(selectedUsers.filter((selectedUser) => selectedUser.id !== user.id));
+    }
+  };
+
+  useEffect(() => {
+    const inputCase = inputQuery;
+    let userCase = '';
+    selectedUsers.forEach((selectedUser) => {
+      userCase = userCase.concat(`-${selectedUser.id}`);
+    });
+    userCase = userCase.slice(1);
+    const filterBacklogData = async () => {
+      const res = await filterBacklog(projectId, inputCase, userCase);
+      setBacklogData(res.backlog);
+      setSprintData(res.sprints);
+    };
+    filterBacklogData();
+  }, [inputQuery, projectId, selectedUsers]);
 
   const getBacklogDataApi = useCallback(() => {
     const getBacklogData = async () => {
@@ -70,6 +104,7 @@ export default function BacklogPage() {
     const data = { sprintId };
     updateTask(id, data);
   };
+
   const onDragEventHandler = (result: DropResult) => {
     const { destination, source } = result;
     const destinationData = { sprintId: null, data: [] };
@@ -132,6 +167,21 @@ export default function BacklogPage() {
         >
           {finishLoading && (
             <>
+              <div className={styles.BacklogSearchFilter}>
+                <div className={styles.BacklogSearchArea}>
+                  <SearchForBoard
+                    inputState={inputState}
+                    setInputQuery={setInputQuery}
+                    setInputState={setInputState}
+                    page={page}
+                  />
+                </div>
+                <UserTaskFilter
+                  selectedUsers={selectedUsers}
+                  changeSelectedUsers={chaneSelectedUsers}
+                  userList={userList}
+                />
+              </div>
               {sprintData
                 .filter((sprint: any) => {
                   return !sprint.isComplete;

@@ -5,6 +5,9 @@ import Footer from '../../components/Footer/Footer';
 import ReusableSection from './ReusableSection/ReusableSection';
 import HomeSection from './HomeSection/HomeSection';
 import REUSABLE_SECTION_TEXT from './constant';
+import VisualizeSection from './VisualizeSection/VisualizeSection';
+import EmailSection from './EmailSection/EmailSection';
+import KindnessSection from './KindnessSection/KindnessSection';
 
 export default function MyWorkPage() {
   return (
@@ -24,6 +27,9 @@ export default function MyWorkPage() {
           />
         );
       })}
+      <VisualizeSection />
+      <EmailSection />
+      <KindnessSection />
       <Footer />
     </>
   );

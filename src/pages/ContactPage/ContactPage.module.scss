@@ -25,28 +25,6 @@
     max-width: 500px;
   }
 
-  .shape2Container {
-    position: absolute;
-    left: 25%;
-    top: 25%;
-    animation: 15s apldg_rotate_animation linear infinite;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: 0;
-  }
-
-  .shape3Container {
-    position: absolute;
-    right: 40%;
-    bottom: 30%;
-    animation: 20s apldg_move_animation linear infinite;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: 0;
-  }
-
   .container{
     background: white;
     border-radius: 50px;
@@ -117,73 +95,7 @@
     font-weight: 900;
   }
 }
-@-webkit-keyframes apldg_rotate_animation {
-  from {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  to {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
 
-@keyframes apldg_rotate_animation {
-  from {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  to {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-
-@-webkit-keyframes apldg_move_animation {
-  0% {
-    -webkit-transform: translate(0) rotate(0deg);
-    transform: translate(0) rotate(0deg);
-  }
-  25% {
-    -webkit-transform: translate(200px, 100px) rotate(90deg);
-    transform: translate(200px, 100px) rotate(90deg);
-  }
-  50% {
-    -webkit-transform: transalate(600px, 200px) rotate(180deg);
-    transform: transalate(600px, 200px) rotate(180deg);
-  }
-  75% {
-    -webkit-transform: translate(-50px) rotate(270deg);
-    transform: translate(-50px) rotate(270deg);
-  }
-  100% {
-    -webkit-transform: translate(0) rotate(360deg);
-    transform: translate(0) rotate(360deg);
-  }
-}
-
-@keyframes apldg_move_animation {
-  0% {
-    -webkit-transform: translate(0) rotate(0deg);
-    transform: translate(0) rotate(0deg);
-  }
-  25% {
-    -webkit-transform: translate(200px, 100px) rotate(90deg);
-    transform: translate(200px, 100px) rotate(90deg);
-  }
-  50% {
-    -webkit-transform: transalate(600px, 200px) rotate(180deg);
-    transform: transalate(600px, 200px) rotate(180deg);
-  }
-  75% {
-    -webkit-transform: translate(-50px) rotate(270deg);
-    transform: translate(-50px) rotate(270deg);
-  }
-  100% {
-    -webkit-transform: translate(0) rotate(360deg);
-    transform: translate(0) rotate(360deg);
-  }
-}
 
 
 .contactHeader{
