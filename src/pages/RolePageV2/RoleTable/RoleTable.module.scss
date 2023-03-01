@@ -38,9 +38,40 @@
       vertical-align: top;
     }
 
+    .permissions {
+      .default-status {
+        display: flex;
+        gap: 8px;
+
+        div {
+          border-radius: 50%;
+          // padding: 10px;
+          box-sizing: border-box;
+          height: 30px;
+          width: 30px;
+          line-height: 30px;
+          text-align: center;
+          overflow: hidden;
+          color: white;
+          text-transform: uppercase;
+        }
+      }
+    }
+
     .moreBtn-container {
       width: 120px;
       padding: 0px;
+      .moreBtn {
+        background-color: rgb(255 255 255 /0%);
+      }
+
+      .cancelBtn {
+        background-color: #e03131;
+      }
+      .cancelBtn:hover {
+        background-color: #c92a2a;
+      }
+
       button {
         margin: 6px;
         width: 100%;
@@ -54,9 +85,12 @@
         cursor: pointer;
         height: 32px;
         padding: 0px 10px;
-        color: #ffffff;
         transition: all 0.3s;
         justify-content: center;
+      }
+
+      .editBtn:hover {
+        background-color: #0042a3;
       }
     }
   }
@@ -68,16 +102,6 @@
   .moreBtn-container {
     position: relative;
     display: inline-block;
-
-    // button {
-    //   background-color: #4caf50;
-    //   color: white;
-    //   padding: 16px;
-    //   font-size: 16px;
-    //   border: none;
-    //   cursor: pointer;
-    //   width: 100%;
-    // }
 
     .drop-down {
       display: none;

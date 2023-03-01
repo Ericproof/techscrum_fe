@@ -7,20 +7,17 @@ import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
 import RoleTable from './RoleTable/RoleTable';
 import PermissionSelector from './PermissionSelector/PermissionSelector';
 import AddRoleBtn from './AddRoleBtn/AddRoleBtn';
-import { IRole } from '../../types';
-import { getRoles, addRole, updateRole, deleteRole } from '../../api/role/role';
+import { IPermissions, IRole } from '../../types';
+import {
+  getRoles,
+  addRole,
+  updateRole,
+  deleteRole,
+  getPermissions,
+  getOneRoles
+} from '../../api/role/role';
 import styles from './RolePage.module.scss';
 import RoleNav from './RoleNav/roleNav';
-
-// const roleReducer = (state, action) => {
-//   if (action.type === 'CREATE') {
-//     return { roleName: '', permission: [] };
-//   }
-//   if (action.type === 'EDIT') {
-//     return { id: '', permission: [] };
-//   }
-//   return { roleName: '', permission: [] };
-// };
 
 function RolePage() {
   const [loader, setLoader] = useState(false);
@@ -28,6 +25,8 @@ function RolePage() {
   const [roles, setRoles] = useState<IRole[]>([]);
   const [openEdit, setOpenEdit] = useState(false);
   const [editRole, setEditRole] = useState('');
+  const [selectedRole, setSelectedRole] = useState<IRole>({ id: '', permission: [] });
+  const [permissions, setPermissions] = useState<IPermissions[]>([]);
   // const [roleState, dispatchRole] = useReducer(roleReducer, { roleName: '', permission: [] });
 
   const fetchRoles = useCallback(async () => {
@@ -44,6 +43,16 @@ function RolePage() {
   }, [projectId]);
 
   useEffect(() => {
+    (async () => {
+      try {
+        const res = await getPermissions();
+        // 每次点开form都要读一次
+        // eslint-disable-next-line no-console
+        setPermissions(res);
+      } catch (err) {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+      }
+    })();
     fetchRoles();
   }, [fetchRoles]);
 
@@ -52,9 +61,11 @@ function RolePage() {
     setEditRole('EDIT');
   };
 
-  const editRoleHandler = (roleId: string) => {
+  const editRoleHandler = async (roleId: string) => {
     setOpenEdit(true);
+    const Role = await getOneRoles(projectId, roleId);
     setEditRole(roleId);
+    setSelectedRole(Role);
   };
 
   const deleteRoleHanlder = async (roleId: string) => {
@@ -70,15 +81,19 @@ function RolePage() {
     }
   };
 
-  const submitEditHandler = async (role: string, permissions: Array<string>, newRole: boolean) => {
+  const submitEditHandler = async (
+    role: string,
+    newPermissions: Array<string>,
+    newRole: boolean
+  ) => {
     setOpenEdit(false);
     setEditRole('');
     try {
       setLoader(true);
       if (newRole) {
-        await addRole(projectId, role, permissions);
+        await addRole(projectId, role, newPermissions);
       } else {
-        await updateRole(projectId, role, permissions);
+        await updateRole(projectId, role, newPermissions);
       }
       // setRoles(res);
     } catch (err) {
@@ -87,6 +102,10 @@ function RolePage() {
     } finally {
       fetchRoles();
     }
+  };
+
+  const closeHandler = () => {
+    setOpenEdit(false);
   };
 
   // const permissions = roles
@@ -98,7 +117,7 @@ function RolePage() {
   // console.log(permissions);
 
   return (
-    <>
+    <div className={[styles['page-container'], openEdit && styles.active].join(' ')}>
       <ProjectHeader />
       <div className={styles['main-container']}>
         <RoleNav />
@@ -112,10 +131,16 @@ function RolePage() {
           <RoleTable roles={roles} editRole={editRoleHandler} deleteRole={deleteRoleHanlder} />
         )}
         {openEdit && (
-          <PermissionSelector setName={editRole} submitRoleHandler={submitEditHandler} />
+          <PermissionSelector
+            setName={editRole}
+            submitRoleHandler={submitEditHandler}
+            closeHandler={closeHandler}
+            permissions={permissions}
+            role={selectedRole}
+          />
         )}
       </div>
-    </>
+    </div>
   );
 }
 

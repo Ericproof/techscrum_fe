@@ -1,0 +1,12 @@
+.popup-container {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  background-color: #fff;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 30px rgb(0 0 0 / 20%);
+  border-color: #fff;
+  z-index: 10;
+}
+
+

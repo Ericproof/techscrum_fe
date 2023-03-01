@@ -9,25 +9,7 @@ interface IAddRoleBtn {
 function AddRoleBtn(props: IAddRoleBtn) {
   const { addRole } = props;
   const [isShown, setIsShown] = useState(false);
-  // const [newRole, setNewRole] = useState('');
-  // const [popupWindow, setPopupWindow] = useState(false);
 
-  // const addRoleHandler = () => {
-  //   // setPopupWindow(false);
-  //   addRole();
-  // };
-
-  // const popupLayout = popupWindow && (
-  //   <div className={styles['popup-window']}>
-  //     <input name="roleName" onChange={(e) => setNewRole(e.target.value)} />
-  //     <button onClick={addRoleHandler}>
-  //       <GrFormCheckmark />
-  //     </button>
-  //     <button onClick={() => setPopupWindow(false)}>
-  //       <GrFormClose />
-  //     </button>
-  //   </div>
-  // );
   const buttonNotice = isShown && (
     <div className={styles['notice-container']}>
       <p>Create New Role</p>
@@ -47,7 +29,6 @@ function AddRoleBtn(props: IAddRoleBtn) {
         </button>
         {buttonNotice}
       </div>
-      {/* {popupLayout} */}
     </div>
   );
 }

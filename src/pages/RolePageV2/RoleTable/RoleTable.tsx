@@ -1,9 +1,15 @@
+/* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-import { GrAddCircle } from 'react-icons/gr';
+// import { GrAddCircle } from 'react-icons/gr';
 import { HiDotsHorizontal } from 'react-icons/hi';
+import { RiEditLine } from 'react-icons/ri';
 import { ImCancelCircle } from 'react-icons/im';
 import styles from './RoleTable.module.scss';
+import PermissionIndicator from '../PermissionIndicator/PermissionIndicator';
+
 import { IRole } from '../../../types';
+// import { getPermissions } from '../../../api/role/role';
 
 interface IRoleTable {
   roles: IRole[];
@@ -11,22 +17,50 @@ interface IRoleTable {
   deleteRole: (roleId: string) => void;
 }
 
+const defaultTemplete = [
+  {
+    slug: 'create',
+    isActive: false
+  },
+  {
+    slug: 'view',
+    isActive: false
+  },
+  {
+    slug: 'edit',
+    isActive: false
+  },
+  {
+    slug: 'delete',
+    isActive: false
+  }
+];
+
+const seperationHandler = (operation: string, newPermissions: Array<any>) => {
+  const filterPermissions = newPermissions
+    .filter((permission) => {
+      const seperation = permission.slug.split(':');
+      return seperation[1] === operation;
+    })
+    .map((el) => el.slug.split(':')[0]);
+
+  return defaultTemplete.map((el) => {
+    const res = filterPermissions.indexOf(el.slug);
+    if (res === -1) return { ...el };
+    return { ...el, isActive: true };
+  });
+};
+
+const indicatorsGenerator = (operation: string, newPermissions: Array<any>) => {
+  return seperationHandler(operation, newPermissions).map((el) => {
+    return <PermissionIndicator key={el.slug} isPermissionAllowed={el.isActive} content="C" />;
+  });
+};
+
 function RoleTable(props: IRoleTable) {
-  // eslint-disable-next-line no-unused-vars
   const { roles, editRole, deleteRole } = props;
   const [selectRole, setSelectRole] = useState('');
 
-  // // eslint-disable-next-line no-unused-vars
-  // const permissionList = role?.permission?.map((item) => {
-  //   // eslint-disable-next-line no-console
-  //   // console.log(item.slug?.split(':')[1] === 'projects');
-  //   return (
-  //     <label key={item.id} htmlFor={item.slug}>
-  //       <input type="checkbox" id={item.slug} />
-  //       {item.description}
-  //     </label>
-  //   );
-  // });
   const operationList = [
     'projects',
     'boards',
@@ -36,6 +70,17 @@ function RoleTable(props: IRoleTable) {
     'tasks',
     'settings'
   ];
+
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       const res = await getPermissions();
+  //       setPermissions(res);
+  //     } catch (err) {
+  //       toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+  //     }
+  //   })();
+  // }, []);
 
   const openMoreHandler = (e) => {
     setSelectRole(e.target.value);
@@ -51,17 +96,9 @@ function RoleTable(props: IRoleTable) {
     setSelectRole('');
   };
 
-  const operationFilter = (operation: string, permissions: Array<any>): Array<string> => {
-    return permissions
-      .filter((permission) => {
-        const seperation = permission.slug.split(':');
-        return seperation[1] === operation;
-      })
-      .map((permission) => {
-        const seperation = permission.slug.split(':');
-        return `${seperation[0]} `;
-      });
-  };
+  // 'projects'
+
+  // console.log(dPermissions, roles[2].permission);
 
   return (
     <table className={styles['roles-table-container']}>
@@ -79,21 +116,31 @@ function RoleTable(props: IRoleTable) {
             <tr className={styles['role-body']} key={role.id}>
               <th className={styles.permissions}>{role.name}</th>
               {operationList.map((el) => {
-                return <th key={el}>{operationFilter(el, role.permission)}</th>;
+                // const activeList = operationFilter(el, role.permission);
+                // return <th key={el}>{operationFilter(el, role.permission)}</th>;
+                return (
+                  <th key={el} className={styles.permissions}>
+                    <div className={styles['default-status']}>
+                      {indicatorsGenerator(el, role.permission)}
+                      {/* {operationFilter(el, dPermissions)} */}
+                      {/* {defaultStatus} */}
+                    </div>
+                  </th>
+                );
               })}
               <th className={styles['moreBtn-container']}>
-                <button value={role.id} onMouseEnter={openMoreHandler}>
-                  <HiDotsHorizontal color="white" size="20px" />
+                <button className={styles.moreBtn} value={role.id} onMouseEnter={openMoreHandler}>
+                  <HiDotsHorizontal color="#0052cc" size="20px" />
                 </button>
                 <ul className={styles['drop-down']}>
                   <li>
-                    <button onClick={editRoleHandler}>
-                      <GrAddCircle />
+                    <button onClick={editRoleHandler} className={styles.editBtn}>
+                      <RiEditLine color="white" size="20px" />
                     </button>
                   </li>
                   <li>
-                    <button onClick={deleteRoleHandler}>
-                      <ImCancelCircle />
+                    <button onClick={deleteRoleHandler} className={styles.cancelBtn}>
+                      <ImCancelCircle color="white" size="20px" />
                     </button>
                   </li>
                 </ul>
