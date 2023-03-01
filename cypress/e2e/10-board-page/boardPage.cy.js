@@ -1,6 +1,8 @@
 /// <reference types="cypress" />
 import projectsData from '../../fixtures/projects.json';
 import boardData from '../../fixtures/board.json';
+import boardSearchResults from '../../fixtures/boardSearchResults.json';
+
 describe('Project page', () => {
   beforeEach(() => {
     let projectList = projectsData;
@@ -45,7 +47,9 @@ describe('Project page', () => {
 
   it('Test Search Board page', () => {
     cy.get('[data-testid="board-search"]').click();
+    cy.intercept('GET', '**/board/**', boardSearchResults).as('search-board');
     cy.get('[data-testid="board-search"]').clear().type('test');
+    cy.wait('@search-board');
     cy.get('[data-testid="task-63565485d377d106f9a8b643"]');
     cy.get('[data-testid="task-63567b33e9bcb85c00640d0d"]').should('not.exist');
     cy.get('[data-testid="task-63567b35e9bcb85c00640d14"]').should('not.exist');
