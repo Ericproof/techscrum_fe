@@ -17,6 +17,11 @@ const TYPES = [
     type: 'bug',
     imgUrl:
       'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium'
+  },
+  {
+    type: 'techDebt',
+    imgUrl:
+      'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10308?size=medium'
   }
 ];
 
