@@ -58,6 +58,7 @@ export interface ITaskEntity {
   comments?: any;
   attachmentUrls?: any;
   slug?: any;
+  priority?: any;
 }
 
 export interface ISprint {

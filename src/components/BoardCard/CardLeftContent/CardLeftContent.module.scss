@@ -1,11 +1,9 @@
-@import "../../../variables.scss";
+@import '../../../variables.scss';
 
 .container {
-  padding: 0px 32px 32px 32px;
   display: flex;
   flex-direction: column;
-  overflow: scroll;
-  width: 50%;
+  margin: 30px;
   .footerContent {
     margin-top: 10px;
     width: 100%;
@@ -15,7 +13,7 @@
 
   .footerContent .cancelButton {
     margin-left: 4px;
-    border-width: 0px;
+    border-width: 0;
     border-radius: 3px;
     font-size: inherit;
     font-style: normal;

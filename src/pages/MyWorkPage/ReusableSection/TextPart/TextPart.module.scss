@@ -45,6 +45,10 @@
 @media screen and (max-width: 768px) {
   .textPart {
     width: 100%;
+    text-align: center;
+  }
+  .heading::after {
+    margin: 30px auto;
   }
 }
 

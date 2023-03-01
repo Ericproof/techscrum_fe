@@ -2,10 +2,16 @@
 import axios from 'axios';
 import config from '../../config/config';
 
-export const getBoard = async (id: string) => {
-  const path = `${config.apiAddress}/board/${id}`;
-  const result = await axios.get(path).then((res) => {
-    return res.data;
-  });
-  return result;
+export const getBoard = async (id: string, input: string, users: string) => {
+  let inputCase = input;
+  let userCase = users;
+  if (input === '') {
+    inputCase = 'all';
+  }
+  if (users === '') {
+    userCase = 'all';
+  }
+  const path = `${config.apiAddress}/board/${id}/${inputCase}/${userCase}`;
+  const result = await axios.get(path);
+  return result.data;
 };
