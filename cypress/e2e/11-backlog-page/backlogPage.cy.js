@@ -5,6 +5,7 @@ import backlogData from '../../fixtures/backlog.json';
 import backlogDataAddTask from '../../fixtures/backlogAddTask.json';
 import backlogDataChangeTitle from '../../fixtures/backlogChangeTitle.json';
 import backlogDataChangePriority from '../../fixtures/backlogChangePriority.json';
+
 describe('Backlog page', () => {
   beforeEach(() => {
     cy.intercept('GET', '**/projects', projectsData).as('fetch-projects');
