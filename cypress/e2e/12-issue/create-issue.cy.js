@@ -21,21 +21,21 @@ describe('Create issue', () => {
     cy.visit('/login');
     cy.login('kitman200220022002@gmail.com', '12345678');
     cy.wait('@fetch-projects');
-    cy.intercept('GET', '**/board/*', boardData).as('fetch-board');
+    cy.intercept('GET', '**/board/**', boardData).as('fetch-board');
     cy.get('[data-testid="evan"]').dblclick();
     cy.wait('@fetch-board');
   });
 
   it('Test Board Page should show task', () => {
-      cy.intercept('POST', '**/tasks',{
-        statusCode: 201,
-        body: addTaskData
-      }).as('create-tasks');
-      cy.get('[data-testid="board-create-card"]').click()
-      cy.get('[data-testid="summary"]').type('sdf')
-      cy.get('[data-testid="title"]').type('title1')
-      cy.get('[data-testid="create-issue"]').click();
-      cy.wait('@create-tasks')
-      cy.get('[data-testid="task-635a63d0faf98e9043c9ddf6"]', {timeout:10000});
+    cy.intercept('POST', '**/tasks', {
+      statusCode: 201,
+      body: addTaskData
+    }).as('create-tasks');
+    cy.get('[data-testid="board-create-card"]').click();
+    cy.get('[data-testid="summary"]').type('sdf');
+    cy.get('[data-testid="title"]').type('title1');
+    cy.get('[data-testid="create-issue"]').click();
+    cy.wait('@create-tasks');
+    cy.get('[data-testid="task-635a63d0faf98e9043c9ddf6"]', { timeout: 10000 });
   });
 });
