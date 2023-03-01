@@ -30,7 +30,7 @@ const features = {
       {
         icon: AiOutlineBarChart,
         title: 'Kanban boards',
-        description: 'Optimize your workflow and visualiza project tasks',
+        description: 'Optimize your workflow and visualize project tasks',
         href: '/features/kanban-board'
       },
       {
@@ -177,36 +177,38 @@ export default function ServicesTabs({ show }: Props) {
   return (
     <div className={`${styles.serviceListTabs} ${show ? styles.serviceListTabsActive : ''}`}>
       <div>
-        <Link to="/#" onClick={() => activeMenu('features')}>
+        <button className={styles.tab} onClick={() => activeMenu('features')}>
           Features
           <MdOutlineKeyboardArrowDown />
-        </Link>
+        </button>
         <OneColumnsMenu servicesInfo={features} active={featuresActive} />
       </div>
       <div>
-        <Link to="/#" onClick={() => activeMenu('solution')}>
+        <button className={styles.tab} onClick={() => activeMenu('solution')}>
           Solutions
           <MdOutlineKeyboardArrowDown />
-        </Link>
+        </button>
         <OneColumnsMenu servicesInfo={solutions} active={solutionActive} />
       </div>
       <div>
-        <Link to="/#" onClick={() => activeMenu('teams')}>
+        <button className={styles.tab} onClick={() => activeMenu('teams')}>
           Teams
           <MdOutlineKeyboardArrowDown />
-        </Link>
+        </button>
         <OneColumnsMenu servicesInfo={teams} active={teamActive} />
       </div>
 
       <div>
-        <Link to="/#" onClick={() => activeMenu('resources')}>
+        <button className={styles.tab} onClick={() => activeMenu('resources')}>
           Resources
           <MdOutlineKeyboardArrowDown />
-        </Link>
+        </button>
         <OneColumnsMenu servicesInfo={resources} active={resourcesActive} />
       </div>
       <div>
-        <Link to="/price">Price</Link>
+        <Link className={styles.tab} to="/price">
+          Price
+        </Link>
       </div>
     </div>
   );

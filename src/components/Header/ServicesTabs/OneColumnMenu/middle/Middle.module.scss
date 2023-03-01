@@ -29,6 +29,7 @@ div.middle {
         text-decoration: none;
         padding: 0;
         border: none;
+        align-items: center;
         svg {
           min-width: 24px;
           min-height: 24px;
@@ -40,6 +41,9 @@ div.middle {
         div {
           flex-direction: row;
           margin-top: 0;
+          @media screen and (max-width: 380px) {
+            flex-direction: column;
+          }
           h2 {
             color: #1d1c35;
             font-size: 16px;
@@ -52,6 +56,12 @@ div.middle {
             font-size: 14px;
             font-weight: 400;
             max-width: 250px;
+            @media screen and (max-width: 380px) {
+              max-width: 230px;
+            }
+            @media screen and (max-width: 340px) {
+              max-width: 210px;
+            }
           }
         }
       }
