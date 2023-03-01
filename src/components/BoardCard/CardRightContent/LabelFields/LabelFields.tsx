@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { TiDelete } from 'react-icons/ti';
+import { MdOutlineBookmarkBorder } from 'react-icons/md';
 import { createLabel, removeLabel } from '../../../../api/label/label';
 import useOutsideAlerter from '../../../../hooks/OutsideAlerter';
 import styles from './LabelFields.module.scss';
@@ -110,7 +111,10 @@ export default function LabelFields(props: IPropsLabel) {
   const hasItem = dropDownTaskList.length > 0;
   return (
     <div className={styles.label}>
-      <div>Labels</div>
+      <div className={styles.leftContent}>
+        <MdOutlineBookmarkBorder className={styles.reactIcon} />
+        <div data-testid="card-label-text">Labels</div>
+      </div>
       <div ref={myRef} className={styles.labelDropdownContainer}>
         {visible && !isDisabled ? (
           <div className={styles.labelDropdownOpen}>
@@ -128,7 +132,11 @@ export default function LabelFields(props: IPropsLabel) {
                     </div>
                   );
                 })}
-              <input onChange={onChangeInputLabel} value={inputLabel} />
+              <input
+                onChange={onChangeInputLabel}
+                value={inputLabel}
+                data-testid="card-label-input"
+              />
             </div>
             <div className={styles.labelMenu}>
               <ul>
@@ -137,6 +145,7 @@ export default function LabelFields(props: IPropsLabel) {
                   <li key={label.id}>
                     <button
                       type="button"
+                      data-testid="card-label-button"
                       onClick={() => {
                         addLabelToSelectedTaskLabelList(label);
                         setInputLabel('');
@@ -158,7 +167,12 @@ export default function LabelFields(props: IPropsLabel) {
             </div>
           </div>
         ) : (
-          <button className={styles.labelInputClose} type="button" onClick={handleClickOutside}>
+          <button
+            className={styles.labelInputClose}
+            type="button"
+            data-testid="card-label-button"
+            onClick={handleClickOutside}
+          >
             {selectedTaskLabelList !== undefined &&
               selectedTaskLabelList?.map((item: ILabelData, index: number) => {
                 return <span key={item.id ?? index}>{item.name ?? ''}</span>;

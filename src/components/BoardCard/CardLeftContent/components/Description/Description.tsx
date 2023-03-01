@@ -24,7 +24,7 @@ export default function Description({
         name="description"
         id="description"
         cols={80}
-        rows={23}
+        rows={12}
         placeholder="Add a description..."
         defaultValue={taskInfo.description}
         onFocus={focusEventHandler}

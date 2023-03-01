@@ -75,7 +75,7 @@
 
   .positionSelector {
     display: none;
-
+    outline: none;
     @media (max-width: 768px) {
       width: 100%;
       display: block;
@@ -88,6 +88,10 @@
       border-radius: 6px;
       border-color: #976ae7;
     }
+  }
+
+  .positionSelector:visited {
+    border-color: #976ae7;
   }
 
   .positionFilter {

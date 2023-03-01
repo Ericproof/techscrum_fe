@@ -43,12 +43,6 @@ export default function Contact() {
                     <input type="text" id="moreInfo" required autoComplete="off" />
                   </label>
                 </div>
-                <div>
-                  <label htmlFor={`'url'`}>
-                    <p>Your TechScrum URL *</p>
-                    <input type="text" id="url" required autoComplete="off" />
-                  </label>
-                </div>
                 <p className={styles.privacy}>
                   By submitting, you confirm that you agree to the storing and processing of your
                   personal data by Teamwork as described in our
