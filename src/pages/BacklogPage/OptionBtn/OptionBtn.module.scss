@@ -4,11 +4,11 @@ $bgColorDarkGray: rgb(216, 216, 216);
 $bgColorDark: rgb(40, 54, 84);
 $borderColor: #ebecf0;
 .optionBtnContainer {
+  visibility: hidden;
   position: relative;
   .optionBtn {
     width: 30px;
     height: 30px;
-    visibility: hidden;
     border: none;
     background-color: $bgColorGray;
     border-radius: 5px;
@@ -16,13 +16,12 @@ $borderColor: #ebecf0;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    &:hover {
+      background-color: $bgColorDarkGray;
+    }
   }
-  .optionBtnHover {
-    background-color: $bgColorDarkGray;
-  }
-  .showOptionBtn {
-    visibility: visible;
-  }
+
+
   .clickOptionBtn {
     background-color: $bgColorDark;
     color: rgb(232, 232, 234);

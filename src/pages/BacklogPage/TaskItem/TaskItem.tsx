@@ -33,10 +33,11 @@ export default function TaskItem({
     story:
       'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium',
     bug: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium',
-    task: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium'
+    task: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium',
+    techDebt:
+      'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10308?size=medium'
   };
-  const [showOptionBtn, setShowOptionBtn] = useState(false);
-  const [disableShowOptionBtnEffect, setDisableShowOptionBtnEffect] = useState(false);
+
   const [title, setTitle] = useState(task.title);
 
   const updateTaskTitleContent = () => {
@@ -60,29 +61,10 @@ export default function TaskItem({
       setVisible(false);
     }
   };
-  const mouseOver = () => {
-    if (!disableShowOptionBtnEffect) {
-      setShowOptionBtn(true);
-    }
-  };
-  const mouseOut = () => {
-    if (!disableShowOptionBtnEffect) {
-      setShowOptionBtn(false);
-    }
-  };
-  const toggleDisableShowOptionBtnEffect = () => {
-    if (!disableShowOptionBtnEffect) {
-      setDisableShowOptionBtnEffect(true);
-    } else {
-      setDisableShowOptionBtnEffect(false);
-      setShowOptionBtn(false);
-    }
-  };
+
   return (
     <div
       className={styles.container}
-      onMouseOver={mouseOver}
-      onMouseOut={mouseOut}
       onFocus={() => {}}
       onBlur={() => {}}
       data-testid={'task-hover-'.concat(task.id)}
@@ -147,12 +129,11 @@ export default function TaskItem({
         />
         <OptionBtn
           taskId={task.id}
-          showOptionBtn={showOptionBtn}
-          toggleDisableShowOptionBtnEffect={toggleDisableShowOptionBtnEffect}
           sprintId={task.sprintId}
           sprintData={sprintData}
           showDropDownOnTop={showDropDownOnTop}
           getBacklogDataApi={getBacklogDataApi}
+          className={styles.optionBtn}
         />
       </div>
     </div>
