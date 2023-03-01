@@ -50,6 +50,10 @@
     gap: $size-65;
   }
 
+  &ExtraLarge {
+    gap: $size-80 * 1.2;
+  }
+
   &Reverse {
     flex-direction: row-reverse;
   }
