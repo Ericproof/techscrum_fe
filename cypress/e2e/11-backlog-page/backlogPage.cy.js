@@ -8,7 +8,7 @@ import backlogDataChangePriority from '../../fixtures/backlogChangePriority.json
 describe('Backlog page', () => {
   beforeEach(() => {
     cy.intercept('GET', '**/projects', projectsData).as('fetch-projects');
-    cy.intercept('GET', '**/board/*', boardData).as('fetch-board');
+    cy.intercept('GET', '**/board/**', boardData).as('fetch-board');
     cy.intercept('GET', '**/projects/*/backlogs', backlogData).as('fetch-backlog');
     cy.visit('/login');
     cy.login('kitman200220022002@gmail.com', '12345678');
