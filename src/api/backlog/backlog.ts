@@ -26,7 +26,7 @@ export const filterBacklog = async (
   if (types === '') {
     typeCae = 'all';
   }
-  const path = `${config.apiAddress}/${projectId}/backlogs/${inputCase}/${userCase}/${typeCae}`;
+  const path = `${config.apiAddress}/projects/${projectId}/backlogs/${inputCase}/${userCase}/${typeCae}`;
   const response = await axios.get(path);
   return response.data;
 };
