@@ -251,7 +251,7 @@ export interface IRole {
 export interface IPermissions {
   id: string;
   slug?: string;
-  description?: string;
+  description: string;
 }
 
 export interface ICommentData {

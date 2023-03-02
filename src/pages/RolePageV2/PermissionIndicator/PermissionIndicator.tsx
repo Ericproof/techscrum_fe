@@ -1,12 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
+import styles from './PermissionIndicator.module.scss';
 
 interface IPermissionIndicator {
   isPermissionAllowed?: boolean;
-  content: 'C' | 'R' | 'U' | 'D';
+  content: string;
 }
 
 function PermissionIndicator({ isPermissionAllowed, content }: IPermissionIndicator) {
-  return <div style={{ backgroundColor: isPermissionAllowed ? 'green' : 'red' }}>{content}</div>;
+  const [isShown, setIsShown] = useState(false);
+
+  const indicatorNotice = isShown && (
+    <div className={styles['notice-container']}>
+      <p>{content}</p>
+    </div>
+  );
+  return (
+    <div
+      onMouseEnter={() => setIsShown(true)}
+      onMouseLeave={() => setIsShown(false)}
+      className={styles['outter-container']}
+    >
+      <div
+        style={{ backgroundColor: isPermissionAllowed ? 'green' : 'red' }}
+        className={styles['indicator-container']}
+      >
+        {content[0]}
+      </div>
+      {indicatorNotice}
+    </div>
+  );
 }
 
 PermissionIndicator.defaultProps = {

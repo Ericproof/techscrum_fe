@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { IPermissions, IRole } from '../../../types';
 import styles from './PermissionSelector.module.scss';
@@ -17,7 +15,6 @@ function PermissionSelector(props: IProps) {
   // setName === 'EDIT' or 'roleId'
   const { setName, submitRoleHandler, closeHandler, permissions, role } = props;
   const [roleName, setRoleName] = useState('');
-  console.log(role);
 
   const operationList = [
     'projects',
@@ -29,7 +26,16 @@ function PermissionSelector(props: IProps) {
     'settings'
   ];
 
-  // const defaultTemplete = ['create', 'read', 'update', 'delete'];
+  const defaultFomat = (operation: string, defaultPermissions: Array<any>) => {
+    return defaultPermissions
+      .filter((permission) => {
+        const seperation = permission?.slug.split(':');
+        return seperation[1] === operation;
+      })
+      .map((el) => {
+        return <SelectorIndicator key={el.id} isChecked={false} permission={el} />;
+      });
+  };
 
   const operationFilter = (
     operation: string,
@@ -41,57 +47,18 @@ function PermissionSelector(props: IProps) {
       return seperation[1] === operation;
     });
 
-    let seletedForm;
-    if (selectedPermissions) {
-      seletedForm = selectedPermissions
-        .filter((permission) => {
-          const seperation = permission?.slug.split(':');
-          return seperation[1] === operation;
-        })
-        .map((el) => el.id);
-    }
-    console.log(seletedForm);
-
+    const seletedForm = selectedPermissions
+      .filter((permission) => {
+        const seperation = permission?.slug.split(':');
+        return seperation[1] === operation;
+      })
+      .map((el) => el.id);
     return permissionForm.map((el) => {
       if (seletedForm.indexOf(el.id) === -1)
         return <SelectorIndicator key={el.id} isChecked={false} permission={el} />;
       return <SelectorIndicator key={el.id} isChecked permission={el} />;
     });
-
-    //   return defaultPermissions
-    //     .filter((permission) => {
-    //       const seperation = permission?.slug.split(':');
-    //       return seperation[1] === operation;
-    //     })
-    //     .map((permission) => {
-    //       return (
-    //         <label key={permission.id} htmlFor={permission.id}>
-    //           <input type="checkbox" id={permission.id} />
-    //           {permission.description}
-    //         </label>
-    //       );
-    //     });
-    // });
   };
-
-  // return <SelectorIndicator key={el.id} isChecked permission={el} />;
-  // .map((permission) => {
-  //   return (
-  //     <label key={permission.id} htmlFor={permission.id}>
-  //       <input type="checkbox" id={permission.id} />
-  //       {permission.description}
-  //     </label>
-  //   );
-  // });
-
-  // const editForm = permissions.map((permission) => {
-  //   return (
-  //     <label key={permission.id} htmlFor={permission.id}>
-  //       <input type="checkbox" id={permission.id} />
-  //       {permission.description}
-  //     </label>
-  //   );
-  // });
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -129,13 +96,15 @@ function PermissionSelector(props: IProps) {
             return (
               <div key={el}>
                 <p>{`${el}:`}</p>
-                {operationFilter(el, permissions, role.permission)}
+                {setName === 'EDIT'
+                  ? defaultFomat(el, permissions)
+                  : operationFilter(el, permissions, role.permission)}
               </div>
             );
           })}
         </div>
         <input type="submit" value="Submit" />
-        <input type="submit" value="close" onClick={closeHandler} />
+        <input type="button" value="close" onClick={closeHandler} />
       </form>
     </div>
   );
@@ -168,4 +137,23 @@ function PermissionSelector(props: IProps) {
 //     </div>
 //   );
 // })
+
+// return <SelectorIndicator key={el.id} isChecked permission={el} />;
+// .map((permission) => {
+//   return (
+//     <label key={permission.id} htmlFor={permission.id}>
+//       <input type="checkbox" id={permission.id} />
+//       {permission.description}
+//     </label>
+//   );
+// });
+
+// const editForm = permissions.map((permission) => {
+//   return (
+//     <label key={permission.id} htmlFor={permission.id}>
+//       <input type="checkbox" id={permission.id} />
+//       {permission.description}
+//     </label>
+//   );
+// });
 export default PermissionSelector;

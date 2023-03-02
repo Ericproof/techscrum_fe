@@ -42,19 +42,6 @@
       .default-status {
         display: flex;
         gap: 8px;
-
-        div {
-          border-radius: 50%;
-          // padding: 10px;
-          box-sizing: border-box;
-          height: 30px;
-          width: 30px;
-          line-height: 30px;
-          text-align: center;
-          overflow: hidden;
-          color: white;
-          text-transform: uppercase;
-        }
       }
     }
 

@@ -57,15 +57,15 @@ function RolePage() {
   }, [fetchRoles]);
 
   const newRoleHandler = () => {
-    setOpenEdit(true);
     setEditRole('EDIT');
+    setOpenEdit(true);
   };
 
   const editRoleHandler = async (roleId: string) => {
-    setOpenEdit(true);
     const Role = await getOneRoles(projectId, roleId);
     setEditRole(roleId);
     setSelectedRole(Role);
+    setOpenEdit(true);
   };
 
   const deleteRoleHanlder = async (roleId: string) => {

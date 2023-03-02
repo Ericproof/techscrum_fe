@@ -1,7 +1,5 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-// import { GrAddCircle } from 'react-icons/gr';
+
 import { HiDotsHorizontal } from 'react-icons/hi';
 import { RiEditLine } from 'react-icons/ri';
 import { ImCancelCircle } from 'react-icons/im';
@@ -9,7 +7,6 @@ import styles from './RoleTable.module.scss';
 import PermissionIndicator from '../PermissionIndicator/PermissionIndicator';
 
 import { IRole } from '../../../types';
-// import { getPermissions } from '../../../api/role/role';
 
 interface IRoleTable {
   roles: IRole[];
@@ -53,7 +50,9 @@ const seperationHandler = (operation: string, newPermissions: Array<any>) => {
 
 const indicatorsGenerator = (operation: string, newPermissions: Array<any>) => {
   return seperationHandler(operation, newPermissions).map((el) => {
-    return <PermissionIndicator key={el.slug} isPermissionAllowed={el.isActive} content="C" />;
+    return (
+      <PermissionIndicator key={el.slug} isPermissionAllowed={el.isActive} content={el.slug} />
+    );
   });
 };
 

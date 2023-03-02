@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { IPermissions } from '../../../types';
 
 interface IProps {
@@ -7,9 +7,16 @@ interface IProps {
 }
 
 function SelectorIndicator({ isChecked, permission }: IProps) {
+  const [checked, setChecked] = useState(isChecked);
+
   return (
     <label key={permission.id} htmlFor={permission.id}>
-      <input type="checkbox" id={permission.id} checked={isChecked} />
+      <input
+        type="checkbox"
+        id={permission.id}
+        onChange={(e) => setChecked(e.target.checked)}
+        checked={checked}
+      />
       {permission.description}
     </label>
   );
