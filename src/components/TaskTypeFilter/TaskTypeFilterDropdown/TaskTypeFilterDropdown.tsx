@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { BiCheckbox, BiCheckboxChecked } from 'react-icons/bi';
 import styles from '../TaskTypeFilter.module.scss';
+import { ITypes } from '../../../types';
 
 interface ITaskTypeFilterDropdown {
-  type: any;
-  selectedTypes: any;
-  changeSelectedTypes: any;
-  setSelectedTypes: any;
+  type: ITypes;
+  selectedTypes: ITypes[];
+  changeSelectedTypes: (isExists: boolean, selectedItems: ITypes[], item: ITypes) => ITypes[];
+  setSelectedTypes: Dispatch<SetStateAction<ITypes[]>>;
 }
 
 export default function TaskTypeFilterDropdown(props: ITaskTypeFilterDropdown) {

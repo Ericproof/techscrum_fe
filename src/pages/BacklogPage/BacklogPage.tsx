@@ -27,7 +27,7 @@ export default function BacklogPage() {
   const [sprintData, setSprintData] = useState<any[]>([]);
   const [statusData, setStatusData] = useState([]);
   const { projectId = '', boardId = '' } = useParams();
-  const [typesData, setTypesData] = useState(null);
+  const [typesData, setTypesData] = useState([]);
   const [selectedTypes, setSelectedTypes] = useState<any[]>([]);
   const [userList, setUserList] = useState<any>([]);
   const [projectDataLoaded, setProjectDataLoaded] = useState(false);

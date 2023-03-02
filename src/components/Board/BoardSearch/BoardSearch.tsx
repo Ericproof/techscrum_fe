@@ -1,4 +1,4 @@
-import React, { useState, Dispatch } from 'react';
+import React, { useState, Dispatch, SetStateAction } from 'react';
 import { IoIosAdd } from 'react-icons/io';
 import styles from './BoardSearch.module.scss';
 import checkAccess from '../../../utils/helpers';
@@ -6,19 +6,24 @@ import ButtonV2 from '../../../lib/FormV2/ButtonV2/ButtonV2';
 import UserTaskFilter from '../../UserTaskFilter/UserTaskFilter';
 import SearchForBoard from '../../SearchForBoard/SearchForBoard';
 import TaskTypeFilter from '../../TaskTypeFilter/TaskTypeFilter';
+import { ITypes, IUserInfo } from '../../../types';
 
 interface Props {
   updateIsCreateNewCard: () => void;
   setInputQuery: Dispatch<string>;
   projectId: string;
-  selectedUsers: any;
-  selectedTypes: any;
-  setSelectedUsers: any;
-  setSelectedTypes: any;
-  changeSelectedUsers: any;
-  changeSelectedTypes: any;
-  userList: any;
-  typeList: any;
+  selectedUsers: IUserInfo[];
+  selectedTypes: ITypes[];
+  setSelectedUsers: Dispatch<SetStateAction<IUserInfo[]>>;
+  setSelectedTypes: Dispatch<SetStateAction<ITypes[]>>;
+  changeSelectedUsers: (
+    isExists: boolean,
+    selectedItems: IUserInfo[],
+    item: IUserInfo
+  ) => IUserInfo[];
+  changeSelectedTypes: (isExists: boolean, selectedItems: ITypes[], item: ITypes) => ITypes[];
+  userList: IUserInfo[];
+  typeList: ITypes[];
 }
 export default function BoardSearch({
   updateIsCreateNewCard,

@@ -1,12 +1,17 @@
 import { BiCheckbox, BiCheckboxChecked } from 'react-icons/bi';
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import styles from '../../UserTaskFilter.module.scss';
+import { IUserInfo } from '../../../../types';
 
 interface IBacklogUserFilterDropdownSelectButton {
-  user: any;
-  selectedUsers: any;
-  changeSelectedUsers: any;
-  setSelectedUsers: any;
+  user: IUserInfo;
+  selectedUsers: IUserInfo[];
+  changeSelectedUsers: (
+    isExists: boolean,
+    selectedItems: IUserInfo[],
+    item: IUserInfo
+  ) => IUserInfo[];
+  setSelectedUsers: Dispatch<SetStateAction<IUserInfo[]>>;
 }
 
 export default function BacklogUserFilterDropdownSelectButton(

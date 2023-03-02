@@ -1,12 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import styles from '../UserTaskFilter.module.scss';
 import BacklogUserFilterDropdownSelectButton from './BacklogUserFilterDropdownSelectButton/BacklogUserFilterDropdownSelectButton';
+import { IUserInfo } from '../../../types';
 
 interface IBacklogFilterDropdown {
-  users: any;
-  selectedUsers: any;
-  changeSelectedUsers: any;
-  setSelectedUsers: any;
+  users: IUserInfo[];
+  selectedUsers: IUserInfo[];
+  changeSelectedUsers: (
+    isExists: boolean,
+    selectedItems: IUserInfo[],
+    item: IUserInfo
+  ) => IUserInfo[];
+  setSelectedUsers: Dispatch<SetStateAction<IUserInfo[]>>;
 }
 
 export default function BacklogUserFilterDropdown(props: IBacklogFilterDropdown) {
@@ -27,7 +32,7 @@ export default function BacklogUserFilterDropdown(props: IBacklogFilterDropdown)
   });
 
   return (
-    <div className={styles.backlogUser} key={users.id} ref={myRef}>
+    <div className={styles.backlogUser} ref={myRef}>
       <button
         className={styles.backlogUserIconButton}
         onClick={() => {

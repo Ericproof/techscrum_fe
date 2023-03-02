@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import styles from './UserTaskFilter.module.scss';
 import BacklogUserFilter from './BacklogUserFilter/BacklogUserFilter';
 import BacklogUserFilterDropdown from './BacklogUserFilterDropdown/BacklogUserFilterDropdown';
+import { IUserInfo } from '../../types';
 
 interface IUserTaskFilter {
-  selectedUsers: any;
-  changeSelectedUsers: any;
-  userList: any;
-  setSelectedUsers: any;
+  userList: IUserInfo[];
+  selectedUsers: IUserInfo[];
+  changeSelectedUsers: (
+    isExists: boolean,
+    selectedItems: IUserInfo[],
+    item: IUserInfo
+  ) => IUserInfo[];
+  setSelectedUsers: Dispatch<SetStateAction<IUserInfo[]>>;
 }
 
 export default function userTaskFilter(props: IUserTaskFilter) {

@@ -1,13 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { BiChevronDown } from 'react-icons/bi';
 import styles from './TaskTypeFilter.module.scss';
 import TaskTypeFilterDropdown from './TaskTypeFilterDropdown/TaskTypeFilterDropdown';
+import { ITypes } from '../../types';
 
 interface ITaskTypeFilter {
-  typeList: any;
-  selectedTypes: any;
-  changeSelectedTypes: any;
-  setSelectedTypes: any;
+  typeList: ITypes[];
+  selectedTypes: ITypes[];
+  changeSelectedTypes: (isExists: boolean, selectedItems: ITypes[], item: ITypes) => ITypes[];
+  setSelectedTypes: Dispatch<SetStateAction<ITypes[]>>;
 }
 
 export default function TaskTypeFilter(props: ITaskTypeFilter) {
