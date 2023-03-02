@@ -177,7 +177,11 @@ export default function ServicesTabs({ show }: Props) {
   return (
     <div className={`${styles.serviceListTabs} ${show ? styles.serviceListTabsActive : ''}`}>
       <div>
-        <button className={styles.tab} onClick={() => activeMenu('features')}>
+        <button
+          data-testid="features"
+          className={styles.tab}
+          onClick={() => activeMenu('features')}
+        >
           Features
           <MdOutlineKeyboardArrowDown />
         </button>
