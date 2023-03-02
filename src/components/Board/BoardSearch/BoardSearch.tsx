@@ -5,6 +5,7 @@ import checkAccess from '../../../utils/helpers';
 import ButtonV2 from '../../../lib/FormV2/ButtonV2/ButtonV2';
 import UserTaskFilter from '../../UserTaskFilter/UserTaskFilter';
 import SearchForBoard from '../../SearchForBoard/SearchForBoard';
+import TaskTypeFilter from '../../TaskTypeFilter/TaskTypeFilter';
 
 interface Props {
   updateIsCreateNewCard: () => void;
@@ -12,7 +13,10 @@ interface Props {
   projectId: string;
   selectedUsers: any;
   changeSelectedUsers: any;
+  changeSelectedTypes: any;
   userList: any;
+  typeList: any;
+  selectedTypes: any;
 }
 export default function BoardSearch({
   updateIsCreateNewCard,
@@ -20,7 +24,10 @@ export default function BoardSearch({
   projectId,
   selectedUsers,
   changeSelectedUsers,
-  userList
+  changeSelectedTypes,
+  userList,
+  typeList,
+  selectedTypes
 }: Props) {
   const avatars = [
     { id: 1, name: 'avatar1', url: '' },
@@ -52,6 +59,11 @@ export default function BoardSearch({
           userList={userList}
         />
       </div>
+      <TaskTypeFilter
+        typeList={typeList}
+        changeSelectedTypes={changeSelectedTypes}
+        selectedTypes={selectedTypes}
+      />
       <fieldset style={{ display: 'none' }}>
         <ul className={styles.avatarContainer} id="myList">
           {avatars.map((avatar) => (

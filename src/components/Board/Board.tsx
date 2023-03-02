@@ -23,6 +23,7 @@ import ProjectNavigationV3 from '../../lib/ProjectNavigationV3/ProjectNavigation
 import Modal from '../../lib/Modal/Modal';
 import DefaultModalHeader from '../../lib/Modal/ModalHeader/DefaultModalHeader/DefaultModalHeader';
 import { getUsers } from '../../api/user/user';
+import { getTypes } from '../../api/types/types';
 
 const onDragEnd = (
   result: DropResult,
@@ -81,12 +82,22 @@ export default function Board() {
   const [loading, setLoading] = useState(false);
   const [userList, setUserList] = useState([]);
   const [selectedUsers, setSelectedUsers] = useState<any[]>([]);
+  const [typeList, setTypeList] = useState<any[]>([]);
+  const [selectedTypes, setSelectedTypes] = useState<any[]>([]);
 
   const chaneSelectedUsers = (isExist, user) => {
     if (!isExist) {
       setSelectedUsers([...selectedUsers, user]);
     } else {
       setSelectedUsers(selectedUsers.filter((selectedUser) => selectedUser.id !== user.id));
+    }
+  };
+
+  const changeSelectedTypes = (isExist, type) => {
+    if (!isExist) {
+      setSelectedTypes([...selectedTypes, type]);
+    } else {
+      setSelectedTypes(selectedTypes.filter((selectedType) => selectedType.id !== type.id));
     }
   };
 
@@ -130,6 +141,8 @@ export default function Board() {
       userCase = userCase.slice(1);
       const boardInfo = await getBoard(boardId, inputQuery, userCase);
       fetchColumnsData(boardInfo);
+      const typeData = await getTypes();
+      setTypeList(typeData);
       setLoading(false);
     };
     fetchBoard();
@@ -266,6 +279,9 @@ export default function Board() {
         selectedUsers={selectedUsers}
         changeSelectedUsers={chaneSelectedUsers}
         userList={userList}
+        typeList={typeList}
+        selectedTypes={selectedTypes}
+        changeSelectedTypes={changeSelectedTypes}
       />
       <BoardMain
         columnsInfo={columnsInfo}

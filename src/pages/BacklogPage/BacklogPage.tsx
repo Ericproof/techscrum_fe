@@ -19,6 +19,7 @@ import SprintSection from './SprintSection/SprintSection';
 import Loading from '../../components/Loading/Loading';
 import ProjectNavigationV3 from '../../lib/ProjectNavigationV3/ProjectNavigationV3';
 import SearchForBoard from '../../components/SearchForBoard/SearchForBoard';
+import TaskTypeFilter from '../../components/TaskTypeFilter/TaskTypeFilter';
 
 export default function BacklogPage() {
   const [loaded, setLoaded] = useState(false);
@@ -27,6 +28,7 @@ export default function BacklogPage() {
   const [statusData, setStatusData] = useState([]);
   const { projectId = '', boardId = '' } = useParams();
   const [typesData, setTypesData] = useState(null);
+  const [selectedTypes, setSelectedTypes] = useState<any[]>([]);
   const [userList, setUserList] = useState<any>([]);
   const [projectDataLoaded, setProjectDataLoaded] = useState(false);
   const [projectKey, setProjectKey] = useState('');
@@ -40,6 +42,14 @@ export default function BacklogPage() {
       setSelectedUsers([...selectedUsers, user]);
     } else {
       setSelectedUsers(selectedUsers.filter((selectedUser) => selectedUser.id !== user.id));
+    }
+  };
+
+  const changeSelectedTypes = (isExist, type) => {
+    if (!isExist) {
+      setSelectedTypes([...selectedTypes, type]);
+    } else {
+      setSelectedTypes(selectedTypes.filter((selectedType) => selectedType.id !== type.id));
     }
   };
 
@@ -180,6 +190,11 @@ export default function BacklogPage() {
                   selectedUsers={selectedUsers}
                   changeSelectedUsers={chaneSelectedUsers}
                   userList={userList}
+                />
+                <TaskTypeFilter
+                  typeList={typesData}
+                  selectedTypes={selectedTypes}
+                  changeSelectedTypes={changeSelectedTypes}
                 />
               </div>
               {sprintData
