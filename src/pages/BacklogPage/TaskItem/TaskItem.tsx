@@ -38,10 +38,7 @@ export default function TaskItem({
   // eslint-disable-next-line no-console
 
   const [title, setTitle] = useState(task.title);
-  const [issueTypeId, setIssueTypeId] = useState(() => {
-    const initialId = typesData.filter((e) => e.name === task.typeId.name);
-    return initialId.id;
-  });
+  const [taskTypeId, setTaskTypeId] = useState(task.typeId.id);
 
   const updateTaskTitleContent = () => {
     if (title.trim() !== task.title) {
@@ -79,8 +76,8 @@ export default function TaskItem({
 
   const onTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     // eslint-disable-next-line no-console
-    console.log(e.target.value);
-    setIssueTypeId(e.target.value);
+
+    setTaskTypeId(e.target.value);
     // eslint-disable-next-line no-console
     const newTypeId = e.target.value;
     updateTaskType(newTypeId);
@@ -95,12 +92,19 @@ export default function TaskItem({
       ref={myRef}
     >
       <div className={styles.taskInfo}>
-        <label htmlFor="taskTypes">
-          <select name="taskTypes" id="taskTypes" value={issueTypeId} onChange={onTypeChange}>
+        <label htmlFor="taskTypes" className={styles.typeBtn}>
+          <select
+            name="taskTypes"
+            id="taskTypes"
+            value={taskTypeId}
+            onChange={onTypeChange}
+            className={styles.typeSelect}
+          >
             {typesData.map((e) => (
-              <option key={e.id} value={e.id}>
-                {e.name}
-              </option>
+              <>
+                <img src={e.icon} alt={e.icon} />
+                <option key={e.id} value={e.id} className={styles.typeOpt} label={e.name} />
+              </>
             ))}
           </select>
         </label>
