@@ -110,13 +110,9 @@ export default function OptionBtn({
           )}
           {sprintData
             .filter((sprint) => {
-              // eslint-disable-next-line no-console
-              console.log(sprint);
               return sprint.id !== sprintId && !sprint.isComplete;
             })
             .map((sprint) => {
-              // eslint-disable-next-line no-console
-              console.log(sprint.id);
               return (
                 <li key={sprint.id}>
                   <button

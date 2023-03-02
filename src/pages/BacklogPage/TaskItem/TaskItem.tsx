@@ -62,6 +62,9 @@ export default function TaskItem({
     }
   };
 
+  // eslint-disable-next-line no-console
+  // console.log('i am triggered');
+
   return (
     <div
       className={styles.container}
