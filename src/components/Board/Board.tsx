@@ -85,20 +85,11 @@ export default function Board() {
   const [typeList, setTypeList] = useState<any[]>([]);
   const [selectedTypes, setSelectedTypes] = useState<any[]>([]);
 
-  const chaneSelectedUsers = (isExist, user) => {
+  const changeSelectedItems = (isExist, selectedItems, item) => {
     if (!isExist) {
-      setSelectedUsers([...selectedUsers, user]);
-    } else {
-      setSelectedUsers(selectedUsers.filter((selectedUser) => selectedUser.id !== user.id));
+      return [...selectedItems, item];
     }
-  };
-
-  const changeSelectedTypes = (isExist, type) => {
-    if (!isExist) {
-      setSelectedTypes([...selectedTypes, type]);
-    } else {
-      setSelectedTypes(selectedTypes.filter((selectedType) => selectedType.id !== type.id));
-    }
+    return selectedItems.filter((selectedItem) => selectedItem.id !== item.id);
   };
 
   const getProjectDataApi = useCallback(() => {
@@ -282,11 +273,13 @@ export default function Board() {
         setInputQuery={setInputQuery}
         projectId={projectId}
         selectedUsers={selectedUsers}
-        changeSelectedUsers={chaneSelectedUsers}
+        setSelectedUsers={setSelectedUsers}
+        changeSelectedUsers={changeSelectedItems}
         userList={userList}
         typeList={typeList}
         selectedTypes={selectedTypes}
-        changeSelectedTypes={changeSelectedTypes}
+        setSelectedTypes={setSelectedTypes}
+        changeSelectedTypes={changeSelectedItems}
       />
       <BoardMain
         columnsInfo={columnsInfo}

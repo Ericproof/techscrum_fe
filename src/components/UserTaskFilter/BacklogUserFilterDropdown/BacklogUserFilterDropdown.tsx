@@ -6,11 +6,12 @@ interface IBacklogFilterDropdown {
   users: any;
   selectedUsers: any;
   changeSelectedUsers: any;
+  setSelectedUsers: any;
 }
 
 export default function BacklogUserFilterDropdown(props: IBacklogFilterDropdown) {
   const [visible, setVisible] = useState(false);
-  const { users, selectedUsers, changeSelectedUsers } = props;
+  const { users, selectedUsers, changeSelectedUsers, setSelectedUsers } = props;
   const myRef = useRef<HTMLDivElement>(null);
 
   const handleClickOutside = (e: MouseEvent) => {
@@ -40,6 +41,7 @@ export default function BacklogUserFilterDropdown(props: IBacklogFilterDropdown)
           {users.map((user) => (
             <BacklogUserFilterDropdownSelectButton
               selectedUsers={selectedUsers}
+              setSelectedUsers={setSelectedUsers}
               changeSelectedUsers={changeSelectedUsers}
               key={user.id}
               user={user}

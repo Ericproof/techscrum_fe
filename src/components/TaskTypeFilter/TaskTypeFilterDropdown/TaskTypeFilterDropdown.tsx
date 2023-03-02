@@ -6,10 +6,11 @@ interface ITaskTypeFilterDropdown {
   type: any;
   selectedTypes: any;
   changeSelectedTypes: any;
+  setSelectedTypes: any;
 }
 
 export default function TaskTypeFilterDropdown(props: ITaskTypeFilterDropdown) {
-  const { type, selectedTypes, changeSelectedTypes } = props;
+  const { type, selectedTypes, changeSelectedTypes, setSelectedTypes } = props;
   const checkExisting = () => {
     let isExists = false;
     selectedTypes.forEach((selectedType) => {
@@ -24,7 +25,7 @@ export default function TaskTypeFilterDropdown(props: ITaskTypeFilterDropdown) {
   const handleBtnClick = () => {
     setSelected((prevState) => !prevState);
     const isExists = checkExisting();
-    changeSelectedTypes(isExists, type);
+    setSelectedTypes(changeSelectedTypes(isExists, selectedTypes, type));
   };
 
   return (

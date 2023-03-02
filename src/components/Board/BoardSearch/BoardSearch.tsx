@@ -12,11 +12,13 @@ interface Props {
   setInputQuery: Dispatch<string>;
   projectId: string;
   selectedUsers: any;
+  selectedTypes: any;
+  setSelectedUsers: any;
+  setSelectedTypes: any;
   changeSelectedUsers: any;
   changeSelectedTypes: any;
   userList: any;
   typeList: any;
-  selectedTypes: any;
 }
 export default function BoardSearch({
   updateIsCreateNewCard,
@@ -27,7 +29,9 @@ export default function BoardSearch({
   changeSelectedTypes,
   userList,
   typeList,
-  selectedTypes
+  selectedTypes,
+  setSelectedUsers,
+  setSelectedTypes
 }: Props) {
   const avatars = [
     { id: 1, name: 'avatar1', url: '' },
@@ -56,6 +60,7 @@ export default function BoardSearch({
         <UserTaskFilter
           selectedUsers={selectedUsers}
           changeSelectedUsers={changeSelectedUsers}
+          setSelectedUsers={setSelectedUsers}
           userList={userList}
         />
       </div>
@@ -63,6 +68,7 @@ export default function BoardSearch({
         typeList={typeList}
         changeSelectedTypes={changeSelectedTypes}
         selectedTypes={selectedTypes}
+        setSelectedTypes={setSelectedTypes}
       />
       <fieldset style={{ display: 'none' }}>
         <ul className={styles.avatarContainer} id="myList">

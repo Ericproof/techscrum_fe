@@ -5,10 +5,11 @@ interface IBacklogFilter {
   user: any;
   selectedUsers: any;
   changeSelectedUsers: any;
+  setSelectedUsers: any;
 }
 
 export default function BacklogUserFilter(props: IBacklogFilter) {
-  const { user, selectedUsers, changeSelectedUsers } = props;
+  const { user, selectedUsers, changeSelectedUsers, setSelectedUsers } = props;
   const [pressed, setPressed] = useState(false);
 
   const handleUserFilterSelect = () => {
@@ -19,7 +20,7 @@ export default function BacklogUserFilter(props: IBacklogFilter) {
         isExists = true;
       }
     });
-    changeSelectedUsers(isExists, user);
+    setSelectedUsers(changeSelectedUsers(isExists, selectedUsers, user));
   };
 
   return (

@@ -7,16 +7,18 @@ interface IUserTaskFilter {
   selectedUsers: any;
   changeSelectedUsers: any;
   userList: any;
+  setSelectedUsers: any;
 }
 
 export default function userTaskFilter(props: IUserTaskFilter) {
-  const { selectedUsers, changeSelectedUsers, userList } = props;
+  const { selectedUsers, changeSelectedUsers, userList, setSelectedUsers } = props;
   return (
     <div className={styles.BacklogFilterArea}>
       {userList.slice(0, 4).map((user) => (
         <BacklogUserFilter
           selectedUsers={selectedUsers}
           changeSelectedUsers={changeSelectedUsers}
+          setSelectedUsers={setSelectedUsers}
           key={user.id}
           user={user}
         />
@@ -25,6 +27,7 @@ export default function userTaskFilter(props: IUserTaskFilter) {
         <BacklogUserFilterDropdown
           selectedUsers={selectedUsers}
           changeSelectedUsers={changeSelectedUsers}
+          setSelectedUsers={setSelectedUsers}
           users={userList.slice(4)}
         />
       )}

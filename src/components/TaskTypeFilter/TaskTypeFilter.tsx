@@ -7,10 +7,11 @@ interface ITaskTypeFilter {
   typeList: any;
   selectedTypes: any;
   changeSelectedTypes: any;
+  setSelectedTypes: any;
 }
 
 export default function TaskTypeFilter(props: ITaskTypeFilter) {
-  const { typeList, selectedTypes, changeSelectedTypes } = props;
+  const { typeList, selectedTypes, changeSelectedTypes, setSelectedTypes } = props;
   const myRef = useRef<HTMLDivElement>(null);
 
   const [typeFilterPressed, setTypeFilterPressed] = useState(false);
@@ -50,6 +51,7 @@ export default function TaskTypeFilter(props: ITaskTypeFilter) {
               type={type}
               selectedTypes={selectedTypes}
               changeSelectedTypes={changeSelectedTypes}
+              setSelectedTypes={setSelectedTypes}
             />
           ))}
         </div>

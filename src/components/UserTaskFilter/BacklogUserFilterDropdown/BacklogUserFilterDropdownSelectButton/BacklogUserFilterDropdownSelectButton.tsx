@@ -6,6 +6,7 @@ interface IBacklogUserFilterDropdownSelectButton {
   user: any;
   selectedUsers: any;
   changeSelectedUsers: any;
+  setSelectedUsers: any;
 }
 
 export default function BacklogUserFilterDropdownSelectButton(
@@ -20,13 +21,13 @@ export default function BacklogUserFilterDropdownSelectButton(
     });
     return isExists;
   };
-  const { user, selectedUsers, changeSelectedUsers } = props;
+  const { user, selectedUsers, changeSelectedUsers, setSelectedUsers } = props;
   const [pressed, setPressed] = useState(checkExisting(selectedUsers, user));
   const onHandleButtonClick = (singleUser, e) => {
     e.preventDefault();
     setPressed((prevState) => !prevState);
     const isExists = checkExisting(selectedUsers, user);
-    changeSelectedUsers(isExists, singleUser);
+    setSelectedUsers(changeSelectedUsers(isExists, selectedUsers, singleUser));
   };
 
   return (

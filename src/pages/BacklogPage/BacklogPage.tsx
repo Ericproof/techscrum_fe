@@ -37,20 +37,11 @@ export default function BacklogPage() {
   const [inputQuery, setInputQuery] = useState<string>('');
   const page = 'backlog';
 
-  const chaneSelectedUsers = (isExist, user) => {
+  const changeSelectedItems = (isExist, selectedItems, item) => {
     if (!isExist) {
-      setSelectedUsers([...selectedUsers, user]);
-    } else {
-      setSelectedUsers(selectedUsers.filter((selectedUser) => selectedUser.id !== user.id));
+      return [...selectedItems, item];
     }
-  };
-
-  const changeSelectedTypes = (isExist, type) => {
-    if (!isExist) {
-      setSelectedTypes([...selectedTypes, type]);
-    } else {
-      setSelectedTypes(selectedTypes.filter((selectedType) => selectedType.id !== type.id));
-    }
+    return selectedItems.filter((selectedItem) => selectedItem.id !== item.id);
   };
 
   const arrayToString = (selectedInputs) => {
@@ -193,13 +184,15 @@ export default function BacklogPage() {
                 </div>
                 <UserTaskFilter
                   selectedUsers={selectedUsers}
-                  changeSelectedUsers={chaneSelectedUsers}
+                  setSelectedUsers={setSelectedUsers}
+                  changeSelectedUsers={changeSelectedItems}
                   userList={userList}
                 />
                 <TaskTypeFilter
                   typeList={typesData}
                   selectedTypes={selectedTypes}
-                  changeSelectedTypes={changeSelectedTypes}
+                  setSelectedTypes={setSelectedTypes}
+                  changeSelectedTypes={changeSelectedItems}
                 />
               </div>
               {sprintData
