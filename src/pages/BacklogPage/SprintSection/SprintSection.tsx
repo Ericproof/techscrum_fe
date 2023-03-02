@@ -173,6 +173,7 @@ export default function SprintSection({
                           >
                             <TaskItem
                               task={task}
+                              typesData={typesData}
                               projectKey={projectKey}
                               statusData={statusData}
                               userList={userList}

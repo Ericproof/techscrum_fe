@@ -1,3 +1,5 @@
+// eslint-disable jsx-a11y/control-has-associated-label
+// eslint-disable no-console
 import React, { useState } from 'react';
 import { FaPen } from 'react-icons/fa';
 import { toast } from 'react-toastify';
@@ -13,6 +15,7 @@ import { updateTask } from '../../../api/backlog/backlog';
 
 interface ITaskInput {
   task: any;
+  typesData: any;
   statusData: IStatusBacklog[];
   userList: IUserInfo[];
   sprintData?: any;
@@ -22,6 +25,7 @@ interface ITaskInput {
 }
 export default function TaskItem({
   task,
+  typesData,
   statusData,
   userList,
   sprintData,
@@ -29,16 +33,15 @@ export default function TaskItem({
   getBacklogDataApi,
   projectKey
 }: ITaskInput) {
-  const allTypes = {
-    story:
-      'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium',
-    bug: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium',
-    task: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium',
-    techDebt:
-      'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10308?size=medium'
-  };
+  // eslint-disable-next-line no-console
+
+  // eslint-disable-next-line no-console
 
   const [title, setTitle] = useState(task.title);
+  const [issueTypeId, setIssueTypeId] = useState(() => {
+    const initialId = typesData.filter((e) => e.name === task.typeId.name);
+    return initialId.id;
+  });
 
   const updateTaskTitleContent = () => {
     if (title.trim() !== task.title) {
@@ -53,6 +56,16 @@ export default function TaskItem({
     }
   };
 
+  const updateTaskType = async (newTypeId: string) => {
+    try {
+      const data = { typeId: newTypeId };
+      await updateTask(task.id, data);
+      getBacklogDataApi();
+    } catch (err) {
+      toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+    }
+  };
+
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
 
   const saveKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -63,7 +76,15 @@ export default function TaskItem({
   };
 
   // eslint-disable-next-line no-console
-  // console.log('i am triggered');
+
+  const onTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    // eslint-disable-next-line no-console
+    console.log(e.target.value);
+    setIssueTypeId(e.target.value);
+    // eslint-disable-next-line no-console
+    const newTypeId = e.target.value;
+    updateTaskType(newTypeId);
+  };
 
   return (
     <div
@@ -74,9 +95,16 @@ export default function TaskItem({
       ref={myRef}
     >
       <div className={styles.taskInfo}>
-        <div className={styles.iconContainer}>
-          <img className={styles.icon} src={allTypes[task.typeId.slug]} alt={task.typeId.slug} />
-        </div>
+        <label htmlFor="taskTypes">
+          <select name="taskTypes" id="taskTypes" value={issueTypeId} onChange={onTypeChange}>
+            {typesData.map((e) => (
+              <option key={e.id} value={e.id}>
+                {e.name}
+              </option>
+            ))}
+          </select>
+        </label>
+
         <div className={styles.taskIdContainer}>
           <p>{`${projectKey}-${task.id.slice(task.id.length - 3)}`}</p>
         </div>

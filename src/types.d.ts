@@ -149,6 +149,7 @@ export interface IStatusEntity {
   order: number;
   taskList: ITaskCard[];
 }
+
 export interface IStatusBacklog {
   id: string;
   slug: string;
@@ -285,6 +286,7 @@ export interface ITypes {
   createdAt: string;
   updatedAt: string;
   id: string;
+  icon: string;
 }
 
 export interface IOptions {

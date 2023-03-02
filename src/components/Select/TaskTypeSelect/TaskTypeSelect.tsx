@@ -61,7 +61,6 @@ export default function TaskTypeSelect({
   const initialOption = TYPES[0];
   const [showOptions, setShowOptions] = useState(false);
   const [currentOption, setCurrentOption] = useState(initialOption);
-  const [showHover, setShowHover] = useState(false);
   const [clicked, setClicked] = useState(false);
   const otherOptions = TYPES.filter((item) => item.type !== currentOption.type);
 
@@ -97,11 +96,12 @@ export default function TaskTypeSelect({
   let btnClassName = '';
   if (clicked) {
     btnClassName = [styles.buttonContainer, styles.buttonClicked].join(' ');
-  } else if (showHover) {
-    btnClassName = [styles.hoverButton, styles.buttonContainer].join(' ');
   } else {
     btnClassName = styles.buttonContainer;
   }
+
+  // eslint-disable-next-line no-console
+  console.log('i am hovered');
 
   return (
     <div className={styles.container} ref={containerRef}>
@@ -111,12 +111,6 @@ export default function TaskTypeSelect({
           setClicked(!clicked);
         }}
         className={btnClassName}
-        onMouseOver={() => {
-          setShowHover(true);
-        }}
-        onMouseOut={() => {
-          setShowHover(false);
-        }}
         onBlur={() => {}}
         onFocus={() => {}}
       >
