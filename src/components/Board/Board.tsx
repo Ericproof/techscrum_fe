@@ -117,6 +117,14 @@ export default function Board() {
     getProjectDataApi();
   }, [getProjectDataApi]);
 
+  const arrayToString = (selectedInputs) => {
+    let result = '';
+    selectedInputs.forEach((selectedInput) => {
+      result = result.concat(`-${selectedInput.id}`);
+    });
+    return result.slice(1);
+  };
+
   const fetchColumnsData = useCallback((boardInfo: IBoardEntity) => {
     const columnInfoData: IColumnsFromBackend = {};
 
@@ -134,19 +142,16 @@ export default function Board() {
   const fetchBoardInfo = useCallback(() => {
     const fetchBoard = async () => {
       setLoading(true);
-      let userCase = '';
-      selectedUsers.forEach((selectedUser) => {
-        userCase = userCase.concat(`-${selectedUser.id}`);
-      });
-      userCase = userCase.slice(1);
-      const boardInfo = await getBoard(boardId, inputQuery, userCase);
+      const userCase = arrayToString(selectedUsers);
+      const taskTypeCase = arrayToString(selectedTypes);
+      const boardInfo = await getBoard(boardId, inputQuery, userCase, taskTypeCase);
       fetchColumnsData(boardInfo);
       const typeData = await getTypes();
       setTypeList(typeData);
       setLoading(false);
     };
     fetchBoard();
-  }, [boardId, fetchColumnsData, inputQuery, selectedUsers]);
+  }, [boardId, fetchColumnsData, inputQuery, selectedTypes, selectedUsers]);
 
   useEffect(() => {
     fetchBoardInfo();

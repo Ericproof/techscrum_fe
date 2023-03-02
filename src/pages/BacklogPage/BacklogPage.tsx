@@ -53,20 +53,25 @@ export default function BacklogPage() {
     }
   };
 
+  const arrayToString = (selectedInputs) => {
+    let result = '';
+    selectedInputs.forEach((selectedInput) => {
+      result = result.concat(`-${selectedInput.id}`);
+    });
+    return result.slice(1);
+  };
+
   useEffect(() => {
     const inputCase = inputQuery;
-    let userCase = '';
-    selectedUsers.forEach((selectedUser) => {
-      userCase = userCase.concat(`-${selectedUser.id}`);
-    });
-    userCase = userCase.slice(1);
+    const userCase = arrayToString(selectedUsers);
+    const typeCase = arrayToString(selectedTypes);
     const filterBacklogData = async () => {
-      const res = await filterBacklog(projectId, inputCase, userCase);
+      const res = await filterBacklog(projectId, inputCase, userCase, typeCase);
       setBacklogData(res.backlog);
       setSprintData(res.sprints);
     };
     filterBacklogData();
-  }, [inputQuery, projectId, selectedUsers]);
+  }, [inputQuery, projectId, selectedTypes, selectedUsers]);
 
   const getBacklogDataApi = useCallback(() => {
     const getBacklogData = async () => {
