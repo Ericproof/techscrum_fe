@@ -8,6 +8,9 @@ $small_size: 1000px;
   padding-top: 70px;
   text-align: center;
   font-weight: 700;
+  @media (max-width: 768px) {
+    font-size: 20px;
+  }
 }
 
 .faqsContainer {
@@ -19,11 +22,6 @@ $small_size: 1000px;
   text-align: center;
   width: 80%;
 }
-
-// .faqsContents {
-//   border-bottom: #000;
-//   margin-bottom: 20px;
-// }
 
 .moreInfo {
   margin-top: 40px;

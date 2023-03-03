@@ -1843,6 +1843,10 @@
     left: 0;
     max-width: 100%;
   }
+  @media (max-width: 678px) {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
 }
 
 .header {
