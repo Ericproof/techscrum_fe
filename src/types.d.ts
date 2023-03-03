@@ -59,6 +59,7 @@ export interface ITaskEntity {
   attachmentUrls?: any;
   slug?: any;
   priority?: any;
+  icon?: string;
 }
 
 export interface ISprint {

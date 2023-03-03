@@ -120,7 +120,7 @@ export default function CardRightContent({
   const onClickIssueType = (task: ITaskEntity) => {
     const updateTaskInfo = { ...taskInfo };
     updateTaskInfo.typeId = task;
-    setSelectedTypeIcon(TYPE[task.slug]);
+    setSelectedTypeIcon(task.icon);
     setSelectedType(task.slug);
     setShowSelectDropDown(false);
     onSave(updateTaskInfo);
