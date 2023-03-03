@@ -17,7 +17,6 @@ import { UserContext } from '../../../context/UserInfoProvider';
 import { TaskTypesContext } from '../../../context/TaskTypeProvider';
 import { createActivity } from '../../../api/activity/activity';
 import { createDailyScrum, getDailyScrums } from '../../../api/dailyScrum/dailyScrum';
-import Row from '../../../lib/Grid/Row/Row';
 
 interface Props {
   taskInfo: ITaskEntity;
@@ -324,17 +323,19 @@ export default function CardRightContent({
             projectId={projectId}
             reporterOnchangeEventHandler={reporterOnchangeEventHandler}
           />
-          <Row classesName={style.fieldMargin}>
+          <div className={style.fieldMargin}>
             <div className={style.label}>
               <BsPeople className={style.reactIcon} />
               <div>Assignee</div>
             </div>
-            <UserSelect
-              onChange={assigneeOnchangeEventHandler}
-              value={taskInfo.assignId}
-              allowEdit={editAccess}
-            />
-          </Row>
+            <div className={style.assigneeRightContent}>
+              <UserSelect
+                onChange={assigneeOnchangeEventHandler}
+                value={taskInfo.assignId}
+                allowEdit={editAccess}
+              />
+            </div>
+          </div>
           <LabelFields
             labels={labels}
             taskInfo={taskInfo}

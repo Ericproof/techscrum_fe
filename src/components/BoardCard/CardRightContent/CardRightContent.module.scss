@@ -311,20 +311,40 @@ $padding-left: 10px;
   }
 }
 .fieldMargin {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   margin-bottom: 12px;
   max-height: 44px;
-}
-
-.label {
-  display: flex;
-  box-sizing: border-box;
-  width: 50%;
-  line-height: 1;
-  color: #38465e;
   font-size: 16px;
-  font-weight: 500;
-  align-items: center;
-  .reactIcon {
-    margin-right: 5px;
+
+  .label {
+    display: flex;
+    align-items: center;
+    .reactIcon {
+      margin-right: 5px;
+    }
+  }
+
+  & > div:nth-of-type(1) {
+    box-sizing: border-box;
+    width: 50%;
+    line-height: 1;
+    color: var(--ds-text-subtle, #38465e);
+    font-weight: 500;
+  }
+
+  & > div:nth-of-type(2) {
+    font-size: 16px;
+    line-height: 1;
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 100%;
+    border: 2px solid transparent;
+    border-radius: 3px;
+    transition: background 0.2s ease 0s;
+    color: var(--ds-text-subtlest, #5e6c84);
+    font-weight: 500;
+    align-items: center;
   }
 }
