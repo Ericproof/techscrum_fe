@@ -38,12 +38,6 @@ export default function CardRightContent({
   updateTaskTags,
   onSave
 }: Props) {
-  const TYPE = {
-    story:
-      'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium',
-    task: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium',
-    bug: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium'
-  };
   const PRIORITY = {
     Highest: 'https://010001.atlassian.net/images/icons/priorities/highest.svg',
     High: 'https://010001.atlassian.net/images/icons/priorities/high.svg',
@@ -61,7 +55,7 @@ export default function CardRightContent({
   const taskId = taskInfo.id;
   const [showSelectDropDown, setShowSelectDropDown] = useState(false);
   const [showPriorityDropDown, setShowPriorityDropDown] = useState(false);
-  const [selectedTypeIcon, setSelectedTypeIcon] = useState(TYPE[taskInfo.typeId.slug]);
+  const [selectedTypeIcon, setSelectedTypeIcon] = useState(taskInfo.typeId.icon);
   const [selectedType, setSelectedType] = useState(taskInfo.typeId.name);
   const [selectedPriorityIcon, setSelectedPriorityIcon] = useState(PRIORITY[taskInfo.priority]);
   const [selectedPriority, setSelectedPriority] = useState(taskInfo.priority);
@@ -166,7 +160,7 @@ export default function CardRightContent({
                 <div className={style.taskTypeList}>
                   <p className={style.typeListTitle}>CHANGE ISSUE TYPE</p>
                   {taskTypes.map((taskType) => {
-                    const src = TYPE[taskType.slug];
+                    const src = taskType.icon;
                     const alt = taskType.slug;
                     return (
                       <button
