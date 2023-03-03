@@ -1,5 +1,5 @@
 // eslint-disable jsx-a11y/control-has-associated-label
-/* eslint-disable no-console, no-unused-vars */
+
 import React, { useState } from 'react';
 import { FaPen } from 'react-icons/fa';
 import { toast } from 'react-toastify';
@@ -16,7 +16,6 @@ import TypeEdit from './TypeEdit';
 
 interface ITaskInput {
   task: any;
-  typesData: any;
   statusData: IStatusBacklog[];
   userList: IUserInfo[];
   sprintData?: any;
@@ -26,7 +25,6 @@ interface ITaskInput {
 }
 export default function TaskItem({
   task,
-  typesData,
   statusData,
   userList,
   sprintData,
@@ -34,16 +32,8 @@ export default function TaskItem({
   getBacklogDataApi,
   projectKey
 }: ITaskInput) {
-  const taskTypeOptions = typesData.map((e) => ({
-    id: e.id,
-    name: e.name,
-    icon: e.icon
-  }));
-
   const [title, setTitle] = useState(task.title);
-  const [value, setValue] = useState<typeof taskTypeOptions[0] | undefined>(
-    taskTypeOptions.find((e) => e.id === task.typeId.id)
-  );
+  const [value, setValue] = useState(task.typeId);
 
   const updateTaskTitleContent = () => {
     if (title.trim() !== task.title) {
@@ -82,13 +72,12 @@ export default function TaskItem({
       className={styles.container}
       onFocus={() => {}}
       onBlur={() => {}}
-      data-testid={'task-hover-'.concat(task.id)}
+      data-testid={`task-${task.id}`}
       ref={myRef}
     >
       <div className={styles.taskInfo}>
         <TypeEdit
           value={value}
-          options={taskTypeOptions}
           onChange={(option) => setValue(option)}
           updateTaskType={updateTaskType}
         />

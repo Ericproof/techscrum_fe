@@ -12,7 +12,6 @@ import {
   updateTask
 } from '../../api/backlog/backlog';
 import { getStatuses } from '../../api/status/status';
-import { getTypes } from '../../api/types/types';
 import { getUsers } from '../../api/user/user';
 import { showProject } from '../../api/projects/projects';
 import SprintSection from './SprintSection/SprintSection';
@@ -26,7 +25,6 @@ export default function BacklogPage() {
   const [sprintData, setSprintData] = useState<any[]>([]);
   const [statusData, setStatusData] = useState([]);
   const { projectId = '', boardId = '' } = useParams();
-  const [typesData, setTypesData] = useState(null);
   const [userList, setUserList] = useState<any>([]);
   const [projectDataLoaded, setProjectDataLoaded] = useState(false);
   const [projectKey, setProjectKey] = useState('');
@@ -76,9 +74,7 @@ export default function BacklogPage() {
   const getProjectDataApi = useCallback(() => {
     const getProjectData = async () => {
       try {
-        let res = await getTypes();
-        setTypesData(res);
-        res = await getStatuses(boardId);
+        let res = await getStatuses(boardId);
         setStatusData(res);
         res = await getUsers();
         setUserList(res.data);
@@ -194,7 +190,6 @@ export default function BacklogPage() {
                         sprintData={sprintData}
                         getBacklogDataApi={getBacklogDataApi}
                         statusData={statusData}
-                        typesData={typesData}
                         userList={userList}
                         projectKey={projectKey}
                       />
@@ -206,7 +201,6 @@ export default function BacklogPage() {
                 sprintData={sprintData}
                 getBacklogDataApi={getBacklogDataApi}
                 statusData={statusData}
-                typesData={typesData}
                 userList={userList}
                 projectKey={projectKey}
               />

@@ -14,7 +14,7 @@ describe('Backlog page', () => {
     cy.visit('/login');
     cy.login('kitman200220022002@gmail.com', '12345678');
     cy.wait('@fetch-projects');
-    cy.get('[data-testid="evan"]').dblclick();
+    cy.get('[data-testid="evan"]').click();
     cy.wait('@fetch-board');
     cy.get('[data-testid="backlog-btn"]').click();
     cy.wait('@fetch-backlog');

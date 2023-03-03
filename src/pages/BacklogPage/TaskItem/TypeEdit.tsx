@@ -1,8 +1,9 @@
-/* eslint-disable no-console, no-unused-vars */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useEffect, useRef, useState } from 'react';
+/* eslint-disable no-console, no-unused-vars */
+import React, { useState, useContext } from 'react';
 import styles from './TypeEdit.module.scss';
+import { TaskTypesContext } from '../../../context/TaskTypeProvider';
 
 export type SelectOption = {
   id: string;
@@ -11,18 +12,25 @@ export type SelectOption = {
 };
 
 type SelectProps = {
-  options: SelectOption[];
   value?: SelectOption;
   onChange: (value: SelectOption | undefined) => void;
   updateTaskType: (newTypeId: string) => Promise<void>;
 };
 
-export default function TypeEdit({ value, onChange, options, updateTaskType }: SelectProps) {
+export default function TypeEdit({ value, onChange, updateTaskType }: SelectProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const taskTypes = useContext(TaskTypesContext);
 
   function selectOption(option: SelectOption) {
     onChange(option);
   }
+
+  const options = taskTypes.map((e) => ({
+    id: e.id,
+    name: e.name,
+    icon: e.icon
+  }));
+
   return (
     <button
       className={styles.container}

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useContext } from 'react';
 import { GoPlus } from 'react-icons/go';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -8,15 +8,15 @@ import TaskTypeSelect from '../../../components/Select/TaskTypeSelect/TaskTypeSe
 import TaskItem from '../TaskItem/TaskItem';
 import styles from './BacklogSection.module.scss';
 import { addTask } from '../../../api/backlog/backlog';
-import { IUserInfo, ITypes, IStatusBacklog } from '../../../types';
+import { IUserInfo, IStatusBacklog } from '../../../types';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import CreateEditSprint from '../CreateEditSprint/CreateEditSprint';
+import { TaskTypesContext } from '../../../context/TaskTypeProvider';
 
 interface IBacklogSection {
   backlogData: any;
   getBacklogDataApi: () => void;
   statusData: IStatusBacklog[];
-  typesData: ITypes[] | null;
   userList: IUserInfo[];
   sprintData: any;
   projectKey: string;
@@ -26,7 +26,6 @@ export default function BacklogSection({
   backlogData,
   getBacklogDataApi,
   statusData,
-  typesData,
   userList,
   sprintData,
   projectKey
@@ -35,6 +34,7 @@ export default function BacklogSection({
   const { boardId = '', projectId = '' } = useParams();
   const [showCreateSprint, setShowCreateSprint] = useState(false);
   const createIssueRef = useRef<HTMLInputElement | null>(null);
+  const taskTypes = useContext(TaskTypesContext);
 
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
 
@@ -44,7 +44,7 @@ export default function BacklogSection({
         const data = {
           title: createIssueRef?.current?.value,
           status: 'to do',
-          typeId: typesData?.filter((types) => {
+          typeId: taskTypes.filter((types) => {
             return types.slug === currentTypeOption;
           })[0].id,
           boardId,
@@ -134,7 +134,6 @@ export default function BacklogSection({
                         >
                           <TaskItem
                             task={task}
-                            typesData={typesData}
                             projectKey={projectKey}
                             statusData={statusData}
                             userList={userList}
