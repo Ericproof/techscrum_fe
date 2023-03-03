@@ -62,7 +62,7 @@ export default function CardRightContent({
   const [showSelectDropDown, setShowSelectDropDown] = useState(false);
   const [showPriorityDropDown, setShowPriorityDropDown] = useState(false);
   const [selectedTypeIcon, setSelectedTypeIcon] = useState(TYPE[taskInfo.typeId.slug]);
-  const [selectedType, setSelectedType] = useState(taskInfo.typeId.slug);
+  const [selectedType, setSelectedType] = useState(taskInfo.typeId.name);
   const [selectedPriorityIcon, setSelectedPriorityIcon] = useState(PRIORITY[taskInfo.priority]);
   const [selectedPriority, setSelectedPriority] = useState(taskInfo.priority);
   const taskTypes = useContext(TaskTypesContext);
@@ -158,8 +158,8 @@ export default function CardRightContent({
                     setShowSelectDropDown((prevState) => !prevState);
                   }}
                 >
-                  <img src={selectedTypeIcon} alt="Story" />
-                  <div>{selectedType}</div>
+                  <img className={style.selectedTypeIcon} src={selectedTypeIcon} alt="Story" />
+                  <div className={style.selectedType}>{selectedType}</div>
                 </button>
               </div>
               {showSelectDropDown && checkAccess('edit:tasks', projectId) && (
