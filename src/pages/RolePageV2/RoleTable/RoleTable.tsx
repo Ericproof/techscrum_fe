@@ -70,17 +70,6 @@ function RoleTable(props: IRoleTable) {
     'settings'
   ];
 
-  // useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       const res = await getPermissions();
-  //       setPermissions(res);
-  //     } catch (err) {
-  //       toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
-  //     }
-  //   })();
-  // }, []);
-
   const openMoreHandler = (e) => {
     setSelectRole(e.target.value);
   };
@@ -94,10 +83,6 @@ function RoleTable(props: IRoleTable) {
     deleteRole(selectRole);
     setSelectRole('');
   };
-
-  // 'projects'
-
-  // console.log(dPermissions, roles[2].permission);
 
   return (
     <table className={styles['roles-table-container']}>
@@ -115,14 +100,10 @@ function RoleTable(props: IRoleTable) {
             <tr className={styles['role-body']} key={role.id}>
               <th className={styles.permissions}>{role.name}</th>
               {operationList.map((el) => {
-                // const activeList = operationFilter(el, role.permission);
-                // return <th key={el}>{operationFilter(el, role.permission)}</th>;
                 return (
                   <th key={el} className={styles.permissions}>
                     <div className={styles['default-status']}>
                       {indicatorsGenerator(el, role.permission)}
-                      {/* {operationFilter(el, dPermissions)} */}
-                      {/* {defaultStatus} */}
                     </div>
                   </th>
                 );
@@ -137,11 +118,13 @@ function RoleTable(props: IRoleTable) {
                       <RiEditLine color="white" size="20px" />
                     </button>
                   </li>
-                  <li>
-                    <button onClick={deleteRoleHandler} className={styles.cancelBtn}>
-                      <ImCancelCircle color="white" size="20px" />
-                    </button>
-                  </li>
+                  {role.allowDelete && (
+                    <li>
+                      <button onClick={deleteRoleHandler} className={styles.cancelBtn}>
+                        <ImCancelCircle color="white" size="20px" />
+                      </button>
+                    </li>
+                  )}
                 </ul>
               </th>
             </tr>

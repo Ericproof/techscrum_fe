@@ -7,6 +7,7 @@ export interface IProject {
   boardId?: string;
   projectLeadId?: IUserInfo;
   updateAt: Date;
+  roles: IRole[];
 }
 
 export interface IProjectData {
@@ -245,6 +246,7 @@ export interface IRole {
   id: string;
   name?: string;
   slug?: string;
+  allowDelete?: boolean;
   permission: IPermission[];
 }
 

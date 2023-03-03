@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
-// import components
 import Loading from '../../components/Loading/Loading';
 import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
 import RoleTable from './RoleTable/RoleTable';
@@ -27,7 +26,6 @@ function RolePage() {
   const [editRole, setEditRole] = useState('');
   const [selectedRole, setSelectedRole] = useState<IRole>({ id: '', permission: [] });
   const [permissions, setPermissions] = useState<IPermissions[]>([]);
-  // const [roleState, dispatchRole] = useReducer(roleReducer, { roleName: '', permission: [] });
 
   const fetchRoles = useCallback(async () => {
     try {

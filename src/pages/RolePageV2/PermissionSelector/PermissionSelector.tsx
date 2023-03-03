@@ -15,6 +15,8 @@ function PermissionSelector(props: IProps) {
   // setName === 'EDIT' or 'roleId'
   const { setName, submitRoleHandler, closeHandler, permissions, role } = props;
   const [roleName, setRoleName] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
+  const [errorActive, setErrorActive] = useState(false);
 
   const operationList = [
     'projects',
@@ -71,6 +73,17 @@ function PermissionSelector(props: IProps) {
       }
     });
     if (setName === 'EDIT') {
+      if (!roleName) {
+        setErrorActive(true);
+        setErrorMsg('please Enter a valid role name!!!');
+        return;
+      }
+
+      if (newPermissions.length === 0) {
+        setErrorActive(true);
+        setErrorMsg('please select at least one permission!!!');
+        return;
+      }
       submitRoleHandler(roleName, newPermissions, true);
     } else {
       submitRoleHandler(setName, newPermissions, false);
@@ -79,7 +92,13 @@ function PermissionSelector(props: IProps) {
 
   return (
     <div className={styles['popup-container']}>
-      <form onSubmit={submitHandler}>
+      <div>{setName === 'EDIT' ? <h1>Add New Role</h1> : <h1>Edit Permissions</h1>}</div>
+      <form
+        onSubmit={submitHandler}
+        onChange={() => {
+          setErrorActive(false);
+        }}
+      >
         {setName === 'EDIT' && (
           <label htmlFor="roleName">
             Role name:
@@ -103,57 +122,12 @@ function PermissionSelector(props: IProps) {
             );
           })}
         </div>
+        <div>{errorActive && <p>{errorMsg}</p>}</div>
         <input type="submit" value="Submit" />
         <input type="button" value="close" onClick={closeHandler} />
       </form>
     </div>
   );
 }
-// PermissionSelector.defaultProps = {
-//   role: {}
-// };
 
-// permissionList
-// permissionTypes.map((type) => {
-//   return (
-//     <div key={type}>
-//       <p>{`${type}:`}</p>
-//       <label htmlFor={`view:${type}`}>
-//         <input type="checkbox" id={`view:${type}`} />
-//         View
-//       </label>
-//       <label htmlFor={`edit:${type}`}>
-//         <input type="checkbox" id={`edit:${type}`} />
-//         Edit
-//       </label>
-//       <label htmlFor={`delete:${type}`}>
-//         <input type="checkbox" id={`delete:${type}`} />
-//         Delete
-//       </label>
-//       <label htmlFor={`boards:${type}`}>
-//         <input type="checkbox" id={`boards:${type}`} />
-//         Create
-//       </label>
-//     </div>
-//   );
-// })
-
-// return <SelectorIndicator key={el.id} isChecked permission={el} />;
-// .map((permission) => {
-//   return (
-//     <label key={permission.id} htmlFor={permission.id}>
-//       <input type="checkbox" id={permission.id} />
-//       {permission.description}
-//     </label>
-//   );
-// });
-
-// const editForm = permissions.map((permission) => {
-//   return (
-//     <label key={permission.id} htmlFor={permission.id}>
-//       <input type="checkbox" id={permission.id} />
-//       {permission.description}
-//     </label>
-//   );
-// });
 export default PermissionSelector;

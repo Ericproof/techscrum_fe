@@ -22,8 +22,4 @@ function SelectorIndicator({ isChecked, permission }: IProps) {
   );
 }
 
-// PermissionIndicator.defaultProps = {
-//   isChecked: false
-// };
-
 export default SelectorIndicator;
