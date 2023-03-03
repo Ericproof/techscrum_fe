@@ -69,8 +69,6 @@ export default function CardRightContent({
   const operation = 'updated';
   const userId = userInfo.id;
   const taskId = taskInfo.id;
-  // const [showSelectDropDown, setShowSelectDropDown] = useState(false);
-  // const [showPriorityDropDown, setShowPriorityDropDown] = useState(false);
   const [selectedTypeIcon, setSelectedTypeIcon] = useState(taskInfo.typeId.icon);
   const [selectedType, setSelectedType] = useState(taskInfo.typeId.name);
   const [selectedPriorityIcon, setSelectedPriorityIcon] = useState(PRIORITY[taskInfo.priority]);
