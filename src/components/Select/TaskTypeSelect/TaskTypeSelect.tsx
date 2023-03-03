@@ -101,7 +101,7 @@ export default function TaskTypeSelect({
   }
 
   // eslint-disable-next-line no-console
-  console.log('i am hovered');
+  console.log('i am re rendering');
 
   return (
     <div className={styles.container} ref={containerRef}>

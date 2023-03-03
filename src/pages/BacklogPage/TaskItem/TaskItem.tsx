@@ -1,5 +1,5 @@
 // eslint-disable jsx-a11y/control-has-associated-label
-// eslint-disable no-console
+/* eslint-disable no-console, no-unused-vars */
 import React, { useState } from 'react';
 import { FaPen } from 'react-icons/fa';
 import { toast } from 'react-toastify';
@@ -12,6 +12,7 @@ import StatusBtn from '../StatusBtn/StatusBtn';
 import AssigneeBtn from '../AssigneeBtn/AssigneeBtn';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import { updateTask } from '../../../api/backlog/backlog';
+import TypeEdit from './TypeEdit';
 
 interface ITaskInput {
   task: any;
@@ -33,12 +34,16 @@ export default function TaskItem({
   getBacklogDataApi,
   projectKey
 }: ITaskInput) {
-  // eslint-disable-next-line no-console
-
-  // eslint-disable-next-line no-console
+  const taskTypeOptions = typesData.map((e) => ({
+    id: e.id,
+    name: e.name,
+    icon: e.icon
+  }));
 
   const [title, setTitle] = useState(task.title);
-  const [taskTypeId, setTaskTypeId] = useState(task.typeId.id);
+  const [value, setValue] = useState<typeof taskTypeOptions[0] | undefined>(
+    taskTypeOptions.find((e) => e.id === task.typeId.id)
+  );
 
   const updateTaskTitleContent = () => {
     if (title.trim() !== task.title) {
@@ -72,17 +77,6 @@ export default function TaskItem({
     }
   };
 
-  // eslint-disable-next-line no-console
-
-  const onTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    // eslint-disable-next-line no-console
-
-    setTaskTypeId(e.target.value);
-    // eslint-disable-next-line no-console
-    const newTypeId = e.target.value;
-    updateTaskType(newTypeId);
-  };
-
   return (
     <div
       className={styles.container}
@@ -92,23 +86,12 @@ export default function TaskItem({
       ref={myRef}
     >
       <div className={styles.taskInfo}>
-        <label htmlFor="taskTypes" className={styles.typeBtn}>
-          <select
-            name="taskTypes"
-            id="taskTypes"
-            value={taskTypeId}
-            onChange={onTypeChange}
-            className={styles.typeSelect}
-          >
-            {typesData.map((e) => (
-              <>
-                <img src={e.icon} alt={e.icon} />
-                <option key={e.id} value={e.id} className={styles.typeOpt} label={e.name} />
-              </>
-            ))}
-          </select>
-        </label>
-
+        <TypeEdit
+          value={value}
+          options={taskTypeOptions}
+          onChange={(option) => setValue(option)}
+          updateTaskType={updateTaskType}
+        />
         <div className={styles.taskIdContainer}>
           <p>{`${projectKey}-${task.id.slice(task.id.length - 3)}`}</p>
         </div>
