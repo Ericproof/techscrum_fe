@@ -46,15 +46,31 @@ export default function CardRightContent({
     Lowest: 'https://010001.atlassian.net/images/icons/priorities/lowest.svg'
   };
   const priorityOptions = ['Highest', 'High', 'Medium', 'Low', 'Lowest'];
-  const { visible, setVisible, myRef } = useOutsideAlerter(false);
-  const handleClickOutside = () => setVisible(true);
+  const {
+    visible: visibleSelectStatus,
+    setVisible: setVisibleSelectStatus,
+    myRef: selectStatusRef
+  } = useOutsideAlerter(false);
+  const {
+    visible: visibleSelectType,
+    setVisible: setVisibleSelectType,
+    myRef: selectTypeRef
+  } = useOutsideAlerter(false);
+  const {
+    visible: visibleSelectPriority,
+    setVisible: setVisibleSelectPriority,
+    myRef: selectPriorityRef
+  } = useOutsideAlerter(false);
+  const handleSelectStatusClickOutside = () => setVisibleSelectStatus(true);
+  const handleSelectTypeClickOutside = () => setVisibleSelectType(true);
+  const handleSelectPriorityOutside = () => setVisibleSelectPriority(true);
   const editAccess = checkAccess('edit:tasks', projectId);
   const userInfo = useContext(UserContext);
   const operation = 'updated';
   const userId = userInfo.id;
   const taskId = taskInfo.id;
-  const [showSelectDropDown, setShowSelectDropDown] = useState(false);
-  const [showPriorityDropDown, setShowPriorityDropDown] = useState(false);
+  // const [showSelectDropDown, setShowSelectDropDown] = useState(false);
+  // const [showPriorityDropDown, setShowPriorityDropDown] = useState(false);
   const [selectedTypeIcon, setSelectedTypeIcon] = useState(taskInfo.typeId.icon);
   const [selectedType, setSelectedType] = useState(taskInfo.typeId.name);
   const [selectedPriorityIcon, setSelectedPriorityIcon] = useState(PRIORITY[taskInfo.priority]);
@@ -116,7 +132,7 @@ export default function CardRightContent({
     updateTaskInfo.typeId = task;
     setSelectedTypeIcon(task.icon);
     setSelectedType(task.slug);
-    setShowSelectDropDown(false);
+    handleSelectTypeClickOutside();
     onSave(updateTaskInfo);
   };
 
@@ -125,7 +141,7 @@ export default function CardRightContent({
     updateTaskInfo.priority = task;
     setSelectedPriorityIcon(PRIORITY[task]);
     setSelectedPriority(task);
-    setShowPriorityDropDown(false);
+    handleSelectPriorityOutside();
     onSave(updateTaskInfo);
   };
 
@@ -149,15 +165,15 @@ export default function CardRightContent({
                   data-testid="card-type-button"
                   type="button"
                   onClick={() => {
-                    setShowSelectDropDown((prevState) => !prevState);
+                    handleSelectTypeClickOutside();
                   }}
                 >
                   <img className={style.selectedTypeIcon} src={selectedTypeIcon} alt="Story" />
                   <div className={style.selectedType}>{selectedType}</div>
                 </button>
               </div>
-              {showSelectDropDown && checkAccess('edit:tasks', projectId) && (
-                <div className={style.taskTypeList}>
+              {visibleSelectType && checkAccess('edit:tasks', projectId) && (
+                <div className={style.taskTypeList} ref={selectTypeRef}>
                   <p className={style.typeListTitle}>CHANGE ISSUE TYPE</p>
                   {taskTypes.map((taskType) => {
                     const src = taskType.icon;
@@ -185,13 +201,13 @@ export default function CardRightContent({
               <MdOutlineBookmarkBorder className={style.reactIcon} />
               <div>Status</div>
             </div>
-            <div ref={myRef} className={style.statusSection}>
-              {visible && editAccess ? (
+            <div ref={selectStatusRef} className={style.statusSection}>
+              {visibleSelectStatus && editAccess ? (
                 <>
                   <button
                     type="button"
                     className={style.toDoButton}
-                    onClick={handleClickOutside}
+                    onClick={handleSelectStatusClickOutside}
                     data-testid="card-status-button"
                   >
                     {taskInfo.status && taskInfo.status.name.toUpperCase()}
@@ -214,7 +230,7 @@ export default function CardRightContent({
                               className={style.statusOptions}
                               data-testid="card-status-selection"
                               onClick={() => {
-                                setVisible(false);
+                                setVisibleSelectStatus(false);
                                 const updatedTaskInfo = { ...taskInfo };
                                 updatedTaskInfo.statusId = id;
                                 const { items, ...rest } = column;
@@ -234,7 +250,7 @@ export default function CardRightContent({
                 <button
                   type="button"
                   className={style.toDoButton}
-                  onClick={handleClickOutside}
+                  onClick={handleSelectStatusClickOutside}
                   data-testid="card-status-button"
                 >
                   {taskInfo.status && taskInfo.status.name.toUpperCase()}
@@ -273,7 +289,7 @@ export default function CardRightContent({
                 data-testid="card-priority-button"
                 type="button"
                 onClick={() => {
-                  setShowPriorityDropDown((prevState) => !prevState);
+                  handleSelectPriorityOutside();
                 }}
               >
                 <img
@@ -283,8 +299,8 @@ export default function CardRightContent({
                 />
                 <div>{selectedPriority}</div>
               </button>
-              {showPriorityDropDown && checkAccess('edit:tasks', projectId) && (
-                <div className={style.taskTypeList}>
+              {visibleSelectPriority && checkAccess('edit:tasks', projectId) && (
+                <div className={style.taskTypeList} ref={selectPriorityRef}>
                   {priorityOptions.map((priorityOption) => {
                     const src = PRIORITY[priorityOption];
                     return (
