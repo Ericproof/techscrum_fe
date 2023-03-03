@@ -24,11 +24,13 @@ export default function ReporterFields({
         <BsPerson className={styles.reactIcon} />
         <div>Reporter</div>
       </div>
-      <UserSelect
-        onChange={reporterOnchangeEventHandler}
-        value={taskInfo.reporterId}
-        allowEdit={editAccess}
-      />
+      <div>
+        <UserSelect
+          onChange={reporterOnchangeEventHandler}
+          value={taskInfo.reporterId}
+          allowEdit={editAccess}
+        />
+      </div>
     </div>
   );
 }
