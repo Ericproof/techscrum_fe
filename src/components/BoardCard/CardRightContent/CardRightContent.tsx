@@ -130,7 +130,7 @@ export default function CardRightContent({
     updateTaskInfo.typeId = task;
     setSelectedTypeIcon(task.icon);
     setSelectedType(task.slug);
-    handleSelectTypeClickOutside();
+    setVisibleSelectType(false);
     onSave(updateTaskInfo);
   };
 
@@ -139,7 +139,7 @@ export default function CardRightContent({
     updateTaskInfo.priority = task;
     setSelectedPriorityIcon(PRIORITY[task]);
     setSelectedPriority(task);
-    handleSelectPriorityOutside();
+    setVisibleSelectPriority(false);
     onSave(updateTaskInfo);
   };
 
