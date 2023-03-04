@@ -1,0 +1,30 @@
+[
+  {
+    "id": "63fed22858b88c2bca5d46c9",
+    "name": "to do",
+    "slug": "to-do",
+    "order": 0,
+    "board": "6358beaba662585de524593d"
+  },
+  {
+    "id": "63fed22858b88c2bca5d46ca",
+    "name": "in progress",
+    "slug": "in-progress",
+    "order": 1,
+    "board": "6358beaba662585de524593d"
+  },
+  {
+    "id": "63fed22858b88c2bca5d46cb",
+    "name": "review",
+    "slug": "review",
+    "order": 2,
+    "board": "6358beaba662585de524593d"
+  },
+  {
+    "id": "63fed22858b88c2bca5d46cc",
+    "name": "done",
+    "slug": "done",
+    "order": 3,
+    "board": "6358beaba662585de524593d"
+  }
+]

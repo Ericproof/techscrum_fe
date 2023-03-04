@@ -1,5 +1,4 @@
 // eslint-disable jsx-a11y/control-has-associated-label
-
 import React, { useState } from 'react';
 import { FaPen } from 'react-icons/fa';
 import { toast } from 'react-toastify';
@@ -72,7 +71,7 @@ export default function TaskItem({
       className={styles.container}
       onFocus={() => {}}
       onBlur={() => {}}
-      data-testid={`task-${task.id}`}
+      data-testid={`task-hover-${task.id}`}
       ref={myRef}
     >
       <div className={styles.taskInfo}>
@@ -96,7 +95,7 @@ export default function TaskItem({
             }}
           />
         ) : (
-          <div className={styles.taskTitle} data-testid={'task-'.concat(task.id)}>
+          <div className={styles.taskTitle} data-testid={`task-${task.id}`}>
             {task.title}
           </div>
         )}

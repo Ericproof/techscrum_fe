@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable no-console, no-unused-vars */
 import React, { useState, useContext } from 'react';
 import styles from './TypeEdit.module.scss';
 import { TaskTypesContext } from '../../../context/TaskTypeProvider';
