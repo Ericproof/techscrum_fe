@@ -91,7 +91,7 @@ function PermissionSelector(props: IProps) {
   };
 
   return (
-    <div className={styles['popup-container']}>
+    <div data-testid="permission-selector" className={styles['popup-container']}>
       <form
         onSubmit={submitHandler}
         onChange={() => {
@@ -104,6 +104,7 @@ function PermissionSelector(props: IProps) {
           <label htmlFor="roleName" className={styles['roleName-container']}>
             <p>Role name:</p>
             <input
+              data-testid="role-input"
               name="roleName"
               onChange={(e) => {
                 setRoleName(e.target.value);
@@ -127,8 +128,12 @@ function PermissionSelector(props: IProps) {
         </div>
         <div>{errorActive && <p>{errorMsg}</p>}</div>
         <div className={styles['btn-container']}>
-          {' '}
-          <input type="submit" value="Submit" className={`${styles.Btn} ${styles.add}`} />
+          <input
+            data-testid="submit-btn"
+            type="submit"
+            value="Submit"
+            className={`${styles.Btn} ${styles.add}`}
+          />
           <input
             type="button"
             value="close"

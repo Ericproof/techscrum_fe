@@ -15,7 +15,12 @@ export default function ProjectMemberTitle({ setInviteFormVisible, projectId }: 
       <h1>Access</h1>
       <div>
         <button onClick={() => setInviteFormVisible(true)}>Add Member</button>
-        <button onClick={() => navigate(`/projects/${projectId}/rolesV2`)}>Manage Role</button>
+        <button
+          data-testid="manage-role-btn"
+          onClick={() => navigate(`/projects/${projectId}/rolesV2`)}
+        >
+          Manage Role
+        </button>
       </div>
     </div>
   );

@@ -20,6 +20,7 @@ function AddRoleBtn(props: IAddRoleBtn) {
     <div>
       <div className={styles['addBtn-container']}>
         <button
+          data-testid="add-role-btn"
           className={styles.addBtn}
           onClick={() => addRole()}
           onMouseEnter={() => setIsShown(true)}

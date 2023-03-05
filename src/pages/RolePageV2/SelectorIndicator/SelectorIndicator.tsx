@@ -11,7 +11,12 @@ function SelectorIndicator({ isChecked, permission }: IProps) {
   const [checked, setChecked] = useState(isChecked);
 
   return (
-    <label key={permission.id} htmlFor={permission.id} className={styles.permission}>
+    <label
+      data-testid="permission-option"
+      key={permission.id}
+      htmlFor={permission.id}
+      className={styles.permission}
+    >
       <input
         type="checkbox"
         id={permission.id}

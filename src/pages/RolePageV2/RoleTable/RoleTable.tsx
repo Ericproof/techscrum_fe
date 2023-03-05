@@ -85,7 +85,7 @@ function RoleTable(props: IRoleTable) {
   };
 
   return (
-    <table className={styles['roles-table-container']}>
+    <table data-testid="role-table" className={styles['roles-table-container']}>
       <thead>
         <tr className={styles['role-header']}>
           <th>Roles</th>
@@ -108,13 +108,17 @@ function RoleTable(props: IRoleTable) {
                   </th>
                 );
               })}
-              <th className={styles['moreBtn-container']}>
+              <th data-testid="more-btn" className={styles['moreBtn-container']}>
                 <button className={styles.moreBtn} value={role.id} onMouseEnter={openMoreHandler}>
                   <HiDotsHorizontal color="#0052cc" size="20px" />
                 </button>
-                <ul className={styles['drop-down']}>
+                <ul data-testid="more-list" className={styles['drop-down']}>
                   <li>
-                    <button onClick={editRoleHandler} className={styles.editBtn}>
+                    <button
+                      data-testid="edit-btn"
+                      onClick={editRoleHandler}
+                      className={styles.editBtn}
+                    >
                       <RiEditLine color="white" size="20px" />
                     </button>
                   </li>
