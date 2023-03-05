@@ -276,6 +276,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 10px 15px rgb(16 30 54 / 15%);
           }
         }
       }
@@ -316,7 +317,8 @@
       font-size: 2rem;
       margin: 0;
       @media (max-width: 768px) {
-        font-size: clamp(1.5rem, 6vw, 3rem);
+        text-align: center;
+        font-size: clamp(1.5rem, 5.5vw, 2.5rem);
       }
     }
     .form__row {
@@ -357,10 +359,11 @@
           font-size: 1rem;
         }
         a {
+          color:#292d34;
           text-decoration: none;
           font-weight: bold;
           cursor: pointer;
-          :hover {
+          &:hover {
             text-decoration: underline;
           }
         }
