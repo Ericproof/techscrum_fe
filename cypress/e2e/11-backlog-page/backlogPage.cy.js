@@ -1,12 +1,13 @@
 /// <reference types="cypress" />
-import typesData from '../../fixtures/types.json';
-import projectsData from '../../fixtures/projects.json';
-import boardData from '../../fixtures/board.json';
-import backlogData from '../../fixtures/backlog.json';
-import backlogDataAddTask from '../../fixtures/backlogAddTask.json';
-import backlogDataDeleteTask from '../../fixtures/backlogDeleteTask.json';
-import backlogDataChangeTitle from '../../fixtures/backlogChangeTitle.json';
-import backlogDataChangePriority from '../../fixtures/backlogChangePriority.json';
+import typesData from '../../fixtures/11-backlog-page/types.json';
+import projectsData from '../../fixtures/11-backlog-page/projects.json';
+import boardData from '../../fixtures/11-backlog-page/board.json';
+import backlogData from '../../fixtures/11-backlog-page/backlog.json';
+import backlogDataAddTask from '../../fixtures/11-backlog-page/backlogAddTask.json';
+import backlogDataDeleteTask from '../../fixtures/11-backlog-page/backlogDeleteTask.json';
+import backlogDataChangeTitle from '../../fixtures/11-backlog-page/backlogChangeTitle.json';
+import backlogDataChangePriority from '../../fixtures/11-backlog-page/backlogChangePriority.json';
+import backlogDataTaskTypeChange from '../../fixtures/11-backlog-page/backlogChangeTaskType.json';
 
 describe('Backlog page', () => {
   beforeEach(() => {
@@ -21,16 +22,32 @@ describe('Backlog page', () => {
     cy.get('[data-testid="kitman-test1"]').click();
     cy.wait('@fetch-board');
     cy.get('[data-testid="backlog-btn"]').click();
-    cy.wait('@fetch-backlog'); 
+    cy.wait('@fetch-backlog');
   });
 
   it('Test backlog page show tasks', () => {
     cy.get('[data-testid="task-63e9b7460e1460d2e3e20c52"]').contains('1302');
   });
-
+  it('Test change task type', () => {
+    cy.intercept('PUT', '**/tasks/*', backlogDataTaskTypeChange).as('change-task');
+    cy.intercept('GET', '**/projects/*/backlogs', backlogDataTaskTypeChange).as(
+      'fetch-backlog-task-type-updated'
+    );
+    cy.get('[data-testid="types-btn-63e9b7460e1460d2e3e20c52"]').click();
+    cy.get('[data-testid="Tech Debt-btn-63e9b7460e1460d2e3e20c52"]').click();
+    cy.wait('@change-task');
+    cy.wait('@fetch-backlog-task-type-updated');
+    cy.get('[data-testid="current-icon-63e9b7460e1460d2e3e20c52"]').should(
+      'have.attr',
+      'alt',
+      'Tech Debt'
+    );
+  });
   it('Test create task', () => {
     cy.intercept('POST', '**/tasks', backlogDataAddTask).as('create-issue');
-    cy.intercept('GET', '**/projects/*/backlogs', backlogDataAddTask).as('fetch-backlog-task-added');
+    cy.intercept('GET', '**/projects/*/backlogs', backlogDataAddTask).as(
+      'fetch-backlog-task-added'
+    );
     cy.get('[data-testid="create-issue"]').click();
     cy.get('[data-testid="create-issue-input"]').type('new issue {enter}');
     cy.wait('@create-issue');

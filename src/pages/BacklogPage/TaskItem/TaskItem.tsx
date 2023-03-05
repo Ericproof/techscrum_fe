@@ -76,6 +76,7 @@ export default function TaskItem({
     >
       <div className={styles.taskInfo}>
         <TypeEdit
+          taskId={task.id}
           value={value}
           onChange={(option) => setValue(option)}
           updateTaskType={updateTaskType}

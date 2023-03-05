@@ -11,12 +11,13 @@ export type SelectOption = {
 };
 
 type SelectProps = {
+  taskId: string;
   value?: SelectOption;
   onChange: (value: SelectOption | undefined) => void;
   updateTaskType: (newTypeId: string) => Promise<void>;
 };
 
-export default function TypeEdit({ value, onChange, updateTaskType }: SelectProps) {
+export default function TypeEdit({ taskId, value, onChange, updateTaskType }: SelectProps) {
   const [isOpen, setIsOpen] = useState(false);
   const taskTypes = useContext(TaskTypesContext);
 
@@ -36,8 +37,14 @@ export default function TypeEdit({ value, onChange, updateTaskType }: SelectProp
       tabIndex={0}
       onClick={() => setIsOpen((prev) => !prev)}
       onBlur={() => setIsOpen(false)}
+      data-testid={`types-btn-${taskId}`}
     >
-      <img src={value?.icon} alt={value?.name} className={styles.currentIcon} />
+      <img
+        src={value?.icon}
+        alt={value?.name}
+        className={styles.currentIcon}
+        data-testid={`current-icon-${taskId}`}
+      />
       <ul className={`${styles.options} ${isOpen ? styles.show : ''}`}>
         {options
           .filter((e) => e.name !== value?.name)
@@ -51,6 +58,7 @@ export default function TypeEdit({ value, onChange, updateTaskType }: SelectProp
                 setIsOpen(false);
                 updateTaskType(option.id);
               }}
+              data-testid={`${option.name}-btn-${taskId}`}
             >
               <img src={option.icon} className={styles.icon} alt={option.name} />
               <span className={styles.name}>{option.name}</span>
