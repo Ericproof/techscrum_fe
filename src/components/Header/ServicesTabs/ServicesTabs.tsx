@@ -179,7 +179,7 @@ export default function ServicesTabs({ show }: Props) {
       <div>
         <button
           data-testid="features"
-          className={styles.tab}
+          className={[styles.tab, styles.tabBtn].join(' ')}
           onClick={() => activeMenu('features')}
         >
           Features
@@ -188,14 +188,20 @@ export default function ServicesTabs({ show }: Props) {
         <OneColumnsMenu servicesInfo={features} active={featuresActive} />
       </div>
       <div>
-        <button className={styles.tab} onClick={() => activeMenu('solution')}>
+        <button
+          className={[styles.tab, styles.tabBtn].join(' ')}
+          onClick={() => activeMenu('solution')}
+        >
           Solutions
           <MdOutlineKeyboardArrowDown />
         </button>
         <OneColumnsMenu servicesInfo={solutions} active={solutionActive} />
       </div>
       <div>
-        <button className={styles.tab} onClick={() => activeMenu('teams')}>
+        <button
+          className={[styles.tab, styles.tabBtn].join(' ')}
+          onClick={() => activeMenu('teams')}
+        >
           Teams
           <MdOutlineKeyboardArrowDown />
         </button>
@@ -203,14 +209,17 @@ export default function ServicesTabs({ show }: Props) {
       </div>
 
       <div>
-        <button className={styles.tab} onClick={() => activeMenu('resources')}>
+        <button
+          className={[styles.tab, styles.tabBtn].join(' ')}
+          onClick={() => activeMenu('resources')}
+        >
           Resources
           <MdOutlineKeyboardArrowDown />
         </button>
         <OneColumnsMenu servicesInfo={resources} active={resourcesActive} />
       </div>
       <div>
-        <Link className={styles.tab} to="/price">
+        <Link className={[styles.tab, styles.tabLink].join(' ')} to="/price">
           Price
         </Link>
       </div>
