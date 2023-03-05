@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { IPermissions } from '../../../types';
+import styles from './SelectorIndicator.module.scss';
 
 interface IProps {
   isChecked: boolean;
@@ -10,7 +11,7 @@ function SelectorIndicator({ isChecked, permission }: IProps) {
   const [checked, setChecked] = useState(isChecked);
 
   return (
-    <label key={permission.id} htmlFor={permission.id}>
+    <label key={permission.id} htmlFor={permission.id} className={styles.permission}>
       <input
         type="checkbox"
         id={permission.id}

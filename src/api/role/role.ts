@@ -14,20 +14,35 @@ export const getOneRoles = async (projectId: string, roleId: string) => {
 };
 
 export const addRole = async (projectId: string, roleName: string, permissions: Array<string>) => {
+  const configHeader = {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('access_token') ?? ''}`
+    }
+  };
   const path = `${config.apiAddress}/projects/${projectId}/roles`;
-  const response = await axios.put(path, { roleName, permissions });
+  const response = await axios.put(path, { roleName, permissions }, configHeader);
   return response.data;
 };
 
 export const updateRole = async (projectId: string, roleId: string, permissions: Array<string>) => {
+  const configHeader = {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('access_token') ?? ''}`
+    }
+  };
   const path = `${config.apiAddress}/projects/${projectId}/roles/${roleId}`;
-  const response = await axios.put(path, { permissions });
+  const response = await axios.put(path, { permissions }, configHeader);
   return response.data;
 };
 
 export const deleteRole = async (projectId: string, roleId: string) => {
+  const configHeader = {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('access_token') ?? ''}`
+    }
+  };
   const path = `${config.apiAddress}/projects/${projectId}/roles/${roleId}`;
-  const response = await axios.delete(path);
+  const response = await axios.delete(path, configHeader);
   return response.data;
 };
 

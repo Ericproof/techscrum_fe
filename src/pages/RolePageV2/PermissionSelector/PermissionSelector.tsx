@@ -28,7 +28,7 @@ function PermissionSelector(props: IProps) {
     'settings'
   ];
 
-  const defaultFomat = (operation: string, defaultPermissions: Array<any>) => {
+  const defaultFormat = (operation: string, defaultPermissions: Array<any>) => {
     return defaultPermissions
       .filter((permission) => {
         const seperation = permission?.slug.split(':');
@@ -92,16 +92,17 @@ function PermissionSelector(props: IProps) {
 
   return (
     <div className={styles['popup-container']}>
-      <div>{setName === 'EDIT' ? <h1>Add New Role</h1> : <h1>Edit Permissions</h1>}</div>
       <form
         onSubmit={submitHandler}
         onChange={() => {
           setErrorActive(false);
         }}
+        className={styles['form-container']}
       >
+        <div>{setName === 'EDIT' ? <h1>Add New Role</h1> : <h1>Edit Permissions</h1>}</div>
         {setName === 'EDIT' && (
-          <label htmlFor="roleName">
-            Role name:
+          <label htmlFor="roleName" className={styles['roleName-container']}>
+            <p>Role name:</p>
             <input
               name="roleName"
               onChange={(e) => {
@@ -113,18 +114,28 @@ function PermissionSelector(props: IProps) {
         <div>
           {operationList.map((el) => {
             return (
-              <div key={el}>
+              <div key={el} className={styles['operation-container']}>
                 <p>{`${el}:`}</p>
-                {setName === 'EDIT'
-                  ? defaultFomat(el, permissions)
-                  : operationFilter(el, permissions, role.permission)}
+                <div className={styles['permission-container']}>
+                  {setName === 'EDIT'
+                    ? defaultFormat(el, permissions)
+                    : operationFilter(el, permissions, role.permission)}
+                </div>
               </div>
             );
           })}
         </div>
         <div>{errorActive && <p>{errorMsg}</p>}</div>
-        <input type="submit" value="Submit" />
-        <input type="button" value="close" onClick={closeHandler} />
+        <div className={styles['btn-container']}>
+          {' '}
+          <input type="submit" value="Submit" className={`${styles.Btn} ${styles.add}`} />
+          <input
+            type="button"
+            value="close"
+            onClick={closeHandler}
+            className={`${styles.Btn} ${styles.cancel}`}
+          />
+        </div>
       </form>
     </div>
   );
