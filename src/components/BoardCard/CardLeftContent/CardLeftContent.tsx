@@ -6,7 +6,6 @@ import style from './CardLeftContent.module.scss';
 import Attach from './components/Attach/Attach';
 import Description from './components/Description/Description';
 import LeftBottom from './components/LeftBottom/LeftBottom';
-import Title from './components/Title/Title';
 import { createActivity } from '../../../api/activity/activity';
 import { ITaskEntity } from '../../../types';
 
@@ -52,29 +51,9 @@ export default function CardLeftContent({
     setDesc(e.target.value);
   };
 
-  const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.target.value);
-  };
-
-  const onBlurHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value !== taskInfo.title) {
-      const updatedTaskInfo = { ...taskInfo, title: e.target.value, description: desc };
-      onSave(updatedTaskInfo);
-    }
-  };
-
   return (
     <div className={style.container}>
       <form onSubmit={onSaveProcessing} onReset={onResetHandler} id="task-form">
-        <Title
-          taskInfo={taskInfo}
-          focusEventHandler={onFocusEventHandler}
-          isDisabled={!checkAccess('edit:tasks', projectId)}
-          onChangeTitle={onChangeTitle}
-          onBlurHandler={onBlurHandler}
-          value={title}
-        />
-        {checkAccess('edit:tasks', projectId) && <Attach onChangeAttachment={uploadFile} />}
         <PhotoGallery
           photoData={taskInfo.attachmentUrls}
           removeAttachment={removeAttachment}
@@ -87,6 +66,7 @@ export default function CardLeftContent({
           onChangeDesc={onChangeDesc}
           value={desc}
         />
+        {checkAccess('edit:tasks', projectId) && <Attach onChangeAttachment={uploadFile} />}
         {visible && (
           <div className={style.footerContent}>
             <button className={style.saveButton} type="submit">

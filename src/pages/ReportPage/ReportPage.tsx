@@ -13,10 +13,13 @@ import { BREAKPOINTS } from './utils';
 import {
   GET_START_SECTION_DATA,
   BOARD_SECTION_DATA_LIST,
-  FEATURE_SECTION_DATA
+  FEATURE_SECTION_DATA,
+  CUMSTOMER_SECTION_DATA,
+  SUMMARY_LINKS_DATA
 } from './pageTextContent';
 import FeatureImgCard from './components/Card/FeatureImgCard/FeatureImgCard';
 import SectionWrapper from './components/Card/SectionWrapper/SectionWrapper';
+import SummaryLinksCard from './components/Card/SummaryLinksCard/SummaryLinksCard';
 
 type ReportPageColors = '' | 'purple' | 'pink' | 'blue' | 'green' | 'yellow' | undefined;
 
@@ -31,6 +34,13 @@ function ReportPage() {
     <>
       <Header />
       <div className={styles.mainWrapper}>
+        <span className={styles.shape3Container}>
+          <img
+            src="https://themexriver.com/appilo-theme/seo-agency/wp-content/uploads/sites/56/2021/11/slider-shape-3.png"
+            alt=""
+          />
+        </span>
+        {/* hero-section */}
         <BasicFlex gap="large">
           <div>
             <HeroTitle mainTitleText="create the perfect Agile workflow with Board view" />
@@ -45,12 +55,14 @@ function ReportPage() {
             <VideoPlayer videoSrc="https://clickup.com/videos/features/kanban-board/board-view-agile-inventory.mp4" />
           </div>
         </BasicFlex>
-
+        {isDeskTopPlus && <Space power={1} />}
+        {isDeskTopPlus && <Space power={1} />}
+        {/* board-section */}
         {BOARD_SECTION_DATA_LIST.map(
           ({ MAIN_TITLE_TEXT, SUB_TITLE_TEXT, THEME_COLOR, VIDEO_URL, DESCRIPTION }, index) => (
             <BasicFlex
               flexGrowRatio="moreOnLeft"
-              gap="large"
+              gap={isDeskTopPlus ? 'extraLarge' : 'large'}
               key={MAIN_TITLE_TEXT + SUB_TITLE_TEXT}
               isFlexReverse={!!(index % 2)}
             >
@@ -69,6 +81,7 @@ function ReportPage() {
                 <Space power={3} />
                 <Paragraph centerText={!isDeskTop}>{DESCRIPTION}</Paragraph>
               </div>
+              {!isDeskTop && <Space power={2} />}
               <VideoPlayer
                 videoSrc={VIDEO_URL}
                 isHaveBackground
@@ -88,6 +101,7 @@ function ReportPage() {
             </BasicFlex>
           )
         )}
+        {/* feature-section */}
         <div>
           <HeroTitle
             mainTitleText={FEATURE_SECTION_DATA.SECTION_TITLE_MAIN_TEXT}
@@ -99,7 +113,7 @@ function ReportPage() {
           />
           <Space power={3} />
 
-          <BasicFlex gap="large">
+          <BasicFlex gap="large" style={isDeskTopPlus ? { paddingInline: 'unset' } : undefined}>
             {FEATURE_SECTION_DATA.SECTION_CARDS.map(
               ({ CARD_CONTENT_LIST, CARD_TITLE_TEXT, CARD_IMG_SRC, CARD_THEME_COLOR }) => (
                 <FeatureImgCard
@@ -122,11 +136,11 @@ function ReportPage() {
             )}
           </BasicFlex>
         </div>
-
+        {/* customer-section */}
         <SectionWrapper backgroundColor="default">
           <BasicFlex gap={isDeskTopPlus ? 'large' : 'small'}>
             <HeroTitle
-              mainTitleText="save one day every week with ClickUp's Board view"
+              mainTitleText={CUMSTOMER_SECTION_DATA.SECTION_TITLE}
               centerText={!isDeskTop}
               isMainTextShrink
             />
@@ -136,7 +150,7 @@ function ReportPage() {
                 insetBlock: '-20px',
                 right: '-20px',
                 background: `url(
-                  'https://clickup.com/images/collaboration-detection/bg__with-dotted.svg'
+                  ${CUMSTOMER_SECTION_DATA.SECTION_BACKGROUND_IMG}
                 ) repeat top right/cover`,
                 width: isDeskTop ? '50%' : '100%'
               }}
@@ -150,7 +164,8 @@ function ReportPage() {
           </BasicFlex>
         </SectionWrapper>
       </div>
-
+      {/* summary-link-sction */}
+      <SummaryLinksCard summaryLinksData={SUMMARY_LINKS_DATA} />
       <Footer />
     </>
   );

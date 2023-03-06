@@ -1,74 +1,56 @@
-import React, { useEffect, useRef, useState, Dispatch } from 'react';
+import React, { useState, Dispatch } from 'react';
 import { IoIosAdd } from 'react-icons/io';
 import styles from './BoardSearch.module.scss';
-import search from '../../../assets/search-line.svg';
 import checkAccess from '../../../utils/helpers';
 import ButtonV2 from '../../../lib/FormV2/ButtonV2/ButtonV2';
+import UserTaskFilter from '../../UserTaskFilter/UserTaskFilter';
+import SearchForBoard from '../../SearchForBoard/SearchForBoard';
 
 interface Props {
   updateIsCreateNewCard: () => void;
   setInputQuery: Dispatch<string>;
   projectId: string;
+  selectedUsers: any;
+  changeSelectedUsers: any;
+  userList: any;
 }
-export default function BoardSearch({ updateIsCreateNewCard, setInputQuery, projectId }: Props) {
+export default function BoardSearch({
+  updateIsCreateNewCard,
+  setInputQuery,
+  projectId,
+  selectedUsers,
+  changeSelectedUsers,
+  userList
+}: Props) {
   const avatars = [
     { id: 1, name: 'avatar1', url: '' },
     { id: 2, name: 'avatar2', url: '' },
     { id: 3, name: 'avatar3', url: '' },
     { id: 4, name: 'avatar4', url: '' }
   ];
+  const page = 'board';
 
   const [activeAvatarsID, setActiveAvatarsID] = useState<number>();
   const [activeAvatars, setActiveAvatars] = useState<boolean>(false);
 
   const [inputState, setInputState] = useState<boolean>(false);
-  const myRef = useRef<HTMLInputElement>(null);
-
-  const handleClickOutside = (e: MouseEvent) => {
-    const target = e.target as HTMLDivElement;
-
-    const val: string = myRef.current?.value.trim() ?? '';
-
-    if (!val.length && myRef.current !== null && !myRef.current.contains(target)) {
-      setInputState(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
-  });
 
   return (
     <div className={styles.searchBarContainer}>
-      <div
-        className={
-          inputState
-            ? `${styles.inputContainer} ${styles.inputContainerPlus}`
-            : styles.inputContainer
-        }
-      >
-        <input
-          type="text"
-          name="search"
-          ref={myRef}
-          placeholder={inputState ? 'Search this board' : ''}
-          onClick={() => {
-            setInputState(true);
-          }}
-          onChange={(event) => setInputQuery(event.target.value)}
-          data-testid="board-search"
+      <div className={styles.searchInputContainer}>
+        <SearchForBoard
+          inputState={inputState}
+          setInputQuery={setInputQuery}
+          setInputState={setInputState}
+          page={page}
         />
-        <span>
-          <img
-            className={
-              styles.inputImg ||
-              'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'
-            }
-            src={search}
-            alt="search"
-          />
-        </span>
+      </div>
+      <div className={styles.userTaskFilterContainer}>
+        <UserTaskFilter
+          selectedUsers={selectedUsers}
+          changeSelectedUsers={changeSelectedUsers}
+          userList={userList}
+        />
       </div>
       <fieldset style={{ display: 'none' }}>
         <ul className={styles.avatarContainer} id="myList">
@@ -118,13 +100,15 @@ export default function BoardSearch({ updateIsCreateNewCard, setInputQuery, proj
         </ul>
       </fieldset>
       {checkAccess('add:tasks', projectId) && (
-        <ButtonV2
-          text="ADD NEW"
-          onClick={updateIsCreateNewCard}
-          icon={<IoIosAdd className={styles.createCardIcon} />}
-          fill
-          dataTestId="board-create-card"
-        />
+        <div className={styles.addNewButtonContainer}>
+          <ButtonV2
+            text="ADD NEW"
+            onClick={updateIsCreateNewCard}
+            icon={<IoIosAdd className={styles.createCardIcon} />}
+            fill
+            dataTestId="board-create-card"
+          />
+        </div>
       )}
     </div>
   );

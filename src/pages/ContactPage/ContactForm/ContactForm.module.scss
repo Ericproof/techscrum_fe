@@ -1,7 +1,10 @@
+@use '../../../variables.scss' as *;
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@200;300;400;500;600&display=swap');
+
 .container {
   position: relative;
   overflow: hidden;
-  background:transparent;
+  background: transparent;
   border-radius: 12px;
   width: 100%;
   padding: 48px;
@@ -10,37 +13,39 @@
   @media (max-width: 1279px) {
     max-width: 450px;
   }
-  @media (max-width: 991px) {
-    width: 100%;
-  }
-  @media (max-width: 570px) {
-    max-width: 400px;
-  }
-  @media (max-width: 510px) {
-    max-width: 350px;
-  }
-  @media (max-width: 450px) {
-    max-width: 300px;
-  }
-  @media (max-width: 375px) {
-    max-width: 250px;
-  }
-  @media (max-width: 320px) {
-    max-width: 200px;
-  }
-  @media (max-width: 280px) {
-    max-width: 150px;
-  }
-  form {
+
+  .contactForm {
     display: flex;
     flex-direction: column;
-    box-sizing: border-box;
-    h3 {
+    gap: 1rem;
+    font-family: 'Work Sans', sans-serif;
+    select,
+    button,
+    input {
+      font-family: inherit;
+    }
+    .inputField {
+      padding: 1rem;
+      background-color: #f7f7f7;
+      border-radius: 0.5rem;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      &:hover {
+        border-color: $primaryColor;
+      }
+      select {
+        font-size: 1rem;
+        padding: 0.5rem 0;
+        border: none;
+        background-color: transparent;
+        outline: none;
+      }
+    }
+    .title {
       color: #1d1c39;
-      margin-bottom: 20px;
       font-size: 32px;
       line-height: 115%;
       font-weight: 400;
+      text-align: center;
       @media (max-width: 997px) {
         font-size: 26px;
       }
@@ -48,46 +53,27 @@
         font-size: 22px;
       }
     }
-    input {
-      position: relative;
-      display: inline-flex;
-      background: #fff;
-      border: 1px solid #c5cada;
-      box-sizing: border-box;
-      border-radius: 4px;
-      appearance: none;
-      font-size: 16px;
-      padding: 11px 12px;
-      width: 100%;
-      color: #000;
-      letter-spacing: 0.1px;
-      margin-bottom: 20px;
-      text-overflow: ellipsis;
-    }
+
     button {
-      display: block;
-      width: 100%;
-      border-radius: 32px;
+      border-radius: 0.5rem;
       color: #fff;
-      background: #895ef7;
-      margin-bottom: 20px;
+      background: $primaryColor;
       font-weight: 600;
-      font-size: 16px;
-      line-height: 150%;
+      font-size: 1rem;
+      line-height: 1.5;
       letter-spacing: 0.75px;
       padding: 16px 24px;
-      user-select: none;
-      text-align: center;
-      min-height: 49px;
+      width: 100%;
+      align-items: center;
       border: none;
       cursor: pointer;
-      transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      transition: all 0.15s ease-in-out;
       &:hover {
         outline: none;
         box-shadow: inset 0 0 0 100px rgb(0 0 0 / 30%);
       }
     }
-    p {
+    .desc {
       margin: 0;
       color: #727491;
       font-size: 14px;
@@ -95,12 +81,49 @@
       line-height: 145%;
       font-weight: 400;
       .link {
-        color: #895ef7;
+        color: $primaryColor;
         margin: 0;
         text-decoration: none;
         font-size: 14px;
         letter-spacing: 0.25px;
       }
     }
+    .errMsg {
+      text-align: center;
+      margin: 0 1rem;
+      line-height: 1.5;
+      font-size: 0.75rem;
+      color: red;
+    }
+    .loading{
+      text-align: center;
+      margin: 0 1rem;
+      line-height: 1.5;
+      font-size: 0.75rem;
+      color: $primaryColor;
+    }
   }
+}
+
+
+.close {
+  display: flex;
+  justify-content: flex-end;
+  margin:0.5em;
+}
+
+.close:hover {
+  cursor: pointer;
+}
+
+.modalPadding {
+  padding: 30px 80px 80px 80px;
+}
+
+.iconPosition {
+  text-align: center;
+}
+
+.messagePosition {
+  text-align: center;
 }
