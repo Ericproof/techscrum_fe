@@ -151,6 +151,7 @@
   color: #7c828d;
   font-size: 16px;
   line-height: 1.5;
+  letter-spacing: 0.05em;
 }
 
 .flex_col {
@@ -241,7 +242,7 @@
       border-left: 5px solid $primaryColor;
       box-shadow: 0 10px 25px rgb(0 0 0 / 15%);
       @media (max-width: 768px) {
-        padding: 1rem;
+        padding: 2rem;
       }
       .image {
         display: block;
@@ -251,7 +252,7 @@
         border-radius: 1rem;
         max-width: 500px;
         @media (max-width: 768px) {
-          margin: 1rem auto;
+          margin: -4rem auto 1rem;
         }
       }
       h3 {
@@ -270,8 +271,9 @@
           align-items: center;
           line-height: 1.2;
           .listIcon {
-            background-color: $primaryColor;
-            border-radius: 5px;
+            background: -webkit-linear-gradient(90deg, #9f8fff 0, $primaryColor 100%);
+            border-radius: 10px;
+            padding: 0.5em;
             margin-right: 1rem;
             display: flex;
             align-items: center;
@@ -283,21 +285,10 @@
     }
     .card.pink {
       border-left: 5px solid #fd71af;
-      .image {
-        display: block;
-        margin: -5rem auto 0 auto;
-        width: 100%;
-        aspect-ratio: 1.6;
-        border-radius: 1rem;
-        max-width: 500px;
-        @media (max-width: 768px) {
-          margin: 1rem auto;
-        }
-      }
       ul {
         li {
           .listIcon {
-            background-color: #fd71af;
+            background: -webkit-linear-gradient(90deg, #ff9ec9 0, #fd71af 100%);
           }
         }
       }
@@ -310,14 +301,20 @@
     padding: 0 1rem;
   }
   .card {
+    position:relative;
     display: flex;
     gap: 1rem;
     align-items: center;
     max-width: 1220px;
     margin: 2rem auto;
     border-radius: 1rem;
-    background-image: url('../../assets/bg__with-dotted.svg');
     box-shadow: 0 10px 25px rgb(0 0 0 / 15%);
+    .bg__dots{
+      position:absolute;
+      inset: (0 0 0 50%);
+      background-image: url('../../assets/bg__with-dotted.svg');
+      background-position: left;
+    }
     @media (max-width: 768px) {
       flex-direction: column;
     }
@@ -336,6 +333,10 @@
         text-align: center;
         font-size: clamp(1.5rem, 5.5vw, 2rem);
       }
+      @media (max-width: 768px) {
+        padding:1rem 1rem 0;
+        line-height: 1.5;
+      }
     }
     .form__row {
       display: flex;
@@ -346,7 +347,12 @@
       }
       @media (max-width: 420px) {
         gap: 1rem;
+        padding: 1rem;
         flex-direction: column;
+        .start__btn{
+          align-self: stretch;
+          max-width: none;
+        }
       }
     }
   }
