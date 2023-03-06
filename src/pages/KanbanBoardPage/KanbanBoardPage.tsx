@@ -109,6 +109,7 @@ export default function KanbanBoardPage() {
               <img
                 src="https://clickup.com/images/features/kanban-board/board-view-fiter.png"
                 alt="demo"
+                className={styles.image}
               />
               <h3>Stay on track with sorting and filtering.</h3>
               <ul>
@@ -136,6 +137,7 @@ export default function KanbanBoardPage() {
               <img
                 src="https://clickup.com/images/features/kanban-board/board-view-fiter.png"
                 alt="demo"
+                className={styles.image}
               />
               <h3>Monitor capacity with Work in Progress Limits.</h3>
               <ul>

@@ -236,22 +236,22 @@
       display: flex;
       flex-direction: column;
       gap: 2rem;
-      max-width: 500px;
+      flex: 1 1 500px;
       border-radius: 5px;
       border-left: 5px solid $primaryColor;
       box-shadow: 0 10px 25px rgb(0 0 0 / 15%);
       @media (max-width: 768px) {
         padding: 1rem;
       }
-      img {
+      .image {
         display: block;
         margin: -5rem auto 0 auto;
-        width: 90%;
+        width: 100%;
         aspect-ratio: 1.6;
         border-radius: 1rem;
-        max-width: 400px;
+        max-width: 500px;
         @media (max-width: 768px) {
-          margin: 1rem;
+          margin: 1rem auto;
         }
       }
       h3 {
@@ -283,6 +283,17 @@
     }
     .card.pink {
       border-left: 5px solid #fd71af;
+      .image {
+        display: block;
+        margin: -5rem auto 0 auto;
+        width: 100%;
+        aspect-ratio: 1.6;
+        border-radius: 1rem;
+        max-width: 500px;
+        @media (max-width: 768px) {
+          margin: 1rem auto;
+        }
+      }
       ul {
         li {
           .listIcon {
@@ -299,8 +310,6 @@
     padding: 0 1rem;
   }
   .card {
-    padding: 2rem;
-    background-color: white;
     display: flex;
     gap: 1rem;
     align-items: center;
@@ -314,16 +323,27 @@
     }
     h2 {
       color: #4f5366;
+      background-color: white;
+      border-radius: 1rem;
+      padding: 2rem;
       font-size: 2rem;
       margin: 0;
+      width: 50%;
+      align-self: stretch;
       @media (max-width: 768px) {
+        padding: 1rem;
+        width: 100%;
         text-align: center;
-        font-size: clamp(1.5rem, 5.5vw, 2.5rem);
+        font-size: clamp(1.5rem, 5.5vw, 2rem);
       }
     }
     .form__row {
       display: flex;
       justify-content: center;
+      flex: 1 1 auto;
+      @media (max-width: 768px) {
+        padding-bottom: 2rem;
+      }
       @media (max-width: 420px) {
         gap: 1rem;
         flex-direction: column;
@@ -359,7 +379,7 @@
           font-size: 1rem;
         }
         a {
-          color:#292d34;
+          color: #292d34;
           text-decoration: none;
           font-weight: bold;
           cursor: pointer;
