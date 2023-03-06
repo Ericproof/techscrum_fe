@@ -3,7 +3,6 @@ import Top from './components/Top/Top';
 import Card from './components/Card/Card';
 import Certifications from './components/Certifications/Certifications';
 import Partners from './components/Partners/Partners';
-// import FAQ from './components/FAQ/FAQ';
 import Footer from '../../components/Footer/Footer';
 import Faqs from '../SupportCenterPage/components/MainContent/Faqs/Faqs';
 
@@ -15,8 +14,6 @@ export default function SecurityPage() {
       <Certifications />
       <Partners />
       <Faqs />
-      {/* replace a new component */}
-      {/* <FAQ /> */}
       <Footer />
     </>
   );
