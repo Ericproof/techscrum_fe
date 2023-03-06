@@ -44,8 +44,6 @@ function RolePage() {
     (async () => {
       try {
         const res = await getPermissions();
-        // 每次点开form都要读一次
-        // eslint-disable-next-line no-console
         setPermissions(res);
       } catch (err) {
         toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
@@ -105,14 +103,6 @@ function RolePage() {
   const closeHandler = () => {
     setOpenEdit(false);
   };
-
-  // const permissions = roles
-  //   .find((el) => {
-  //     console.log(el.id.toString());
-  //     return el.id === '63fae6712253ac9017308145';
-  //   })
-  //   ?.permission.map((el) => el.slug);
-  // console.log(permissions);
 
   return (
     <div className={[styles['page-container'], openEdit && styles.active].join(' ')}>

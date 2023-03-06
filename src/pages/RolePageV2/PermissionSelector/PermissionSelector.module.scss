@@ -12,6 +12,19 @@
   margin: auto;
   border-radius: 12px;
 
+  .err-msg-container {
+    align-items: center;
+    display: flex;
+    flex-direction: row-reverse;
+    p {
+      border-radius: 10px;
+      padding: 10px 10px;
+      display: inline-block;
+      border: 1px #e03131 solid;
+      color: #e03131;
+    }
+  }
+
   .roleName-container {
     display: flex;
     flex-direction: row;

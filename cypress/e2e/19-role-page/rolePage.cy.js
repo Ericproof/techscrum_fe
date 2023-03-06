@@ -30,22 +30,14 @@ describe('RolePage', () => {
     cy.wait('@fetch-permissions');
   });
 
-  //   it('displays roles table', () => {
-  //     cy.get('[data-testid="role-table"]').should('be.visible');
-  //   });
+  it('displays roles table', () => {
+    cy.get('[data-testid="role-table"]').should('be.visible');
+  });
 
-  //   it('opens add role form', () => {
-  //     cy.get('[data-testid="add-role-btn"]').click();
-  //     cy.get('[data-testid="permission-selector"]').should('be.visible');
-  //   });
-
-  //   it('opens edit role form', () => {
-  //     cy.get('[data-testid="more-btn"]').first().trigger('mouseover');
-  //     cy.wait(500);
-  //     cy.get('[data-testid="more-list"]').should('be.visible');
-  //     // cy.get('[data-testid="edit-btn"]').first().click();
-  //     // cy.get('[data-testid="permission-selector"]').should('be.visible');
-  //   });
+  it('opens add role form', () => {
+    cy.get('[data-testid="add-role-btn"]').click();
+    cy.get('[data-testid="permission-selector"]').should('be.visible');
+  });
 
   it('adds new role', () => {
     const roleName = 'Test Role';
@@ -55,25 +47,5 @@ describe('RolePage', () => {
     cy.get('[data-testid="permission-option"]').eq(2).click();
     cy.get('[data-testid="permission-option"]').eq(0).click();
     cy.get('[data-testid="submit-btn"]').click();
-    // cy.wait('@fetch-roles');
-    // cy.get('[data-testid="role-table"]').should('contain', roleName);
   });
-
-  //   it('edits role', () => {
-  //     const roleName = 'Edited Role';
-  //     cy.get('[data-testid="edit-role-btn"]').first().click();
-  //     cy.get('[data-testid="role-input"]').clear().type(roleName);
-  //     cy.get('[data-testid="permission-select"]').eq(0).click();
-  //     cy.get('[data-testid="permission-option"]').eq(1).click();
-  //     cy.get('[data-testid="submit-btn"]').click();
-  //     cy.wait('@getRoles');
-  //     cy.get('[data-testid="role-name"]').should('contain', roleName);
-  //   });
-
-  //   it('deletes role', () => {
-  //     cy.get('[data-testid="delete-role-btn"]').first().click();
-  //     cy.get('[data-testid="confirm-delete-btn"]').click();
-  //     cy.wait('@getRoles');
-  //     cy.get('[data-testid="role-name"]').should('have.length', 2);
-  //   });
 });

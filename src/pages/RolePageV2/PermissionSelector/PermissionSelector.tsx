@@ -12,7 +12,6 @@ interface IProps {
 }
 
 function PermissionSelector(props: IProps) {
-  // setName === 'EDIT' or 'roleId'
   const { setName, submitRoleHandler, closeHandler, permissions, role } = props;
   const [roleName, setRoleName] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
@@ -72,16 +71,16 @@ function PermissionSelector(props: IProps) {
         newPermissions.push(input.id);
       }
     });
+    if (newPermissions.length === 0) {
+      setErrorActive(true);
+      setErrorMsg('please select at least one permission!!!');
+      return;
+    }
+
     if (setName === 'EDIT') {
       if (!roleName) {
         setErrorActive(true);
         setErrorMsg('please Enter a valid role name!!!');
-        return;
-      }
-
-      if (newPermissions.length === 0) {
-        setErrorActive(true);
-        setErrorMsg('please select at least one permission!!!');
         return;
       }
       submitRoleHandler(roleName, newPermissions, true);
@@ -126,7 +125,12 @@ function PermissionSelector(props: IProps) {
             );
           })}
         </div>
-        <div>{errorActive && <p>{errorMsg}</p>}</div>
+        {errorActive && (
+          <div className={styles['err-msg-container']}>
+            <p>{errorMsg}</p>
+          </div>
+        )}
+
         <div className={styles['btn-container']}>
           <input
             data-testid="submit-btn"
