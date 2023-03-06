@@ -2,36 +2,37 @@ import React, { useContext, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { AiOutlineClose } from 'react-icons/ai';
 import { toast } from 'react-toastify';
+import { AxiosResponse } from 'axios';
 import styles from './DailyScrum.module.scss';
 import DailyScrumTicket from './DailyScrumTicket/DailyScrumTicket';
 import { getDailyScrums, updateDailyScrum } from '../../api/dailyScrum/dailyScrum';
 import { UserContext } from '../../context/UserInfoProvider';
 import Modal from '../../lib/Modal/Modal';
+import { dateFormatter } from '../../utils/helpers';
+import { IUserInfo } from '../../types';
 
 interface IDailyScrumModal {
   onClickCloseModal: () => void;
   projectId: string;
 }
-function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal) {
-  const userInfo = useContext(UserContext);
-  const userId = userInfo.id;
-  const dateHandler = (fullDate) => {
-    const date = new Date(fullDate);
-    const year = date.getFullYear();
-    let month: string | number = date.getMonth();
-    let day: string | number = date.getDate();
-    day = day < 10 ? `0${day}` : day;
-    month = month + 1 < 10 ? `0${month + 1}` : month + 1;
-    return `${day}-${month}-${year}`;
-  };
+
+function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JSX.Element {
   const [dailyScrumTicketData, setDailyScrumTicketData] = useState<any>([]);
-  const [submitting, setSubmitting] = useState(false);
+  const [submitting, setSubmitting] = useState<boolean>(false);
+
+  const { id: userId }: IUserInfo = useContext(UserContext);
 
   useEffect(() => {
-    const handleDailyScrum = async () => {
+    (async () => {
       try {
         const searchCase = 'search-all';
-        const results = await getDailyScrums(projectId, userId, 'none', 'none', searchCase);
+        const results: AxiosResponse<any, IDailyScrum[]> = await getDailyScrums(
+          projectId,
+          userId,
+          'none',
+          'none',
+          searchCase
+        );
         if (results.data.length === 0) {
           toast('No dailyScrum data for now!', { theme: 'colored', toastId: 'dailyScrum error' });
         }
@@ -42,8 +43,7 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal) {
           toastId: 'dailyScrum error'
         });
       }
-    };
-    handleDailyScrum();
+    })();
   }, [projectId, userId]);
 
   const onChangeFinish = (id: string, value: boolean) => {
@@ -92,7 +92,7 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal) {
       setSubmitting(true);
       dailyScrumTicketData
         .filter((ticket) => {
-          return dateHandler(ticket.createdAt) === dateHandler(new Date());
+          return dateFormatter(ticket.createdAt) === dateFormatter();
         })
         .map(async (ticket) => {
           const data = {
@@ -101,7 +101,7 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal) {
             hasReason: !!ticket.reason,
             reason: ticket.reason ? ticket.reason : '',
             isNeedSupport: ticket.support ? ticket.support : false,
-            createdDate: dateHandler(new Date()),
+            createdDate: dateFormatter(),
             finishValidation: ticket.finishValidation ? ticket.finishValidation : false,
             supportValidation: ticket.supportValidation ? ticket.supportValidation : false
           };
@@ -133,7 +133,7 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal) {
           <AiOutlineClose />
         </button>
       </div>
-      <h4>Today: {dateHandler(new Date())}</h4>
+      <h4>Today: {dateFormatter()}</h4>
       {dailyScrumTicketData.map((ticket) => {
         return (
           <DailyScrumTicket

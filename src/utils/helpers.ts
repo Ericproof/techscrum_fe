@@ -130,3 +130,13 @@ export const clickedShowMore = (e, refShowMore) => {
   }
   return hasClickShowMore;
 };
+
+export const dateFormatter = (rawDate: string | number | Date = new Date()): string => {
+  // default date: current
+  const date: Date = new Date(rawDate);
+  const options: Intl.DateTimeFormatOptions = { day: '2-digit', month: '2-digit', year: 'numeric' };
+  const formatter: Intl.DateTimeFormat = new Intl.DateTimeFormat('en-AU', options);
+  const formattedDate: string = formatter.format(date).replace(/\//g, '-');
+  window.console.log(formattedDate);
+  return formattedDate; // Output: 03-06-2023
+};
