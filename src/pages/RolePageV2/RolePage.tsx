@@ -91,7 +91,6 @@ function RolePage() {
       } else {
         await updateRole(projectId, role, newPermissions);
       }
-      // setRoles(res);
     } catch (err) {
       setLoader(false);
       toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
