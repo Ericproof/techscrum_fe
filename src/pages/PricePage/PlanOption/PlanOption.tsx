@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { createAdvancedPayment, createUltraPayment } from '../../../api/price/price';
 import styles from './PlanOption.module.scss';
+import { UserContext } from '../../../context/UserInfoProvider';
 
 const plans = {
   content: {
@@ -102,8 +104,11 @@ interface IPlanOptionProps {
 }
 
 function PlanOption(props: IPlanOptionProps) {
+  const navigate = useNavigate();
   const { isChecked, setIsChecked } = props;
   const { content } = plans;
+  const userInfo = useContext(UserContext);
+  const { id: userId, email } = userInfo;
 
   const ADVANCED_ID = 1;
   const ULTRA_ID = 2;
@@ -113,14 +118,18 @@ function PlanOption(props: IPlanOptionProps) {
   };
 
   const handleButtonClick = async (id: number) => {
-    let price;
-    if (id === ADVANCED_ID) {
-      price = isChecked ? 49 : 29;
-      createAdvancedPayment({ price });
-    }
-    if (id === ULTRA_ID) {
-      price = isChecked ? 149 : 59;
-      createUltraPayment({ price });
+    if (userId && email) {
+      let price;
+      if (id === ADVANCED_ID) {
+        price = isChecked ? 49 : 29;
+        createAdvancedPayment({ price, userId });
+      }
+      if (id === ULTRA_ID) {
+        price = isChecked ? 149 : 59;
+        createUltraPayment({ price, userId });
+      }
+    } else {
+      navigate(`/login`);
     }
   };
 

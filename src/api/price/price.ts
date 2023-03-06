@@ -1,13 +1,13 @@
 import axios from 'axios';
 import config from '../../config/config';
 
-export function createAdvancedPayment(data: { price: number }) {
+export function createAdvancedPayment(data: { price: number; userId: string }) {
   axios.post(`${config.apiAddress}/payment/advanced`, data).then((res) => {
     window.location = res.data;
   });
 }
 
-export function createUltraPayment(data: { price: number }) {
+export function createUltraPayment(data: { price: number; userId: string }) {
   axios.post(`${config.apiAddress}/payment/ultra`, data).then((res) => {
     window.location = res.data;
   });
