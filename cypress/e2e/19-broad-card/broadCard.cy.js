@@ -25,7 +25,7 @@ describe('Project page', () => {
     cy.intercept('PUT', '**/tasks/*', taskData).as('update-task');
     cy.get('[data-testid="card-type-button"]').click();
     cy.get('[data-testid="card-type-selection"]').then((items) => {
-      items[1].click();
+      items[0].click();
     });
     cy.get('[data-testid="card-type-button"]').contains('task');
   });
