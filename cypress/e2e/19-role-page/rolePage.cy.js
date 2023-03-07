@@ -3,23 +3,11 @@ import rolesData from '../../fixtures/roles.json';
 import permissionsData from '../../fixtures/permissions.json';
 import projectsData from '../../fixtures/projects.json';
 
-// describe('Role page', () => {
-//   beforeEach(() => {
-//     cy.intercept('GET', '**/projects/*/roles', rolesData).as('fetch-roles');
-//     cy.intercept('GET', '**/projects/*/roles/*', rolesData[0]).as('fetch-one-role');
-//     cy.visit('/login');
-//     cy.login('kitman200220022002@gmail.com', '12345678');
-//     cy.wait('@fetch-roles');
-//     cy.get('[data-testid="evan"]').dblclick();
-//   });
-// });
-
 describe('RolePage', () => {
   beforeEach(() => {
     cy.intercept('GET', '**/projects', projectsData).as('fetch-projects');
     cy.intercept('GET', '**/projects/*/roles', rolesData).as('fetch-roles');
     cy.intercept('GET', '**/permissions', permissionsData).as('fetch-permissions');
-    // cy.visit('/roles');
     cy.visit('/login');
     cy.login('kitman200220022002@gmail.com', '12345678');
     cy.wait('@fetch-projects');
