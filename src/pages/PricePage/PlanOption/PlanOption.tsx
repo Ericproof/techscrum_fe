@@ -118,30 +118,39 @@ function PlanOption(props: IPlanOptionProps) {
     setIsChecked((ischecked) => !ischecked);
   };
 
+  const createPaymentMonthly = async (id: string) => {
+    let price: number;
+    price = isChecked ? 49 : 29;
+    if (price === 49) {
+      planName = 'Advanced monthly plan';
+      createMonthlyPayment({ price, userId: id, planName });
+    } else {
+      planName = 'Advanced yearly plan';
+      price = 348;
+      createYearlyPayment({ price, userId: id, planName });
+    }
+  };
+
+  const createPaymentYearly = async (id: string) => {
+    let price: number;
+    price = isChecked ? 149 : 59;
+    if (price === 149) {
+      planName = 'Ultra monthly plan';
+      createMonthlyPayment({ price, userId: id, planName });
+    } else {
+      planName = 'Ultra yearly plan';
+      price = 708;
+      createYearlyPayment({ price, userId: id, planName });
+    }
+  };
+
   const handleButtonClick = async (id: number) => {
     if (userId && email) {
-      let price;
       if (id === ADVANCED_ID) {
-        price = isChecked ? 49 : 29;
-        if (price === 49) {
-          planName = 'Advanced monthly plan';
-          createMonthlyPayment({ price, userId, planName });
-        } else {
-          planName = 'Advanced yearly plan';
-          price = 348;
-          createYearlyPayment({ price, userId, planName });
-        }
+        createPaymentMonthly(userId);
       }
       if (id === ULTRA_ID) {
-        price = isChecked ? 149 : 59;
-        if (price === 149) {
-          planName = 'Ultra monthly plan';
-          createMonthlyPayment({ price, userId, planName });
-        } else {
-          planName = 'Ultra yearly plan';
-          price = 708;
-          createYearlyPayment({ price, userId, planName });
-        }
+        createPaymentYearly(userId);
       }
     } else {
       navigate(`/login`);
