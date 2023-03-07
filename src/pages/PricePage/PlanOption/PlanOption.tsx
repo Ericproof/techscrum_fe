@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createMonthlyPayment, createYearlyPayment } from '../../../api/price/price';
 import styles from './PlanOption.module.scss';
 import { UserContext } from '../../../context/UserInfoProvider';
+import { createAdvancedPayment, createUltraPayment } from '../../../utils/paymentUtils';
 
 const plans = {
   content: {
@@ -112,45 +112,20 @@ function PlanOption(props: IPlanOptionProps) {
 
   const ADVANCED_ID = 1;
   const ULTRA_ID = 2;
-  let planName: string;
+  let price: number;
 
   const handleClick = () => {
     setIsChecked((ischecked) => !ischecked);
   };
 
-  const createPaymentMonthly = async (id: string) => {
-    let price: number;
-    price = isChecked ? 49 : 29;
-    if (price === 49) {
-      planName = 'Advanced monthly plan';
-      createMonthlyPayment({ price, userId: id, planName });
-    } else {
-      planName = 'Advanced yearly plan';
-      price = 348;
-      createYearlyPayment({ price, userId: id, planName });
-    }
-  };
-
-  const createPaymentYearly = async (id: string) => {
-    let price: number;
-    price = isChecked ? 149 : 59;
-    if (price === 149) {
-      planName = 'Ultra monthly plan';
-      createMonthlyPayment({ price, userId: id, planName });
-    } else {
-      planName = 'Ultra yearly plan';
-      price = 708;
-      createYearlyPayment({ price, userId: id, planName });
-    }
-  };
-
   const handleButtonClick = async (id: number) => {
+    price = isChecked ? 49 : 29;
     if (userId && email) {
       if (id === ADVANCED_ID) {
-        createPaymentMonthly(userId);
+        createAdvancedPayment(userId, price);
       }
       if (id === ULTRA_ID) {
-        createPaymentYearly(userId);
+        createUltraPayment(userId, price);
       }
     } else {
       navigate(`/login`);
