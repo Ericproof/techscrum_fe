@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createAdvancedPayment, createUltraPayment } from '../../../../api/price/price';
+import { createMonthlyPayment, createYearlyPayment } from '../../../../api/price/price';
 import { UserContext } from '../../../../context/UserInfoProvider';
 import styles from './PlanTableHeader.module.scss';
 
@@ -16,17 +16,32 @@ function PlanTableHeader(props: IPlanTableHeaderProps) {
   const ULTRA_ID = 2;
   const userInfo = useContext(UserContext);
   const { id: userId, email } = userInfo;
+  let planName: string;
 
   const handleButtonClick = async (id: number) => {
     if (userId && email) {
       let price;
       if (id === ADVANCED_ID) {
         price = isCheck ? 49 : 29;
-        createAdvancedPayment({ price, userId });
+        if (price === 49) {
+          planName = 'Advanced monthly plan';
+          createMonthlyPayment({ price, userId, planName });
+        } else {
+          planName = 'Advanced yearly plan';
+          price = 348;
+          createYearlyPayment({ price, userId, planName });
+        }
       }
       if (id === ULTRA_ID) {
         price = isCheck ? 149 : 59;
-        createUltraPayment({ price, userId });
+        if (price === 149) {
+          planName = 'Ultra monthly plan';
+          createMonthlyPayment({ price, userId, planName });
+        } else {
+          planName = 'Ultra yearly plan';
+          price = 708;
+          createYearlyPayment({ price, userId, planName });
+        }
       }
     } else {
       navigate(`/login`);

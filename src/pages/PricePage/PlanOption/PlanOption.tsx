@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createAdvancedPayment, createUltraPayment } from '../../../api/price/price';
+import { createMonthlyPayment, createYearlyPayment } from '../../../api/price/price';
 import styles from './PlanOption.module.scss';
 import { UserContext } from '../../../context/UserInfoProvider';
 
@@ -112,6 +112,7 @@ function PlanOption(props: IPlanOptionProps) {
 
   const ADVANCED_ID = 1;
   const ULTRA_ID = 2;
+  let planName: string;
 
   const handleClick = () => {
     setIsChecked((ischecked) => !ischecked);
@@ -122,11 +123,25 @@ function PlanOption(props: IPlanOptionProps) {
       let price;
       if (id === ADVANCED_ID) {
         price = isChecked ? 49 : 29;
-        createAdvancedPayment({ price, userId });
+        if (price === 49) {
+          planName = 'Advanced monthly plan';
+          createMonthlyPayment({ price, userId, planName });
+        } else {
+          planName = 'Advanced yearly plan';
+          price = 348;
+          createYearlyPayment({ price, userId, planName });
+        }
       }
       if (id === ULTRA_ID) {
         price = isChecked ? 149 : 59;
-        createUltraPayment({ price, userId });
+        if (price === 149) {
+          planName = 'Ultra monthly plan';
+          createMonthlyPayment({ price, userId, planName });
+        } else {
+          planName = 'Ultra yearly plan';
+          price = 708;
+          createYearlyPayment({ price, userId, planName });
+        }
       }
     } else {
       navigate(`/login`);
