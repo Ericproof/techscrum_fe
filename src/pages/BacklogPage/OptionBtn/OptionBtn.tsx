@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import React, { useState } from 'react';
 import { BsThreeDots } from 'react-icons/bs';
 import { toast } from 'react-toastify';
