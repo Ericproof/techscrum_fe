@@ -48,6 +48,7 @@ import PricePage from './pages/PricePage/PricePage';
 import MyWorkPage from './pages/MyWorkPage/MyWorkPage';
 import ReportPage from './pages/ReportPage/ReportPage';
 import SupportCenterPage from './pages/SupportCenterPage/SupportCenterPage';
+import RegisterPageV2 from './pages/RegisterV2/RegisterPageV2';
 
 function App() {
   const [showPages, setShowPages] = useState(null);
@@ -79,6 +80,7 @@ function App() {
             <TaskTypesProvider>
               <Routes>
                 {showPages && <Route path="/register" element={<RegisterPage />} />}
+                {showPages && <Route path="/registerV2" element={<RegisterPageV2 />} />}
                 {showPages && <Route path="/admin" element={<AdminPage />} />}
                 <Route path="/faq" element={<FAQPage />} />
                 <Route path="/verify" element={<VerifyPage />} />
