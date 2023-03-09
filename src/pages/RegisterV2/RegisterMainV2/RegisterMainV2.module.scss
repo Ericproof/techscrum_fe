@@ -30,6 +30,17 @@
       margin-bottom: 20px;
     }
 
+    .registerCompany {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      width: 400px;
+      padding: 0 40px 0 40px;
+      .registerCompanyInput {
+        margin-bottom: 0;
+      }
+    }
+
     input {
       padding: 8px 6px;
       height: 36px;
