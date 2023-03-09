@@ -17,14 +17,19 @@ export const filterBacklog = async (
   let inputCase = input;
   let userCase = users;
   let typeCae = types;
+
+  enum Cases {
+    searchAllCase = 'all'
+  }
+
   if (input === '') {
-    inputCase = 'all';
+    inputCase = Cases.searchAllCase;
   }
   if (users === '') {
-    userCase = 'all';
+    userCase = Cases.searchAllCase;
   }
   if (types === '') {
-    typeCae = 'all';
+    typeCae = Cases.searchAllCase;
   }
   const path = `${config.apiAddress}/projects/${projectId}/backlogs/${inputCase}/${userCase}/${typeCae}`;
   const response = await axios.get(path);

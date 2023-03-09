@@ -6,14 +6,17 @@ export const getBoard = async (id: string, input: string, users: string, taskTyp
   let inputCase = input;
   let userCase = users;
   let taskTypeCase = taskTypes;
+  enum Cases {
+    searchAllCase = 'all'
+  }
   if (input === '') {
-    inputCase = 'all';
+    inputCase = Cases.searchAllCase;
   }
   if (users === '') {
-    userCase = 'all';
+    userCase = Cases.searchAllCase;
   }
   if (taskTypes === '') {
-    taskTypeCase = 'all';
+    taskTypeCase = Cases.searchAllCase;
   }
   const path = `${config.apiAddress}/board/${id}/${inputCase}/${userCase}/${taskTypeCase}`;
   const result = await axios.get(path);
