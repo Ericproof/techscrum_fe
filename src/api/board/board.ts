@@ -3,22 +3,22 @@ import axios from 'axios';
 import config from '../../config/config';
 
 export const getBoard = async (id: string, input: string, users: string, taskTypes: string) => {
-  let inputCase = input;
-  let userCase = users;
-  let taskTypeCase = taskTypes;
+  let inputSearchCase = input;
+  let userSearchCase = users;
+  let taskTypeSearchCase = taskTypes;
   enum Cases {
-    searchAllCase = 'all'
+    searchAll = 'all'
   }
   if (input === '') {
-    inputCase = Cases.searchAllCase;
+    inputSearchCase = Cases.searchAll;
   }
   if (users === '') {
-    userCase = Cases.searchAllCase;
+    userSearchCase = Cases.searchAll;
   }
   if (taskTypes === '') {
-    taskTypeCase = Cases.searchAllCase;
+    taskTypeSearchCase = Cases.searchAll;
   }
-  const path = `${config.apiAddress}/board/${id}/${inputCase}/${userCase}/${taskTypeCase}`;
+  const path = `${config.apiAddress}/board/${id}/${inputSearchCase}/${userSearchCase}/${taskTypeSearchCase}`;
   const result = await axios.get(path);
   return result.data;
 };
