@@ -282,6 +282,7 @@ export interface IConfig {
 export interface ITypes {
   slug: string;
   name: string;
+  icon: string;
   createdAt: string;
   updatedAt: string;
   id: string;

@@ -1,18 +1,29 @@
-import React, { useState, Dispatch } from 'react';
+import React, { useState, Dispatch, SetStateAction } from 'react';
 import { IoIosAdd } from 'react-icons/io';
 import styles from './BoardSearch.module.scss';
 import checkAccess from '../../../utils/helpers';
 import ButtonV2 from '../../../lib/FormV2/ButtonV2/ButtonV2';
 import UserTaskFilter from '../../UserTaskFilter/UserTaskFilter';
 import SearchForBoard from '../../SearchForBoard/SearchForBoard';
+import TaskTypeFilter from '../../TaskTypeFilter/TaskTypeFilter';
+import { ITypes, IUserInfo } from '../../../types';
 
 interface Props {
   updateIsCreateNewCard: () => void;
   setInputQuery: Dispatch<string>;
   projectId: string;
-  selectedUsers: any;
-  changeSelectedUsers: any;
-  userList: any;
+  selectedUsers: IUserInfo[];
+  selectedTypes: ITypes[];
+  setSelectedUsers: Dispatch<SetStateAction<IUserInfo[]>>;
+  setSelectedTypes: Dispatch<SetStateAction<ITypes[]>>;
+  changeSelectedUsers: (
+    isExists: boolean,
+    selectedItems: IUserInfo[],
+    item: IUserInfo
+  ) => IUserInfo[];
+  changeSelectedTypes: (isExists: boolean, selectedItems: ITypes[], item: ITypes) => ITypes[];
+  userList: IUserInfo[];
+  typeList: ITypes[];
 }
 export default function BoardSearch({
   updateIsCreateNewCard,
@@ -20,7 +31,12 @@ export default function BoardSearch({
   projectId,
   selectedUsers,
   changeSelectedUsers,
-  userList
+  changeSelectedTypes,
+  userList,
+  typeList,
+  selectedTypes,
+  setSelectedUsers,
+  setSelectedTypes
 }: Props) {
   const avatars = [
     { id: 1, name: 'avatar1', url: '' },
@@ -49,9 +65,16 @@ export default function BoardSearch({
         <UserTaskFilter
           selectedUsers={selectedUsers}
           changeSelectedUsers={changeSelectedUsers}
+          setSelectedUsers={setSelectedUsers}
           userList={userList}
         />
       </div>
+      <TaskTypeFilter
+        typeList={typeList}
+        changeSelectedTypes={changeSelectedTypes}
+        selectedTypes={selectedTypes}
+        setSelectedTypes={setSelectedTypes}
+      />
       <fieldset style={{ display: 'none' }}>
         <ul className={styles.avatarContainer} id="myList">
           {avatars.map((avatar) => (

@@ -14,7 +14,8 @@ import IBoardEntity, {
   ICardData,
   ILabelData,
   ITaskCard,
-  ITaskEntity
+  ITaskEntity,
+  ITypes
 } from '../../types';
 import BoardCard from '../BoardCard/BoardCard';
 import { getLabels } from '../../api/label/label';
@@ -23,6 +24,8 @@ import ProjectNavigationV3 from '../../lib/ProjectNavigationV3/ProjectNavigation
 import Modal from '../../lib/Modal/Modal';
 import DefaultModalHeader from '../../lib/Modal/ModalHeader/DefaultModalHeader/DefaultModalHeader';
 import { getUsers } from '../../api/user/user';
+import { getTypes } from '../../api/types/types';
+import { convertFilterArrayToString } from '../../utils/helpers';
 
 const onDragEnd = (
   result: DropResult,
@@ -81,13 +84,14 @@ export default function Board() {
   const [loading, setLoading] = useState(false);
   const [userList, setUserList] = useState([]);
   const [selectedUsers, setSelectedUsers] = useState<any[]>([]);
+  const [typeList, setTypeList] = useState<any[]>([]);
+  const [selectedTypes, setSelectedTypes] = useState<ITypes[]>([]);
 
-  const chaneSelectedUsers = (isExist, user) => {
+  const changeSelectedItems = (isExist, selectedItems, item) => {
     if (!isExist) {
-      setSelectedUsers([...selectedUsers, user]);
-    } else {
-      setSelectedUsers(selectedUsers.filter((selectedUser) => selectedUser.id !== user.id));
+      return [...selectedItems, item];
     }
+    return selectedItems.filter((selectedItem) => selectedItem.id !== item.id);
   };
 
   const getProjectDataApi = useCallback(() => {
@@ -123,17 +127,16 @@ export default function Board() {
   const fetchBoardInfo = useCallback(() => {
     const fetchBoard = async () => {
       setLoading(true);
-      let userCase = '';
-      selectedUsers.forEach((selectedUser) => {
-        userCase = userCase.concat(`-${selectedUser.id}`);
-      });
-      userCase = userCase.slice(1);
-      const boardInfo = await getBoard(boardId, inputQuery, userCase);
+      const userCase = convertFilterArrayToString(selectedUsers);
+      const taskTypeCase = convertFilterArrayToString(selectedTypes);
+      const boardInfo = await getBoard(boardId, inputQuery, userCase, taskTypeCase);
       fetchColumnsData(boardInfo);
+      const typeData = await getTypes();
+      setTypeList(typeData);
       setLoading(false);
     };
     fetchBoard();
-  }, [boardId, fetchColumnsData, inputQuery, selectedUsers]);
+  }, [boardId, fetchColumnsData, inputQuery, selectedTypes, selectedUsers]);
 
   useEffect(() => {
     fetchBoardInfo();
@@ -264,8 +267,13 @@ export default function Board() {
         setInputQuery={setInputQuery}
         projectId={projectId}
         selectedUsers={selectedUsers}
-        changeSelectedUsers={chaneSelectedUsers}
+        setSelectedUsers={setSelectedUsers}
+        changeSelectedUsers={changeSelectedItems}
         userList={userList}
+        typeList={typeList}
+        selectedTypes={selectedTypes}
+        setSelectedTypes={setSelectedTypes}
+        changeSelectedTypes={changeSelectedItems}
       />
       <BoardMain
         columnsInfo={columnsInfo}
