@@ -6,7 +6,7 @@ export function createPayment(data: {
   userId: string;
   paymentMode: boolean;
 }) {
-  axios.post(`${config.apiAddress}/payment/`, data).then((res) => {
+  axios.post(`${config.apiAddress}/payment`, data).then((res) => {
     window.location = res.data;
   });
 }
