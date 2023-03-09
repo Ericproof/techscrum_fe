@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../../../context/UserInfoProvider';
-import { createAdvancedPayment, createUltraPayment } from '../../../../utils/paymentUtils';
+import { createSubcription } from '../../../../utils/paymentUtils';
 import styles from './PlanTableHeader.module.scss';
 
 interface IPlanTableHeaderProps {
@@ -16,16 +16,17 @@ function PlanTableHeader(props: IPlanTableHeaderProps) {
   const ULTRA_ID = 2;
   const userInfo = useContext(UserContext);
   const { id: userId, email } = userInfo;
-  let price: number;
+
+  const ADVANCED_PRICE_IDENTIFIER = 0;
+  const ULTRA_PRICE_IDENTIFIER = 1;
 
   const handleButtonClick = async (id: number) => {
-    price = isCheck ? 49 : 29;
     if (userId && email) {
       if (id === ADVANCED_ID) {
-        createAdvancedPayment(userId, price);
+        createSubcription(userId, ADVANCED_PRICE_IDENTIFIER, isCheck);
       }
       if (id === ULTRA_ID) {
-        createUltraPayment(userId, price);
+        createSubcription(userId, ULTRA_PRICE_IDENTIFIER, isCheck);
       }
     } else {
       navigate(`/login`);
