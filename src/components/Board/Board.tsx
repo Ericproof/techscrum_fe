@@ -14,7 +14,8 @@ import IBoardEntity, {
   ICardData,
   ILabelData,
   ITaskCard,
-  ITaskEntity
+  ITaskEntity,
+  ITypes
 } from '../../types';
 import BoardCard from '../BoardCard/BoardCard';
 import { getLabels } from '../../api/label/label';
@@ -83,7 +84,7 @@ export default function Board() {
   const [userList, setUserList] = useState([]);
   const [selectedUsers, setSelectedUsers] = useState<any[]>([]);
   const [typeList, setTypeList] = useState<any[]>([]);
-  const [selectedTypes, setSelectedTypes] = useState<any[]>([]);
+  const [selectedTypes, setSelectedTypes] = useState<ITypes[]>([]);
 
   const changeSelectedItems = (isExist, selectedItems, item) => {
     if (!isExist) {

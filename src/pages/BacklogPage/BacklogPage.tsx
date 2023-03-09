@@ -20,6 +20,7 @@ import Loading from '../../components/Loading/Loading';
 import ProjectNavigationV3 from '../../lib/ProjectNavigationV3/ProjectNavigationV3';
 import SearchForBoard from '../../components/SearchForBoard/SearchForBoard';
 import TaskTypeFilter from '../../components/TaskTypeFilter/TaskTypeFilter';
+import { ITypes } from '../../types';
 
 export default function BacklogPage() {
   const [loaded, setLoaded] = useState(false);
@@ -28,7 +29,7 @@ export default function BacklogPage() {
   const [statusData, setStatusData] = useState([]);
   const { projectId = '', boardId = '' } = useParams();
   const [typesData, setTypesData] = useState([]);
-  const [selectedTypes, setSelectedTypes] = useState<any[]>([]);
+  const [selectedTypes, setSelectedTypes] = useState<ITypes[]>([]);
   const [userList, setUserList] = useState<any>([]);
   const [projectDataLoaded, setProjectDataLoaded] = useState(false);
   const [projectKey, setProjectKey] = useState('');
