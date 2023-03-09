@@ -21,6 +21,7 @@ import ProjectNavigationV3 from '../../lib/ProjectNavigationV3/ProjectNavigation
 import SearchForBoard from '../../components/SearchForBoard/SearchForBoard';
 import TaskTypeFilter from '../../components/TaskTypeFilter/TaskTypeFilter';
 import { ITypes } from '../../types';
+import { convertFilterArrayToString } from '../../utils/helpers';
 
 export default function BacklogPage() {
   const [loaded, setLoaded] = useState(false);
@@ -45,18 +46,10 @@ export default function BacklogPage() {
     return selectedItems.filter((selectedItem) => selectedItem.id !== item.id);
   };
 
-  const arrayToString = (selectedInputs) => {
-    let result = '';
-    selectedInputs.forEach((selectedInput) => {
-      result = result.concat(`-${selectedInput.id}`);
-    });
-    return result.slice(1);
-  };
-
   useEffect(() => {
     const inputCase = inputQuery;
-    const userCase = arrayToString(selectedUsers);
-    const typeCase = arrayToString(selectedTypes);
+    const userCase = convertFilterArrayToString(selectedUsers);
+    const typeCase = convertFilterArrayToString(selectedTypes);
     const filterBacklogData = async () => {
       const res = await filterBacklog(projectId, inputCase, userCase, typeCase);
       setBacklogData(res.backlog);

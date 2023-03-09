@@ -25,6 +25,7 @@ import Modal from '../../lib/Modal/Modal';
 import DefaultModalHeader from '../../lib/Modal/ModalHeader/DefaultModalHeader/DefaultModalHeader';
 import { getUsers } from '../../api/user/user';
 import { getTypes } from '../../api/types/types';
+import { convertFilterArrayToString } from '../../utils/helpers';
 
 const onDragEnd = (
   result: DropResult,
@@ -109,14 +110,6 @@ export default function Board() {
     getProjectDataApi();
   }, [getProjectDataApi]);
 
-  const arrayToString = (selectedInputs) => {
-    let result = '';
-    selectedInputs.forEach((selectedInput) => {
-      result = result.concat(`-${selectedInput.id}`);
-    });
-    return result.slice(1);
-  };
-
   const fetchColumnsData = useCallback((boardInfo: IBoardEntity) => {
     const columnInfoData: IColumnsFromBackend = {};
 
@@ -134,8 +127,8 @@ export default function Board() {
   const fetchBoardInfo = useCallback(() => {
     const fetchBoard = async () => {
       setLoading(true);
-      const userCase = arrayToString(selectedUsers);
-      const taskTypeCase = arrayToString(selectedTypes);
+      const userCase = convertFilterArrayToString(selectedUsers);
+      const taskTypeCase = convertFilterArrayToString(selectedTypes);
       const boardInfo = await getBoard(boardId, inputQuery, userCase, taskTypeCase);
       fetchColumnsData(boardInfo);
       const typeData = await getTypes();
