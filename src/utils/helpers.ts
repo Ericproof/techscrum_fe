@@ -131,6 +131,14 @@ export const clickedShowMore = (e, refShowMore) => {
   return hasClickShowMore;
 };
 
+export const convertFilterArrayToString = (selectedInputs) => {
+  let result = '';
+  selectedInputs.forEach((selectedInput) => {
+    result = result.concat(`-${selectedInput.id}`);
+  });
+  return result.slice(1);
+};
+
 export const dateFormatter = (rawDate: string | number | Date = new Date()): string => {
   // default date: current
   const date: Date = new Date(rawDate);
