@@ -1,0 +1,60 @@
+.filterTab {
+  margin-left: 20px;
+  position: relative;
+
+  .filterBtn {
+    display: flex;
+    align-items: center;
+    padding: 8px 13px 8px 8px;
+    background-color: transparent;
+    border: none;
+    border-radius: 5px;
+    transition: 0.3s;
+    .filterBtnIcon {
+      margin-left: 8px;
+    }
+    &:hover {
+      cursor: pointer;
+      background-color: #6a2add;
+      color: white;
+    }
+    &.active {
+      background-color: #6a2add;
+      color: white;
+    }
+  }
+
+  .optionsBox {
+    background-color: white;
+    position: absolute;
+    top: 35px;
+    display: none;
+    flex-direction: column;
+    box-shadow: rgb(9 30 66 / 8%) 0px 0px 0px 1px, rgb(9 30 66 / 8%) 0px 2px 1px,
+      rgb(9 30 66 / 31%) 0px 0px 20px -6px;
+    width: 150px;
+    border-radius: 5px;
+    z-index: 3;
+    &.active {
+      display: flex;
+    }
+
+    .optionBtn {
+      background-color: white;
+      border: none;
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      .optionCheckBox {
+        font-size: 20px;
+      }
+      .optionName {
+        margin-left: 5px;
+      }
+      &:hover {
+        cursor: pointer;
+        background-color: #e0e0e0;
+      }
+    }
+  }
+}

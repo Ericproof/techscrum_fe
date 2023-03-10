@@ -6,7 +6,9 @@ import ButtonV2 from '../../../lib/FormV2/ButtonV2/ButtonV2';
 import UserTaskFilter from '../../UserTaskFilter/UserTaskFilter';
 import SearchForBoard from '../../SearchForBoard/SearchForBoard';
 import TaskTypeFilter from '../../TaskTypeFilter/TaskTypeFilter';
+import TaskLabelFilter from '../../TaskLabelFilter/TaskLabelFilter';
 import { ITypes, IUserInfo } from '../../../types';
+import { LabelsProvider } from '../../../context/LabelProvider';
 
 interface Props {
   updateIsCreateNewCard: () => void;
@@ -75,6 +77,9 @@ export default function BoardSearch({
         selectedTypes={selectedTypes}
         setSelectedTypes={setSelectedTypes}
       />
+      <LabelsProvider>
+        <TaskLabelFilter />
+      </LabelsProvider>
       <fieldset style={{ display: 'none' }}>
         <ul className={styles.avatarContainer} id="myList">
           {avatars.map((avatar) => (
