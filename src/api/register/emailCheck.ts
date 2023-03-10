@@ -21,3 +21,9 @@ export async function emailVerifyCheck(emalToken: string) {
   const result = await axios.get(path);
   return result;
 }
+
+export async function emailVerifyCheckV2(emalToken: string) {
+  const path = `http://localhost:8000/api/v1/registerv2/${emalToken}`;
+  const result = await axios.get(path);
+  return result;
+}

@@ -49,6 +49,7 @@ import MyWorkPage from './pages/MyWorkPage/MyWorkPage';
 import ReportPage from './pages/ReportPage/ReportPage';
 import SupportCenterPage from './pages/SupportCenterPage/SupportCenterPage';
 import RegisterPageV2 from './pages/RegisterV2/RegisterPageV2';
+import VerifyPageV2 from './pages/VerifyPageV2/VerifyPageV2';
 
 function App() {
   const [showPages, setShowPages] = useState(null);
@@ -84,6 +85,7 @@ function App() {
                 {showPages && <Route path="/admin" element={<AdminPage />} />}
                 <Route path="/faq" element={<FAQPage />} />
                 <Route path="/verify" element={<VerifyPage />} />
+                <Route path="/verifyv2" element={<VerifyPageV2 />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/" element={getHomePage()} />
                 <Route path="/login/reset-password" element={<ResetPasswordPage />} />
