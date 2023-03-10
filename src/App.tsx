@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import HomePage from './pages/HomePage/HomePage';
 import RegisterPage from './pages/Register/RegisterPage';
 import LoginPage from './pages/Login/LoginPage';
+import LoginPageV2 from './pages/LoginV2/LoginPageV2';
 import Setting from './pages/Setting/Setting';
 import GdprPage from './pages/GDPRPage/GDPRPage';
 import CookiePolicyPage from './pages/CookiePolicyPage/CookiePolicyPage';
@@ -90,6 +91,7 @@ function App() {
                 {/* confirm existing user */}
                 {/*  <Route path="/user-confirm" element={<VerifyPageV2 />} />  */}
                 <Route path="/login" element={<LoginPage />} />
+                <Route path="/loginv2" element={<LoginPageV2 />} />
                 <Route path="/" element={getHomePage()} />
                 <Route path="/login/reset-password" element={<ResetPasswordPage />} />
                 <Route path="/report" element={<ReportPage />} />
