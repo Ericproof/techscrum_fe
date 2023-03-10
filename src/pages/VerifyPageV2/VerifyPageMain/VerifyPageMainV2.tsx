@@ -3,7 +3,7 @@ import { useNavigate, Link, useSearchParams } from 'react-router-dom';
 import { emailVerifyCheckV2 } from '../../../api/register/emailCheck';
 import { IUserInfo } from '../../../types';
 import { UserDispatchContext } from '../../../context/UserInfoProvider';
-import register from '../../../api/register/register';
+import { registerV2 } from '../../../api/register/register';
 import styles from './VerifyPageMainV2.module.scss';
 import Icon from '../../../assets/logo.svg';
 import Error from '../../../assets/error.png';
@@ -32,8 +32,6 @@ export default function VerifyPageMainV2() {
 
   useEffect(() => {
     const token = searchParams.get('token');
-    // eslint-disable-next-line no-console
-    console.log(token);
     const fetchEmailByToken = async () => {
       if (!token) {
         tip('The link is invalidate, please contact the administrator');
@@ -55,7 +53,7 @@ export default function VerifyPageMainV2() {
     setIsLoading(true);
     const emailToken = searchParams.get('token');
     try {
-      const result = await register(emailToken ?? 'undefined', {
+      const result = await registerV2(emailToken ?? 'undefined', {
         email: verifyEmail,
         name: nameRecorder,
         password: passwordRecorder
@@ -78,7 +76,7 @@ export default function VerifyPageMainV2() {
       localStorage.setItem('access_token', token);
       localStorage.setItem('refresh_token', refreshToken);
       setLocalStorage(user);
-      navigate(`/projects`);
+      navigate(`/`);
     } catch (e) {
       tip('Something go wrong, please contact staff');
     }

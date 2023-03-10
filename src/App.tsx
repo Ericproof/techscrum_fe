@@ -85,7 +85,10 @@ function App() {
                 {showPages && <Route path="/admin" element={<AdminPage />} />}
                 <Route path="/faq" element={<FAQPage />} />
                 <Route path="/verify" element={<VerifyPage />} />
-                <Route path="/verifyv2" element={<VerifyPageV2 />} />
+                {/* active new user */}
+                <Route path="/verify-v2" element={<VerifyPageV2 />} />
+                {/* confirm existing user */}
+                {/*  <Route path="/user-confirm" element={<VerifyPageV2 />} />  */}
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/" element={getHomePage()} />
                 <Route path="/login/reset-password" element={<ResetPasswordPage />} />
