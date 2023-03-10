@@ -145,6 +145,5 @@ export const dateFormatter = (rawDate: string | number | Date = new Date()): str
   const options: Intl.DateTimeFormatOptions = { day: '2-digit', month: '2-digit', year: 'numeric' };
   const formatter: Intl.DateTimeFormat = new Intl.DateTimeFormat('en-AU', options);
   const formattedDate: string = formatter.format(date).replace(/\//g, '-');
-  window.console.log(formattedDate);
   return formattedDate; // Output: 03-06-2023
 };

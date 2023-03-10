@@ -306,18 +306,3 @@ export interface IMinEvent {
     name: string;
   };
 }
-
-export interface IDailyScrum {
-  title: string;
-  progress: number;
-  isFinished: boolean;
-  hasReason: boolean;
-  reason?: string;
-  isNeedSupport: boolean;
-  userId: string;
-  projectId: string;
-  taskId: string;
-  createdDate?: string;
-  finishValidation?: boolean;
-  supportValidation?: boolean;
-}

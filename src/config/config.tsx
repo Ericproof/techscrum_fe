@@ -9,6 +9,8 @@ export default {
   // apiAddress: 'http://localhost:8000/api/v1'
 };
 
+export const TIME_OUT = 10 * 1000;
+
 const alphaApi = axios.create({
   headers: {
     Authorization: `Bearer ${localStorage.getItem('access_token')}`

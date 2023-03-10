@@ -111,7 +111,7 @@ export default function CardRightContent({
         dateHandler(new Date()),
         searchCase
       );
-      if (resultsForThisTask.data.length === 0) {
+      if (resultsForThisTask.length === 0) {
         await createDailyScrum(projectId, data);
       }
     }

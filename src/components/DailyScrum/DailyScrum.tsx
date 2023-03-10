@@ -1,11 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { MouseEvent, useContext, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { AiOutlineClose } from 'react-icons/ai';
 import { toast } from 'react-toastify';
-import { AxiosResponse } from 'axios';
 import styles from './DailyScrum.module.scss';
 import DailyScrumTicket from './DailyScrumTicket/DailyScrumTicket';
-import { getDailyScrums, updateDailyScrum } from '../../api/dailyScrum/dailyScrum';
+import {
+  getDailyScrums,
+  IDailyScrumTicket,
+  updateDailyScrum
+} from '../../api/dailyScrum/dailyScrum';
 import { UserContext } from '../../context/UserInfoProvider';
 import Modal from '../../lib/Modal/Modal';
 import { dateFormatter } from '../../utils/helpers';
@@ -16,29 +19,26 @@ interface IDailyScrumModal {
   projectId: string;
 }
 
+const SEARCH_CASE = 'search-all';
+
 function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JSX.Element {
-  const [dailyScrumTicketData, setDailyScrumTicketData] = useState<any>([]);
-  const [submitting, setSubmitting] = useState<boolean>(false);
+  const [dailyScrumTicketData, setDailyScrumTicketData] = useState<IDailyScrumTicket[]>([]);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const { id: userId }: IUserInfo = useContext(UserContext);
 
   useEffect(() => {
     (async () => {
       try {
-        const searchCase = 'search-all';
-        const results: AxiosResponse<any, IDailyScrum[]> = await getDailyScrums(
-          projectId,
-          userId,
-          'none',
-          'none',
-          searchCase
-        );
-        if (results.data.length === 0) {
+        const results = await getDailyScrums(projectId, userId, 'none', 'none', SEARCH_CASE);
+
+        if (results.length === 0) {
           toast('No dailyScrum data for now!', { theme: 'colored', toastId: 'dailyScrum error' });
         }
-        setDailyScrumTicketData(results.data);
-      } catch (e) {
-        toast.error('Failed tp get dailyScrum data!', {
+
+        setDailyScrumTicketData(results);
+      } catch (e: any) {
+        toast.error('Failed to get dailyScrum data!', {
           theme: 'colored',
           toastId: 'dailyScrum error'
         });
@@ -46,31 +46,31 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
     })();
   }, [projectId, userId]);
 
-  const onChangeFinish = (id: string, value: boolean) => {
+  const onChangeFinish = (id: string, isFinished: boolean) => {
     setDailyScrumTicketData(
       dailyScrumTicketData.map((ticket) => {
         if (ticket.id === id) {
-          return { ...ticket, finish: value, finishValidation: true };
+          return { ...ticket, isFinished, finishValidation: true };
         }
         return ticket;
       })
     );
   };
-  const onChangeSupport = (id: string, value: boolean) => {
+  const onChangeSupport = (id: string, isNeedSupport: boolean) => {
     setDailyScrumTicketData(
       dailyScrumTicketData.map((ticket) => {
         if (ticket.id === id) {
-          return { ...ticket, support: value, supportValidation: true };
+          return { ...ticket, isNeedSupport, supportValidation: true };
         }
         return ticket;
       })
     );
   };
-  const onChangeReason = (id: string, value: string) => {
+  const onChangeReason = (id: string, reason: string) => {
     setDailyScrumTicketData(
       dailyScrumTicketData.map((ticket) => {
         if (ticket.id === id) {
-          return { ...ticket, reason: value };
+          return { ...ticket, reason };
         }
         return ticket;
       })
@@ -80,40 +80,55 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
     setDailyScrumTicketData(
       dailyScrumTicketData.map((ticket) => {
         if (ticket.id === id) {
-          return { ...ticket, progress: e.target.value };
+          return { ...ticket, progress: e.target.valueAsNumber };
         }
         return ticket;
       })
     );
   };
-  const onHandleSubmit = async (e) => {
+  const onHandleSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
     try {
       e.preventDefault();
-      setSubmitting(true);
+      setIsSubmitting(true);
+
+      // createDate is not in a correct format that can be accepted by new Date()
+      // useCreateAt instead
       dailyScrumTicketData
-        .filter((ticket) => {
-          return dateFormatter(ticket.createdAt) === dateFormatter();
+        .filter(({ createAt }: IDailyScrumTicket) => {
+          return dateFormatter(createAt) === dateFormatter();
         })
-        .map(async (ticket) => {
-          const data = {
-            progress: ticket.progress ? ticket.progress : 0,
-            isFinished: ticket.finish ? ticket.finish : false,
-            hasReason: !!ticket.reason,
-            reason: ticket.reason ? ticket.reason : '',
-            isNeedSupport: ticket.support ? ticket.support : false,
-            createdDate: dateFormatter(),
-            finishValidation: ticket.finishValidation ? ticket.finishValidation : false,
-            supportValidation: ticket.supportValidation ? ticket.supportValidation : false
-          };
-          await updateDailyScrum(data, projectId, userId, ticket.taskId.id);
-        });
+        .map(
+          async ({
+            progress = 0,
+            isFinished = false,
+            reason = '',
+            isNeedSupport = false,
+            finishValidation = false,
+            supportValidation = false,
+            taskId
+          }) => {
+            const data = {
+              progress,
+              isFinished,
+              hasReason: !!reason,
+              reason,
+              isNeedSupport,
+              createdDate: dateFormatter(),
+              finishValidation,
+              supportValidation
+            };
+
+            window.console.log(taskId, data);
+            await updateDailyScrum(data, projectId, userId, taskId.id);
+          }
+        );
       toast.success('Submit successful!', {
         theme: 'colored',
         className: 'primaryColorBackground',
         toastId: 'dailyScrum success'
       });
       onClickCloseModal();
-      setSubmitting(false);
+      setIsSubmitting(false);
     } catch (error) {
       toast.error('Temporarily server error, please try again later!', {
         theme: 'colored',
@@ -134,15 +149,15 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
         </button>
       </div>
       <h4>Today: {dateFormatter()}</h4>
-      {dailyScrumTicketData.map((ticket) => {
+      {dailyScrumTicketData.map(({ id, title, progress, isFinished, finishValidation }) => {
         return (
           <DailyScrumTicket
-            key={ticket.id}
-            id={ticket.id}
-            title={ticket.title}
-            progress={ticket.progress}
-            finish={ticket.finish}
-            finishValidation={ticket.finishValidation}
+            key={id}
+            id={id}
+            title={title}
+            progress={progress.toString()}
+            finish={isFinished}
+            finishValidation={finishValidation as boolean}
             onChangeFinish={onChangeFinish}
             onChangeSupport={onChangeSupport}
             onChangeReason={onChangeReason}
@@ -161,7 +176,7 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
         <button
           className={styles.submitBtn}
           onClick={onHandleSubmit}
-          disabled={submitting}
+          disabled={isSubmitting}
           data-testid="dailyscrum-submit"
         >
           Submit
