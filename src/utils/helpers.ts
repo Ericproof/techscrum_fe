@@ -130,3 +130,11 @@ export const clickedShowMore = (e, refShowMore) => {
   }
   return hasClickShowMore;
 };
+
+export const convertFilterArrayToString = (selectedInputs) => {
+  let result = '';
+  selectedInputs.forEach((selectedInput) => {
+    result = result.concat(`-${selectedInput.id}`);
+  });
+  return result.slice(1);
+};
