@@ -12,11 +12,13 @@ export const filterBacklog = async (
   projectId: string,
   input: string,
   users: string,
-  types: string
+  types: string,
+  labels: string
 ) => {
   let inputSearchCase = input;
   let userSearchCase = users;
   let typeSearchCase = types;
+  let labelSearchCase = labels;
 
   enum Cases {
     searchAll = 'all'
@@ -31,7 +33,10 @@ export const filterBacklog = async (
   if (types === '') {
     typeSearchCase = Cases.searchAll;
   }
-  const path = `${config.apiAddress}/projects/${projectId}/backlogs/${inputSearchCase}/${userSearchCase}/${typeSearchCase}`;
+  if (labels === '') {
+    labelSearchCase = Cases.searchAll;
+  }
+  const path = `${config.apiAddress}/projects/${projectId}/backlogs/${inputSearchCase}/${userSearchCase}/${typeSearchCase}/${labelSearchCase}`;
   const response = await axios.get(path);
   return response.data;
 };
