@@ -53,7 +53,7 @@ export default function VerifyPageMainV2() {
   useEffect(() => {
     if (userActive) {
       setTimeout(() => {
-        // navigate('/');
+        navigate('/');
       }, 5000);
     }
   }, [navigate, userActive]);
