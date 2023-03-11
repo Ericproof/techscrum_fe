@@ -20,7 +20,7 @@ export default function VerifyPageMainV2() {
   const [invalidateStatus, setInvalidateStatus] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  const [userActived, setUserActived] = useState<boolean>(false);
+  const [userActive, setUserActive] = useState<boolean>(false);
 
   let nameRecorder = '';
   let passwordRecorder = '';
@@ -41,7 +41,7 @@ export default function VerifyPageMainV2() {
       try {
         const result = await emailVerifyCheckV2(token);
         setVerifyEmail(result.data.email);
-        setUserActived(result.data.active);
+        setUserActive(result.data.active);
         setIsLoading(false);
       } catch (e) {
         tip('The link is invalidate, please contact the administrator');
@@ -49,6 +49,14 @@ export default function VerifyPageMainV2() {
     };
     fetchEmailByToken();
   });
+
+  useEffect(() => {
+    if (userActive) {
+      setTimeout(() => {
+        // navigate('/');
+      }, 5000);
+    }
+  }, [navigate, userActive]);
 
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
@@ -110,7 +118,7 @@ export default function VerifyPageMainV2() {
             <p>Hold on while we are setting up your environment</p>
           </div>
         )}
-        {!invalidateStatus && !isLoading && !userActived && (
+        {!invalidateStatus && !isLoading && !userActive && (
           <>
             <h1>Register to continue</h1>
             <h1>Your team&apos;s site</h1>
@@ -150,19 +158,17 @@ export default function VerifyPageMainV2() {
             <button type="submit">Register</button>
           </>
         )}
-        {!invalidateStatus && !isLoading && userActived && (
+        {!invalidateStatus && !isLoading && userActive && (
           <>
-            <h1>Register to continue</h1>
-            <h1>Your team&apos;s site</h1>
+            <h1>Your team&apos;s site all done</h1>
             <div className={styles.registerMessageContainer}>
+              <img
+                className={styles.verifySuccessImg}
+                src="https://upload.wikimedia.org/wikipedia/commons/7/73/Flat_tick_icon.svg"
+                alt="success"
+              />
               <h1>The registration for the domain is successful!</h1>
             </div>
-            <p>
-              By registering, I accept the{' '}
-              <Link to="/terms-of-service">TechScrum Terms of Service</Link> and confirm acceptance
-              of the
-              <Link to="/privacy-policy"> Privacy Policy.</Link>
-            </p>
           </>
         )}
       </form>

@@ -176,8 +176,16 @@ $small_size: 704px;
     }
   }
   .registerMessageContainer {
-    margin-top: 50px;
-    margin-bottom: 150px;
+    padding-top: 50px;
+    padding-bottom: 120px;
+    text-align: center;
+
+    .verifySuccessImg {
+      max-width: 50%;
+      height: 100px;
+      align-self: center;
+      margin-bottom: 50px;
+    }
   }
 }
 
