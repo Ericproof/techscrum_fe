@@ -1,11 +1,17 @@
 import { BiCheckbox, BiCheckboxChecked } from 'react-icons/bi';
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import styles from '../../UserTaskFilter.module.scss';
+import { IUserInfo } from '../../../../types';
 
 interface IBacklogUserFilterDropdownSelectButton {
-  user: any;
-  selectedUsers: any;
-  changeSelectedUsers: any;
+  user: IUserInfo;
+  selectedUsers: IUserInfo[];
+  changeSelectedUsers: (
+    isExists: boolean,
+    selectedItems: IUserInfo[],
+    item: IUserInfo
+  ) => IUserInfo[];
+  setSelectedUsers: Dispatch<SetStateAction<IUserInfo[]>>;
 }
 
 export default function BacklogUserFilterDropdownSelectButton(
@@ -20,13 +26,13 @@ export default function BacklogUserFilterDropdownSelectButton(
     });
     return isExists;
   };
-  const { user, selectedUsers, changeSelectedUsers } = props;
+  const { user, selectedUsers, changeSelectedUsers, setSelectedUsers } = props;
   const [pressed, setPressed] = useState(checkExisting(selectedUsers, user));
   const onHandleButtonClick = (singleUser, e) => {
     e.preventDefault();
     setPressed((prevState) => !prevState);
     const isExists = checkExisting(selectedUsers, user);
-    changeSelectedUsers(isExists, singleUser);
+    setSelectedUsers(changeSelectedUsers(isExists, selectedUsers, singleUser));
   };
 
   return (
