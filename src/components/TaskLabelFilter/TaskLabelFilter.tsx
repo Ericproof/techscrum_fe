@@ -1,36 +1,55 @@
 /* eslint-disable no-console */
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useRef, useEffect } from 'react';
 import { BiChevronDown } from 'react-icons/bi';
 import styles from './TaskLabelFilter.module.scss';
-import LabelOptions from './LabelOptions';
+import LabelOption from './LabelOption';
 import { LabelContext } from '../../context/LabelProvider';
+import { ILabelData } from '../../types';
 
-export default function TaskTypeFilter() {
-  const labels = useContext(LabelContext);
-  const [isBtnActive, setIsBtnActive] = useState(false);
+interface Props {
+  selectedLabels: ILabelData[];
+  setSelectedLabels: React.Dispatch<React.SetStateAction<ILabelData[]>>;
+}
+export default function TaskLabelFilter({ selectedLabels, setSelectedLabels }: Props) {
+  const labelsCollection = useContext(LabelContext);
+  const [isTabActive, setIsTabActive] = useState(false);
+  const myRef = useRef<HTMLDivElement>(null);
 
   const showOptions = () => {
-    setIsBtnActive((prev) => !prev);
+    setIsTabActive((prev) => !prev);
   };
 
-  const closeOptions = () => {
-    setIsBtnActive(false);
+  const handleClickOutside = (e) => {
+    const target = e.target as HTMLDivElement;
+    if (myRef.current !== null && !myRef.current.contains(target)) {
+      setIsTabActive(false);
+    }
   };
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  });
 
   return (
-    <div className={styles.filterTab}>
+    <div className={styles.filterTab} ref={myRef}>
       <button
-        className={isBtnActive ? `${styles.filterBtn} ${styles.active}` : styles.filterBtn}
+        className={isTabActive ? `${styles.filterBtn} ${styles.active}` : styles.filterBtn}
         onClick={showOptions}
-        onBlur={closeOptions}
       >
-        Label
+        Label:
+        {selectedLabels.length > 0 && <span className={styles.badge}>{selectedLabels.length}</span>}
         <BiChevronDown className={styles.filterBtnIcon} />
       </button>
 
-      <div className={isBtnActive ? `${styles.optionsBox} ${styles.active}` : styles.optionsBox}>
-        {labels.map((label) => (
-          <LabelOptions key={label.id} label={label} />
+      <div className={isTabActive ? `${styles.optionsBox} ${styles.active}` : styles.optionsBox}>
+        {labelsCollection.map((label) => (
+          <LabelOption
+            key={label.id}
+            label={label}
+            selectedLabels={selectedLabels}
+            setSelectedLabels={setSelectedLabels}
+          />
         ))}
       </div>
     </div>

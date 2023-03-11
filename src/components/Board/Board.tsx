@@ -1,4 +1,5 @@
 /* eslint-disable no-restricted-syntax */
+/* eslint-disable no-console */
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { DropResult } from 'react-beautiful-dnd';
@@ -86,6 +87,7 @@ export default function Board() {
   const [selectedUsers, setSelectedUsers] = useState<any[]>([]);
   const [typeList, setTypeList] = useState<any[]>([]);
   const [selectedTypes, setSelectedTypes] = useState<ITypes[]>([]);
+  const [selectedLabels, setSelectedLabels] = useState<ILabelData[]>([]);
 
   const changeSelectedItems = (isExist, selectedItems, item) => {
     if (!isExist) {
@@ -129,14 +131,15 @@ export default function Board() {
       setLoading(true);
       const userCase = convertFilterArrayToString(selectedUsers);
       const taskTypeCase = convertFilterArrayToString(selectedTypes);
-      const boardInfo = await getBoard(boardId, inputQuery, userCase, taskTypeCase);
+      const labelCase = convertFilterArrayToString(selectedLabels);
+      const boardInfo = await getBoard(boardId, inputQuery, userCase, taskTypeCase, labelCase);
       fetchColumnsData(boardInfo);
       const typeData = await getTypes();
       setTypeList(typeData);
       setLoading(false);
     };
     fetchBoard();
-  }, [boardId, fetchColumnsData, inputQuery, selectedTypes, selectedUsers]);
+  }, [boardId, fetchColumnsData, inputQuery, selectedTypes, selectedUsers, selectedLabels]);
 
   useEffect(() => {
     fetchBoardInfo();
@@ -274,6 +277,8 @@ export default function Board() {
         selectedTypes={selectedTypes}
         setSelectedTypes={setSelectedTypes}
         changeSelectedTypes={changeSelectedItems}
+        selectedLabels={selectedLabels}
+        setSelectedLabels={setSelectedLabels}
       />
       <BoardMain
         columnsInfo={columnsInfo}

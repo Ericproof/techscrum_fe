@@ -8,13 +8,25 @@ interface IRolesProvider {
   children?: React.ReactNode;
 }
 
+interface IProps {
+  id: string;
+  name: string;
+  slug: string;
+}
+
+function selectProps(obj: IProps) {
+  const { id, name, slug } = obj;
+  return { id, name, slug };
+}
+
 function LabelsProvider({ children }: IRolesProvider) {
-  const [labels, setLabels] = useState<any>([]);
+  const [labels, setLabels] = useState<IProps[]>([]);
 
   const getCompanyLabels = async () => {
     const path = `${config.apiAddress}/labels`;
     const res = await axios.get(path);
-    setLabels(res.data);
+    const labelsData = res.data.map(selectProps);
+    setLabels(labelsData);
   };
 
   useEffect(() => {

@@ -7,7 +7,7 @@ import UserTaskFilter from '../../UserTaskFilter/UserTaskFilter';
 import SearchForBoard from '../../SearchForBoard/SearchForBoard';
 import TaskTypeFilter from '../../TaskTypeFilter/TaskTypeFilter';
 import TaskLabelFilter from '../../TaskLabelFilter/TaskLabelFilter';
-import { ITypes, IUserInfo } from '../../../types';
+import { ITypes, IUserInfo, ILabelData } from '../../../types';
 import { LabelsProvider } from '../../../context/LabelProvider';
 
 interface Props {
@@ -16,8 +16,10 @@ interface Props {
   projectId: string;
   selectedUsers: IUserInfo[];
   selectedTypes: ITypes[];
+  selectedLabels: ILabelData[];
   setSelectedUsers: Dispatch<SetStateAction<IUserInfo[]>>;
   setSelectedTypes: Dispatch<SetStateAction<ITypes[]>>;
+  setSelectedLabels: Dispatch<SetStateAction<ILabelData[]>>;
   changeSelectedUsers: (
     isExists: boolean,
     selectedItems: IUserInfo[],
@@ -37,8 +39,10 @@ export default function BoardSearch({
   userList,
   typeList,
   selectedTypes,
+  selectedLabels,
   setSelectedUsers,
-  setSelectedTypes
+  setSelectedTypes,
+  setSelectedLabels
 }: Props) {
   const avatars = [
     { id: 1, name: 'avatar1', url: '' },
@@ -78,7 +82,7 @@ export default function BoardSearch({
         setSelectedTypes={setSelectedTypes}
       />
       <LabelsProvider>
-        <TaskLabelFilter />
+        <TaskLabelFilter selectedLabels={selectedLabels} setSelectedLabels={setSelectedLabels} />
       </LabelsProvider>
       <fieldset style={{ display: 'none' }}>
         <ul className={styles.avatarContainer} id="myList">
