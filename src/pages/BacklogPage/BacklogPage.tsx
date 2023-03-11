@@ -19,6 +19,9 @@ import SprintSection from './SprintSection/SprintSection';
 import Loading from '../../components/Loading/Loading';
 import ProjectNavigationV3 from '../../lib/ProjectNavigationV3/ProjectNavigationV3';
 import SearchForBoard from '../../components/SearchForBoard/SearchForBoard';
+import TaskTypeFilter from '../../components/TaskTypeFilter/TaskTypeFilter';
+import { ITypes } from '../../types';
+import { convertFilterArrayToString } from '../../utils/helpers';
 
 export default function BacklogPage() {
   const [loaded, setLoaded] = useState(false);
@@ -26,7 +29,8 @@ export default function BacklogPage() {
   const [sprintData, setSprintData] = useState<any[]>([]);
   const [statusData, setStatusData] = useState([]);
   const { projectId = '', boardId = '' } = useParams();
-  const [typesData, setTypesData] = useState(null);
+  const [typesData, setTypesData] = useState([]);
+  const [selectedTypes, setSelectedTypes] = useState<ITypes[]>([]);
   const [userList, setUserList] = useState<any>([]);
   const [projectDataLoaded, setProjectDataLoaded] = useState(false);
   const [projectKey, setProjectKey] = useState('');
@@ -35,28 +39,24 @@ export default function BacklogPage() {
   const [inputQuery, setInputQuery] = useState<string>('');
   const page = 'backlog';
 
-  const chaneSelectedUsers = (isExist, user) => {
+  const changeSelectedItems = (isExist, selectedItems, item) => {
     if (!isExist) {
-      setSelectedUsers([...selectedUsers, user]);
-    } else {
-      setSelectedUsers(selectedUsers.filter((selectedUser) => selectedUser.id !== user.id));
+      return [...selectedItems, item];
     }
+    return selectedItems.filter((selectedItem) => selectedItem.id !== item.id);
   };
 
   useEffect(() => {
     const inputCase = inputQuery;
-    let userCase = '';
-    selectedUsers.forEach((selectedUser) => {
-      userCase = userCase.concat(`-${selectedUser.id}`);
-    });
-    userCase = userCase.slice(1);
+    const userCase = convertFilterArrayToString(selectedUsers);
+    const typeCase = convertFilterArrayToString(selectedTypes);
     const filterBacklogData = async () => {
-      const res = await filterBacklog(projectId, inputCase, userCase);
+      const res = await filterBacklog(projectId, inputCase, userCase, typeCase);
       setBacklogData(res.backlog);
       setSprintData(res.sprints);
     };
     filterBacklogData();
-  }, [inputQuery, projectId, selectedUsers]);
+  }, [inputQuery, projectId, selectedTypes, selectedUsers]);
 
   const getBacklogDataApi = useCallback(() => {
     const getBacklogData = async () => {
@@ -178,8 +178,15 @@ export default function BacklogPage() {
                 </div>
                 <UserTaskFilter
                   selectedUsers={selectedUsers}
-                  changeSelectedUsers={chaneSelectedUsers}
+                  setSelectedUsers={setSelectedUsers}
+                  changeSelectedUsers={changeSelectedItems}
                   userList={userList}
+                />
+                <TaskTypeFilter
+                  typeList={typesData}
+                  selectedTypes={selectedTypes}
+                  setSelectedTypes={setSelectedTypes}
+                  changeSelectedTypes={changeSelectedItems}
                 />
               </div>
               {sprintData

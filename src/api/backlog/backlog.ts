@@ -8,16 +8,30 @@ export const getBacklog = async (projectId: string) => {
   return response.data;
 };
 
-export const filterBacklog = async (projectId: string, input: string, users: string) => {
-  let inputCase = input;
-  let userCase = users;
+export const filterBacklog = async (
+  projectId: string,
+  input: string,
+  users: string,
+  types: string
+) => {
+  let inputSearchCase = input;
+  let userSearchCase = users;
+  let typeSearchCase = types;
+
+  enum Cases {
+    searchAll = 'all'
+  }
+
   if (input === '') {
-    inputCase = 'all';
+    inputSearchCase = Cases.searchAll;
   }
   if (users === '') {
-    userCase = 'all';
+    userSearchCase = Cases.searchAll;
   }
-  const path = `${config.apiAddress}/projects/${projectId}/backlogs/${inputCase}/${userCase}`;
+  if (types === '') {
+    typeSearchCase = Cases.searchAll;
+  }
+  const path = `${config.apiAddress}/projects/${projectId}/backlogs/${inputSearchCase}/${userSearchCase}/${typeSearchCase}`;
   const response = await axios.get(path);
   return response.data;
 };
