@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { MdOutlineVisibility, MdVisibility } from 'react-icons/md';
 import { AxiosError } from 'axios';
-import login from '../../../api/login/login';
+import loginv2 from '../../../api/loginv2/loginv2';
 import { IUserInfo } from '../../../types';
 import { UserDispatchContext } from '../../../context/UserInfoProvider';
 import styles from './LoginMain.module.scss';
@@ -23,7 +23,7 @@ export default function LoginMain() {
     event.preventDefault();
     try {
       setLoading(true);
-      const result = await login({
+      const result = await loginv2({
         email: emailRecorder,
         password: passwordRecorder
       });
