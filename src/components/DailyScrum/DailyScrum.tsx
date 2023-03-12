@@ -16,14 +16,15 @@ interface IDailyScrumModal {
   projectId: string;
 }
 
-type IDailyScrumTicketsActionKey = keyof typeof dailyScrumTicketsActionTypes;
-type IDailyScrumTicketsActionType =
-  typeof dailyScrumTicketsActionTypes[IDailyScrumTicketsActionKey];
-
 type IDailyScrumTicketUpdate = Partial<IDailyScrumTicket> & { id: string };
 
+enum DailyScrumTicketsActionType {
+  updateOneTicket = 'UPDATE_ONE_TICKET',
+  getAllTickets = 'GET_ALL_TICKET'
+}
+
 interface IDailyScrumTicketsAction {
-  type: IDailyScrumTicketsActionType;
+  type: DailyScrumTicketsActionType;
   payload: IDailyScrumTicketUpdate | IDailyScrumTicket[];
 }
 
@@ -31,17 +32,12 @@ const SEARCH_CASE = 'search-all';
 
 const initialDailyScrumTickets: IDailyScrumTicket[] = [];
 
-const dailyScrumTicketsActionTypes = {
-  updateOneTicket: 'UPDATE_ONE_TICKET',
-  getAllTickets: 'GET_ALL_TICKET'
-};
-
 const dailyScrumTicketsReducer = (state: IDailyScrumTicket[], action: IDailyScrumTicketsAction) => {
   switch (action.type) {
-    case dailyScrumTicketsActionTypes.getAllTickets:
+    case DailyScrumTicketsActionType.getAllTickets:
       return [...state, ...(action.payload as IDailyScrumTicket[])];
 
-    case dailyScrumTicketsActionTypes.updateOneTicket:
+    case DailyScrumTicketsActionType.updateOneTicket:
       return state.map((ticket: IDailyScrumTicket) =>
         ticket.id === (action.payload as IDailyScrumTicketUpdate).id
           ? { ...ticket, ...action.payload }
@@ -73,7 +69,7 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
           toast('No dailyScrum data for now!', { theme: 'colored', toastId: 'dailyScrum error' });
         }
 
-        dispatch({ type: dailyScrumTicketsActionTypes.getAllTickets, payload: results });
+        dispatch({ type: DailyScrumTicketsActionType.getAllTickets, payload: results });
       } catch (e: any) {
         toast.error('Failed to get dailyScrum data!', {
           theme: 'colored',
@@ -91,7 +87,7 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
       // if this is only UI related, then make it a local state
       if (key === 'isFinished') {
         dispatch({
-          type: dailyScrumTicketsActionTypes.updateOneTicket,
+          type: DailyScrumTicketsActionType.updateOneTicket,
           payload: {
             id,
             finishValidation: true
@@ -101,7 +97,7 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
 
       if (key === 'isNeedSupport') {
         dispatch({
-          type: dailyScrumTicketsActionTypes.updateOneTicket,
+          type: DailyScrumTicketsActionType.updateOneTicket,
           payload: {
             id,
             supportValidation: true
@@ -110,7 +106,7 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
       }
 
       return dispatch({
-        type: dailyScrumTicketsActionTypes.updateOneTicket,
+        type: DailyScrumTicketsActionType.updateOneTicket,
         payload: {
           id,
           [key]: value
