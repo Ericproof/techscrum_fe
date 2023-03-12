@@ -1,22 +1,6 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import config, { TIME_OUT } from '../../config/config';
-
-export interface IDailyScrumTicket {
-  title: string;
-  progress: number;
-  isFinished: boolean;
-  hasReason: boolean;
-  reason?: string;
-  isNeedSupport: boolean;
-  userId: { id: string };
-  projectId: { id: string };
-  taskId: { id: string };
-  createdDate?: string;
-  finishValidation?: boolean;
-  supportValidation?: boolean;
-  id: string;
-  createAt: string;
-}
+import { IDailyScrumTicket } from '../../types';
 
 const axiosConfig = {
   baseURL: `${config.apiAddress}/projects`,
@@ -29,8 +13,8 @@ const axiosConfig = {
 const http: AxiosInstance = axios.create(axiosConfig);
 
 http.interceptors.response.use(
-  (response) => {
-    const updatedDataArr = response.data.map((item: IDailyScrumTicket) => ({
+  (response): IDailyScrumTicket => {
+    const updatedDataArr = response.data.map((item: any) => ({
       ...item,
       projectId: item.projectId.id,
       userId: item.userId.id,

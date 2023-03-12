@@ -2,31 +2,33 @@ import React from 'react';
 import styles from './RadioInput.module.scss';
 
 interface IRadioInput {
-  onChange: (id: string, value: boolean) => void;
-  id: string;
+  onChange: (value: boolean) => void;
   name: string;
+  value: boolean;
 }
-export default function RadioInput({ onChange, id, name }: IRadioInput) {
+export default function RadioInput({ onChange, name, value }: IRadioInput) {
   return (
     <>
-      <label htmlFor={id} className={styles.radioLabel}>
+      <label htmlFor={`${name}-yes`} className={styles.radioLabel}>
         <input
           type="radio"
           name={name}
-          id={id}
+          id={`${name}-yes`}
+          checked={!!value}
           onChange={() => {
-            onChange(id, true);
+            onChange(true);
           }}
         />
         Yes
       </label>
-      <label htmlFor={id} className={styles.radioLabel}>
+      <label htmlFor={`${name}-no`} className={styles.radioLabel}>
         <input
           type="radio"
           name={name}
-          id={id}
+          id={`${name}-no`}
+          checked={!value}
           onChange={() => {
-            onChange(id, false);
+            onChange(false);
           }}
         />
         No

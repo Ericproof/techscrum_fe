@@ -1,29 +1,66 @@
-import React, { MouseEvent, useContext, useEffect, useState } from 'react';
+import React, { MouseEvent, useContext, useEffect, useReducer, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { AiOutlineClose } from 'react-icons/ai';
 import { toast } from 'react-toastify';
+import { DatePicker } from '@atlaskit/datetime-picker';
 import styles from './DailyScrum.module.scss';
-import DailyScrumTicket from './DailyScrumTicket/DailyScrumTicket';
-import {
-  getDailyScrums,
-  IDailyScrumTicket,
-  updateDailyScrum
-} from '../../api/dailyScrum/dailyScrum';
+import { getDailyScrums, updateDailyScrum } from '../../api/dailyScrum/dailyScrum';
 import { UserContext } from '../../context/UserInfoProvider';
 import Modal from '../../lib/Modal/Modal';
 import { dateFormatter } from '../../utils/helpers';
-import { IUserInfo } from '../../types';
+import { IUserInfo, IDailyScrumTicket } from '../../types';
+import DailyScrumTicket from './DailyScrumTicket/DailyScrumTicket';
 
 interface IDailyScrumModal {
   onClickCloseModal: () => void;
   projectId: string;
 }
 
+type IDailyScrumTicketsActionKey = keyof typeof dailyScrumTicketsActionTypes;
+type IDailyScrumTicketsActionType =
+  typeof dailyScrumTicketsActionTypes[IDailyScrumTicketsActionKey];
+
+type IDailyScrumTicketUpdate = Partial<IDailyScrumTicket> & { id: string };
+
+interface IDailyScrumTicketsAction {
+  type: IDailyScrumTicketsActionType;
+  payload: IDailyScrumTicketUpdate | IDailyScrumTicket[];
+}
+
 const SEARCH_CASE = 'search-all';
 
+const initialDailyScrumTickets: IDailyScrumTicket[] = [];
+
+const dailyScrumTicketsActionTypes = {
+  updateOneTicket: 'UPDATE_ONE_TICKET',
+  getAllTickets: 'GET_ALL_TICKET'
+};
+
+const dailyScrumTicketsReducer = (state: IDailyScrumTicket[], action: IDailyScrumTicketsAction) => {
+  switch (action.type) {
+    case dailyScrumTicketsActionTypes.getAllTickets:
+      return [...state, ...(action.payload as IDailyScrumTicket[])];
+
+    case dailyScrumTicketsActionTypes.updateOneTicket:
+      return state.map((ticket: IDailyScrumTicket) =>
+        ticket.id === (action.payload as IDailyScrumTicketUpdate).id
+          ? { ...ticket, ...action.payload }
+          : { ...ticket }
+      );
+
+    default:
+      return [...state];
+  }
+};
+
 function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JSX.Element {
-  const [dailyScrumTicketData, setDailyScrumTicketData] = useState<IDailyScrumTicket[]>([]);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [calendarDate, setCalendarDate] = useState<string>(dateFormatter(undefined, true));
+
+  const [dailyScrumTickets, dispatch] = useReducer(
+    dailyScrumTicketsReducer,
+    initialDailyScrumTickets
+  );
 
   const { id: userId }: IUserInfo = useContext(UserContext);
 
@@ -36,7 +73,7 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
           toast('No dailyScrum data for now!', { theme: 'colored', toastId: 'dailyScrum error' });
         }
 
-        setDailyScrumTicketData(results);
+        dispatch({ type: dailyScrumTicketsActionTypes.getAllTickets, payload: results });
       } catch (e: any) {
         toast.error('Failed to get dailyScrum data!', {
           theme: 'colored',
@@ -46,46 +83,41 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
     })();
   }, [projectId, userId]);
 
-  const onChangeFinish = (id: string, isFinished: boolean) => {
-    setDailyScrumTicketData(
-      dailyScrumTicketData.map((ticket) => {
-        if (ticket.id === id) {
-          return { ...ticket, isFinished, finishValidation: true };
+  const updateDailyScrumTicket =
+    (id: string) =>
+    (key: 'progress' | 'isFinished' | 'isNeedSupport' | 'reason') =>
+    (value: number | string | boolean) => {
+      // What is this for????? validations????
+      // if this is only UI related, then make it a local state
+      if (key === 'isFinished') {
+        dispatch({
+          type: dailyScrumTicketsActionTypes.updateOneTicket,
+          payload: {
+            id,
+            finishValidation: true
+          }
+        });
+      }
+
+      if (key === 'isNeedSupport') {
+        dispatch({
+          type: dailyScrumTicketsActionTypes.updateOneTicket,
+          payload: {
+            id,
+            supportValidation: true
+          }
+        });
+      }
+
+      return dispatch({
+        type: dailyScrumTicketsActionTypes.updateOneTicket,
+        payload: {
+          id,
+          [key]: value
         }
-        return ticket;
-      })
-    );
-  };
-  const onChangeSupport = (id: string, isNeedSupport: boolean) => {
-    setDailyScrumTicketData(
-      dailyScrumTicketData.map((ticket) => {
-        if (ticket.id === id) {
-          return { ...ticket, isNeedSupport, supportValidation: true };
-        }
-        return ticket;
-      })
-    );
-  };
-  const onChangeReason = (id: string, reason: string) => {
-    setDailyScrumTicketData(
-      dailyScrumTicketData.map((ticket) => {
-        if (ticket.id === id) {
-          return { ...ticket, reason };
-        }
-        return ticket;
-      })
-    );
-  };
-  const onChangeProgress = (id: string, e: React.ChangeEvent<HTMLInputElement>) => {
-    setDailyScrumTicketData(
-      dailyScrumTicketData.map((ticket) => {
-        if (ticket.id === id) {
-          return { ...ticket, progress: e.target.valueAsNumber };
-        }
-        return ticket;
-      })
-    );
-  };
+      });
+    };
+
   const onHandleSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
     try {
       e.preventDefault();
@@ -93,7 +125,7 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
 
       // createDate is not in a correct format that can be accepted by new Date()
       // useCreateAt instead
-      dailyScrumTicketData
+      dailyScrumTickets
         .filter(({ createAt }: IDailyScrumTicket) => {
           return dateFormatter(createAt) === dateFormatter();
         })
@@ -119,7 +151,7 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
             };
 
             window.console.log(taskId, data);
-            await updateDailyScrum(data, projectId, userId, taskId.id);
+            await updateDailyScrum(data, projectId, userId, taskId);
           }
         );
       toast.success('Submit successful!', {
@@ -149,22 +181,41 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
         </button>
       </div>
       <h4>Today: {dateFormatter()}</h4>
-      {dailyScrumTicketData.map(({ id, title, progress, isFinished, finishValidation }) => {
-        return (
-          <DailyScrumTicket
-            key={id}
-            id={id}
-            title={title}
-            progress={progress.toString()}
-            finish={isFinished}
-            finishValidation={finishValidation as boolean}
-            onChangeFinish={onChangeFinish}
-            onChangeSupport={onChangeSupport}
-            onChangeReason={onChangeReason}
-            onChangeProgress={onChangeProgress}
-          />
-        );
-      })}
+      <div className={styles.dailyScrumContent}>
+        <DatePicker
+          spacing="compact"
+          appearance="subtle"
+          defaultIsOpen
+          isOpen
+          locale="en-AU"
+          dateFormat="MM-DD-YYYY"
+          placeholder="e.g 11-13-2018"
+          value={calendarDate}
+          onChange={(e) => {
+            setCalendarDate(e);
+          }}
+        />
+        <div className={styles.dailyScrumTicketsListWrapper}>
+          {dailyScrumTickets.map(
+            ({ id, title, progress, isFinished, finishValidation, isNeedSupport, reason }) => {
+              return (
+                <DailyScrumTicket
+                  key={id}
+                  id={id}
+                  title={title}
+                  progress={progress}
+                  reason={reason}
+                  finish={isFinished}
+                  isNeedSupport={isNeedSupport}
+                  finishValidation={finishValidation as boolean}
+                  updateDailyScrumTicket={updateDailyScrumTicket}
+                />
+              );
+            }
+          )}
+        </div>
+      </div>
+
       <div className={styles.btnContainer}>
         <button
           className={styles.cancelBtn}

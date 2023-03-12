@@ -11,12 +11,31 @@ $colorBlue: rgb(50, 115, 246);
 }
 
 .dailyScrumModal {
-  max-width: 45% !important;
+  max-width: 65% !important;
   width: 100%;
   height: 100%;
 }
 .dailyScrumContainer {
   padding: 40px;
+
+  .dailyScrumContent {
+    display: flex;
+    justify-content: flex-end;
+    gap: 3rem;
+    position: relative;
+
+    & > *:nth-child(2) {
+      width: 50%;
+    }
+
+    & > *:first-child {
+      width: 40%;
+      max-width: 400px;
+
+      position: absolute;
+      left: 0;
+    }
+  }
 }
 .dailyScrumHeader {
   display: flex;

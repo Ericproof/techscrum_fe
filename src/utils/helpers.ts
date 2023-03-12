@@ -139,9 +139,16 @@ export const convertFilterArrayToString = (selectedInputs) => {
   return result.slice(1);
 };
 
-export const dateFormatter = (rawDate: string | number | Date = new Date()): string => {
+export const dateFormatter = (
+  rawDate: string | number | Date = new Date(),
+  isToISO?: boolean
+): string => {
   // default date: current
   const date: Date = new Date(rawDate);
+  if (isToISO) {
+    return date.toISOString();
+  }
+
   const options: Intl.DateTimeFormatOptions = { day: '2-digit', month: '2-digit', year: 'numeric' };
   const formatter: Intl.DateTimeFormat = new Intl.DateTimeFormat('en-AU', options);
   const formattedDate: string = formatter.format(date).replace(/\//g, '-');
