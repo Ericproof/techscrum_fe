@@ -63,9 +63,8 @@ function PermissionSelector(props: IProps) {
 
   const submitHandler = (event) => {
     event.preventDefault();
-
-    const view = event.target.elements;
     const newPermissions: string[] = [];
+    const view = event.target.elements;
     Array.prototype.forEach.call(view, (input) => {
       if (input.checked) {
         newPermissions.push(input.id);
@@ -73,19 +72,19 @@ function PermissionSelector(props: IProps) {
     });
     if (newPermissions.length === 0) {
       setErrorActive(true);
-      setErrorMsg('please select at least one permission!!!');
+      setErrorMsg('Please select at least one permission!!!');
       return;
     }
 
-    if (setName === 'EDIT') {
+    if (setName !== 'EDIT') {
+      submitRoleHandler(setName, newPermissions, false);
+    } else {
       if (!roleName) {
         setErrorActive(true);
         setErrorMsg('Please Enter a valid role name!!!');
         return;
       }
       submitRoleHandler(roleName, newPermissions, true);
-    } else {
-      submitRoleHandler(setName, newPermissions, false);
     }
   };
 
