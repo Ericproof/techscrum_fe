@@ -27,7 +27,7 @@ export default function LabelOption({ label, selectedLabels, setSelectedLabels }
   };
 
   return (
-    <button className={styles.optionBtn} onClick={handleBtnClick}>
+    <button className={styles.optionBtn} onClick={handleBtnClick} data-testid={`label-${label.id}`}>
       {isSelected ? (
         <BiCheckboxChecked className={styles.optionCheckBox} />
       ) : (

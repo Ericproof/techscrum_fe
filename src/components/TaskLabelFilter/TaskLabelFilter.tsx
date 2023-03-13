@@ -36,13 +36,17 @@ export default function TaskLabelFilter({ selectedLabels, setSelectedLabels }: P
       <button
         className={isTabActive ? `${styles.filterBtn} ${styles.active}` : styles.filterBtn}
         onClick={showOptions}
+        data-testid="labelsTab"
       >
         Label:
         {selectedLabels.length > 0 && <span className={styles.badge}>{selectedLabels.length}</span>}
         <BiChevronDown className={styles.filterBtnIcon} />
       </button>
 
-      <div className={isTabActive ? `${styles.optionsBox} ${styles.active}` : styles.optionsBox}>
+      <div
+        className={isTabActive ? `${styles.optionsBox} ${styles.active}` : styles.optionsBox}
+        data-testid="labelOptions"
+      >
         {labelsCollection.map((label) => (
           <LabelOption
             key={label.id}
