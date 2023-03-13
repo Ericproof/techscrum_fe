@@ -135,7 +135,7 @@ function PermissionSelector(props: IProps) {
             data-testid="submit-btn"
             type="submit"
             value="Submit"
-            className={`${styles.Btn} ${styles.add}`}
+            className={`${styles.btn} ${styles.add}`}
           />
           <input
             type="button"
