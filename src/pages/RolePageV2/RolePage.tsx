@@ -13,7 +13,7 @@ import {
   updateRole,
   deleteRole,
   getPermissions,
-  getOneRoles
+  getRoleById
 } from '../../api/role/role';
 import styles from './RolePage.module.scss';
 import RoleNav from './RoleNav/roleNav';
@@ -58,7 +58,7 @@ function RolePage() {
   };
 
   const editRoleHandler = async (roleId: string) => {
-    const Role = await getOneRoles(projectId, roleId);
+    const Role = await getRoleById(projectId, roleId);
     setEditRole(roleId);
     setSelectedRole(Role);
     setOpenEdit(true);

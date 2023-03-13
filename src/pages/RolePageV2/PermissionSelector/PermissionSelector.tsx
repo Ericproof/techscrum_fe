@@ -40,8 +40,8 @@ function PermissionSelector(props: IProps) {
 
   const operationFilter = (
     operation: string,
-    defaultPermissions: Array<any>,
-    selectedPermissions: Array<any>
+    defaultPermissions: Array<IPermissions>,
+    selectedPermissions: Array<IPermissions>
   ) => {
     const permissionForm = defaultPermissions.filter((permission) => {
       const seperation = permission?.slug.split(':');
@@ -80,7 +80,7 @@ function PermissionSelector(props: IProps) {
     if (setName === 'EDIT') {
       if (!roleName) {
         setErrorActive(true);
-        setErrorMsg('please Enter a valid role name!!!');
+        setErrorMsg('Please Enter a valid role name!!!');
         return;
       }
       submitRoleHandler(roleName, newPermissions, true);
@@ -131,7 +131,7 @@ function PermissionSelector(props: IProps) {
           </div>
         )}
 
-        <div className={styles['btn-container']}>
+        <div className={styles.btnContainer}>
           <input
             data-testid="submit-btn"
             type="submit"
@@ -142,7 +142,7 @@ function PermissionSelector(props: IProps) {
             type="button"
             value="close"
             onClick={closeHandler}
-            className={`${styles.Btn} ${styles.cancel}`}
+            className={`${styles.btn} ${styles.cancel}`}
           />
         </div>
       </form>

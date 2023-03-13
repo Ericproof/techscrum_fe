@@ -7,7 +7,7 @@ export const getRoles = async (projectId: string) => {
   return response.data;
 };
 
-export const getOneRoles = async (projectId: string, roleId: string) => {
+export const getRoleById = async (projectId: string, roleId: string) => {
   const path = `${config.apiAddress}/projects/${projectId}/roles/${roleId}`;
   const response = await axios.get(path);
   return response.data;

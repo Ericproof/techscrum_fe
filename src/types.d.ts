@@ -247,12 +247,12 @@ export interface IRole {
   name?: string;
   slug?: string;
   allowDelete?: boolean;
-  permission: IPermission[];
+  permission: IPermissions[];
 }
 
 export interface IPermissions {
   id: string;
-  slug?: string;
+  slug: string;
   description: string;
 }
 
