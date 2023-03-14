@@ -9,7 +9,7 @@ import styles from './LoginMain.module.scss';
 import Icon from '../../../assets/logo.svg';
 import { setLocalStorage } from '../../../utils/helpers';
 
-export default function LoginMain() {
+export default function LoginMainV2() {
   const navigate = useNavigate();
   const setUserInfo = useContext(UserDispatchContext);
   const illegalCharacter = /[%&]/;
