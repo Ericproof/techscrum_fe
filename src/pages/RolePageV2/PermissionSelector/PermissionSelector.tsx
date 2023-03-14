@@ -63,13 +63,12 @@ function PermissionSelector(props: IProps) {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    const newPermissions: string[] = [];
     const view = event.target.elements;
-    Array.prototype.forEach.call(view, (input) => {
-      if (input.checked) {
-        newPermissions.push(input.id);
-      }
-    });
+
+    const newPermissions = Array.prototype.filter
+      .call(view, (input) => input.checked)
+      .map((input) => input.id);
+
     if (newPermissions.length === 0) {
       setErrorActive(true);
       setErrorMsg('Please select at least one permission!!!');
