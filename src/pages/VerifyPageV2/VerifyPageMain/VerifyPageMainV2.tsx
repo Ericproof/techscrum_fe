@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate, Link, useSearchParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { emailVerifyCheckV2 } from '../../../api/register/emailCheck';
 import { IUserInfo } from '../../../types';
 import { UserDispatchContext } from '../../../context/UserInfoProvider';
@@ -24,6 +25,7 @@ export default function VerifyPageMainV2() {
 
   let nameRecorder = '';
   let passwordRecorder = '';
+  let confirmPasswordRecorder = '';
 
   const tip = (error: string) => {
     setInvalidateStatus(true);
@@ -60,35 +62,39 @@ export default function VerifyPageMainV2() {
 
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
-    setIsLoading(true);
-    const emailToken = searchParams.get('token');
-    try {
-      const result = await registerV2(emailToken ?? 'undefined', {
-        email: verifyEmail,
-        name: nameRecorder,
-        password: passwordRecorder
-      });
-      const { user, token, refreshToken } = result.data;
-      if (!user) {
-        tip('Register Failed, please try again');
-        return;
+    if (passwordRecorder === confirmPasswordRecorder) {
+      setIsLoading(true);
+      const emailToken = searchParams.get('token');
+      try {
+        const result = await registerV2(emailToken ?? 'undefined', {
+          email: verifyEmail,
+          name: nameRecorder,
+          password: passwordRecorder
+        });
+        const { user, token, refreshToken } = result.data;
+        if (!user) {
+          tip('Register Failed, please try again');
+          return;
+        }
+        setIsLoading(false);
+        const userLoginInfo: IUserInfo = {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          avatarIcon: user?.avatarIcon,
+          token,
+          refreshToken
+        };
+        setUserInfo(userLoginInfo);
+        localStorage.setItem('access_token', token);
+        localStorage.setItem('refresh_token', refreshToken);
+        setLocalStorage(user);
+        navigate(`/`);
+      } catch (e) {
+        tip('Something go wrong, please contact staff');
       }
-      setIsLoading(false);
-      const userLoginInfo: IUserInfo = {
-        id: user.id,
-        email: user.email,
-        name: user.name,
-        avatarIcon: user?.avatarIcon,
-        token,
-        refreshToken
-      };
-      setUserInfo(userLoginInfo);
-      localStorage.setItem('access_token', token);
-      localStorage.setItem('refresh_token', refreshToken);
-      setLocalStorage(user);
-      navigate(`/`);
-    } catch (e) {
-      tip('Something go wrong, please contact staff');
+    } else {
+      toast.error('Passwords are not match, please try enter your passwords again');
     }
   };
 
@@ -100,6 +106,10 @@ export default function VerifyPageMainV2() {
     if (!illegalCharacter.test(password) || password === '') {
       passwordRecorder = password;
     } else tip('Illegal Character Detected');
+  };
+
+  const setConfirmPassword = (password: string) => {
+    confirmPasswordRecorder = password;
   };
 
   return (
@@ -148,6 +158,15 @@ export default function VerifyPageMainV2() {
               minLength={8}
               maxLength={16}
               onChange={(e) => setPassword(e.target.value)}
+            />
+            <input
+              className={styles.password}
+              type="password"
+              placeholder="Confirm Your Password"
+              name="password"
+              minLength={8}
+              maxLength={16}
+              onChange={(e) => setConfirmPassword(e.target.value)}
             />
             <p>
               By registering, I accept the{' '}

@@ -35,7 +35,7 @@ export default function RegisterMainV2() {
               <img src={Email} alt="Email Icon" className={styles.emailBoxImg} />
             </div>
             <h1 className={styles.emailBoxNotification}>
-              Email have Sent, Please check your email
+              Email has been sent, Please check your email
             </h1>
           </div>
         )}
@@ -81,53 +81,25 @@ export default function RegisterMainV2() {
             >
               Register
             </button>
-            <div className={styles.thirdPartyRegisterContainer}>
-              <h1 className={styles.thirdPartyRegisterTitle}>Or Register Via:</h1>
-              <button className={styles.thirdPartyBtn}>
-                <img
-                  className={styles.thirdPartyImg}
-                  src="https://aid-frontend.prod.atl-paas.net/atlassian-id/front-end/5.0.424/static/media/google-logo.e086107b.svg"
-                  alt="google"
-                />
-                <div className={styles.thirdPartyDesc}>Use Google to Continue</div>
-              </button>
-              <button className={styles.thirdPartyBtn}>
-                <img
-                  className={styles.thirdPartyImg}
-                  src="https://aid-frontend.prod.atl-paas.net/atlassian-id/front-end/5.0.424/static/media/microsoft-logo.42b61fa1.svg"
-                  alt="microsoft"
-                />
-                <div className={styles.thirdPartyDesc}>Use Microsoft to Continue</div>
-              </button>
-            </div>
             <div className={styles.registerLoginContainer}>
               <Link to="/login" className={styles.registerLogin}>
                 Already have TechScrum Account? Login
               </Link>
             </div>
-            <div className={styles.registerFooter}>
-              <img className={styles.techScrumFooterIcon} src={Icon} alt="TechScrum Icon" />
-              <p className={styles.registerFooterText}>
-                <Link
-                  to="/privacy-policy"
-                  target="_blank"
-                  className={styles.registerFooterTextLink}
-                >
-                  Privacy Policy
-                </Link>
-                &nbsp;and&nbsp;
-                <Link
-                  to="/terms-of-service"
-                  target="_blank"
-                  className={styles.registerFooterTextLink}
-                >
-                  Terms of Service
-                </Link>
-              </p>
-            </div>
           </>
         )}
       </form>
+      <div className={styles.registerFooter}>
+        <p className={styles.registerFooterText}>
+          <Link to="/privacy-policy" target="_blank" className={styles.registerFooterTextLink}>
+            Privacy Policy
+          </Link>
+          &nbsp;and&nbsp;
+          <Link to="/terms-of-service" target="_blank" className={styles.registerFooterTextLink}>
+            Terms of Service
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }

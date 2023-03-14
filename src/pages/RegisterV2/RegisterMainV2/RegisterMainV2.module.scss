@@ -139,32 +139,32 @@
     }
 
     .registerLoginContainer {
+      margin-top: 20px;
       .registerLogin {
         font-size: 13px;
         text-decoration: none;
         color: rgb(0, 82, 204);
       }
     }
+  }
 
-    .registerFooter {
-      color: rgb(107, 119, 140);
-      padding-top: 16px;
-      margin-top: 32px;
-      border-top: 1px solid rgb(213, 216, 222);
-      font-size: 14px;
-      text-align: center;
-      line-height: 20px;
+  .registerFooter {
+    color: rgb(107, 119, 140);
+    padding-top: 16px;
+    font-size: 14px;
+    text-align: center;
+    line-height: 20px;
+    text-decoration: none;
 
-      .techScrumFooterIcon {
-        height: 35px;
-        color: gray;
-      }
+    .techScrumFooterIcon {
+      height: 35px;
+      color: gray;
+    }
 
-      .registerFooterText {
-        .registerFooterTextLink {
-          text-decoration: none;
-          color: rgb(0, 82, 204);
-        }
+    .registerFooterText {
+      .registerFooterTextLink {
+        text-decoration: none;
+        color: rgb(0, 82, 204);
       }
     }
   }
