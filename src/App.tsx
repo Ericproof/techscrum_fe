@@ -85,7 +85,7 @@ function App() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/" element={getHomePage()} />
                 <Route path="/login/reset-password" element={<ResetPasswordPage />} />
-                <Route path="/report" element={<ReportPage />} />
+                <Route path="/features/report" element={<ReportPage />} />
                 <Route path="/login/change-password" element={<ChangePasswordPage />} />
                 <Route path="/cookie-policy" element={<CookiePolicyPage />} />
                 <Route path="/gdpr" element={<GdprPage />} />
