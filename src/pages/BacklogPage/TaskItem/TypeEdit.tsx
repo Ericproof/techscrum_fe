@@ -1,8 +1,7 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import styles from './TypeEdit.module.scss';
 import { TaskTypesContext } from '../../../context/TaskTypeProvider';
+import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 
 export type SelectOption = {
   id: string;
@@ -18,26 +17,28 @@ type SelectProps = {
 };
 
 export default function TypeEdit({ taskId, value, onChange, updateTaskType }: SelectProps) {
-  const [isOpen, setIsOpen] = useState(false);
   const taskTypes = useContext(TaskTypesContext);
+  const { visible, setVisible, myRef } = useOutsideAlerter(false);
 
   function selectOption(option: SelectOption) {
     onChange(option);
   }
 
-  const options = taskTypes.map((e) => ({
+  const options = taskTypes.map((e: SelectOption) => ({
     id: e.id,
     name: e.name,
     icon: e.icon
   }));
 
   return (
-    <button
+    <div
       className={styles.container}
+      role="button"
       tabIndex={0}
-      onClick={() => setIsOpen((prev) => !prev)}
-      onBlur={() => setIsOpen(false)}
+      onClick={() => setVisible((prev) => !prev)}
+      onKeyDown={(e) => e.key === 'Enter' && setVisible((prev) => !prev)}
       data-testid={`types-btn-${taskId}`}
+      ref={myRef}
     >
       <img
         src={value?.icon}
@@ -45,27 +46,27 @@ export default function TypeEdit({ taskId, value, onChange, updateTaskType }: Se
         className={styles.currentIcon}
         data-testid={`current-icon-${taskId}`}
       />
-      <ul className={`${styles.options} ${isOpen ? styles.show : ''}`}>
+      <div className={`${styles.options} ${visible ? styles.show : ''}`}>
         {options
           .filter((e) => e.name !== value?.name)
           .map((option) => (
-            <li
+            <button
               className={styles.option}
               key={option.name}
               onClick={(e) => {
                 e.stopPropagation();
                 selectOption(option);
-                setIsOpen(false);
+                setVisible(false);
                 updateTaskType(option.id);
               }}
               data-testid={`${option.name}-btn-${taskId}`}
             >
               <img src={option.icon} className={styles.icon} alt={option.name} />
               <span className={styles.name}>{option.name}</span>
-            </li>
+            </button>
           ))}
-      </ul>
-    </button>
+      </div>
+    </div>
   );
 }
 

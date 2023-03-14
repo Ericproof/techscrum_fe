@@ -8,6 +8,7 @@ $btHoverBg: rgb(245, 245, 247);
   background-color: transparent;
   border: none;
   cursor: pointer;
+  display: flex;
   img {
     width: 1.05em;
     aspect-ratio: 1;
@@ -19,7 +20,6 @@ $btHoverBg: rgb(245, 245, 247);
     position: absolute;
     margin: 0;
     padding: 0;
-    list-style: none;
     display: none;
     max-height: 15em;
     overflow-y: auto;
@@ -31,10 +31,13 @@ $btHoverBg: rgb(245, 245, 247);
     background-color: white;
     z-index: 100;
     &.show {
-      display: block;
+      display: flex;
+      flex-direction: column
     }
     .option {
+      border:none;
       padding: 0.25em 0.5em;
+      background-color: transparent;
       display: flex;
       align-items: center;
       cursor: pointer;
