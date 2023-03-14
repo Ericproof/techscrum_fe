@@ -5,9 +5,14 @@
   text-align: center;
   width: 596px;
   height: 304px;
-  margin: 0px auto;
   padding-top: 80px;
   padding-bottom: 130px;
+  margin: 40px auto 120px;
+  @media (max-width: 1130px) {
+    width: 100%;
+    height: auto;
+    padding-bottom: 0;
+  } 
 
   h1 {
     color: rgb(79, 83, 102);
@@ -19,6 +24,12 @@
     text-align: center;
     height: 152px;
     margin-bottom: 20px;
+    @media (max-width: 1130px) {
+      font-size: 36px;
+      letter-spacing: -1px;
+      padding: 0 30px;
+      line-height: 42px;
+    } 
   }
   .start {
     color: rgb(221, 42, 59);
@@ -42,15 +53,24 @@
     letter-spacing: -1px;
     text-size-adjust: 100%;
     margin: 0 0; 
+    @media (max-width: 1130px) {
+      font-size: 20px;
+      padding: 0 30px;
+    } 
   }
 }
 
 .option {
   display: flex;
   justify-content: center;
-  margin-top: 45px; 
+  margin-top: 45px;
   width: 596px;
   height: 38px;
+  @media (max-width: 1130px) {
+    width: 100%;
+    height: auto;
+    margin-top: 100px;
+  } 
   
   .month {
     display: block;
