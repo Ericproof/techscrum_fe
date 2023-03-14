@@ -9,6 +9,8 @@ import typesData from '../../fixtures/types.json';
 import statusesData from '../../fixtures/statuses.json';
 import labelsData from '../../fixtures/labels.json';
 import usersData from '../../fixtures/users.json';
+import issuesByLabelBe from '../../fixtures/11-backlog-page/issuesByLabelBe.json';
+import issuesByLabelBeAndFe from '../../fixtures/11-backlog-page/issuesByLabelBeAndFe.json';
 
 describe('Backlog page', () => {
   beforeEach(() => {
@@ -90,5 +92,37 @@ describe('Backlog page', () => {
     cy.get('[data-testid="priority-dropdown-btn-6350dbbca5c71eda4bcf78aa-Highest"]').click();
     cy.wait('@change-priority');
     cy.wait('@fetch-backlog-4');
+  });
+  it('Should have label options', () => {
+    cy.get('[data-testid="labelsTab"]').click();
+    cy.get('[data-testid="labelOptions"]').children().should('have.length', labelsData.length);
+  });
+  it('Should show issues with selected labels', () => {
+    cy.intercept(
+      'GET',
+      '**/projects/*/backlogs/*/*/*/6340129a5eb06d386302b22b',
+      issuesByLabelBe
+    ).as('get-issuesByLabelBe');
+    cy.intercept(
+      'GET',
+      '**/projects/*/backlogs/*/*/*/6340129a5eb06d386302b22b-6381d2cfa6c3f10a7e8ae07e',
+      issuesByLabelBeAndFe
+    ).as('get-issuesByLabelBeAndFe');
+    cy.get('[data-testid="labelsTab"]').click();
+    cy.get('[data-testid="label-6340129a5eb06d386302b22b"]').click();
+    cy.wait('@get-issuesByLabelBe');
+    // now we want to check  if all the return tasks have selected label
+    cy.get('[data-testid-count="filter-issues"]').should(
+      'have.length',
+      issuesByLabelBe.backlog.cards.length +
+        issuesByLabelBe.sprints.reduce((acc, sprint) => acc + sprint.taskId.length, 0)
+    );
+    cy.get('[data-testid="label-6381d2cfa6c3f10a7e8ae07e"]').click();
+    cy.wait('@get-issuesByLabelBeAndFe');
+    cy.get('[data-testid-count="filter-issues"]').should(
+      'have.length',
+      issuesByLabelBeAndFe.backlog.cards.length +
+      issuesByLabelBeAndFe.sprints.reduce((acc, sprint) => acc + sprint.taskId.length, 0)
+    );
   });
 });
