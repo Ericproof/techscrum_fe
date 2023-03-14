@@ -1,10 +1,10 @@
-/* eslint-disable no-console */
-import React, { useContext, useState, useRef, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { BiChevronDown } from 'react-icons/bi';
 import styles from './TaskLabelFilter.module.scss';
 import LabelOption from './LabelOption';
 import { LabelContext } from '../../context/LabelProvider';
 import { ILabelData } from '../../types';
+import useOutsideAlerter from '../../hooks/OutsideAlerter';
 
 interface Props {
   selectedLabels: ILabelData[];
@@ -12,29 +12,16 @@ interface Props {
 }
 export default function TaskLabelFilter({ selectedLabels, setSelectedLabels }: Props) {
   const labelsCollection = useContext(LabelContext);
-  const [isTabActive, setIsTabActive] = useState(false);
-  const myRef = useRef<HTMLDivElement>(null);
+  const { visible, setVisible, myRef } = useOutsideAlerter(false);
 
   const showOptions = () => {
-    setIsTabActive((prev) => !prev);
+    setVisible((prev) => !prev);
   };
-
-  const handleClickOutside = (e) => {
-    const target = e.target as HTMLDivElement;
-    if (myRef.current !== null && !myRef.current.contains(target)) {
-      setIsTabActive(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
-  });
 
   return (
     <div className={styles.filterTab} ref={myRef}>
       <button
-        className={isTabActive ? `${styles.filterBtn} ${styles.active}` : styles.filterBtn}
+        className={visible ? `${styles.filterBtn} ${styles.active}` : styles.filterBtn}
         onClick={showOptions}
         data-testid="labelsTab"
       >
@@ -44,7 +31,7 @@ export default function TaskLabelFilter({ selectedLabels, setSelectedLabels }: P
       </button>
 
       <div
-        className={isTabActive ? `${styles.optionsBox} ${styles.active}` : styles.optionsBox}
+        className={visible ? `${styles.optionsBox} ${styles.active}` : styles.optionsBox}
         data-testid="labelOptions"
       >
         {labelsCollection.map((label) => (

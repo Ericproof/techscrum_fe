@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
@@ -49,17 +49,24 @@ export default function BacklogPage() {
     return selectedItems.filter((selectedItem) => selectedItem.id !== item.id);
   };
 
+  const effectRan = useRef(false);
+
   useEffect(() => {
-    const inputCase = inputQuery;
-    const userCase = convertFilterArrayToString(selectedUsers);
-    const typeCase = convertFilterArrayToString(selectedTypes);
-    const labelCase = convertFilterArrayToString(selectedLabels);
-    const filterBacklogData = async () => {
-      const res = await filterBacklog(projectId, inputCase, userCase, typeCase, labelCase);
-      setBacklogData(res.backlog);
-      setSprintData(res.sprints);
+    if (effectRan.current) {
+      const inputCase = inputQuery;
+      const userCase = convertFilterArrayToString(selectedUsers);
+      const typeCase = convertFilterArrayToString(selectedTypes);
+      const labelCase = convertFilterArrayToString(selectedLabels);
+      const filterBacklogData = async () => {
+        const res = await filterBacklog(projectId, inputCase, userCase, typeCase, labelCase);
+        setBacklogData(res.backlog);
+        setSprintData(res.sprints);
+      };
+      filterBacklogData();
+    }
+    return () => {
+      effectRan.current = true;
     };
-    filterBacklogData();
   }, [inputQuery, projectId, selectedTypes, selectedUsers, selectedLabels]);
 
   const getBacklogDataApi = useCallback(() => {
