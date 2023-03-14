@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { BiCheckbox, BiCheckboxChecked } from 'react-icons/bi';
 import styles from './TaskLabelFilter.module.scss';
