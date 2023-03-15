@@ -17,6 +17,10 @@
   display: flex;
   align-items: center;
   min-height: 100vh;
+  @media (max-width: 768px) {
+    padding: 0;
+    margin-top: 60px;
+  }
 
   .circleContainer {
     position: absolute;
@@ -36,6 +40,12 @@
     justify-content: space-around;
     z-index: 1;
     position: relative;
+    @media (max-width: 768px) {
+      flex-direction: column;
+      width: 80%;
+      padding: 30px;
+      margin-top: 60px;
+    }
   }
 
   .container::before{
@@ -58,11 +68,17 @@
     padding: 50px;
     margin-top: -150px;
     margin-bottom: 167px;
+    @media (max-width: 768px) {
+      margin-top: 30px;
+      margin-bottom: 30px;
+      padding: 20px;
+    }
     p,h1{
     color: white;
     }
     p{
       font-size: 20px;
+      word-wrap: break-word;
     }
   }
 
@@ -82,6 +98,12 @@
 
       .textContainer{
         margin-left: 30px;
+        @media (max-width: 768px) {
+          margin-left: 15px;
+          width: 80%;
+          padding: 10px;
+        }
+        
       }
 
       .info1{

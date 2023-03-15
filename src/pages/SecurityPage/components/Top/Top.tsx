@@ -8,7 +8,7 @@ export default function Top() {
       <p className={styles.para}>
         We’re privileged to be trusted by thousands of companies in over 140 countries worldwide.
       </p>
-      <svg className={styles.buleRec}>
+      <svg className={styles.blueRec}>
         <rect className={styles.blue} width="10" height="10" />
       </svg>
       <svg className={styles.yellowRec}>

@@ -218,7 +218,6 @@ export default function BacklogPage() {
                         sprintData={sprintData}
                         getBacklogDataApi={getBacklogDataApi}
                         statusData={statusData}
-                        typesData={typesData}
                         userList={userList}
                         projectKey={projectKey}
                       />
@@ -230,7 +229,6 @@ export default function BacklogPage() {
                 sprintData={sprintData}
                 getBacklogDataApi={getBacklogDataApi}
                 statusData={statusData}
-                typesData={typesData}
                 userList={userList}
                 projectKey={projectKey}
               />

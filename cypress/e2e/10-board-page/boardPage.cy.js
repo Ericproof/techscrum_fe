@@ -27,7 +27,7 @@ describe('Project page', () => {
     cy.login('kitman200220022002@gmail.com', '12345678');
     cy.wait('@fetch-projects');
     cy.intercept('GET', '**/board/**', boardData).as('fetch-board');
-    cy.get('[data-testid="evan"]').dblclick();
+    cy.get('[data-testid="evan"]').click();
     cy.wait('@fetch-board');
     cy.wait('@fetch-labels');
   });
@@ -66,19 +66,25 @@ describe('Project page', () => {
   });
 
   it('Should show tasks with selected labels', () => {
-    cy.intercept('GET', '**/board/*/*/*/*/6340129a5eb06d386302b22b', tasksByLabelBe).as('get-tasksByLabelBe');
-    cy.intercept('GET', '**/board/*/*/*/*/6340129a5eb06d386302b22b-6381d2cfa6c3f10a7e8ae07e', tasksByLabelBeAndFe).as('get-tasksByLabelBeAndFe');
+    cy.intercept('GET', '**/board/*/*/*/*/6340129a5eb06d386302b22b', tasksByLabelBe).as(
+      'get-tasksByLabelBe'
+    );
+    cy.intercept(
+      'GET',
+      '**/board/*/*/*/*/6340129a5eb06d386302b22b-6381d2cfa6c3f10a7e8ae07e',
+      tasksByLabelBeAndFe
+    ).as('get-tasksByLabelBeAndFe');
     cy.get('[data-testid="labelsTab"]').click();
     cy.get('[data-testid="label-6340129a5eb06d386302b22b"]').click();
     cy.wait('@get-tasksByLabelBe');
     // now we want to check  if all the return tasks have selected label
-    cy.get('[data-testid="task-labels"]').each(($parent) => {
+    cy.get('[data-testid="task-labels"]', { timeout: 8000 }).each(($parent) => {
       cy.wrap($parent).children().should('contain', 'Backend');
     });
 
     cy.get('[data-testid="label-6381d2cfa6c3f10a7e8ae07e"]').click();
     cy.wait('@get-tasksByLabelBeAndFe');
-    cy.get('[data-testid="task-labels"]').each(($parent) => {
+    cy.get('[data-testid="task-labels"]', { timeout: 8000 }).each(($parent) => {
       cy.wrap($parent).children().should('contain', 'Backend').and('contain', 'Frontend');
     });
   });

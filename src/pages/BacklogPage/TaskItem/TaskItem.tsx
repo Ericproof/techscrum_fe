@@ -10,6 +10,7 @@ import StatusBtn from '../StatusBtn/StatusBtn';
 import AssigneeBtn from '../AssigneeBtn/AssigneeBtn';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import { updateTask } from '../../../api/backlog/backlog';
+import TypeEdit from './TypeEdit';
 
 interface ITaskInput {
   task: any;
@@ -29,15 +30,8 @@ export default function TaskItem({
   getBacklogDataApi,
   projectKey
 }: ITaskInput) {
-  const allTypes = {
-    story:
-      'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium',
-    bug: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium',
-    task: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium'
-  };
-  const [showOptionBtn, setShowOptionBtn] = useState(false);
-  const [disableShowOptionBtnEffect, setDisableShowOptionBtnEffect] = useState(false);
   const [title, setTitle] = useState(task.title);
+  const [value, setValue] = useState(task.typeId);
 
   const updateTaskTitleContent = () => {
     if (title.trim() !== task.title) {
@@ -52,6 +46,16 @@ export default function TaskItem({
     }
   };
 
+  const updateTaskType = async (newTypeId: string) => {
+    try {
+      const data = { typeId: newTypeId };
+      await updateTask(task.id, data);
+      getBacklogDataApi();
+    } catch (err) {
+      toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+    }
+  };
+
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
 
   const saveKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -60,39 +64,23 @@ export default function TaskItem({
       setVisible(false);
     }
   };
-  const mouseOver = () => {
-    if (!disableShowOptionBtnEffect) {
-      setShowOptionBtn(true);
-    }
-  };
-  const mouseOut = () => {
-    if (!disableShowOptionBtnEffect) {
-      setShowOptionBtn(false);
-    }
-  };
-  const toggleDisableShowOptionBtnEffect = () => {
-    if (!disableShowOptionBtnEffect) {
-      setDisableShowOptionBtnEffect(true);
-    } else {
-      setDisableShowOptionBtnEffect(false);
-      setShowOptionBtn(false);
-    }
-  };
+
   return (
     <div
       className={styles.container}
-      onMouseOver={mouseOver}
-      onMouseOut={mouseOut}
       onFocus={() => {}}
       onBlur={() => {}}
-      data-testid={'task-hover-'.concat(task.id)}
+      data-testid={`task-hover-${task.id}`}
       data-testid-count="filter-issues"
       ref={myRef}
     >
       <div className={styles.taskInfo}>
-        <div className={styles.iconContainer}>
-          <img className={styles.icon} src={allTypes[task.typeId.slug]} alt={task.typeId.slug} />
-        </div>
+        <TypeEdit
+          taskId={task.id}
+          value={value}
+          onChange={(option) => setValue(option)}
+          updateTaskType={updateTaskType}
+        />
         <div className={styles.taskIdContainer}>
           <p>{`${projectKey}-${task.id.slice(task.id.length - 3)}`}</p>
         </div>
@@ -108,7 +96,7 @@ export default function TaskItem({
             }}
           />
         ) : (
-          <div className={styles.taskTitle} data-testid={'task-'.concat(task.id)}>
+          <div className={styles.taskTitle} data-testid={`task-${task.id}`}>
             {task.title}
           </div>
         )}
@@ -148,12 +136,11 @@ export default function TaskItem({
         />
         <OptionBtn
           taskId={task.id}
-          showOptionBtn={showOptionBtn}
-          toggleDisableShowOptionBtnEffect={toggleDisableShowOptionBtnEffect}
           sprintId={task.sprintId}
           sprintData={sprintData}
           showDropDownOnTop={showDropDownOnTop}
           getBacklogDataApi={getBacklogDataApi}
+          className={styles.optionBtn}
         />
       </div>
     </div>

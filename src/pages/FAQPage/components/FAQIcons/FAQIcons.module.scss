@@ -21,10 +21,21 @@ $dark-gray: rgb(107, 107, 107);
         border-radius: 10px;
         cursor: pointer;
         border: 2px solid white;
+        @media (max-width: 768px) {
+          width: 100%;
+          flex-direction: row;
+          height: auto;
+        }
 
         .iconDescription {
           font-size: 20px;
           color: $dark-gray;
+          text-align: center;
+          @media (max-width: 768px) {
+            font-size: 16px;
+            margin-left: 10px;
+            width: 32%;
+          }
         }
         .iconImg {
           width: 100px;

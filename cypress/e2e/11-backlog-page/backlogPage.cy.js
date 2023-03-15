@@ -1,20 +1,25 @@
 /// <reference types="cypress" />
-import projectsData from '../../fixtures/projects.json';
-import boardData from '../../fixtures/board.json';
-import backlogData from '../../fixtures/backlog.json';
-import backlogDataAddTask from '../../fixtures/backlogAddTask.json';
-import backlogDataChangeTitle from '../../fixtures/backlogChangeTitle.json';
-import backlogDataChangePriority from '../../fixtures/backlogChangePriority.json';
-import typesData from '../../fixtures/types.json';
+import typesData from '../../fixtures/11-backlog-page/types.json';
+import projectsData from '../../fixtures/11-backlog-page/projects.json';
+import boardData from '../../fixtures/11-backlog-page/board.json';
+import backlogData from '../../fixtures/11-backlog-page/backlog.json';
+import backlogDataAddTask from '../../fixtures/11-backlog-page/backlogAddTask.json';
+import backlogDataDeleteTask from '../../fixtures/11-backlog-page/backlogDeleteTask.json';
+import backlogDataChangeTitle from '../../fixtures/11-backlog-page/backlogChangeTitle.json';
+import backlogDataChangePriority from '../../fixtures/11-backlog-page/backlogChangePriority.json';
+import backlogDataTaskTypeChange from '../../fixtures/11-backlog-page/backlogChangeTaskType.json';
 import statusesData from '../../fixtures/statuses.json';
 import labelsData from '../../fixtures/labels.json';
 import usersData from '../../fixtures/users.json';
 import issuesByLabelBe from '../../fixtures/11-backlog-page/issuesByLabelBe.json';
 import issuesByLabelBeAndFe from '../../fixtures/11-backlog-page/issuesByLabelBeAndFe.json';
+import projectCurrentPage from '../../fixtures/11-backlog-page/projectCurrentPage.json';
 
 describe('Backlog page', () => {
   beforeEach(() => {
+    cy.intercept('GET', '**/types', typesData).as('fetch-types');
     cy.intercept('GET', '**/projects', projectsData).as('fetch-projects');
+    cy.intercept('GET', '**/projects/**', projectCurrentPage).as('fetch-projectCurrentPage');
     cy.intercept('GET', '**/board/**', boardData).as('fetch-board');
     cy.intercept('GET', '**/projects/*/backlogs', backlogData).as('fetch-backlog');
     cy.intercept('GET', '**/types', typesData).as('fetch-types');
@@ -24,74 +29,88 @@ describe('Backlog page', () => {
     cy.visit('/login');
     cy.login('kitman200220022002@gmail.com', '12345678');
     cy.wait('@fetch-projects');
-    cy.get('[data-testid="evan"]').dblclick();
+    cy.get('[data-testid="kitman-test1"]').click();
     cy.wait('@fetch-board');
+    cy.wait('@fetch-users');
+    cy.wait('@fetch-labels');
     cy.get('[data-testid="backlog-btn"]').click();
     cy.wait('@fetch-backlog');
     cy.wait('@fetch-types');
-    cy.wait('@fetch-labels');
-    cy.wait('@fetch-users');
     cy.wait('@fetch-statuses');
+    cy.wait('@fetch-users');
+    cy.wait('@fetch-projectCurrentPage');
+    cy.wait('@fetch-labels');
   });
 
   it('Test backlog page show tasks', () => {
-    cy.get('[data-testid="task-6350dbbca5c71eda4bcf78aa"]').contains('asdf');
-    cy.get('[data-testid="task-6350dcfa560c73ef4f32e2a6"]').contains('daf');
-    cy.get('[data-testid="task-6350dfbbca131ce6228f3e59"]').contains('daffdd');
+    cy.get('[data-testid="task-63e9b7460e1460d2e3e20c52"]').contains('1302');
   });
-
+  it('Test change task type', () => {
+    cy.intercept('PUT', '**/tasks/*', backlogDataTaskTypeChange).as('change-task');
+    cy.intercept('GET', '**/projects/*/backlogs', backlogDataTaskTypeChange).as(
+      'fetch-backlog-task-type-updated'
+    );
+    cy.get('[data-testid="types-btn-63e9b7460e1460d2e3e20c52"]').click();
+    cy.get('[data-testid="Tech Debt-btn-63e9b7460e1460d2e3e20c52"]').click();
+    cy.wait('@change-task');
+    cy.wait('@fetch-backlog-task-type-updated');
+    cy.get('[data-testid="current-icon-63e9b7460e1460d2e3e20c52"]').should(
+      'have.attr',
+      'alt',
+      'Tech Debt'
+    );
+  });
   it('Test create task', () => {
     cy.intercept('POST', '**/tasks', backlogDataAddTask).as('create-issue');
-    cy.intercept('GET', '**/projects/*/backlogs', backlogDataAddTask).as('fetch-backlog-2');
+    cy.intercept('GET', '**/projects/*/backlogs', backlogDataAddTask).as(
+      'fetch-backlog-task-added'
+    );
     cy.get('[data-testid="create-issue"]').click();
-    cy.get('[data-testid="create-issue-input"]').type('eat lunch {enter}');
+    cy.get('[data-testid="create-issue-input"]').type('new issue {enter}');
     cy.wait('@create-issue');
-    cy.wait('@fetch-backlog-2');
-    cy.get('[data-testid="task-6350dbbca5c71eda4bcf78aa3"]').contains('eat lunch');
+    cy.wait('@fetch-backlog-task-added');
+    cy.get('[data-testid="task-6402d9d0fe10bbef59cac8f4"]').contains('new issue');
   });
 
   it('Test delete task', () => {
-    //create task
-    cy.intercept('POST', '**/tasks', backlogDataAddTask).as('create-issue');
-    cy.intercept('GET', '**/projects/*/backlogs', backlogDataAddTask).as('fetch-backlog-2');
-    cy.get('[data-testid="create-issue"]').click();
-    cy.get('[data-testid="create-issue-input"]').type('eat lunch {enter}');
-    cy.wait('@create-issue');
-    cy.wait('@fetch-backlog-2');
-    cy.get('[data-testid="task-6350dbbca5c71eda4bcf78aa3"]').contains('eat lunch');
-    //delete task
-    cy.intercept('DELETE', '**/tasks/*', backlogData).as('delete-issue');
-    cy.intercept('GET', '**/projects/*/backlogs', backlogData).as('fetch-backlog');
-    cy.get('[data-testid="task-6350dbbca5c71eda4bcf78aa3"]').trigger('mouseover');
-    cy.get('[data-testid="hover-show-option-btn-6350dbbca5c71eda4bcf78aa3"]').click();
-    cy.get('[data-testid="delete-task-6350dbbca5c71eda4bcf78aa3"]').click();
+    cy.intercept('DELETE', '**/tasks/*', backlogDataDeleteTask).as('delete-issue');
+    cy.intercept('GET', '**/projects/*/backlogs', backlogDataDeleteTask).as(
+      'fetch-backlog-task-deleted'
+    );
+    cy.get('[data-testid="task-63e9b7460e1460d2e3e20c52"]').trigger('mouseover');
+    cy.get('[data-testid="hover-show-option-btn-63e9b7460e1460d2e3e20c52"]').click({ force: true });
+    cy.get('[data-testid="delete-task-63e9b7460e1460d2e3e20c52"]').click({ force: true });
     cy.wait('@delete-issue');
-    cy.wait('@fetch-backlog');
+    cy.wait('@fetch-backlog-task-deleted');
+    cy.get('[data-testid="task-63e9b7460e1460d2e3e20c52"]').should('not.exist');
   });
 
   it('Test change title', () => {
     cy.intercept('PUT', '**/tasks/*', backlogDataChangeTitle).as('change-title');
-    cy.intercept('GET', '**/projects/*/backlogs', backlogDataChangeTitle).as('fetch-backlog-3');
-    cy.get('[data-testid="task-hover-6350dbbca5c71eda4bcf78aa"]').trigger('mouseover');
-    cy.get('[data-testid="task-edit-btn-6350dbbca5c71eda4bcf78aa"]').click({ force: true });
-    cy.get('[data-testid="task-title-input-6350dbbca5c71eda4bcf78aa"]')
+    cy.intercept('GET', '**/projects/*/backlogs', backlogDataChangeTitle).as(
+      'fetch-backlog-task-title-updated'
+    );
+    cy.get('[data-testid="task-63e9b7460e1460d2e3e20c52"]').trigger('mouseover');
+    cy.get('[data-testid="task-edit-btn-63e9b7460e1460d2e3e20c52"]').click({ force: true });
+    cy.get('[data-testid="task-title-input-63e9b7460e1460d2e3e20c52"]')
       .clear()
       .type('drink water {enter}');
     cy.wait('@change-title');
-    cy.wait('@fetch-backlog-3');
+    cy.wait('@fetch-backlog-task-title-updated');
+    cy.get('[data-testid="task-63e9b7460e1460d2e3e20c52"]').contains('drink water');
   });
   it('Test show priority', () => {
-    cy.get('[data-testid="priority-btn-6350dbbca5c71eda4bcf78aa"]').should('exist');
-    cy.get('[data-testid="priority-btn-6350dcfa560c73ef4f32e2a6"]').should('exist');
-    cy.get('[data-testid="priority-btn-6350dfbbca131ce6228f3e59"]').should('exist');
+    cy.get('[data-testid="priority-btn-63e9b7460e1460d2e3e20c52"]').should('exist');
   });
   it('Test change priority', () => {
     cy.intercept('PUT', '**/tasks/*', backlogDataChangePriority).as('change-priority');
-    cy.intercept('GET', '**/projects/*/backlogs', backlogDataChangePriority).as('fetch-backlog-4');
-    cy.get('[data-testid="priority-btn-6350dbbca5c71eda4bcf78aa"]').click();
-    cy.get('[data-testid="priority-dropdown-btn-6350dbbca5c71eda4bcf78aa-Highest"]').click();
+    cy.intercept('GET', '**/projects/*/backlogs', backlogDataChangePriority).as(
+      'fetch-backlog-task-priority-updated'
+    );
+    cy.get('[data-testid="priority-btn-63e9b7460e1460d2e3e20c52"]').click();
+    cy.get('[data-testid="priority-dropdown-btn-63e9b7460e1460d2e3e20c52-Highest"]').click();
     cy.wait('@change-priority');
-    cy.wait('@fetch-backlog-4');
+    cy.wait('@fetch-backlog-task-priority-updated');
   });
   it('Should have label options', () => {
     cy.get('[data-testid="labelsTab"]').click();
