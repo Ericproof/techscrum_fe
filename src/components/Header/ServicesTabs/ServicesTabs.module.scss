@@ -16,19 +16,22 @@ $small_size: 1000px;
     @media (max-width: $max_size) {
       width: 94%;
     }
-    a {
-      text-decoration: none;
-      color: black;
+    .tab {
       cursor: pointer;
       display: flex;
       align-items: center;
+      line-height: 44px;
+      vertical-align: middle;
       @media (max-width: $max_size) {
-        border-radius: 0;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.058823529411764705);
-        width: 104%;
-        padding: 15px 5px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        padding: 5px;
         font-size: 15px;
       }
+    }
+    .tabBtn {
+      background: none;
+      border: none;
+      font-size: 16px;
       svg {
         margin-left: 5px;
         min-width: 10px;
@@ -39,6 +42,10 @@ $small_size: 1000px;
           min-height: 7.5px;
         }
       }
+    }
+    .tabLink {
+      text-decoration: none;
+      color: black;
     }
   }
 }

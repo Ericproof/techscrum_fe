@@ -76,7 +76,7 @@ export default function KanbanBoardPage() {
                     <input
                       type="email"
                       className={styles.email__input}
-                      placeholder="Your work email"
+                      placeholder="Enter your work email"
                       required
                     />
                     <HiOutlineMailOpen className={styles.email__icon} />
@@ -109,24 +109,25 @@ export default function KanbanBoardPage() {
               <img
                 src="https://clickup.com/images/features/kanban-board/board-view-fiter.png"
                 alt="demo"
+                className={styles.image}
               />
               <h3>Stay on track with sorting and filtering.</h3>
               <ul>
                 <li>
                   <span className={styles.listIcon}>
-                    <HiCheck color="white" fontSize="24px" />
+                    <HiCheck color="white" fontSize="16px" />
                   </span>
                   <span>Sort tasks in a column by due date, priority, and more</span>
                 </li>
                 <li>
                   <span className={styles.listIcon}>
-                    <HiCheck color="white" fontSize="24px" />
+                    <HiCheck color="white" fontSize="16px" />
                   </span>
                   <span>Filter tasks by assignee to only see your work</span>
                 </li>
                 <li>
                   <span className={styles.listIcon}>
-                    <HiCheck color="white" fontSize="24px" />
+                    <HiCheck color="white" fontSize="16px" />
                   </span>
                   <span>Add filtered views to your Favorites for future reference</span>
                 </li>
@@ -136,25 +137,26 @@ export default function KanbanBoardPage() {
               <img
                 src="https://clickup.com/images/features/kanban-board/board-view-fiter.png"
                 alt="demo"
+                className={styles.image}
               />
               <h3>Monitor capacity with Work in Progress Limits.</h3>
               <ul>
                 <li>
                   <span className={styles.listIcon}>
-                    <HiCheck color="white" fontSize="24px" />
+                    <HiCheck color="white" fontSize="16px" />
                   </span>
 
                   <span>Easily see when there&#39;s too much work in a status</span>
                 </li>
                 <li>
                   <span className={styles.listIcon}>
-                    <HiCheck color="white" fontSize="24px" />
+                    <HiCheck color="white" fontSize="16px" />
                   </span>
                   <span>Measure workload by sprint points, time estimates, and more</span>
                 </li>
                 <li>
                   <span className={styles.listIcon}>
-                    <HiCheck color="white" fontSize="24px" />
+                    <HiCheck color="white" fontSize="16px" />
                   </span>
                   <span>Spot bottlenecks at a glance to ship projects faster</span>
                 </li>
@@ -164,13 +166,14 @@ export default function KanbanBoardPage() {
         </section>
         <section className={styles.supportSection}>
           <div className={styles.card}>
+            <div className={styles.bg__dots} />
             <h2>Save one day every week with TechScrum&#39;s Board view.</h2>
             <form className={`${styles.form} ${styles.form__row}`}>
               <div className={styles.email__wrapper}>
                 <input
                   type="email"
                   className={styles.email__input}
-                  placeholder="Your work email"
+                  placeholder="Enter your work email"
                   required
                 />
                 <HiOutlineMailOpen className={styles.email__icon} />

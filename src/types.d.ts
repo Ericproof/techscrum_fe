@@ -59,6 +59,7 @@ export interface ITaskEntity {
   attachmentUrls?: any;
   slug?: any;
   priority?: any;
+  icon?: string;
 }
 
 export interface ISprint {
@@ -121,7 +122,7 @@ export interface IItemFromBackend {
   id: string;
 }
 export interface ITaskCard {
-  assignId?: any;
+  assignId?: IUserInfo;
   id?: string;
   tags?: [ILabelData];
   title: string;
@@ -282,6 +283,7 @@ export interface IConfig {
 export interface ITypes {
   slug: string;
   name: string;
+  icon: string;
   createdAt: string;
   updatedAt: string;
   id: string;

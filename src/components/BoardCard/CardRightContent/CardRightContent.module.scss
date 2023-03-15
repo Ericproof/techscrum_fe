@@ -13,7 +13,7 @@ $padding-left: 10px;
       border-radius: 3px;
       box-sizing: border-box;
       display: inline-flex;
-      font-size: 14px;
+      font-size: 16px;
       font-style: normal;
       font-family: inherit;
       transition: background 0.1s ease-out 0s,
@@ -73,7 +73,7 @@ $padding-left: 10px;
               background-color: #f4f5f7;
             }
             span {
-              font-size: 11px;
+              font-size: 14px;
               font-weight: 700;
               text-transform: uppercase;
               line-height: 1;
@@ -146,7 +146,7 @@ $padding-left: 10px;
       flex-direction: row;
       margin-bottom: 12px;
       align-items: center;
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 500;
       color: #38465e;
       height: 44px;
@@ -164,8 +164,15 @@ $padding-left: 10px;
         align-items: center;
         position: relative;
         .priorityImg {
-          height: 17px;
-          width: 17px;
+          height: 20px;
+          width: 20px;
+        }
+        .selectedTypeIcon {
+          height: 20px;
+          width: 20px;
+        }
+        .selectedType {
+          font-size: 16px;
         }
         .taskTypeList {
           position: absolute;
@@ -181,10 +188,11 @@ $padding-left: 10px;
           min-width: 200px;
           box-sizing: border-box;
           .typeListTitle {
-            font-size: 9px;
+            font-size: 14px;
             font-weight: bolder;
             color: #5e6c84;
             padding-left: 20px;
+            padding-top: 14px;
           }
           .typeListOption {
             display: flex;
@@ -192,7 +200,7 @@ $padding-left: 10px;
             border: none;
             background: none;
             width: 100%;
-            font-size: 5px;
+            font-size: 14px;
             font-weight: normal;
             color: black;
             padding: 10px 0 10px 20px;
@@ -213,6 +221,7 @@ $padding-left: 10px;
         cursor: pointer;
         border: none;
         background: none;
+        font-size: 16px;
         img {
           width: 18px;
           height: 18px;
@@ -227,6 +236,7 @@ $padding-left: 10px;
       margin-bottom: 12px;
       align-items: center;
       justify-content: center;
+      font-size: 16px;
       & > div:nth-of-type(1) {
         display: flex;
         align-items: center;
@@ -234,7 +244,6 @@ $padding-left: 10px;
         width: 50%;
         line-height: 1;
         color: var(--ds-text-subtle, #38465e);
-        font-size: 14px;
         font-weight: 500;
         .reactIcon {
           margin-right: 5px;
@@ -242,7 +251,7 @@ $padding-left: 10px;
       }
 
       & > div:nth-of-type(2) {
-        font-size: 14px;
+        font-size: 16px;
         line-height: 1;
         width: 100%;
         display: inline-block;
@@ -302,20 +311,40 @@ $padding-left: 10px;
   }
 }
 .fieldMargin {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   margin-bottom: 12px;
   max-height: 44px;
-}
+  font-size: 16px;
 
-.label {
-  display: flex;
-  box-sizing: border-box;
-  width: 50%;
-  line-height: 1;
-  color: #38465e;
-  font-size: 14px;
-  font-weight: 500;
-  align-items: center;
-  .reactIcon {
-    margin-right: 5px;
+  .label {
+    display: flex;
+    align-items: center;
+    .reactIcon {
+      margin-right: 5px;
+    }
+  }
+
+  & > div:nth-of-type(1) {
+    box-sizing: border-box;
+    width: 50%;
+    line-height: 1;
+    color: var(--ds-text-subtle, #38465e);
+    font-weight: 500;
+  }
+
+  & > div:nth-of-type(2) {
+    font-size: 16px;
+    line-height: 1;
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 100%;
+    border: 2px solid transparent;
+    border-radius: 3px;
+    transition: background 0.2s ease 0s;
+    color: var(--ds-text-subtlest, #5e6c84);
+    font-weight: 500;
+    align-items: center;
   }
 }

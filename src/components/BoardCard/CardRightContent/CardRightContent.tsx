@@ -17,7 +17,6 @@ import { UserContext } from '../../../context/UserInfoProvider';
 import { TaskTypesContext } from '../../../context/TaskTypeProvider';
 import { createActivity } from '../../../api/activity/activity';
 import { createDailyScrum, getDailyScrums } from '../../../api/dailyScrum/dailyScrum';
-import Row from '../../../lib/Grid/Row/Row';
 
 interface Props {
   taskInfo: ITaskEntity;
@@ -38,12 +37,6 @@ export default function CardRightContent({
   updateTaskTags,
   onSave
 }: Props) {
-  const TYPE = {
-    story:
-      'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium',
-    task: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium',
-    bug: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium'
-  };
   const PRIORITY = {
     Highest: 'https://010001.atlassian.net/images/icons/priorities/highest.svg',
     High: 'https://010001.atlassian.net/images/icons/priorities/high.svg',
@@ -52,17 +45,31 @@ export default function CardRightContent({
     Lowest: 'https://010001.atlassian.net/images/icons/priorities/lowest.svg'
   };
   const priorityOptions = ['Highest', 'High', 'Medium', 'Low', 'Lowest'];
-  const { visible, setVisible, myRef } = useOutsideAlerter(false);
-  const handleClickOutside = () => setVisible(true);
+  const {
+    visible: visibleSelectStatus,
+    setVisible: setVisibleSelectStatus,
+    myRef: selectStatusRef
+  } = useOutsideAlerter(false);
+  const {
+    visible: visibleSelectType,
+    setVisible: setVisibleSelectType,
+    myRef: selectTypeRef
+  } = useOutsideAlerter(false);
+  const {
+    visible: visibleSelectPriority,
+    setVisible: setVisibleSelectPriority,
+    myRef: selectPriorityRef
+  } = useOutsideAlerter(false);
+  const handleSelectStatusClickOutside = () => setVisibleSelectStatus(true);
+  const handleSelectTypeClickOutside = () => setVisibleSelectType(true);
+  const handleSelectPriorityOutside = () => setVisibleSelectPriority(true);
   const editAccess = checkAccess('edit:tasks', projectId);
   const userInfo = useContext(UserContext);
   const operation = 'updated';
   const userId = userInfo.id;
   const taskId = taskInfo.id;
-  const [showSelectDropDown, setShowSelectDropDown] = useState(false);
-  const [showPriorityDropDown, setShowPriorityDropDown] = useState(false);
-  const [selectedTypeIcon, setSelectedTypeIcon] = useState(TYPE[taskInfo.typeId.slug]);
-  const [selectedType, setSelectedType] = useState(taskInfo.typeId.slug);
+  const [selectedTypeIcon, setSelectedTypeIcon] = useState(taskInfo.typeId.icon);
+  const [selectedType, setSelectedType] = useState(taskInfo.typeId.name);
   const [selectedPriorityIcon, setSelectedPriorityIcon] = useState(PRIORITY[taskInfo.priority]);
   const [selectedPriority, setSelectedPriority] = useState(taskInfo.priority);
   const taskTypes = useContext(TaskTypesContext);
@@ -120,9 +127,9 @@ export default function CardRightContent({
   const onClickIssueType = (task: ITaskEntity) => {
     const updateTaskInfo = { ...taskInfo };
     updateTaskInfo.typeId = task;
-    setSelectedTypeIcon(TYPE[task.slug]);
+    setSelectedTypeIcon(task.icon);
     setSelectedType(task.slug);
-    setShowSelectDropDown(false);
+    setVisibleSelectType(false);
     onSave(updateTaskInfo);
   };
 
@@ -131,7 +138,7 @@ export default function CardRightContent({
     updateTaskInfo.priority = task;
     setSelectedPriorityIcon(PRIORITY[task]);
     setSelectedPriority(task);
-    setShowPriorityDropDown(false);
+    setVisibleSelectPriority(false);
     onSave(updateTaskInfo);
   };
 
@@ -155,18 +162,18 @@ export default function CardRightContent({
                   data-testid="card-type-button"
                   type="button"
                   onClick={() => {
-                    setShowSelectDropDown((prevState) => !prevState);
+                    handleSelectTypeClickOutside();
                   }}
                 >
-                  <img src={selectedTypeIcon} alt="Story" />
-                  <div>{selectedType}</div>
+                  <img className={style.selectedTypeIcon} src={selectedTypeIcon} alt="Story" />
+                  <div className={style.selectedType}>{selectedType}</div>
                 </button>
               </div>
-              {showSelectDropDown && checkAccess('edit:tasks', projectId) && (
-                <div className={style.taskTypeList}>
+              {visibleSelectType && checkAccess('edit:tasks', projectId) && (
+                <div className={style.taskTypeList} ref={selectTypeRef}>
                   <p className={style.typeListTitle}>CHANGE ISSUE TYPE</p>
                   {taskTypes.map((taskType) => {
-                    const src = TYPE[taskType.slug];
+                    const src = taskType.icon;
                     const alt = taskType.slug;
                     return (
                       <button
@@ -191,13 +198,13 @@ export default function CardRightContent({
               <MdOutlineBookmarkBorder className={style.reactIcon} />
               <div>Status</div>
             </div>
-            <div ref={myRef} className={style.statusSection}>
-              {visible && editAccess ? (
+            <div ref={selectStatusRef} className={style.statusSection}>
+              {visibleSelectStatus && editAccess ? (
                 <>
                   <button
                     type="button"
                     className={style.toDoButton}
-                    onClick={handleClickOutside}
+                    onClick={handleSelectStatusClickOutside}
                     data-testid="card-status-button"
                   >
                     {taskInfo.status && taskInfo.status.name.toUpperCase()}
@@ -220,7 +227,7 @@ export default function CardRightContent({
                               className={style.statusOptions}
                               data-testid="card-status-selection"
                               onClick={() => {
-                                setVisible(false);
+                                setVisibleSelectStatus(false);
                                 const updatedTaskInfo = { ...taskInfo };
                                 updatedTaskInfo.statusId = id;
                                 const { items, ...rest } = column;
@@ -240,7 +247,7 @@ export default function CardRightContent({
                 <button
                   type="button"
                   className={style.toDoButton}
-                  onClick={handleClickOutside}
+                  onClick={handleSelectStatusClickOutside}
                   data-testid="card-status-button"
                 >
                   {taskInfo.status && taskInfo.status.name.toUpperCase()}
@@ -279,7 +286,7 @@ export default function CardRightContent({
                 data-testid="card-priority-button"
                 type="button"
                 onClick={() => {
-                  setShowPriorityDropDown((prevState) => !prevState);
+                  handleSelectPriorityOutside();
                 }}
               >
                 <img
@@ -289,8 +296,8 @@ export default function CardRightContent({
                 />
                 <div>{selectedPriority}</div>
               </button>
-              {showPriorityDropDown && checkAccess('edit:tasks', projectId) && (
-                <div className={style.taskTypeList}>
+              {visibleSelectPriority && checkAccess('edit:tasks', projectId) && (
+                <div className={style.taskTypeList} ref={selectPriorityRef}>
                   {priorityOptions.map((priorityOption) => {
                     const src = PRIORITY[priorityOption];
                     return (
@@ -316,17 +323,19 @@ export default function CardRightContent({
             projectId={projectId}
             reporterOnchangeEventHandler={reporterOnchangeEventHandler}
           />
-          <Row classesName={style.fieldMargin}>
+          <div className={style.fieldMargin}>
             <div className={style.label}>
               <BsPeople className={style.reactIcon} />
               <div>Assignee</div>
             </div>
-            <UserSelect
-              onChange={assigneeOnchangeEventHandler}
-              value={taskInfo.assignId}
-              allowEdit={editAccess}
-            />
-          </Row>
+            <div className={style.assigneeRightContent}>
+              <UserSelect
+                onChange={assigneeOnchangeEventHandler}
+                value={taskInfo.assignId}
+                allowEdit={editAccess}
+              />
+            </div>
+          </div>
           <LabelFields
             labels={labels}
             taskInfo={taskInfo}

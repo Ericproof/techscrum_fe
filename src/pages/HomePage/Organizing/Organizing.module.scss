@@ -179,7 +179,6 @@
           overflow: hidden;
           @media (max-width: 768px) {
             max-width: 80%;
-            margin-top: 10px;
             }
 
           img {
@@ -197,9 +196,7 @@
     margin: 0;
     padding: 0;
     @media (max-width: 768px) {
-        max-width: 60%;
-        display: flex;
-        flex-direction: column;
+        width: 60%;
     }
 
     h3 {

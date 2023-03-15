@@ -63,8 +63,9 @@
       .text {
         color: #7c828d;
         line-height: 1.5;
-        @media (max-width: 768px) {
-          margin: 0 30px;
+        letter-spacing: 0.05em;
+        @media (max-width: 420px) {
+          text-align: center;
         }
       }
     }
@@ -74,7 +75,7 @@
       flex: 1 1 auto;
       aspect-ratio: 1.6;
       display: block;
-      padding: 2rem 4rem;
+      padding: 2rem 3rem;
       margin: auto;
       background-image: url('../../assets/bg__with-dotted.svg');
       @media (max-width: 768px) {

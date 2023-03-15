@@ -26,7 +26,7 @@ export default function OneColumnMiddle({ content }: Props) {
               <Link to={service.href}>
                 <service.icon />
                 <div>
-                  <h2>{service.title}</h2>
+                  <h2 data-testid="service-title">{service.title}</h2>
                   <p>{service.description}</p>
                 </div>
               </Link>
