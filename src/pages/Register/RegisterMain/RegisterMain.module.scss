@@ -81,7 +81,7 @@
     input.email {
       display: block;
       @media (max-width: 500px) {
-        width: 91%;
+        width: 100%;
       }
     }
 
@@ -91,6 +91,7 @@
 
     p {
       font-size: 12px;
+      margin-bottom: 20px;
       padding: 0px;
       align-self: center;
 

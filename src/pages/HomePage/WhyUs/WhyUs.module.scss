@@ -1,4 +1,5 @@
 @import "../../../variables.scss";
+$max_size: 768px;
 
 .container {
     max-width: 1280px;
@@ -12,6 +13,9 @@
     justify-content: space-between;
     align-items: center;
     margin: auto;
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
 }
 
 .projectManagement {
@@ -174,6 +178,9 @@
       .businessPicture {
           max-width: 50%;
           overflow: hidden;
+          @media (max-width: 768px) {
+            max-width: 80%;
+          }
 
           img {
               height: auto;
@@ -189,6 +196,9 @@
     width: 100%;
     margin: 0;
     padding: 0;
+    @media (max-width: 768px) {
+        width: 60%;
+    }
 
     h3 {
         font-size: 22px !important;
