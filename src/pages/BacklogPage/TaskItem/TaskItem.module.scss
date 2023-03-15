@@ -7,6 +7,7 @@ $btnColorBlue: rgb(31, 70, 160);
 $btnBgColorBlue: rgb(224, 235, 253);
 $btnColorGreen: rgb(42, 100, 71);
 $btnBgColorGreen: rgb(232, 251, 240);
+$btHoverBg: rgb(245, 245, 247);
 
 @mixin ellipsis {
   white-space: nowrap;
@@ -24,6 +25,14 @@ $btnBgColorGreen: rgb(232, 251, 240);
   cursor: pointer;
   height: 40px;
   font-size: 15px;
+  &:hover {
+    .editButton {
+      visibility: visible;
+    }
+    .optionBtn {
+      visibility: visible;
+    }
+  }
 
   ::-webkit-scrollbar {
     height: 3px;
@@ -55,14 +64,7 @@ $btnBgColorGreen: rgb(232, 251, 240);
     display: flex;
     width: calc(100% - 268px);
     height: 100%;
-    .iconContainer {
-      width: 100%;
-      max-width: 40px;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+
     .taskIdContainer {
       width: 100%;
       max-width: 70px;
@@ -78,6 +80,12 @@ $btnBgColorGreen: rgb(232, 251, 240);
       outline-width: 5px;
       margin-left: 7px;
     }
+    .taskTitle {
+      @include ellipsis;
+      display: flex;
+      align-items: center;
+      margin: 0px 10px;
+    }
   }
 }
 
@@ -87,20 +95,9 @@ $btnBgColorGreen: rgb(232, 251, 240);
   @include ellipsis;
 }
 
-.taskTitle {
-  @include ellipsis;
-  display: flex;
-  align-items: center;
-  margin: 0px 10px;
-}
-
 .editButton {
   visibility: hidden;
   display: flex;
   align-items: center;
   margin-right: 10px;
-}
-
-.container:hover .editButton {
-  visibility: visible;
 }
