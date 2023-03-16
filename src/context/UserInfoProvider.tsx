@@ -28,7 +28,6 @@ function UserProvider({ children }: ILoginInfoProvider) {
   useEffect(() => {
     const fetchUserInfo = async (token: string, refreshToken: string) => {
       try {
-        // getUserInfo去当前数据库找
         const result = await getUserInfo(token, refreshToken);
         const { user } = result.data;
         const t = token || user.token;
