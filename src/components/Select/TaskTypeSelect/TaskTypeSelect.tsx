@@ -17,6 +17,11 @@ const TYPES = [
     type: 'bug',
     imgUrl:
       'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium'
+  },
+  {
+    type: 'techDebt',
+    imgUrl:
+      'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10308?size=medium'
   }
 ];
 
@@ -56,7 +61,6 @@ export default function TaskTypeSelect({
   const initialOption = TYPES[0];
   const [showOptions, setShowOptions] = useState(false);
   const [currentOption, setCurrentOption] = useState(initialOption);
-  const [showHover, setShowHover] = useState(false);
   const [clicked, setClicked] = useState(false);
   const otherOptions = TYPES.filter((item) => item.type !== currentOption.type);
 
@@ -92,8 +96,6 @@ export default function TaskTypeSelect({
   let btnClassName = '';
   if (clicked) {
     btnClassName = [styles.buttonContainer, styles.buttonClicked].join(' ');
-  } else if (showHover) {
-    btnClassName = [styles.hoverButton, styles.buttonContainer].join(' ');
   } else {
     btnClassName = styles.buttonContainer;
   }
@@ -106,12 +108,6 @@ export default function TaskTypeSelect({
           setClicked(!clicked);
         }}
         className={btnClassName}
-        onMouseOver={() => {
-          setShowHover(true);
-        }}
-        onMouseOut={() => {
-          setShowHover(false);
-        }}
         onBlur={() => {}}
         onFocus={() => {}}
       >

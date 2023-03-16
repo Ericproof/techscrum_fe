@@ -3,7 +3,6 @@ import {
   AiOutlineFieldTime,
   AiOutlineBarChart,
   AiOutlineLaptop,
-  AiOutlineUserAdd,
   AiOutlineDisconnect,
   AiOutlineTeam,
   AiOutlineFundProjectionScreen,
@@ -29,28 +28,22 @@ const features = {
     title: 'Features',
     content: [
       {
-        icon: AiOutlineFieldTime,
-        title: 'Resource Management',
-        description: 'Manage your team&apos;s short team and long term resources',
-        href: '/#'
-      },
-      {
         icon: AiOutlineBarChart,
         title: 'Kanban boards',
-        description: 'Automate your workflow and visualiza project tasks',
-        href: '/#'
+        description: 'Optimize your workflow and visualize project tasks',
+        href: '/features/kanban-board'
+      },
+      {
+        icon: AiOutlineFieldTime,
+        title: 'Report',
+        description: 'Track delay and achieve goals based on improvement report',
+        href: '/features/report'
       },
       {
         icon: AiOutlineLaptop,
-        title: 'Time Tracking',
-        description: 'Deliver a more collaborative client experience',
-        href: '/#'
-      },
-      {
-        icon: AiOutlineUserAdd,
-        title: 'Unlimited client users',
-        description: 'Deliver a more collaborative client experience',
-        href: '/#'
+        title: 'My work',
+        description: 'Stay flexible and prioritize your work',
+        href: '/features/my-work'
       }
     ]
   }
@@ -184,36 +177,51 @@ export default function ServicesTabs({ show }: Props) {
   return (
     <div className={`${styles.serviceListTabs} ${show ? styles.serviceListTabsActive : ''}`}>
       <div>
-        <Link to="/#" onClick={() => activeMenu('features')}>
+        <button
+          data-testid="features"
+          className={[styles.tab, styles.tabBtn].join(' ')}
+          onClick={() => activeMenu('features')}
+        >
           Features
           <MdOutlineKeyboardArrowDown />
-        </Link>
+        </button>
         <OneColumnsMenu servicesInfo={features} active={featuresActive} />
       </div>
       <div>
-        <Link to="/#" onClick={() => activeMenu('solution')}>
+        <button
+          className={[styles.tab, styles.tabBtn].join(' ')}
+          onClick={() => activeMenu('solution')}
+        >
           Solutions
           <MdOutlineKeyboardArrowDown />
-        </Link>
+        </button>
         <OneColumnsMenu servicesInfo={solutions} active={solutionActive} />
       </div>
       <div>
-        <Link to="/#" onClick={() => activeMenu('teams')}>
+        <button
+          className={[styles.tab, styles.tabBtn].join(' ')}
+          onClick={() => activeMenu('teams')}
+        >
           Teams
           <MdOutlineKeyboardArrowDown />
-        </Link>
+        </button>
         <OneColumnsMenu servicesInfo={teams} active={teamActive} />
       </div>
 
       <div>
-        <Link to="/#" onClick={() => activeMenu('resources')}>
+        <button
+          className={[styles.tab, styles.tabBtn].join(' ')}
+          onClick={() => activeMenu('resources')}
+        >
           Resources
           <MdOutlineKeyboardArrowDown />
-        </Link>
+        </button>
         <OneColumnsMenu servicesInfo={resources} active={resourcesActive} />
       </div>
       <div>
-        <Link to="/price">Price</Link>
+        <Link className={[styles.tab, styles.tabLink].join(' ')} to="/price">
+          Price
+        </Link>
       </div>
     </div>
   );
