@@ -6,6 +6,10 @@ export function getTasks() {
   return axios.get(`${config.apiAddress}/projects`);
 }
 
+export function getTasksByProject(projectId: string) {
+  return axios.get(`${config.apiAddress}/tasks/project/${projectId}`);
+}
+
 export function showTask(id = '') {
   return axios.get(`${config.apiAddress}/projects/${id}`);
 }

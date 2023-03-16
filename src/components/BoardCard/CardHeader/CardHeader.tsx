@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from 'react';
 import { RiMoreFill } from 'react-icons/ri';
-
 import { TaskTypesContext } from '../../../context/TaskTypeProvider';
+import { TasksByProjectContext } from '../../../context/TasksByProjectProvider';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import checkAccess from '../../../utils/helpers';
 import style from './CardHeader.module.scss';
@@ -43,6 +43,10 @@ export default function CardHeader({
   const handleSelectDropDownClickOutside = () => setVisibleSelectDropDown(!visibleSelectDropDown);
   const handleDeleteSectionClickOutside = () => setVisibleDeleteSection(!visibleDeleteSection);
   const taskType = useContext(TaskTypesContext);
+  const TasksByProject = useContext(TasksByProjectContext);
+  const taskTicketNum = TasksByProject.findIndex((e) => e.id === taskInfo.id) + 1;
+  const projectKey = TasksByProject[0]?.projectId.key;
+
   const [selectedType, setSelectedType] = useState(
     'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium'
   );
@@ -101,7 +105,7 @@ export default function CardHeader({
             })}
           </div>
         )}
-        {taskInfo.id}
+        {`${projectKey}-${String(taskTicketNum).padStart(3, '0')}`}
       </div>
       <div className={style.headerRight}>
         <div ref={deleteSectionRef} className={style.deleteSection}>
