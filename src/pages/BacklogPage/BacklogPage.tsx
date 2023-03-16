@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
@@ -22,6 +22,7 @@ import SearchForBoard from '../../components/SearchForBoard/SearchForBoard';
 import TaskTypeFilter from '../../components/TaskTypeFilter/TaskTypeFilter';
 import { ITypes } from '../../types';
 import { convertFilterArrayToString } from '../../utils/helpers';
+import { getTasksByProject, ITasksByProject } from '../../utils/backlogUtils';
 
 export default function BacklogPage() {
   const [loaded, setLoaded] = useState(false);
@@ -46,16 +47,25 @@ export default function BacklogPage() {
     return selectedItems.filter((selectedItem) => selectedItem.id !== item.id);
   };
 
+  const effectRan = useRef(false);
+  const tasksByProject = useRef<ITasksByProject>();
+
   useEffect(() => {
-    const inputCase = inputQuery;
-    const userCase = convertFilterArrayToString(selectedUsers);
-    const typeCase = convertFilterArrayToString(selectedTypes);
-    const filterBacklogData = async () => {
-      const res = await filterBacklog(projectId, inputCase, userCase, typeCase);
-      setBacklogData(res.backlog);
-      setSprintData(res.sprints);
+    if (effectRan.current) {
+      const inputCase = inputQuery;
+      const userCase = convertFilterArrayToString(selectedUsers);
+      const typeCase = convertFilterArrayToString(selectedTypes);
+      const filterBacklogData = async () => {
+        const res = await filterBacklog(projectId, inputCase, userCase, typeCase);
+        setBacklogData(res.backlog);
+        setSprintData(res.sprints);
+        tasksByProject.current = getTasksByProject(res);
+      };
+      filterBacklogData();
+    }
+    return () => {
+      effectRan.current = true;
     };
-    filterBacklogData();
   }, [inputQuery, projectId, selectedTypes, selectedUsers]);
 
   const getBacklogDataApi = useCallback(() => {
@@ -64,6 +74,7 @@ export default function BacklogPage() {
         const res = await getBacklog(projectId);
         setBacklogData(res.backlog);
         setSprintData(res.sprints);
+        tasksByProject.current = getTasksByProject(res);
         setLoaded(true);
       } catch (e) {
         setLoaded(false);
@@ -203,6 +214,7 @@ export default function BacklogPage() {
                         statusData={statusData}
                         userList={userList}
                         projectKey={projectKey}
+                        tasksByProject={tasksByProject.current}
                       />
                     </React.Fragment>
                   );
@@ -214,6 +226,7 @@ export default function BacklogPage() {
                 statusData={statusData}
                 userList={userList}
                 projectKey={projectKey}
+                tasksByProject={tasksByProject.current}
               />
             </>
           )}

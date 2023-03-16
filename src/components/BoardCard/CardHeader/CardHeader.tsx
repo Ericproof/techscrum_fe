@@ -105,7 +105,7 @@ export default function CardHeader({
             })}
           </div>
         )}
-        {`${projectKey}-${String(taskTicketNum).padStart(3, '0')}`}
+        <span>{`${projectKey}-${String(taskTicketNum).padStart(3, '0')}`}</span>
       </div>
       <div className={style.headerRight}>
         <div ref={deleteSectionRef} className={style.deleteSection}>

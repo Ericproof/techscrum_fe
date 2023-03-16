@@ -20,6 +20,7 @@ interface ITaskInput {
   showDropDownOnTop?: boolean;
   getBacklogDataApi: () => void;
   projectKey: string;
+  tasksByProject: any;
 }
 export default function TaskItem({
   task,
@@ -28,10 +29,12 @@ export default function TaskItem({
   sprintData,
   showDropDownOnTop,
   getBacklogDataApi,
-  projectKey
+  projectKey,
+  tasksByProject
 }: ITaskInput) {
   const [title, setTitle] = useState(task.title);
   const [value, setValue] = useState(task.typeId);
+  const taskTicketNum = tasksByProject.findIndex((e) => e.id === task.id) + 1;
 
   const updateTaskTitleContent = () => {
     if (title.trim() !== task.title) {
@@ -81,7 +84,7 @@ export default function TaskItem({
           updateTaskType={updateTaskType}
         />
         <div className={styles.taskIdContainer}>
-          <p>{`${projectKey}-${task.id.slice(task.id.length - 3)}`}</p>
+          <p>{`${projectKey}-${String(taskTicketNum).padStart(3, '0')}`}</p>
         </div>
         {visible ? (
           <input

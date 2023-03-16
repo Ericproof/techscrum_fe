@@ -20,6 +20,7 @@ interface IBacklogSection {
   userList: IUserInfo[];
   sprintData: any;
   projectKey: string;
+  tasksByProject: any;
 }
 
 export default function BacklogSection({
@@ -28,7 +29,8 @@ export default function BacklogSection({
   statusData,
   userList,
   sprintData,
-  projectKey
+  projectKey,
+  tasksByProject
 }: IBacklogSection) {
   const [currentTypeOption, setCurrentTypeOption] = useState('story');
   const { boardId = '', projectId = '' } = useParams();
@@ -142,6 +144,7 @@ export default function BacklogSection({
                               calculateShowDropDownTop() && index > backlogData.cards.length - 6
                             }
                             getBacklogDataApi={getBacklogDataApi}
+                            tasksByProject={tasksByProject}
                           />
                         </div>
                       );
