@@ -7,7 +7,7 @@ export function getTasks() {
 }
 
 export function getTasksByProject(projectId: string) {
-  return axios.get(`${config.apiAddress}/tasks/project/${projectId}`);
+  return alphaApi.get(`${config.apiAddress}/tasks/project/${projectId}`);
 }
 
 export function showTask(id = '') {
