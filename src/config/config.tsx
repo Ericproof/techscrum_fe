@@ -5,8 +5,10 @@ import axios, { AxiosRequestConfig } from 'axios';
 
 export default {
   apiAddress:
-    process.env.REACT_APP_BACKEND_URL || 'https://afternoon-fortress-36104.herokuapp.com/api/v1'
+    process.env.REACT_APP_BACKEND_URL || 'https://afternoon-fortress-36104.herokuapp.com/api/v1',
   // apiAddress: 'http://localhost:8000/api/v1'
+  apiAddressV2:
+    process.env.REACT_APP_BACKEND_URL_V2 || 'https://afternoon-fortress-36104.herokuapp.com/api/v1'
 };
 
 const alphaApi = axios.create({
