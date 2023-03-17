@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState, createRef } from 'react';
 import { TiDelete } from 'react-icons/ti';
-// import { updateRole, removePermission } from '../../api/role/role';
 import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
 import config from '../../config/config';
 import { IPermissions, IRole } from '../../types';
@@ -33,25 +32,9 @@ export default function ProjectMembersPage() {
     getPermissions();
   }, [permissions]);
 
-  //   const onClickAddPermission = (roleId: string, permissionId: string) => {
-  //     updateRole(roleId, permissionId);
-  //   };
-
   const onChangeSelectedPermissions = (item: IPermissions) => {
     setSelectedPermissions(selectedPermissions.concat(item));
   };
-
-  //   const removePermissionFromList = async (roleId: string, permissionId: string) => {
-  //     try {
-  //       await removePermission(roleId, permissionId);
-  //     } finally {
-  //       if (selectedPermissions !== undefined && Array.isArray(selectedPermissions)) {
-  //         setSelectedPermissions(
-  //           selectedPermissions.filter((item: IPermissions) => item.id !== permissionId)
-  //         );
-  //       }
-  //     }
-  //   };
 
   const viewDetailPosition = (e: React.MouseEvent<HTMLDivElement>, id: number) => {
     const mouseDetailPosition = e.currentTarget.getBoundingClientRect();
@@ -135,7 +118,6 @@ export default function ProjectMembersPage() {
                                           if (!item.id) {
                                             return;
                                           }
-                                          //   onClickAddPermission(role.id, item.id);
                                           onChangeSelectedPermissions(item);
                                           setShowPermissionOptions('-1');
                                         }}
@@ -151,14 +133,7 @@ export default function ProjectMembersPage() {
                               {role?.permission?.map((item: IPermissions) => (
                                 <div key={item.id} className={styles.editSelectedSection}>
                                   <span>{item.slug}</span>
-                                  <TiDelete
-                                    onClick={() => {
-                                      //   if (!item.id) {
-                                      //     return;
-                                      //   }
-                                      //   removePermissionFromList(role.id, item.id);
-                                    }}
-                                  />
+                                  <TiDelete onClick={() => {}} />
                                 </div>
                               ))}
                             </div>
