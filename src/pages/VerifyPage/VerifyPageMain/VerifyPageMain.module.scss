@@ -1,4 +1,4 @@
-$small_size: 704px;
+$small_size: 768px;
 
 .registerMain {
   align-self: center;
@@ -30,6 +30,9 @@ $small_size: 704px;
     box-shadow: rgb(0 0 0 / 10%) 0px 0px 10px;
     box-sizing: border-box;
     color: rgb(94, 108, 132);
+    @media (max-width: $small_size) {
+      width: 80%;
+    }
  
     min-height: 370px;
     h1 {
@@ -173,6 +176,8 @@ $small_size: 704px;
     color:black;
     @media (max-width: $small_size) {
       width: 60%;
+      max-width: 90%;
+      margin-bottom: 100px;
     }
   }
 }
@@ -202,6 +207,9 @@ $small_size: 704px;
 .errorMessage{
   margin-top: 120px!important;
   font-size: 25px!important;
+  @media (max-width: $small_size) {
+    margin-top: 60px!important;
+  }
 }
 
 .logo{

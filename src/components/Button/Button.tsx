@@ -6,7 +6,8 @@ export interface IButton {
   iconPosition?: 'start' | 'end';
   overrideStyle?: string;
   onClick?: () => void;
-  children: React.ReactNode | string;
+  onMouseEnter?: (e) => void;
+  children?: React.ReactNode | string;
 }
 
 export default function Button({
@@ -14,6 +15,7 @@ export default function Button({
   iconPosition = 'start',
   overrideStyle,
   onClick,
+  onMouseEnter,
   children
 }: IButton) {
   return (
@@ -22,6 +24,7 @@ export default function Button({
         iconPosition === 'start' ? '' : styles.rowReversed
       } ${overrideStyle}`}
       onClick={onClick}
+      onMouseEnter={onMouseEnter}
     >
       {icon && <span className={styles.icon}>{icon}</span>}
       <span className={styles.buttonText}>{children}</span>
@@ -33,5 +36,7 @@ Button.defaultProps = {
   icon: null,
   iconPosition: 'start',
   overrideStyle: '',
-  onClick: null
+  onClick: null,
+  onMouseEnter: null,
+  children: null
 };

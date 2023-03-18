@@ -205,27 +205,29 @@ function AboutPageT3() {
   );
 
   return (
-    <div className={`${styles.outterContainer} ${openDetail && styles.active}`}>
-      <Header />
-      <div className={styles.container}>
-        <h2>
-          Meet the <b>team3.</b>
-        </h2>
-        <div>
-          <ul className={styles.positionFilter}>{positionNav}</ul>
-          <select
-            className={styles.positionSelector}
-            onChange={(e) => {
-              setActiveBtn(e.target.value);
-            }}
-            value={activeBtn}
-          >
-            {positionSelector}
-          </select>
+    <div>
+      <div className={`${styles.outterContainer} ${openDetail && styles.active}`}>
+        <Header />
+        <div className={styles.container}>
+          <h2>
+            Meet the <b>team3.</b>
+          </h2>
+          <div>
+            <ul className={styles.positionFilter}>{positionNav}</ul>
+            <select
+              className={styles.positionSelector}
+              onChange={(e) => {
+                setActiveBtn(e.target.value);
+              }}
+              value={activeBtn}
+            >
+              {positionSelector}
+            </select>
+          </div>
+          <div className={styles.listContainer}>{selectedPosition}</div>
         </div>
-        <div className={styles.listContainer}>{selectedPosition}</div>
+        {staffIntro}
       </div>
-      {staffIntro}
       <Footer />
     </div>
   );
