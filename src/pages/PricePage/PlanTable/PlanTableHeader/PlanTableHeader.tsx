@@ -20,13 +20,13 @@ function PlanTableHeader(props: IPlanTableHeaderProps) {
   const ADVANCED_PRICE_IDENTIFIER = 0;
   const ULTRA_PRICE_IDENTIFIER = 1;
 
-  const handleButtonClick = async (id: number) => {
+  const handleButtonClick = async (id: number, isFreeTrial: boolean) => {
     if (userId && email) {
       if (id === ADVANCED_ID) {
-        createSubcription(userId, ADVANCED_PRICE_IDENTIFIER, isCheck);
+        createSubcription(userId, ADVANCED_PRICE_IDENTIFIER, isCheck, isFreeTrial);
       }
       if (id === ULTRA_ID) {
-        createSubcription(userId, ULTRA_PRICE_IDENTIFIER, isCheck);
+        createSubcription(userId, ULTRA_PRICE_IDENTIFIER, isCheck, isFreeTrial);
       }
     } else {
       navigate(`/login`);
@@ -49,11 +49,14 @@ function PlanTableHeader(props: IPlanTableHeaderProps) {
               )}
               {plan.yearly_price && !plan.monthly_price && <span>{plan.yearly_price}</span>}
 
-              <button className={styles.action} onClick={() => handleButtonClick(plan.id)}>
+              <button className={styles.action} onClick={() => handleButtonClick(plan.id, true)}>
                 {plan.action}
               </button>
               {plan.buy_action && (
-                <button className={styles.buy_action} onClick={() => handleButtonClick(plan.id)}>
+                <button
+                  className={styles.buy_action}
+                  onClick={() => handleButtonClick(plan.id, false)}
+                >
                   {plan.buy_action}
                 </button>
               )}
