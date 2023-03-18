@@ -51,6 +51,9 @@
   width: 500px;
   height: 500px;
   text-align: center;
+  @media (max-width: 768px) {
+    width: 80%;
+  }
 }
 
 .header{

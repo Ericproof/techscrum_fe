@@ -3,8 +3,8 @@ import Top from './components/Top/Top';
 import Card from './components/Card/Card';
 import Certifications from './components/Certifications/Certifications';
 import Partners from './components/Partners/Partners';
-import FAQ from './components/FAQ/FAQ';
-import Teamwork from './components/Teamwork/Teamwork';
+import Footer from '../../components/Footer/Footer';
+import Faqs from '../SupportCenterPage/components/MainContent/Faqs/Faqs';
 
 export default function SecurityPage() {
   return (
@@ -13,8 +13,8 @@ export default function SecurityPage() {
       <Card />
       <Certifications />
       <Partners />
-      <FAQ />
-      <Teamwork />
+      <Faqs />
+      <Footer />
     </>
   );
 }

@@ -7,6 +7,7 @@ export interface IProject {
   boardId?: string;
   projectLeadId?: IUserInfo;
   updateAt: Date;
+  roles: IRole[];
 }
 
 export interface IProjectData {
@@ -59,6 +60,7 @@ export interface ITaskEntity {
   attachmentUrls?: any;
   slug?: any;
   priority?: any;
+  icon?: string;
 }
 
 export interface ISprint {
@@ -121,7 +123,7 @@ export interface IItemFromBackend {
   id: string;
 }
 export interface ITaskCard {
-  assignId?: any;
+  assignId?: IUserInfo;
   id?: string;
   tags?: [ILabelData];
   title: string;
@@ -149,6 +151,7 @@ export interface IStatusEntity {
   order: number;
   taskList: ITaskCard[];
 }
+
 export interface IStatusBacklog {
   id: string;
   slug: string;
@@ -247,13 +250,14 @@ export interface IRole {
   id: string;
   name?: string;
   slug?: string;
-  permission?: IPermission[];
+  allowDelete?: boolean;
+  permission: IPermissions[];
 }
 
 export interface IPermissions {
   id: string;
-  slug?: string;
-  description?: string;
+  slug: string;
+  description: string;
 }
 
 export interface ICommentData {
@@ -282,9 +286,11 @@ export interface IConfig {
 export interface ITypes {
   slug: string;
   name: string;
+  icon: string;
   createdAt: string;
   updatedAt: string;
   id: string;
+  icon: string;
 }
 
 export interface IOptions {
