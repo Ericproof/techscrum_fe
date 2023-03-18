@@ -81,8 +81,8 @@ function App() {
           <ProjectProvider>
             <TaskTypesProvider>
               <Routes>
-                {showPages && <Route path="/register" element={<RegisterPage />} />}
-                {showPages && <Route path="/registerV2" element={<RegisterPageV2 />} />}
+                {showPages && <Route path="v1/register" element={<RegisterPage />} />}
+                {showPages && <Route path="v2/register" element={<RegisterPageV2 />} />}
                 {showPages && <Route path="/admin" element={<AdminPage />} />}
                 <Route path="/faq" element={<FAQPage />} />
                 <Route path="/verify" element={<VerifyPage />} />
@@ -90,8 +90,8 @@ function App() {
                 <Route path="/verify-v2" element={<VerifyPageV2 />} />
                 {/* confirm existing user */}
                 {/*  <Route path="/user-confirm" element={<VerifyPageV2 />} />  */}
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/loginv2" element={<LoginPageV2 />} />
+                <Route path="v1/login" element={<LoginPage />} />
+                <Route path="v2/login" element={<LoginPageV2 />} />
                 <Route path="/" element={getHomePage()} />
                 <Route path="/login/reset-password" element={<ResetPasswordPage />} />
                 <Route path="/features/report" element={<ReportPage />} />
