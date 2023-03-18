@@ -3,7 +3,8 @@ import { BsThreeDots } from 'react-icons/bs';
 import { toast } from 'react-toastify';
 import styles from './OptionBtn.module.scss';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
-import { deleteTask, updateTask } from '../../../api/backlog/backlog';
+import { updateTask } from '../../../api/backlog/backlog';
+import { softDeleteTask } from '../../../api/task/task';
 
 interface IOptionBtn {
   taskId: string;
@@ -29,7 +30,7 @@ export default function OptionBtn({
   const { visible, setVisible, myRef } = useOutsideAlerter(false, action);
 
   const onClickDelete = (id: string) => {
-    deleteTask(id)
+    softDeleteTask(id)
       .then(() => {
         getBacklogDataApi();
       })

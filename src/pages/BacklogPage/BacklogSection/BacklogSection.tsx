@@ -12,6 +12,7 @@ import { IUserInfo, IStatusBacklog } from '../../../types';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import CreateEditSprint from '../CreateEditSprint/CreateEditSprint';
 import { TaskTypesContext } from '../../../context/TaskTypeProvider';
+import { TasksByProjectProvider } from '../../../context/TasksByProjectProvider';
 
 interface IBacklogSection {
   backlogData: any;
@@ -19,8 +20,6 @@ interface IBacklogSection {
   statusData: IStatusBacklog[];
   userList: IUserInfo[];
   sprintData: any;
-  projectKey: string;
-  tasksByProject: any;
 }
 
 export default function BacklogSection({
@@ -28,9 +27,7 @@ export default function BacklogSection({
   getBacklogDataApi,
   statusData,
   userList,
-  sprintData,
-  projectKey,
-  tasksByProject
+  sprintData
 }: IBacklogSection) {
   const [currentTypeOption, setCurrentTypeOption] = useState('story');
   const { boardId = '', projectId = '' } = useParams();
@@ -134,18 +131,18 @@ export default function BacklogSection({
                           {...provided2.draggableProps}
                           aria-hidden="true"
                         >
-                          <TaskItem
-                            task={task}
-                            projectKey={projectKey}
-                            statusData={statusData}
-                            userList={userList}
-                            sprintData={sprintData}
-                            showDropDownOnTop={
-                              calculateShowDropDownTop() && index > backlogData.cards.length - 6
-                            }
-                            getBacklogDataApi={getBacklogDataApi}
-                            tasksByProject={tasksByProject}
-                          />
+                          <TasksByProjectProvider projectId={projectId}>
+                            <TaskItem
+                              task={task}
+                              statusData={statusData}
+                              userList={userList}
+                              sprintData={sprintData}
+                              showDropDownOnTop={
+                                calculateShowDropDownTop() && index > backlogData.cards.length - 6
+                              }
+                              getBacklogDataApi={getBacklogDataApi}
+                            />
+                          </TasksByProjectProvider>
                         </div>
                       );
                     }}

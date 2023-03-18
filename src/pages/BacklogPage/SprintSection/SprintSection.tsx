@@ -16,6 +16,7 @@ import { IUserInfo, IStatusBacklog } from '../../../types';
 import CreateEditSprint from '../CreateEditSprint/CreateEditSprint';
 import { updateSprint } from '../../../api/sprint/sprint';
 import { TaskTypesContext } from '../../../context/TaskTypeProvider';
+import { TasksByProjectProvider } from '../../../context/TasksByProjectProvider';
 
 interface ISprintSection {
   sprint: any;
@@ -23,17 +24,13 @@ interface ISprintSection {
   statusData: IStatusBacklog[];
   userList: IUserInfo[];
   getBacklogDataApi: () => void;
-  projectKey: string;
-  tasksByProject: any;
 }
 export default function SprintSection({
   sprint,
   statusData,
   userList,
   sprintData,
-  getBacklogDataApi,
-  projectKey,
-  tasksByProject
+  getBacklogDataApi
 }: ISprintSection) {
   const [currentTypeOption, setCurrentTypeOption] = useState('story');
   const [showEditSprint, setShowEditSprint] = useState(false);
@@ -173,15 +170,15 @@ export default function SprintSection({
                             {...provided2.draggableProps}
                             aria-hidden="true"
                           >
-                            <TaskItem
-                              task={task}
-                              projectKey={projectKey}
-                              statusData={statusData}
-                              userList={userList}
-                              sprintData={sprintData}
-                              getBacklogDataApi={getBacklogDataApi}
-                              tasksByProject={tasksByProject}
-                            />
+                            <TasksByProjectProvider projectId={projectId}>
+                              <TaskItem
+                                task={task}
+                                statusData={statusData}
+                                userList={userList}
+                                sprintData={sprintData}
+                                getBacklogDataApi={getBacklogDataApi}
+                              />
+                            </TasksByProjectProvider>
                           </div>
                         );
                       }}

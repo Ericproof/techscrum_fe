@@ -44,12 +44,17 @@ export default function CardHeader({
   const handleDeleteSectionClickOutside = () => setVisibleDeleteSection(!visibleDeleteSection);
   const taskType = useContext(TaskTypesContext);
   const TasksByProject = useContext(TasksByProjectContext);
-  const taskTicketNum = TasksByProject.findIndex((e) => e.id === taskInfo.id) + 1;
-  const projectKey = TasksByProject[0]?.projectId.key;
 
+  const [taskTicketNum, setTaskTicketNum] = useState();
+  const [projectKey, setProjectKey] = useState();
   const [selectedType, setSelectedType] = useState(
     'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium'
   );
+
+  useEffect(() => {
+    setTaskTicketNum(TasksByProject.findIndex((e) => e.id === taskInfo.id) + 1);
+    setProjectKey(TasksByProject[0]?.projectId.key);
+  }, [TasksByProject, taskInfo.id]);
 
   useEffect(() => {
     setSelectedType(TYPE[taskInfo?.typeId?.slug]);

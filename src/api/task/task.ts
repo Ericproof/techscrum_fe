@@ -22,6 +22,10 @@ export function deleteTask(id: string) {
   return axios.delete(`${config.apiAddress}/projects/${id}`);
 }
 
+export function softDeleteTask(id: string) {
+  return alphaApi.put(`${config.apiAddress}/tasks/${id}/toggleActive`);
+}
+
 export function createNewTask(data: ITaskData) {
   return alphaApi.post(`${config.apiAddress}/tasks`, data);
 }

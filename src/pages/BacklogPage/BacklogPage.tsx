@@ -14,7 +14,6 @@ import {
 import { getStatuses } from '../../api/status/status';
 import { getTypes } from '../../api/types/types';
 import { getUsers } from '../../api/user/user';
-import { showProject } from '../../api/projects/projects';
 import SprintSection from './SprintSection/SprintSection';
 import Loading from '../../components/Loading/Loading';
 import ProjectNavigationV3 from '../../lib/ProjectNavigationV3/ProjectNavigationV3';
@@ -22,7 +21,6 @@ import SearchForBoard from '../../components/SearchForBoard/SearchForBoard';
 import TaskTypeFilter from '../../components/TaskTypeFilter/TaskTypeFilter';
 import { ITypes } from '../../types';
 import { convertFilterArrayToString } from '../../utils/helpers';
-import { getTasksByProject, ITasksByProject } from '../../utils/backlogUtils';
 
 export default function BacklogPage() {
   const [loaded, setLoaded] = useState(false);
@@ -34,7 +32,6 @@ export default function BacklogPage() {
   const [selectedTypes, setSelectedTypes] = useState<ITypes[]>([]);
   const [userList, setUserList] = useState<any>([]);
   const [projectDataLoaded, setProjectDataLoaded] = useState(false);
-  const [projectKey, setProjectKey] = useState('');
   const [selectedUsers, setSelectedUsers] = useState<any[]>([]);
   const [inputState, setInputState] = useState<boolean>(false);
   const [inputQuery, setInputQuery] = useState<string>('');
@@ -48,7 +45,6 @@ export default function BacklogPage() {
   };
 
   const effectRan = useRef(false);
-  const tasksByProject = useRef<ITasksByProject>();
 
   useEffect(() => {
     if (effectRan.current) {
@@ -59,7 +55,6 @@ export default function BacklogPage() {
         const res = await filterBacklog(projectId, inputCase, userCase, typeCase);
         setBacklogData(res.backlog);
         setSprintData(res.sprints);
-        tasksByProject.current = getTasksByProject(res);
       };
       filterBacklogData();
     }
@@ -74,7 +69,6 @@ export default function BacklogPage() {
         const res = await getBacklog(projectId);
         setBacklogData(res.backlog);
         setSprintData(res.sprints);
-        tasksByProject.current = getTasksByProject(res);
         setLoaded(true);
       } catch (e) {
         setLoaded(false);
@@ -93,8 +87,6 @@ export default function BacklogPage() {
         setStatusData(res);
         res = await getUsers();
         setUserList(res.data);
-        res = await showProject(projectId, localStorage.getItem('access_token') ?? '');
-        setProjectKey(res.data.key);
         setProjectDataLoaded(true);
       } catch (e) {
         setProjectDataLoaded(false);
@@ -102,7 +94,7 @@ export default function BacklogPage() {
       }
     };
     getProjectData();
-  }, [boardId, projectId]);
+  }, [boardId]);
 
   useEffect(() => {
     getBacklogDataApi();
@@ -213,8 +205,6 @@ export default function BacklogPage() {
                         getBacklogDataApi={getBacklogDataApi}
                         statusData={statusData}
                         userList={userList}
-                        projectKey={projectKey}
-                        tasksByProject={tasksByProject.current}
                       />
                     </React.Fragment>
                   );
@@ -225,8 +215,6 @@ export default function BacklogPage() {
                 getBacklogDataApi={getBacklogDataApi}
                 statusData={statusData}
                 userList={userList}
-                projectKey={projectKey}
-                tasksByProject={tasksByProject.current}
               />
             </>
           )}

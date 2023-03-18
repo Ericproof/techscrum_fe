@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FaPen } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import IconButton from '../../../components/Button/IconButton/IconButton';
@@ -11,6 +11,7 @@ import AssigneeBtn from '../AssigneeBtn/AssigneeBtn';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import { updateTask } from '../../../api/backlog/backlog';
 import TypeEdit from './TypeEdit';
+import { TasksByProjectContext } from '../../../context/TasksByProjectProvider';
 
 interface ITaskInput {
   task: any;
@@ -19,8 +20,6 @@ interface ITaskInput {
   sprintData?: any;
   showDropDownOnTop?: boolean;
   getBacklogDataApi: () => void;
-  projectKey: string;
-  tasksByProject: any;
 }
 export default function TaskItem({
   task,
@@ -28,13 +27,19 @@ export default function TaskItem({
   userList,
   sprintData,
   showDropDownOnTop,
-  getBacklogDataApi,
-  projectKey,
-  tasksByProject
+  getBacklogDataApi
 }: ITaskInput) {
   const [title, setTitle] = useState(task.title);
   const [value, setValue] = useState(task.typeId);
-  const taskTicketNum = tasksByProject.findIndex((e) => e.id === task.id) + 1;
+  const [taskTicketNum, setTaskTicketNum] = useState();
+  const [projectKey, setProjectKey] = useState();
+
+  const TasksByProject = useContext(TasksByProjectContext);
+
+  useEffect(() => {
+    setTaskTicketNum(TasksByProject.findIndex((e) => e.id === task.id) + 1);
+    setProjectKey(TasksByProject[0]?.projectId.key);
+  }, [TasksByProject, task.id]);
 
   const updateTaskTitleContent = () => {
     if (title.trim() !== task.title) {
