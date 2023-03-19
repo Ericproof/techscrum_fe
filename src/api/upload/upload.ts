@@ -3,5 +3,5 @@ import axios from 'axios';
 import config from '../../config/config';
 
 export function upload(data: FormData) {
-  return axios.post(`${config.apiAddress}/uploads`, data, {});
+  return axios.post(`${config.apiAddressV2}/uploads`, data, {});
 }
