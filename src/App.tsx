@@ -30,7 +30,7 @@ import { UserProvider } from './context/UserInfoProvider';
 import { ProjectProvider } from './context/ProjectProvider';
 import VerifyPage from './pages/VerifyPage/VerifyPage';
 import ProjectMembersPage from './pages/ProjectMembersPage/ProjectMembersPage';
-import RolePage from './pages/RolePage/RolePage';
+import RolePageV2 from './pages/RolePageV2/RolePage';
 import UnauthorizePage from './pages/UnauthorizePage/UnauthorizePage';
 import { RolesProvider } from './context/UserPermissionProvider';
 import { TaskTypesProvider } from './context/TaskTypeProvider';
@@ -131,7 +131,7 @@ function App() {
                     element={<AccountSettingsPage />}
                   />
                   <Route path="/projects/:projectId/members" element={<ProjectMembersPage />} />
-                  <Route path="/roles" element={<RolePage />} />
+                  <Route path="/projects/:projectId/rolesV2" element={<RolePageV2 />} />
                 </Route>
                 <Route path="/unauthorize" element={<UnauthorizePage />} />
                 <Route path="/contact" element={<ContactPage />} />
