@@ -17,13 +17,13 @@ export default function ProjectMembersPage() {
 
   useEffect(() => {
     const getRoles = async () => {
-      const path = `${config.apiAddress}/roles`;
+      const path = `${config.apiAddressV2}/roles`;
       const res = await axios.get(path);
       setRoles(res.data);
     };
 
     const getPermissions = async () => {
-      const path = `${config.apiAddress}/permissions`;
+      const path = `${config.apiAddressV2}/permissions`;
       const res = await axios.get(path);
       setPermissions(res.data);
     };
