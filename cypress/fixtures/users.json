@@ -1,232 +1,183 @@
 [
   {
-    "id": 1,
-    "name": "Leanne Graham",
-    "username": "Bret",
-    "email": "Sincere@april.biz",
-    "address": {
-      "street": "Kulas Light",
-      "suite": "Apt. 556",
-      "city": "Gwenborough",
-      "zipcode": "92998-3874",
-      "geo": {
-        "lat": "-37.3159",
-        "lng": "81.1496"
+    "email": "kitman200220022002@gmail.com",
+    "avatarIcon": "https://kitmanimage.s3.ap-southeast-2.amazonaws.com/1669817672461.png",
+    "createdAt": "2022-09-11T12:31:46.017Z",
+    "isAdmin": 1,
+    "projectsRoles": [
+      {
+        "projectId": "6350c09984d4276f1347d489",
+        "roleId": "631d94d08a05945727602cdf",
+        "id": "635666c1d377d106f9a8b85d"
+      },
+      {
+        "projectId": "63f98693f45a92dd93934b13",
+        "roleId": "63f98693f45a92dd93934b15",
+        "id": "63f98bc5692a7c50b114ff3c"
+      },
+      {
+        "projectId": "63f991d2365ebbac8818ebf3",
+        "roleId": "63f991d2365ebbac8818ebf4",
+        "id": "63f9a32e059920c4ba1bd522"
+      },
+      {
+        "projectId": "63fc2954954752aacabacb4d",
+        "roleId": "63fc3708954752aacabad145",
+        "id": "63fc2973954752aacabacc56"
+      },
+      {
+        "projectId": "63fc3c51954752aacabad3eb",
+        "roleId": "63fc3c51954752aacabad3ec",
+        "id": "63fc6cff4322fee2ec197d9b"
       }
-    },
-    "phone": "1-770-736-8031 x56442",
-    "website": "hildegard.org",
-    "company": {
-      "name": "Romaguera-Crona",
-      "catchPhrase": "Multi-layered client-server neural-net",
-      "bs": "harness real-time e-markets"
-    }
+    ],
+    "updatedAt": "2023-03-12T00:22:27.833Z",
+    "name": "kitman",
+    "abbreviation": "",
+    "jobTitle": "",
+    "location": "kitman200220022002@gmail.com",
+    "userName": "",
+    "id": "631dd53189d19ed1f532fb85"
   },
   {
-    "id": 2,
-    "name": "Ervin Howell",
-    "username": "Antonette",
-    "email": "Shanna@melissa.tv",
-    "address": {
-      "street": "Victor Plains",
-      "suite": "Suite 879",
-      "city": "Wisokyburgh",
-      "zipcode": "90566-7771",
-      "geo": {
-        "lat": "-43.9509",
-        "lng": "-34.4618"
+    "email": "joe.hz.au@gmail.com",
+    "avatarIcon": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png",
+    "createdAt": "2022-09-25T02:56:58.574Z",
+    "isAdmin": 1,
+    "projectsRoles": [
+      {
+        "projectId": "6350c09984d4276f1347d489",
+        "roleId": "631d94d08a05945727602cdf",
+        "id": "635666d3d377d106f9a8b86d"
+      },
+      {
+        "projectId": "63f991d2365ebbac8818ebf3",
+        "roleId": "63f991d2365ebbac8818ebf5",
+        "id": "63f99e6a910e26fee78efdf1"
       }
-    },
-    "phone": "010-692-6593 x09125",
-    "website": "anastasia.net",
-    "company": {
-      "name": "Deckow-Crist",
-      "catchPhrase": "Proactive didactic contingency",
-      "bs": "synergize scalable supply-chains"
-    }
+    ],
+    "updatedAt": "2023-02-25T05:42:31.490Z",
+    "name": "Joe",
+    "id": "632fc37a89d19ed1f57c7ab1"
   },
   {
-    "id": 3,
-    "name": "Clementine Bauch",
-    "username": "Samantha",
-    "email": "Nathan@yesenia.net",
-    "address": {
-      "street": "Douglas Extension",
-      "suite": "Suite 847",
-      "city": "McKenziehaven",
-      "zipcode": "59590-4157",
-      "geo": {
-        "lat": "-68.6102",
-        "lng": "-47.0653"
+    "email": "shirleymm118@gmail.com",
+    "avatarIcon": "https://kitmanimage.s3.ap-southeast-2.amazonaws.com/1669817330764.webp",
+    "createdAt": "2022-09-27T11:06:08.723Z",
+    "isAdmin": 1,
+    "projectsRoles": [
+      {
+        "projectId": "63587a9db75521ab7737c7f0",
+        "roleId": "631d94d08a05945727602ce0",
+        "id": "6359046e253dd7bffe551080"
       }
-    },
-    "phone": "1-463-123-4447",
-    "website": "ramiro.info",
-    "company": {
-      "name": "Romaguera-Jacobson",
-      "catchPhrase": "Face to face bifurcated interface",
-      "bs": "e-enable strategic applications"
-    }
+    ],
+    "updatedAt": "2022-11-30T14:08:55.630Z",
+    "name": "hyna",
+    "abbreviation": "",
+    "jobTitle": "",
+    "location": "shirleymm118@gmail.com",
+    "userName": "",
+    "id": "6332d92189d19ed1f5e91b1b"
   },
   {
-    "id": 4,
-    "name": "Patricia Lebsack",
-    "username": "Karianne",
-    "email": "Julianne.OConner@kory.org",
-    "address": {
-      "street": "Hoeger Mall",
-      "suite": "Apt. 692",
-      "city": "South Elvis",
-      "zipcode": "53919-4257",
-      "geo": {
-        "lat": "29.4572",
-        "lng": "-164.2990"
-      }
-    },
-    "phone": "493-170-9623 x156",
-    "website": "kale.biz",
-    "company": {
-      "name": "Robel-Corkery",
-      "catchPhrase": "Multi-tiered zero tolerance productivity",
-      "bs": "transition cutting-edge web services"
-    }
+    "email": "teddy.xiaofe@gmail.com",
+    "avatarIcon": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png",
+    "createdAt": "2022-09-27T13:09:43.071Z",
+    "isAdmin": 1,
+    "projectsRoles": [],
+    "updatedAt": "2022-09-27T13:10:45.340Z",
+    "name": "teddy.xiaofe@gmail.com",
+    "id": "6332f61789d19ed1f5ed4ff1"
   },
   {
-    "id": 5,
-    "name": "Chelsey Dietrich",
-    "username": "Kamren",
-    "email": "Lucio_Hettinger@annie.ca",
-    "address": {
-      "street": "Skiles Walks",
-      "suite": "Suite 351",
-      "city": "Roscoeview",
-      "zipcode": "33263",
-      "geo": {
-        "lat": "-31.8129",
-        "lng": "62.5342"
-      }
-    },
-    "phone": "(254)954-1289",
-    "website": "demarco.info",
-    "company": {
-      "name": "Keebler LLC",
-      "catchPhrase": "User-centric fault-tolerant solution",
-      "bs": "revolutionize end-to-end systems"
-    }
+    "email": "565311899@qq.com",
+    "avatarIcon": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png",
+    "createdAt": "2022-09-28T07:56:48.487Z",
+    "isAdmin": 1,
+    "projectsRoles": [],
+    "updatedAt": "2022-09-28T07:57:28.472Z",
+    "name": "jack",
+    "id": "6333fe4089d19ed1f511b516"
   },
   {
-    "id": 6,
-    "name": "Mrs. Dennis Schulist",
-    "username": "Leopoldo_Corkery",
-    "email": "Karley_Dach@jasper.info",
-    "address": {
-      "street": "Norberto Crossing",
-      "suite": "Apt. 950",
-      "city": "South Christy",
-      "zipcode": "23505-1337",
-      "geo": {
-        "lat": "-71.4197",
-        "lng": "71.7478"
-      }
-    },
-    "phone": "1-477-935-8478 x6430",
-    "website": "ola.org",
-    "company": {
-      "name": "Considine-Lockman",
-      "catchPhrase": "Synchronised bottom-line interface",
-      "bs": "e-enable innovative applications"
-    }
+    "email": "jamessihang@hotmail.com",
+    "avatarIcon": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png",
+    "createdAt": "2022-09-29T02:18:44.741Z",
+    "isAdmin": 1,
+    "projectsRoles": [],
+    "updatedAt": "2022-09-29T02:26:08.164Z",
+    "name": "James Liu",
+    "id": "63350085c94265ad05d31302"
   },
   {
-    "id": 7,
-    "name": "Kurtis Weissnat",
-    "username": "Elwyn.Skiles",
-    "email": "Telly.Hoeger@billy.biz",
-    "address": {
-      "street": "Rex Trail",
-      "suite": "Suite 280",
-      "city": "Howemouth",
-      "zipcode": "58804-1099",
-      "geo": {
-        "lat": "24.8918",
-        "lng": "21.8984"
+    "email": "davidg9911mail@gmail.com",
+    "avatarIcon": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png",
+    "createdAt": "2022-10-04T07:55:21.286Z",
+    "isAdmin": 1,
+    "projectsRoles": [
+      {
+        "projectId": "634e9f20162cb5e204e4e538",
+        "roleId": "631d94d08a05945727602ce0",
+        "id": "635551d2063fa76f9e8e5834"
+      },
+      {
+        "projectId": "6350c09984d4276f1347d489",
+        "roleId": "631d94d08a05945727602cdf",
+        "id": "635557bc063fa76f9e8e598b"
+      },
+      {
+        "projectId": "6358c090a662585de5245a2d",
+        "roleId": "631d94d08a05945727602cdf",
+        "id": "63821762a6c3f10a7e8b06ab"
       }
-    },
-    "phone": "210.067.6132",
-    "website": "elvis.io",
-    "company": {
-      "name": "Johns Group",
-      "catchPhrase": "Configurable multimedia task-force",
-      "bs": "generate enterprise e-tailers"
-    }
+    ],
+    "updatedAt": "2022-11-26T13:40:50.163Z",
+    "name": "David Guo",
+    "id": "633be6e9c94265ad05d0eca6"
   },
   {
-    "id": 8,
-    "name": "Nicholas Runolfsdottir V",
-    "username": "Maxime_Nienow",
-    "email": "Sherwood@rosamond.me",
-    "address": {
-      "street": "Ellsworth Summit",
-      "suite": "Suite 729",
-      "city": "Aliyaview",
-      "zipcode": "45169",
-      "geo": {
-        "lat": "-14.3990",
-        "lng": "-120.7677"
+    "email": "anthony0716@hotmail.com",
+    "isAdmin": 0,
+    "avatarIcon": "https://kitmanimage.s3.ap-southeast-2.amazonaws.com/1675985752215.jpg",
+    "projectsRoles": [
+      {
+        "projectId": "6387521b185362f033085c69",
+        "roleId": "631d94d08a05945727602cdf",
+        "id": "63e582bccc7419e65c92945b"
+      },
+      {
+        "projectId": "6358beaba662585de524593e",
+        "roleId": "631d94d08a05945727602cdf",
+        "id": "63fd4daca5a538c1a2295de8"
       }
-    },
-    "phone": "586.493.6943 x140",
-    "website": "jacynthe.com",
-    "company": {
-      "name": "Abernathy Group",
-      "catchPhrase": "Implemented secondary concept",
-      "bs": "e-enable extensible e-tailers"
-    }
+    ],
+    "createdAt": "2023-02-09T23:33:16.512Z",
+    "updatedAt": "2023-02-28T00:41:16.175Z",
+    "name": "JoeJoe_ZhouTian",
+    "abbreviation": "",
+    "jobTitle": "",
+    "location": "",
+    "userName": "JoeJoe_ZhouTian",
+    "id": "63e582bccc7419e65c929458"
   },
   {
-    "id": 9,
-    "name": "Glenna Reichert",
-    "username": "Delphine",
-    "email": "Chaim_McDermott@dana.io",
-    "address": {
-      "street": "Dayna Park",
-      "suite": "Suite 449",
-      "city": "Bartholomebury",
-      "zipcode": "76495-3109",
-      "geo": {
-        "lat": "24.6463",
-        "lng": "-168.8889"
-      }
-    },
-    "phone": "(775)976-6794 x41206",
-    "website": "conrad.com",
-    "company": {
-      "name": "Yost and Sons",
-      "catchPhrase": "Switchable contextually-based project",
-      "bs": "aggregate real-time technologies"
-    }
-  },
-  {
-    "id": 10,
-    "name": "Clementina DuBuque",
-    "username": "Moriah.Stanton",
-    "email": "Rey.Padberg@karina.biz",
-    "address": {
-      "street": "Kattie Turnpike",
-      "suite": "Suite 198",
-      "city": "Lebsackbury",
-      "zipcode": "31428-2261",
-      "geo": {
-        "lat": "-38.2386",
-        "lng": "57.2232"
-      }
-    },
-    "phone": "024-648-3804",
-    "website": "ambrose.net",
-    "company": {
-      "name": "Hoeger LLC",
-      "catchPhrase": "Centralized empowering task-force",
-      "bs": "target end-to-end models"
-    }
+    "email": "wei19970101@gmail.com",
+    "avatarIcon": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png",
+    "createdAt": "2023-03-01T01:00:12.700Z",
+    "isAdmin": 1,
+    "projectsRoles": [],
+    "updatedAt": "2023-03-06T12:23:08.092Z",
+    "name": "Andy W",
+    "customerId": "cus_NT3Nhg8l2UrINM",
+    "currentChargeEndDate": "2023-03-04T13:00:00.000Z",
+    "currentChargeStartDate": "2023-03-04T13:00:00.000Z",
+    "paymentHistoryId": [
+      "sub_1MiFaOFPj1yAUwnceEKzg4qK",
+      "sub_1MiFaOFPj1yAUwnceEKzg4qK",
+      "sub_1MiFaOFPj1yAUwnceEKzg4qK",
+      "sub_1Mi7GRFPj1yAUwncErF6h2Uj"
+    ],
+    "id": "63fea39da93a3876770a34e9"
   }
 ]

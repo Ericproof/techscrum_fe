@@ -8,6 +8,9 @@ import backlogDataDeleteTask from '../../fixtures/11-backlog-page/backlogDeleteT
 import backlogDataChangeTitle from '../../fixtures/11-backlog-page/backlogChangeTitle.json';
 import backlogDataChangePriority from '../../fixtures/11-backlog-page/backlogChangePriority.json';
 import backlogDataTaskTypeChange from '../../fixtures/11-backlog-page/backlogChangeTaskType.json';
+import tasksByProject from '../../fixtures/11-backlog-page/tasksByProject.json';
+import statusesData from '../../fixtures/statuses.json';
+import usersData from '../../fixtures/users.json';
 
 describe('Backlog page', () => {
   beforeEach(() => {
@@ -15,14 +18,21 @@ describe('Backlog page', () => {
     cy.intercept('GET', '**/projects', projectsData).as('fetch-projects');
     cy.intercept('GET', '**/board/**', boardData).as('fetch-board');
     cy.intercept('GET', '**/projects/*/backlogs', backlogData).as('fetch-backlog');
+    cy.intercept('GET', '**/boards/*/statuses', statusesData).as('fetch-statuses');
+    cy.intercept('GET', '**/users', usersData).as('fetch-users');
+    cy.intercept('GET', '**/tasks/project/**', tasksByProject).as('fetch-tasksByProject');
     cy.visit('/login');
     cy.login('kitman200220022002@gmail.com', '12345678');
     cy.wait('@fetch-projects');
     cy.wait('@fetch-types');
     cy.get('[data-testid="kitman-test1"]').click();
     cy.wait('@fetch-board');
+    cy.wait('@fetch-users');
     cy.get('[data-testid="backlog-btn"]').click();
     cy.wait('@fetch-backlog');
+    cy.wait('@fetch-users');
+    cy.wait('@fetch-statuses');
+    cy.wait('@fetch-tasksByProject');
   });
 
   it('Test backlog page show tasks', () => {
@@ -56,7 +66,8 @@ describe('Backlog page', () => {
   });
 
   it('Test delete task', () => {
-    cy.intercept('DELETE', '**/tasks/*', backlogDataDeleteTask).as('delete-issue');
+    cy.intercept('PUT', '**/tasks/*/toggleActive', backlogDataDeleteTask).as('delete-issue');
+    cy.intercept('GET', '**/tasks/project/**', tasksByProject).as('fetch-tasksByProject');
     cy.intercept('GET', '**/projects/*/backlogs', backlogDataDeleteTask).as(
       'fetch-backlog-task-deleted'
     );
@@ -64,6 +75,7 @@ describe('Backlog page', () => {
     cy.get('[data-testid="hover-show-option-btn-63e9b7460e1460d2e3e20c52"]').click({ force: true });
     cy.get('[data-testid="delete-task-63e9b7460e1460d2e3e20c52"]').click({ force: true });
     cy.wait('@delete-issue');
+    cy.wait('@fetch-tasksByProject');
     cy.wait('@fetch-backlog-task-deleted');
     cy.get('[data-testid="task-63e9b7460e1460d2e3e20c52"]').should('not.exist');
   });
