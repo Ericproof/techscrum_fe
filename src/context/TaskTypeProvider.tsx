@@ -12,7 +12,7 @@ function TaskTypesProvider({ children }: IRolesProvider) {
   const [taskTypes, setTaskTypes] = useState<any>([]);
 
   const getTypes = async () => {
-    const path = `${config.apiAddress}/types`;
+    const path = `${config.apiAddressV2}/types`;
     const res = await axios.get(path);
     setTaskTypes(res.data);
   };

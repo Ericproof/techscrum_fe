@@ -18,7 +18,7 @@ export const getBoard = async (id: string, input: string, users: string, taskTyp
   if (taskTypes === '') {
     taskTypeSearchCase = Cases.searchAll;
   }
-  const path = `${config.apiAddress}/board/${id}/${inputSearchCase}/${userSearchCase}/${taskTypeSearchCase}`;
+  const path = `${config.apiAddressV2}/board/${id}/${inputSearchCase}/${userSearchCase}/${taskTypeSearchCase}`;
   const result = await axios.get(path);
   return result.data;
 };

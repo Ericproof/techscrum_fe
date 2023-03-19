@@ -12,13 +12,13 @@ const getAuthHeader = (token: string) => {
 };
 
 export function getUser(id: string) {
-  return axios.get(`${config.apiAddress}/users/${id}`);
+  return axios.get(`${config.apiAddressV2}/users/${id}`);
 }
 
 export function getUsers() {
-  return axios.get(`${config.apiAddress}/users`);
+  return axios.get(`${config.apiAddressV2}/users`);
 }
 
 export function updateMe(data: IUserInfo, token: string) {
-  return axios.put(`${config.apiAddress}/account/me`, data, getAuthHeader(token));
+  return axios.put(`${config.apiAddressV2}/account/me`, data, getAuthHeader(token));
 }

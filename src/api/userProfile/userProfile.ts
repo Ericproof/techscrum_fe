@@ -7,7 +7,7 @@ export function getUserInfo(token: string, refreshToken: string) {
       Authorization: `Bearer ${token ?? ''} ${refreshToken ?? ''}`
     }
   };
-  return axios.post(`${config.apiAddress}/auto-fetch-userInfo`, {}, configHeader);
+  return axios.post(`${config.apiAddressV2}/auto-fetch-userInfo`, {}, configHeader);
 }
 
 export function anotherProfileFunction() {

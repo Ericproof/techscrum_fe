@@ -98,7 +98,7 @@ export const convertRolesArrayToObject = (roles: any) => {
 };
 
 export const getRoles = async () => {
-  const path = `${config.apiAddress}/roles`;
+  const path = `${config.apiAddressV2}/roles`;
   const res = await axios.get(path);
   const obj = convertRolesArrayToObject(res.data);
   localStorage.setItem('roles', JSON.stringify(obj));
