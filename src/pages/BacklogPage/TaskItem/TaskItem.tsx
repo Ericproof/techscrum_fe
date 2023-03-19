@@ -34,12 +34,12 @@ export default function TaskItem({
   const [taskTicketNum, setTaskTicketNum] = useState();
   const [projectKey, setProjectKey] = useState();
 
-  const TasksByProject = useContext(TasksByProjectContext);
+  const tasksByProject = useContext(TasksByProjectContext);
 
   useEffect(() => {
-    setTaskTicketNum(TasksByProject.findIndex((e) => e.id === task.id) + 1);
-    setProjectKey(TasksByProject[0]?.projectId.key);
-  }, [TasksByProject, task.id]);
+    setTaskTicketNum(tasksByProject.findIndex((e) => e.id === task.id) + 1);
+    setProjectKey(tasksByProject[0]?.projectId.key);
+  }, [tasksByProject, task.id]);
 
   const updateTaskTitleContent = () => {
     if (title.trim() !== task.title) {

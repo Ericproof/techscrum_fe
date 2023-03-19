@@ -27,14 +27,14 @@ export default function DailyScrumTicket({
   onChangeReason,
   onChangeProgress
 }: IDailyScrumTicket) {
-  const TasksByProject = useContext(TasksByProjectContext);
+  const tasksByProject = useContext(TasksByProjectContext);
   const [taskTicketNum, setTaskTicketNum] = useState();
   const [projectKey, setProjectKey] = useState();
 
   useEffect(() => {
-    setTaskTicketNum(TasksByProject.findIndex((e) => e.id === taskId) + 1);
-    setProjectKey(TasksByProject[0]?.projectId.key);
-  }, [TasksByProject, taskId]);
+    setTaskTicketNum(tasksByProject.findIndex((e) => e.id === taskId) + 1);
+    setProjectKey(tasksByProject[0]?.projectId.key);
+  }, [tasksByProject, taskId]);
 
   return (
     <div className={styles.dailyScrumTicket}>

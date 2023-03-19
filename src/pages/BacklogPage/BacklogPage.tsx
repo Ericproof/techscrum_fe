@@ -12,7 +12,6 @@ import {
   updateTask
 } from '../../api/backlog/backlog';
 import { getStatuses } from '../../api/status/status';
-import { getTypes } from '../../api/types/types';
 import { getUsers } from '../../api/user/user';
 import SprintSection from './SprintSection/SprintSection';
 import Loading from '../../components/Loading/Loading';
@@ -21,6 +20,7 @@ import SearchForBoard from '../../components/SearchForBoard/SearchForBoard';
 import TaskTypeFilter from '../../components/TaskTypeFilter/TaskTypeFilter';
 import { ITypes } from '../../types';
 import { convertFilterArrayToString } from '../../utils/helpers';
+import { TasksByProjectProvider } from '../../context/TasksByProjectProvider';
 
 export default function BacklogPage() {
   const [loaded, setLoaded] = useState(false);
@@ -28,7 +28,6 @@ export default function BacklogPage() {
   const [sprintData, setSprintData] = useState<any[]>([]);
   const [statusData, setStatusData] = useState([]);
   const { projectId = '', boardId = '' } = useParams();
-  const [typesData, setTypesData] = useState([]);
   const [selectedTypes, setSelectedTypes] = useState<ITypes[]>([]);
   const [userList, setUserList] = useState<any>([]);
   const [projectDataLoaded, setProjectDataLoaded] = useState(false);
@@ -81,9 +80,7 @@ export default function BacklogPage() {
   const getProjectDataApi = useCallback(() => {
     const getProjectData = async () => {
       try {
-        let res = await getTypes();
-        setTypesData(res);
-        res = await getStatuses(boardId);
+        let res = await getStatuses(boardId);
         setStatusData(res);
         res = await getUsers();
         setUserList(res.data);
@@ -169,7 +166,7 @@ export default function BacklogPage() {
           }}
         >
           {finishLoading && (
-            <>
+            <TasksByProjectProvider projectId={projectId} backlogData={backlogData}>
               <div className={styles.BacklogSearchFilter}>
                 <div className={styles.BacklogSearchArea}>
                   <SearchForBoard
@@ -186,7 +183,6 @@ export default function BacklogPage() {
                   userList={userList}
                 />
                 <TaskTypeFilter
-                  typeList={typesData}
                   selectedTypes={selectedTypes}
                   setSelectedTypes={setSelectedTypes}
                   changeSelectedTypes={changeSelectedItems}
@@ -216,7 +212,7 @@ export default function BacklogPage() {
                 statusData={statusData}
                 userList={userList}
               />
-            </>
+            </TasksByProjectProvider>
           )}
         </DragDropContext>
       </div>

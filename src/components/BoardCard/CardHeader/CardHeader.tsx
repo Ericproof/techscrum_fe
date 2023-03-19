@@ -43,7 +43,7 @@ export default function CardHeader({
   const handleSelectDropDownClickOutside = () => setVisibleSelectDropDown(!visibleSelectDropDown);
   const handleDeleteSectionClickOutside = () => setVisibleDeleteSection(!visibleDeleteSection);
   const taskType = useContext(TaskTypesContext);
-  const TasksByProject = useContext(TasksByProjectContext);
+  const tasksByProject = useContext(TasksByProjectContext);
 
   const [taskTicketNum, setTaskTicketNum] = useState();
   const [projectKey, setProjectKey] = useState();
@@ -52,9 +52,9 @@ export default function CardHeader({
   );
 
   useEffect(() => {
-    setTaskTicketNum(TasksByProject.findIndex((e) => e.id === taskInfo.id) + 1);
-    setProjectKey(TasksByProject[0]?.projectId.key);
-  }, [TasksByProject, taskInfo.id]);
+    setTaskTicketNum(tasksByProject.findIndex((e) => e.id === taskInfo.id) + 1);
+    setProjectKey(tasksByProject[0]?.projectId.key);
+  }, [tasksByProject, taskInfo.id]);
 
   useEffect(() => {
     setSelectedType(TYPE[taskInfo?.typeId?.slug]);

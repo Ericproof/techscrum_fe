@@ -8,7 +8,7 @@ import BoardSearch from './BoardSearch/BoardSearch';
 import BoardMain from './BoardMain/BoardMain';
 import CreateNewCard from '../CreateNewCard/CreateNewCard';
 import { getBoard } from '../../api/board/board';
-import { updateTaskStatus, fetchTask, updateTask, removeTask } from '../../api/task/task';
+import { updateTaskStatus, fetchTask, updateTask, softDeleteTask } from '../../api/task/task';
 import IBoardEntity, {
   IColumnsFromBackend,
   ICardData,
@@ -24,7 +24,6 @@ import ProjectNavigationV3 from '../../lib/ProjectNavigationV3/ProjectNavigation
 import Modal from '../../lib/Modal/Modal';
 import DefaultModalHeader from '../../lib/Modal/ModalHeader/DefaultModalHeader/DefaultModalHeader';
 import { getUsers } from '../../api/user/user';
-import { getTypes } from '../../api/types/types';
 import { convertFilterArrayToString } from '../../utils/helpers';
 
 const onDragEnd = (
@@ -84,7 +83,6 @@ export default function Board() {
   const [loading, setLoading] = useState(false);
   const [userList, setUserList] = useState([]);
   const [selectedUsers, setSelectedUsers] = useState<any[]>([]);
-  const [typeList, setTypeList] = useState<any[]>([]);
   const [selectedTypes, setSelectedTypes] = useState<ITypes[]>([]);
 
   const changeSelectedItems = (isExist, selectedItems, item) => {
@@ -131,8 +129,6 @@ export default function Board() {
       const taskTypeCase = convertFilterArrayToString(selectedTypes);
       const boardInfo = await getBoard(boardId, inputQuery, userCase, taskTypeCase);
       fetchColumnsData(boardInfo);
-      const typeData = await getTypes();
-      setTypeList(typeData);
       setLoading(false);
     };
     fetchBoard();
@@ -239,7 +235,7 @@ export default function Board() {
   const deleteTask = async () => {
     if (taskData?.id ?? taskData?.id) {
       try {
-        await removeTask(taskData.id);
+        await softDeleteTask(taskData.id);
       } finally {
         getViewTaskStateFromChildren();
         const updatedColumns = { ...columnsInfo };
@@ -270,7 +266,6 @@ export default function Board() {
         setSelectedUsers={setSelectedUsers}
         changeSelectedUsers={changeSelectedItems}
         userList={userList}
-        typeList={typeList}
         selectedTypes={selectedTypes}
         setSelectedTypes={setSelectedTypes}
         changeSelectedTypes={changeSelectedItems}

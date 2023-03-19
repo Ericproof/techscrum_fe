@@ -16,7 +16,6 @@ import { IUserInfo, IStatusBacklog } from '../../../types';
 import CreateEditSprint from '../CreateEditSprint/CreateEditSprint';
 import { updateSprint } from '../../../api/sprint/sprint';
 import { TaskTypesContext } from '../../../context/TaskTypeProvider';
-import { TasksByProjectProvider } from '../../../context/TasksByProjectProvider';
 
 interface ISprintSection {
   sprint: any;
@@ -170,15 +169,13 @@ export default function SprintSection({
                             {...provided2.draggableProps}
                             aria-hidden="true"
                           >
-                            <TasksByProjectProvider projectId={projectId}>
-                              <TaskItem
-                                task={task}
-                                statusData={statusData}
-                                userList={userList}
-                                sprintData={sprintData}
-                                getBacklogDataApi={getBacklogDataApi}
-                              />
-                            </TasksByProjectProvider>
+                            <TaskItem
+                              task={task}
+                              statusData={statusData}
+                              userList={userList}
+                              sprintData={sprintData}
+                              getBacklogDataApi={getBacklogDataApi}
+                            />
                           </div>
                         );
                       }}

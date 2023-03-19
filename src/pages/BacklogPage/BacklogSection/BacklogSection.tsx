@@ -12,7 +12,6 @@ import { IUserInfo, IStatusBacklog } from '../../../types';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import CreateEditSprint from '../CreateEditSprint/CreateEditSprint';
 import { TaskTypesContext } from '../../../context/TaskTypeProvider';
-import { TasksByProjectProvider } from '../../../context/TasksByProjectProvider';
 
 interface IBacklogSection {
   backlogData: any;
@@ -131,18 +130,16 @@ export default function BacklogSection({
                           {...provided2.draggableProps}
                           aria-hidden="true"
                         >
-                          <TasksByProjectProvider projectId={projectId}>
-                            <TaskItem
-                              task={task}
-                              statusData={statusData}
-                              userList={userList}
-                              sprintData={sprintData}
-                              showDropDownOnTop={
-                                calculateShowDropDownTop() && index > backlogData.cards.length - 6
-                              }
-                              getBacklogDataApi={getBacklogDataApi}
-                            />
-                          </TasksByProjectProvider>
+                          <TaskItem
+                            task={task}
+                            statusData={statusData}
+                            userList={userList}
+                            sprintData={sprintData}
+                            showDropDownOnTop={
+                              calculateShowDropDownTop() && index > backlogData.cards.length - 6
+                            }
+                            getBacklogDataApi={getBacklogDataApi}
+                          />
                         </div>
                       );
                     }}
