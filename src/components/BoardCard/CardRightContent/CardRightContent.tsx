@@ -1,11 +1,17 @@
-import React, { useContext, useState } from 'react';
+import React, { Dispatch, SetStateAction, useContext, useState } from 'react';
 import { CgArrowRightR } from 'react-icons/cg';
 import { MdOutlineBookmarkBorder } from 'react-icons/md';
 import { RiFlag2Line } from 'react-icons/ri';
 import { BsPeople } from 'react-icons/bs';
 import { AiOutlineCalendar } from 'react-icons/ai';
 import { v4 as uuid } from 'uuid';
-import { IColumnsFromBackend, ILabelData, IOnChangeProjectLead, ITaskEntity } from '../../../types';
+import {
+  IColumnsFromBackend,
+  ILabelData,
+  IOnChangeProjectLead,
+  ITaskEntity,
+  ITypes
+} from '../../../types';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import style from './CardRightContent.module.scss';
 import ReporterFields from './ReporterFields/ReporterFields';
@@ -26,6 +32,8 @@ interface Props {
   projectId: string;
   updateTaskTags: (tags: ILabelData[] | undefined) => void;
   onSave: (data: ITaskEntity) => void;
+  selectedType: ITypes | null;
+  setSelectedType: Dispatch<SetStateAction<ITypes | null>>;
 }
 
 export default function CardRightContent({
@@ -35,7 +43,9 @@ export default function CardRightContent({
   labels,
   projectId,
   updateTaskTags,
-  onSave
+  onSave,
+  selectedType,
+  setSelectedType
 }: Props) {
   const PRIORITY = {
     Highest: 'https://010001.atlassian.net/images/icons/priorities/highest.svg',
@@ -68,8 +78,6 @@ export default function CardRightContent({
   const operation = 'updated';
   const userId = userInfo.id;
   const taskId = taskInfo.id;
-  const [selectedTypeIcon, setSelectedTypeIcon] = useState(taskInfo.typeId.icon);
-  const [selectedType, setSelectedType] = useState(taskInfo.typeId.name);
   const [selectedPriorityIcon, setSelectedPriorityIcon] = useState(PRIORITY[taskInfo.priority]);
   const [selectedPriority, setSelectedPriority] = useState(taskInfo.priority);
   const taskTypes = useContext(TaskTypesContext);
@@ -127,8 +135,7 @@ export default function CardRightContent({
   const onClickIssueType = (task: ITaskEntity) => {
     const updateTaskInfo = { ...taskInfo };
     updateTaskInfo.typeId = task;
-    setSelectedTypeIcon(task.icon);
-    setSelectedType(task.slug);
+    setSelectedType(updateTaskInfo.typeId);
     setVisibleSelectType(false);
     onSave(updateTaskInfo);
   };
@@ -165,8 +172,8 @@ export default function CardRightContent({
                     handleSelectTypeClickOutside();
                   }}
                 >
-                  <img className={style.selectedTypeIcon} src={selectedTypeIcon} alt="Story" />
-                  <div className={style.selectedType}>{selectedType}</div>
+                  <img className={style.selectedTypeIcon} src={selectedType?.icon} alt="Story" />
+                  <div className={style.selectedType}>{selectedType?.name}</div>
                 </button>
               </div>
               {visibleSelectType && checkAccess('edit:tasks', projectId) && (
