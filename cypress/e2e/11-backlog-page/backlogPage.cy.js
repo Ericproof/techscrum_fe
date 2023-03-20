@@ -8,21 +8,38 @@ import backlogDataDeleteTask from '../../fixtures/11-backlog-page/backlogDeleteT
 import backlogDataChangeTitle from '../../fixtures/11-backlog-page/backlogChangeTitle.json';
 import backlogDataChangePriority from '../../fixtures/11-backlog-page/backlogChangePriority.json';
 import backlogDataTaskTypeChange from '../../fixtures/11-backlog-page/backlogChangeTaskType.json';
+import statusesData from '../../fixtures/statuses.json';
+import labelsData from '../../fixtures/labels.json';
+import usersData from '../../fixtures/users.json';
+import issuesByLabelBe from '../../fixtures/11-backlog-page/issuesByLabelBe.json';
+import issuesByLabelBeAndFe from '../../fixtures/11-backlog-page/issuesByLabelBeAndFe.json';
+import projectCurrentPage from '../../fixtures/11-backlog-page/projectCurrentPage.json';
 
 describe('Backlog page', () => {
   beforeEach(() => {
     cy.intercept('GET', '**/types', typesData).as('fetch-types');
     cy.intercept('GET', '**/projects', projectsData).as('fetch-projects');
+    cy.intercept('GET', '**/projects/**', projectCurrentPage).as('fetch-projectCurrentPage');
     cy.intercept('GET', '**/board/**', boardData).as('fetch-board');
     cy.intercept('GET', '**/projects/*/backlogs', backlogData).as('fetch-backlog');
+    cy.intercept('GET', '**/types', typesData).as('fetch-types');
+    cy.intercept('GET', '**/labels', labelsData).as('fetch-labels');
+    cy.intercept('GET', '**/users', usersData).as('fetch-users');
+    cy.intercept('GET', '**/boards/*/statuses', statusesData).as('fetch-statuses');
     cy.visit('/login');
     cy.login('kitman200220022002@gmail.com', '12345678');
     cy.wait('@fetch-projects');
-    cy.wait('@fetch-types');
     cy.get('[data-testid="kitman-test1"]').click();
     cy.wait('@fetch-board');
+    cy.wait('@fetch-users');
+    cy.wait('@fetch-labels');
     cy.get('[data-testid="backlog-btn"]').click();
     cy.wait('@fetch-backlog');
+    cy.wait('@fetch-types');
+    cy.wait('@fetch-statuses');
+    cy.wait('@fetch-users');
+    cy.wait('@fetch-projectCurrentPage');
+    cy.wait('@fetch-labels');
   });
 
   it('Test backlog page show tasks', () => {
@@ -94,5 +111,37 @@ describe('Backlog page', () => {
     cy.get('[data-testid="priority-dropdown-btn-63e9b7460e1460d2e3e20c52-Highest"]').click();
     cy.wait('@change-priority');
     cy.wait('@fetch-backlog-task-priority-updated');
+  });
+  it('Should have label options', () => {
+    cy.get('[data-testid="labelsTab"]').click();
+    cy.get('[data-testid="labelOptions"]').children().should('have.length', labelsData.length);
+  });
+  it('Should show issues with selected labels', () => {
+    cy.intercept(
+      'GET',
+      '**/projects/*/backlogs/*/*/*/6340129a5eb06d386302b22b',
+      issuesByLabelBe
+    ).as('get-issuesByLabelBe');
+    cy.intercept(
+      'GET',
+      '**/projects/*/backlogs/*/*/*/6340129a5eb06d386302b22b-6381d2cfa6c3f10a7e8ae07e',
+      issuesByLabelBeAndFe
+    ).as('get-issuesByLabelBeAndFe');
+    cy.get('[data-testid="labelsTab"]').click();
+    cy.get('[data-testid="label-6340129a5eb06d386302b22b"]').click();
+    cy.wait('@get-issuesByLabelBe');
+    // now we want to check  if all the return tasks have selected label
+    cy.get('[data-testid-count="filter-issues"]').should(
+      'have.length',
+      issuesByLabelBe.backlog.cards.length +
+        issuesByLabelBe.sprints.reduce((acc, sprint) => acc + sprint.taskId.length, 0)
+    );
+    cy.get('[data-testid="label-6381d2cfa6c3f10a7e8ae07e"]').click();
+    cy.wait('@get-issuesByLabelBeAndFe');
+    cy.get('[data-testid-count="filter-issues"]').should(
+      'have.length',
+      issuesByLabelBeAndFe.backlog.cards.length +
+      issuesByLabelBeAndFe.sprints.reduce((acc, sprint) => acc + sprint.taskId.length, 0)
+    );
   });
 });
