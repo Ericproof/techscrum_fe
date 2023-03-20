@@ -67,7 +67,7 @@ export default function BoardMain({
                                   }}
                                   data-testid={`task-${item.id}`}
                                 >
-                                  <span>
+                                  <span data-testid="task-labels">
                                     {' '}
                                     {item.tags?.map((tag) => {
                                       return (

@@ -1,6 +1,7 @@
 import projectData from '../../fixtures/projects.json';
 import boardData from '../../fixtures/board.json';
 import taskData from '../../fixtures/updateTask.json';
+import updatedLabel from '../../fixtures/updatedLabel.json'
 
 describe('Project page', () => {
   beforeEach(() => {
@@ -49,12 +50,12 @@ describe('Project page', () => {
   });
 
   it('Test should change label', () => {
-    cy.intercept('POST', '**/tasks/*/labels', taskData).as('update-task');
+    cy.intercept('POST', '**/tasks/*/labels', updatedLabel).as('update-task');
     cy.get('[data-testid="card-label-button"]').click();
     cy.get('[data-testid="card-label-button"]').then((items) => {
       items[0].click();
     });
     cy.get('[data-testid="card-label-text"]').click();
-    cy.get('[data-testid="card-label-button"]').contains('fe');
+    cy.get('[data-testid="card-label-button"]').contains('Backend');
   });
 });
