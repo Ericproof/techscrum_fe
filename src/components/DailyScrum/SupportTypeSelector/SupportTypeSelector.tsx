@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './SupportTypeSelector.module.scss';
 
 // enum SupportTypes {
@@ -30,6 +30,13 @@ function SupportTypeSelector({
   otherSupportDesc?: string;
   editOtherSupportDesc: (value: string) => void;
 }) {
+  useEffect(() => {
+    if (supportType !== 4) {
+      editOtherSupportDesc('');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [supportType]);
+
   return (
     <div className={styles.mainWrapper}>
       {supportTypesTitles.slice(1).map((title, index) => {
