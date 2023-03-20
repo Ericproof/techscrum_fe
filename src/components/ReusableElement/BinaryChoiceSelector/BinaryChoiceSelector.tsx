@@ -1,12 +1,20 @@
 import React from 'react';
-import styles from './RadioInput.module.scss';
+import styles from './BinaryChoiceSelector.module.scss';
 
-interface IRadioInput {
+interface IBinaryChoiceSelectorProps {
   onChange: (value: boolean) => void;
   name: string;
   value: boolean;
+  onChangeSupport?: (value: boolean) => void;
+  resetSupportType?: (value: number) => void;
 }
-export default function RadioInput({ onChange, name, value }: IRadioInput) {
+export default function BinaryChoiceSelector({
+  onChange,
+  name,
+  value,
+  resetSupportType,
+  onChangeSupport
+}: IBinaryChoiceSelectorProps) {
   return (
     <>
       <label htmlFor={`${name}-yes`} className={styles.radioLabel}>
@@ -17,6 +25,10 @@ export default function RadioInput({ onChange, name, value }: IRadioInput) {
           checked={!!value}
           onChange={() => {
             onChange(true);
+            if (onChangeSupport && resetSupportType) {
+              onChangeSupport(false);
+              resetSupportType(0);
+            }
           }}
         />
         Yes
@@ -29,6 +41,9 @@ export default function RadioInput({ onChange, name, value }: IRadioInput) {
           checked={!value}
           onChange={() => {
             onChange(false);
+            if (resetSupportType) {
+              resetSupportType(0);
+            }
           }}
         />
         No
@@ -36,3 +51,8 @@ export default function RadioInput({ onChange, name, value }: IRadioInput) {
     </>
   );
 }
+
+BinaryChoiceSelector.defaultProps = {
+  resetSupportType: () => {},
+  onChangeSupport: () => {}
+};

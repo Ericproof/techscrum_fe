@@ -141,16 +141,22 @@ export const convertFilterArrayToString = (selectedInputs) => {
 
 export const dateFormatter = (
   rawDate: string | number | Date = new Date(),
-  isToISO?: boolean
+  options?: {
+    isToISO?: boolean;
+  }
 ): string => {
-  // default date: current
+  // default date: current date
   const date: Date = new Date(rawDate);
-  if (isToISO) {
+  if (options?.isToISO) {
     return date.toISOString();
   }
 
-  const options: Intl.DateTimeFormatOptions = { day: '2-digit', month: '2-digit', year: 'numeric' };
-  const formatter: Intl.DateTimeFormat = new Intl.DateTimeFormat('en-AU', options);
+  const formatOptions: Intl.DateTimeFormatOptions = {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
+  };
+  const formatter: Intl.DateTimeFormat = new Intl.DateTimeFormat('en-AU', formatOptions);
   const formattedDate: string = formatter.format(date).replace(/\//g, '-');
   return formattedDate; // Output: 03-06-2023
 };

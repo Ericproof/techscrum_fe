@@ -1,19 +1,21 @@
 import React from 'react';
 import styles from './DailyScrumTicket.module.scss';
-import RadioInput from '../../ReusableElement/RadioInput/RadioInput';
+import BinaryChoiceSelector from '../../ReusableElement/BinaryChoiceSelector/BinaryChoiceSelector';
+import SupportTypeSelector from '../SupportTypeSelector/SupportTypeSelector';
 
-interface IDailyScrumTicket {
+interface IDailyScrumTicketProps {
   id: string;
   title: string;
   progress: number;
-  finish: boolean;
-  reason?: string;
+  isCanfinish: boolean;
   isNeedSupport: boolean;
-  finishValidation: boolean;
+  supportType: 0 | 1 | 2 | 3 | 4;
+  projectAbbr: string;
+  otherSupportDesc?: string;
   updateDailyScrumTicket: (
     id: string
   ) => (
-    key: 'progress' | 'isFinished' | 'isNeedSupport' | 'reason'
+    key: 'progress' | 'isCanFinish' | 'isNeedSupport' | 'supportType' | 'otherSupportDesc'
   ) => (value: number | string | boolean) => void;
 }
 
@@ -21,16 +23,17 @@ export default function DailyScrumTicket({
   id,
   title,
   progress,
-  finish,
-  finishValidation,
+  isCanfinish,
   isNeedSupport,
-  updateDailyScrumTicket,
-  reason
-}: IDailyScrumTicket) {
+  supportType,
+  projectAbbr,
+  otherSupportDesc,
+  updateDailyScrumTicket
+}: IDailyScrumTicketProps) {
   return (
     <div className={styles.dailyScrumTicket}>
       <p className={styles.ticketTitle}>
-        {id} - {title}
+        {projectAbbr} - {title}
       </p>
       <div className={styles.progress}>
         <p>Progress</p>
@@ -51,40 +54,38 @@ export default function DailyScrumTicket({
       </div>
       <div className={styles.finish}>
         <p>Can you finish this ticket by sprint end?</p>
-        <RadioInput
-          name={`finish/${id}`}
-          onChange={updateDailyScrumTicket(id)('isFinished')}
-          value={finish}
+        <BinaryChoiceSelector
+          name={`isCanFinish-${id}`}
+          onChange={updateDailyScrumTicket(id)('isCanFinish')}
+          onChangeSupport={updateDailyScrumTicket(id)('isNeedSupport')}
+          resetSupportType={updateDailyScrumTicket(id)('supportType')}
+          value={isCanfinish}
         />
-        {!finish && finishValidation && (
-          <div className={styles.anyReason}>
-            <p>Any reasons?</p>
-            <textarea
-              name="reason"
-              id=""
-              cols={30}
-              rows={10}
-              value={reason}
-              onChange={(e) => {
-                updateDailyScrumTicket(id)('reason')(e.target.value);
-              }}
-              data-testid={'dailyscrum-reason-'.concat(id)}
+      </div>
+      {!isCanfinish ? (
+        <div className={styles.support}>
+          <p>Do you need support to complete this ticket?</p>
+          <BinaryChoiceSelector
+            name={`isNeedSupport-${id}`}
+            onChange={updateDailyScrumTicket(id)('isNeedSupport')}
+            resetSupportType={updateDailyScrumTicket(id)('supportType')}
+            value={isNeedSupport}
+          />
+          {isNeedSupport ? (
+            <SupportTypeSelector
+              supportType={supportType}
+              name={`supportType-${id}`}
+              onChange={updateDailyScrumTicket(id)('supportType')}
+              otherSupportDesc={otherSupportDesc}
+              editOtherSupportDesc={updateDailyScrumTicket(id)('otherSupportDesc')}
             />
-          </div>
-        )}
-      </div>
-      <div className={styles.support}>
-        <p>Do you need support to complete this ticket?</p>
-        <RadioInput
-          name={`support/${id}`}
-          onChange={updateDailyScrumTicket(id)('isNeedSupport')}
-          value={isNeedSupport}
-        />
-      </div>
+          ) : null}
+        </div>
+      ) : null}
     </div>
   );
 }
 
 DailyScrumTicket.defaultProps = {
-  reason: ''
+  otherSupportDesc: ''
 };

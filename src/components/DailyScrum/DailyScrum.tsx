@@ -16,6 +16,7 @@ interface IDailyScrumModal {
   projectId: string;
 }
 
+// id is required but any other properties of IDailyScrumTicket are optional
 type IDailyScrumTicketUpdate = Partial<IDailyScrumTicket> & { id: string };
 
 enum DailyScrumTicketsActionType {
@@ -27,8 +28,6 @@ interface IDailyScrumTicketsAction {
   type: DailyScrumTicketsActionType;
   payload: IDailyScrumTicketUpdate | IDailyScrumTicket[];
 }
-
-const SEARCH_CASE = 'search-all';
 
 const initialDailyScrumTickets: IDailyScrumTicket[] = [];
 
@@ -51,7 +50,9 @@ const dailyScrumTicketsReducer = (state: IDailyScrumTicket[], action: IDailyScru
 
 function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JSX.Element {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const [calendarDate, setCalendarDate] = useState<string>(dateFormatter(undefined, true));
+  const [calendarDate, setCalendarDate] = useState<string>(
+    dateFormatter(undefined, { isToISO: true })
+  );
 
   const [dailyScrumTickets, dispatch] = useReducer(
     dailyScrumTicketsReducer,
@@ -63,7 +64,7 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
   useEffect(() => {
     (async () => {
       try {
-        const results = await getDailyScrums(projectId, userId, 'none', 'none', SEARCH_CASE);
+        const results = await getDailyScrums(projectId, userId as string);
 
         if (results.length === 0) {
           toast('No dailyScrum data for now!', { theme: 'colored', toastId: 'dailyScrum error' });
@@ -81,30 +82,8 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
 
   const updateDailyScrumTicket =
     (id: string) =>
-    (key: 'progress' | 'isFinished' | 'isNeedSupport' | 'reason') =>
+    (key: 'progress' | 'isCanFinish' | 'isNeedSupport' | 'supportType' | 'otherSupportDesc') =>
     (value: number | string | boolean) => {
-      // What is this for????? validations????
-      // if this is only UI related, then make it a local state
-      if (key === 'isFinished') {
-        dispatch({
-          type: DailyScrumTicketsActionType.updateOneTicket,
-          payload: {
-            id,
-            finishValidation: true
-          }
-        });
-      }
-
-      if (key === 'isNeedSupport') {
-        dispatch({
-          type: DailyScrumTicketsActionType.updateOneTicket,
-          payload: {
-            id,
-            supportValidation: true
-          }
-        });
-      }
-
       return dispatch({
         type: DailyScrumTicketsActionType.updateOneTicket,
         payload: {
@@ -119,37 +98,18 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
       e.preventDefault();
       setIsSubmitting(true);
 
-      // createDate is not in a correct format that can be accepted by new Date()
-      // useCreateAt instead
-      dailyScrumTickets
-        .filter(({ createAt }: IDailyScrumTicket) => {
-          return dateFormatter(createAt) === dateFormatter();
-        })
-        .map(
-          async ({
-            progress = 0,
-            isFinished = false,
-            reason = '',
-            isNeedSupport = false,
-            finishValidation = false,
-            supportValidation = false,
-            taskId
-          }) => {
-            const data = {
-              progress,
-              isFinished,
-              hasReason: !!reason,
-              reason,
-              isNeedSupport,
-              createdDate: dateFormatter(),
-              finishValidation,
-              supportValidation
-            };
-
-            window.console.log(taskId, data);
-            await updateDailyScrum(data, projectId, userId, taskId);
-          }
-        );
+      dailyScrumTickets.forEach(
+        async ({ progress, isCanFinish, isNeedSupport, supportType, id, otherSupportDesc }) => {
+          await updateDailyScrum(projectId, id, {
+            progress,
+            isCanFinish,
+            isNeedSupport,
+            supportType,
+            otherSupportDesc,
+            id
+          });
+        }
+      );
       toast.success('Submit successful!', {
         theme: 'colored',
         className: 'primaryColorBackground',
@@ -192,18 +152,29 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
           }}
         />
         <div className={styles.dailyScrumTicketsListWrapper}>
+          <p>You currently have {dailyScrumTickets.length} dailyScrum(s)</p>
           {dailyScrumTickets.map(
-            ({ id, title, progress, isFinished, finishValidation, isNeedSupport, reason }) => {
+            ({
+              id,
+              title,
+              progress,
+              isCanFinish,
+              isNeedSupport,
+              supportType,
+              project,
+              otherSupportDesc
+            }) => {
               return (
                 <DailyScrumTicket
                   key={id}
                   id={id}
                   title={title}
+                  projectAbbr={project.key}
                   progress={progress}
-                  reason={reason}
-                  finish={isFinished}
+                  isCanfinish={isCanFinish}
                   isNeedSupport={isNeedSupport}
-                  finishValidation={finishValidation as boolean}
+                  supportType={supportType}
+                  otherSupportDesc={otherSupportDesc}
                   updateDailyScrumTicket={updateDailyScrumTicket}
                 />
               );

@@ -14,44 +14,40 @@ const http: AxiosInstance = axios.create(axiosConfig);
 
 http.interceptors.response.use(
   (response): IDailyScrumTicket => {
-    const updatedDataArr = response.data.map((item: any) => ({
-      ...item,
-      projectId: item.projectId.id,
-      userId: item.userId.id,
-      taskId: item.taskId.id
-    }));
-
-    return updatedDataArr ?? response;
+    return response.data ?? response;
   },
   (error) => {
     return Promise.reject(error);
   }
 );
 
-export const getDailyScrums = (
-  projectId = 'none',
-  userId = 'none',
-  taskId = 'none',
-  date = 'none',
-  searchCase = 'none'
-): Promise<IDailyScrumTicket[]> => {
-  return http.get(`/${projectId}/dailyScrums/${userId}/${taskId}/${date}/${searchCase}`);
+export const getDailyScrums = (projectId: string, userId: string): Promise<IDailyScrumTicket[]> => {
+  return http.get(`/${projectId}/dailyScrums`, {
+    params: {
+      userId
+    }
+  });
 };
 
 export const createDailyScrum = (
   projectId: string,
   data: any
 ): Promise<AxiosResponse<IDailyScrumTicket[]>> => {
-  return axios.post(`${config.apiAddress}/projects/${projectId}/dailyScrums`, data);
+  return http.post(`/${projectId}/dailyScrums`, data);
 };
 
-export const updateDailyScrum = async (data: any, projectId = '', userId = '', taskId = '') => {
-  return axios.patch(
-    `${config.apiAddress}/projects/${projectId}/dailyScrums/${userId}/${taskId}`,
-    data
-  );
+export const updateDailyScrum = async (
+  projectId: string,
+  dailyScrumsId: string,
+  data: Partial<IDailyScrumTicket>
+) => {
+  return http.patch(`/${projectId}/dailyScrums/${dailyScrumsId}`, data);
 };
 
-export const deleteDailyScrum = async (projectId = '', taskId = '') => {
-  return axios.delete(`${config.apiAddress}/projects/${projectId}/dailyScrums/${taskId}`);
+export const deleteDailyScrum = async (projectId: string, taskId: string) => {
+  return http.delete(`/${projectId}/dailyScrums`, {
+    params: {
+      taskId
+    }
+  });
 };

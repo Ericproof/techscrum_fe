@@ -16,7 +16,7 @@ import DueDatePicker from '../../DueDatePicker/DueDatePicker';
 import { UserContext } from '../../../context/UserInfoProvider';
 import { TaskTypesContext } from '../../../context/TaskTypeProvider';
 import { createActivity } from '../../../api/activity/activity';
-import { createDailyScrum, getDailyScrums } from '../../../api/dailyScrum/dailyScrum';
+import { createDailyScrum } from '../../../api/dailyScrum/dailyScrum';
 
 interface Props {
   taskInfo: ITaskEntity;
@@ -74,16 +74,6 @@ export default function CardRightContent({
   const [selectedPriority, setSelectedPriority] = useState(taskInfo.priority);
   const taskTypes = useContext(TaskTypesContext);
 
-  const dateHandler = (fullDate) => {
-    const date = new Date(fullDate);
-    const year = date.getFullYear();
-    let month: string | number = date.getMonth();
-    let day: string | number = date.getDate();
-    day = day < 10 ? `0${day}` : day;
-    month = month + 1 < 10 ? `0${month + 1}` : month + 1;
-    return `${day}-${month}-${year}`;
-  };
-
   const reporterOnchangeEventHandler = async (e: IOnChangeProjectLead) => {
     const updatedTaskInfo = { ...taskInfo };
     updatedTaskInfo.reporterId = !e.target.value ? undefined : e.target.value;
@@ -98,29 +88,12 @@ export default function CardRightContent({
     await createActivity({ operation, userId, taskId });
     const { assignId } = updatedTaskInfo;
     if (assignId) {
-      const createdDate = dateHandler(new Date());
       const data = {
         title: updatedTaskInfo.title,
-        progress: 0,
-        isFinished: false,
-        hasReason: false,
-        reason: '',
-        isNeedSupport: false,
         userId: assignId,
-        taskId: updatedTaskInfo.id,
-        createdDate
+        taskId: updatedTaskInfo.id
       };
-      const searchCase = 'search-by-user-task-date';
-      const resultsForThisTask = await getDailyScrums(
-        projectId,
-        'none',
-        taskId,
-        dateHandler(new Date()),
-        searchCase
-      );
-      if (resultsForThisTask.length === 0) {
-        await createDailyScrum(projectId, data);
-      }
+      await createDailyScrum(projectId, data);
     }
   };
 

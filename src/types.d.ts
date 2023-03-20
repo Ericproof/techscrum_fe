@@ -315,16 +315,24 @@ export interface IMinEvent {
 export interface IDailyScrumTicket {
   title: string;
   progress: number;
-  isFinished: boolean;
-  hasReason: boolean;
-  reason?: string;
+  isCanFinish: boolean;
   isNeedSupport: boolean;
-  userId: string;
-  projectId: string;
-  taskId: string;
-  createdDate?: string;
-  finishValidation?: boolean;
-  supportValidation?: boolean;
+  supportType: 0 | 1 | 2 | 3 | 4;
+  user: {
+    id: string;
+    name: string;
+  };
+  project: {
+    id: string;
+    name: string;
+    key: string;
+  };
+  task: {
+    id: string;
+    title: string;
+  };
   id: string;
   createAt: string;
+  updateAt: string;
+  otherSupportDesc?: string;
 }

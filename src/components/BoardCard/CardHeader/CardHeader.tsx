@@ -52,7 +52,7 @@ export default function CardHeader({
   }, [taskInfo.id]);
 
   const onDeleteDailyScrum = async () => {
-    await deleteDailyScrum(projectId, taskInfo.id);
+    await deleteDailyScrum(projectId, taskInfo.id as string);
   };
 
   const onClickIssueType = (task: ITaskEntity) => {
