@@ -12,7 +12,7 @@ import { sendEmail } from '../../../api/contact/contact';
 
 const FULLNAME_REGEX = /^[a-zA-Z ]{1,40}$/;
 const COMPANY_REGEX = /^[a-zA-Z0-9][-a-zA-Z0-9 ']*[a-zA-Z0-9]$/;
-const PHONE_REGEX = /^(?:\+(?:\d ?){6,14}\d|(?:61 ?|\(61\))? ?04(?:[ .-]?\d){8})$/;
+const PHONE_REGEX = /^(?:\+(?:[\d ]){6,14}\d|(?:61 ?|\(61\))? ?04(?:[ .-]?[\d ]){6,8}[\d ]?)$/;
 const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 const MESSAGE_REGEX = /^.{1,200}$/;
 const enquiryTitles = [
