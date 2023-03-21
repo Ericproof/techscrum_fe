@@ -13,34 +13,32 @@ import labelsData from '../../fixtures/labels.json';
 import usersData from '../../fixtures/users.json';
 import issuesByLabelBe from '../../fixtures/11-backlog-page/issuesByLabelBe.json';
 import issuesByLabelBeAndFe from '../../fixtures/11-backlog-page/issuesByLabelBeAndFe.json';
-import projectCurrentPage from '../../fixtures/11-backlog-page/projectCurrentPage.json';
 import tasksByProject from '../../fixtures/11-backlog-page/tasksByProject.json';
 
 describe('Backlog page', () => {
   beforeEach(() => {
     cy.intercept('GET', '**/types', typesData).as('fetch-types');
     cy.intercept('GET', '**/projects', projectsData).as('fetch-projects');
-    cy.intercept('GET', '**/projects/**', projectCurrentPage).as('fetch-projectCurrentPage');
     cy.intercept('GET', '**/board/**', boardData).as('fetch-board');
     cy.intercept('GET', '**/projects/*/backlogs', backlogData).as('fetch-backlog');
-    cy.intercept('GET', '**/types', typesData).as('fetch-types');
     cy.intercept('GET', '**/labels', labelsData).as('fetch-labels');
+    cy.intercept('GET', '**/labels/**', labelsData).as('fetch-labels-byProject');
     cy.intercept('GET', '**/users', usersData).as('fetch-users');
     cy.intercept('GET', '**/boards/*/statuses', statusesData).as('fetch-statuses');
     cy.intercept('GET', '**/tasks/project/**', tasksByProject).as('fetch-tasksByProject');
     cy.visit('/login');
+    cy.wait('@fetch-types');
     cy.login('kitman200220022002@gmail.com', '12345678');
     cy.wait('@fetch-projects');
     cy.get('[data-testid="kitman-test1"]').click();
     cy.wait('@fetch-board');
     cy.wait('@fetch-users');
     cy.wait('@fetch-labels');
+    cy.wait('@fetch-labels-byProject');
     cy.get('[data-testid="backlog-btn"]').click();
     cy.wait('@fetch-backlog');
-    cy.wait('@fetch-types');
     cy.wait('@fetch-statuses');
     cy.wait('@fetch-users');
-    cy.wait('@fetch-projectCurrentPage');
     cy.wait('@fetch-labels');
     cy.wait('@fetch-tasksByProject');
   });
