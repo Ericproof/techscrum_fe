@@ -18,7 +18,9 @@ import Loading from '../../components/Loading/Loading';
 import ProjectNavigationV3 from '../../lib/ProjectNavigationV3/ProjectNavigationV3';
 import SearchForBoard from '../../components/SearchForBoard/SearchForBoard';
 import TaskTypeFilter from '../../components/TaskTypeFilter/TaskTypeFilter';
-import { ITypes } from '../../types';
+import TaskLabelFilter from '../../components/TaskLabelFilter/TaskLabelFilter';
+import { LabelsProvider } from '../../context/LabelProvider';
+import { ITypes, ILabelData } from '../../types';
 import { convertFilterArrayToString } from '../../utils/helpers';
 import { TasksByProjectProvider } from '../../context/TasksByProjectProvider';
 
@@ -29,6 +31,7 @@ export default function BacklogPage() {
   const [statusData, setStatusData] = useState([]);
   const { projectId = '', boardId = '' } = useParams();
   const [selectedTypes, setSelectedTypes] = useState<ITypes[]>([]);
+  const [selectedLabels, setSelectedLabels] = useState<ILabelData[]>([]);
   const [userList, setUserList] = useState<any>([]);
   const [projectDataLoaded, setProjectDataLoaded] = useState(false);
   const [selectedUsers, setSelectedUsers] = useState<any[]>([]);
@@ -50,8 +53,9 @@ export default function BacklogPage() {
       const inputCase = inputQuery;
       const userCase = convertFilterArrayToString(selectedUsers);
       const typeCase = convertFilterArrayToString(selectedTypes);
+      const labelCase = convertFilterArrayToString(selectedLabels);
       const filterBacklogData = async () => {
-        const res = await filterBacklog(projectId, inputCase, userCase, typeCase);
+        const res = await filterBacklog(projectId, inputCase, userCase, typeCase, labelCase);
         setBacklogData(res.backlog);
         setSprintData(res.sprints);
       };
@@ -60,7 +64,7 @@ export default function BacklogPage() {
     return () => {
       effectRan.current = true;
     };
-  }, [inputQuery, projectId, selectedTypes, selectedUsers]);
+  }, [inputQuery, projectId, selectedTypes, selectedUsers, selectedLabels]);
 
   const getBacklogDataApi = useCallback(() => {
     const getBacklogData = async () => {
@@ -187,6 +191,12 @@ export default function BacklogPage() {
                   setSelectedTypes={setSelectedTypes}
                   changeSelectedTypes={changeSelectedItems}
                 />
+                <LabelsProvider>
+                  <TaskLabelFilter
+                    selectedLabels={selectedLabels}
+                    setSelectedLabels={setSelectedLabels}
+                  />
+                </LabelsProvider>
               </div>
               {sprintData
                 .filter((sprint: any) => {

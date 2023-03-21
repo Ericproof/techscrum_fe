@@ -84,6 +84,7 @@ export default function Board() {
   const [userList, setUserList] = useState([]);
   const [selectedUsers, setSelectedUsers] = useState<any[]>([]);
   const [selectedTypes, setSelectedTypes] = useState<ITypes[]>([]);
+  const [selectedLabels, setSelectedLabels] = useState<ILabelData[]>([]);
 
   const changeSelectedItems = (isExist, selectedItems, item) => {
     if (!isExist) {
@@ -127,12 +128,13 @@ export default function Board() {
       setLoading(true);
       const userCase = convertFilterArrayToString(selectedUsers);
       const taskTypeCase = convertFilterArrayToString(selectedTypes);
-      const boardInfo = await getBoard(boardId, inputQuery, userCase, taskTypeCase);
+      const labelCase = convertFilterArrayToString(selectedLabels);
+      const boardInfo = await getBoard(boardId, inputQuery, userCase, taskTypeCase, labelCase);
       fetchColumnsData(boardInfo);
       setLoading(false);
     };
     fetchBoard();
-  }, [boardId, fetchColumnsData, inputQuery, selectedTypes, selectedUsers]);
+  }, [boardId, fetchColumnsData, inputQuery, selectedTypes, selectedUsers, selectedLabels]);
 
   useEffect(() => {
     fetchBoardInfo();
@@ -269,6 +271,8 @@ export default function Board() {
         selectedTypes={selectedTypes}
         setSelectedTypes={setSelectedTypes}
         changeSelectedTypes={changeSelectedItems}
+        selectedLabels={selectedLabels}
+        setSelectedLabels={setSelectedLabels}
       />
       <BoardMain
         columnsInfo={columnsInfo}

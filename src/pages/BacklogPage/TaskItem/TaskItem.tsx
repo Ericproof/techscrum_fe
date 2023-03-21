@@ -79,6 +79,7 @@ export default function TaskItem({
       onFocus={() => {}}
       onBlur={() => {}}
       data-testid={`task-hover-${task.id}`}
+      data-testid-count="filter-issues"
       ref={myRef}
     >
       <div className={styles.taskInfo}>

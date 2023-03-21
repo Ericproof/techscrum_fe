@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import CardHeader from './CardHeader/CardHeader';
 import CardLeftContent from './CardLeftContent/CardLeftContent';
 import CardRightContent from './CardRightContent/CardRightContent';
-import { IColumnsFromBackend, ILabelData, ITaskEntity } from '../../types';
+import { IColumnsFromBackend, ILabelData, ITaskEntity, ITypes } from '../../types';
 import styles from './BoardCard.module.scss';
 import { upload } from '../../api/upload/upload';
 import { createActivity } from '../../api/activity/activity';
@@ -33,6 +33,7 @@ export default function BoardCard({
   updateTaskTags
 }: Props) {
   const [taskInfo, setTaskInfo] = useState<ITaskEntity | null>(null);
+  const [selectedType, setSelectedType] = useState<ITypes | null>(null);
   const userInfo = useContext(UserContext);
 
   const [title, setTitle] = useState<string | undefined>(taskInfo?.title);
@@ -106,6 +107,8 @@ export default function BoardCard({
             taskInfo={taskInfo}
             projectId={projectId}
             onSave={onSave}
+            selectedType={selectedType}
+            setSelectedType={setSelectedType}
           />
         </TasksByProjectProvider>
         <div className={styles.cardContent}>
@@ -127,6 +130,8 @@ export default function BoardCard({
             projectId={projectId}
             updateTaskTags={updateTaskTags}
             onSave={onSave}
+            selectedType={selectedType}
+            setSelectedType={setSelectedType}
           />
           <CardLeftContent
             taskInfo={taskInfo}
