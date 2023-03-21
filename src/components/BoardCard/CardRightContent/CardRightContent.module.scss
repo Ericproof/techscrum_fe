@@ -149,7 +149,7 @@ $padding-left: 10px;
       font-size: 16px;
       font-weight: 500;
       color: #38465e;
-      height: 44px;
+      height: 35px;
       .leftContent {
         display: flex;
         align-items: center;
@@ -237,6 +237,7 @@ $padding-left: 10px;
       align-items: center;
       justify-content: center;
       font-size: 16px;
+      height: 35px;
       & > div:nth-of-type(1) {
         display: flex;
         align-items: center;
@@ -315,7 +316,7 @@ $padding-left: 10px;
   flex-direction: row;
   align-items: center;
   margin-bottom: 12px;
-  max-height: 44px;
+  max-height: 35px;
   font-size: 16px;
 
   .label {
