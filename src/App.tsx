@@ -68,7 +68,7 @@ function App() {
       return <></>;
     }
     if (!showPages) {
-      return <LoginPage />;
+      return <LoginPageV2 />;
     }
     return <HomePage />;
   };
