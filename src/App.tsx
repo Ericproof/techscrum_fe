@@ -13,6 +13,7 @@ import PrivacyPolicy from './pages/PrivacyPolicyPage/PrivacyPolicyPage';
 import PrivacyStatementPage from './pages/PrivacyStatementPage/PrivacyStatementPage';
 import UserPage from './pages/UserPage/UserPage';
 import UserMePage from './pages/SettingPage/UserMePage/UserMePage';
+import SubscriptionPage from './pages/SubscriptionPage/SubscriptionPage';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import AccessPage from './pages/AccessPage/AccessPage';
 import ProjectPage from './pages/ProjectPage/ProjectPage';
@@ -108,6 +109,7 @@ function App() {
                   </Route>
                   <Route path="/settings/:projectId" element={<Setting />} />
                   <Route path="/me" element={<UserMePage />} />
+                  <Route path="/subscription" element={<SubscriptionPage />} />
                   <Route path="/user/:id" element={<UserPage />} />
                   <Route path="/access" element={<AccessPage />} />
                   <Route path="/projects" element={<ProjectPage />} />

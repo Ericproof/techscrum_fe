@@ -1,8 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import styles from './PlanOption.module.scss';
 import { UserContext } from '../../../context/UserInfoProvider';
 import { createSubcription } from '../../../utils/paymentUtils';
+import config from '../../../config/config';
 
 const plans = {
   content: {
@@ -115,6 +117,16 @@ function PlanOption(props: IPlanOptionProps) {
   const ADVANCED_PRICE_IDENTIFIER = 0;
   const ULTRA_PRICE_IDENTIFIER = 1;
 
+  type PlanInfo = {
+    isCurrentPlan: boolean;
+    productType: string;
+  };
+
+  const [isCurrentPlan, setIsCurrentPlan] = useState<PlanInfo>({
+    isCurrentPlan: false,
+    productType: ''
+  });
+
   const handleClick = () => {
     setIsChecked((ischecked) => !ischecked);
   };
@@ -132,6 +144,18 @@ function PlanOption(props: IPlanOptionProps) {
     }
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await axios.post(`${config.apiAddress}/userCurrentPlan`, {
+        userId
+      });
+      setIsCurrentPlan(res.data);
+    };
+    fetchData();
+  }, [userId]);
+
+  useEffect(() => {}, [isCurrentPlan]);
+
   return (
     <div className={styles.group}>
       {content.content.map((plan) => (
@@ -139,9 +163,7 @@ function PlanOption(props: IPlanOptionProps) {
           <h1 className={styles.plan}>
             {plan.plan} {plan.popularity && <span>{plan.popularity}</span>}
           </h1>
-
           <p className={styles.description}>{plan.description}</p>
-
           <div className={styles.discount}>
             <div className={styles.price}>
               {plan.yearly_price && !plan.monthly_price && (
@@ -175,19 +197,81 @@ function PlanOption(props: IPlanOptionProps) {
             )}
           </div>
 
-          <div className={styles.buttons}>
-            <button className={styles.action} onClick={() => handleButtonClick(plan.id, true)}>
-              {plan.action}
-            </button>
-            {plan.buy_action && (
-              <button
-                className={styles.buy_action}
-                onClick={() => handleButtonClick(plan.id, false)}
-              >
-                {plan.buy_action}
+          {!isChecked && isCurrentPlan.productType === 'yearly' && plan.id === 1 && (
+            <div className={styles.buttons}>
+              <h1>Current plan</h1>
+            </div>
+          )}
+
+          {!isChecked && isCurrentPlan.productType === 'monthly' && plan.id === 1 && (
+            <div className={styles.buttons}>
+              <button className={styles.action} onClick={() => handleButtonClick(plan.id, true)}>
+                {plan.action}
               </button>
-            )}
-          </div>
+              {plan.buy_action && (
+                <button
+                  className={styles.buy_action}
+                  onClick={() => handleButtonClick(plan.id, false)}
+                >
+                  {plan.buy_action}
+                </button>
+              )}
+            </div>
+          )}
+
+          {isChecked && isCurrentPlan.productType === 'monthly' && plan.id === 1 && (
+            <div className={styles.buttons}>
+              <h1>Current plan</h1>
+            </div>
+          )}
+
+          {isChecked && isCurrentPlan.productType === 'yearly' && plan.id === 1 && (
+            <div className={styles.buttons}>
+              <button className={styles.action} onClick={() => handleButtonClick(plan.id, true)}>
+                {plan.action}
+              </button>
+              {plan.buy_action && (
+                <button
+                  className={styles.buy_action}
+                  onClick={() => handleButtonClick(plan.id, false)}
+                >
+                  {plan.buy_action}
+                </button>
+              )}
+            </div>
+          )}
+
+          {plan.id !== 1 && (
+            <div className={styles.buttons}>
+              <button className={styles.action} onClick={() => handleButtonClick(plan.id, true)}>
+                {plan.action}
+              </button>
+              {plan.buy_action && (
+                <button
+                  className={styles.buy_action}
+                  onClick={() => handleButtonClick(plan.id, false)}
+                >
+                  {plan.buy_action}
+                </button>
+              )}
+            </div>
+          )}
+
+          {plan.id === 1 && isCurrentPlan.productType === '' && (
+            <div className={styles.buttons}>
+              <button className={styles.action} onClick={() => handleButtonClick(plan.id, true)}>
+                {plan.action}
+              </button>
+              {plan.buy_action && (
+                <button
+                  className={styles.buy_action}
+                  onClick={() => handleButtonClick(plan.id, false)}
+                >
+                  {plan.buy_action}
+                </button>
+              )}
+            </div>
+          )}
 
           <div className={styles.service}>
             <h3 className={styles.include}>Includes:</h3>
