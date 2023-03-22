@@ -105,8 +105,7 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
             isCanFinish,
             isNeedSupport,
             supportType,
-            otherSupportDesc,
-            id
+            otherSupportDesc
           });
         }
       );
