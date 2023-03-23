@@ -66,12 +66,12 @@ describe('Project page', () => {
   });
 
   it('Should show tasks with selected labels', () => {
-    cy.intercept('GET', '**/board/*/*/*/*/6340129a5eb06d386302b22b', tasksByLabelBe).as(
+    cy.intercept('GET', '**/board/**/6340129a5eb06d386302b22b', tasksByLabelBe).as(
       'get-tasksByLabelBe'
     );
     cy.intercept(
       'GET',
-      '**/board/*/*/*/*/6340129a5eb06d386302b22b-6381d2cfa6c3f10a7e8ae07e',
+      '**/board/**/6340129a5eb06d386302b22b-6381d2cfa6c3f10a7e8ae07e',
       tasksByLabelBeAndFe
     ).as('get-tasksByLabelBeAndFe');
     cy.get('[data-testid="labelsTab"]').click();
