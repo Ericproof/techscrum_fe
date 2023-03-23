@@ -42,7 +42,7 @@ export default function RegisterMain() {
           setInvalidateStatus(true);
         }
       } else {
-        navigate('/register');
+        navigate('/v1/register');
       }
     };
     fetchEmailByToken();
