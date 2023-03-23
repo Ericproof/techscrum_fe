@@ -11,19 +11,19 @@ const getAuthHeader = (token: string) => {
 };
 
 export function getProjects() {
-  return alphaApi.get(`${config.apiAddressV2}/projects`);
+  return alphaApi.get(`${config.apiAddress}/projects`);
 }
 
 export function showProject(id: string, token: string) {
-  return alphaApi.get(`${config.apiAddressV2}/projects/${id}`, getAuthHeader(token));
+  return alphaApi.get(`${config.apiAddress}/projects/${id}`, getAuthHeader(token));
 }
 
 export function createProject(data: IProjectData) {
-  return alphaApi.post(`${config.apiAddressV2}/projects`, data);
+  return alphaApi.post(`${config.apiAddress}/projects`, data);
 }
 
 export function deleteProject(id: string) {
-  return alphaApi.delete(`${config.apiAddressV2}/projects/${id}`);
+  return alphaApi.delete(`${config.apiAddress}/projects/${id}`);
 }
 
 export function updateProject(id: string, data: IProjectData, token: string) {
@@ -34,5 +34,5 @@ export function updateProject(id: string, data: IProjectData, token: string) {
   if (typeof data.projectLeadId !== 'string') {
     copyData.projectLeadId = !data.projectLeadId ? null : data.projectLeadId.id;
   }
-  return alphaApi.put(`${config.apiAddressV2}/projects/${id}`, copyData, getAuthHeader(token));
+  return alphaApi.put(`${config.apiAddress}/projects/${id}`, copyData, getAuthHeader(token));
 }

@@ -3,5 +3,5 @@ import axios from 'axios';
 import config from '../../config/config';
 
 export function getDomains() {
-  return axios.get(`${config.apiAddressV2}/domains`);
+  return axios.get(`${config.apiAddress}/domains`);
 }

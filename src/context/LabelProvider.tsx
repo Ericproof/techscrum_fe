@@ -23,7 +23,7 @@ function LabelsProvider({ children }: IRolesProvider) {
   const [labels, setLabels] = useState<IProps[]>([]);
 
   const getCompanyLabels = async () => {
-    const path = `${config.apiAddressV2}/labels`;
+    const path = `${config.apiAddress}/labels`;
     const res = await axios.get(path);
     const labelsData = res.data.map(selectProps);
     setLabels(labelsData);

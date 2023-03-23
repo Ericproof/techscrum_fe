@@ -3,27 +3,27 @@ import config, { alphaApi } from '../../config/config';
 import { ITaskData } from '../../types';
 
 export function getTasks() {
-  return axios.get(`${config.apiAddressV2}/projects`);
+  return axios.get(`${config.apiAddress}/projects`);
 }
 
 export function showTask(id = '') {
-  return axios.get(`${config.apiAddressV2}/projects/${id}`);
+  return axios.get(`${config.apiAddress}/projects/${id}`);
 }
 
 export function createTask(data: ITaskData) {
-  return axios.post(`${config.apiAddressV2}/projects`, data);
+  return axios.post(`${config.apiAddress}/projects`, data);
 }
 
 export function deleteTask(id: string) {
-  return axios.delete(`${config.apiAddressV2}/projects/${id}`);
+  return axios.delete(`${config.apiAddress}/projects/${id}`);
 }
 
 export function createNewTask(data: ITaskData) {
-  return alphaApi.post(`${config.apiAddressV2}/tasks`, data);
+  return alphaApi.post(`${config.apiAddress}/tasks`, data);
 }
 
 export function fetchTask(taskId: string) {
-  return axios.get(`${config.apiAddressV2}/tasks/${taskId}`);
+  return axios.get(`${config.apiAddress}/tasks/${taskId}`);
 }
 
 export function updateTask(taskId: string, data: ITaskData) {
@@ -46,13 +46,13 @@ export function updateTask(taskId: string, data: ITaskData) {
     return typeof item !== 'string' ? item.id : item;
   });
 
-  return axios.put(`${config.apiAddressV2}/tasks/${taskId}`, copyData);
+  return axios.put(`${config.apiAddress}/tasks/${taskId}`, copyData);
 }
 
 export function updateTaskStatus(taskId: string, status: string) {
-  return axios.put(`${config.apiAddressV2}/tasks/${taskId}`, { status });
+  return axios.put(`${config.apiAddress}/tasks/${taskId}`, { status });
 }
 
 export function removeTask(taskId: string) {
-  return axios.delete(`${config.apiAddressV2}/tasks/${taskId}`);
+  return axios.delete(`${config.apiAddress}/tasks/${taskId}`);
 }

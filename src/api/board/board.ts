@@ -28,7 +28,7 @@ export const getBoard = async (
   if (labels === '') {
     labelSearchCase = Cases.searchAll;
   }
-  const path = `${config.apiAddressV2}/board/${id}/${inputSearchCase}/${userSearchCase}/${taskTypeSearchCase}/${labelSearchCase}`;
+  const path = `${config.apiAddress}/board/${id}/${inputSearchCase}/${userSearchCase}/${taskTypeSearchCase}/${labelSearchCase}`;
   const result = await axios.get(path);
   return result.data;
 };

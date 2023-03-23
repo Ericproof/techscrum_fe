@@ -3,7 +3,7 @@ import config from '../../config/config';
 
 // eslint-disable-next-line import/prefer-default-export
 export const getBacklog = async (projectId: string) => {
-  const path = `${config.apiAddressV2}/projects/${projectId}/backlogs`;
+  const path = `${config.apiAddress}/projects/${projectId}/backlogs`;
   const response = await axios.get(path);
   return response.data;
 };
@@ -36,7 +36,7 @@ export const filterBacklog = async (
   if (labels === '') {
     labelSearchCase = Cases.searchAll;
   }
-  const path = `${config.apiAddressV2}/projects/${projectId}/backlogs/${inputSearchCase}/${userSearchCase}/${typeSearchCase}/${labelSearchCase}`;
+  const path = `${config.apiAddress}/projects/${projectId}/backlogs/${inputSearchCase}/${userSearchCase}/${typeSearchCase}/${labelSearchCase}`;
   const response = await axios.get(path);
   return response.data;
 };
@@ -47,7 +47,7 @@ export const addTask = async (data: object) => {
       Authorization: `Bearer ${localStorage.getItem('access_token') ?? ''}`
     }
   };
-  const path = `${config.apiAddressV2}/tasks`;
+  const path = `${config.apiAddress}/tasks`;
   const response = await axios.post(path, data, configHeader);
   return response.data;
 };
@@ -58,7 +58,7 @@ export const updateTask = async (id: string, data: object) => {
       Authorization: `Bearer ${localStorage.getItem('access_token') ?? ''}`
     }
   };
-  const path = `${config.apiAddressV2}/tasks/${id}`;
+  const path = `${config.apiAddress}/tasks/${id}`;
   const response = await axios.put(path, data, configHeader);
   return response.data;
 };
@@ -69,13 +69,13 @@ export const deleteTask = async (id: string) => {
       Authorization: `Bearer ${localStorage.getItem('access_token') ?? ''}`
     }
   };
-  const path = `${config.apiAddressV2}/tasks/${id}`;
+  const path = `${config.apiAddress}/tasks/${id}`;
   const response = await axios.delete(path, configHeader);
   return response.data;
 };
 
 export const updateBacklogOrder = async (projectId: string, data: object) => {
-  const path = `${config.apiAddressV2}/projects/${projectId}/backlogs/updateOrder`;
+  const path = `${config.apiAddress}/projects/${projectId}/backlogs/updateOrder`;
   const response = await axios.put(path, data);
   return response.data;
 };
