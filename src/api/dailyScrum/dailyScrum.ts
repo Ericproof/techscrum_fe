@@ -31,8 +31,13 @@ export const getDailyScrums = (projectId: string, userId: string): Promise<IDail
 
 export const createDailyScrum = (
   projectId: string,
-  data: any
-): Promise<AxiosResponse<IDailyScrumTicket[]>> => {
+  data: {
+    // these 3 attributes are supposed to be not nullish; however, apparently the type for taskInfo was not defined properly causing these attributes to be optional. The backend has valiations which check the existence of these data. If the taskInfo type is causing additional problems, plz fix it 1st.
+    title?: string;
+    userId?: string;
+    taskId?: string;
+  }
+): Promise<AxiosResponse<IDailyScrumTicket>> => {
   return http.post(`/${projectId}/dailyScrums`, data);
 };
 

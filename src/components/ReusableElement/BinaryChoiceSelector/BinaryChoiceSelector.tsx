@@ -5,15 +5,15 @@ interface IBinaryChoiceSelectorProps {
   onChange: (value: boolean) => void;
   name: string;
   value: boolean;
-  onChangeSupport?: (value: boolean) => void;
-  resetSupportType?: (value: number) => void;
+  isResetHanlderForOptionYes?: boolean;
+  handleResetStates?: () => void;
 }
 export default function BinaryChoiceSelector({
   onChange,
   name,
   value,
-  resetSupportType,
-  onChangeSupport
+  handleResetStates,
+  isResetHanlderForOptionYes
 }: IBinaryChoiceSelectorProps) {
   return (
     <>
@@ -25,9 +25,8 @@ export default function BinaryChoiceSelector({
           checked={!!value}
           onChange={() => {
             onChange(true);
-            if (onChangeSupport && resetSupportType) {
-              onChangeSupport(false);
-              resetSupportType(0);
+            if (handleResetStates && isResetHanlderForOptionYes) {
+              handleResetStates();
             }
           }}
         />
@@ -41,8 +40,8 @@ export default function BinaryChoiceSelector({
           checked={!value}
           onChange={() => {
             onChange(false);
-            if (resetSupportType) {
-              resetSupportType(0);
+            if (handleResetStates && !isResetHanlderForOptionYes) {
+              handleResetStates();
             }
           }}
         />
@@ -53,6 +52,6 @@ export default function BinaryChoiceSelector({
 }
 
 BinaryChoiceSelector.defaultProps = {
-  resetSupportType: () => {},
-  onChangeSupport: () => {}
+  handleResetStates: () => {},
+  isResetHanlderForOptionYes: true
 };

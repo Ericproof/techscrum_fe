@@ -1,8 +1,9 @@
-import React, { MouseEvent, useContext, useEffect, useReducer, useState } from 'react';
+import React, { MouseEvent, useCallback, useContext, useEffect, useReducer, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { AiOutlineClose } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 import { DatePicker } from '@atlaskit/datetime-picker';
+import { AxiosResponse } from 'axios';
 import styles from './DailyScrum.module.scss';
 import { getDailyScrums, updateDailyScrum } from '../../api/dailyScrum/dailyScrum';
 import { UserContext } from '../../context/UserInfoProvider';
@@ -80,42 +81,55 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
     })();
   }, [projectId, userId]);
 
-  const updateDailyScrumTicket =
+  const updateDailyScrumTicket = useCallback(
     (id: string) =>
-    (key: 'progress' | 'isCanFinish' | 'isNeedSupport' | 'supportType' | 'otherSupportDesc') =>
-    (value: number | string | boolean) => {
-      return dispatch({
-        type: DailyScrumTicketsActionType.updateOneTicket,
-        payload: {
-          id,
-          [key]: value
-        }
-      });
-    };
+      (key: 'progress' | 'isCanFinish' | 'isNeedSupport' | 'supportType' | 'otherSupportDesc') =>
+      (value: number | string | boolean) => {
+        return dispatch({
+          type: DailyScrumTicketsActionType.updateOneTicket,
+          payload: {
+            id,
+            [key]: value
+          }
+        });
+      },
+    []
+  );
 
   const onHandleSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
-    try {
-      e.preventDefault();
-      setIsSubmitting(true);
+    e.preventDefault();
+    setIsSubmitting(true);
 
-      dailyScrumTickets.forEach(
-        async ({ progress, isCanFinish, isNeedSupport, supportType, id, otherSupportDesc }) => {
-          await updateDailyScrum(projectId, id, {
-            progress,
-            isCanFinish,
-            isNeedSupport,
-            supportType,
-            otherSupportDesc
-          });
-        }
+    const promises = dailyScrumTickets.map(
+      ({ progress, isCanFinish, isNeedSupport, supportType, id, otherSupportDesc }) => {
+        return updateDailyScrum(projectId, id, {
+          progress,
+          isCanFinish,
+          isNeedSupport,
+          supportType,
+          otherSupportDesc
+        });
+      }
+    );
+
+    try {
+      const results: PromiseSettledResult<AxiosResponse<any, any>>[] = await Promise.allSettled(
+        promises
       );
-      toast.success('Submit successful!', {
-        theme: 'colored',
-        className: 'primaryColorBackground',
-        toastId: 'dailyScrum success'
-      });
-      onClickCloseModal();
-      setIsSubmitting(false);
+
+      if (results.map((result) => result.status).every((status) => status === 'fulfilled')) {
+        toast.success('Submit successful!', {
+          theme: 'colored',
+          className: 'primaryColorBackground',
+          toastId: 'dailyScrum success'
+        });
+        onClickCloseModal();
+        setIsSubmitting(false);
+      } else {
+        const failedResults: any = results.filter((result) => result.status === 'rejected');
+
+        window.console.log(failedResults[0]?.reason.response.data.errors.errors[0]);
+      }
     } catch (error) {
       toast.error('Temporarily server error, please try again later!', {
         theme: 'colored',
@@ -174,7 +188,7 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
                   isNeedSupport={isNeedSupport}
                   supportType={supportType}
                   otherSupportDesc={otherSupportDesc}
-                  updateDailyScrumTicket={updateDailyScrumTicket}
+                  updateDailyScrumTicket={updateDailyScrumTicket(id)}
                 />
               );
             }
@@ -185,6 +199,7 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
       <div className={styles.btnContainer}>
         <button
           className={styles.cancelBtn}
+          type="button"
           onClick={onClickCloseModal}
           data-testid="dailyscrum-cancel"
         >
@@ -194,6 +209,7 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
           className={styles.submitBtn}
           onClick={onHandleSubmit}
           disabled={isSubmitting}
+          type="button"
           data-testid="dailyscrum-submit"
         >
           Submit

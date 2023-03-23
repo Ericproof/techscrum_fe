@@ -1,14 +1,6 @@
 import React, { useEffect } from 'react';
 import styles from './SupportTypeSelector.module.scss';
 
-// enum SupportTypes {
-//   noSupport,
-//   technicalSupport,
-//   requirementSupport,
-//   dependencySupport,
-//   others
-// }
-
 const supportTypesTitles: string[] = [
   'no support',
   'technical support',
@@ -34,6 +26,7 @@ function SupportTypeSelector({
     if (supportType !== 4) {
       editOtherSupportDesc('');
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [supportType]);
 
@@ -60,6 +53,7 @@ function SupportTypeSelector({
       })}
       {supportType === 4 ? (
         <textarea
+          maxLength={40}
           value={otherSupportDesc}
           onChange={(e) => {
             editOtherSupportDesc(e.target.value);

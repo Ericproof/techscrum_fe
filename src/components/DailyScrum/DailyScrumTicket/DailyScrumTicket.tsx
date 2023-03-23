@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styles from './DailyScrumTicket.module.scss';
 import BinaryChoiceSelector from '../../ReusableElement/BinaryChoiceSelector/BinaryChoiceSelector';
 import SupportTypeSelector from '../SupportTypeSelector/SupportTypeSelector';
@@ -13,8 +13,6 @@ interface IDailyScrumTicketProps {
   projectAbbr: string;
   otherSupportDesc?: string;
   updateDailyScrumTicket: (
-    id: string
-  ) => (
     key: 'progress' | 'isCanFinish' | 'isNeedSupport' | 'supportType' | 'otherSupportDesc'
   ) => (value: number | string | boolean) => void;
 }
@@ -30,6 +28,25 @@ export default function DailyScrumTicket({
   otherSupportDesc,
   updateDailyScrumTicket
 }: IDailyScrumTicketProps) {
+  const handleResetStates = useCallback(
+    (states: Array<'isNeedSupport' | 'supportType' | 'otherSupportDesc'>) => () => {
+      return states.forEach((state) => {
+        if (state === 'isNeedSupport') {
+          updateDailyScrumTicket(state)(false);
+        }
+
+        if (state === 'supportType') {
+          updateDailyScrumTicket(state)(0);
+        }
+
+        if (state === 'otherSupportDesc') {
+          updateDailyScrumTicket(state)('');
+        }
+      });
+    },
+    [updateDailyScrumTicket]
+  );
+
   return (
     <div className={styles.dailyScrumTicket}>
       <p className={styles.ticketTitle}>
@@ -45,7 +62,7 @@ export default function DailyScrumTicket({
             step="1"
             defaultValue={progress}
             onChange={(e) => {
-              updateDailyScrumTicket(id)('progress')(e.target.valueAsNumber);
+              updateDailyScrumTicket('progress')(e.target.valueAsNumber);
             }}
             data-testid={'dailyscrum-progress-bar-'.concat(id)}
           />
@@ -56,9 +73,13 @@ export default function DailyScrumTicket({
         <p>Can you finish this ticket by sprint end?</p>
         <BinaryChoiceSelector
           name={`isCanFinish-${id}`}
-          onChange={updateDailyScrumTicket(id)('isCanFinish')}
-          onChangeSupport={updateDailyScrumTicket(id)('isNeedSupport')}
-          resetSupportType={updateDailyScrumTicket(id)('supportType')}
+          onChange={updateDailyScrumTicket('isCanFinish')}
+          handleResetStates={handleResetStates([
+            'isNeedSupport',
+            'supportType',
+            'otherSupportDesc'
+          ])}
+          isResetHanlderForOptionYes
           value={isCanfinish}
         />
       </div>
@@ -67,17 +88,18 @@ export default function DailyScrumTicket({
           <p>Do you need support to complete this ticket?</p>
           <BinaryChoiceSelector
             name={`isNeedSupport-${id}`}
-            onChange={updateDailyScrumTicket(id)('isNeedSupport')}
-            resetSupportType={updateDailyScrumTicket(id)('supportType')}
+            onChange={updateDailyScrumTicket('isNeedSupport')}
+            handleResetStates={handleResetStates(['supportType', 'otherSupportDesc'])}
+            isResetHanlderForOptionYes={false}
             value={isNeedSupport}
           />
           {isNeedSupport ? (
             <SupportTypeSelector
               supportType={supportType}
               name={`supportType-${id}`}
-              onChange={updateDailyScrumTicket(id)('supportType')}
+              onChange={updateDailyScrumTicket('supportType')}
               otherSupportDesc={otherSupportDesc}
-              editOtherSupportDesc={updateDailyScrumTicket(id)('otherSupportDesc')}
+              editOtherSupportDesc={updateDailyScrumTicket('otherSupportDesc')}
             />
           ) : null}
         </div>
