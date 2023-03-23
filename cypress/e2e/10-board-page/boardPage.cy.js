@@ -23,7 +23,7 @@ describe('Project page', () => {
       return projectList;
     }).as('delete-projects');
     cy.intercept('GET', '**/labels', labelsData).as('fetch-labels');
-    cy.visit('/login');
+    cy.visit('/v1/login');
     cy.login('kitman200220022002@gmail.com', '12345678');
     cy.wait('@fetch-projects');
     cy.intercept('GET', '**/board/**', boardData).as('fetch-board');
