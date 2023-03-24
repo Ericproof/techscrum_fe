@@ -21,3 +21,9 @@ export async function emailVerifyCheck(emalToken: string) {
   const result = await axios.get(path);
   return result;
 }
+
+export async function emailVerifyCheckV2(emalToken: string) {
+  const path = `${config.apiAddress}/register/${emalToken}`;
+  const result = await axios.get(path);
+  return result;
+}

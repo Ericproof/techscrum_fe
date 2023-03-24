@@ -68,7 +68,7 @@ export default function MainMenuV2() {
   const logout = () => {
     localStorage.clear();
     setUserInfo({});
-    navigate('/');
+    navigate('/v2/login');
   };
 
   const renderModals = () => {
