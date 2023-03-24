@@ -1,4 +1,4 @@
-import React, { MouseEvent, useCallback, useContext, useEffect, useReducer, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useReducer, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { AiOutlineClose } from 'react-icons/ai';
 import { toast } from 'react-toastify';
@@ -60,8 +60,6 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
     initialDailyScrumTickets
   );
 
-  window.console.log(dailyScrumTickets);
-
   const { id: userId }: IUserInfo = useContext(UserContext);
 
   useEffect(() => {
@@ -106,7 +104,7 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
     []
   );
 
-  const onHandleSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
+  const onHandleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -139,17 +137,20 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
       } else {
         // status & reason for rejected result
         const failedResults: any = results.filter((result) => result.status === 'rejected');
+
         const failedResultsSimplified = failedResults.map((result: any) => ({
           id: result?.reason?.response?.data?.id,
           errCode: result?.reason?.response?.status,
           errMsg:
-            result?.reason?.response?.data?.errors?.errors[0].msg ??
-            result?.reason?.response?.data?.errors
+            result?.reason?.response?.data?.errors?.errors?.[0]?.msg ?? // handles validation error
+            result?.reason?.response?.data?.errors?.[0]?.msg ?? // handles customised error
+            result?.reason?.response?.data?.toString() ?? // handles axios error
+            'unknown error' // default error
         }));
 
         failedResultsSimplified.forEach(
-          ({ id, errMsg, errCode }: { id: string; errMsg: string; errCode: number }) => {
-            updateDailyScrumTicket(id)('errMsg')(errCode + errMsg);
+          ({ id, errMsg }: { id: string; errMsg: string; errCode: number }) => {
+            updateDailyScrumTicket(id)('errMsg')(errMsg);
           }
         );
         setIsSubmitting(false);
@@ -173,74 +174,74 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
           <AiOutlineClose />
         </button>
       </div>
-      <h4>Today: {dateFormatter()}</h4>
-      <div className={styles.dailyScrumContent}>
-        <DatePicker
-          spacing="compact"
-          appearance="subtle"
-          defaultIsOpen
-          isOpen
-          locale="en-AU"
-          dateFormat="MM-DD-YYYY"
-          placeholder="e.g 11-13-2018"
-          value={calendarDate}
-          onChange={(e) => {
-            setCalendarDate(e);
-          }}
-        />
-        <div className={styles.dailyScrumTicketsListWrapper}>
-          <p>You currently have {dailyScrumTickets.length} dailyScrum(s)</p>
-          {dailyScrumTickets.map(
-            ({
-              id,
-              title,
-              progress,
-              isCanFinish,
-              isNeedSupport,
-              supportType,
-              project,
-              otherSupportDesc,
-              errMsg
-            }) => {
-              return (
-                <DailyScrumTicket
-                  key={id}
-                  id={id}
-                  title={title}
-                  projectAbbr={project.key}
-                  progress={progress}
-                  isCanfinish={isCanFinish}
-                  isNeedSupport={isNeedSupport}
-                  supportType={supportType}
-                  otherSupportDesc={otherSupportDesc}
-                  updateDailyScrumTicket={updateDailyScrumTicket(id)}
-                  errMsg={errMsg}
-                />
-              );
-            }
-          )}
+      <form onSubmit={onHandleSubmit}>
+        <h4>Today: {dateFormatter()}</h4>
+        <div className={styles.dailyScrumContent}>
+          <DatePicker
+            spacing="compact"
+            appearance="subtle"
+            defaultIsOpen
+            isOpen
+            locale="en-AU"
+            dateFormat="MM-DD-YYYY"
+            placeholder="e.g 11-13-2018"
+            value={calendarDate}
+            onChange={(e) => {
+              setCalendarDate(e);
+            }}
+          />
+          <div className={styles.dailyScrumTicketsListWrapper}>
+            <p>You currently have {dailyScrumTickets.length} dailyScrum(s)</p>
+            {dailyScrumTickets.map(
+              ({
+                id,
+                title,
+                progress,
+                isCanFinish,
+                isNeedSupport,
+                supportType,
+                project,
+                otherSupportDesc,
+                errMsg
+              }) => {
+                return (
+                  <DailyScrumTicket
+                    key={id}
+                    id={id}
+                    title={title}
+                    projectAbbr={project.key}
+                    progress={progress}
+                    isCanfinish={isCanFinish}
+                    isNeedSupport={isNeedSupport}
+                    supportType={supportType}
+                    otherSupportDesc={otherSupportDesc}
+                    updateDailyScrumTicket={updateDailyScrumTicket(id)}
+                    errMsg={errMsg}
+                  />
+                );
+              }
+            )}
+          </div>
         </div>
-      </div>
 
-      <div className={styles.btnContainer}>
-        <button
-          className={styles.cancelBtn}
-          type="button"
-          onClick={onClickCloseModal}
-          data-testid="dailyscrum-cancel"
-        >
-          Cancel
-        </button>
-        <button
-          className={styles.submitBtn}
-          onClick={onHandleSubmit}
-          disabled={isSubmitting}
-          type="button"
-          data-testid="dailyscrum-submit"
-        >
-          Submit
-        </button>
-      </div>
+        <div className={styles.btnContainer}>
+          <button
+            className={styles.cancelBtn}
+            type="button"
+            onClick={onClickCloseModal}
+            data-testid="dailyscrum-cancel"
+          >
+            Cancel
+          </button>
+          <input
+            className={styles.submitBtn}
+            disabled={isSubmitting}
+            type="submit"
+            data-testid="dailyscrum-submit"
+            value="Submit"
+          />
+        </div>
+      </form>
     </div>
   );
 }
