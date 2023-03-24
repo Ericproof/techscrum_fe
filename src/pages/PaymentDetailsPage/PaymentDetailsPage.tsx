@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { HiUser } from 'react-icons/hi';
-import { RiArrowDropDownLine } from 'react-icons/ri';
 import MainMenuV2 from '../MainMenuV2/MainMenuV2';
 import SubSettingMenu from '../../lib/SubSettingMenu/SubSettingMenu';
 import styles from './PaymentDetailsPage.module.scss';
 import mention from '../../assets/creditCards.svg';
 import InvoiceForm from './InvoiceForm/InvoiceForm';
+import CreditCardForm from './CreditCardForm/CreditCardForm';
 
 interface IUserPayment {
   plan: string;
@@ -25,7 +25,7 @@ interface IUserPayment {
 }
 
 const freeUser = {
-  plan: 'free',
+  plan: 'Free',
   admin: {
     name: 'Hyna',
     email: 'Hyna@example.com'
@@ -41,7 +41,7 @@ const freeUser = {
 };
 
 const advanceUser = {
-  plan: 'advanced',
+  plan: 'Advanced',
   admin: {
     name: 'Hyna',
     email: 'Hyna@example.com'
@@ -75,47 +75,18 @@ export default function PaymentDetailsPage() {
         <h2 className={styles.sectionTitle}>Billing details</h2>
         <div className={styles.flexRow}>
           <div className={styles.mainColumn}>
-            <div className={styles.creditCards__container}>
-              {isFreePlan ? (
+            {isFreePlan ? (
+              <div className={styles.creditCards__container}>
                 <img src={mention} alt="mention" className={styles.creditCardImg} />
-              ) : (
-                <div className={styles.creditCard}>
-                  <h4 className={styles.creditCard__sectionTitle}>
-                    Credit card direct debit account details for contributions
-                  </h4>
-                  <div className={styles.creditCard__grid__item}>
-                    <h4>Card type:</h4>
-                    <p
-                      className={`${styles.creditCard__inputBox} ${styles.creditCard__inputBox__wide}`}
-                    >
-                      {user.cardDetails.type}{' '}
-                      <RiArrowDropDownLine className={styles.dropDownIcon} fontSize="20px" />
-                    </p>
-                  </div>
-                  <div className={styles.creditCard__grid__item}>
-                    <h4>Cardholder name:</h4>
-                    <p className={styles.creditCard__inputBox}>{user.cardDetails.holder}</p>
-                  </div>
-                  <div className={styles.creditCard__grid__item}>
-                    <h4>Card number:</h4>
-                    <p className={styles.creditCard__inputBox}>{`${user.cardDetails.number.slice(
-                      0,
-                      4
-                    )}*****${user.cardDetails.number.slice(-3)}`}</p>
-                  </div>
-                  <div className={styles.creditCard__grid__item}>
-                    <h4>Card expiry:</h4>
-                    <p className={styles.creditCard__inputBox}>{user.cardDetails.expiry}</p>
-                  </div>
-                </div>
-              )}
-              <Link to="/billing/paymentdetails/add">
-                <button className={styles.pageBtn}>
-                  {isFreePlan ? 'Add ' : 'Update '}payment method
-                </button>
-              </Link>
-              <p className={styles.textSecondary}>We accept all major credit/debit cards</p>
-            </div>
+                <Link to="/billing/paymentdetails/add">
+                  <button className={styles.pageBtn}>Add payment method</button>
+                </Link>
+                <p className={styles.textSecondary}>We accept all major credit/debit cards</p>
+              </div>
+            ) : (
+              <CreditCardForm cardDetails={user.cardDetails} />
+            )}
+
             <h3>Contact details</h3>
             <div>
               <div className={styles.billingContactTitle}>
@@ -162,7 +133,7 @@ export default function PaymentDetailsPage() {
             </div>
             <div className={styles.sideColumn__main}>
               <p className={`${styles.currentPlan} ${styles.flexBetween}`}>
-                <span>{user.plan.toUpperCase()} Plan</span>
+                <span>{user.plan} Plan</span>
                 <span>$0.00</span>
               </p>
               {isFreePlan ? (

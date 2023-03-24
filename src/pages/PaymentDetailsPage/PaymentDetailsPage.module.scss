@@ -30,40 +30,6 @@ $gray: rgb(246, 248, 249);
         .creditCardImg {
           max-width: 400px;
         }
-        .creditCard {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 2rem;
-          .creditCard__sectionTitle {
-            grid-column: 1 / 3;
-            text-align: center;
-          }
-          .creditCard__grid__item {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            align-items: center;
-            .creditCard__inputBox {
-              font-size: 14px;
-              color: gray;
-              padding: 8px 6px;
-              background-color: rgba(0, 0, 0, 0.01);
-              border-radius: 3px;
-              border: 2px solid #dee1e6;
-              min-width: 120px;
-            }
-            .creditCard__inputBox__wide {
-              position: relative;
-              min-width: 250px;
-              .dropDownIcon {
-                position: absolute;
-                top: 50%;
-                right: 0;
-                transform: translate(-50%, -50%);
-              }
-            }
-          }
-        }
       }
     }
 
@@ -86,16 +52,16 @@ $gray: rgb(246, 248, 249);
           margin-left: -8px;
           border-radius: 3px;
           font-size: 14px;
-          color: gray;
+          color: #006644;
           text-decoration: none;
           align-self: start;
           transition: 0.2s;
           &:hover {
-            background-color: $gray;
+            background-color: #e3fcef;
           }
         }
         .trialBtn {
-          background-color: $gray;
+          background-color: #e3fcef;
         }
       }
       .sideColumn__footer {
