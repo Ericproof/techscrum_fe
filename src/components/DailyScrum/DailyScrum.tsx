@@ -60,6 +60,8 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
     initialDailyScrumTickets
   );
 
+  window.console.log(dailyScrumTickets);
+
   const { id: userId }: IUserInfo = useContext(UserContext);
 
   useEffect(() => {
@@ -83,7 +85,15 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
 
   const updateDailyScrumTicket = useCallback(
     (id: string) =>
-      (key: 'progress' | 'isCanFinish' | 'isNeedSupport' | 'supportType' | 'otherSupportDesc') =>
+      (
+        key:
+          | 'progress'
+          | 'isCanFinish'
+          | 'isNeedSupport'
+          | 'supportType'
+          | 'otherSupportDesc'
+          | 'errMsg'
+      ) =>
       (value: number | string | boolean) => {
         return dispatch({
           type: DailyScrumTicketsActionType.updateOneTicket,
@@ -123,14 +133,28 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
           className: 'primaryColorBackground',
           toastId: 'dailyScrum success'
         });
+
         onClickCloseModal();
         setIsSubmitting(false);
       } else {
+        // status & reason for rejected result
         const failedResults: any = results.filter((result) => result.status === 'rejected');
+        const failedResultsSimplified = failedResults.map((result: any) => ({
+          id: result?.reason?.response?.data?.id,
+          errCode: result?.reason?.response?.status,
+          errMsg:
+            result?.reason?.response?.data?.errors?.errors[0].msg ??
+            result?.reason?.response?.data?.errors
+        }));
 
-        window.console.log(failedResults[0]?.reason.response.data.errors.errors[0]);
+        failedResultsSimplified.forEach(
+          ({ id, errMsg, errCode }: { id: string; errMsg: string; errCode: number }) => {
+            updateDailyScrumTicket(id)('errMsg')(errCode + errMsg);
+          }
+        );
+        setIsSubmitting(false);
       }
-    } catch (error) {
+    } catch (err) {
       toast.error('Temporarily server error, please try again later!', {
         theme: 'colored',
         toastId: 'dailyScrum error'
@@ -175,7 +199,8 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
               isNeedSupport,
               supportType,
               project,
-              otherSupportDesc
+              otherSupportDesc,
+              errMsg
             }) => {
               return (
                 <DailyScrumTicket
@@ -189,6 +214,7 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
                   supportType={supportType}
                   otherSupportDesc={otherSupportDesc}
                   updateDailyScrumTicket={updateDailyScrumTicket(id)}
+                  errMsg={errMsg}
                 />
               );
             }

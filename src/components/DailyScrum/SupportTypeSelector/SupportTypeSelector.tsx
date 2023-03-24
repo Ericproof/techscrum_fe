@@ -53,6 +53,7 @@ function SupportTypeSelector({
       })}
       {supportType === 4 ? (
         <textarea
+          placeholder="please write at least one reason."
           maxLength={40}
           value={otherSupportDesc}
           onChange={(e) => {

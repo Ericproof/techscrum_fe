@@ -335,4 +335,5 @@ export interface IDailyScrumTicket {
   createAt: string;
   updateAt: string;
   otherSupportDesc?: string;
+  errMsg?: string;
 }

@@ -15,6 +15,7 @@ interface IDailyScrumTicketProps {
   updateDailyScrumTicket: (
     key: 'progress' | 'isCanFinish' | 'isNeedSupport' | 'supportType' | 'otherSupportDesc'
   ) => (value: number | string | boolean) => void;
+  errMsg?: string;
 }
 
 export default function DailyScrumTicket({
@@ -26,6 +27,7 @@ export default function DailyScrumTicket({
   supportType,
   projectAbbr,
   otherSupportDesc,
+  errMsg,
   updateDailyScrumTicket
 }: IDailyScrumTicketProps) {
   const handleResetStates = useCallback(
@@ -52,6 +54,7 @@ export default function DailyScrumTicket({
       <p className={styles.ticketTitle}>
         {projectAbbr} - {title}
       </p>
+      {errMsg && <p>{errMsg}</p>}
       <div className={styles.progress}>
         <p>Progress</p>
         <div className={styles.progressRange}>
@@ -109,5 +112,6 @@ export default function DailyScrumTicket({
 }
 
 DailyScrumTicket.defaultProps = {
-  otherSupportDesc: ''
+  otherSupportDesc: '',
+  errMsg: ''
 };
