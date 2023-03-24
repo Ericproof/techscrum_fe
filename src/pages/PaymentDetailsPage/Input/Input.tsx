@@ -5,8 +5,15 @@ import styles from './Input.module.scss';
 
 const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 
-export default function Input() {
-  const [value, setValue] = useState('');
+interface Props {
+  invoiceEmail?: string;
+  isEditing: boolean;
+  onValueChange: (newValue: string) => void;
+  onValidChange: (isFormValid: boolean) => void;
+}
+
+export default function Input({ invoiceEmail, isEditing, onValueChange, onValidChange }: Props) {
+  const [value, setValue] = useState(invoiceEmail);
   const [isValid, setIsValid] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
 
@@ -17,13 +24,13 @@ export default function Input() {
   const inputClassName = isFocused ? `${styles.input} ${styles.input__focused}` : styles.input;
 
   useEffect(() => {
-    if (value.length) {
+    if (value?.length) {
       setIsValid(EMAIL_REGEX.test(value));
-      // eslint-disable-next-line no-console
+      onValidChange(isValid);
     }
-  }, [value]);
+  }, [value, onValidChange, isValid]);
 
-  return (
+  return isEditing ? (
     <div className={styles.container}>
       <input
         type="email"
@@ -32,7 +39,10 @@ export default function Input() {
         onFocus={() => setIsFocused(true)}
         onBlur={onBlurHandler}
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(e) => {
+          setValue(e.target.value);
+          onValueChange(e.target.value);
+        }}
       />
 
       {value && (
@@ -41,5 +51,11 @@ export default function Input() {
         </div>
       )}
     </div>
+  ) : (
+    <p className={styles.loadedEmail}>{invoiceEmail}</p>
   );
 }
+
+Input.defaultProps = {
+  invoiceEmail: ''
+};

@@ -1,24 +1,70 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { HiUser } from 'react-icons/hi';
+import { RiArrowDropDownLine } from 'react-icons/ri';
 import MainMenuV2 from '../MainMenuV2/MainMenuV2';
 import SubSettingMenu from '../../lib/SubSettingMenu/SubSettingMenu';
 import styles from './PaymentDetailsPage.module.scss';
 import mention from '../../assets/creditCards.svg';
-import Input from './Input/Input';
+import InvoiceForm from './InvoiceForm/InvoiceForm';
 
 interface IUserPayment {
   plan: string;
+  admin: {
+    name: string;
+    email: string;
+  };
+  invoiceEmail: string;
+  cardDetails: {
+    type: string;
+    holder: string;
+    number: string;
+    expiry: string;
+  };
+  onTrial: boolean;
 }
-const userPayment = {
-  plan: 'Free'
+
+const freeUser = {
+  plan: 'free',
+  admin: {
+    name: 'Hyna',
+    email: 'Hyna@example.com'
+  },
+  invoiceEmail: 'Hyna@example.com',
+  cardDetails: {
+    type: 'MasterCard',
+    holder: 'Yue Hua',
+    number: '5353291888041513',
+    expiry: '08/23'
+  },
+  onTrial: true
+};
+
+const advanceUser = {
+  plan: 'advanced',
+  admin: {
+    name: 'Hyna',
+    email: 'Hyna@example.com'
+  },
+  invoiceEmail: 'Hyna@example.com',
+  cardDetails: {
+    type: 'MasterCard',
+    holder: 'Yue Hua',
+    number: '5353291888041513',
+    expiry: '08/23'
+  },
+  onTrial: true
 };
 
 export default function PaymentDetailsPage() {
-  const [user, setUser] = useState<IUserPayment>(userPayment);
+  const [user, setUser] = useState<IUserPayment>(freeUser);
+  const [invoiceEmail, setInvoiceEmail] = useState<string>(freeUser.invoiceEmail);
+
+  const isFreePlan = user.plan === 'free';
+  const { onTrial } = user;
 
   useEffect(() => {
-    setUser(userPayment);
+    setUser(freeUser);
   }, []);
 
   return (
@@ -30,16 +76,63 @@ export default function PaymentDetailsPage() {
         <div className={styles.flexRow}>
           <div className={styles.mainColumn}>
             <div className={styles.creditCards__container}>
-              <img src={mention} alt="mention" className={styles.creditCards} />
-              <button className={styles.pageBtn}>Add payment method</button>
+              {isFreePlan ? (
+                <img src={mention} alt="mention" className={styles.creditCardImg} />
+              ) : (
+                <div className={styles.creditCard}>
+                  <h4 className={styles.creditCard__sectionTitle}>
+                    Credit card direct debit account details for contributions
+                  </h4>
+                  <div className={styles.creditCard__grid__item}>
+                    <h4>Card type:</h4>
+                    <p
+                      className={`${styles.creditCard__inputBox} ${styles.creditCard__inputBox__wide}`}
+                    >
+                      {user.cardDetails.type}{' '}
+                      <RiArrowDropDownLine className={styles.dropDownIcon} fontSize="20px" />
+                    </p>
+                  </div>
+                  <div className={styles.creditCard__grid__item}>
+                    <h4>Cardholder name:</h4>
+                    <p className={styles.creditCard__inputBox}>{user.cardDetails.holder}</p>
+                  </div>
+                  <div className={styles.creditCard__grid__item}>
+                    <h4>Card number:</h4>
+                    <p className={styles.creditCard__inputBox}>{`${user.cardDetails.number.slice(
+                      0,
+                      4
+                    )}*****${user.cardDetails.number.slice(-3)}`}</p>
+                  </div>
+                  <div className={styles.creditCard__grid__item}>
+                    <h4>Card expiry:</h4>
+                    <p className={styles.creditCard__inputBox}>{user.cardDetails.expiry}</p>
+                  </div>
+                </div>
+              )}
+              <Link to="/billing/paymentdetails/add">
+                <button className={styles.pageBtn}>
+                  {isFreePlan ? 'Add ' : 'Update '}payment method
+                </button>
+              </Link>
               <p className={styles.textSecondary}>We accept all major credit/debit cards</p>
             </div>
             <h3>Contact details</h3>
             <div>
-              <h4 className={styles.billingContactTitle}>
-                <span>Billing contact</span>
-                <span className={styles.infoIcon}>i</span>
-              </h4>
+              <div className={styles.billingContactTitle}>
+                <h4>Billing contact</h4>
+                <div className={styles.tooltip}>
+                  <span className={styles.infoIcon}>i</span>
+                  <div className={styles.tooltip__pop}>
+                    <p>
+                      Billing contacts have access to this site. They are contacted with invoicing
+                      or billing enquiries and can raise support requests.
+                    </p>
+                    <p>
+                      However, only the primary billing contact will receive orders and invoices.
+                    </p>
+                  </div>
+                </div>
+              </div>
               <div className={styles.flexAlign}>
                 <HiUser className={styles.userIcon} color="white" fontSize="2.5rem" />
                 <div>
@@ -48,17 +141,19 @@ export default function PaymentDetailsPage() {
                 </div>
               </div>
             </div>
-            <form className={styles.invoice__form}>
-              <div className={styles.flexCol}>
-                <span className={styles.textSecondary}>Send copies of invoices to</span>
-                <Input />
-              </div>
-              <button className={`${styles.pageBtn} ${styles.invoice__Btn}`}>Save</button>
-            </form>
+            <InvoiceForm invoiceEmail={invoiceEmail} setInvoiceEmail={setInvoiceEmail} />
             <p className={styles.textSecondary}>
               Your credit card issuer may charge foreign transaction or cross-border fees in
               addition to the total price above.
             </p>
+            <div>
+              <button className={styles.setUserBtn} onClick={() => setUser(freeUser)}>
+                Free
+              </button>
+              <button className={styles.setUserBtn} onClick={() => setUser(advanceUser)}>
+                Adavance
+              </button>
+            </div>
           </div>
           <div className={styles.sideColumn}>
             <div>
@@ -67,12 +162,16 @@ export default function PaymentDetailsPage() {
             </div>
             <div className={styles.sideColumn__main}>
               <p className={`${styles.currentPlan} ${styles.flexBetween}`}>
-                <span>{user.plan} Plan</span>
+                <span>{user.plan.toUpperCase()} Plan</span>
                 <span>$0.00</span>
               </p>
-              <Link to="/price" className={styles.planBtn}>
-                <p>Start the trial today!</p>
-              </Link>
+              {isFreePlan ? (
+                <Link to="/price" className={styles.planBtn}>
+                  <p>Start the trial today!</p>
+                </Link>
+              ) : (
+                onTrial && <p className={`${styles.planBtn} ${styles.trialBtn}`}>FREE TRIAL</p>
+              )}
             </div>
             <div className={styles.sideColumn__footer}>
               <p className={`${styles.textSecondary} ${styles.flexBetween}`}>

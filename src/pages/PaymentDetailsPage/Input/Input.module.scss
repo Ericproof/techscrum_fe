@@ -2,7 +2,6 @@
 
 .container {
   position: relative;
-  margin-bottom: 1rem;
   .input {
     width: 100%;
     padding: 8px 6px;
@@ -24,4 +23,9 @@
     right: 0;
     transform: translate(-50%, -50%);
   }
+}
+
+.loadedEmail {
+  padding: 8px 6px;
+  font-size: 14px;
 }
