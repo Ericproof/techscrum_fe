@@ -1,13 +1,13 @@
 import projectData from '../../fixtures/projects.json';
 import boardData from '../../fixtures/board.json';
 import taskData from '../../fixtures/updateTask.json';
-import updatedLabel from '../../fixtures/updatedLabel.json'
+import updatedLabel from '../../fixtures/updatedLabel.json';
 
 describe('Project page', () => {
   beforeEach(() => {
     let projectList = projectData;
     cy.intercept('GET', '**/projects', projectList).as('fetch-projects');
-    cy.visit('/login');
+    cy.visit('/v1/login');
     cy.login('kitman200220022002@gmail.com', '12345678');
     cy.wait('@fetch-projects');
     cy.intercept('GET', '**/board/**', boardData).as('fetch-board');

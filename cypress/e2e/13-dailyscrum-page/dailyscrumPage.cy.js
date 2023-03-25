@@ -7,7 +7,7 @@ describe('Project page', () => {
   beforeEach(() => {
     let projectList = projectsData;
     cy.intercept('GET', '**/projects', projectList).as('fetch-projects');
-    cy.visit('/login');
+    cy.visit('/v1/login');
     cy.login('kitman200220022002@gmail.com', '12345678');
     cy.wait('@fetch-projects');
     cy.intercept('GET', '**/board/**', boardData).as('fetch-board');
