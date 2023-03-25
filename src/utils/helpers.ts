@@ -160,3 +160,9 @@ export const dateFormatter = (
   const formattedDate: string = formatter.format(date).replace(/\//g, '-');
   return formattedDate; // Output: 03-06-2023
 };
+
+export const urlParamExtractor = (url: string, paramName: string) => {
+  const start = url.indexOf(`${paramName}/`) + `${paramName}/`.length;
+  const end = url.indexOf('/', start) === -1 ? undefined : url.indexOf('/', start); // find the 1st "/" after start index
+  return url.substring(start, end);
+};

@@ -8,7 +8,7 @@ import styles from './DailyScrum.module.scss';
 import { getDailyScrums, updateDailyScrum } from '../../api/dailyScrum/dailyScrum';
 import { UserContext } from '../../context/UserInfoProvider';
 import Modal from '../../lib/Modal/Modal';
-import { dateFormatter } from '../../utils/helpers';
+import { dateFormatter, urlParamExtractor } from '../../utils/helpers';
 import { IUserInfo, IDailyScrumTicket } from '../../types';
 import DailyScrumTicket from './DailyScrumTicket/DailyScrumTicket';
 
@@ -125,7 +125,7 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
         promises
       );
 
-      if (results.map((result) => result.status).every((status) => status === 'fulfilled')) {
+      if (results.every(({ status }) => status === 'fulfilled')) {
         toast.success('Submit successful!', {
           theme: 'colored',
           className: 'primaryColorBackground',
@@ -134,17 +134,22 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
 
         onClickCloseModal();
         setIsSubmitting(false);
+      } else if (results.every(({ status }) => status === 'rejected')) {
+        toast.error('Temporarily server error, please try again later!', {
+          theme: 'colored',
+          toastId: 'dailyScrum error'
+        });
       } else {
         // status & reason for rejected result
         const failedResults: any = results.filter((result) => result.status === 'rejected');
 
         const failedResultsSimplified = failedResults.map((result: any) => ({
-          id: result?.reason?.response?.data?.id,
+          id: urlParamExtractor(result?.reason?.config?.url, 'dailyScrums'),
           errCode: result?.reason?.response?.status,
           errMsg:
             result?.reason?.response?.data?.errors?.errors?.[0]?.msg ?? // handles validation error
-            result?.reason?.response?.data?.errors?.[0]?.msg ?? // handles customised error
-            result?.reason?.response?.data?.toString() ?? // handles axios error
+            result?.reason?.response?.data?.error?.msg ?? // handles customised error
+            result?.reason?.response?.data?.toString() ?? // handles other axios error
             'unknown error' // default error
         }));
 
@@ -156,6 +161,7 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
         setIsSubmitting(false);
       }
     } catch (err) {
+      window.console.log(err);
       toast.error('Temporarily server error, please try again later!', {
         theme: 'colored',
         toastId: 'dailyScrum error'
