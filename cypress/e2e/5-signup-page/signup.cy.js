@@ -3,7 +3,7 @@ import register from '../../fixtures/register.json';
 
 describe('signup', () => {
   beforeEach(() => {
-    cy.visit('/register');
+    cy.visit('/v1/register');
   });
 
   it('should show please fill in the blank', () => {

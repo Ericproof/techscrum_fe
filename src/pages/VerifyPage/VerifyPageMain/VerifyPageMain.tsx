@@ -3,7 +3,7 @@ import { useNavigate, Link, useSearchParams } from 'react-router-dom';
 import { emailVerifyCheck } from '../../../api/register/emailCheck';
 import { IUserInfo } from '../../../types';
 import { UserDispatchContext } from '../../../context/UserInfoProvider';
-import register from '../../../api/register/register';
+import { register } from '../../../api/register/register';
 import styles from './VerifyPageMain.module.scss';
 import Icon from '../../../assets/logo.svg';
 import Error from '../../../assets/error.png';

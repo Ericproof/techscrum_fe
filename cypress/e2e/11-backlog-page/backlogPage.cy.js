@@ -26,7 +26,7 @@ describe('Backlog page', () => {
     cy.intercept('GET', '**/users', usersData).as('fetch-users');
     cy.intercept('GET', '**/boards/*/statuses', statusesData).as('fetch-statuses');
     cy.intercept('GET', '**/tasks/project/**', tasksByProject).as('fetch-tasksByProject');
-    cy.visit('/login');
+    cy.visit('/v1/login');
     cy.wait('@fetch-types');
     cy.login('kitman200220022002@gmail.com', '12345678');
     cy.wait('@fetch-projects');
@@ -144,7 +144,7 @@ describe('Backlog page', () => {
     cy.get('[data-testid-count="filter-issues"]').should(
       'have.length',
       issuesByLabelBeAndFe.backlog.cards.length +
-      issuesByLabelBeAndFe.sprints.reduce((acc, sprint) => acc + sprint.taskId.length, 0)
+        issuesByLabelBeAndFe.sprints.reduce((acc, sprint) => acc + sprint.taskId.length, 0)
     );
   });
 });
