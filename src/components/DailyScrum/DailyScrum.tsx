@@ -161,7 +161,6 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
         setIsSubmitting(false);
       }
     } catch (err) {
-      window.console.log(err);
       toast.error('Temporarily server error, please try again later!', {
         theme: 'colored',
         toastId: 'dailyScrum error'
