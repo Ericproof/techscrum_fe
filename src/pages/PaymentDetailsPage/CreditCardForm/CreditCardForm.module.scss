@@ -1,3 +1,5 @@
+@use '../../../variables.scss' as *;
+
 .creditCard__container {
   border-radius: 5px;
   display: flex;
@@ -35,7 +37,7 @@
         min-width: 120px;
         transition: 0.2s;
         &:focus {
-          border: 2px solid orange;
+          border: 2px solid $primaryColor;
           background-color: white;
         }
       }
@@ -54,15 +56,15 @@
 }
 
 .cardUpdateBtn {
-  background-color: rgb(255, 165, 0);
-  font-size: 1.2rem;
+  background-color: $primaryColor;
+  color: white;
   font-weight: bold;
   padding: 0.5em 0.8em;
   border: none;
-  border-radius: 999px;
+  border-radius: 5px;
   cursor: pointer;
   &:hover {
-    background-color: rgba(255, 165, 0, 0.8);
+    background-color: $primaryColor-hover;
   }
 }
 

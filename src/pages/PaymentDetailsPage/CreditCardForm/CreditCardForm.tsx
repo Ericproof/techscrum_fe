@@ -37,6 +37,11 @@ export default function CreditCardForm() {
         type: action,
         payload: formattedValue
       });
+    } else if (action === ReducerActionTypes.SetHolder) {
+      dispatch({
+        type: action,
+        payload: e.target.value.toUpperCase()
+      });
     } else {
       dispatch({
         type: action,

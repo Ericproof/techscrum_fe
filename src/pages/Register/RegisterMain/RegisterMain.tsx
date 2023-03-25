@@ -4,7 +4,7 @@ import { AxiosError } from 'axios';
 import { emailCheck, emailVerifyCheck } from '../../../api/register/emailCheck';
 import { IUserInfo } from '../../../types';
 import { UserDispatchContext } from '../../../context/UserInfoProvider';
-import register from '../../../api/register/register';
+import { register } from '../../../api/register/register';
 import styles from './RegisterMain.module.scss';
 import Icon from '../../../assets/logo.svg';
 import Email from '../../../assets/email.png';
@@ -42,7 +42,7 @@ export default function RegisterMain() {
           setInvalidateStatus(true);
         }
       } else {
-        navigate('/register');
+        navigate('/v1/register');
       }
     };
     fetchEmailByToken();

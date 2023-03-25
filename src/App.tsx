@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import HomePage from './pages/HomePage/HomePage';
 import RegisterPage from './pages/Register/RegisterPage';
 import LoginPage from './pages/Login/LoginPage';
+import LoginPageV2 from './pages/LoginV2/LoginPageV2';
 import Setting from './pages/Setting/Setting';
 import GdprPage from './pages/GDPRPage/GDPRPage';
 import CookiePolicyPage from './pages/CookiePolicyPage/CookiePolicyPage';
@@ -48,6 +49,8 @@ import PricePage from './pages/PricePage/PricePage';
 import MyWorkPage from './pages/MyWorkPage/MyWorkPage';
 import ReportPage from './pages/ReportPage/ReportPage';
 import SupportCenterPage from './pages/SupportCenterPage/SupportCenterPage';
+import RegisterPageV2 from './pages/RegisterV2/RegisterPageV2';
+import VerifyPageV2 from './pages/VerifyPageV2/VerifyPageV2';
 import PaymentDetailsPage from './pages/PaymentDetailsPage/PaymentDetailsPage';
 
 function App() {
@@ -66,7 +69,7 @@ function App() {
       return <></>;
     }
     if (!showPages) {
-      return <LoginPage />;
+      return <LoginPageV2 />;
     }
     return <HomePage />;
   };
@@ -79,11 +82,17 @@ function App() {
           <ProjectProvider>
             <TaskTypesProvider>
               <Routes>
-                {showPages && <Route path="/register" element={<RegisterPage />} />}
+                {showPages && <Route path="v1/register" element={<RegisterPage />} />}
+                {showPages && <Route path="v2/register" element={<RegisterPageV2 />} />}
                 {showPages && <Route path="/admin" element={<AdminPage />} />}
                 <Route path="/faq" element={<FAQPage />} />
                 <Route path="/verify" element={<VerifyPage />} />
-                <Route path="/login" element={<LoginPage />} />
+                {/* active new user */}
+                <Route path="/verify-v2" element={<VerifyPageV2 />} />
+                {/* confirm existing user */}
+                {/*  <Route path="/user-confirm" element={<VerifyPageV2 />} />  */}
+                <Route path="v1/login" element={<LoginPage />} />
+                <Route path="v2/login" element={<LoginPageV2 />} />
                 <Route path="/" element={getHomePage()} />
                 <Route path="/login/reset-password" element={<ResetPasswordPage />} />
                 <Route path="/features/report" element={<ReportPage />} />
