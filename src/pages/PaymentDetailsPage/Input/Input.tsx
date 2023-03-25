@@ -15,13 +15,6 @@ interface Props {
 export default function Input({ invoiceEmail, isEditing, onValueChange, onValidChange }: Props) {
   const [value, setValue] = useState(invoiceEmail);
   const [isValid, setIsValid] = useState(false);
-  const [isFocused, setIsFocused] = useState(false);
-
-  const onBlurHandler = () => {
-    setIsFocused(false);
-  };
-
-  const inputClassName = isFocused ? `${styles.input} ${styles.input__focused}` : styles.input;
 
   useEffect(() => {
     if (value?.length) {
@@ -34,10 +27,8 @@ export default function Input({ invoiceEmail, isEditing, onValueChange, onValidC
     <div className={styles.container}>
       <input
         type="email"
-        className={inputClassName}
+        className={styles.input}
         autoComplete="off"
-        onFocus={() => setIsFocused(true)}
-        onBlur={onBlurHandler}
         value={value}
         onChange={(e) => {
           setValue(e.target.value);

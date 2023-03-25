@@ -28,10 +28,16 @@
         font-size: 14px;
         color: gray;
         padding: 8px 6px;
-        background-color: rgba(0, 0, 0, 0.01);
+        background-color: rgba(0, 0, 0, 0.02);
         border-radius: 3px;
         border: 2px solid #dee1e6;
+        outline: none;
         min-width: 120px;
+        transition: 0.2s;
+        &:focus {
+          border: 2px solid orange;
+          background-color: white;
+        }
       }
       .creditCard__inputBox__wide {
         position: relative;
@@ -58,4 +64,8 @@
   &:hover {
     background-color: rgba(255, 165, 0, 0.8);
   }
+}
+
+.cardUpdateBtn__disabled {
+  cursor: not-allowed;
 }

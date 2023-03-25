@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 const initData = {
-  type: 'MasterCard',
-  holder: 'Yue Hua',
+  type: 'mastercard',
+  holder: 'YUE HUA',
   number: '5353291888041513',
   expiry: '08/23'
 };
@@ -13,7 +13,8 @@ export const enum ReducerActionTypes {
   SetHolder,
   SetNumber,
   SetExpiry,
-  FormReset
+  FormReset,
+  FormSubmit
 }
 
 type ReducerAction = {
@@ -26,13 +27,16 @@ export function reducer(state: typeof initState, action: ReducerAction) {
     case ReducerActionTypes.SetType:
       return { ...state, type: action.payload ?? '' };
     case ReducerActionTypes.SetHolder:
-      return { ...state, company: action.payload ?? '' };
+      // eslint-disable-next-line no-console
+      return { ...state, holder: action.payload ?? '' };
     case ReducerActionTypes.SetNumber:
-      return { ...state, phone: action.payload ?? '' };
+      return { ...state, number: action.payload ?? '' };
     case ReducerActionTypes.SetExpiry:
-      return { ...state, email: action.payload ?? '' };
+      return { ...state, expiry: action.payload ?? '' };
     case ReducerActionTypes.FormReset:
       return initState;
+    case ReducerActionTypes.FormSubmit:
+      return state;
     default:
       return state;
   }

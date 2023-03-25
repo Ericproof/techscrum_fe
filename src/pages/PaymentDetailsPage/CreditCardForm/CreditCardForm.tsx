@@ -1,25 +1,84 @@
-import React, { useState } from 'react';
-import { RiArrowDropDownLine } from 'react-icons/ri';
+import React, { useReducer, useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
+import CardInput from './CardInput';
 import styles from './CreditCardForm.module.scss';
+import { reducer, ReducerActionTypes, initState } from './CreditCardFormReducer';
 
-interface Props {
-  cardDetails: {
-    type: string;
-    holder: string;
-    number: string;
-    expiry: string;
-  };
-}
+const typeOptions = ['visa', 'mastercard', 'amex', 'discover'];
+const FULLNAME_REGEX = /^[A-Z]+(?:\s[A-Z]+)?$/;
+const CARD_NUMBER_REGEX = /^\d{16}$/;
+const EXPIRY_REGEX = /^(0[1-9]|1[0-2])\/([2-9][0-9])$/;
 
-export default function CreditCardForm({ cardDetails }: Props) {
+export default function CreditCardForm() {
   const [isChecked, setIsChecked] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [reducerState, dispatch] = useReducer(reducer, initState);
+
+  const { type, holder, number, expiry } = reducerState;
+
+  const cardNumber = `${number.slice(0, 4)}*****${number.slice(-3)}`;
 
   const handleCheckboxChange = () => {
     setIsChecked((prev) => !prev);
+    if (!isChecked) {
+      dispatch({ type: ReducerActionTypes.FormReset });
+    }
   };
 
+  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>, action: ReducerActionTypes) => {
+    if (action === ReducerActionTypes.SetExpiry) {
+      const formattedValue = e.target.value
+        .replace(/[^\d/]/g, '')
+        .slice(0, 5)
+        .replace(/^(\d{2})/, '$1/')
+        .replace(/\/+/, '/');
+
+      dispatch({
+        type: action,
+        payload: formattedValue
+      });
+    } else {
+      dispatch({
+        type: action,
+        payload: e.target.value
+      });
+    }
+  };
+
+  const onSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch({
+      type: ReducerActionTypes.SetType,
+      payload: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e: React.SyntheticEvent) => {
+    e.preventDefault();
+
+    if (!isFormValid) {
+      return;
+    }
+    dispatch({ type: ReducerActionTypes.FormSubmit });
+    setIsChecked(false);
+    toast.success('Credit card updated!', { theme: 'colored', autoClose: 2000 });
+  };
+
+  useEffect(() => {
+    // here check if obj valid
+    const isAllRegexPassed = [
+      FULLNAME_REGEX.test(holder),
+      CARD_NUMBER_REGEX.test(number),
+      EXPIRY_REGEX.test(expiry)
+    ].every((each) => each);
+    if (!isAllRegexPassed) {
+      setIsFormValid(false);
+    } else {
+      setIsFormValid(true);
+    }
+  }, [holder, number, expiry, isFormValid]);
+
   return (
-    <form className={styles.creditCard__container}>
+    <form className={styles.creditCard__container} onSubmit={handleSubmit}>
       <h4>Credit card direct debit account details for contributions</h4>
       <h5 className={styles.flexAlign}>
         <input
@@ -33,34 +92,73 @@ export default function CreditCardForm({ cardDetails }: Props) {
       <div className={styles.creditCard}>
         <div className={styles.creditCard__grid__item}>
           <h4>Card type:</h4>
-          <p className={`${styles.creditCard__inputBox} ${styles.creditCard__inputBox__wide}`}>
-            {cardDetails.type}{' '}
-            <RiArrowDropDownLine className={styles.dropDownIcon} fontSize="20px" />
-          </p>
+          <select
+            className={`${styles.creditCard__inputBox} ${styles.creditCard__inputBox__wide}`}
+            onChange={onSelectChange}
+            disabled={!isChecked}
+            value={type}
+          >
+            {typeOptions.map((e) => (
+              <option key={e} value={e}>
+                {e.replace(/^\w/, (c) => c.toUpperCase())}
+              </option>
+            ))}
+          </select>
         </div>
         <div className={styles.creditCard__grid__item}>
           <h4>Cardholder name:</h4>
-          <input
-            className={styles.creditCard__inputBox}
+          <CardInput
             type="text"
-            value="df"
-            onChange={() => {}}
+            value={holder}
+            regex={FULLNAME_REGEX}
+            placeholder="JOHN DOE"
+            onChange={(e) => onInputChange(e, ReducerActionTypes.SetHolder)}
             disabled={!isChecked}
           />
         </div>
         <div className={styles.creditCard__grid__item}>
           <h4>Card number:</h4>
-          <p className={styles.creditCard__inputBox}>{`${cardDetails.number.slice(
-            0,
-            4
-          )}*****${cardDetails.number.slice(-3)}`}</p>
+          {isChecked ? (
+            <CardInput
+              type="text"
+              value={number}
+              regex={CARD_NUMBER_REGEX}
+              placeholder="16 DIGITs"
+              onChange={(e) => onInputChange(e, ReducerActionTypes.SetNumber)}
+              disabled={!isChecked}
+            />
+          ) : (
+            <input
+              className={styles.creditCard__inputBox}
+              type="text"
+              value={cardNumber}
+              disabled={!isChecked}
+            />
+          )}
         </div>
         <div className={styles.creditCard__grid__item}>
           <h4>Card expiry:</h4>
-          <p className={styles.creditCard__inputBox}>{cardDetails.expiry}</p>
+          <CardInput
+            type="text"
+            value={expiry}
+            regex={EXPIRY_REGEX}
+            placeholder="MM/YY"
+            onChange={(e) => onInputChange(e, ReducerActionTypes.SetExpiry)}
+            disabled={!isChecked}
+          />
         </div>
       </div>
-      <button className={styles.cardUpdateBtn}>Update</button>
+      <button
+        className={
+          isChecked && isFormValid
+            ? styles.cardUpdateBtn
+            : `${styles.cardUpdateBtn} ${styles.cardUpdateBtn__disabled}`
+        }
+        type="submit"
+        disabled={!isChecked || !isFormValid}
+      >
+        Update
+      </button>
     </form>
   );
 }

@@ -15,57 +15,42 @@ interface IUserPayment {
     email: string;
   };
   invoiceEmail: string;
-  cardDetails: {
-    type: string;
-    holder: string;
-    number: string;
-    expiry: string;
-  };
   onTrial: boolean;
 }
 
 const freeUser = {
-  plan: 'Free',
+  plan: 'free',
   admin: {
     name: 'Hyna',
     email: 'Hyna@example.com'
   },
   invoiceEmail: 'Hyna@example.com',
-  cardDetails: {
-    type: 'MasterCard',
-    holder: 'Yue Hua',
-    number: '5353291888041513',
-    expiry: '08/23'
-  },
   onTrial: true
 };
 
 const advanceUser = {
-  plan: 'Advanced',
+  plan: 'advanced',
   admin: {
     name: 'Hyna',
     email: 'Hyna@example.com'
   },
   invoiceEmail: 'Hyna@example.com',
-  cardDetails: {
-    type: 'MasterCard',
-    holder: 'Yue Hua',
-    number: '5353291888041513',
-    expiry: '08/23'
-  },
   onTrial: true
 };
 
 export default function PaymentDetailsPage() {
   const [user, setUser] = useState<IUserPayment>(freeUser);
   const [invoiceEmail, setInvoiceEmail] = useState<string>(freeUser.invoiceEmail);
-
-  const isFreePlan = user.plan === 'free';
+  const [isFreePlan, setIsFreePlan] = useState<boolean>(true);
   const { onTrial } = user;
 
   useEffect(() => {
-    setUser(freeUser);
-  }, []);
+    if (user.plan === 'free') {
+      setIsFreePlan(true);
+    } else {
+      setIsFreePlan(false);
+    }
+  }, [user]);
 
   return (
     <div className={styles.pageContainer}>
@@ -84,7 +69,7 @@ export default function PaymentDetailsPage() {
                 <p className={styles.textSecondary}>We accept all major credit/debit cards</p>
               </div>
             ) : (
-              <CreditCardForm cardDetails={user.cardDetails} />
+              <CreditCardForm />
             )}
 
             <h3>Contact details</h3>
