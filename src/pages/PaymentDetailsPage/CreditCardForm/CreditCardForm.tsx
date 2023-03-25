@@ -7,7 +7,7 @@ import { reducer, ReducerActionTypes, initState } from './CreditCardFormReducer'
 const typeOptions = ['visa', 'mastercard', 'amex', 'discover'];
 const FULLNAME_REGEX = /^[A-Z]+(?:\s[A-Z]+)?$/;
 const CARD_NUMBER_REGEX = /^\d{16}$/;
-const EXPIRY_REGEX = /^(0[1-9]|1[0-2])\/([2-9][0-9])$/;
+const EXPIRY_REGEX = /^(0[1-9]|1[0-2])\/([2-9]\d)$/;
 
 export default function CreditCardForm() {
   const [isChecked, setIsChecked] = useState(false);
