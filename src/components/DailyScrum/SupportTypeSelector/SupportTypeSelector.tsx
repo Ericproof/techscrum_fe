@@ -34,7 +34,7 @@ function SupportTypeSelector({
     <div className={styles.mainWrapper}>
       {supportTypesTitles.slice(1).map((title, index) => {
         return (
-          <div className="controlWrapper" key={crypto.randomUUID()}>
+          <div className={styles.controlWrapper} key={crypto.randomUUID()}>
             <label htmlFor={`${name}-${index}`} className="supportName">
               {title}
               <input
