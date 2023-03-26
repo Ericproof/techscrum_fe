@@ -17,10 +17,9 @@ export default function Input({ invoiceEmail, isEditing, onValueChange, onValidC
   const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
-    if (value?.length) {
-      setIsValid(EMAIL_REGEX.test(value));
-      onValidChange(isValid);
-    }
+    if (!value?.length) return;
+    setIsValid(EMAIL_REGEX.test(value));
+    onValidChange(isValid);
   }, [value, onValidChange, isValid]);
 
   return isEditing ? (
