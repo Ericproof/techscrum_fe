@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 const initData = {
   type: 'mastercard',
   holder: 'YUE HUA',
@@ -27,7 +26,6 @@ export function reducer(state: typeof initState, action: ReducerAction) {
     case ReducerActionTypes.SetType:
       return { ...state, type: action.payload ?? '' };
     case ReducerActionTypes.SetHolder:
-      // eslint-disable-next-line no-console
       return { ...state, holder: action.payload ?? '' };
     case ReducerActionTypes.SetNumber:
       return { ...state, number: action.payload ?? '' };

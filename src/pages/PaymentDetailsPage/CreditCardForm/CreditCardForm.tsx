@@ -69,18 +69,13 @@ export default function CreditCardForm() {
   };
 
   useEffect(() => {
-    // here check if obj valid
     const isAllRegexPassed = [
       FULLNAME_REGEX.test(holder),
       CARD_NUMBER_REGEX.test(number),
       EXPIRY_REGEX.test(expiry)
     ].every((each) => each);
-    if (!isAllRegexPassed) {
-      setIsFormValid(false);
-    } else {
-      setIsFormValid(true);
-    }
-  }, [holder, number, expiry, isFormValid]);
+    setIsFormValid(isAllRegexPassed);
+  }, [holder, number, expiry]);
 
   return (
     <form className={styles.creditCard__container} onSubmit={handleSubmit}>
