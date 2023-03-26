@@ -48,6 +48,7 @@ import PricePage from './pages/PricePage/PricePage';
 import MyWorkPage from './pages/MyWorkPage/MyWorkPage';
 import ReportPage from './pages/ReportPage/ReportPage';
 import SupportCenterPage from './pages/SupportCenterPage/SupportCenterPage';
+import BillingSubscriptionPage from './pages/BillingSubscriptionPage/BillingSubscriptionPage';
 
 function App() {
   const [showPages, setShowPages] = useState(null);
@@ -108,6 +109,7 @@ function App() {
                   </Route>
                   <Route path="/settings/:projectId" element={<Setting />} />
                   <Route path="/me" element={<UserMePage />} />
+                  <Route path="/billing/subscription" element={<BillingSubscriptionPage />} />
                   <Route path="/user/:id" element={<UserPage />} />
                   <Route path="/access" element={<AccessPage />} />
                   <Route path="/projects" element={<ProjectPage />} />
