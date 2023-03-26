@@ -215,7 +215,6 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
         <div className={styles.dailyScrumContent}>
           <div>
             <Calendar
-              style={{ position: 'relative' }}
               maxDate={LAST_DAY_OF_YEAR}
               defaultMonth={CURRENT_DATE.getMonth() + 1}
               defaultYear={CURRENT_DATE.getFullYear()}
