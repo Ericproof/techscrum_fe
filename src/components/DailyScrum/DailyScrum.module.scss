@@ -1,3 +1,4 @@
+@import '../../pages/ReportPage/styles/variables.scss';
 $closeBtnColor: rgb(202, 207, 227);
 $closeBtnColorHover: rgb(178, 182, 200);
 $colorGray: rgb(102, 106, 133);
@@ -35,6 +36,18 @@ $colorBlue: rgb(50, 115, 246);
       position: absolute;
       left: 0;
     }
+
+    h4 {
+      font-weight: 400;
+      margin-block-end: $size-24;
+      margin-inline-start: $size-16;
+      & > span {
+        display: block;
+        margin-top: $size-14;
+        font-size: $size-16;
+        font-weight: 300;
+      }
+    }
   }
 }
 .dailyScrumHeader {
@@ -42,6 +55,14 @@ $colorBlue: rgb(50, 115, 246);
   height: 50px;
   justify-content: space-between;
   align-items: center;
+  padding-inline-start: $size-16;
+  margin-block-end: $size-40;
+
+  h2 {
+    font-size: $size-32;
+    font-weight: 500;
+  }
+
   .closeBtn {
     display: flex;
     justify-content: center;
@@ -78,5 +99,19 @@ $colorBlue: rgb(50, 115, 246);
       opacity: 0.7;
       cursor: not-allowed;
     }
+  }
+}
+
+.dayDiffText {
+  margin-inline-start: $size-14;
+  &Safe {
+    color: $color-green-dark;
+  }
+
+  &Caution {
+    color: $color-orange;
+  }
+  &Danger {
+    color: $color-brand-youtube;
   }
 }

@@ -1,9 +1,9 @@
-import React, { useCallback, useContext, useEffect, useReducer, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useReducer, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { AiOutlineClose } from 'react-icons/ai';
 import { toast } from 'react-toastify';
-import { DatePicker } from '@atlaskit/datetime-picker';
 import { AxiosResponse } from 'axios';
+import Calendar from '@atlaskit/calendar';
 import styles from './DailyScrum.module.scss';
 import { getDailyScrums, updateDailyScrum } from '../../api/dailyScrum/dailyScrum';
 import { UserContext } from '../../context/UserInfoProvider';
@@ -51,9 +51,6 @@ const dailyScrumTicketsReducer = (state: IDailyScrumTicket[], action: IDailyScru
 
 function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JSX.Element {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const [calendarDate, setCalendarDate] = useState<string>(
-    dateFormatter(undefined, { isToISO: true })
-  );
 
   const [dailyScrumTickets, dispatch] = useReducer(
     dailyScrumTicketsReducer,
@@ -61,6 +58,41 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
   );
 
   const { id: userId }: IUserInfo = useContext(UserContext);
+
+  const CURRENT_DATE = useMemo(() => {
+    return new Date();
+  }, []);
+
+  const LAST_DAY_OF_YEAR = useMemo(() => {
+    const lastDay = new Date(new Date().getFullYear(), 11, 31);
+    const lastDayISOString = dateFormatter(lastDay, { isToISO: true });
+    return lastDayISOString;
+  }, []);
+
+  const SPRINT_END_DATE = useMemo(() => {
+    return new Date('2023-03-31');
+  }, []);
+
+  const dayDiffObj = useMemo(() => {
+    const timeDiff = SPRINT_END_DATE.getTime() - CURRENT_DATE.getTime();
+    const diffOfDays = Math.round(timeDiff / 1000 / 60 / 60 / 24);
+    const obj: { value: number; style: 'Safe' | 'Caution' | 'Danger' } = {
+      value: diffOfDays,
+      style: 'Safe'
+    };
+
+    if (diffOfDays <= 3) {
+      obj.style = 'Caution';
+    }
+    if (diffOfDays <= 1) {
+      obj.style = 'Danger';
+    }
+    if (timeDiff <= 0) {
+      obj.value = 0;
+      obj.style = 'Danger';
+    }
+    return obj;
+  }, [CURRENT_DATE, SPRINT_END_DATE]);
 
   useEffect(() => {
     (async () => {
@@ -180,21 +212,33 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
         </button>
       </div>
       <form onSubmit={onHandleSubmit}>
-        <h4>Today: {dateFormatter()}</h4>
         <div className={styles.dailyScrumContent}>
-          <DatePicker
-            spacing="compact"
-            appearance="subtle"
-            defaultIsOpen
-            isOpen
-            locale="en-AU"
-            dateFormat="MM-DD-YYYY"
-            placeholder="e.g 11-13-2018"
-            value={calendarDate}
-            onChange={(e) => {
-              setCalendarDate(e);
-            }}
-          />
+          <div>
+            <Calendar
+              style={{ position: 'relative' }}
+              maxDate={LAST_DAY_OF_YEAR}
+              defaultMonth={CURRENT_DATE.getMonth() + 1}
+              defaultYear={CURRENT_DATE.getFullYear()}
+              testId="calendar"
+            />
+            <h4>
+              Today: <span>{dateFormatter()}</span>
+            </h4>
+            <h4>
+              Sprint Ends:
+              <span>
+                {dateFormatter(SPRINT_END_DATE)}
+                <span
+                  className={[styles.dayDiffText, styles[`dayDiffText${dayDiffObj?.style}`]].join(
+                    ' '
+                  )}
+                >
+                  {dayDiffObj?.value} days left
+                </span>
+              </span>
+            </h4>
+          </div>
+
           <div className={styles.dailyScrumTicketsListWrapper}>
             <p>You currently have {dailyScrumTickets.length} dailyScrum(s)</p>
             {dailyScrumTickets.map(
