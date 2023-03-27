@@ -10,9 +10,11 @@ import styles from './ContactForm.module.scss';
 import { reducer, ReducerActionTypes, initState } from './ContactFormReducer';
 import { sendEmail } from '../../../api/contact/contact';
 
-const FULLNAME_REGEX = /^[a-z ,.'-]+$/i;
-const PHONE_REGEX = /^\d{10}$/;
+const FULLNAME_REGEX = /^[a-zA-Z ]{1,40}$/;
+const COMPANY_REGEX = /^[a-zA-Z0-9][-a-zA-Z0-9 ']*[a-zA-Z0-9]$/;
+const PHONE_REGEX = /^(\+[\d\s]{6,14}\d|(61\s?|\(61\))?\s?04[.\-\s]?\d{7,9})$/;
 const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+const MESSAGE_REGEX = /^.{1,200}$/;
 const enquiryTitles = [
   `Just saying hi!`,
   `I'd like to request a feature`,
@@ -105,9 +107,8 @@ export default function ContactForm() {
 
   return (
     <>
-      <div className={styles.container}>
+      <div className={styles.formContainer}>
         <form className={styles.contactForm} onSubmit={submitHandler}>
-          <h3 className={styles.title}>Contact Us</h3>
           {!isFormValid && (
             <p className={styles.errMsg} data-cy="form-error-msg">
               Please valid your form.
@@ -137,7 +138,7 @@ export default function ContactForm() {
             label="Full name *"
             identifier="name"
             regex={FULLNAME_REGEX}
-            errMsg="Field required, lettes only, seperated with spaces."
+            errMsg="Field required, lettes only, seperated with spaces, 40 char max"
           />
           <InputV3
             value={reducerState.company}
@@ -145,7 +146,8 @@ export default function ContactForm() {
             type="text"
             label="Company *"
             identifier="company"
-            errMsg="Field required, ensure the validity of your company."
+            regex={COMPANY_REGEX}
+            errMsg="Field required, ensure the validation of your company."
           />
           <InputV3
             value={reducerState.phone}
@@ -154,7 +156,7 @@ export default function ContactForm() {
             label="Phone Number *"
             identifier="phone"
             regex={PHONE_REGEX}
-            errMsg="Field required, 10 Digit Phone Number."
+            errMsg="Field required, ensure the validation of your number."
           />
           <InputV3
             value={reducerState.email}
@@ -172,7 +174,8 @@ export default function ContactForm() {
             label="Any more info you can provide *"
             identifier="message"
             tagType="textarea"
-            errMsg="Field required, thanks for your message."
+            regex={MESSAGE_REGEX}
+            errMsg="Field required, 200 char max."
           />
           <button className={styles.contactForm} type="submit" data-cy="sub-btn">
             Send
@@ -187,7 +190,6 @@ export default function ContactForm() {
           </p>
         </form>
       </div>
-
       {modal &&
         ReactDOM.createPortal(
           <Modal fullWidth data-cy="modal">
