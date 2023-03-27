@@ -62,7 +62,10 @@ export default function ContactPage() {
                 </li>
               </ul>
             </div>
-            <ContactForm />
+            <div>
+              <h3 className={styles.formTitle}>Contact Us</h3>
+              <ContactForm />
+            </div>
           </div>
         </div>
       </Fade>
