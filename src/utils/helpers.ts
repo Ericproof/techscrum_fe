@@ -148,7 +148,7 @@ export const dateFormatter = (
   // default date: current date
   const date: Date = new Date(rawDate);
   if (options?.isToISO) {
-    return date.toISOString();
+    return date.toISOString(); // Output: 2023-03-26T05:43:16.654Z
   }
 
   const formatOptions: Intl.DateTimeFormatOptions = {
