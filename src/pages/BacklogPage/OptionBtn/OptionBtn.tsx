@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import styles from './OptionBtn.module.scss';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import { updateTask } from '../../../api/backlog/backlog';
-import { softDeleteTask } from '../../../api/task/task';
+import { deactiveTask } from '../../../api/task/task';
 
 interface IOptionBtn {
   taskId: string;
@@ -30,7 +30,7 @@ export default function OptionBtn({
   const { visible, setVisible, myRef } = useOutsideAlerter(false, action);
 
   const onClickDelete = (id: string) => {
-    softDeleteTask(id)
+    deactiveTask(id)
       .then(() => {
         getBacklogDataApi();
       })

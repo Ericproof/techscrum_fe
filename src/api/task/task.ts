@@ -22,7 +22,7 @@ export function deleteTask(id: string) {
   return axios.delete(`${config.apiAddress}/projects/${id}`);
 }
 
-export function softDeleteTask(id: string) {
+export function deactiveTask(id: string) {
   return alphaApi.put(`${config.apiAddress}/tasks/${id}/toggleActive`);
 }
 

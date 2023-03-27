@@ -8,7 +8,7 @@ import BoardSearch from './BoardSearch/BoardSearch';
 import BoardMain from './BoardMain/BoardMain';
 import CreateNewCard from '../CreateNewCard/CreateNewCard';
 import { getBoard } from '../../api/board/board';
-import { updateTaskStatus, fetchTask, updateTask, softDeleteTask } from '../../api/task/task';
+import { updateTaskStatus, fetchTask, updateTask, deactiveTask } from '../../api/task/task';
 import IBoardEntity, {
   IColumnsFromBackend,
   ICardData,
@@ -237,7 +237,7 @@ export default function Board() {
   const deleteTask = async () => {
     if (taskData?.id ?? taskData?.id) {
       try {
-        await softDeleteTask(taskData.id);
+        await deactiveTask(taskData.id);
       } finally {
         getViewTaskStateFromChildren();
         const updatedColumns = { ...columnsInfo };
