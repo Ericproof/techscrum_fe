@@ -1,11 +1,8 @@
 @use '../../../variables.scss' as *;
 
 .tableRow {
-  border-bottom: 2px solid gray;
-}
-
-.tableRow {
   line-height: 3em;
+  border-bottom: 2px solid gray;
   .product {
     display: flex;
     align-items: center;
