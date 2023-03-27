@@ -25,16 +25,21 @@ $colorBlue: rgb(50, 115, 246);
     gap: 3rem;
     position: relative;
 
+    @media screen and (max-width: 1120px) {
+      flex-direction: column;
+    }
+
     & > *:nth-child(2) {
       width: 50%;
+
+      @media screen and (max-width: 1120px) {
+        width: 80%;
+      }
     }
 
     & > *:first-child {
       width: 40%;
       max-width: 400px;
-
-      position: absolute;
-      left: 0;
     }
 
     h4 {

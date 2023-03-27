@@ -41,6 +41,7 @@ function SupportTypeSelector({
                 type="radio"
                 id={`${name}-${index}`}
                 name={name}
+                required
                 checked={index === supportType - 1}
                 value={index + 1}
                 onChange={(e) => {
