@@ -18,6 +18,7 @@ import DropdownV2 from '../../lib/FormV2/DropdownV2/DropdownV2';
 import TextAreaV2 from '../../lib/FormV2/TextAreaV2/TextAreaV2';
 import InputV2 from '../../lib/FormV2/InputV2/InputV2';
 import Row from '../../lib/Grid/Row/Row';
+import { createDailyScrum } from '../../api/dailyScrum/dailyScrum';
 
 interface Props {
   fetchNewCard: (newCard: ICardData) => void;
@@ -100,6 +101,16 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
           const taskId = res.data.id;
           createActivity({ operation, userId, taskId });
           fetchNewCard({ ...res.data, statusId: res.data.status });
+
+          if (assigneeId) {
+            const dailyScrumData = {
+              userId: assigneeId,
+              title,
+              taskId
+            };
+            createDailyScrum(projectId, dailyScrumData);
+          }
+
           return;
         }
         toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
