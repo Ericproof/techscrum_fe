@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './SearchForBoard.module.scss';
 import search from '../../assets/search-line.svg';
 
@@ -11,7 +11,7 @@ interface ISearchForBoard {
 
 export default function SearchForBoard(props: ISearchForBoard) {
   const { inputState, setInputState, setInputQuery, page } = props;
-
+  const [searchValue, setSearchValue] = useState('');
   const myRef = useRef<HTMLInputElement>(null);
 
   const handleClickOutside = (e: MouseEvent) => {
@@ -29,6 +29,19 @@ export default function SearchForBoard(props: ISearchForBoard) {
     return () => document.removeEventListener('click', handleClickOutside);
   });
 
+  const searchHandler = (event) => {
+    setSearchValue(event.target.value);
+  };
+  useEffect(() => {
+    const identifier = setTimeout(() => {
+      setInputQuery(searchValue);
+    }, 500);
+
+    return () => {
+      clearTimeout(identifier);
+    };
+  }, [searchValue, setInputQuery]);
+
   return (
     <div
       className={
@@ -43,7 +56,7 @@ export default function SearchForBoard(props: ISearchForBoard) {
         onClick={() => {
           setInputState(true);
         }}
-        onChange={(event) => setInputQuery(event.target.value)}
+        onChange={searchHandler}
         data-testid="board-search"
       />
       <span>
