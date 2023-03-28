@@ -1,0 +1,41 @@
+@use '../../variables.scss' as *;
+
+.pageContainer {
+  display: flex;
+  min-height: 100vh;
+  .sectionContainer {
+    width: 100%;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    .contents {
+      .paymentImg {
+        margin: 0 auto;
+        display: block;
+      }
+      p {
+        padding-bottom: 1rem;
+        line-height: 1.5;
+      }
+    }
+  }
+}
+
+.textSecondary {
+  font-size: 14px;
+  color: gray;
+}
+
+.linkBtn {
+  background-color: $primaryColor;
+  color: white;
+  font-weight: bold;
+  padding: 0.5em 0.8em;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  &:hover {
+    background-color: $primaryColor-hover;
+  }
+}
