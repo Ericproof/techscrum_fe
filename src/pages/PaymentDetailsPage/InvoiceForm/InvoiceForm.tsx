@@ -1,6 +1,6 @@
 import React, { FormEvent, useState } from 'react';
 import { toast } from 'react-toastify';
-import Input from '../Input/Input';
+import EmailInput from '../EmailInput/EmailInput';
 import styles from './InvoiceForm.module.scss';
 
 interface Props {
@@ -39,7 +39,7 @@ export default function InvoiceForm({ invoiceEmail, setInvoiceEmail }: Props) {
   return (
     <form className={styles.invoice__form} onSubmit={onSubmit}>
       <span className={styles.textSecondary}>Send copies of invoices to</span>
-      <Input
+      <EmailInput
         isEditing={isEditing}
         invoiceEmail={invoiceEmail}
         onValueChange={handleValueChange}

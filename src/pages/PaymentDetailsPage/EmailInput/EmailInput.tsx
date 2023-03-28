@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { CiWarning } from 'react-icons/ci';
 import { AiOutlineCheck } from 'react-icons/ai';
-import styles from './Input.module.scss';
+import styles from './EmailInput.module.scss';
 
 const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 
@@ -12,7 +12,12 @@ interface Props {
   onValidChange: (isFormValid: boolean) => void;
 }
 
-export default function Input({ invoiceEmail, isEditing, onValueChange, onValidChange }: Props) {
+export default function EmailInput({
+  invoiceEmail,
+  isEditing,
+  onValueChange,
+  onValidChange
+}: Props) {
   const [value, setValue] = useState(invoiceEmail);
   const [isValid, setIsValid] = useState(false);
 
@@ -46,6 +51,6 @@ export default function Input({ invoiceEmail, isEditing, onValueChange, onValidC
   );
 }
 
-Input.defaultProps = {
+EmailInput.defaultProps = {
   invoiceEmail: ''
 };
