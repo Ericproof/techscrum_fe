@@ -52,6 +52,7 @@ import SupportCenterPage from './pages/SupportCenterPage/SupportCenterPage';
 import RegisterPageV2 from './pages/RegisterV2/RegisterPageV2';
 import VerifyPageV2 from './pages/VerifyPageV2/VerifyPageV2';
 import PaymentSuccessPage from './pages/PaymentSuccessPage/PaymentSuccessPage';
+import PaymentDetailsPage from './pages/PaymentDetailsPage/PaymentDetailsPage';
 
 function App() {
   const [showPages, setShowPages] = useState(null);
@@ -118,6 +119,7 @@ function App() {
                   </Route>
                   <Route path="/settings/:projectId" element={<Setting />} />
                   <Route path="/me" element={<UserMePage />} />
+                  <Route path="/billing/paymentdetails" element={<PaymentDetailsPage />} />
                   <Route path="/payment/success" element={<PaymentSuccessPage />} />
                   <Route path="/user/:id" element={<UserPage />} />
                   <Route path="/access" element={<AccessPage />} />
