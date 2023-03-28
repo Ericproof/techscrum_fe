@@ -123,15 +123,17 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
   }, [projectId, userId]);
 
   const updateDailyScrumTicket = useCallback(
-    (id: string) => (key: UpdateDailyScrumTicketParamKey) => (value: number | string | boolean) => {
-      return dispatch({
-        type: DailyScrumTicketsActionType.UPDATE_ONE_TICKET,
-        payload: {
-          id,
-          [key]: value
-        }
-      });
-    },
+    (id: string) =>
+      (key: UpdateDailyScrumTicketParamKey) =>
+      (value: number | string | boolean | object) => {
+        return dispatch({
+          type: DailyScrumTicketsActionType.UPDATE_ONE_TICKET,
+          payload: {
+            id,
+            [key]: value
+          }
+        });
+      },
     []
   );
 
