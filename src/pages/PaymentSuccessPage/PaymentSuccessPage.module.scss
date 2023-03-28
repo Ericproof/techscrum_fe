@@ -1,23 +1,30 @@
 @use '../../variables.scss' as *;
 
-.pageContainer {
-  display: flex;
+.sectionContainer {
   min-height: 100vh;
-  .sectionContainer {
-    width: 100%;
-    padding: 2rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  @media (max-width: 420px) {
+    padding: 1rem;
+    gap: 1rem;
+  }
+  .paymentImg {
+    display: block;
+    width: 90%;
+    max-width: 500px;
+  }
+  .contents {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
-    .contents {
-      .paymentImg {
-        margin: 0 auto;
-        display: block;
-      }
-      p {
-        padding-bottom: 1rem;
-        line-height: 1.5;
-      }
+    gap: 1rem;
+    align-items: center;
+    max-width: 500px;
+    p {
+      line-height: 1.5;
+      text-align: justify;
     }
   }
 }
