@@ -1,10 +1,9 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
-import config, { TIME_OUT } from '../../config/config';
+import config from '../../config/config';
 import { IDailyScrumTicket } from '../../types';
 
 const axiosConfig = {
   baseURL: `${config.apiAddress}/projects`,
-  timeout: TIME_OUT,
   headers: {
     Authorization: `Bearer ${localStorage.getItem('access_token')}`
   }
