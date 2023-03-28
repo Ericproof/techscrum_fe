@@ -189,6 +189,10 @@
     width: 100%;
     margin: 0;
     padding: 0;
+    @media (max-width: 768px) {
+        width: 60%;
+        margin: 0 auto 30px;
+        }
 
     h3 {
         font-size: 22px !important;

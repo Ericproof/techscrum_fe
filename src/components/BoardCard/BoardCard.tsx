@@ -2,11 +2,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import CardHeader from './CardHeader/CardHeader';
 import CardLeftContent from './CardLeftContent/CardLeftContent';
 import CardRightContent from './CardRightContent/CardRightContent';
-import { IColumnsFromBackend, ILabelData, ITaskEntity } from '../../types';
+import { IColumnsFromBackend, ILabelData, ITaskEntity, ITypes } from '../../types';
 import styles from './BoardCard.module.scss';
 import { upload } from '../../api/upload/upload';
 import { createActivity } from '../../api/activity/activity';
 import { UserContext } from '../../context/UserInfoProvider';
+import Title from './CardLeftContent/components/Title/Title';
+import checkAccess from '../../utils/helpers';
 
 interface Props {
   columnsInfo: IColumnsFromBackend;
@@ -30,7 +32,23 @@ export default function BoardCard({
   updateTaskTags
 }: Props) {
   const [taskInfo, setTaskInfo] = useState<ITaskEntity | null>(null);
+  const [selectedType, setSelectedType] = useState<ITypes | null>(null);
   const userInfo = useContext(UserContext);
+
+  const [title, setTitle] = useState<string | undefined>(taskInfo?.title);
+
+  const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
+  };
+
+  const onBlurHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (taskInfo) {
+      if (e.target.value !== taskInfo.title) {
+        const updatedTaskInfo = { ...taskInfo, title: e.target.value };
+        onSave(updatedTaskInfo);
+      }
+    }
+  };
 
   useEffect(() => {
     if (!taskData) {
@@ -87,15 +105,20 @@ export default function BoardCard({
           taskInfo={taskInfo}
           projectId={projectId}
           onSave={onSave}
+          selectedType={selectedType}
+          setSelectedType={setSelectedType}
         />
         <div className={styles.cardContent}>
-          <CardLeftContent
-            taskInfo={taskInfo}
-            onSave={onSave}
-            removeAttachment={removeAttachment}
-            uploadFile={uploadFile}
-            projectId={projectId}
-          />
+          <div className={styles.cardTitle}>
+            <Title
+              taskInfo={taskInfo}
+              focusEventHandler={() => {}}
+              isDisabled={!checkAccess('edit:tasks', projectId)}
+              onChangeTitle={onChangeTitle}
+              onBlurHandler={onBlurHandler}
+              value={title}
+            />
+          </div>
           <CardRightContent
             taskInfo={taskInfo}
             columnsInfo={columnsInfo}
@@ -103,6 +126,16 @@ export default function BoardCard({
             labels={labels}
             projectId={projectId}
             updateTaskTags={updateTaskTags}
+            onSave={onSave}
+            selectedType={selectedType}
+            setSelectedType={setSelectedType}
+          />
+          <CardLeftContent
+            taskInfo={taskInfo}
+            onSave={onSave}
+            removeAttachment={removeAttachment}
+            uploadFile={uploadFile}
+            projectId={projectId}
           />
         </div>
       </div>

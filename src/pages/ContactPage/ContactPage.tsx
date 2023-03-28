@@ -6,7 +6,7 @@ import Fade from 'react-reveal/Fade';
 import styles from './ContactPage.module.scss';
 import ContactForm from './ContactForm/ContactForm';
 import Header from '../../components/Header/Header';
-// https://www.privy.com/contact
+
 export default function ContactPage() {
   return (
     <>
@@ -16,24 +16,12 @@ export default function ContactPage() {
           <h1>Contact Us</h1>
         </div>
         <div className={styles.contactPage}>
-          <span className={styles.shape2Container}>
-            <img
-              src="https://themexriver.com/appilo-theme/seo-agency/wp-content/uploads/sites/56/2021/11/slider-shape-2.png"
-              alt=""
-            />
-          </span>
           <div className={styles.circleContainer}>
             <img
               src="https://themexriver.com/appilo-theme/seo-agency/wp-content/uploads/sites/56/2021/11/slider-shape.png"
               alt=""
             />
           </div>
-          <span className={styles.shape3Container}>
-            <img
-              src="https://themexriver.com/appilo-theme/seo-agency/wp-content/uploads/sites/56/2021/11/slider-shape-3.png"
-              alt=""
-            />
-          </span>
           <div className={styles.container}>
             <div className={styles.content}>
               <p className={styles.title}>Contact Us</p>
@@ -48,7 +36,7 @@ export default function ContactPage() {
                     <b>Phone</b>
                     <p className={styles.info1}>Mon-Fri from 9am to 5pm.</p>
                     <p className={styles.info}>
-                      <p>Work in progress (WIP)</p>
+                      <span>Work in progress (WIP)</span>
                     </p>
                   </div>
                 </li>
@@ -74,7 +62,10 @@ export default function ContactPage() {
                 </li>
               </ul>
             </div>
-            <ContactForm />
+            <div>
+              <h3 className={styles.formTitle}>Contact Us</h3>
+              <ContactForm />
+            </div>
           </div>
         </div>
       </Fade>

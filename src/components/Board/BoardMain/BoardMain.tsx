@@ -67,7 +67,7 @@ export default function BoardMain({
                                   }}
                                   data-testid={`task-${item.id}`}
                                 >
-                                  <span>
+                                  <span data-testid="task-labels">
                                     {' '}
                                     {item.tags?.map((tag) => {
                                       return (
@@ -100,9 +100,8 @@ export default function BoardMain({
                                     <div className={styles.cardFooterRight}>
                                       <img
                                         src={
-                                          item !== undefined && item?.assignee !== undefined
-                                            ? item.assignee?.avatarIcon ??
-                                              'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'
+                                          item !== undefined && item?.assignId !== null
+                                            ? item.assignId?.avatarIcon
                                             : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'
                                         }
                                         alt="avatar"

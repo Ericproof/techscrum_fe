@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useContext, useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useContext, useEffect } from 'react';
 import { RiMoreFill } from 'react-icons/ri';
 
 import { TaskTypesContext } from '../../../context/TaskTypeProvider';
@@ -7,7 +7,7 @@ import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import checkAccess from '../../../utils/helpers';
 import style from './CardHeader.module.scss';
 import { deleteDailyScrum } from '../../../api/dailyScrum/dailyScrum';
-import { ITaskEntity } from '../../../types';
+import { ITaskEntity, ITypes } from '../../../types';
 
 interface Props {
   updateIsViewTask: () => void;
@@ -15,33 +15,35 @@ interface Props {
   deleteTask: () => void;
   projectId: string;
   onSave: (data: ITaskEntity) => void;
+  selectedType: ITypes | null;
+  setSelectedType: Dispatch<SetStateAction<ITypes | null>>;
 }
-// https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium
-// https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium
 
-const TYPE = {
-  story:
-    'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium',
-  task: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium',
-  bug: 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium'
-};
 export default function CardHeader({
   updateIsViewTask,
   taskInfo,
   deleteTask,
   projectId,
-  onSave
+  onSave,
+  selectedType,
+  setSelectedType
 }: Props) {
-  const { visible, setVisible, myRef } = useOutsideAlerter(false);
-  const handleClickOutside = () => setVisible(!visible);
+  const {
+    visible: visibleDeleteSection,
+    setVisible: setVisibleDeleteSection,
+    myRef: deleteSectionRef
+  } = useOutsideAlerter(false);
+  const {
+    visible: visibleSelectDropDown,
+    setVisible: setVisibleSelectDropDown,
+    myRef: selectDropDownRef
+  } = useOutsideAlerter(false);
+  const handleSelectDropDownClickOutside = () => setVisibleSelectDropDown(!visibleSelectDropDown);
+  const handleDeleteSectionClickOutside = () => setVisibleDeleteSection(!visibleDeleteSection);
   const taskType = useContext(TaskTypesContext);
-  const [selectedType, setSelectedType] = useState(
-    'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium'
-  );
-  const [showSelectDropDown, setShowSelectDropDown] = useState(false);
 
   useEffect(() => {
-    setSelectedType(TYPE[taskInfo?.typeId?.slug]);
+    setSelectedType(taskInfo?.typeId);
   }, [taskInfo.id]);
 
   const onDeleteDailyScrum = async () => {
@@ -51,8 +53,7 @@ export default function CardHeader({
   const onClickIssueType = (task: ITaskEntity) => {
     const updateTaskInfo = { ...taskInfo };
     updateTaskInfo.typeId = task;
-    setSelectedType(TYPE[task.slug]);
-    setShowSelectDropDown(false);
+    setSelectedType(updateTaskInfo?.typeId);
     onSave(updateTaskInfo);
   };
 
@@ -63,20 +64,19 @@ export default function CardHeader({
           className={style.storyIcon}
           type="button"
           onClick={() => {
-            setShowSelectDropDown(!showSelectDropDown);
+            handleSelectDropDownClickOutside();
           }}
         >
-          <img src={selectedType} alt="Story" />
+          <img src={selectedType?.icon} alt="Story" />
         </button>
-        {showSelectDropDown && checkAccess('edit:tasks', projectId) && (
-          <div className={style.taskTypeList}>
+        {visibleSelectDropDown && checkAccess('edit:tasks', projectId) && (
+          <div className={style.taskTypeList} ref={selectDropDownRef}>
             <p className={[style.storyIcon, style.header].join(' ')}>Change Issue Type</p>
             {taskType.map((item: any) => {
               let src =
                 'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium';
-              if (item?.slug) {
-                const { slug } = item;
-                src = TYPE[slug];
+              if (item?.icon) {
+                src = item.icon;
               }
               return (
                 <button
@@ -85,6 +85,7 @@ export default function CardHeader({
                   type="button"
                   onClick={() => {
                     onClickIssueType(item);
+                    handleSelectDropDownClickOutside();
                   }}
                 >
                   <img src={src} alt={item.slug} />
@@ -97,11 +98,11 @@ export default function CardHeader({
         {taskInfo.id}
       </div>
       <div className={style.headerRight}>
-        <div ref={myRef} className={style.deleteSection}>
-          {visible ? (
+        <div ref={deleteSectionRef} className={style.deleteSection}>
+          {visibleDeleteSection ? (
             <div className={style.dropdown}>
               <div className={style.menuOpen}>
-                <RiMoreFill onClick={handleClickOutside} />
+                <RiMoreFill onClick={handleDeleteSectionClickOutside} />
               </div>
               <div className={style.delete}>
                 <button
@@ -109,7 +110,7 @@ export default function CardHeader({
                   onClick={() => {
                     deleteTask();
                     onDeleteDailyScrum();
-                    handleClickOutside();
+                    handleDeleteSectionClickOutside();
                   }}
                 >
                   Delete
@@ -119,7 +120,7 @@ export default function CardHeader({
           ) : (
             <div className={checkAccess('delete:tasks', projectId) ? style.menuClose : ''}>
               {checkAccess('delete:tasks', projectId) && (
-                <RiMoreFill onClick={handleClickOutside} />
+                <RiMoreFill onClick={handleDeleteSectionClickOutside} />
               )}
             </div>
           )}

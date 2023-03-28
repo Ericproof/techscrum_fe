@@ -1,4 +1,4 @@
-@import "../../variables.scss";
+@import '../../variables.scss';
 
 .contactPage {
   background-image: url(https://themexriver.com/appilo-theme/seo-agency/wp-content/uploads/sites/56/2021/11/hero-bg.jpg);
@@ -17,6 +17,10 @@
   display: flex;
   align-items: center;
   min-height: 100vh;
+  @media (max-width: 768px) {
+    padding: 0;
+    margin-top: 60px;
+  }
 
   .circleContainer {
     position: absolute;
@@ -25,29 +29,7 @@
     max-width: 500px;
   }
 
-  .shape2Container {
-    position: absolute;
-    left: 25%;
-    top: 25%;
-    animation: 15s apldg_rotate_animation linear infinite;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: 0;
-  }
-
-  .shape3Container {
-    position: absolute;
-    right: 40%;
-    bottom: 30%;
-    animation: 20s apldg_move_animation linear infinite;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: 0;
-  }
-
-  .container{
+  .container {
     background: white;
     border-radius: 50px;
     display: flex;
@@ -58,143 +40,105 @@
     justify-content: space-around;
     z-index: 1;
     position: relative;
+    @media (max-width: 768px) {
+      flex-direction: column;
+      width: 80%;
+      padding: 30px;
+      margin-top: 60px;
+    }
+  }
+  .formTitle {
+    color: #1d1c39;
+    font-size: 32px;
+    line-height: 115%;
+    font-weight: 400;
+    text-align: center;
+    @media (max-width: 997px) {
+      font-size: 26px;
+    }
+    @media (max-width: 568px) {
+      font-size: 22px;
+    }
   }
 
-  .container::before{
+  .container::before {
     position: absolute;
     bottom: 0;
     right: 0;
     content: '';
     background-image: url(../../assets/dots.png), url(../../assets/dots.png);
-    background-repeat: no-repeat,no-repeat;
+    background-repeat: no-repeat, no-repeat;
     background-size: 20%, 20%;
     background-position: right -52px, center 400px;
     width: 80%;
     height: 80%;
     opacity: 0.1;
-    
   }
 
-  .content{
+  .content {
     background: $primaryColor;
     padding: 50px;
     margin-top: -150px;
     margin-bottom: 167px;
-    p,h1{
-    color: white;
+    @media (max-width: 768px) {
+      margin-top: 30px;
+      margin-bottom: 30px;
+      padding: 20px;
     }
-    p{
+    p,
+    h1 {
+      color: white;
+    }
+    p {
       font-size: 20px;
+      word-wrap: break-word;
     }
   }
 
-  ul{
+  ul {
     padding: 0;
     margin: 0;
-    li{
+    li {
       display: flex;
       list-style: none;
-      color:white;
+      color: white;
       padding: 0;
       margin: 40px 0;
-      font-size:22px;
-      b{
+      font-size: 22px;
+      b {
         font-size: 24px;
       }
 
-      .textContainer{
+      .textContainer {
         margin-left: 30px;
+        @media (max-width: 768px) {
+          margin-left: 15px;
+          width: 80%;
+          padding: 10px;
+        }
       }
 
-      .info1{
-        color:#dadada;
+      .info1 {
+        color: #dadada;
         margin: 40px 0 0 0;
       }
     }
   }
 
-  .info{
+  .info {
     font-weight: 900;
   }
 }
-@-webkit-keyframes apldg_rotate_animation {
-  from {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  to {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
 
-@keyframes apldg_rotate_animation {
-  from {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  to {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-
-@-webkit-keyframes apldg_move_animation {
-  0% {
-    -webkit-transform: translate(0) rotate(0deg);
-    transform: translate(0) rotate(0deg);
-  }
-  25% {
-    -webkit-transform: translate(200px, 100px) rotate(90deg);
-    transform: translate(200px, 100px) rotate(90deg);
-  }
-  50% {
-    -webkit-transform: transalate(600px, 200px) rotate(180deg);
-    transform: transalate(600px, 200px) rotate(180deg);
-  }
-  75% {
-    -webkit-transform: translate(-50px) rotate(270deg);
-    transform: translate(-50px) rotate(270deg);
-  }
-  100% {
-    -webkit-transform: translate(0) rotate(360deg);
-    transform: translate(0) rotate(360deg);
-  }
-}
-
-@keyframes apldg_move_animation {
-  0% {
-    -webkit-transform: translate(0) rotate(0deg);
-    transform: translate(0) rotate(0deg);
-  }
-  25% {
-    -webkit-transform: translate(200px, 100px) rotate(90deg);
-    transform: translate(200px, 100px) rotate(90deg);
-  }
-  50% {
-    -webkit-transform: transalate(600px, 200px) rotate(180deg);
-    transform: transalate(600px, 200px) rotate(180deg);
-  }
-  75% {
-    -webkit-transform: translate(-50px) rotate(270deg);
-    transform: translate(-50px) rotate(270deg);
-  }
-  100% {
-    -webkit-transform: translate(0) rotate(360deg);
-    transform: translate(0) rotate(360deg);
-  }
-}
-
-
-.contactHeader{
+.contactHeader {
   width: 100%;
   min-height: 500px;
   background: $primaryColor;
   display: flex;
   align-items: center;
   justify-content: center;
-  h1{
-    color:white;
+  h1 {
+    color: white;
     font-size: 50px;
   }
 }

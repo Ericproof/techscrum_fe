@@ -456,6 +456,9 @@
             height: auto;
             width: 100%;
             max-width: 100%;
+            @media (max-width: 768px) {
+              display: block;
+            }
           }
         }
       }
@@ -886,6 +889,9 @@
       margin-right: auto;
       margin-left: auto;
       width:100%;
+      @media (max-width: 768px) {
+        width: 80%;
+      } 
       .supportContent {
         font-size: 36px;
         font-weight: 700;
@@ -1479,6 +1485,9 @@
             width: 100%;
             padding: 0;
             margin-top: 20px;
+            @media (max-width: 768px) {
+              width: 60%;
+            }
           }
         }
       }
@@ -1843,6 +1852,10 @@
     left: 0;
     max-width: 100%;
   }
+  @media (max-width: 768px) {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
 }
 
 .header {
@@ -2037,6 +2050,9 @@
   justify-content: space-between;
   align-items: center;
   margin: auto;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 }
 
 .projectManagement {

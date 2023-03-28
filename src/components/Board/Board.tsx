@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { DropResult } from 'react-beautiful-dnd';
+import { toast } from 'react-toastify';
 import style from './Board.module.scss';
 import BoardSearch from './BoardSearch/BoardSearch';
 import BoardMain from './BoardMain/BoardMain';
@@ -13,7 +14,8 @@ import IBoardEntity, {
   ICardData,
   ILabelData,
   ITaskCard,
-  ITaskEntity
+  ITaskEntity,
+  ITypes
 } from '../../types';
 import BoardCard from '../BoardCard/BoardCard';
 import { getLabels } from '../../api/label/label';
@@ -21,6 +23,9 @@ import { deleteActivity } from '../../api/activity/activity';
 import ProjectNavigationV3 from '../../lib/ProjectNavigationV3/ProjectNavigationV3';
 import Modal from '../../lib/Modal/Modal';
 import DefaultModalHeader from '../../lib/Modal/ModalHeader/DefaultModalHeader/DefaultModalHeader';
+import { getUsers } from '../../api/user/user';
+import { getTypes } from '../../api/types/types';
+import { convertFilterArrayToString } from '../../utils/helpers';
 
 const onDragEnd = (
   result: DropResult,
@@ -77,47 +82,63 @@ export default function Board() {
   const [taskData, setTaskData] = useState<ITaskEntity>();
   const [labels, setLabels] = useState<ILabelData[]>([]);
   const [loading, setLoading] = useState(false);
+  const [userList, setUserList] = useState([]);
+  const [selectedUsers, setSelectedUsers] = useState<any[]>([]);
+  const [typeList, setTypeList] = useState<any[]>([]);
+  const [selectedTypes, setSelectedTypes] = useState<ITypes[]>([]);
+  const [selectedLabels, setSelectedLabels] = useState<ILabelData[]>([]);
 
-  const fetchColumnsData = useCallback(
-    (boardInfo: IBoardEntity) => {
-      const columnInfoData: IColumnsFromBackend = {};
+  const changeSelectedItems = (isExist, selectedItems, item) => {
+    if (!isExist) {
+      return [...selectedItems, item];
+    }
+    return selectedItems.filter((selectedItem) => selectedItem.id !== item.id);
+  };
 
-      if (inputQuery) {
-        for (const item of boardInfo.taskStatus) {
-          columnInfoData[item.id] = {
-            name: item.name,
-            slug: item.slug,
-            order: item.order,
-            items: item.taskList.filter((task) =>
-              task.title?.toLowerCase().includes(inputQuery.toLowerCase())
-            )
-          };
-        }
-        return setColumnsInfo(columnInfoData);
+  const getProjectDataApi = useCallback(() => {
+    const getProjectData = async () => {
+      try {
+        const res = await getUsers();
+        setUserList(res.data);
+      } catch (e) {
+        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
       }
+    };
+    getProjectData();
+  }, []);
 
-      for (const item of boardInfo.taskStatus) {
-        columnInfoData[item.id] = {
-          name: item.name,
-          slug: item.slug,
-          order: item.order,
-          items: item.taskList
-        };
-      }
+  useEffect(() => {
+    getProjectDataApi();
+  }, [getProjectDataApi]);
 
-      return setColumnsInfo(columnInfoData);
-    },
-    [inputQuery]
-  );
+  const fetchColumnsData = useCallback((boardInfo: IBoardEntity) => {
+    const columnInfoData: IColumnsFromBackend = {};
+
+    for (const item of boardInfo.taskStatus) {
+      columnInfoData[item.id] = {
+        name: item.name,
+        slug: item.slug,
+        order: item.order,
+        items: item.taskList
+      };
+    }
+    return setColumnsInfo(columnInfoData);
+  }, []);
+
   const fetchBoardInfo = useCallback(() => {
     const fetchBoard = async () => {
       setLoading(true);
-      const boardInfo = await getBoard(boardId);
+      const userCase = convertFilterArrayToString(selectedUsers);
+      const taskTypeCase = convertFilterArrayToString(selectedTypes);
+      const labelCase = convertFilterArrayToString(selectedLabels);
+      const boardInfo = await getBoard(boardId, inputQuery, userCase, taskTypeCase, labelCase);
       fetchColumnsData(boardInfo);
+      const typeData = await getTypes();
+      setTypeList(typeData);
       setLoading(false);
     };
     fetchBoard();
-  }, [boardId, fetchColumnsData]);
+  }, [boardId, fetchColumnsData, inputQuery, selectedTypes, selectedUsers, selectedLabels]);
 
   useEffect(() => {
     fetchBoardInfo();
@@ -171,8 +192,8 @@ export default function Board() {
 
   const showUpdatedTask = (updatedTaskInfo: any) => {
     const updatedColumns = { ...columnsInfo };
-    if (updatedTaskInfo?.statusId && taskData?.statusId) {
-      columnsInfo[taskData.statusId].items.forEach((item, index) => {
+    if (updatedTaskInfo?.statusId && taskData?.status.id) {
+      columnsInfo[taskData.status.id].items.forEach((item, index) => {
         if (
           item.id === updatedTaskInfo.id &&
           updatedTaskInfo.title !== undefined &&
@@ -204,7 +225,7 @@ export default function Board() {
       updatedNewTaskInfo.sprintId = newTaskInfo.sprintId ? newTaskInfo.sprintId.id : null;
       if (updatedNewTaskInfo.id !== undefined) {
         await updateTask(updatedNewTaskInfo.id, updatedNewTaskInfo);
-        showUpdatedTask(updatedNewTaskInfo);
+        showUpdatedTask({ ...newTaskInfo, status: newTaskInfo.status });
       }
     } catch (e) {
       getViewTaskStateFromChildren();
@@ -247,6 +268,16 @@ export default function Board() {
         updateIsCreateNewCard={getCreateNewCardStateFromChildren}
         setInputQuery={setInputQuery}
         projectId={projectId}
+        selectedUsers={selectedUsers}
+        setSelectedUsers={setSelectedUsers}
+        changeSelectedUsers={changeSelectedItems}
+        userList={userList}
+        typeList={typeList}
+        selectedTypes={selectedTypes}
+        setSelectedTypes={setSelectedTypes}
+        changeSelectedTypes={changeSelectedItems}
+        selectedLabels={selectedLabels}
+        setSelectedLabels={setSelectedLabels}
       />
       <BoardMain
         columnsInfo={columnsInfo}

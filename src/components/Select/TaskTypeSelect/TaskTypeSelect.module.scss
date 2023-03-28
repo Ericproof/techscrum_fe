@@ -5,18 +5,20 @@ $bgColorDark: rgb(40, 54, 84);
 .buttonContainer {
   height: 100%;
   border-radius: 5px;
+  padding: 8px;
   border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   background-color: white;
+  &:hover {
+    background-color: $btHoverBg;
+  }
   img {
     margin-right: 5px;
   }
 }
-.hoverButton {
-  background-color: $btHoverBg;
-}
+
 .buttonClicked {
   background-color: $bgColorDark;
   color: white;
@@ -37,7 +39,7 @@ $bgColorDark: rgb(40, 54, 84);
     border-left: 2px solid rgb(33, 81, 197);
   }
   img {
-    margin-right: 5px;
+    margin: 0 5px;
   }
   p {
     font-size: 15px;

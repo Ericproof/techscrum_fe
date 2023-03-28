@@ -7,27 +7,23 @@ import { deleteTask, updateTask } from '../../../api/backlog/backlog';
 
 interface IOptionBtn {
   taskId: string;
-  showOptionBtn: boolean;
   sprintId: string;
   showDropDownOnTop?: boolean;
   sprintData: any;
-  toggleDisableShowOptionBtnEffect: () => void;
   getBacklogDataApi: () => void;
+  className: string;
 }
 export default function OptionBtn({
   taskId,
-  showOptionBtn,
   sprintId,
   sprintData,
   showDropDownOnTop,
-  toggleDisableShowOptionBtnEffect,
-  getBacklogDataApi
+  getBacklogDataApi,
+  className
 }: IOptionBtn) {
   const [clickOptionBtnShowStyle, setClickOptionBtnShowStyle] = useState(false);
-  const [hoverOptionBtn, setHoverOptionBtn] = useState(false);
 
   const action = () => {
-    toggleDisableShowOptionBtnEffect();
     setClickOptionBtnShowStyle(false);
   };
   const { visible, setVisible, myRef } = useOutsideAlerter(false, action);
@@ -69,30 +65,13 @@ export default function OptionBtn({
     action();
   };
 
-  let btnClassName = '';
-  if (showOptionBtn && clickOptionBtnShowStyle) {
-    btnClassName = [styles.optionBtn, styles.showOptionBtn, styles.clickOptionBtn].join(' ');
-  } else if (showOptionBtn && hoverOptionBtn) {
-    btnClassName = [styles.optionBtn, styles.showOptionBtn, styles.optionBtnHover].join(' ');
-  } else if (showOptionBtn) {
-    btnClassName = [styles.optionBtn, styles.showOptionBtn].join(' ');
-  } else {
-    btnClassName = styles.optionBtn;
-  }
   return (
-    <div className={styles.optionBtnContainer} ref={myRef}>
+    <div className={`${styles.optionBtnContainer} ${className}`} ref={myRef}>
       <button
-        className={btnClassName}
+        className={styles.optionBtn}
         onClick={() => {
           setVisible(!visible);
           setClickOptionBtnShowStyle(!clickOptionBtnShowStyle);
-          toggleDisableShowOptionBtnEffect();
-        }}
-        onMouseOver={() => {
-          setHoverOptionBtn(true);
-        }}
-        onMouseOut={() => {
-          setHoverOptionBtn(false);
         }}
         onBlur={() => {}}
         onFocus={() => {}}

@@ -1,5 +1,17 @@
-import React, { useContext } from 'react';
-import { IColumnsFromBackend, ILabelData, IOnChangeProjectLead, ITaskEntity } from '../../../types';
+import React, { Dispatch, SetStateAction, useContext, useState } from 'react';
+import { CgArrowRightR } from 'react-icons/cg';
+import { MdOutlineBookmarkBorder } from 'react-icons/md';
+import { RiFlag2Line } from 'react-icons/ri';
+import { BsPeople } from 'react-icons/bs';
+import { AiOutlineCalendar } from 'react-icons/ai';
+import { v4 as uuid } from 'uuid';
+import {
+  IColumnsFromBackend,
+  ILabelData,
+  IOnChangeProjectLead,
+  ITaskEntity,
+  ITypes
+} from '../../../types';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import style from './CardRightContent.module.scss';
 import ReporterFields from './ReporterFields/ReporterFields';
@@ -8,9 +20,9 @@ import UserSelect from '../../Form/Select/UserSelect/UserSelect';
 import checkAccess from '../../../utils/helpers';
 import DueDatePicker from '../../DueDatePicker/DueDatePicker';
 import { UserContext } from '../../../context/UserInfoProvider';
+import { TaskTypesContext } from '../../../context/TaskTypeProvider';
 import { createActivity } from '../../../api/activity/activity';
 import { createDailyScrum, getDailyScrums } from '../../../api/dailyScrum/dailyScrum';
-import Row from '../../../lib/Grid/Row/Row';
 
 interface Props {
   taskInfo: ITaskEntity;
@@ -19,6 +31,9 @@ interface Props {
   labels: ILabelData[];
   projectId: string;
   updateTaskTags: (tags: ILabelData[] | undefined) => void;
+  onSave: (data: ITaskEntity) => void;
+  selectedType: ITypes | null;
+  setSelectedType: Dispatch<SetStateAction<ITypes | null>>;
 }
 
 export default function CardRightContent({
@@ -27,15 +42,46 @@ export default function CardRightContent({
   taskStatusOnchange,
   labels,
   projectId,
-  updateTaskTags
+  updateTaskTags,
+  onSave,
+  selectedType,
+  setSelectedType
 }: Props) {
-  const { visible, setVisible, myRef } = useOutsideAlerter(false);
-  const handleClickOutside = () => setVisible(true);
+  const PRIORITY = {
+    Highest: 'https://010001.atlassian.net/images/icons/priorities/highest.svg',
+    High: 'https://010001.atlassian.net/images/icons/priorities/high.svg',
+    Medium: 'https://010001.atlassian.net/images/icons/priorities/medium.svg',
+    Low: 'https://010001.atlassian.net/images/icons/priorities/low.svg',
+    Lowest: 'https://010001.atlassian.net/images/icons/priorities/lowest.svg'
+  };
+  const priorityOptions = ['Highest', 'High', 'Medium', 'Low', 'Lowest'];
+  const {
+    visible: visibleSelectStatus,
+    setVisible: setVisibleSelectStatus,
+    myRef: selectStatusRef
+  } = useOutsideAlerter(false);
+  const {
+    visible: visibleSelectType,
+    setVisible: setVisibleSelectType,
+    myRef: selectTypeRef
+  } = useOutsideAlerter(false);
+  const {
+    visible: visibleSelectPriority,
+    setVisible: setVisibleSelectPriority,
+    myRef: selectPriorityRef
+  } = useOutsideAlerter(false);
+  const handleSelectStatusClickOutside = () => setVisibleSelectStatus(true);
+  const handleSelectTypeClickOutside = () => setVisibleSelectType(true);
+  const handleSelectPriorityOutside = () => setVisibleSelectPriority(true);
   const editAccess = checkAccess('edit:tasks', projectId);
   const userInfo = useContext(UserContext);
   const operation = 'updated';
   const userId = userInfo.id;
   const taskId = taskInfo.id;
+  const [selectedPriorityIcon, setSelectedPriorityIcon] = useState(PRIORITY[taskInfo.priority]);
+  const [selectedPriority, setSelectedPriority] = useState(taskInfo.priority);
+  const taskTypes = useContext(TaskTypesContext);
+
   const dateHandler = (fullDate) => {
     const date = new Date(fullDate);
     const year = date.getFullYear();
@@ -44,6 +90,13 @@ export default function CardRightContent({
     day = day < 10 ? `0${day}` : day;
     month = month + 1 < 10 ? `0${month + 1}` : month + 1;
     return `${day}-${month}-${year}`;
+  };
+
+  const reporterOnchangeEventHandler = async (e: IOnChangeProjectLead) => {
+    const updatedTaskInfo = { ...taskInfo };
+    updatedTaskInfo.reporterId = !e.target.value ? undefined : e.target.value;
+    taskStatusOnchange(updatedTaskInfo);
+    await createActivity({ operation, userId, taskId });
   };
 
   const assigneeOnchangeEventHandler = async (e: IOnChangeProjectLead) => {
@@ -79,34 +132,21 @@ export default function CardRightContent({
     }
   };
 
-  const monthShortNames = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec'
-  ];
+  const onClickIssueType = (task: ITaskEntity) => {
+    const updateTaskInfo = { ...taskInfo };
+    updateTaskInfo.typeId = task;
+    setSelectedType(updateTaskInfo.typeId);
+    setVisibleSelectType(false);
+    onSave(updateTaskInfo);
+  };
 
-  const dateWithTimestamp = (d: Date | null) => {
-    if (d != null) {
-      const date = d.toString().split('T')[0];
-      const dateDataArray = date.split('-');
-      const time = d.toString().split('T')[1].split(':');
-      const hour = Number(time[0]);
-      time[0] = hour > 12 ? `${hour - 12}` : `${hour}`;
-      const period = hour < 12 ? 'AM' : 'PM';
-      return `${monthShortNames[Number(dateDataArray[1]) - 1]} ${dateDataArray[2]}, ${
-        dateDataArray[0]
-      } at ${time[0]}:${time[1]} ${period}`;
-    }
-    return '';
+  const onClickPriorityOption = (task: string) => {
+    const updateTaskInfo = { ...taskInfo };
+    updateTaskInfo.priority = task;
+    setSelectedPriorityIcon(PRIORITY[task]);
+    setSelectedPriority(task);
+    setVisibleSelectPriority(false);
+    onSave(updateTaskInfo);
   };
 
   if (!taskInfo) {
@@ -115,92 +155,201 @@ export default function CardRightContent({
 
   return (
     <div className={style.container}>
-      <div ref={myRef} className={style.statusSection}>
-        {visible && editAccess ? (
-          <>
-            <button type="button" className={style.toDoButton} onClick={handleClickOutside}>
-              <span>{columnsInfo[taskInfo.statusId ?? ''].name ?? ''}</span>
-              <svg viewBox="0 0 24 24" role="presentation">
-                <path
-                  d="M8.292 10.293a1.009 1.009 0 000 1.419l2.939 2.965c.218.215.5.322.779.322s.556-.107.769-.322l2.93-2.955a1.01 1.01 0 000-1.419.987.987 0 00-1.406 0l-2.298 2.317-2.307-2.327a.99.99 0 00-1.406 0z"
-                  fill="currentColor"
-                  fillRule="evenodd"
-                />
-              </svg>
-            </button>
-            <div className={style.dropdownSection}>
-              <ul>
-                {Object.entries(columnsInfo).map(([id, column]) => {
-                  return (
-                    <li key={id}>
+      <div className={style.box}>
+        <div className={style.boxBody}>
+          <div className={style.type}>
+            <div className={style.leftContent}>
+              <CgArrowRightR className={style.reactIcon} />
+              <div>Type</div>
+            </div>
+            <div className={style.rightContent}>
+              <div>
+                <button
+                  className={style.storyIcon}
+                  data-testid="card-type-button"
+                  type="button"
+                  onClick={() => {
+                    handleSelectTypeClickOutside();
+                  }}
+                >
+                  <img className={style.selectedTypeIcon} src={selectedType?.icon} alt="Story" />
+                  <div className={style.selectedType}>{selectedType?.name}</div>
+                </button>
+              </div>
+              {visibleSelectType && checkAccess('edit:tasks', projectId) && (
+                <div className={style.taskTypeList} ref={selectTypeRef}>
+                  <p className={style.typeListTitle}>CHANGE ISSUE TYPE</p>
+                  {taskTypes.map((taskType) => {
+                    const src = taskType.icon;
+                    const alt = taskType.slug;
+                    return (
                       <button
-                        type="button"
-                        name="status"
-                        className={style.statusOptions}
+                        className={style.typeListOption}
+                        data-testid="card-type-selection"
+                        key={taskType.id}
                         onClick={() => {
-                          setVisible(false);
-                          const updatedTaskInfo = { ...taskInfo };
-                          updatedTaskInfo.statusId = id;
-                          taskStatusOnchange(updatedTaskInfo);
+                          onClickIssueType(taskType);
                         }}
                       >
-                        <span>{column.name}</span>
+                        <img src={src} alt={alt} />
+                        <p>{taskType.name}</p>
                       </button>
-                    </li>
-                  );
-                })}
-              </ul>
+                    );
+                  })}
+                </div>
+              )}
             </div>
-          </>
-        ) : (
-          <button type="button" className={style.toDoButton} onClick={handleClickOutside}>
-            {taskInfo.status && taskInfo.status.name.toUpperCase()}
-            <span>{columnsInfo[taskInfo.statusId ?? '']?.name ?? ''}</span>
-            {editAccess && (
-              <svg viewBox="0 0 24 24" role="presentation">
-                <path
-                  d="M8.292 10.293a1.009 1.009 0 000 1.419l2.939 2.965c.218.215.5.322.779.322s.556-.107.769-.322l2.93-2.955a1.01 1.01 0 000-1.419.987.987 0 00-1.406 0l-2.298 2.317-2.307-2.327a.99.99 0 00-1.406 0z"
-                  fill="currentColor"
-                  fillRule="evenodd"
-                />
-              </svg>
-            )}
-          </button>
-        )}
-      </div>
-      <div className={style.box}>
-        <div className={style.detail}>
-          <span>Detail</span>
-        </div>
-        <div className={style.boxBody}>
-          <Row classesName={style.fieldMargin}>
-            <div className={['fullWidth', style.label].join(' ')}>Assignee</div>
-            <UserSelect
-              onChange={assigneeOnchangeEventHandler}
-              value={taskInfo.assignId}
-              allowEdit={editAccess}
-            />
-          </Row>
-          <LabelFields
-            labels={labels}
-            taskInfo={taskInfo}
-            isDisabled={!editAccess}
-            updateTaskTags={updateTaskTags}
-          />
+          </div>
+          <div className={style.type}>
+            <div className={style.leftContent}>
+              <MdOutlineBookmarkBorder className={style.reactIcon} />
+              <div>Status</div>
+            </div>
+            <div ref={selectStatusRef} className={style.statusSection}>
+              {visibleSelectStatus && editAccess ? (
+                <>
+                  <button
+                    type="button"
+                    className={style.toDoButton}
+                    onClick={handleSelectStatusClickOutside}
+                    data-testid="card-status-button"
+                  >
+                    {taskInfo.status && taskInfo.status.name.toUpperCase()}
+                    <svg viewBox="0 0 24 24" role="presentation">
+                      <path
+                        d="M8.292 10.293a1.009 1.009 0 000 1.419l2.939 2.965c.218.215.5.322.779.322s.556-.107.769-.322l2.93-2.955a1.01 1.01 0 000-1.419.987.987 0 00-1.406 0l-2.298 2.317-2.307-2.327a.99.99 0 00-1.406 0z"
+                        fill="currentColor"
+                        fillRule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                  <div className={style.dropdownSection}>
+                    <ul>
+                      {Object.entries(columnsInfo).map(([id, column]) => {
+                        return (
+                          <li key={id}>
+                            <button
+                              type="button"
+                              name="status"
+                              className={style.statusOptions}
+                              data-testid="card-status-selection"
+                              onClick={() => {
+                                setVisibleSelectStatus(false);
+                                const updatedTaskInfo = { ...taskInfo };
+                                updatedTaskInfo.statusId = id;
+                                const { items, ...rest } = column;
+                                updatedTaskInfo.status = { ...rest, id };
+                                taskStatusOnchange(updatedTaskInfo);
+                              }}
+                            >
+                              <span>{column.name}</span>
+                            </button>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                </>
+              ) : (
+                <button
+                  type="button"
+                  className={style.toDoButton}
+                  onClick={handleSelectStatusClickOutside}
+                  data-testid="card-status-button"
+                >
+                  {taskInfo.status && taskInfo.status.name.toUpperCase()}
+                  {editAccess && (
+                    <svg viewBox="0 0 24 24" role="presentation">
+                      <path
+                        d="M8.292 10.293a1.009 1.009 0 000 1.419l2.939 2.965c.218.215.5.322.779.322s.556-.107.769-.322l2.93-2.955a1.01 1.01 0 000-1.419.987.987 0 00-1.406 0l-2.298 2.317-2.307-2.327a.99.99 0 00-1.406 0z"
+                        fill="currentColor"
+                        fillRule="evenodd"
+                      />
+                    </svg>
+                  )}
+                </button>
+              )}
+            </div>
+          </div>
           <div className={style.dueDate}>
-            <div>Due date</div>
+            <div className={style.leftContent}>
+              <AiOutlineCalendar className={style.reactIcon} />
+              <div>Due date</div>
+            </div>
             <DueDatePicker
               taskInfo={taskInfo}
               dueDateOnchange={taskStatusOnchange}
               isDisabled={editAccess}
             />
           </div>
-          <ReporterFields reporterInfo={taskInfo.reporterId ?? {}} />
+          <div className={style.type}>
+            <div className={style.leftContent}>
+              <RiFlag2Line className={style.reactIcon} />
+              <div>Priority</div>
+            </div>
+            <div className={style.rightContent}>
+              <button
+                className={style.storyIcon}
+                data-testid="card-priority-button"
+                type="button"
+                onClick={() => {
+                  handleSelectPriorityOutside();
+                }}
+              >
+                <img
+                  className={style.priorityImg}
+                  src={selectedPriorityIcon}
+                  alt={taskInfo.priority}
+                />
+                <div>{selectedPriority}</div>
+              </button>
+              {visibleSelectPriority && checkAccess('edit:tasks', projectId) && (
+                <div className={style.taskTypeList} ref={selectPriorityRef}>
+                  {priorityOptions.map((priorityOption) => {
+                    const src = PRIORITY[priorityOption];
+                    return (
+                      <button
+                        key={uuid()}
+                        className={style.typeListOption}
+                        data-testid="card-priority-selection"
+                        onClick={() => {
+                          onClickPriorityOption(priorityOption);
+                        }}
+                      >
+                        <img className={style.priorityImg} src={src} alt={priorityOption} />
+                        {priorityOption}
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          </div>
+          <ReporterFields
+            taskInfo={taskInfo}
+            projectId={projectId}
+            reporterOnchangeEventHandler={reporterOnchangeEventHandler}
+          />
+          <div className={style.fieldMargin}>
+            <div className={style.label}>
+              <BsPeople className={style.reactIcon} />
+              <div>Assignee</div>
+            </div>
+            <div className={style.assigneeRightContent}>
+              <UserSelect
+                onChange={assigneeOnchangeEventHandler}
+                value={taskInfo.assignId}
+                allowEdit={editAccess}
+              />
+            </div>
+          </div>
+          <LabelFields
+            labels={labels}
+            taskInfo={taskInfo}
+            isDisabled={!editAccess}
+            updateTaskTags={updateTaskTags}
+          />
         </div>
-      </div>
-      <div className={style.createAndUpdateDate}>
-        <span>Created {dateWithTimestamp(taskInfo.createdAt ?? null)}</span>
-        <span>Updated {dateWithTimestamp(taskInfo.updatedAt ?? null)}</span>
       </div>
     </div>
   );

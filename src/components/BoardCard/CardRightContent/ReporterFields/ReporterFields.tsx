@@ -1,25 +1,35 @@
 import React from 'react';
+import { BsPerson } from 'react-icons/bs';
 import styles from './ReporterFields.module.scss';
+import UserSelect from '../../../Form/Select/UserSelect/UserSelect';
+import checkAccess from '../../../../utils/helpers';
+import { IOnChangeProjectLead } from '../../../../types';
 
 interface ITaskRelator {
-  reporterInfo: any;
+  taskInfo: any;
+  projectId: any;
+  reporterOnchangeEventHandler: (e: IOnChangeProjectLead) => void;
 }
 
-export default function ReporterFields({ reporterInfo }: ITaskRelator) {
+export default function ReporterFields({
+  taskInfo,
+  projectId,
+  reporterOnchangeEventHandler
+}: ITaskRelator) {
+  const editAccess = checkAccess('edit:tasks', projectId);
+
   return (
     <div className={styles.reporter}>
-      <div>Reporter</div>
-      <div className={styles.leadDropdownContainer}>
-        <button className={styles.leadInputClose} type="button">
-          <img
-            src={
-              reporterInfo.avatarIcon ??
-              'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'
-            }
-            alt="avatar"
-          />
-          <span>{reporterInfo.name ?? ''}</span>
-        </button>
+      <div className={styles.leftContent}>
+        <BsPerson className={styles.reactIcon} />
+        <div>Reporter</div>
+      </div>
+      <div>
+        <UserSelect
+          onChange={reporterOnchangeEventHandler}
+          value={taskInfo.reporterId}
+          allowEdit={editAccess}
+        />
       </div>
     </div>
   );

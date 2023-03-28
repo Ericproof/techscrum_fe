@@ -3,14 +3,18 @@ import {
   AiOutlineFieldTime,
   AiOutlineBarChart,
   AiOutlineLaptop,
-  AiOutlineUserAdd,
   AiOutlineDisconnect,
   AiOutlineTeam,
   AiOutlineFundProjectionScreen,
   AiTwotoneSwitcher,
   AiOutlineAliwangwang
 } from 'react-icons/ai';
-import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
+import {
+  MdOutlineKeyboardArrowDown,
+  MdWorkOutline,
+  MdLaptopChromebook,
+  MdOutlineContactSupport
+} from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import styles from './ServicesTabs.module.scss';
 import OneColumnsMenu from './OneColumnMenu/OneColumnMenu';
@@ -24,28 +28,22 @@ const features = {
     title: 'Features',
     content: [
       {
-        icon: AiOutlineFieldTime,
-        title: 'Resource Management',
-        description: 'Manage your team&apos;s short team and long term resources',
-        href: '/#'
-      },
-      {
         icon: AiOutlineBarChart,
         title: 'Kanban boards',
-        description: 'Automate your workflow and visualiza project tasks',
-        href: '/#'
+        description: 'Optimize your workflow and visualize project tasks',
+        href: '/features/kanban-board'
+      },
+      {
+        icon: AiOutlineFieldTime,
+        title: 'Report',
+        description: 'Track delay and achieve goals based on improvement report',
+        href: '/features/report'
       },
       {
         icon: AiOutlineLaptop,
-        title: 'Time Tracking',
-        description: 'Deliver a more collaborative client experience',
-        href: '/#'
-      },
-      {
-        icon: AiOutlineUserAdd,
-        title: 'Unlimited client users',
-        description: 'Deliver a more collaborative client experience',
-        href: '/#'
+        title: 'My work',
+        description: 'Stay flexible and prioritize your work',
+        href: '/features/my-work'
       }
     ]
   }
@@ -66,6 +64,12 @@ const teams = {
         title: 'Team 2',
         description: '',
         href: '/about-t2'
+      },
+      {
+        icon: AiOutlineTeam,
+        title: 'Team 3',
+        description: '',
+        href: '/about-t3'
       }
     ]
   }
@@ -123,15 +127,43 @@ const solutions = {
   }
 };
 
+const resources = {
+  content: {
+    title: 'resources',
+    content: [
+      {
+        icon: MdWorkOutline,
+        title: 'Careers',
+        description: 'A team that provides Growth and Support',
+        href: '/careers'
+      },
+      {
+        icon: MdLaptopChromebook,
+        title: 'Book a demo',
+        description: 'Learn the basic features of TechScrum',
+        href: '/contact'
+      },
+      {
+        icon: MdOutlineContactSupport,
+        title: 'Support Center',
+        description: 'Get the direct help Get the direct help',
+        href: '/support-center'
+      }
+    ]
+  }
+};
+
 export default function ServicesTabs({ show }: Props) {
   const [featuresActive, setFeaturesActive] = useState(false);
   const [solutionActive, setSolutionActive] = useState(false);
   const [teamActive, setTeamActive] = useState(false);
+  const [resourcesActive, setResourcesActive] = useState(false);
 
   const initial = () => {
     setFeaturesActive(false);
     setSolutionActive(false);
     setTeamActive(false);
+    setResourcesActive(false);
   };
 
   const activeMenu = (menu: string) => {
@@ -139,43 +171,57 @@ export default function ServicesTabs({ show }: Props) {
     if (menu === 'features') setFeaturesActive(!featuresActive);
     if (menu === 'solution') setSolutionActive(!solutionActive);
     if (menu === 'teams') setTeamActive(!teamActive);
+    if (menu === 'resources') setResourcesActive(!resourcesActive);
   };
 
   return (
     <div className={`${styles.serviceListTabs} ${show ? styles.serviceListTabsActive : ''}`}>
       <div>
-        <Link to="/#" onClick={() => activeMenu('features')}>
+        <button
+          data-testid="features"
+          className={[styles.tab, styles.tabBtn].join(' ')}
+          onClick={() => activeMenu('features')}
+        >
           Features
           <MdOutlineKeyboardArrowDown />
-        </Link>
+        </button>
         <OneColumnsMenu servicesInfo={features} active={featuresActive} />
       </div>
       <div>
-        <Link to="/#" onClick={() => activeMenu('solution')}>
+        <button
+          className={[styles.tab, styles.tabBtn].join(' ')}
+          onClick={() => activeMenu('solution')}
+        >
           Solutions
           <MdOutlineKeyboardArrowDown />
-        </Link>
+        </button>
         <OneColumnsMenu servicesInfo={solutions} active={solutionActive} />
       </div>
       <div>
-        <Link to="/#" onClick={() => activeMenu('teams')}>
+        <button
+          className={[styles.tab, styles.tabBtn].join(' ')}
+          onClick={() => activeMenu('teams')}
+        >
           Teams
           <MdOutlineKeyboardArrowDown />
-        </Link>
+        </button>
         <OneColumnsMenu servicesInfo={teams} active={teamActive} />
       </div>
+
       <div>
-        <Link to="/careers" onClick={() => activeMenu('careers')}>
-          Careers
-        </Link>
+        <button
+          className={[styles.tab, styles.tabBtn].join(' ')}
+          onClick={() => activeMenu('resources')}
+        >
+          Resources
+          <MdOutlineKeyboardArrowDown />
+        </button>
+        <OneColumnsMenu servicesInfo={resources} active={resourcesActive} />
       </div>
       <div>
-        <Link to="/contact" onClick={() => activeMenu('contact')}>
-          Book a demo
+        <Link className={[styles.tab, styles.tabLink].join(' ')} to="/price">
+          Price
         </Link>
-      </div>
-      <div>
-        <Link to="/price">Price</Link>
       </div>
     </div>
   );

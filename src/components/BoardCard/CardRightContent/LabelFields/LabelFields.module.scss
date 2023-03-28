@@ -2,13 +2,22 @@
   display: flex;
   flex-direction: row;
   margin-bottom: 12px;
+  height: 35px;
+  align-items: center;
+  font-size: 16px;
+
+  .leftContent {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    .reactIcon {
+      margin-right: 5px;
+    }
+  }
+
   & > div:nth-of-type(1) {
-    box-sizing: border-box;
-    width: 100%;
-    padding-top: 8px;
     line-height: 1;
     color: var(--ds-text-subtle, #38465e);
-    font-size: 14px;
     font-weight: 500;
   }
 
@@ -35,6 +44,8 @@
       width: 100%;
       max-width: 200px;
       flex-direction: column;
+      position: relative;
+      top: 73px;
       .labelOptions {
         display: flex;
         flex-direction: row;
@@ -162,9 +173,8 @@
       flex-wrap: wrap;
       gap: 5px;
       span {
-        margin-left: 10px;
         display: inline-flex;
-        font-size: 14px;
+        font-size: 16px;
         justify-content: center;
         color: rgb(0, 82, 204);
         background-color: #f4f5f7;
@@ -179,6 +189,7 @@
       .noLabel {
         color: #5e6c84;
         background-color: #fff;
+        font-size: 16px;
         &:hover {
           color: #5e6c84;
           background-color: #f4f5f7;
