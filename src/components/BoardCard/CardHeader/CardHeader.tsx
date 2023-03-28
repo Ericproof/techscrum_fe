@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { Dispatch, SetStateAction, useContext, useEffect } from 'react';
+import React, { Dispatch, SetStateAction, useContext, useEffect, useState } from 'react';
 import { RiMoreFill } from 'react-icons/ri';
-
 import { TaskTypesContext } from '../../../context/TaskTypeProvider';
+import { TasksByProjectContext } from '../../../context/TasksByProjectProvider';
 import useOutsideAlerter from '../../../hooks/OutsideAlerter';
 import checkAccess from '../../../utils/helpers';
 import style from './CardHeader.module.scss';
@@ -41,6 +41,15 @@ export default function CardHeader({
   const handleSelectDropDownClickOutside = () => setVisibleSelectDropDown(!visibleSelectDropDown);
   const handleDeleteSectionClickOutside = () => setVisibleDeleteSection(!visibleDeleteSection);
   const taskType = useContext(TaskTypesContext);
+  const tasksByProject = useContext(TasksByProjectContext);
+
+  const [taskTicketNum, setTaskTicketNum] = useState();
+  const [projectKey, setProjectKey] = useState();
+
+  useEffect(() => {
+    setTaskTicketNum(tasksByProject.findIndex((e) => e.id === taskInfo.id) + 1);
+    setProjectKey(tasksByProject[0]?.projectId.key);
+  }, [tasksByProject, taskInfo.id]);
 
   useEffect(() => {
     setSelectedType(taskInfo?.typeId);
@@ -95,7 +104,7 @@ export default function CardHeader({
             })}
           </div>
         )}
-        {taskInfo.id}
+        <span>{`${projectKey}-${String(taskTicketNum).padStart(3, '0')}`}</span>
       </div>
       <div className={style.headerRight}>
         <div ref={deleteSectionRef} className={style.deleteSection}>
