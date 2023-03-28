@@ -92,9 +92,12 @@ export default function BoardMain({
                                     <div className={styles.cardFooterLeft}>
                                       <span>
                                         Due Date:{' '}
-                                        {item.dueAt?.toString().split('T')[0].split('-')[2]}/
-                                        {item.dueAt?.toString().split('T')[0].split('-')[1]}/
-                                        {item.dueAt?.toString().split('T')[0].split('-')[0]}
+                                        {item.dueAt
+                                          ?.toString()
+                                          .split('T')[0]
+                                          .split('-')
+                                          .reverse()
+                                          .join('/')}
                                       </span>
                                     </div>
                                     <div className={styles.cardFooterRight}>

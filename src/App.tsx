@@ -51,6 +51,9 @@ import ReportPage from './pages/ReportPage/ReportPage';
 import SupportCenterPage from './pages/SupportCenterPage/SupportCenterPage';
 import RegisterPageV2 from './pages/RegisterV2/RegisterPageV2';
 import VerifyPageV2 from './pages/VerifyPageV2/VerifyPageV2';
+import PaymentSuccessPage from './pages/PaymentSuccessPage/PaymentSuccessPage';
+import PaymentDetailsPage from './pages/PaymentDetailsPage/PaymentDetailsPage';
+import BillingHistoryPage from './pages/BillingHistoryPage/BillingHistoryPage';
 import BillingSubscriptionPage from './pages/BillingSubscriptionPage/BillingSubscriptionPage';
 
 function App() {
@@ -118,6 +121,9 @@ function App() {
                   </Route>
                   <Route path="/settings/:projectId" element={<Setting />} />
                   <Route path="/me" element={<UserMePage />} />
+                  <Route path="/billing/paymentdetails" element={<PaymentDetailsPage />} />
+                  <Route path="/payment/success" element={<PaymentSuccessPage />} />
+                  <Route path="/billing/history" element={<BillingHistoryPage />} />
                   <Route path="/billing/subscription" element={<BillingSubscriptionPage />} />
                   <Route path="/user/:id" element={<UserPage />} />
                   <Route path="/access" element={<AccessPage />} />
