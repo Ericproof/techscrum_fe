@@ -4,19 +4,19 @@ import BinaryChoiceSelector from '../../ReusableElement/BinaryChoiceSelector/Bin
 import SupportTypeSelector from '../SupportTypeSelector/SupportTypeSelector';
 
 enum UpdateDailyScrumTicketParamKey {
-  progress = 'progress',
-  isCanFinish = 'isCanFinish',
-  isNeedSupport = 'isNeedSupport',
-  supportType = 'supportType',
-  otherSupportDesc = 'otherSupportDesc'
+  PROGRESS = 'progress',
+  IS_CAN_FINISH = 'isCanFinish',
+  IS_NEED_SUPPORT = 'isNeedSupport',
+  SUPPORT_TYPE = 'supportType',
+  OTHER_SUPPORT_DESC = 'otherSupportDesc'
 }
 
 enum SupportType {
-  noSupport,
-  technical,
-  requirement,
-  dependency,
-  other
+  NO_SUPPORT,
+  TECHNICAL,
+  REQUIREMENT,
+  DEPENDENCY,
+  OTHER
 }
 
 interface IDailyScrumTicketProps {
@@ -49,15 +49,15 @@ function DailyScrumTicket({
   const handleResetStates = useCallback(
     (states: Array<UpdateDailyScrumTicketParamKey>) => () => {
       return states.forEach((state) => {
-        if (state === UpdateDailyScrumTicketParamKey.isNeedSupport) {
+        if (state === UpdateDailyScrumTicketParamKey.IS_NEED_SUPPORT) {
           updateDailyScrumTicket(state)(false);
         }
 
-        if (state === UpdateDailyScrumTicketParamKey.supportType) {
+        if (state === UpdateDailyScrumTicketParamKey.SUPPORT_TYPE) {
           updateDailyScrumTicket(state)(0);
         }
 
-        if (state === UpdateDailyScrumTicketParamKey.otherSupportDesc) {
+        if (state === UpdateDailyScrumTicketParamKey.OTHER_SUPPORT_DESC) {
           updateDailyScrumTicket(state)('');
         }
       });
@@ -81,7 +81,7 @@ function DailyScrumTicket({
             step="1"
             defaultValue={progress}
             onChange={(e) => {
-              updateDailyScrumTicket(UpdateDailyScrumTicketParamKey.progress)(
+              updateDailyScrumTicket(UpdateDailyScrumTicketParamKey.PROGRESS)(
                 e.target.valueAsNumber
               );
             }}
@@ -94,11 +94,11 @@ function DailyScrumTicket({
         <p>Can you finish this ticket by sprint end?</p>
         <BinaryChoiceSelector
           name={`isCanFinish-${id}`}
-          onChange={updateDailyScrumTicket(UpdateDailyScrumTicketParamKey.isCanFinish)}
+          onChange={updateDailyScrumTicket(UpdateDailyScrumTicketParamKey.IS_CAN_FINISH)}
           handleResetStates={handleResetStates([
-            UpdateDailyScrumTicketParamKey.isNeedSupport,
-            UpdateDailyScrumTicketParamKey.supportType,
-            UpdateDailyScrumTicketParamKey.otherSupportDesc
+            UpdateDailyScrumTicketParamKey.IS_NEED_SUPPORT,
+            UpdateDailyScrumTicketParamKey.SUPPORT_TYPE,
+            UpdateDailyScrumTicketParamKey.OTHER_SUPPORT_DESC
           ])}
           isResetHanlderForOptionYes
           value={isCanfinish}
@@ -109,10 +109,10 @@ function DailyScrumTicket({
           <p>Do you need support to complete this ticket?</p>
           <BinaryChoiceSelector
             name={`isNeedSupport-${id}`}
-            onChange={updateDailyScrumTicket(UpdateDailyScrumTicketParamKey.isNeedSupport)}
+            onChange={updateDailyScrumTicket(UpdateDailyScrumTicketParamKey.IS_NEED_SUPPORT)}
             handleResetStates={handleResetStates([
-              UpdateDailyScrumTicketParamKey.supportType,
-              UpdateDailyScrumTicketParamKey.otherSupportDesc
+              UpdateDailyScrumTicketParamKey.SUPPORT_TYPE,
+              UpdateDailyScrumTicketParamKey.OTHER_SUPPORT_DESC
             ])}
             isResetHanlderForOptionYes={false}
             value={isNeedSupport}
@@ -121,10 +121,10 @@ function DailyScrumTicket({
             <SupportTypeSelector
               supportType={supportType}
               name={`supportType-${id}`}
-              onChange={updateDailyScrumTicket(UpdateDailyScrumTicketParamKey.supportType)}
+              onChange={updateDailyScrumTicket(UpdateDailyScrumTicketParamKey.SUPPORT_TYPE)}
               otherSupportDesc={otherSupportDesc}
               editOtherSupportDesc={updateDailyScrumTicket(
-                UpdateDailyScrumTicketParamKey.otherSupportDesc
+                UpdateDailyScrumTicketParamKey.OTHER_SUPPORT_DESC
               )}
             />
           ) : null}

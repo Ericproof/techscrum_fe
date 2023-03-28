@@ -10,11 +10,11 @@ const supportTypesTitles: string[] = [
 ];
 
 enum SupportType {
-  noSupport,
-  technical,
-  requirement,
-  dependency,
-  other
+  NO_SUPPORT,
+  TECHNICAL,
+  REQUIREMENT,
+  DEPENDENCY,
+  OTHER
 }
 
 function SupportTypeSelector({
@@ -31,7 +31,7 @@ function SupportTypeSelector({
   editOtherSupportDesc: (value: string) => void;
 }) {
   useEffect(() => {
-    if (supportType !== SupportType.other) {
+    if (supportType !== SupportType.OTHER) {
       editOtherSupportDesc('');
     }
 
@@ -60,7 +60,7 @@ function SupportTypeSelector({
           </div>
         );
       })}
-      {supportType === SupportType.other ? (
+      {supportType === SupportType.OTHER ? (
         <textarea
           placeholder="please write at least one reason."
           required

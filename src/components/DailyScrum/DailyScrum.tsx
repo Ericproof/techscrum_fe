@@ -26,12 +26,12 @@ enum DailyScrumTicketsActionType {
 }
 
 enum UpdateDailyScrumTicketParamKey {
-  progress = 'progress',
-  isCanFinish = 'isCanFinish',
-  isNeedSupport = 'isNeedSupport',
-  supportType = 'supportType',
-  otherSupportDesc = 'otherSupportDesc',
-  errMsg = 'errMsg'
+  PROGRESS = 'progress',
+  IS_CAN_FINISH = 'isCanFinish',
+  IS_NEED_SUPPORT = 'isNeedSupport',
+  SUPPORT_TYPE = 'supportType',
+  OTHER_SUPPORT_DESC = 'otherSupportDesc',
+  ERR_MSG = 'errMsg'
 }
 
 interface IDailyScrumTicketsAction {
@@ -186,7 +186,7 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
 
         failedResultsSimplified.forEach(
           ({ id, errMsg }: { id: string; errMsg: string; errCode: number }) => {
-            updateDailyScrumTicket(id)(UpdateDailyScrumTicketParamKey.errMsg)(errMsg);
+            updateDailyScrumTicket(id)(UpdateDailyScrumTicketParamKey.ERR_MSG)(errMsg);
           }
         );
         setIsSubmitting(false);
