@@ -1,46 +1,76 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback } from 'react';
 import styles from './DailyScrumTicket.module.scss';
-import RadioInput from '../../ReusableElement/RadioInput/RadioInput';
-import { TasksByProjectContext } from '../../../context/TasksByProjectProvider';
+import BinaryChoiceSelector from '../../ReusableElement/BinaryChoiceSelector/BinaryChoiceSelector';
+import SupportTypeSelector from '../SupportTypeSelector/SupportTypeSelector';
 
-interface IDailyScrumTicket {
-  id: string;
-  taskId: string;
-  title: string;
-  progress: string;
-  finish: boolean;
-  finishValidation: boolean;
-  onChangeFinish: (id: string, value: boolean) => void;
-  onChangeSupport: (id: string, value: boolean) => void;
-  onChangeReason: (id: string, value: string) => void;
-  onChangeProgress: (id: string, e: React.ChangeEvent<HTMLInputElement>) => void;
+enum UpdateDailyScrumTicketParamKey {
+  PROGRESS = 'progress',
+  IS_CAN_FINISH = 'isCanFinish',
+  IS_NEED_SUPPORT = 'isNeedSupport',
+  SUPPORT_TYPE = 'supportType',
+  OTHER_SUPPORT_DESC = 'otherSupportDesc'
 }
-export default function DailyScrumTicket({
+
+enum SupportType {
+  NO_SUPPORT,
+  TECHNICAL,
+  REQUIREMENT,
+  DEPENDENCY,
+  OTHER
+}
+
+interface IDailyScrumTicketProps {
+  id: string;
+  title: string;
+  progress: number;
+  isCanfinish: boolean;
+  isNeedSupport: boolean;
+  supportType: SupportType;
+  projectKey: string;
+  otherSupportDesc?: string;
+  updateDailyScrumTicket: (
+    key: UpdateDailyScrumTicketParamKey
+  ) => (value: number | string | boolean) => void;
+  errMsg?: string;
+}
+
+function DailyScrumTicket({
   id,
-  taskId,
   title,
   progress,
-  finish,
-  finishValidation,
-  onChangeFinish,
-  onChangeSupport,
-  onChangeReason,
-  onChangeProgress
-}: IDailyScrumTicket) {
-  const tasksByProject = useContext(TasksByProjectContext);
-  const [taskTicketNum, setTaskTicketNum] = useState();
-  const [projectKey, setProjectKey] = useState();
+  isCanfinish,
+  isNeedSupport,
+  supportType,
+  projectKey,
+  otherSupportDesc,
+  errMsg,
+  updateDailyScrumTicket
+}: IDailyScrumTicketProps) {
+  const handleResetStates = useCallback(
+    (states: Array<UpdateDailyScrumTicketParamKey>) => () => {
+      return states.forEach((state) => {
+        if (state === UpdateDailyScrumTicketParamKey.IS_NEED_SUPPORT) {
+          updateDailyScrumTicket(state)(false);
+        }
 
-  useEffect(() => {
-    setTaskTicketNum(tasksByProject.findIndex((e) => e.id === taskId) + 1);
-    setProjectKey(tasksByProject[0]?.projectId.key);
-  }, [tasksByProject, taskId]);
+        if (state === UpdateDailyScrumTicketParamKey.SUPPORT_TYPE) {
+          updateDailyScrumTicket(state)(0);
+        }
+
+        if (state === UpdateDailyScrumTicketParamKey.OTHER_SUPPORT_DESC) {
+          updateDailyScrumTicket(state)('');
+        }
+      });
+    },
+    [updateDailyScrumTicket]
+  );
 
   return (
     <div className={styles.dailyScrumTicket}>
       <p className={styles.ticketTitle}>
-        {`${projectKey}-${String(taskTicketNum).padStart(3, '0')} - ${title}`}
+        {projectKey} - {title}
       </p>
+      {errMsg && <p>{errMsg}</p>}
       <div className={styles.progress}>
         <p>Progress</p>
         <div className={styles.progressRange}>
@@ -51,7 +81,9 @@ export default function DailyScrumTicket({
             step="1"
             defaultValue={progress}
             onChange={(e) => {
-              onChangeProgress(id, e);
+              updateDailyScrumTicket(UpdateDailyScrumTicketParamKey.PROGRESS)(
+                e.target.valueAsNumber
+              );
             }}
             data-testid={'dailyscrum-progress-bar-'.concat(id)}
           />
@@ -60,27 +92,51 @@ export default function DailyScrumTicket({
       </div>
       <div className={styles.finish}>
         <p>Can you finish this ticket by sprint end?</p>
-        <RadioInput id={id} name={`finish/${id}`} onChange={onChangeFinish} />
-        {!finish && finishValidation && (
-          <div className={styles.anyReason}>
-            <p>Any reasons?</p>
-            <textarea
-              name="reason"
-              id=""
-              cols={30}
-              rows={10}
-              onChange={(e) => {
-                onChangeReason(id, e.target.value);
-              }}
-              data-testid={'dailyscrum-reason-'.concat(id)}
+        <BinaryChoiceSelector
+          name={`isCanFinish-${id}`}
+          onChange={updateDailyScrumTicket(UpdateDailyScrumTicketParamKey.IS_CAN_FINISH)}
+          handleResetStates={handleResetStates([
+            UpdateDailyScrumTicketParamKey.IS_NEED_SUPPORT,
+            UpdateDailyScrumTicketParamKey.SUPPORT_TYPE,
+            UpdateDailyScrumTicketParamKey.OTHER_SUPPORT_DESC
+          ])}
+          isResetHanlderForOptionYes
+          value={isCanfinish}
+        />
+      </div>
+      {!isCanfinish ? (
+        <div className={styles.support}>
+          <p>Do you need support to complete this ticket?</p>
+          <BinaryChoiceSelector
+            name={`isNeedSupport-${id}`}
+            onChange={updateDailyScrumTicket(UpdateDailyScrumTicketParamKey.IS_NEED_SUPPORT)}
+            handleResetStates={handleResetStates([
+              UpdateDailyScrumTicketParamKey.SUPPORT_TYPE,
+              UpdateDailyScrumTicketParamKey.OTHER_SUPPORT_DESC
+            ])}
+            isResetHanlderForOptionYes={false}
+            value={isNeedSupport}
+          />
+          {isNeedSupport ? (
+            <SupportTypeSelector
+              supportType={supportType}
+              name={`supportType-${id}`}
+              onChange={updateDailyScrumTicket(UpdateDailyScrumTicketParamKey.SUPPORT_TYPE)}
+              otherSupportDesc={otherSupportDesc}
+              editOtherSupportDesc={updateDailyScrumTicket(
+                UpdateDailyScrumTicketParamKey.OTHER_SUPPORT_DESC
+              )}
             />
-          </div>
-        )}
-      </div>
-      <div className={styles.support}>
-        <p>Do you need support to complete this ticket?</p>
-        <RadioInput id={id} name={`support/${id}`} onChange={onChangeSupport} />
-      </div>
+          ) : null}
+        </div>
+      ) : null}
     </div>
   );
 }
+
+export default React.memo(DailyScrumTicket);
+
+DailyScrumTicket.defaultProps = {
+  otherSupportDesc: '',
+  errMsg: ''
+};
