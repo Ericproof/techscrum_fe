@@ -6,6 +6,10 @@ export function getTasks() {
   return axios.get(`${config.apiAddress}/projects`);
 }
 
+export function getTasksByProject(projectId: string) {
+  return alphaApi.get(`${config.apiAddress}/tasks/project/${projectId}`);
+}
+
 export function showTask(id = '') {
   return axios.get(`${config.apiAddress}/projects/${id}`);
 }
@@ -16,6 +20,10 @@ export function createTask(data: ITaskData) {
 
 export function deleteTask(id: string) {
   return axios.delete(`${config.apiAddress}/projects/${id}`);
+}
+
+export function deactiveTask(id: string) {
+  return alphaApi.put(`${config.apiAddress}/tasks/${id}/toggleActive`);
 }
 
 export function createNewTask(data: ITaskData) {

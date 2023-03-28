@@ -112,6 +112,6 @@ InputV2.defaultProps = {
   onValueBlur: null,
   loading: false,
   classes: null,
-  value: null,
+  value: '',
   defaultValue: null
 };
