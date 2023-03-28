@@ -7,8 +7,7 @@ export default {
   apiAddress:
     process.env.REACT_APP_BACKEND_URL ||
     process.env.REACT_APP_BACKEND_URL_V2 ||
-    'https://afternoon-fortress-36104.herokuapp.com/api/v1'
-  // apiAddress: 'http://localhost:8000/api/v1'
+    'https://afternoon-fortress-36104.herokuapp.com/api/v2'
 };
 
 const alphaApi = axios.create({

@@ -12,9 +12,7 @@ import {
   updateTask
 } from '../../api/backlog/backlog';
 import { getStatuses } from '../../api/status/status';
-import { getTypes } from '../../api/types/types';
 import { getUsers } from '../../api/user/user';
-import { showProject } from '../../api/projects/projects';
 import SprintSection from './SprintSection/SprintSection';
 import Loading from '../../components/Loading/Loading';
 import ProjectNavigationV3 from '../../lib/ProjectNavigationV3/ProjectNavigationV3';
@@ -24,6 +22,7 @@ import TaskLabelFilter from '../../components/TaskLabelFilter/TaskLabelFilter';
 import { LabelsProvider } from '../../context/LabelProvider';
 import { ITypes, ILabelData } from '../../types';
 import { convertFilterArrayToString } from '../../utils/helpers';
+import { TasksByProjectProvider } from '../../context/TasksByProjectProvider';
 
 export default function BacklogPage() {
   const [loaded, setLoaded] = useState(false);
@@ -31,12 +30,10 @@ export default function BacklogPage() {
   const [sprintData, setSprintData] = useState<any[]>([]);
   const [statusData, setStatusData] = useState([]);
   const { projectId = '', boardId = '' } = useParams();
-  const [typesData, setTypesData] = useState([]);
   const [selectedTypes, setSelectedTypes] = useState<ITypes[]>([]);
   const [selectedLabels, setSelectedLabels] = useState<ILabelData[]>([]);
   const [userList, setUserList] = useState<any>([]);
   const [projectDataLoaded, setProjectDataLoaded] = useState(false);
-  const [projectKey, setProjectKey] = useState('');
   const [selectedUsers, setSelectedUsers] = useState<any[]>([]);
   const [inputState, setInputState] = useState<boolean>(false);
   const [inputQuery, setInputQuery] = useState<string>('');
@@ -87,14 +84,10 @@ export default function BacklogPage() {
   const getProjectDataApi = useCallback(() => {
     const getProjectData = async () => {
       try {
-        let res = await getTypes();
-        setTypesData(res);
-        res = await getStatuses(boardId);
+        let res = await getStatuses(boardId);
         setStatusData(res);
         res = await getUsers();
         setUserList(res.data);
-        res = await showProject(projectId, localStorage.getItem('access_token') ?? '');
-        setProjectKey(res.data.key);
         setProjectDataLoaded(true);
       } catch (e) {
         setProjectDataLoaded(false);
@@ -102,7 +95,7 @@ export default function BacklogPage() {
       }
     };
     getProjectData();
-  }, [boardId, projectId]);
+  }, [boardId]);
 
   useEffect(() => {
     getBacklogDataApi();
@@ -177,7 +170,7 @@ export default function BacklogPage() {
           }}
         >
           {finishLoading && (
-            <>
+            <TasksByProjectProvider projectId={projectId} backlogData={backlogData}>
               <div className={styles.BacklogSearchFilter}>
                 <div className={styles.BacklogSearchArea}>
                   <SearchForBoard
@@ -194,7 +187,6 @@ export default function BacklogPage() {
                   userList={userList}
                 />
                 <TaskTypeFilter
-                  typeList={typesData}
                   selectedTypes={selectedTypes}
                   setSelectedTypes={setSelectedTypes}
                   changeSelectedTypes={changeSelectedItems}
@@ -219,7 +211,6 @@ export default function BacklogPage() {
                         getBacklogDataApi={getBacklogDataApi}
                         statusData={statusData}
                         userList={userList}
-                        projectKey={projectKey}
                       />
                     </React.Fragment>
                   );
@@ -230,9 +221,8 @@ export default function BacklogPage() {
                 getBacklogDataApi={getBacklogDataApi}
                 statusData={statusData}
                 userList={userList}
-                projectKey={projectKey}
               />
-            </>
+            </TasksByProjectProvider>
           )}
         </DragDropContext>
       </div>

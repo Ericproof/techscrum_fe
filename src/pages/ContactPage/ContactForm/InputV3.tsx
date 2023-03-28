@@ -49,6 +49,9 @@ export default function InputV3(props: TInputV3) {
     if (!regex && value.length) {
       setIsValid(true);
     }
+    if (value.length) {
+      setIsFocused(true);
+    }
   }, [regex, value]);
 
   const onBlurHandler = () => {

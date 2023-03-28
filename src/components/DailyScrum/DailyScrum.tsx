@@ -7,6 +7,7 @@ import DailyScrumTicket from './DailyScrumTicket/DailyScrumTicket';
 import { getDailyScrums, updateDailyScrum } from '../../api/dailyScrum/dailyScrum';
 import { UserContext } from '../../context/UserInfoProvider';
 import Modal from '../../lib/Modal/Modal';
+import { TasksByProjectProvider } from '../../context/TasksByProjectProvider';
 
 interface IDailyScrumModal {
   onClickCloseModal: () => void;
@@ -136,18 +137,20 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal) {
       <h4>Today: {dateHandler(new Date())}</h4>
       {dailyScrumTicketData.map((ticket) => {
         return (
-          <DailyScrumTicket
-            key={ticket.id}
-            id={ticket.id}
-            title={ticket.title}
-            progress={ticket.progress}
-            finish={ticket.finish}
-            finishValidation={ticket.finishValidation}
-            onChangeFinish={onChangeFinish}
-            onChangeSupport={onChangeSupport}
-            onChangeReason={onChangeReason}
-            onChangeProgress={onChangeProgress}
-          />
+          <TasksByProjectProvider projectId={projectId} key={ticket.id}>
+            <DailyScrumTicket
+              id={ticket.id}
+              taskId={ticket.taskId.id}
+              title={ticket.title}
+              progress={ticket.progress}
+              finish={ticket.finish}
+              finishValidation={ticket.finishValidation}
+              onChangeFinish={onChangeFinish}
+              onChangeSupport={onChangeSupport}
+              onChangeReason={onChangeReason}
+              onChangeProgress={onChangeProgress}
+            />
+          </TasksByProjectProvider>
         );
       })}
       <div className={styles.btnContainer}>

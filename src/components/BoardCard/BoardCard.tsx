@@ -7,6 +7,7 @@ import styles from './BoardCard.module.scss';
 import { upload } from '../../api/upload/upload';
 import { createActivity } from '../../api/activity/activity';
 import { UserContext } from '../../context/UserInfoProvider';
+import { TasksByProjectProvider } from '../../context/TasksByProjectProvider';
 import Title from './CardLeftContent/components/Title/Title';
 import checkAccess from '../../utils/helpers';
 
@@ -99,15 +100,17 @@ export default function BoardCard({
   return (
     <div className={styles.background}>
       <div className={styles.container}>
-        <CardHeader
-          updateIsViewTask={updateIsViewTask}
-          deleteTask={deleteTask}
-          taskInfo={taskInfo}
-          projectId={projectId}
-          onSave={onSave}
-          selectedType={selectedType}
-          setSelectedType={setSelectedType}
-        />
+        <TasksByProjectProvider projectId={projectId}>
+          <CardHeader
+            updateIsViewTask={updateIsViewTask}
+            deleteTask={deleteTask}
+            taskInfo={taskInfo}
+            projectId={projectId}
+            onSave={onSave}
+            selectedType={selectedType}
+            setSelectedType={setSelectedType}
+          />
+        </TasksByProjectProvider>
         <div className={styles.cardContent}>
           <div className={styles.cardTitle}>
             <Title

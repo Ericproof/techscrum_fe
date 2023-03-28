@@ -27,7 +27,6 @@ interface Props {
   ) => IUserInfo[];
   changeSelectedTypes: (isExists: boolean, selectedItems: ITypes[], item: ITypes) => ITypes[];
   userList: IUserInfo[];
-  typeList: ITypes[];
 }
 export default function BoardSearch({
   updateIsCreateNewCard,
@@ -37,7 +36,6 @@ export default function BoardSearch({
   changeSelectedUsers,
   changeSelectedTypes,
   userList,
-  typeList,
   selectedTypes,
   selectedLabels,
   setSelectedUsers,
@@ -76,7 +74,6 @@ export default function BoardSearch({
         />
       </div>
       <TaskTypeFilter
-        typeList={typeList}
         changeSelectedTypes={changeSelectedTypes}
         selectedTypes={selectedTypes}
         setSelectedTypes={setSelectedTypes}

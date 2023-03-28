@@ -1,4 +1,4 @@
-@import "../../variables.scss";
+@import '../../variables.scss';
 
 .contactPage {
   background-image: url(https://themexriver.com/appilo-theme/seo-agency/wp-content/uploads/sites/56/2021/11/hero-bg.jpg);
@@ -29,7 +29,7 @@
     max-width: 500px;
   }
 
-  .container{
+  .container {
     background: white;
     border-radius: 50px;
     display: flex;
@@ -47,23 +47,35 @@
       margin-top: 60px;
     }
   }
+  .formTitle {
+    color: #1d1c39;
+    font-size: 32px;
+    line-height: 115%;
+    font-weight: 400;
+    text-align: center;
+    @media (max-width: 997px) {
+      font-size: 26px;
+    }
+    @media (max-width: 568px) {
+      font-size: 22px;
+    }
+  }
 
-  .container::before{
+  .container::before {
     position: absolute;
     bottom: 0;
     right: 0;
     content: '';
     background-image: url(../../assets/dots.png), url(../../assets/dots.png);
-    background-repeat: no-repeat,no-repeat;
+    background-repeat: no-repeat, no-repeat;
     background-size: 20%, 20%;
     background-position: right -52px, center 400px;
     width: 80%;
     height: 80%;
     opacity: 0.1;
-    
   }
 
-  .content{
+  .content {
     background: $primaryColor;
     padding: 50px;
     margin-top: -150px;
@@ -73,62 +85,60 @@
       margin-bottom: 30px;
       padding: 20px;
     }
-    p,h1{
-    color: white;
+    p,
+    h1 {
+      color: white;
     }
-    p{
+    p {
       font-size: 20px;
       word-wrap: break-word;
     }
   }
 
-  ul{
+  ul {
     padding: 0;
     margin: 0;
-    li{
+    li {
       display: flex;
       list-style: none;
-      color:white;
+      color: white;
       padding: 0;
       margin: 40px 0;
-      font-size:22px;
-      b{
+      font-size: 22px;
+      b {
         font-size: 24px;
       }
 
-      .textContainer{
+      .textContainer {
         margin-left: 30px;
         @media (max-width: 768px) {
           margin-left: 15px;
           width: 80%;
           padding: 10px;
         }
-        
       }
 
-      .info1{
-        color:#dadada;
+      .info1 {
+        color: #dadada;
         margin: 40px 0 0 0;
       }
     }
   }
 
-  .info{
+  .info {
     font-weight: 900;
   }
 }
 
-
-
-.contactHeader{
+.contactHeader {
   width: 100%;
   min-height: 500px;
   background: $primaryColor;
   display: flex;
   align-items: center;
   justify-content: center;
-  h1{
-    color:white;
+  h1 {
+    color: white;
     font-size: 50px;
   }
 }
