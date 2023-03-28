@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Contact.module.scss';
+import ContactForm from '../../../../ContactPage/ContactForm/ContactForm';
 
 export default function Contact() {
   return (
@@ -10,47 +11,8 @@ export default function Contact() {
           <p>9.00am - 5.00pm IST, limited weekend cover.</p>
         </div>
         <div className={styles.contactDetail}>
-          <div className={styles.formContainer}>
-            <div className={styles.contactDetailForm}>
-              <form>
-                <div>
-                  <label htmlFor={`'problem'`}>
-                    <p>What’s up *</p>
-                    <select name="problem" id="problem">
-                      <option value="greeting">Just saying hi!</option>
-                      <option value="feature">I’d like to request a feature</option>
-                      <option value="billing">I have a question about billing</option>
-                      <option value="how to work">I‘m confused about how something works</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </label>
-                </div>
-                <div>
-                  <label htmlFor={`'fullName'`}>
-                    <p>Full name *</p>
-                    <input type="text" id="fullName" required autoComplete="off" />
-                  </label>
-                </div>
-                <div>
-                  <label htmlFor={`'email'`}>
-                    <p>Email address *</p>
-                    <input type="text" id="email" required autoComplete="off" />
-                  </label>
-                </div>
-                <div>
-                  <label htmlFor={`'moreInfo'`}>
-                    <p>Any more info you can provide *</p>
-                    <input type="text" id="moreInfo" required autoComplete="off" />
-                  </label>
-                </div>
-                <p className={styles.privacy}>
-                  By submitting, you confirm that you agree to the storing and processing of your
-                  personal data by Teamwork as described in our
-                  <a href="http://localhost:3001/privacy-policy">Privacy Statement</a>
-                </p>
-                <input className={styles.submit} type="submit" value="Submit your ticket" />
-              </form>
-            </div>
+          <div className={styles.contactDetailForm}>
+            <ContactForm />
           </div>
           <div className={styles.emailContainer}>
             <h4>Email us</h4>

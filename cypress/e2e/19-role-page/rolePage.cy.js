@@ -8,7 +8,7 @@ describe('RolePage', () => {
     cy.intercept('GET', '**/projects', projectsData).as('fetch-projects');
     cy.intercept('GET', '**/projects/*/roles', rolesData).as('fetch-roles');
     cy.intercept('GET', '**/permissions', permissionsData).as('fetch-permissions');
-    cy.visit('/login');
+    cy.visit('/v1/login');
     cy.login('kitman200220022002@gmail.com', '12345678');
     cy.wait('@fetch-projects');
     cy.get('[data-testid="testcypress"]').dblclick();
