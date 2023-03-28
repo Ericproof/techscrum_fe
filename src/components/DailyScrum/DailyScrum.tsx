@@ -256,7 +256,7 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
                     key={id}
                     id={id}
                     title={title}
-                    projectAbbr={project.key}
+                    projectKey={project.key}
                     progress={progress}
                     isCanfinish={isCanFinish}
                     isNeedSupport={isNeedSupport}

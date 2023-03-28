@@ -26,7 +26,7 @@ interface IDailyScrumTicketProps {
   isCanfinish: boolean;
   isNeedSupport: boolean;
   supportType: SupportType;
-  projectAbbr: string;
+  projectKey: string;
   otherSupportDesc?: string;
   updateDailyScrumTicket: (
     key: UpdateDailyScrumTicketParamKey
@@ -41,7 +41,7 @@ function DailyScrumTicket({
   isCanfinish,
   isNeedSupport,
   supportType,
-  projectAbbr,
+  projectKey,
   otherSupportDesc,
   errMsg,
   updateDailyScrumTicket
@@ -68,7 +68,7 @@ function DailyScrumTicket({
   return (
     <div className={styles.dailyScrumTicket}>
       <p className={styles.ticketTitle}>
-        {projectAbbr} - {title}
+        {projectKey} - {title}
       </p>
       {errMsg && <p>{errMsg}</p>}
       <div className={styles.progress}>
