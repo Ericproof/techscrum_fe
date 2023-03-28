@@ -23,13 +23,13 @@ describe('form', () => {
       .type(123)
       .should('have.attr', 'class')
       .and('contain', 'input__error');
-    cy.get('[data-cy="phone-input"]').clear().type(1234567890).and('not.contain', 'input__error');
+    cy.get('[data-cy="phone-input"]').clear().type('0416667708').and('not.contain', 'input__error');
   });
 
   it('(MOCK) Should have a success modal, after submitting with all valid input', () => {
     cy.get('[data-cy="name-input"]').type('john doe');
     cy.get('[data-cy="company-input"]').type('testing pty ltd');
-    cy.get('[data-cy="phone-input"]').type(1234567890);
+    cy.get('[data-cy="phone-input"]').type('0416667708');
     cy.get('[data-cy="email-input"]').type('johndoe@gmail.com');
     cy.get('[data-cy="message-input"]').type('Hi, This message is from cypress testing', {
       force: true
