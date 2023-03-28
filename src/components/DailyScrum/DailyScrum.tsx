@@ -21,8 +21,8 @@ interface IDailyScrumModal {
 type IDailyScrumTicketUpdate = Partial<IDailyScrumTicket> & { id: string };
 
 enum DailyScrumTicketsActionType {
-  updateOneTicket = 'UPDATE_ONE_TICKET',
-  getAllTickets = 'GET_ALL_TICKET'
+  UPDATE_ONE_TICKET = 'UPDATE_ONE_TICKET',
+  GET_ALL_TICKETS = 'GET_ALL_TICKET'
 }
 
 enum UpdateDailyScrumTicketParamKey {
@@ -43,10 +43,10 @@ const initialDailyScrumTickets: IDailyScrumTicket[] = [];
 
 const dailyScrumTicketsReducer = (state: IDailyScrumTicket[], action: IDailyScrumTicketsAction) => {
   switch (action.type) {
-    case DailyScrumTicketsActionType.getAllTickets:
+    case DailyScrumTicketsActionType.GET_ALL_TICKETS:
       return [...state, ...(action.payload as IDailyScrumTicket[])];
 
-    case DailyScrumTicketsActionType.updateOneTicket:
+    case DailyScrumTicketsActionType.UPDATE_ONE_TICKET:
       return state.map((ticket: IDailyScrumTicket) =>
         ticket.id === (action.payload as IDailyScrumTicketUpdate).id
           ? { ...ticket, ...action.payload }
@@ -112,7 +112,7 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
           toast('No dailyScrum data for now!', { theme: 'colored', toastId: 'dailyScrum error' });
         }
 
-        dispatch({ type: DailyScrumTicketsActionType.getAllTickets, payload: results });
+        dispatch({ type: DailyScrumTicketsActionType.GET_ALL_TICKETS, payload: results });
       } catch (e: unknown) {
         toast.error('Failed to get dailyScrum data!', {
           theme: 'colored',
@@ -125,7 +125,7 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
   const updateDailyScrumTicket = useCallback(
     (id: string) => (key: UpdateDailyScrumTicketParamKey) => (value: number | string | boolean) => {
       return dispatch({
-        type: DailyScrumTicketsActionType.updateOneTicket,
+        type: DailyScrumTicketsActionType.UPDATE_ONE_TICKET,
         payload: {
           id,
           [key]: value
