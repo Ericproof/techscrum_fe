@@ -3,22 +3,38 @@ import styles from './DailyScrumTicket.module.scss';
 import BinaryChoiceSelector from '../../ReusableElement/BinaryChoiceSelector/BinaryChoiceSelector';
 import SupportTypeSelector from '../SupportTypeSelector/SupportTypeSelector';
 
+enum UpdateDailyScrumTicketParamKey {
+  progress = 'progress',
+  isCanFinish = 'isCanFinish',
+  isNeedSupport = 'isNeedSupport',
+  supportType = 'supportType',
+  otherSupportDesc = 'otherSupportDesc'
+}
+
+enum SupportType {
+  noSupport,
+  technical,
+  requirement,
+  dependency,
+  other
+}
+
 interface IDailyScrumTicketProps {
   id: string;
   title: string;
   progress: number;
   isCanfinish: boolean;
   isNeedSupport: boolean;
-  supportType: 0 | 1 | 2 | 3 | 4;
+  supportType: SupportType;
   projectAbbr: string;
   otherSupportDesc?: string;
   updateDailyScrumTicket: (
-    key: 'progress' | 'isCanFinish' | 'isNeedSupport' | 'supportType' | 'otherSupportDesc'
+    key: UpdateDailyScrumTicketParamKey
   ) => (value: number | string | boolean) => void;
   errMsg?: string;
 }
 
-export default function DailyScrumTicket({
+function DailyScrumTicket({
   id,
   title,
   progress,
@@ -31,17 +47,17 @@ export default function DailyScrumTicket({
   updateDailyScrumTicket
 }: IDailyScrumTicketProps) {
   const handleResetStates = useCallback(
-    (states: Array<'isNeedSupport' | 'supportType' | 'otherSupportDesc'>) => () => {
+    (states: Array<UpdateDailyScrumTicketParamKey>) => () => {
       return states.forEach((state) => {
-        if (state === 'isNeedSupport') {
+        if (state === UpdateDailyScrumTicketParamKey.isNeedSupport) {
           updateDailyScrumTicket(state)(false);
         }
 
-        if (state === 'supportType') {
+        if (state === UpdateDailyScrumTicketParamKey.supportType) {
           updateDailyScrumTicket(state)(0);
         }
 
-        if (state === 'otherSupportDesc') {
+        if (state === UpdateDailyScrumTicketParamKey.otherSupportDesc) {
           updateDailyScrumTicket(state)('');
         }
       });
@@ -65,7 +81,9 @@ export default function DailyScrumTicket({
             step="1"
             defaultValue={progress}
             onChange={(e) => {
-              updateDailyScrumTicket('progress')(e.target.valueAsNumber);
+              updateDailyScrumTicket(UpdateDailyScrumTicketParamKey.progress)(
+                e.target.valueAsNumber
+              );
             }}
             data-testid={'dailyscrum-progress-bar-'.concat(id)}
           />
@@ -76,11 +94,11 @@ export default function DailyScrumTicket({
         <p>Can you finish this ticket by sprint end?</p>
         <BinaryChoiceSelector
           name={`isCanFinish-${id}`}
-          onChange={updateDailyScrumTicket('isCanFinish')}
+          onChange={updateDailyScrumTicket(UpdateDailyScrumTicketParamKey.isCanFinish)}
           handleResetStates={handleResetStates([
-            'isNeedSupport',
-            'supportType',
-            'otherSupportDesc'
+            UpdateDailyScrumTicketParamKey.isNeedSupport,
+            UpdateDailyScrumTicketParamKey.supportType,
+            UpdateDailyScrumTicketParamKey.otherSupportDesc
           ])}
           isResetHanlderForOptionYes
           value={isCanfinish}
@@ -91,8 +109,11 @@ export default function DailyScrumTicket({
           <p>Do you need support to complete this ticket?</p>
           <BinaryChoiceSelector
             name={`isNeedSupport-${id}`}
-            onChange={updateDailyScrumTicket('isNeedSupport')}
-            handleResetStates={handleResetStates(['supportType', 'otherSupportDesc'])}
+            onChange={updateDailyScrumTicket(UpdateDailyScrumTicketParamKey.isNeedSupport)}
+            handleResetStates={handleResetStates([
+              UpdateDailyScrumTicketParamKey.supportType,
+              UpdateDailyScrumTicketParamKey.otherSupportDesc
+            ])}
             isResetHanlderForOptionYes={false}
             value={isNeedSupport}
           />
@@ -100,9 +121,11 @@ export default function DailyScrumTicket({
             <SupportTypeSelector
               supportType={supportType}
               name={`supportType-${id}`}
-              onChange={updateDailyScrumTicket('supportType')}
+              onChange={updateDailyScrumTicket(UpdateDailyScrumTicketParamKey.supportType)}
               otherSupportDesc={otherSupportDesc}
-              editOtherSupportDesc={updateDailyScrumTicket('otherSupportDesc')}
+              editOtherSupportDesc={updateDailyScrumTicket(
+                UpdateDailyScrumTicketParamKey.otherSupportDesc
+              )}
             />
           ) : null}
         </div>
@@ -110,6 +133,8 @@ export default function DailyScrumTicket({
     </div>
   );
 }
+
+export default React.memo(DailyScrumTicket);
 
 DailyScrumTicket.defaultProps = {
   otherSupportDesc: '',

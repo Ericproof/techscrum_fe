@@ -95,25 +95,25 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
 
     createNewTask(newCard)
       .then((res) => {
-        if (res.status === 201) {
-          const operation = 'created';
-          const userId = userInfo?.id;
-          const taskId = res.data.id;
-          createActivity({ operation, userId, taskId });
-          fetchNewCard({ ...res.data, statusId: res.data.status });
-
-          if (assigneeId) {
-            const dailyScrumData = {
-              userId: assigneeId,
-              title,
-              taskId
-            };
-            createDailyScrum(projectId, dailyScrumData);
-          }
-
-          return;
+        if (res.status !== 201) {
+          return toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
         }
-        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+
+        const operation = 'created';
+        const userId = userInfo?.id;
+        const taskId = res.data.id;
+
+        if (assigneeId) {
+          const dailyScrumData = {
+            userId: assigneeId,
+            title,
+            taskId
+          };
+          createDailyScrum(projectId, dailyScrumData);
+        }
+
+        createActivity({ operation, userId, taskId });
+        return fetchNewCard({ ...res.data, statusId: res.data.status });
       })
       .catch(() => {
         toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });

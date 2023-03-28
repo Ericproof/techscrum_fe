@@ -25,6 +25,15 @@ enum DailyScrumTicketsActionType {
   getAllTickets = 'GET_ALL_TICKET'
 }
 
+enum UpdateDailyScrumTicketParamKey {
+  progress = 'progress',
+  isCanFinish = 'isCanFinish',
+  isNeedSupport = 'isNeedSupport',
+  supportType = 'supportType',
+  otherSupportDesc = 'otherSupportDesc',
+  errMsg = 'errMsg'
+}
+
 interface IDailyScrumTicketsAction {
   type: DailyScrumTicketsActionType;
   payload: IDailyScrumTicketUpdate | IDailyScrumTicket[];
@@ -73,7 +82,7 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
     return new Date('2023-03-31');
   }, []);
 
-  const dayDiffObj = useMemo(() => {
+  const sprintData = useMemo(() => {
     const timeDiff = SPRINT_END_DATE.getTime() - CURRENT_DATE.getTime();
     const diffOfDays = Math.round(timeDiff / 1000 / 60 / 60 / 24);
     const obj: { value: number; style: 'Safe' | 'Caution' | 'Danger' } = {
@@ -104,7 +113,7 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
         }
 
         dispatch({ type: DailyScrumTicketsActionType.getAllTickets, payload: results });
-      } catch (e: any) {
+      } catch (e: unknown) {
         toast.error('Failed to get dailyScrum data!', {
           theme: 'colored',
           toastId: 'dailyScrum error'
@@ -114,25 +123,15 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
   }, [projectId, userId]);
 
   const updateDailyScrumTicket = useCallback(
-    (id: string) =>
-      (
-        key:
-          | 'progress'
-          | 'isCanFinish'
-          | 'isNeedSupport'
-          | 'supportType'
-          | 'otherSupportDesc'
-          | 'errMsg'
-      ) =>
-      (value: number | string | boolean) => {
-        return dispatch({
-          type: DailyScrumTicketsActionType.updateOneTicket,
-          payload: {
-            id,
-            [key]: value
-          }
-        });
-      },
+    (id: string) => (key: UpdateDailyScrumTicketParamKey) => (value: number | string | boolean) => {
+      return dispatch({
+        type: DailyScrumTicketsActionType.updateOneTicket,
+        payload: {
+          id,
+          [key]: value
+        }
+      });
+    },
     []
   );
 
@@ -187,7 +186,7 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
 
         failedResultsSimplified.forEach(
           ({ id, errMsg }: { id: string; errMsg: string; errCode: number }) => {
-            updateDailyScrumTicket(id)('errMsg')(errMsg);
+            updateDailyScrumTicket(id)(UpdateDailyScrumTicketParamKey.errMsg)(errMsg);
           }
         );
         setIsSubmitting(false);
@@ -228,11 +227,11 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
               <span>
                 {dateFormatter(SPRINT_END_DATE)}
                 <span
-                  className={[styles.dayDiffText, styles[`dayDiffText${dayDiffObj?.style}`]].join(
+                  className={[styles.dayDiffText, styles[`dayDiffText${sprintData?.style}`]].join(
                     ' '
                   )}
                 >
-                  {dayDiffObj?.value} days left
+                  {sprintData?.value} days left
                 </span>
               </span>
             </h4>

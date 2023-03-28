@@ -9,6 +9,14 @@ const supportTypesTitles: string[] = [
   'other'
 ];
 
+enum SupportType {
+  noSupport,
+  technical,
+  requirement,
+  dependency,
+  other
+}
+
 function SupportTypeSelector({
   supportType,
   name,
@@ -16,14 +24,14 @@ function SupportTypeSelector({
   otherSupportDesc,
   editOtherSupportDesc
 }: {
-  supportType: 0 | 1 | 2 | 3 | 4;
+  supportType: SupportType;
   onChange: (value: number) => void;
   name: string;
   otherSupportDesc?: string;
   editOtherSupportDesc: (value: string) => void;
 }) {
   useEffect(() => {
-    if (supportType !== 4) {
+    if (supportType !== SupportType.other) {
       editOtherSupportDesc('');
     }
 
@@ -52,7 +60,7 @@ function SupportTypeSelector({
           </div>
         );
       })}
-      {supportType === 4 ? (
+      {supportType === SupportType.other ? (
         <textarea
           placeholder="please write at least one reason."
           required
@@ -71,4 +79,4 @@ SupportTypeSelector.defaultProps = {
   otherSupportDesc: ''
 };
 
-export default SupportTypeSelector;
+export default React.memo(SupportTypeSelector);
