@@ -53,6 +53,7 @@ import RegisterPageV2 from './pages/RegisterV2/RegisterPageV2';
 import VerifyPageV2 from './pages/VerifyPageV2/VerifyPageV2';
 import PaymentSuccessPage from './pages/PaymentSuccessPage/PaymentSuccessPage';
 import PaymentDetailsPage from './pages/PaymentDetailsPage/PaymentDetailsPage';
+import BillingHistoryPage from './pages/BillingHistoryPage/BillingHistoryPage';
 
 function App() {
   const [showPages, setShowPages] = useState(null);
@@ -121,6 +122,7 @@ function App() {
                   <Route path="/me" element={<UserMePage />} />
                   <Route path="/billing/paymentdetails" element={<PaymentDetailsPage />} />
                   <Route path="/payment/success" element={<PaymentSuccessPage />} />
+                  <Route path="/billing/history" element={<BillingHistoryPage />} />
                   <Route path="/user/:id" element={<UserPage />} />
                   <Route path="/access" element={<AccessPage />} />
                   <Route path="/projects" element={<ProjectPage />} />
