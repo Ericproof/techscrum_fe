@@ -3,6 +3,7 @@
   "version": "0.1.4",
   "private": true,
   "dependencies": {
+    "@atlaskit/calendar": "^13.0.7",
     "@atlaskit/datetime-picker": "^11.1.11",
     "@atlaskit/textfield": "^5.1.11",
     "@draft-js-plugins/editor": "^4.1.3",
