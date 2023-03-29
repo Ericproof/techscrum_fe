@@ -121,10 +121,10 @@ export default function ProjectPage() {
         theme: 'colored',
         className: 'primaryColorBackground'
       });
-      setShowCreateProjectModal(false);
     } catch (error) {
       toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
     } finally {
+      setShowCreateProjectModal(false);
       setLoading(false);
     }
   };
