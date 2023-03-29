@@ -8,6 +8,7 @@ import { UserContext } from '../../context/UserInfoProvider';
 import UsersFieldsV2 from '../../lib/FieldsV2/UsersFieldsV2/UsersFieldsV2';
 import ButtonV2 from '../../lib/FormV2/ButtonV2/ButtonV2';
 import InputV2 from '../../lib/FormV2/InputV2/InputV2';
+import TextAreaV2 from '../../lib/FormV2/TextAreaV2/TextAreaV2';
 import BtnContainer from '../../lib/Grid/BtnContainer/BtnContainer';
 import Row from '../../lib/Grid/Row/Row';
 
@@ -26,7 +27,8 @@ function ProjectEditor(props: ProjectEditorProps) {
     key: '',
     projectLeadId: 1,
     assigneeId: 1,
-    iconUrl: ''
+    iconUrl: '',
+    description: ''
   });
   const userInfo = useContext(UserContext);
   const [projectLeader, setProjectLeader] = useState('');
@@ -67,6 +69,14 @@ function ProjectEditor(props: ProjectEditorProps) {
     };
 
     setData({ ...data, ...updateData });
+  };
+
+  const onChangeDesc = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setData({ ...data, description: e.target.value });
+  };
+
+  const onChangeWebsiteUrl = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setData({ ...data, websiteUrl: e.target.value });
   };
 
   const onSave = () => {
@@ -114,6 +124,24 @@ function ProjectEditor(props: ProjectEditorProps) {
               onValueChanged={() => {}}
               value={data.key}
               dataTestId="key"
+            />
+          </Row>
+          <Row defaultMargin>
+            <InputV2
+              name="websiteUrl"
+              label="Website Url"
+              onValueChanged={onChangeWebsiteUrl}
+              value={data.websiteUrl}
+              dataTestId="websiteUrl"
+            />
+          </Row>
+          <Row defaultMargin>
+            <TextAreaV2
+              label="Description"
+              onValueChanged={onChangeDesc}
+              defaultValue={data.description}
+              name="description"
+              dataTestId="project-description"
             />
           </Row>
           {hasError && (
