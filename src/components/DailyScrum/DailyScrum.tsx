@@ -1,120 +1,197 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useReducer, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { AiOutlineClose } from 'react-icons/ai';
 import { toast } from 'react-toastify';
+import { AxiosResponse } from 'axios';
+import Calendar from '@atlaskit/calendar';
 import styles from './DailyScrum.module.scss';
-import DailyScrumTicket from './DailyScrumTicket/DailyScrumTicket';
 import { getDailyScrums, updateDailyScrum } from '../../api/dailyScrum/dailyScrum';
 import { UserContext } from '../../context/UserInfoProvider';
 import Modal from '../../lib/Modal/Modal';
+import { dateFormatter, urlParamExtractor } from '../../utils/helpers';
+import { IUserInfo, IDailyScrumTicket } from '../../types';
+import DailyScrumTicket from './DailyScrumTicket/DailyScrumTicket';
 
 interface IDailyScrumModal {
   onClickCloseModal: () => void;
   projectId: string;
 }
-function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal) {
-  const userInfo = useContext(UserContext);
-  const userId = userInfo.id;
-  const dateHandler = (fullDate) => {
-    const date = new Date(fullDate);
-    const year = date.getFullYear();
-    let month: string | number = date.getMonth();
-    let day: string | number = date.getDate();
-    day = day < 10 ? `0${day}` : day;
-    month = month + 1 < 10 ? `0${month + 1}` : month + 1;
-    return `${day}-${month}-${year}`;
-  };
-  const [dailyScrumTicketData, setDailyScrumTicketData] = useState<any>([]);
-  const [submitting, setSubmitting] = useState(false);
+
+// id is required but any other properties of IDailyScrumTicket are optional
+type IDailyScrumTicketUpdate = Partial<IDailyScrumTicket> & { id: string };
+
+enum DailyScrumTicketsActionType {
+  UPDATE_ONE_TICKET = 'UPDATE_ONE_TICKET',
+  GET_ALL_TICKETS = 'GET_ALL_TICKET'
+}
+
+enum UpdateDailyScrumTicketParamKey {
+  PROGRESS = 'progress',
+  IS_CAN_FINISH = 'isCanFinish',
+  IS_NEED_SUPPORT = 'isNeedSupport',
+  SUPPORT_TYPE = 'supportType',
+  OTHER_SUPPORT_DESC = 'otherSupportDesc',
+  ERR_MSG = 'errMsg'
+}
+
+interface IDailyScrumTicketsAction {
+  type: DailyScrumTicketsActionType;
+  payload: IDailyScrumTicketUpdate | IDailyScrumTicket[];
+}
+
+const initialDailyScrumTickets: IDailyScrumTicket[] = [];
+
+const dailyScrumTicketsReducer = (state: IDailyScrumTicket[], action: IDailyScrumTicketsAction) => {
+  switch (action.type) {
+    case DailyScrumTicketsActionType.GET_ALL_TICKETS:
+      return [...state, ...(action.payload as IDailyScrumTicket[])];
+
+    case DailyScrumTicketsActionType.UPDATE_ONE_TICKET:
+      return state.map((ticket: IDailyScrumTicket) =>
+        ticket.id === (action.payload as IDailyScrumTicketUpdate).id
+          ? { ...ticket, ...action.payload }
+          : { ...ticket }
+      );
+
+    default:
+      return [...state];
+  }
+};
+
+function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JSX.Element {
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
+  const [dailyScrumTickets, dispatch] = useReducer(
+    dailyScrumTicketsReducer,
+    initialDailyScrumTickets
+  );
+
+  const { id: userId }: IUserInfo = useContext(UserContext);
+
+  const CURRENT_DATE = useMemo(() => {
+    return new Date();
+  }, []);
+
+  const LAST_DAY_OF_YEAR = useMemo(() => {
+    const lastDay = new Date(new Date().getFullYear(), 11, 31);
+    const lastDayISOString = dateFormatter(lastDay, { isToISO: true });
+    return lastDayISOString;
+  }, []);
+
+  const SPRINT_END_DATE = useMemo(() => {
+    return new Date('2023-03-31');
+  }, []);
+
+  const sprintData = useMemo(() => {
+    const timeDiff = SPRINT_END_DATE.getTime() - CURRENT_DATE.getTime();
+    const diffOfDays = Math.round(timeDiff / 1000 / 60 / 60 / 24);
+    const obj: { value: number; style: 'Safe' | 'Caution' | 'Danger' } = {
+      value: diffOfDays,
+      style: 'Safe'
+    };
+
+    if (diffOfDays <= 3) {
+      obj.style = 'Caution';
+    }
+    if (diffOfDays <= 1) {
+      obj.style = 'Danger';
+    }
+    if (timeDiff <= 0) {
+      obj.value = 0;
+      obj.style = 'Danger';
+    }
+    return obj;
+  }, [CURRENT_DATE, SPRINT_END_DATE]);
 
   useEffect(() => {
-    const handleDailyScrum = async () => {
+    (async () => {
       try {
-        const searchCase = 'search-all';
-        const results = await getDailyScrums(projectId, userId, 'none', 'none', searchCase);
-        if (results.data.length === 0) {
+        const results = await getDailyScrums(projectId, userId as string);
+
+        if (results.length === 0) {
           toast('No dailyScrum data for now!', { theme: 'colored', toastId: 'dailyScrum error' });
         }
-        setDailyScrumTicketData(results.data);
-      } catch (e) {
-        toast.error('Failed tp get dailyScrum data!', {
+
+        dispatch({ type: DailyScrumTicketsActionType.GET_ALL_TICKETS, payload: results });
+      } catch (e: unknown) {
+        toast.error('Failed to get dailyScrum data!', {
           theme: 'colored',
           toastId: 'dailyScrum error'
         });
       }
-    };
-    handleDailyScrum();
+    })();
   }, [projectId, userId]);
 
-  const onChangeFinish = (id: string, value: boolean) => {
-    setDailyScrumTicketData(
-      dailyScrumTicketData.map((ticket) => {
-        if (ticket.id === id) {
-          return { ...ticket, finish: value, finishValidation: true };
+  const updateDailyScrumTicket = useCallback(
+    (id: string) => (key: UpdateDailyScrumTicketParamKey) => (value: number | string | boolean) => {
+      return dispatch({
+        type: DailyScrumTicketsActionType.UPDATE_ONE_TICKET,
+        payload: {
+          id,
+          [key]: value
         }
-        return ticket;
-      })
-    );
-  };
-  const onChangeSupport = (id: string, value: boolean) => {
-    setDailyScrumTicketData(
-      dailyScrumTicketData.map((ticket) => {
-        if (ticket.id === id) {
-          return { ...ticket, support: value, supportValidation: true };
-        }
-        return ticket;
-      })
-    );
-  };
-  const onChangeReason = (id: string, value: string) => {
-    setDailyScrumTicketData(
-      dailyScrumTicketData.map((ticket) => {
-        if (ticket.id === id) {
-          return { ...ticket, reason: value };
-        }
-        return ticket;
-      })
-    );
-  };
-  const onChangeProgress = (id: string, e: React.ChangeEvent<HTMLInputElement>) => {
-    setDailyScrumTicketData(
-      dailyScrumTicketData.map((ticket) => {
-        if (ticket.id === id) {
-          return { ...ticket, progress: e.target.value };
-        }
-        return ticket;
-      })
-    );
-  };
-  const onHandleSubmit = async (e) => {
-    try {
-      e.preventDefault();
-      setSubmitting(true);
-      dailyScrumTicketData
-        .filter((ticket) => {
-          return dateHandler(ticket.createdAt) === dateHandler(new Date());
-        })
-        .map(async (ticket) => {
-          const data = {
-            progress: ticket.progress ? ticket.progress : 0,
-            isFinished: ticket.finish ? ticket.finish : false,
-            hasReason: !!ticket.reason,
-            reason: ticket.reason ? ticket.reason : '',
-            isNeedSupport: ticket.support ? ticket.support : false,
-            createdDate: dateHandler(new Date()),
-            finishValidation: ticket.finishValidation ? ticket.finishValidation : false,
-            supportValidation: ticket.supportValidation ? ticket.supportValidation : false
-          };
-          await updateDailyScrum(data, projectId, userId, ticket.taskId.id);
-        });
-      toast.success('Submit successful!', {
-        theme: 'colored',
-        className: 'primaryColorBackground',
-        toastId: 'dailyScrum success'
       });
-      onClickCloseModal();
-      setSubmitting(false);
-    } catch (error) {
+    },
+    []
+  );
+
+  const onHandleSubmit = async (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    const promises = dailyScrumTickets.map(
+      ({ progress, isCanFinish, isNeedSupport, supportType, id, otherSupportDesc }) => {
+        return updateDailyScrum(projectId, id, {
+          progress,
+          isCanFinish,
+          isNeedSupport,
+          supportType,
+          otherSupportDesc
+        });
+      }
+    );
+
+    try {
+      const results: PromiseSettledResult<AxiosResponse<any, any>>[] = await Promise.allSettled(
+        promises
+      );
+
+      if (results.every(({ status }) => status === 'fulfilled')) {
+        toast.success('Submit successful!', {
+          theme: 'colored',
+          className: 'primaryColorBackground',
+          toastId: 'dailyScrum success'
+        });
+
+        onClickCloseModal();
+        setIsSubmitting(false);
+      } else if (results.every(({ status }) => status === 'rejected')) {
+        toast.error('Temporarily server error, please try again later!', {
+          theme: 'colored',
+          toastId: 'dailyScrum error'
+        });
+      } else {
+        // status & reason for rejected result
+        const failedResults: any = results.filter((result) => result.status === 'rejected');
+
+        const failedResultsSimplified = failedResults.map((result: any) => ({
+          id: urlParamExtractor(result?.reason?.config?.url, 'dailyScrums'),
+          errCode: result?.reason?.response?.status,
+          errMsg:
+            result?.reason?.response?.data?.errors?.errors?.[0]?.msg ?? // handles validation error
+            result?.reason?.response?.data?.error?.msg ?? // handles customised error
+            result?.reason?.response?.data?.toString() ?? // handles other axios error
+            'unknown error' // default error
+        }));
+
+        failedResultsSimplified.forEach(
+          ({ id, errMsg }: { id: string; errMsg: string; errCode: number }) => {
+            updateDailyScrumTicket(id)(UpdateDailyScrumTicketParamKey.ERR_MSG)(errMsg);
+          }
+        );
+        setIsSubmitting(false);
+      }
+    } catch (err) {
       toast.error('Temporarily server error, please try again later!', {
         theme: 'colored',
         toastId: 'dailyScrum error'
@@ -133,40 +210,85 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal) {
           <AiOutlineClose />
         </button>
       </div>
-      <h4>Today: {dateHandler(new Date())}</h4>
-      {dailyScrumTicketData.map((ticket) => {
-        return (
-          <DailyScrumTicket
-            key={ticket.id}
-            id={ticket.id}
-            title={ticket.title}
-            progress={ticket.progress}
-            finish={ticket.finish}
-            finishValidation={ticket.finishValidation}
-            onChangeFinish={onChangeFinish}
-            onChangeSupport={onChangeSupport}
-            onChangeReason={onChangeReason}
-            onChangeProgress={onChangeProgress}
+      <form onSubmit={onHandleSubmit}>
+        <div className={styles.dailyScrumContent}>
+          <div>
+            <Calendar
+              maxDate={LAST_DAY_OF_YEAR}
+              defaultMonth={CURRENT_DATE.getMonth() + 1}
+              defaultYear={CURRENT_DATE.getFullYear()}
+              testId="calendar"
+            />
+            <h4>
+              Today: <span>{dateFormatter()}</span>
+            </h4>
+            <h4>
+              Sprint Ends:
+              <span>
+                {dateFormatter(SPRINT_END_DATE)}
+                <span
+                  className={[styles.dayDiffText, styles[`dayDiffText${sprintData?.style}`]].join(
+                    ' '
+                  )}
+                >
+                  {sprintData?.value} days left
+                </span>
+              </span>
+            </h4>
+          </div>
+
+          <div className={styles.dailyScrumTicketsListWrapper}>
+            <p>You currently have {dailyScrumTickets.length} dailyScrum(s)</p>
+            {dailyScrumTickets.map(
+              ({
+                id,
+                title,
+                progress,
+                isCanFinish,
+                isNeedSupport,
+                supportType,
+                project,
+                otherSupportDesc,
+                errMsg
+              }) => {
+                return (
+                  <DailyScrumTicket
+                    key={id}
+                    id={id}
+                    title={title}
+                    projectKey={project.key}
+                    progress={progress}
+                    isCanfinish={isCanFinish}
+                    isNeedSupport={isNeedSupport}
+                    supportType={supportType}
+                    otherSupportDesc={otherSupportDesc}
+                    updateDailyScrumTicket={updateDailyScrumTicket(id)}
+                    errMsg={errMsg}
+                  />
+                );
+              }
+            )}
+          </div>
+        </div>
+
+        <div className={styles.btnContainer}>
+          <button
+            className={styles.cancelBtn}
+            type="button"
+            onClick={onClickCloseModal}
+            data-testid="dailyscrum-cancel"
+          >
+            Cancel
+          </button>
+          <input
+            className={styles.submitBtn}
+            disabled={isSubmitting}
+            type="submit"
+            data-testid="dailyscrum-submit"
+            value="Submit"
           />
-        );
-      })}
-      <div className={styles.btnContainer}>
-        <button
-          className={styles.cancelBtn}
-          onClick={onClickCloseModal}
-          data-testid="dailyscrum-cancel"
-        >
-          Cancel
-        </button>
-        <button
-          className={styles.submitBtn}
-          onClick={onHandleSubmit}
-          disabled={submitting}
-          data-testid="dailyscrum-submit"
-        >
-          Submit
-        </button>
-      </div>
+        </div>
+      </form>
     </div>
   );
 }
