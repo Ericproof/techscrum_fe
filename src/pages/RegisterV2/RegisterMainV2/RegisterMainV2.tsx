@@ -82,7 +82,7 @@ export default function RegisterMainV2() {
               Register
             </button>
             <div className={styles.registerLoginContainer}>
-              <Link to="/login" className={styles.registerLogin}>
+              <Link to="/v2/login" className={styles.registerLogin}>
                 Already have TechScrum Account? Login
               </Link>
             </div>
