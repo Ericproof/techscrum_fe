@@ -39,7 +39,10 @@ function SupportTypeSelector({
   }, [supportType]);
 
   return (
-    <div className={styles.mainWrapper}>
+    <div
+      className={styles.mainWrapper}
+      data-testid="dailyscrum-ticket-support-type-radio-input-group"
+    >
       {supportTypesTitles.slice(1).map((title, index) => {
         return (
           <div className={styles.controlWrapper} key={crypto.randomUUID()}>
@@ -69,6 +72,7 @@ function SupportTypeSelector({
           onChange={(e) => {
             editOtherSupportDesc(e.target.value);
           }}
+          data-testid="dailyscrum-ticket-other-support-desc"
         />
       ) : null}
     </div>
