@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import changePassword from '../../../api/accountSetting/changePassword';
 import styles from './changePassword.module.scss';
 
@@ -18,6 +18,11 @@ export default function ChangePassword({ changePasswordTipHandler }: Props) {
   const fetchNewPassword = (input: string) => {
     setNewPassword(input);
   };
+
+  useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.log(oldPassword);
+  }, [oldPassword]);
 
   const fetchConfirmPassword = (input: string, e: React.ChangeEvent<HTMLInputElement>) => {
     if (input !== newPassword) {

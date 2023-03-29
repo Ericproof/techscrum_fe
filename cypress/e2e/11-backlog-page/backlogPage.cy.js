@@ -26,9 +26,9 @@ describe('Backlog page', () => {
     cy.intercept('GET', '**/users', usersData).as('fetch-users');
     cy.intercept('GET', '**/boards/*/statuses', statusesData).as('fetch-statuses');
     cy.intercept('GET', '**/tasks/project/**', tasksByProject).as('fetch-tasksByProject');
-    cy.visit('/v1/login');
+    cy.visit('/v2/login');
     cy.wait('@fetch-types');
-    cy.login('kitman200220022002@gmail.com', '12345678');
+    cy.login('coffeetsang20@gmail.com', 'wendy123');
     cy.wait('@fetch-projects');
     cy.get('[data-testid="kitman-test1"]').click();
     cy.wait('@fetch-board');

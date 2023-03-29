@@ -1,5 +1,5 @@
 import projectData from '../../fixtures/projects.json';
-import boardData from '../../fixtures/board.json';
+import boardData from '../../fixtures/boardv2.json';
 import taskData from '../../fixtures/updateTask.json';
 import updatedLabel from '../../fixtures/updatedLabel.json';
 
@@ -7,19 +7,19 @@ describe('Project page', () => {
   beforeEach(() => {
     let projectList = projectData;
     cy.intercept('GET', '**/projects', projectList).as('fetch-projects');
-    cy.visit('/v1/login');
-    cy.login('kitman200220022002@gmail.com', '12345678');
+    cy.visit('/v2/login');
+    cy.login('coffeetsang20@gmail.com', 'wendy123');
     cy.wait('@fetch-projects');
     cy.intercept('GET', '**/board/**', boardData).as('fetch-board');
     cy.get('[data-testid="evan"]').dblclick();
     cy.wait('@fetch-board');
-    cy.get('[data-testid="task-63565485d377d106f9a8b643"]').click();
+    cy.get('[data-testid="task-641bdca55a236b40a1e21253"]').click();
   });
 
   it('Test should change title', () => {
     cy.intercept('PUT', '**/tasks/*', taskData).as('update-task');
     cy.get('[data-testid="card-title"]').click().type(' change');
-    cy.get('[data-testid="card-title-input"]').should('have.value', 'test change');
+    cy.get('[data-testid="card-title-input"]').should('have.value', 'change env add task change');
   });
 
   it('Test should change type', () => {

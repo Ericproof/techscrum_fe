@@ -13,15 +13,16 @@
 
 describe('login', () => {
   beforeEach(() => {
-    cy.visit('/v1/login');
+    cy.visit('/v2/login');
   });
 
   it('should able to login', () => {
-    cy.login('kitman200220022002@gmail.com', '12345678');
+    cy.login('coffeetsang20@gmail.com', 'wendy123');
   });
 
   it('should show user not active', () => {
-    cy.get('[data-testid="email"]').type('kitmanwork@gmail.com');
+    //need to create an inactive account in database
+    cy.get('[data-testid="email"]').type('kitman200220022002@gmail.com');
     cy.get('[data-testid="password"]').type('1234678');
     cy.get('[data-testid="login"]').click();
     cy.get('[data-testid="login-tip"]').contains(
