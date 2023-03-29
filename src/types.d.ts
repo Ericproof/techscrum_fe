@@ -314,7 +314,10 @@ export interface IMinEvent {
 
 export interface IDailyScrumTicket {
   title: string;
-  progress: number;
+  progress: {
+    timeStamp: number;
+    value: number;
+  };
   isCanFinish: boolean;
   isNeedSupport: boolean;
   supportType: 0 | 1 | 2 | 3 | 4;
