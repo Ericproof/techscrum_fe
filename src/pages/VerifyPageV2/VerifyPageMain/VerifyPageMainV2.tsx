@@ -4,12 +4,13 @@ import { toast } from 'react-toastify';
 import { emailVerifyCheckV2 } from '../../../api/register/emailCheck';
 import { IUserInfo } from '../../../types';
 import { UserDispatchContext } from '../../../context/UserInfoProvider';
-import { registerV2 } from '../../../api/register/register';
+
 import styles from './VerifyPageMainV2.module.scss';
 import Icon from '../../../assets/logo.svg';
 import Error from '../../../assets/error.png';
 import Loading from '../../../components/Loading/Loading';
 import { setLocalStorage } from '../../../utils/helpers';
+import { register } from '../../../api/register/register';
 
 export default function VerifyPageMainV2() {
   const navigate = useNavigate();
@@ -66,7 +67,7 @@ export default function VerifyPageMainV2() {
       setIsLoading(true);
       const emailToken = searchParams.get('token');
       try {
-        const result = await registerV2(emailToken ?? 'undefined', {
+        const result = await register(emailToken ?? 'undefined', {
           email: verifyEmail,
           name: nameRecorder,
           password: passwordRecorder
