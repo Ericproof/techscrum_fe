@@ -16,7 +16,7 @@ export default function BinaryChoiceSelector({
   isResetHanlderForOptionYes
 }: IBinaryChoiceSelectorProps) {
   return (
-    <>
+    <div data-testid={`dailyscrum-ticket-binary-input-group-${name}`}>
       <label htmlFor={`${name}-yes`} className={styles.radioLabel}>
         <input
           type="radio"
@@ -47,7 +47,7 @@ export default function BinaryChoiceSelector({
         />
         No
       </label>
-    </>
+    </div>
   );
 }
 

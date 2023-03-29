@@ -44,27 +44,24 @@ export default function ProjectPage() {
     setValue(value + 1);
   };
 
-  const removeProject = (id: string) => {
-    setLoading(true);
-    deleteProject(id)
-      .then((res: AxiosResponse) => {
-        if (res.status === 204) {
-          fetchProjects();
-          setLoading(false);
-          toast.success('Project has been deleted', {
-            theme: 'colored',
-            className: 'primaryColorBackground'
-          });
-        }
-      })
-      .catch(() => {
-        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
-        setLoading(false);
-      })
-      .finally(() => {
-        setShowDeleteModal(false);
-        setSubmitting(false);
-      });
+  const removeProject = async (id: string) => {
+    try {
+      setLoading(true);
+      const deleteRes: AxiosResponse = await deleteProject(id);
+      if (deleteRes.status === 204) {
+        await fetchProjects();
+        toast.success('Project has been deleted', {
+          theme: 'colored',
+          className: 'primaryColorBackground'
+        });
+      }
+    } catch (error) {
+      toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+    } finally {
+      setShowDeleteModal(false);
+      setLoading(false);
+      setSubmitting(false);
+    }
   };
 
   const starProject = (id: string, data: IProjectData, token: string) => {
@@ -112,25 +109,24 @@ export default function ProjectPage() {
     return () => document.removeEventListener('mousedown', handleClickInside);
   });
 
-  const onClickProjectSave = (apiData: IProjectData) => {
-    setLoading(true);
-    createProject(apiData)
-      .then((res: AxiosResponse) => {
-        if (!res.data) {
-          return;
-        }
-        fetchProjects();
-        setLoading(false);
-        toast.success('Project has been created', {
-          theme: 'colored',
-          className: 'primaryColorBackground'
-        });
-        setShowCreateProjectModal(false);
-      })
-      .catch(() => {
-        toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
-        setLoading(false);
+  const onClickProjectSave = async (apiData: IProjectData) => {
+    try {
+      setLoading(true);
+      const res: AxiosResponse = await createProject(apiData);
+      if (!res.data) {
+        return;
+      }
+      await fetchProjects();
+      toast.success('Project has been created', {
+        theme: 'colored',
+        className: 'primaryColorBackground'
       });
+    } catch (error) {
+      toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });
+    } finally {
+      setShowCreateProjectModal(false);
+      setLoading(false);
+    }
   };
 
   const renderModals = () => {
