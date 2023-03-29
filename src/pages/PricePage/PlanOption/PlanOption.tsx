@@ -128,7 +128,7 @@ function PlanOption(props: IPlanOptionProps) {
         createSubcription(userId, ULTRA_PRICE_IDENTIFIER, isChecked);
       }
     } else {
-      navigate(`/login`);
+      navigate(`/v2/login`);
     }
   };
 
