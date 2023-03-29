@@ -212,7 +212,7 @@ export default function RegisterMain() {
               Register
             </button>
             <div className={styles.formFooter}>
-              <Link to="/login">Already have TechScrum Account? Login</Link>
+              <Link to="/v2/login">Already have TechScrum Account? Login</Link>
             </div>
           </>
         )}
