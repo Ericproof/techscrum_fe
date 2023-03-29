@@ -240,7 +240,9 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
           </div>
 
           <div className={styles.dailyScrumTicketsListWrapper}>
-            <p>You currently have {dailyScrumTickets.length} dailyScrum(s)</p>
+            <p data-testid="dailyscrum-total-number-of-ticktes">
+              You currently have {dailyScrumTickets.length} dailyScrum(s)
+            </p>
             {dailyScrumTickets.map(
               ({
                 id,

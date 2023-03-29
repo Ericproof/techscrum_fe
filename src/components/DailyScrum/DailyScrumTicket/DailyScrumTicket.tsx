@@ -66,8 +66,8 @@ function DailyScrumTicket({
   );
 
   return (
-    <div className={styles.dailyScrumTicket}>
-      <p className={styles.ticketTitle}>
+    <div className={styles.dailyScrumTicket} data-testid="dailyscrum-ticket">
+      <p className={styles.ticketTitle} data-testid="dailyscrum-ticket-title">
         {projectKey} - {title}
       </p>
       {errMsg && <p>{errMsg}</p>}
@@ -86,9 +86,9 @@ function DailyScrumTicket({
                 value: e.target.valueAsNumber
               });
             }}
-            data-testid={'dailyscrum-progress-bar-'.concat(id)}
+            data-testid="dailyscrum-ticket-progress-bar"
           />
-          <p data-testid={'dailyscrum-progress-'.concat(id)}>
+          <p data-testid="dailyscrum-ticket-progress-description">
             {progress?.value}% - {new Date(progress?.timeStamp).toLocaleString()}
           </p>
         </div>
