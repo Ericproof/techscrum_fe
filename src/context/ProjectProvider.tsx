@@ -4,7 +4,7 @@ import { IProject } from '../types';
 import { projectToObject } from '../utils/helpers';
 
 const ProjectContext = createContext<IProject[]>([]);
-const ProjectDispatchContext = createContext<() => void>(() => Promise<void>);
+const ProjectDispatchContext = createContext<() => Promise<void>>(() => Promise.resolve());
 
 interface IProjectProvider {
   children?: React.ReactNode;
