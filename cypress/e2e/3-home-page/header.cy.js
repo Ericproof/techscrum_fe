@@ -1,7 +1,6 @@
 /// <reference types="cypress" />
 
 describe('click Features in the header', () => {
-
   beforeEach(() => {
     cy.visit('/');
   });
@@ -14,7 +13,6 @@ describe('click Features in the header', () => {
   });
 
   describe('click feature to its related page', () => {
-
     beforeEach(() => {
       cy.get('[data-testid="features"]').click();
     });
@@ -33,7 +31,5 @@ describe('click Features in the header', () => {
       cy.get('[data-testid="service-title"]').eq(2).click();
       cy.url().should('include', 'features/my-work');
     });
-  })
+  });
 });
-
-
