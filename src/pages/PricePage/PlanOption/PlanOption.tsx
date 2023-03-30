@@ -131,13 +131,15 @@ function PlanOption(props: IPlanOptionProps) {
     setIsChecked((ischecked) => !ischecked);
   };
 
+  const currentDomain = `${window.location.protocol}//${window.location.hostname}:${window.location.port}`;
+
   const handleButtonClick = async (id: number, isFreeTrial: boolean) => {
     if (userId && email) {
       if (id === ADVANCED_ID) {
-        createSubcription(userId, ADVANCED_PRICE_IDENTIFIER, isChecked, isFreeTrial);
+        createSubcription(userId, currentDomain, ADVANCED_PRICE_IDENTIFIER, isChecked, isFreeTrial);
       }
       if (id === ULTRA_ID) {
-        createSubcription(userId, ULTRA_PRICE_IDENTIFIER, isChecked, isFreeTrial);
+        createSubcription(userId, currentDomain, ULTRA_PRICE_IDENTIFIER, isChecked, isFreeTrial);
       }
     } else {
       navigate(`/login`);
