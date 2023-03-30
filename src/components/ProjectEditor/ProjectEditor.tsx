@@ -79,7 +79,8 @@ function ProjectEditor(props: ProjectEditorProps) {
     setData({ ...data, websiteUrl: e.target.value });
   };
 
-  const onSave = () => {
+  const onSave = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (projectLeader !== '') {
       const apiData = { ...data, userId: userInfo.id };
       onClickSave(apiData);
@@ -97,7 +98,7 @@ function ProjectEditor(props: ProjectEditorProps) {
   return (
     <div className={styles.editSection}>
       <div className={styles.editContainer}>
-        <form>
+        <form onSubmit={onSave}>
           <ChangeIcon uploadSuccess={uploadSuccess} value={data.iconUrl} />
           <Row defaultMargin>
             <UsersFieldsV2
@@ -106,6 +107,7 @@ function ProjectEditor(props: ProjectEditorProps) {
               label="Project Lead"
               name="projectLeadId"
               required
+              dataTestId="project-lead"
             />
           </Row>
           <Row defaultMargin>
@@ -151,7 +153,14 @@ function ProjectEditor(props: ProjectEditorProps) {
           )}
           <Row>
             <BtnContainer>
-              <ButtonV2 text="Save" onClick={onSave} dataTestId="save" fill loading={loading} />
+              <ButtonV2
+                text="Save"
+                onClick={() => {}}
+                dataTestId="save"
+                fill
+                loading={loading}
+                btnType="submit"
+              />
               {showCancelBtn && (
                 <ButtonV2
                   text="Cancel"

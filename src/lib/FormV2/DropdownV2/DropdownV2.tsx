@@ -33,7 +33,7 @@ export default function DropdownV2(props: IDropdownV2) {
     onValueChanged,
     onValueBlur = null,
     loading = false,
-    dataTestId = ''
+    dataTestId
   } = props;
   const defaultPlaceHolder = placeHolder || 'None';
   const [value, setValue] = useState(defaultValue);
@@ -76,7 +76,11 @@ export default function DropdownV2(props: IDropdownV2) {
                 .filter((item) => item.value !== value)
                 .map((item) => {
                   return (
-                    <button key={item.value} onClick={() => onChangeSelect(item.value)}>
+                    <button
+                      key={item.value}
+                      onClick={() => onChangeSelect(item.value)}
+                      data-testid={`leader-name-${item.label}`}
+                    >
                       {item.label}
                     </button>
                   );

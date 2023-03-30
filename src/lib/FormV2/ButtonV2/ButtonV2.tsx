@@ -12,6 +12,7 @@ interface IPropsButtonV2 {
   size?: 'xs' | 'md' | 'lg';
   dataTestId?: string;
   disabled?: boolean;
+  btnType?: 'button' | 'submit' | 'reset' | undefined;
 }
 
 export default function ButtonV2(props: IPropsButtonV2) {
@@ -25,11 +26,12 @@ export default function ButtonV2(props: IPropsButtonV2) {
     icon = null,
     size = 'md',
     dataTestId = '',
-    disabled = false
+    disabled = false,
+    btnType
   } = props;
   return (
     <button
-      type="button"
+      type={btnType}
       className={[
         styles.buttonV2,
         customStyles || '',
@@ -55,5 +57,6 @@ ButtonV2.defaultProps = {
   icon: null,
   size: 'md',
   dataTestId: '',
-  disabled: false
+  disabled: false,
+  btnType: 'button'
 };
