@@ -311,3 +311,32 @@ export interface IMinEvent {
     name: string;
   };
 }
+
+export interface IDailyScrumTicket {
+  title: string;
+  progress: {
+    timeStamp: number;
+    value: number;
+  };
+  isCanFinish: boolean;
+  isNeedSupport: boolean;
+  supportType: 0 | 1 | 2 | 3 | 4;
+  user: {
+    id: string;
+    name: string;
+  };
+  project: {
+    id: string;
+    name: string;
+    key: string;
+  };
+  task: {
+    id: string;
+    title: string;
+  };
+  id: string;
+  createAt: string;
+  updateAt: string;
+  otherSupportDesc?: string;
+  errMsg?: string;
+}

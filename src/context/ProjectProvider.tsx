@@ -4,7 +4,7 @@ import { IProject } from '../types';
 import { projectToObject } from '../utils/helpers';
 
 const ProjectContext = createContext<IProject[]>([]);
-const ProjectDispatchContext = createContext<() => void>(() => {});
+const ProjectDispatchContext = createContext<() => Promise<void>>(() => Promise.resolve());
 
 interface IProjectProvider {
   children?: React.ReactNode;
@@ -22,8 +22,8 @@ function ProjectProvider({ children }: IProjectProvider) {
     localStorage.setItem('projects', JSON.stringify(projectToObject(res.data)));
   };
 
-  const fetchProjects = useCallback(() => {
-    fetchProjectData();
+  const fetchProjects = useCallback(async () => {
+    await fetchProjectData();
   }, []);
 
   useEffect(() => {
