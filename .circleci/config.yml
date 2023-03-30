@@ -155,18 +155,18 @@ workflows:
     jobs:
       - security_check
       - code_qa
-      # - cypress/install:
-      #     yarn: true
-      #     executor: with-chrome
-      # - cypress/run:
-      #     requires:
-      #       - cypress/install
-      #     wait-on: 'http://localhost:3000'
-      #     yarn: true
-      #     executor: with-chrome
-      #     browser: chrome
-      #     start: yarn start
-      #     record: true
+       - cypress/install:
+           yarn: true
+           executor: with-chrome
+       - cypress/run:
+           requires:
+             - cypress/install
+           wait-on: 'http://localhost:3000'
+           yarn: true
+           executor: with-chrome
+           browser: chrome
+           start: yarn start
+           record: true
       - build_production:
           requires:
             - code_qa
