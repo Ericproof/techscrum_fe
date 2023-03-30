@@ -22,7 +22,7 @@ enum SupportType {
 interface IDailyScrumTicketProps {
   id: string;
   title: string;
-  progress: number;
+  progress: { timeStamp: number; value: number };
   isCanfinish: boolean;
   isNeedSupport: boolean;
   supportType: SupportType;
@@ -30,7 +30,7 @@ interface IDailyScrumTicketProps {
   otherSupportDesc?: string;
   updateDailyScrumTicket: (
     key: UpdateDailyScrumTicketParamKey
-  ) => (value: number | string | boolean) => void;
+  ) => (value: number | string | boolean | object) => void;
   errMsg?: string;
 }
 
@@ -66,8 +66,8 @@ function DailyScrumTicket({
   );
 
   return (
-    <div className={styles.dailyScrumTicket}>
-      <p className={styles.ticketTitle}>
+    <div className={styles.dailyScrumTicket} data-testid="dailyscrum-ticket">
+      <p className={styles.ticketTitle} data-testid="dailyscrum-ticket-title">
         {projectKey} - {title}
       </p>
       {errMsg && <p>{errMsg}</p>}
@@ -79,15 +79,18 @@ function DailyScrumTicket({
             min="0"
             max="100"
             step="1"
-            defaultValue={progress}
+            defaultValue={progress?.value}
             onChange={(e) => {
-              updateDailyScrumTicket(UpdateDailyScrumTicketParamKey.PROGRESS)(
-                e.target.valueAsNumber
-              );
+              updateDailyScrumTicket(UpdateDailyScrumTicketParamKey.PROGRESS)({
+                timeStamp: new Date().getTime(),
+                value: e.target.valueAsNumber
+              });
             }}
-            data-testid={'dailyscrum-progress-bar-'.concat(id)}
+            data-testid="dailyscrum-ticket-progress-bar"
           />
-          <p data-testid={'dailyscrum-progress-'.concat(id)}>{progress}%</p>
+          <p data-testid="dailyscrum-ticket-progress-description">
+            {progress?.value}% - {new Date(progress?.timeStamp).toLocaleString()}
+          </p>
         </div>
       </div>
       <div className={styles.finish}>
