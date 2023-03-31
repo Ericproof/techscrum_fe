@@ -218,7 +218,9 @@ export default function ProjectPage() {
           <div className={styles.viewDetail} ref={refShowMore[index]}>
             {checkAccess('view:projects', projectId) && (
               <Link to={`/settings/${projectId}`}>
-                <button type="button">View Detail</button>
+                <button type="button" data-testid="project-details">
+                  View Detail
+                </button>
               </Link>
             )}
             {checkAccess('delete:projects', projectId) && (
@@ -241,7 +243,7 @@ export default function ProjectPage() {
               setShowProjectDetails(projectId);
             }}
             className={styles.verticalMiddle}
-            data-testid="project-expand-button"
+            data-testid={`project-expand-btn-${projectId}`}
           />
         )}
       </td>
