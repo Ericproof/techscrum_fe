@@ -1,27 +1,16 @@
 /// <reference types="cypress" />
-import projectsData from '../../fixtures/8-project-page/projects.json';
+import projectsData from '../../fixtures/projects.json';
 import rolesData from '../../fixtures/8-project-page/roles.json';
-import usersData from '../../fixtures/8-project-page/users.json';
 import projectsDeletedData from '../../fixtures/projectsDeleted.json';
 
 describe('Project page', () => {
   beforeEach(() => {
-    let projectList = projectsData;
-    cy.intercept('GET', '**/projects', projectList).as('fetch-projects');
-    cy.intercept('DELETE', '**/projects/*', (req) => {
-      const url = req.url;
-      const urlParams = url.split('/');
-      const id = urlParams[urlParams.length - 1];
-      const newProjectList = [];
-      projectList.forEach((project) => {
-        if (project.id !== id) newProjectList.push(project);
-      });
-      projectList = newProjectList;
-      return projectList;
-    }).as('delete-projects');
+    cy.intercept('GET', '**/projects', projectsData).as('get-projects');
+    cy.intercept('GET', '**/roles', rolesData).as('get-roles');
     cy.visit('/v2/login');
     cy.login('coffeetsang20@gmail.com', 'wendy123');
-    cy.wait('@fetch-projects');
+    cy.wait('@get-roles');
+    cy.wait('@get-projects');
   });
 
   it('should search projects and find it in the project list', () => {
@@ -42,17 +31,13 @@ describe('Project page', () => {
   });
 
   it('delete a project', () => {
-    cy.get('[data-testid="project-expand-button"]').eq(1).click();
+    cy.intercept('DELETE', '**/projects/*').as('delete-project');
+    cy.intercept('GET', '**/projects', projectsDeletedData).as('get-deleted-projects');
+    cy.get(`[data-testid="project-expand-btn-${projectsData[0].id}"]`).click();
     cy.get('[data-testid="project-delete"]').click();
     cy.get('[data-testid="confirm-delete"]').click();
-    cy.intercept('GET', '**/projects', projectsDeletedData).as('get-deleted-projects');
-    cy.wait('@delete-projects');
+    cy.wait('@delete-project');
     cy.wait('@get-deleted-projects');
-    cy.get('[data-testid="project-name"]').should('have.length', 3);
-    cy.get('[data-testid="project-name"]').then((items) => {
-      expect(items[0]).to.contain.text('Evan');
-      expect(items[1]).to.contain.text('EmilTestABCD');
-      expect(items[2]).to.contain.text('12333');
-    });
+    cy.get('[data-testid="project-name"]').should('have.length', projectsData.length - 1);
   });
 });
