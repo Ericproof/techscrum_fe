@@ -13,9 +13,9 @@ describe('Project page', () => {
     cy.intercept('GET', '**/board/**', boardData).as('fetch-board');
     cy.get('[data-testid="evan"]').dblclick();
     cy.wait('@fetch-board');
-    // cy.intercept('GET', '**/tasks/**', boardCard).as('fetch-board-card');
+    cy.intercept('GET', '**/tasks/*', boardCard).as('fetch-task');
     cy.get('[data-testid="task-64265a2fc2c30adddb5cc239"]').click();
-    // cy.wait('@fetch-board-card');
+    cy.wait('@fetch-task');
   });
   it('Test should show activities', () => {
     cy.intercept('GET', '**/activities/**', activityData).as('fetch-activities');

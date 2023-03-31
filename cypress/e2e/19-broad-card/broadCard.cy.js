@@ -3,10 +3,12 @@ import boardData from '../../fixtures/boardv2.json';
 import taskData from '../../fixtures/updateTask.json';
 import updatedLabel from '../../fixtures/updatedLabel.json';
 import boardCard from '../../fixtures/boardCard.json';
+import labelData from '../../fixtures/labels.json';
 
 describe('Project page', () => {
   beforeEach(() => {
     let projectList = projectData;
+    cy.intercept('GET', '**/labels', labelData).as('fetch-labels');
     cy.intercept('GET', '**/projects', projectList).as('fetch-projects');
     cy.visit('/v2/login');
     cy.login('coffeetsang20@gmail.com', 'wendy123');
@@ -14,7 +16,11 @@ describe('Project page', () => {
     cy.intercept('GET', '**/board/**', boardData).as('fetch-board');
     cy.get('[data-testid="evan"]').dblclick();
     cy.wait('@fetch-board');
+    cy.wait('@fetch-labels');
+
+    cy.intercept('GET', '**/tasks/*', boardCard).as('fetch-task');
     cy.get('[data-testid="task-64265a2fc2c30adddb5cc239"]').click();
+    cy.wait('@fetch-task');
   });
 
   it('Test should change title', () => {
