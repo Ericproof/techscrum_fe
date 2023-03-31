@@ -1,8 +1,8 @@
 /// <reference types="cypress" />
 
-import projectsData from '../../fixtures/7-create-project-page/projects.json';
-import rolesData from '../../fixtures/7-create-project-page/roles.json';
-import usersData from '../../fixtures/7-create-project-page/users.json';
+import projectsData from '../../fixtures/8-project-page/projects.json';
+import rolesData from '../../fixtures/8-project-page/roles.json';
+import usersData from '../../fixtures/8-project-page/users.json';
 import projectSelected from '../../fixtures/16-project-settings-page/projectSelected.json';
 
 describe('Project page', () => {
