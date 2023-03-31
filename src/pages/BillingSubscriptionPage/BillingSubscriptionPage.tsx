@@ -37,21 +37,24 @@ export default function BillingSubscriptionPage() {
           <h2>Manage subscriptions</h2>
           <div className={styles.rowLayout}>
             <div className={styles.mainColumn}>
-              <div className={styles.warnBox}>
-                <div>
-                  <IoWarning color="orange" fontSize="1.5rem" />
+              {user.plan === 'free' && (
+                <div className={styles.warnBox}>
+                  <div>
+                    <IoWarning color="orange" fontSize="1.5rem" />
+                  </div>
+                  <div className={styles.flexCol}>
+                    <h4>We need your payment details</h4>
+                    <p className={styles.textSecondary}>
+                      Your free trials end soon. Add your payment details to keep enjoying the
+                      benefits of your Techscrum product.
+                    </p>
+                    <Link className={styles.links} to="/billing/paymentdetails/add">
+                      Add payment details
+                    </Link>
+                  </div>
                 </div>
-                <div className={styles.flexCol}>
-                  <h4>We need your payment details</h4>
-                  <p className={styles.textSecondary}>
-                    Your free trials end soon. Add your payment details to keep enjoying the
-                    benefits of your Techscrum product.
-                  </p>
-                  <Link className={styles.links} to="/billing/paymentdetails/add">
-                    Add payment details
-                  </Link>
-                </div>
-              </div>
+              )}
+
               <div className={styles.subscriptionsBox}>
                 <p className={styles.subscriptionsBoxTitle}>
                   <b>ACTIVE SUBSCRIPTIONS</b>
@@ -103,22 +106,23 @@ export default function BillingSubscriptionPage() {
               </div>
             </div>
             <div className={styles.sideColumn}>
-              <div className={`${styles.cardBox} ${styles.flexCol}`}>
-                <h4>Payment options</h4>
-                <p>
-                  Start monthly subscription{' '}
-                  <Link to="/billing/paymentdetails" className={styles.links}>
-                    Add billing details
-                  </Link>
-                </p>
-                <p>
-                  See pricing and pay for your site{' '}
-                  <Link to="/price" className={styles.links}>
-                    Choose annual payment
-                  </Link>
-                </p>
-              </div>
-
+              {user.plan === 'free' && (
+                <div className={`${styles.cardBox} ${styles.flexCol}`}>
+                  <h4>Payment options</h4>
+                  <p>
+                    Start monthly subscription{' '}
+                    <Link to="/billing/paymentdetails" className={styles.links}>
+                      Add billing details
+                    </Link>
+                  </p>
+                  <p>
+                    See pricing and pay for your site{' '}
+                    <Link to="/price" className={styles.links}>
+                      Choose annual payment
+                    </Link>
+                  </p>
+                </div>
+              )}
               <div className={`${styles.cardBox} ${styles.flexCol}`}>
                 <div>
                   <h4>Current Bill</h4>
