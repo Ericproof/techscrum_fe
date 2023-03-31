@@ -73,7 +73,6 @@ export default function SubscriptionPage() {
     periodEnd = ''
   } = billOverviewInfo || {};
 
-
   return (
     <>
       <div className={styles.subscriptionPage}>
