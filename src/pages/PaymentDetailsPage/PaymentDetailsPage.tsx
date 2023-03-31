@@ -118,7 +118,7 @@ export default function PaymentDetailsPage() {
             </div>
             <div className={styles.sideColumn__main}>
               <p className={`${styles.currentPlan} ${styles.flexBetween}`}>
-                <span>{user.plan} Plan</span>
+                <span>{`${user.plan.charAt(0).toUpperCase()}${user.plan.slice(1)}`} Plan</span>
                 <span>$0.00</span>
               </p>
               {isFreePlan ? (
