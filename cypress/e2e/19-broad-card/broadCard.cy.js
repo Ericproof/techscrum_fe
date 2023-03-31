@@ -2,6 +2,7 @@ import projectData from '../../fixtures/projects.json';
 import boardData from '../../fixtures/boardv2.json';
 import taskData from '../../fixtures/updateTask.json';
 import updatedLabel from '../../fixtures/updatedLabel.json';
+import boardCard from '../../fixtures/boardCard.json';
 
 describe('Project page', () => {
   beforeEach(() => {
@@ -13,13 +14,13 @@ describe('Project page', () => {
     cy.intercept('GET', '**/board/**', boardData).as('fetch-board');
     cy.get('[data-testid="evan"]').dblclick();
     cy.wait('@fetch-board');
-    cy.get('[data-testid="task-641bdca55a236b40a1e21253"]').click();
+    cy.get('[data-testid="task-64265a2fc2c30adddb5cc239"]').click();
   });
 
   it('Test should change title', () => {
     cy.intercept('PUT', '**/tasks/*', taskData).as('update-task');
     cy.get('[data-testid="card-title"]').click().type(' change');
-    cy.get('[data-testid="card-title-input"]').should('have.value', 'change env add task change');
+    cy.get('[data-testid="card-title-input"]').should('have.value', 'should create task change');
   });
 
   it('Test should change type', () => {

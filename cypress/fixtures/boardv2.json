@@ -1,78 +1,25 @@
 {
-  "id": "641912f771c79643bebdec7b",
-  "title": "cpt 1",
+  "id": "642652025ab8a4f27b003a55",
+  "title": "CPT1",
   "taskStatus": [
     {
-      "id": "641912f771c79643bebdec82",
+      "id": "642652025ab8a4f27b003a5c",
       "name": "to do",
       "slug": "to-do",
       "order": 0,
       "taskList": [
         {
-          "isActive": true,
-          "title": "change env add task",
-          "tags": [],
-          "comments": [],
-          "status": "641912f771c79643bebdec82",
-          "priority": "Medium",
-          "projectId": { "id": "641912f771c79643bebdec7c", "key": "CPT" },
-          "boardId": "641912f771c79643bebdec7b",
-          "sprintId": null,
-          "description": "",
-          "storyPoint": 0,
-          "dueAt": "2023-03-23T04:59:03.390Z",
-          "reporterId": "64129b2d2110dfcdc0dd2da4",
-          "assignId": {
-            "id": "64129b2d2110dfcdc0dd2da4",
-            "avatarIcon": "https://kitmanimage.s3.ap-southeast-2.amazonaws.com/1679373195973.ico",
-            "name": "wendy123"
-          },
-          "typeId": "631d94d08a05945727602cd6",
-          "attachmentUrls": [],
-          "createdAt": "2023-03-23T04:59:17.233Z",
-          "updatedAt": "2023-03-23T04:59:27.047Z",
-          "id": "641bdca55a236b40a1e21253"
-        },
-        {
-          "isActive": true,
-          "title": "abcc",
-          "tags": [],
-          "comments": [],
-          "status": "641912f771c79643bebdec82",
-          "priority": "Medium",
-          "projectId": { "id": "641912f771c79643bebdec7c", "key": "CPT" },
-          "boardId": "641912f771c79643bebdec7b",
-          "sprintId": null,
-          "description": "testing",
-          "storyPoint": 0,
-          "dueAt": "2023-03-26T00:12:52.094Z",
-          "reporterId": "64129b2d2110dfcdc0dd2da4",
-          "assignId": {
-            "id": "64129b2d2110dfcdc0dd2da4",
-            "avatarIcon": "https://kitmanimage.s3.ap-southeast-2.amazonaws.com/1679373195973.ico",
-            "name": "wendy123"
-          },
-          "typeId": "631d94d08a05945727602cdb",
-          "attachmentUrls": [
-            "https://kitmanimage.s3.ap-southeast-2.amazonaws.com/1679789590819.png"
-          ],
-          "createdAt": "2023-03-26T00:13:24.631Z",
-          "updatedAt": "2023-03-26T00:13:24.631Z",
-          "id": "641f8e2468afc96253e4d9aa"
-        },
-        {
-          "isActive": true,
           "title": "should create task",
           "tags": [],
           "comments": [],
-          "status": "641912f771c79643bebdec82",
+          "status": "642652025ab8a4f27b003a5c",
           "priority": "Medium",
-          "projectId": { "id": "641912f771c79643bebdec7c", "key": "CPT" },
-          "boardId": "641912f771c79643bebdec7b",
+          "projectId": { "id": "642652025ab8a4f27b003a56", "key": "CPT" },
+          "boardId": "642652025ab8a4f27b003a55",
           "sprintId": null,
-          "description": "sssss",
+          "description": "",
           "storyPoint": 0,
-          "dueAt": "2023-03-26T00:04:22.965Z",
+          "dueAt": "2023-03-31T03:57:24.613Z",
           "reporterId": "64129b2d2110dfcdc0dd2da4",
           "assignId": {
             "id": "64129b2d2110dfcdc0dd2da4",
@@ -80,86 +27,30 @@
             "name": "wendy123"
           },
           "typeId": "631d94d08a05945727602cd6",
-          "attachmentUrls": [],
-          "createdAt": "2023-03-26T00:04:37.886Z",
-          "updatedAt": "2023-03-26T00:14:03.726Z",
-          "id": "641f8c1567f7f262ec1f8d25"
-        },
-        {
-          "title": "should add comment",
-          "tags": [],
-          "comments": [],
-          "status": "641912f771c79643bebdec82",
-          "priority": "Medium",
-          "projectId": { "id": "641912f771c79643bebdec7c", "key": "CPT" },
-          "boardId": "641912f771c79643bebdec7b",
-          "sprintId": null,
-          "description": "",
-          "storyPoint": 0,
-          "dueAt": "2023-03-29T00:49:38.050Z",
-          "reporterId": "640ad21caa8e4c215f332e07",
-          "assignId": {
-            "id": "64129b2d2110dfcdc0dd2da4",
-            "avatarIcon": "https://kitmanimage.s3.ap-southeast-2.amazonaws.com/1679373195973.ico",
-            "name": "wendy123"
-          },
-          "typeId": "631d94d08a05945727602cd6",
-          "attachmentUrls": [],
-          "createdAt": "2023-03-29T00:49:48.986Z",
-          "updatedAt": "2023-03-29T02:56:05.020Z",
           "isActive": true,
-          "id": "64238b2c3359cec0c1bd9eec"
+          "attachmentUrls": [],
+          "createdAt": "2023-03-31T03:57:35.064Z",
+          "updatedAt": "2023-03-31T04:15:13.530Z",
+          "id": "64265a2fc2c30adddb5cc239"
         }
       ]
     },
     {
-      "id": "641912f771c79643bebdec83",
+      "id": "642652025ab8a4f27b003a5d",
       "name": "in progress",
       "slug": "in-progress",
       "order": 1,
       "taskList": []
     },
     {
-      "id": "641912f771c79643bebdec84",
+      "id": "642652025ab8a4f27b003a5e",
       "name": "review",
       "slug": "review",
       "order": 2,
       "taskList": []
     },
-    {
-      "id": "641912f771c79643bebdec85",
-      "name": "done",
-      "slug": "done",
-      "order": 3,
-      "taskList": [
-        {
-          "isActive": true,
-          "title": "add task test",
-          "tags": [],
-          "comments": [],
-          "status": "641912f771c79643bebdec85",
-          "priority": "Medium",
-          "projectId": { "id": "641912f771c79643bebdec7c", "key": "CPT" },
-          "boardId": "641912f771c79643bebdec7b",
-          "sprintId": null,
-          "description": "",
-          "storyPoint": 0,
-          "dueAt": "2023-03-21T02:55:11.746Z",
-          "reporterId": "64129b2d2110dfcdc0dd2da4",
-          "assignId": {
-            "id": "64129b2d2110dfcdc0dd2da4",
-            "avatarIcon": "https://kitmanimage.s3.ap-southeast-2.amazonaws.com/1679373195973.ico",
-            "name": "wendy123"
-          },
-          "typeId": "631d94d08a05945727602cd6",
-          "attachmentUrls": [],
-          "createdAt": "2023-03-21T02:55:26.425Z",
-          "updatedAt": "2023-03-26T00:12:51.291Z",
-          "id": "64191c9e09bb793df5232dae"
-        }
-      ]
-    }
+    { "id": "642652025ab8a4f27b003a5f", "name": "done", "slug": "done", "order": 3, "taskList": [] }
   ],
-  "createdAt": "2023-03-21T02:14:15.899Z",
-  "updatedAt": "2023-03-21T02:14:15.899Z"
+  "createdAt": "2023-03-31T03:22:42.965Z",
+  "updatedAt": "2023-03-31T03:22:42.965Z"
 }
