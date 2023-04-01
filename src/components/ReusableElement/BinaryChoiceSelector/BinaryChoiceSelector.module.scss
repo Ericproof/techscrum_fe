@@ -1,25 +1,29 @@
+@import '../../../pages/ReportPage/styles/variables.scss';
 $colorBorder: rgb(218, 216, 220);
 $colorBlue: rgb(50, 115, 246);
 $colorLightGray: rgb(245, 246, 254);
 .radioLabel {
-  font-size: 14px;
+  font-size: $size-14;
   font-weight: bold;
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
+
+  margin-block-start: 10px;
+  margin-right: 20px;
   width: 15%;
   cursor: pointer;
-  input[type='radio'] {
+  display: flex;
+  align-items: center;
+
+  input {
     margin-right: 10px;
     appearance: none;
     width: 1.15em;
     height: 1.15em;
-    border: 1px solid $colorBorder;
+    outline: 1px solid $colorBorder;
     background-color: $colorLightGray;
     border-radius: 3px;
     cursor: pointer;
   }
-  input[type='radio']:checked:before {
+  input:checked:before {
     height: 100%;
     width: 100%;
     display: flex;
@@ -27,7 +31,7 @@ $colorLightGray: rgb(245, 246, 254);
     align-items: center;
     content: '✔';
     font-size: 9px;
-    border-radius: 3px;
+
     color: white;
     background-color: $colorBlue;
   }

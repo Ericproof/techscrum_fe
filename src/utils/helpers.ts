@@ -138,3 +138,31 @@ export const convertFilterArrayToString = (selectedInputs) => {
   });
   return result.slice(1);
 };
+
+export const dateFormatter = (
+  rawDate: string | number | Date = new Date(),
+  options?: {
+    isToISO?: boolean;
+  }
+): string => {
+  // default date: current date
+  const date: Date = new Date(rawDate);
+  if (options?.isToISO) {
+    return date.toISOString(); // Output: 2023-03-26T05:43:16.654Z
+  }
+
+  const formatOptions: Intl.DateTimeFormatOptions = {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
+  };
+  const formatter: Intl.DateTimeFormat = new Intl.DateTimeFormat('en-AU', formatOptions);
+  const formattedDate: string = formatter.format(date).replace(/\//g, '-');
+  return formattedDate; // Output: 03-06-2023
+};
+
+export const urlParamExtractor = (url: string, paramName: string) => {
+  const start = url.indexOf(`${paramName}/`) + `${paramName}/`.length;
+  const end = url.indexOf('/', start) === -1 ? undefined : url.indexOf('/', start); // find the 1st "/" after start index
+  return url.substring(start, end);
+};

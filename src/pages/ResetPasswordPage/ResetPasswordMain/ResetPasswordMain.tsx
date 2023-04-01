@@ -57,7 +57,7 @@ export default function RegisterMain() {
               Next
             </button>
             <div className={styles.formFooter}>
-              <Link to="/login">Login</Link>
+              <Link to="/v2/login">Login</Link>
             </div>
           </>
         )}

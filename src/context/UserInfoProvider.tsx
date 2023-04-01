@@ -38,7 +38,7 @@ function UserProvider({ children }: ILoginInfoProvider) {
       } catch (e) {
         localStorage.clear();
         setUserInfo({});
-        navigator('/login');
+        navigator('/v2/login');
       }
     };
 
@@ -48,7 +48,7 @@ function UserProvider({ children }: ILoginInfoProvider) {
     if (expirationDate <= new Date()) {
       localStorage.clear();
       setUserInfo({});
-      navigator('/login');
+      navigator('/v2/login');
     }
     if (
       token !== undefined &&

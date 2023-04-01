@@ -138,7 +138,7 @@ function PermissionSelector(props: IProps) {
           />
           <input
             type="button"
-            value="close"
+            value="Close"
             onClick={closeHandler}
             className={`${styles.btn} ${styles.cancel}`}
           />

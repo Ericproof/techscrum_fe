@@ -7,9 +7,3 @@ export const register = async (emailToken: string, registerForm: RegisterForm) =
   const result = await axios.put(path, { ...registerForm });
   return result;
 };
-
-export const registerV2 = async (emailToken: string, registerForm: RegisterForm) => {
-  const path = `${config.apiAddress}/registerV2/${emailToken}`;
-  const result = await axios.put(path, { ...registerForm });
-  return result;
-};

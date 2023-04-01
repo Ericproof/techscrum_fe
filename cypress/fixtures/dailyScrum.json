@@ -1,98 +1,89 @@
 [
   {
-    "title": "bug created",
-    "progress": 0,
-    "isFinished": false,
-    "hasReason": false,
-    "reason": "",
+    "title": "sdfsdf",
+    "isCanFinish": false,
+    "isNeedSupport": true,
+    "supportType": 4,
+    "user": {
+      "id": "631dd53189d19ed1f532fb85",
+      "name": "kitman"
+    },
+    "project": {
+      "id": "63eb5b2ec2d370bdcd64ed55",
+      "name": "projectttt",
+      "key": "PRO"
+    },
+    "task": {
+      "id": "63ffcd28e375175228cc4125",
+      "title": "sdfsdf"
+    },
+    "otherSupportDesc": "I need love",
+    "createdAt": "2023-03-28T11:25:54.795Z",
+    "updatedAt": "2023-03-28T11:33:09.382Z",
+    "__v": 0,
+    "id": "6422cec21e78df20e4ca725d",
+    "progress": {
+      "timeStamp": 1680003188508,
+      "value": 71,
+      "id": "6422d075fcc73fef7980630c"
+    }
+  },
+  {
+    "title": "sdf",
+    "isCanFinish": true,
     "isNeedSupport": false,
-    "userId": {
-      "_id": "631dd53189d19ed1f532fb85",
-      "email": "kitman200220022002@gmail.com",
-      "__v": 0,
-      "active": true,
-      "activeCode": "",
-      "avatarIcon": "https://kitmanimage.s3.ap-southeast-2.amazonaws.com/1665799533694.png",
-      "createdAt": "2022-09-11T12:31:46.017Z",
-      "isAdmin": 1,
-      "projectsRoles": [
-        {
-          "projectId": "6350c09984d4276f1347d489",
-          "roleId": "631d94d08a05945727602cdf",
-          "_id": "635666c1d377d106f9a8b85d"
-        }
-      ],
-      "updatedAt": "2022-10-24T10:19:45.417Z",
-      "name": "kitman",
-      "password": "$2b$08$6ggLLlQGiXWZTQTcS2zXe.8X7zFpx5Ajz8wKaxC.R7zbrU8fAa0ra",
-      "refreshToken": "nrGHmn02Dz",
-      "abbreviation": "",
-      "jobTitle": "",
-      "location": "",
-      "userName": ""
+    "supportType": 0,
+    "user": {
+      "id": "631dd53189d19ed1f532fb85",
+      "name": "kitman"
     },
-    "projectId": {
-      "_id": "6358c090a662585de5245a2d",
-      "name": "DEMO",
-      "key": "DEM",
-      "projectLeadId": "631dd53189d19ed1f532fb85",
-      "ownerId": "631dd53189d19ed1f532fb85",
-      "assigneeId": "1",
-      "boardId": "6358c090a662585de5245a2c",
-      "iconUrl": "https://kitmanimage.s3.ap-southeast-2.amazonaws.com/1666761128872.JPG",
-      "star": false,
-      "isDelete": false,
-      "shortcut": [
-        {
-          "name": "github👀",
-          "shortcutLink": "https://github.com/",
-          "_id": "6358c1cba662585de5245aa3"
-        },
-        {
-          "name": "google",
-          "shortcutLink": "https://www.google.com",
-          "_id": "6360d663abfec5bba0e70124"
-        },
-        {
-          "name": "google",
-          "shortcutLink": "https://www.google.com",
-          "_id": "63636b9d369cd1899d2ec5b6"
-        },
-        {
-          "name": "w3School",
-          "shortcutLink": "https://www.w3schools.com/",
-          "_id": "6364e327dc6e74f7f61db64b"
-        }
-      ],
-      "createdAt": "2022-10-26T05:07:28.626Z",
-      "updatedAt": "2022-11-04T11:14:22.323Z",
-      "__v": 0
+    "project": {
+      "id": "63eb5b2ec2d370bdcd64ed55",
+      "name": "projectttt",
+      "key": "PRO"
     },
-    "taskId": {
-      "_id": "636f9dfaa36196f2b5d06fec",
-      "title": "bug created",
-      "tags": [],
-      "comments": [],
-      "status": "6358c090a662585de5245a25",
-      "priority": "Medium",
-      "projectId": "6358c090a662585de5245a2d",
-      "boardId": "6358c090a662585de5245a2c",
-      "sprintId": null,
-      "storyPoint": 0,
-      "dueAt": null,
-      "reporterId": "633be6e9c94265ad05d0eca6",
-      "assignId": "631dd53189d19ed1f532fb85",
-      "typeId": "631d94d08a05945727602cdb",
-      "attachmentUrls": [],
-      "createdAt": "2022-11-12T13:22:02.061Z",
-      "updatedAt": "2022-11-14T05:47:29.392Z",
-      "__v": 0
+    "task": {
+      "id": "63ffcd21e375175228cc4110",
+      "title": "sdf"
     },
-    "createdDate": "14-11-2022",
-    "finishValidation": false,
-    "supportValidation": false,
-    "createdAt": "2022-11-14T05:37:27.116Z",
-    "updatedAt": "2022-11-14T05:37:27.116Z",
-    "id": "6371d4176d614a9131b97e6f"
+    "otherSupportDesc": "",
+    "createdAt": "2023-03-28T11:50:02.136Z",
+    "updatedAt": "2023-03-28T11:50:02.136Z",
+    "__v": 0,
+    "id": "6422d46abfeebedf453afd77",
+    "progress": {
+      "id": "6422d46abfeebedf453afd78",
+      "timeStamp": 1680004116406,
+      "value": 0
+    }
+  },
+  {
+    "title": "dfggg",
+    "isCanFinish": false,
+    "isNeedSupport": true,
+    "supportType": 1,
+    "user": {
+      "id": "631dd53189d19ed1f532fb85",
+      "name": "kitman"
+    },
+    "project": {
+      "id": "63eb5b2ec2d370bdcd64ed55",
+      "name": "projectttt",
+      "key": "PRO"
+    },
+    "task": {
+      "id": "63ffcd3ee375175228cc414c",
+      "title": "dfggg"
+    },
+    "otherSupportDesc": "",
+    "createdAt": "2023-03-28T11:50:18.247Z",
+    "updatedAt": "2023-03-28T11:50:18.247Z",
+    "__v": 0,
+    "id": "6422d47abfeebedf453afdd9",
+    "progress": {
+      "id": "6422d47abfeebedf453afdda",
+      "timeStamp": 1680004116406,
+      "value": 25
+    }
   }
 ]
