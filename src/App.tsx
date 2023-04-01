@@ -87,7 +87,7 @@ function App() {
             <TaskTypesProvider>
               <Routes>
                 {showPages && <Route path="v1/register" element={<RegisterPage />} />}
-                {showPages && <Route path="v2/register" element={<RegisterPageV2 />} />}
+                <Route path="v2/register" element={<RegisterPageV2 />} />
                 {showPages && <Route path="/admin" element={<AdminPage />} />}
                 <Route path="/faq" element={<FAQPage />} />
                 <Route path="/verify" element={<VerifyPage />} />
