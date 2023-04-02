@@ -32,10 +32,10 @@ describe('Project page', () => {
 
   it('delete a project', () => {
     cy.intercept('DELETE', '**/projects/*').as('delete-project');
-    cy.intercept('GET', '**/projects', projectsDeletedData).as('get-deleted-projects');
     cy.get(`[data-testid="project-expand-btn-${projectsData[0].id}"]`).click();
     cy.get('[data-testid="project-delete"]').click();
     cy.get('[data-testid="confirm-delete"]').click();
+    cy.intercept('GET', '**/projects', projectsDeletedData).as('get-deleted-projects');
     cy.wait('@delete-project');
     cy.wait('@get-deleted-projects');
     cy.get('[data-testid="project-name"]').should('have.length', projectsData.length - 1);

@@ -164,6 +164,7 @@ export default function Setting() {
                 onValueChanged={onChangeName}
                 onValueBlur={() => {}}
                 value={data?.name}
+                defaultValue={data?.name}
                 name="name"
                 loading={!data}
                 dataTestId="projectName"
@@ -173,6 +174,7 @@ export default function Setting() {
                 onValueChanged={onChange}
                 onValueBlur={() => {}}
                 value={data?.key}
+                defaultValue={data?.key}
                 name="key"
                 loading={!data}
                 dataTestId="projectKey"
@@ -200,6 +202,7 @@ export default function Setting() {
                 onValueChanged={onChange}
                 onValueBlur={() => {}}
                 value={data?.websiteUrl}
+                defaultValue={data?.websiteUrl}
                 name="websiteUrl"
                 loading={!data}
                 dataTestId="websiteUrl"
@@ -211,12 +214,18 @@ export default function Setting() {
                 onValueChanged={onChange}
                 onValueBlur={() => {}}
                 value={data?.description}
+                defaultValue={data?.description}
                 name="description"
                 loading={!data}
                 dataTestId="description"
               />
             </div>
-            <ButtonV2 text="SAVE CHANGES" onClick={onClickSave} loading={loading} />
+            <ButtonV2
+              text="SAVE CHANGES"
+              onClick={onClickSave}
+              loading={loading}
+              dataTestId="projectUpdateBtn"
+            />
           </SettingCard>
           {checkAccess('delete:projects', projectId) && (
             <SettingCard title="Delete Project">
