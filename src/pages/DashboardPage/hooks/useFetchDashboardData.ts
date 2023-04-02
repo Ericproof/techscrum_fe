@@ -2,10 +2,11 @@ import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { getDashBoardDailyScrumsByUser, getDashBoardData } from '../../../api/dashboard';
 import { UserContext } from '../../../context/UserInfoProvider';
+import { IDashboard, IDashBoardDailyScrum } from '../../../types';
 
 const useFetchDashboardData = () => {
   const { id } = useContext(UserContext);
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<IDashboard | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const { projectId } = useParams<{ projectId: string }>();
 
@@ -26,7 +27,7 @@ const useFetchDashboardData = () => {
 
 export const useFetchDashboardDailyScrumsByUser = () => {
   const { id } = useContext(UserContext);
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<IDashBoardDailyScrum[] | null>(null);
   const { projectId } = useParams<{ projectId: string }>();
 
   useEffect(() => {

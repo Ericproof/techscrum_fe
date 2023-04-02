@@ -2,25 +2,27 @@
 .mainWrapper {
   display: flex;
   flex-direction: column;
-  gap: $size-14;
+  gap: $size-10;
 
   align-items: center;
   padding: $size-24;
   background-color: $color-white;
   border-radius: $size-10;
   .title {
-    font-size: x-large;
+    font-size: $size-18;
     font-weight: 400;
     align-self: flex-start;
+    text-transform: capitalize;
   }
 
   .value {
-    font-size: xx-large;
+    font-size: $size-55;
     font-weight: 900;
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
+    color: $color-grey-0;
   }
 }
