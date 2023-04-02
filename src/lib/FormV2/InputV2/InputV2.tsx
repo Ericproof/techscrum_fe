@@ -37,13 +37,14 @@ export default function InputV2(props: IInputV2) {
     value
   } = props;
   const [val, setVal] = useState(defaultValue);
+  const [hadDefaultValue] = useState(!value);
   const [error, setError] = useState<null | string>(null);
   const [isActive, setIsActive] = useState(false);
 
   const onChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     const errorMessage = getErrorMessage(e, props);
     setError(errorMessage);
-    if (!defaultValue) {
+    if (hadDefaultValue) {
       setVal(e.target.value);
     }
     onValueChanged(e);
@@ -58,7 +59,7 @@ export default function InputV2(props: IInputV2) {
 
   useEffect(() => {
     if (!loading) {
-      setVal(defaultValue);
+      setVal(defaultValue || '');
     }
   }, [loading]);
 
@@ -88,7 +89,7 @@ export default function InputV2(props: IInputV2) {
       <input
         className={[styles.input].join(' ')}
         type={type}
-        value={defaultValue ? val : value}
+        value={hadDefaultValue ? val || '' : value || ''}
         name={name}
         onChange={onChanged}
         onBlur={onBlurValue}

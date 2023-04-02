@@ -68,7 +68,7 @@ export default function MainMenuV2() {
   const logout = () => {
     localStorage.clear();
     setUserInfo({});
-    navigate('/v2/login');
+    navigate('/');
   };
 
   const renderModals = () => {
@@ -89,6 +89,10 @@ export default function MainMenuV2() {
             <MdList />
             Preferences (WIP)
           </div>
+          <Link to="/subscription" className={styles.item}>
+            <FiSettings />
+            Subscriptions
+          </Link>
           <hr />
           <button className={styles.item} onClick={logout}>
             <MdLogout />
