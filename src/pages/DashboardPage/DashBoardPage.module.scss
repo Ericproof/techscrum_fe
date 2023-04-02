@@ -1,0 +1,54 @@
+@import '../ReportPage/styles/variables.scss';
+.mainWrapper {
+  min-height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  padding-block-start: $size-30;
+  padding-inline-end: $size-30;
+
+  .dashboardWrapper {
+    background-color: $color-grey-3;
+    // min-height: 75vh;
+    border-radius: $size-14;
+    padding: $size-24;
+
+    h2 {
+      margin-block-end: $size-24;
+    }
+
+    .dashboardGridLayout {
+      display: grid;
+      grid-template-columns: repeat(8, minmax(100px, 1fr));
+      grid-template-rows: repeat(5, minmax(120px, 1fr));
+
+      grid-template-areas:
+        'value-card-1 value-card-1 value-card-2 value-card-2 value-card-4 value-card-4 value-card-5 value-card-5'
+        'value-card-3 value-card-3 value-card-2 value-card-2 value-card-4 value-card-4 value-card-6 value-card-6'
+        'chart-card-1 chart-card-1 chart-card-1 chart-card-1 chart-card-2 chart-card-2 chart-card-2 chart-card-2'
+        'chart-card-1 chart-card-1 chart-card-1 chart-card-1 chart-card-2 chart-card-2 chart-card-2 chart-card-2'
+        'chart-card-1 chart-card-1 chart-card-1 chart-card-1 chart-card-2 chart-card-2 chart-card-2 chart-card-2';
+
+      gap: $size-24;
+
+      @media screen and (max-width: 1396px) {
+        grid-template-columns: repeat(2, minmax(100px, 1fr));
+        grid-template-rows: repeat(12, minmax(120px, 1fr));
+
+        grid-template-areas:
+          'value-card-1 value-card-2'
+          'value-card-1 value-card-2'
+          'value-card-3 value-card-2'
+          'value-card-4 value-card-5'
+          'value-card-4 value-card-5'
+          'value-card-6 value-card-5'
+          'chart-card-1 chart-card-1'
+          'chart-card-1 chart-card-1'
+          'chart-card-1 chart-card-1'
+          'chart-card-2 chart-card-2'
+          'chart-card-2 chart-card-2'
+          'chart-card-2 chart-card-2';
+      }
+    }
+  }
+}

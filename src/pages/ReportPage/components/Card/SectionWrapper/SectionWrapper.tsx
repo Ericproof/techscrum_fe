@@ -6,9 +6,10 @@ interface Props {
   children: React.ReactNode;
   backgroundColor?: 'blue' | 'pink' | 'purple' | 'green' | 'default' | '';
   extended?: boolean;
+  style?: React.CSSProperties;
 }
 
-function SectionWrapper({ children, backgroundColor, extended }: Props) {
+function SectionWrapper({ children, backgroundColor, extended, style }: Props) {
   return (
     <div
       className={[
@@ -16,6 +17,7 @@ function SectionWrapper({ children, backgroundColor, extended }: Props) {
         styles[`bg${capitalise(backgroundColor as string)}`],
         styles[extended ? 'extended' : '']
       ].join(' ')}
+      style={{ ...style }}
     >
       {children}
     </div>
@@ -24,7 +26,8 @@ function SectionWrapper({ children, backgroundColor, extended }: Props) {
 
 SectionWrapper.defaultProps = {
   backgroundColor: '',
-  extended: false
+  extended: false,
+  style: {}
 };
 
 export default SectionWrapper;

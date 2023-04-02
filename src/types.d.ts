@@ -340,3 +340,38 @@ export interface IDailyScrumTicket {
   otherSupportDesc?: string;
   errMsg?: string;
 }
+
+export interface IDashBoardDailyScrum {
+  title: string;
+  id: string;
+  user: {
+    id: string;
+    name: string;
+  };
+  progresses: {
+    timeStamp: number;
+    id: string;
+    value: number;
+  }[];
+}
+export interface IDashboard {
+  dailyScrumCount: {
+    total: number;
+    isCanFinish: number;
+    isNeedSupport: {
+      total: number;
+      technical: number;
+      requirement: number;
+      other: number;
+      dependency: number;
+    };
+  };
+  taskCount: {
+    total: number;
+    toDo: number;
+    inProgress: number;
+    review: number;
+    done: number;
+  };
+  dailyScrums: IDashBoardDailyScrum[];
+}
