@@ -115,6 +115,13 @@
     font-size: 12px;
   }
 }
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+   
 //////////////////////////////@at-root
 
 .settingPage{
@@ -181,4 +188,5 @@
 .p{
   font-size: 14px;
   font-weight: bold;
+  margin: 7px 0 20px 0px;
 }

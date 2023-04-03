@@ -39,7 +39,7 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
     if (!taskType) {
       return;
     }
-    setTaskTypeId(taskType[0].id);
+    setTaskTypeId(taskType[0]?.id);
   }, [taskType]);
 
   const data = useState<ICardData>({
@@ -144,7 +144,7 @@ function CreateNewCard({ fetchNewCard, updateIsCreateNewCard }: Props) {
             label="Card Type"
             name="type"
             onValueChanged={onChangeTaskType}
-            defaultValue={taskType[0].name}
+            defaultValue={taskType[0]?.name}
             options={taskType.map((item) => {
               return { value: item.id, label: item.name };
             })}

@@ -8,7 +8,7 @@ import BoardSearch from './BoardSearch/BoardSearch';
 import BoardMain from './BoardMain/BoardMain';
 import CreateNewCard from '../CreateNewCard/CreateNewCard';
 import { getBoard } from '../../api/board/board';
-import { updateTaskStatus, fetchTask, updateTask, deactiveTask } from '../../api/task/task';
+import { updateTaskStatus, fetchTask, updateTask, deleteTask } from '../../api/task/task';
 import IBoardEntity, {
   IColumnsFromBackend,
   ICardData,
@@ -227,17 +227,17 @@ export default function Board() {
       getViewTaskStateFromChildren();
     }
   };
-
+  // TODO: typo error
   const updasteTaskInfo = (tags: ILabelData[] | undefined) => {
     if (tags === undefined) return;
     const updatedTaskInfo = { ...taskData, tags };
     showUpdatedTask(updatedTaskInfo);
   };
 
-  const deleteTask = async () => {
+  const removeTask = async () => {
     if (taskData?.id ?? taskData?.id) {
       try {
-        await deactiveTask(taskData.id);
+        await deleteTask(taskData.id);
       } finally {
         getViewTaskStateFromChildren();
         const updatedColumns = { ...columnsInfo };
@@ -302,7 +302,7 @@ export default function Board() {
           taskData={taskData}
           onSave={updateTaskInfo}
           columnsInfo={columnsInfo}
-          deleteTask={deleteTask}
+          deleteTask={removeTask}
           labels={labels}
           projectId={projectId}
           updateTaskTags={updasteTaskInfo}

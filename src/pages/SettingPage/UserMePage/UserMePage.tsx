@@ -98,7 +98,7 @@ export default function UserMePage() {
                 <InputV2
                   label="User Name"
                   onValueChanged={onChangeUser}
-                  defaultValue={userInfo.userName || ''}
+                  defaultValue={userInfo.userName}
                   name="userName"
                   loading={loading}
                   dataTestId="userName"
@@ -106,7 +106,7 @@ export default function UserMePage() {
                 <InputV2
                   label="Full Name"
                   onValueChanged={onChangeUser}
-                  defaultValue={userInfo.name || ''}
+                  defaultValue={userInfo.name}
                   name="fullName"
                   loading={loading}
                   dataTestId="fullName"
@@ -116,7 +116,7 @@ export default function UserMePage() {
                 <InputV2
                   label="Job Title"
                   onValueChanged={onChangeUser}
-                  defaultValue={userInfo.jobTitle || ''}
+                  defaultValue={userInfo.jobTitle}
                   name="jobTitle"
                   loading={loading}
                   dataTestId="jobTitle"
@@ -124,7 +124,7 @@ export default function UserMePage() {
                 <InputV2
                   label="Location"
                   onValueChanged={onChangeUser}
-                  defaultValue={userInfo.location || ''}
+                  defaultValue={userInfo.location}
                   name="location"
                   loading={loading}
                   dataTestId="location"
