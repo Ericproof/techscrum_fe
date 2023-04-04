@@ -22,7 +22,6 @@ function PlanTableHeader(props: IPlanTableHeaderProps) {
 
   const handleButtonClick = async (id: number, isFreeTrial: boolean) => {
     const currentDomain = `${window.location.hostname}:${window.location.port}`;
-    console.log('currentDomain', currentDomain);
     if (userId && email) {
       if (id === ADVANCED_ID) {
         createSubcription(userId, currentDomain, ADVANCED_PRICE_IDENTIFIER, isCheck, isFreeTrial);

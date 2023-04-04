@@ -77,7 +77,6 @@ export default function MainMenuV2() {
 
   useEffect(() => {
     const currentDomain = `${window.location.hostname}:${window.location.port}`;
-    console.log(currentDomain);
     const fetchData = async () => {
       const isOwnerBoolean = await axios.post(`${config.apiAddress}/domains/owner`, {
         currentDomain,
