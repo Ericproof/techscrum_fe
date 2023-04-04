@@ -15,8 +15,14 @@ export function getUser(id: string) {
   return axios.get(`${config.apiAddress}/users/${id}`);
 }
 
-export function getUsers() {
-  return axios.get(`${config.apiAddress}/users`);
+export async function getUsers() {
+  const userListLocalStorage = localStorage.getItem('users_list');
+  if (userListLocalStorage) {
+    return { data: JSON.parse(userListLocalStorage) };
+  }
+  const res = await axios.get(`${config.apiAddress}/users`);
+  localStorage.setItem('users_list', JSON.stringify(res.data));
+  return res.data;
 }
 
 export function updateMe(data: IUserInfo, token: string) {
