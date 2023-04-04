@@ -17,7 +17,7 @@ const useFetchDashboardData = () => {
     }
     (async () => {
       try {
-        const result = await getDashBoardData(projectId as string, id as string);
+        const result = await getDashBoardData(projectId, id);
         setData(result);
         setIsLoading(false);
       } catch (e) {
@@ -35,9 +35,12 @@ export const useFetchDashboardDailyScrumsByUser = () => {
   const { projectId } = useParams<{ projectId: string }>();
 
   useEffect(() => {
+    if (!projectId || !id) {
+      return;
+    }
     (async () => {
       try {
-        const result = await getDashBoardDailyScrumsByUser(projectId as string, id as string);
+        const result = await getDashBoardDailyScrumsByUser(projectId, id);
         setData(result);
       } catch (e) {
         toast.error('Temporary Server Error. Try Again.', { theme: 'colored' });

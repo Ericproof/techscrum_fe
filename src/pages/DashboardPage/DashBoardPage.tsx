@@ -4,7 +4,7 @@ import ProjectNavigationV3 from '../../lib/ProjectNavigationV3/ProjectNavigation
 import ValueCard from './components/ValueCard/ValueCard';
 import styles from './DashBoardPage.module.scss';
 import useFetchDashboardData from './hooks/useFetchDashboardData';
-import { IDashBoardDailyScrum, IDashboard } from '../../types';
+import { IDashBoardDailyScrum } from '../../types';
 import ChartCard, { ChartType } from './components/ChartCard/ChartCard';
 
 interface IValueCard {
@@ -36,7 +36,7 @@ function DashBoardPage() {
   const valueCardList: IValueCard[] = useMemo(() => {
     if (!data) return [];
 
-    const { taskCount, dailyScrumCount } = data as IDashboard;
+    const { taskCount, dailyScrumCount } = data;
 
     const { total: totalDailyScrum, isCanFinish } = dailyScrumCount;
     const { total: totalTask, toDo, inProgress, done, review } = taskCount;
@@ -131,19 +131,19 @@ function DashBoardPage() {
   // The accpeted data format for BarChart is like this:
   // [
   //   {
-  //     "name": "toDo",
-  //     "value": 4,
-  //   },
-  //   {
   //     "name": "inProgress",
   //     "value": 3,
+  //   },
+  //   {
+  //     "name": "review",
+  //     "value": 4,
   //   },
   //   ...
   // ]
   const barChartData = useMemo((): IBarChartData => {
     if (!data) return { data: [], dataKeyList: [] };
 
-    const { taskCount } = data as IDashboard;
+    const { taskCount } = data;
     const modifiedData = Object.entries(taskCount).filter(([key]) => key !== 'total');
 
     return {
