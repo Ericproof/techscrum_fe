@@ -87,11 +87,11 @@ function App() {
             <TaskTypesProvider>
               <Routes>
                 {showPages && <Route path="v1/register" element={<RegisterPage />} />}
-                {showPages && <Route path="v2/register" element={<RegisterPageV2 />} />}
+                <Route path="v2/register" element={<RegisterPageV2 />} />
                 {showPages && <Route path="/admin" element={<AdminPage />} />}
                 <Route path="/faq" element={<FAQPage />} />
                 <Route path="/verify" element={<VerifyPage />} />
-                {/* active new user */}
+                {/* active new user TODO: fix */}
                 <Route path="/verify-v2" element={<VerifyPageV2 />} />
                 {/* confirm existing user */}
                 {/*  <Route path="/user-confirm" element={<VerifyPageV2 />} />  */}

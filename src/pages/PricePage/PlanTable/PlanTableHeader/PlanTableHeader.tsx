@@ -30,7 +30,7 @@ function PlanTableHeader(props: IPlanTableHeaderProps) {
         createSubcription(userId, currentDomain, ULTRA_PRICE_IDENTIFIER, isCheck, isFreeTrial);
       }
     } else {
-      navigate(`/login`);
+      navigate(`/v2/login`);
     }
   };
 

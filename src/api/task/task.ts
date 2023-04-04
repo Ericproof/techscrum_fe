@@ -19,7 +19,7 @@ export function createTask(data: ITaskData) {
 }
 
 export function deleteTask(id: string) {
-  return axios.delete(`${config.apiAddress}/projects/${id}`);
+  return alphaApi.delete(`${config.apiAddress}/tasks/${id}`);
 }
 
 export function deactiveTask(id: string) {

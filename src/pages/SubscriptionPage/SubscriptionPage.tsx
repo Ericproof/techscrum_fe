@@ -73,8 +73,6 @@ export default function SubscriptionPage() {
     periodEnd = ''
   } = billOverviewInfo || {};
 
-  useEffect(() => {}, [billOverviewInfo]);
-
   return (
     <>
       <div className={styles.subscriptionPage}>
