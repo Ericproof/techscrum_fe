@@ -11,7 +11,6 @@ import {
   Line,
   LineChart
 } from 'recharts';
-// import { IDashBoardDailyScrum } from '../../../../types';
 import styles from './ChartCard.module.scss';
 
 type Props = {
