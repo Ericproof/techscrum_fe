@@ -50,6 +50,20 @@ To able to deploy this to the server, please follow this doc below
 
 https://www.notion.so/Frontend-React-e424fc3e001d432eb15b4407a9fac588
 
+## Folder structure
+
+api - All API goes here
+asset - Image,video...etc
+components - common components used in application
+config - As it's explain
+context - Context API see React docs for more info
+Hooks - React docs for more info
+lib - All common components that maybe will be put in another repo
+pages - As it's explain
+routes - As it's explain
+stories - For storybook
+utils - utils functions
+
 ## Roadmap
 
 https://010001.atlassian.net/jira/software/projects/TEC/boards/2/roadmap
