@@ -28,6 +28,7 @@ function UserProvider({ children }: ILoginInfoProvider) {
   useEffect(() => {
     const fetchUserInfo = async (token: string, refreshToken: string) => {
       try {
+        localStorage.removeItem('users_list');
         const result = await getUserInfo(token, refreshToken);
         const { user } = result.data;
         const t = token || user.token;

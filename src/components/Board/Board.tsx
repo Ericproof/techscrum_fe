@@ -93,7 +93,7 @@ export default function Board() {
     return selectedItems.filter((selectedItem) => selectedItem.id !== item.id);
   };
 
-  const getProjectDataApi = useCallback(() => {
+  useEffect(() => {
     const getProjectData = async () => {
       try {
         const res = await getUsers();
@@ -104,10 +104,6 @@ export default function Board() {
     };
     getProjectData();
   }, []);
-
-  useEffect(() => {
-    getProjectDataApi();
-  }, [getProjectDataApi]);
 
   const fetchColumnsData = useCallback((boardInfo: IBoardEntity) => {
     const columnInfoData: IColumnsFromBackend = {};
@@ -155,7 +151,7 @@ export default function Board() {
 
   const getViewTaskStateFromChildren = () => {
     setIsViewTask(!isViewTask);
-    fetchBoardInfo();
+    // fetchBoardInfo();
   };
 
   const getTaskId = async (itemId: string) => {
