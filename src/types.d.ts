@@ -349,7 +349,7 @@ export interface IDashBoardDailyScrum {
     name: string;
   };
   progresses: {
-    timeStamp: number;
+    timeStamp: string;
     id: string;
     value: number;
   }[];
