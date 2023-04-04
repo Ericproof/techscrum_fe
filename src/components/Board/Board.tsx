@@ -151,7 +151,7 @@ export default function Board() {
 
   const getViewTaskStateFromChildren = () => {
     setIsViewTask(!isViewTask);
-    // fetchBoardInfo();
+    fetchBoardInfo();
   };
 
   const getTaskId = async (itemId: string) => {
