@@ -14,7 +14,7 @@ TechScrum is a project management tools which helps company to prevent delays.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
+List of tools needed to be installed before the project can start
 
 - Node
 - Yarn
@@ -26,7 +26,7 @@ Below are the command that you would need to run after clone down the repo, unle
 - yarn install
 - cp .env.example .env
 
-### Start up 
+### Start up
 
 To able to start the server these are the following commands that would need to be run
 
@@ -34,9 +34,13 @@ To able to start the server these are the following commands that would need to 
 
 ### Environments
 
+Environments for web development are the tools and configurations used by developers to create, test, and deploy web applications. These environments include local development, staging, and production, and are optimized for performance, reliability, and security.
+
 - Local: http://localhost:3000(NOTE: Must run under localhost:3000 else will not work)
 
-- Testing: http://devtechscrum.s3-website-ap-southeast-2.amazonaws.com/
+- Testing: https://dev.techscrumapp.com
+
+- Staging: https://staging.techscrumapp.com
 
 - Production: https://techscrumapp.com
 
@@ -46,29 +50,33 @@ To able to deploy this to the server, please follow this doc below
 
 https://www.notion.so/Frontend-React-e424fc3e001d432eb15b4407a9fac588
 
-## Usage
+## Folder structure
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<!-- ROADMAP -->
+api - All API goes here
+asset - Image,video...etc
+components - common components used in application
+config - As it's explain
+context - Context API see React docs for more info
+Hooks - React docs for more info
+lib - All common components that maybe will be put in another repo
+pages - As it's explain
+routes - As it's explain
+stories - For storybook
+utils - utils functions
 
 ## Roadmap
 
-- [x] Add Changelog
-- [x] Add back to top links
-- [ ] Add Additional Templates w/ Examples
-- [ ] Add "components" document to easily copy & paste sections of the readme
-- [ ] Multi-language Support
-
-See the [open issues](https://010001.atlassian.net/jira/software/projects/TEC/boards/2/backlog) for a full list of proposed features (and known issues).
-
-<!-- CONTRIBUTING -->
+https://010001.atlassian.net/jira/software/projects/TEC/boards/2/roadmap
 
 ## Tests
 
 - npm run cypress
+
+## Storybook
+
+Storybook showing UI components our platform. It allows developers to maintain consistency, reusability and efficiency in the development process.
+
+- yarn run storybook
 
 ## Contributing
 
@@ -83,10 +91,6 @@ David Guo - Implement dailyscrum, backlog page, modal component, FAQ page, fix b
 ## Contact
 
 Kitman Yiu - [Kitman Yiu](www.kitmanyiu.com)
-
-## Acknowledgments
-
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
 
 ## Coding Standard
 
