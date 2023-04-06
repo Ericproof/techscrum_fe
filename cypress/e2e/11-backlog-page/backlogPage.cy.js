@@ -10,7 +10,7 @@ import backlogDataChangePriority from '../../fixtures/11-backlog-page/backlogCha
 import backlogDataTaskTypeChange from '../../fixtures/11-backlog-page/backlogChangeTaskType.json';
 import statusesData from '../../fixtures/statuses.json';
 import labelsData from '../../fixtures/labels.json';
-import usersData from '../../fixtures/users.json';
+import usersData from '../../fixtures/usersV2.json';
 import issuesByLabelBe from '../../fixtures/11-backlog-page/issuesByLabelBe.json';
 import issuesByLabelBeAndFe from '../../fixtures/11-backlog-page/issuesByLabelBeAndFe.json';
 import tasksByProject from '../../fixtures/11-backlog-page/tasksByProject.json';
@@ -38,7 +38,6 @@ describe('Backlog page', () => {
     cy.get('[data-testid="backlog-btn"]').click();
     cy.wait('@fetch-backlog');
     cy.wait('@fetch-statuses');
-    cy.wait('@fetch-users');
     cy.wait('@fetch-labels');
     cy.wait('@fetch-tasksByProject');
   });
