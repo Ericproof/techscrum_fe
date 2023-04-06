@@ -1,9 +1,12 @@
 import axios from 'axios';
 import config from '../../config/config';
 import { ILabelData } from '../../types';
+import { query } from '../../utils/cache';
 
 export function getLabels(projectId: string) {
-  return axios.get(`${config.apiAddress}/labels/${projectId}`);
+  return query('labels', () => {
+    return axios.get(`${config.apiAddress}/labels/${projectId}`);
+  });
 }
 
 export function showLabel(projectId: string) {

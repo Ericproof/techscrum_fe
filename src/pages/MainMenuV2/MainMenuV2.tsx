@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import {
   AiOutlineCalendar,
@@ -12,6 +12,7 @@ import { MdList, MdLogout } from 'react-icons/md';
 import { TbReportSearch } from 'react-icons/tb';
 import { VscChecklist } from 'react-icons/vsc';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import NavigationBtn from '../../components/Navigation/NavigationBtn/NavigationBtn';
 import NavigationLayout from '../../components/Navigation/NavigationLayout/NavigationLayout';
 import { UserContext, UserDispatchContext } from '../../context/UserInfoProvider';
@@ -20,6 +21,7 @@ import avatarImg from '../../assets/userAvatar.png';
 import SubProjectMenu from '../ProjectPage/SubProjectMenu/SubProjectMenu';
 import { IProject } from '../../types';
 import { ProjectContext } from '../../context/ProjectProvider';
+import config from '../../config/config';
 
 const buttons = [
   {
@@ -61,8 +63,10 @@ export default function MainMenuV2() {
   const navigate = useNavigate();
   const [showUserSettingsModal, setShowUserSettingsModal] = useState(false);
   const [toggleSearchMenu, setToggleSearchMenu] = useState(false);
+  const [isOwner, setIsOwner] = useState(false);
   const setUserInfo = useContext(UserDispatchContext);
   const userInfo = useContext(UserContext);
+  const { id: userId } = userInfo;
   const projectList = useContext<IProject[]>(ProjectContext);
 
   const logout = () => {
@@ -70,6 +74,18 @@ export default function MainMenuV2() {
     setUserInfo({});
     navigate('/');
   };
+
+  useEffect(() => {
+    const currentDomain = `${window.location.hostname}:${window.location.port}`;
+    const fetchData = async () => {
+      const isOwnerBoolean = await axios.post(`${config.apiAddress}/domains/owner`, {
+        currentDomain,
+        userId
+      });
+      setIsOwner(isOwnerBoolean.data);
+    };
+    fetchData();
+  }, [userId]);
 
   const renderModals = () => {
     return (
@@ -89,10 +105,12 @@ export default function MainMenuV2() {
             <MdList />
             Preferences (WIP)
           </div>
-          <Link to="/subscription" className={styles.item}>
-            <FiSettings />
-            Subscriptions
-          </Link>
+          {isOwner && (
+            <Link to="/subscription" className={styles.item}>
+              <FiSettings />
+              Subscriptions
+            </Link>
+          )}
           <hr />
           <button className={styles.item} onClick={logout}>
             <MdLogout />
