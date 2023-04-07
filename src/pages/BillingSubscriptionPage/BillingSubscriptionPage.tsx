@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { IoWarning } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import MainMenuV2 from '../MainMenuV2/MainMenuV2';
 import SubSettingMenu from '../../lib/SubSettingMenu/SubSettingMenu';
 import styles from './BillingSubscriptionPage.module.scss';
 import logo from '../../assets/small-logo.svg';
 import useOutsideAlerter from '../../hooks/OutsideAlerter';
 import PopUpModal from './PopUpModal';
+import { paymentButtons } from '../../utils/billingButtons';
+import config from '../../config/config';
+import { UserContext } from '../../context/UserInfoProvider';
 
 const userFree = {
   plan: 'free',
@@ -18,11 +22,49 @@ const userAdvanced = {
   endDate: 1681273318
 };
 
+type BillOverviewInfo = {
+  amount: number;
+  planName: string;
+  customerEmail: string;
+  customerName: string;
+  periodStart: string;
+  periodEnd: string;
+};
+
 export default function BillingSubscriptionPage() {
   const [user, setUser] = useState(userFree);
   const [modal, setModal] = useState(false);
+  const userInfo = useContext(UserContext);
+  const { id: userId } = userInfo;
+  const domainURL = `${window.location.hostname}:${window.location.port}`;
+  const [billOverviewInfo, setBillOverviewInfo] = useState<BillOverviewInfo | null>(null);
+  const [isSubscrbePlan, setIsSubscribePlan] = useState(false);
+  const [isUserFreeTrial, setIsUserFreeTrial] = useState(false);
 
   const { visible, setVisible, myRef } = useOutsideAlerter(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await axios.post(`${config.apiAddress}/payment/info/billingOverview`, {
+        userId
+      });
+      setBillOverviewInfo(res.data);
+    };
+
+    const checkIsSubscribePlan = async () => {
+      const res = await axios.get(`${config.apiAddress}/payment/check/isUserSubscribePlan`, {});
+      setIsSubscribePlan(res.data);
+    };
+
+    const checkIsUserFreeTrial = async () => {
+      const res = await axios.get(`${config.apiAddress}/payment/check/isUserFreeTrial`, {});
+      setIsUserFreeTrial(res.data);
+    };
+
+    fetchData();
+    checkIsSubscribePlan();
+    checkIsUserFreeTrial();
+  }, [domainURL, userId]);
 
   const showOptions = () => {
     setVisible((prev) => !prev);
@@ -32,12 +74,12 @@ export default function BillingSubscriptionPage() {
     <>
       <div className={styles.pageContainer}>
         <MainMenuV2 />
-        <SubSettingMenu />
+        <SubSettingMenu items={paymentButtons} />
         <div className={styles.sectionContainer}>
           <h2>Manage subscriptions</h2>
           <div className={styles.rowLayout}>
             <div className={styles.mainColumn}>
-              {user.plan === 'free' && (
+              {!isSubscrbePlan && (
                 <div className={styles.warnBox}>
                   <div>
                     <IoWarning color="orange" fontSize="1.5rem" />
@@ -63,15 +105,26 @@ export default function BillingSubscriptionPage() {
                   <h3 className={styles.planTitle}>
                     <img src={logo} alt="logo" className={styles.logoIcon} />
                     <span>TechScrum Access</span>
-                    {user.plan === 'advance' && <span className={styles.label}>FREE TRIAL</span>}
+                    {isSubscrbePlan && isUserFreeTrial && (
+                      <span className={styles.label}>FREE TRIAL</span>
+                    )}
                   </h3>
-                  <div className={styles.planEndDate}>
-                    <p className={styles.textSecondary}>Price estimate</p>
-                    <p>Free until Apr 15</p>
-                  </div>
+                  {isSubscrbePlan && (
+                    <div className={styles.planEndDate}>
+                      <p className={styles.textSecondary}>Price estimate</p>
+                      {isUserFreeTrial ? (
+                        <p>Free until {billOverviewInfo?.periodEnd}</p>
+                      ) : (
+                        <p>
+                          {billOverviewInfo?.amount}
+                          .00
+                        </p>
+                      )}
+                    </div>
+                  )}
                   <div className={styles.planFooter}>
                     <Link className={styles.trialBtn} to="/price">
-                      {user.plan === 'advance' ? 'Change plan' : 'Start the trial'}
+                      {isSubscrbePlan ? 'Change plan' : 'Start the trial'}
                     </Link>
                     <div className={styles.planOptionsBtn} ref={myRef}>
                       <button className={styles.dotsBtn} onClick={showOptions}>
@@ -106,7 +159,7 @@ export default function BillingSubscriptionPage() {
               </div>
             </div>
             <div className={styles.sideColumn}>
-              {user.plan === 'free' && (
+              {!isSubscrbePlan && (
                 <div className={`${styles.cardBox} ${styles.flexCol}`}>
                   <h4>Payment options</h4>
                   <p>
@@ -123,6 +176,7 @@ export default function BillingSubscriptionPage() {
                   </p>
                 </div>
               )}
+
               <div className={`${styles.cardBox} ${styles.flexCol}`}>
                 <div>
                   <h4>Current Bill</h4>

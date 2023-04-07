@@ -123,11 +123,11 @@ function App() {
                   <Route path="/settings/:projectId" element={<Setting />} />
                   <Route path="/me" element={<UserMePage />} />
 
-                  <Route path="/subscription" element={<SubscriptionPage />} />
-                  <Route path="/billing/paymentdetails" element={<PaymentDetailsPage />} />
+                  <Route path="/billing/info/overview" element={<SubscriptionPage />} />
+                  <Route path="/billing/info/detail" element={<PaymentDetailsPage />} />
                   <Route path="/payment/success" element={<PaymentSuccessPage />} />
-                  <Route path="/billing/history" element={<BillingHistoryPage />} />
-                  <Route path="/billing/subscription" element={<BillingSubscriptionPage />} />
+                  <Route path="/billing/info/history" element={<BillingHistoryPage />} />
+                  <Route path="/billing/info/subscription" element={<BillingSubscriptionPage />} />
 
                   <Route path="/user/:id" element={<UserPage />} />
                   <Route path="/access" element={<AccessPage />} />

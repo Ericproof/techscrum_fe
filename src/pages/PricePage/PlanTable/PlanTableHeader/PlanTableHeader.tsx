@@ -21,13 +21,12 @@ function PlanTableHeader(props: IPlanTableHeaderProps) {
   const ULTRA_PRICE_IDENTIFIER = 1;
 
   const handleButtonClick = async (id: number, isFreeTrial: boolean) => {
-    const currentDomain = `${window.location.hostname}:${window.location.port}`;
     if (userId && email) {
       if (id === ADVANCED_ID) {
-        createSubcription(userId, currentDomain, ADVANCED_PRICE_IDENTIFIER, isCheck, isFreeTrial);
+        createSubcription(userId, ADVANCED_PRICE_IDENTIFIER, isCheck, isFreeTrial);
       }
       if (id === ULTRA_ID) {
-        createSubcription(userId, currentDomain, ULTRA_PRICE_IDENTIFIER, isCheck, isFreeTrial);
+        createSubcription(userId, ULTRA_PRICE_IDENTIFIER, isCheck, isFreeTrial);
       }
     } else {
       navigate(`/v2/login`);
