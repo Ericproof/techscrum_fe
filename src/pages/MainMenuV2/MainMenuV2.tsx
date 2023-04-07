@@ -9,7 +9,7 @@ import {
 import { BsPeople } from 'react-icons/bs';
 import { FiSettings } from 'react-icons/fi';
 import { MdList, MdLogout } from 'react-icons/md';
-import { TbReportSearch } from 'react-icons/tb';
+import { TbReportMoney, TbReportSearch } from 'react-icons/tb';
 import { VscChecklist } from 'react-icons/vsc';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -76,10 +76,8 @@ export default function MainMenuV2() {
   };
 
   useEffect(() => {
-    const currentDomain = `${window.location.hostname}:${window.location.port}`;
     const fetchData = async () => {
       const isOwnerBoolean = await axios.post(`${config.apiAddress}/domains/owner`, {
-        currentDomain,
         userId
       });
       setIsOwner(isOwnerBoolean.data);
@@ -106,9 +104,9 @@ export default function MainMenuV2() {
             Preferences (WIP)
           </div>
           {isOwner && (
-            <Link to="/subscription" className={styles.item}>
-              <FiSettings />
-              Subscriptions
+            <Link to="/billing/info/overview" className={styles.item}>
+              <TbReportMoney />
+              Plan & billing
             </Link>
           )}
           <hr />

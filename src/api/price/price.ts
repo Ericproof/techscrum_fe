@@ -2,7 +2,6 @@ import axios from 'axios';
 import config from '../../config/config';
 
 export function createPayment(data: {
-  domainURL: string;
   planIdentifier: number;
   userId: string;
   paymentMode: boolean;
