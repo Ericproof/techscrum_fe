@@ -9,6 +9,7 @@ import { UserContext } from '../../context/UserInfoProvider';
 import { paymentButtons } from '../../utils/billingButtons';
 import folder from '../../assets/billingFolder.svg';
 import InvoiceRow from '../BillingHistoryPage/InvoiceRow/InvoiceRow';
+import { checkIsUserSubscribePlan, fetchBillingOverview } from '../../utils/paymentUtils';
 
 export default function SubscriptionPage() {
   type BillOverviewInfo = {
@@ -48,15 +49,13 @@ export default function SubscriptionPage() {
   // it should render again, but after something changed.
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.post(`${config.apiAddress}/payment/info/billingOverview`, {
-        userId
-      });
-      setBillOverviewInfo(res.data);
+      const res = await fetchBillingOverview(userId);
+      setBillOverviewInfo(res);
     };
 
-    const checkIsSubscribePlan = async () => {
-      const res = await axios.get(`${config.apiAddress}/payment/check/isUserSubscribePlan`, {});
-      setIsSubscribePlan(res.data);
+    const checkIsUserSubscribe = async () => {
+      const res = await checkIsUserSubscribePlan();
+      setIsSubscribePlan(res);
     };
 
     const fetchLatestInvoice = async () => {
@@ -65,7 +64,7 @@ export default function SubscriptionPage() {
     };
 
     fetchData();
-    checkIsSubscribePlan();
+    checkIsUserSubscribe();
     fetchLatestInvoice();
   }, [domainURL, userId]);
 

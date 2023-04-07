@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+
 import styles from './PaymentSuccessPage.module.scss';
 import paymentSuccess from '../../assets/payment-success.webp';
-import config from '../../config/config';
 import { UserContext } from '../../context/UserInfoProvider';
+import { fetchBillingOverview } from '../../utils/paymentUtils';
 
 const formatTimeStamp = (date: string | undefined): string => {
   if (date === undefined) {
@@ -36,10 +36,8 @@ export default function PaymentSuccessPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.post(`${config.apiAddress}/payment/info/billingOverview`, {
-        userId
-      });
-      setBillOverviewInfo(res.data);
+      const res = await fetchBillingOverview(userId);
+      setBillOverviewInfo(res);
     };
     fetchData();
   }, [userId]);

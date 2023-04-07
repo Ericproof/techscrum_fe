@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { HiUser } from 'react-icons/hi';
-import axios from 'axios';
 import MainMenuV2 from '../MainMenuV2/MainMenuV2';
 import SubSettingMenu from '../../lib/SubSettingMenu/SubSettingMenu';
 import styles from './PaymentDetailsPage.module.scss';
@@ -9,8 +8,12 @@ import mention from '../../assets/creditCards.svg';
 import InvoiceForm from './InvoiceForm/InvoiceForm';
 import CreditCardForm from './CreditCardForm/CreditCardForm';
 import { paymentButtons } from '../../utils/billingButtons';
-import config from '../../config/config';
 import { UserContext } from '../../context/UserInfoProvider';
+import {
+  checkIsUserFreeTrial,
+  checkIsUserSubscribePlan,
+  fetchBillingOverview
+} from '../../utils/paymentUtils';
 
 type BillOverviewInfo = {
   amount: number;
@@ -31,25 +34,23 @@ export default function PaymentDetailsPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.post(`${config.apiAddress}/payment/info/billingOverview`, {
-        userId
-      });
-      setBillOverviewInfo(res.data);
+      const res = await fetchBillingOverview(userId);
+      setBillOverviewInfo(res);
     };
 
-    const checkIsSubscribePlan = async () => {
-      const res = await axios.get(`${config.apiAddress}/payment/check/isUserSubscribePlan`, {});
-      setIsSubscribePlan(res.data);
+    const checkIsUserSubscribe = async () => {
+      const res = await checkIsUserSubscribePlan();
+      setIsSubscribePlan(res);
     };
 
-    const checkIsUserFreeTrial = async () => {
-      const res = await axios.get(`${config.apiAddress}/payment/check/isUserFreeTrial`, {});
-      setIsUserFreeTrial(res.data);
+    const checkIsFreeTrial = async () => {
+      const res = await checkIsUserFreeTrial();
+      setIsUserFreeTrial(res);
     };
 
     fetchData();
-    checkIsSubscribePlan();
-    checkIsUserFreeTrial();
+    checkIsUserSubscribe();
+    checkIsFreeTrial();
   }, [userId]);
 
   return (
