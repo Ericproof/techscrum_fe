@@ -2,21 +2,24 @@ import React from 'react';
 import logo from '../../../assets/small-logo.svg';
 import styles from './InvoiceRow.module.scss';
 
-type Props = {
-  invoice: {
-    id: number;
-    product: string;
-    plan: string;
-    amount: number;
-    start: number;
-    end: number;
-    invoiceUrl: string;
-  };
-};
+/*
+interface Invoice {
+  id: string | undefined;
+  planName: string | undefined;
+  amount: number | undefined;
+  startDate: string;
+  endDate: string;
+  invoiceURL: string | undefined;
+}
+*/
 
-const formatTimeStamp = (stamp: number): string => {
-  const date = new Date(stamp * 1000);
-  const formattedDate = date.toLocaleDateString('en-AU', {
+interface InvoiceRowProps {
+  invoice: any;
+}
+
+const formatTimeStamp = (date: string): string => {
+  const planDate = new Date(date);
+  const formattedDate = planDate.toLocaleDateString('en-AU', {
     year: '2-digit',
     month: 'short',
     day: 'numeric'
@@ -24,24 +27,24 @@ const formatTimeStamp = (stamp: number): string => {
   return formattedDate;
 };
 
-export default function InvoiceRow(props: Props) {
-  const {
-    invoice: { product, plan, amount, start, end, invoiceUrl }
-  } = props;
+export default function InvoiceRow(props: InvoiceRowProps) {
+  const { invoice } = props;
+  const { planName, amount, startDate, endDate, invoiceURL } = invoice;
+
   return (
     <tr className={styles.tableRow}>
       <td className={styles.product}>
         <img src={logo} alt="logo" className={styles.logoIcon} />
-        <span>{product}</span>
+        <span>Techscrum Product</span>
       </td>
-      <td>{plan}</td>
+      <td>{planName}</td>
       <td>${amount}</td>
       <td>
-        {formatTimeStamp(start)} - {formatTimeStamp(end)}
+        {formatTimeStamp(startDate)} - {formatTimeStamp(endDate)}
       </td>
       <td>
-        {invoiceUrl && (
-          <a href={invoiceUrl} download className={styles.invoiceBtn}>
+        {invoiceURL && (
+          <a href={invoiceURL} download className={styles.invoiceBtn}>
             View
           </a>
         )}

@@ -17,11 +17,6 @@ const userFree = {
   endDate: 1681273318
 };
 
-const userAdvanced = {
-  plan: 'advance',
-  endDate: 1681273318
-};
-
 type BillOverviewInfo = {
   amount: number;
   planName: string;
@@ -29,10 +24,10 @@ type BillOverviewInfo = {
   customerName: string;
   periodStart: string;
   periodEnd: string;
+  freeTrialDuration: number;
 };
 
 export default function BillingSubscriptionPage() {
-  const [user, setUser] = useState(userFree);
   const [modal, setModal] = useState(false);
   const userInfo = useContext(UserContext);
   const { id: userId } = userInfo;
@@ -135,7 +130,7 @@ export default function BillingSubscriptionPage() {
                           visible ? `${styles.planOptions} ${styles.active}` : styles.planOptions
                         }
                       >
-                        {user.plan === 'advance' && (
+                        {isSubscrbePlan && (
                           <li>
                             <button className={styles.optionBtn} onClick={() => setModal(true)}>
                               Unsubscribe
@@ -152,10 +147,6 @@ export default function BillingSubscriptionPage() {
                     </div>
                   </div>
                 </div>
-              </div>
-              <div>
-                <button onClick={() => setUser(userFree)}>Free</button>
-                <button onClick={() => setUser(userAdvanced)}>Adavance</button>
               </div>
             </div>
             <div className={styles.sideColumn}>
@@ -180,12 +171,23 @@ export default function BillingSubscriptionPage() {
               <div className={`${styles.cardBox} ${styles.flexCol}`}>
                 <div>
                   <h4>Current Bill</h4>
-                  <p className={styles.textSecondary}>Apr 15, 2023 - May 15, 2023</p>
+                  {isSubscrbePlan && (
+                    <p className={styles.textSecondary}>
+                      {billOverviewInfo?.periodStart} - {billOverviewInfo?.periodEnd}
+                    </p>
+                  )}
                 </div>
-                <p className={`${styles.currentPlan} ${styles.flexBetween}`}>
-                  <span>Free Plan</span>
-                  <span>$0.00</span>
-                </p>
+                {!isSubscrbePlan ? (
+                  <p className={`${styles.currentPlan} ${styles.flexBetween}`}>
+                    <span>Free Plan</span>
+                    <span>$0.00</span>
+                  </p>
+                ) : (
+                  <p className={`${styles.currentPlan} ${styles.flexBetween}`}>
+                    <span>{billOverviewInfo?.planName}</span>
+                    <span>${billOverviewInfo?.amount}.00</span>
+                  </p>
+                )}
                 <div className={styles.sideColumn__footer}>
                   <p className={`${styles.textSecondary} ${styles.flexBetween}`}>
                     <span>TAX</span>
@@ -193,7 +195,11 @@ export default function BillingSubscriptionPage() {
                   </p>
                   <p className={`${styles.textSecondary} ${styles.flexBetween}`}>
                     <span>TOTAL</span>
-                    <span className={styles.totalPrice}>AUD 0.00</span>
+                    {!isSubscrbePlan ? (
+                      <span className={styles.totalPrice}>AUD 0.00</span>
+                    ) : (
+                      <span className={styles.totalPrice}>AUD {billOverviewInfo?.amount}.00</span>
+                    )}
                   </p>
                 </div>
               </div>
@@ -201,7 +207,7 @@ export default function BillingSubscriptionPage() {
           </div>
         </div>
       </div>
-      {modal && <PopUpModal user={user} setModal={setModal} />}
+      {modal && <PopUpModal user={userFree} setModal={setModal} />}
     </>
   );
 }

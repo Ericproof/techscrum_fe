@@ -3,20 +3,28 @@ import { toast } from 'react-toastify';
 import EmailInput from '../EmailInput/EmailInput';
 import styles from './InvoiceForm.module.scss';
 
+// interface Props {
+//  invoiceEmail: string;
+//  setInvoiceEmail: React.Dispatch<React.SetStateAction<string>>;
+// }
+
 interface Props {
-  invoiceEmail: string;
-  setInvoiceEmail: React.Dispatch<React.SetStateAction<string>>;
+  invoiceEmail: string | undefined;
 }
 
-export default function InvoiceForm({ invoiceEmail, setInvoiceEmail }: Props) {
+export default function InvoiceForm(props: Props) {
   const [isEditing, setIsEditing] = useState(false);
-  const [value, setValue] = useState('');
+  // const [value, setValue] = useState('');
   const [isValid, setIsValid] = useState(false);
 
+  const { invoiceEmail } = props;
+
   // State getting from child
-  const handleValueChange = (newValue: string) => {
-    setValue(newValue);
-  };
+  // const handleValueChange = (newValue: string) => {
+  //  setValue(newValue);
+  // };
+
+  const handleValueChange = () => {};
 
   // State getting from child
   const handleValidChange = (isFormValid: boolean) => {
@@ -27,7 +35,7 @@ export default function InvoiceForm({ invoiceEmail, setInvoiceEmail }: Props) {
     e.preventDefault();
     setIsEditing((prev) => !prev);
     if (isEditing) {
-      setInvoiceEmail(value);
+      // setInvoiceEmail(value);
       toast.success('Email updated successfully.', { theme: 'colored', autoClose: 2000 });
     }
   };
