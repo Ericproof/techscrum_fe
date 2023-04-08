@@ -17,7 +17,7 @@ describe('forget password page', () => {
   });
 
   it('should able to send forgetPassword Application', () => {
-    cy.get('[data-testid="email"]').type('kitman200220022002@gmail.com');
+    cy.get('[data-testid="email"]').type('coffeetsang20@gmail.com');
     cy.get('[data-testid="next"]').click();
   });
 
