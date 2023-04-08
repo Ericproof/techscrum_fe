@@ -6,5 +6,10 @@ export const createSubcription = async (
   paymentMode: boolean,
   isFreeTrial: boolean
 ) => {
-  createPayment({ planIdentifier, userId: id, paymentMode, isFreeTrial });
+  createPayment({
+    planIdentifier,
+    userId: id,
+    paymentMode,
+    isFreeTrial
+  });
 };

@@ -130,7 +130,6 @@ function PlanOption(props: IPlanOptionProps) {
   const handleClick = () => {
     setIsChecked((ischecked) => !ischecked);
   };
-
   const handleButtonClick = async (id: number, isFreeTrial: boolean) => {
     if (userId && email) {
       if (id === ADVANCED_ID) {

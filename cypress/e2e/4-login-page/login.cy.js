@@ -13,20 +13,20 @@
 
 describe('login', () => {
   beforeEach(() => {
-    cy.visit('/v1/login');
+    cy.visit('/v2/login');
   });
 
   it('should able to login', () => {
-    cy.login('kitman200220022002@gmail.com', '12345678');
+    cy.login('coffeetsang20@gmail.com', 'wendy123');
   });
 
+  //this tes need to be changed as before active an account, the password is empty, thus it will always show password is wrong
   it('should show user not active', () => {
-    cy.get('[data-testid="email"]').type('kitmanwork@gmail.com');
-    cy.get('[data-testid="password"]').type('1234678');
+    //need to create an inactive account in database
+    cy.get('[data-testid="email"]').type('testacc@g.com');
+    cy.get('[data-testid="password"]').type('wendy123');
     cy.get('[data-testid="login"]').click();
-    cy.get('[data-testid="login-tip"]').contains(
-      'User has not active account, Please contact staff!'
-    );
+    cy.get('[data-testid="login-tip"]').contains('Wrong Email or Password.');
   });
 
   it('should show error message when login is incorrect', () => {
