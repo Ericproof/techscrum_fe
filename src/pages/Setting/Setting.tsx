@@ -113,7 +113,7 @@ export default function Setting() {
     if (!data) {
       return;
     }
-    const copiedData = { name: data.name, key: data.key, projectLeadId: data.projectLeadId };
+    const copiedData = { ...data };
     update(copiedData);
   };
 
@@ -155,6 +155,7 @@ export default function Setting() {
                 onValueChanged={onChangeName}
                 onValueBlur={() => {}}
                 value={data?.name}
+                defaultValue={data?.name}
                 name="name"
                 loading={!data}
                 dataTestId="projectName"
@@ -164,6 +165,7 @@ export default function Setting() {
                 onValueChanged={onChange}
                 onValueBlur={() => {}}
                 value={data?.key}
+                defaultValue={data?.key}
                 name="key"
                 loading={!data}
                 dataTestId="projectKey"
@@ -176,6 +178,7 @@ export default function Setting() {
                 onValueChanged={onChange}
                 onValueBlur={() => {}}
                 defaultValue={data?.projectLeadId?.id}
+                placeHolder={data?.projectLeadId?.name}
                 name="projectLeadId"
                 loading={!data}
                 options={userList.map((item) => {
@@ -186,27 +189,34 @@ export default function Setting() {
                 })}
               />
               <InputV2
-                label="Website URL"
-                onValueChanged={() => {}}
+                label="Website Url"
+                onValueChanged={onChange}
                 onValueBlur={() => {}}
-                defaultValue=""
-                name="websiteURL"
+                value={data?.websiteUrl}
+                defaultValue={data?.websiteUrl}
+                name="websiteUrl"
                 loading={!data}
-                dataTestId="websiteURL"
+                dataTestId="websiteUrl"
               />
             </div>
             <div className={[styles.gap, styles.row, 'flex'].join(' ')}>
               <InputV2
                 label="Description"
-                onValueChanged={() => {}}
+                onValueChanged={onChange}
                 onValueBlur={() => {}}
-                defaultValue=""
+                value={data?.description}
+                defaultValue={data?.description}
                 name="description"
                 loading={!data}
                 dataTestId="description"
               />
             </div>
-            <ButtonV2 text="SAVE CHANGES" onClick={onClickSave} loading={loading} />
+            <ButtonV2
+              text="SAVE CHANGES"
+              onClick={onClickSave}
+              loading={loading}
+              dataTestId="projectUpdateBtn"
+            />
           </SettingCard>
           {checkAccess('delete:projects', projectId) && (
             <SettingCard title="Delete Project">

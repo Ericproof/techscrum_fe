@@ -8,10 +8,11 @@ interface IUsersFieldsV2 {
   label: string;
   name: string;
   required: boolean;
+  dataTestId?: string;
 }
 
 export default function UsersFieldsV2(props: IUsersFieldsV2) {
-  const { onChange, defaultValue, name, label, required } = props;
+  const { onChange, defaultValue, name, label, required, dataTestId } = props;
   const [userList, setUserList] = useState<any>([]);
 
   useEffect(() => {
@@ -38,6 +39,11 @@ export default function UsersFieldsV2(props: IUsersFieldsV2) {
           value: item.id
         };
       })}
+      dataTestId={dataTestId}
     />
   );
 }
+
+UsersFieldsV2.defaultProps = {
+  dataTestId: ''
+};
