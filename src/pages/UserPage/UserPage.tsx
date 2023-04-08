@@ -2,10 +2,10 @@
 import { AxiosResponse } from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getUser } from '../../api/user/user';
 import ProjectHeader from '../../components/ProjectHeader/ProjectHeader';
 import { IUserInfo } from '../../types';
 import styles from './UserPage.module.scss';
+import { getUser } from '../../api/user/user';
 
 export default function UserPage() {
   const { id = '' } = useParams();

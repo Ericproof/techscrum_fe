@@ -2,6 +2,7 @@
 import axios from 'axios';
 import config from '../../config/config';
 import { IUserInfo } from '../../types';
+import { query } from '../../utils/cache';
 
 const getAuthHeader = (token: string) => {
   return {
@@ -16,13 +17,9 @@ export function getUser(id: string) {
 }
 
 export async function getUsers() {
-  const userListLocalStorage = localStorage.getItem('users_list');
-  if (userListLocalStorage) {
-    return { data: JSON.parse(userListLocalStorage) };
-  }
-  const res = await axios.get(`${config.apiAddress}/users`);
-  localStorage.setItem('users_list', JSON.stringify(res.data));
-  return res.data;
+  return query('userList', () => {
+    return axios.get(`${config.apiAddress}/users`);
+  });
 }
 
 export function updateMe(data: IUserInfo, token: string) {
