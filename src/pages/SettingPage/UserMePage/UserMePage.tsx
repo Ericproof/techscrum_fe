@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import { toast } from 'react-toastify';
-import { updateMe } from '../../../api/user/user';
 import ChangeIcon from '../../../components/ProjectEditor/ChangeIcon/ChangeIcon';
 import { UserContext, UserDispatchContext } from '../../../context/UserInfoProvider';
 import styles from './UserMePage.module.scss';
@@ -12,6 +11,7 @@ import ButtonV2 from '../../../lib/FormV2/ButtonV2/ButtonV2';
 import InputV2 from '../../../lib/FormV2/InputV2/InputV2';
 import Modal from '../../../lib/Modal/Modal';
 import changePassword from '../../../api/accountSetting/changePassword';
+import { updateMe } from '../../../api/user/user';
 
 export default function UserMePage() {
   const userInfo = useContext(UserContext);

@@ -41,7 +41,7 @@ export default function DropdownV2(props: IDropdownV2) {
   const [isActive, setIsActive] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
 
-  const finalValue = options.filter((item) => item.value === value)[0]?.label;
+  const finalValue = options?.filter((item) => item.value === value)[0]?.label;
 
   useEffect(() => {
     if (value === null && defaultValue) {
