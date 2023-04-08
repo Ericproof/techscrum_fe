@@ -43,7 +43,7 @@ export default function BillingSubscriptionPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetchBillingOverview(userId);
+      const res = await fetchBillingOverview();
       setBillOverviewInfo(res);
     };
 

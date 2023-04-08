@@ -145,9 +145,7 @@ function PlanOption(props: IPlanOptionProps) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.post(`${config.apiAddress}/payment/check/userCurrentPlan`, {
-        userId
-      });
+      const res = await axios.get(`${config.apiAddress}/payment/check/userCurrentPlan`, {});
       setIsCurrentPlan(res.data);
     };
     fetchData();

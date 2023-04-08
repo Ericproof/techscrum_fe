@@ -16,8 +16,8 @@ export const createSubcription = async (
   });
 };
 
-export const fetchBillingOverview = async (userId) => {
-  const res = await axios.post(`${config.apiAddress}/payment/info/billingOverview`, { userId });
+export const fetchBillingOverview = async () => {
+  const res = await axios.get(`${config.apiAddress}/payment/info/billingOverview`, {});
   return res.data;
 };
 

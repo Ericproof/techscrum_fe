@@ -49,7 +49,7 @@ export default function SubscriptionPage() {
   // it should render again, but after something changed.
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetchBillingOverview(userId);
+      const res = await fetchBillingOverview();
       setBillOverviewInfo(res);
     };
 
