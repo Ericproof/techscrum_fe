@@ -22,7 +22,6 @@ export default function InvoiceForm(props: Props) {
     e.preventDefault();
     setIsEditing((prev) => !prev);
     if (isEditing) {
-      // setInvoiceEmail(value);
       toast.success('Email updated successfully.', { theme: 'colored', autoClose: 2000 });
     }
   };
