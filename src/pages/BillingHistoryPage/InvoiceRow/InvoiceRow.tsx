@@ -2,17 +2,6 @@ import React from 'react';
 import logo from '../../../assets/small-logo.svg';
 import styles from './InvoiceRow.module.scss';
 
-/*
-interface Invoice {
-  id: string | undefined;
-  planName: string | undefined;
-  amount: number | undefined;
-  startDate: string;
-  endDate: string;
-  invoiceURL: string | undefined;
-}
-*/
-
 interface InvoiceRowProps {
   invoice: any;
 }
