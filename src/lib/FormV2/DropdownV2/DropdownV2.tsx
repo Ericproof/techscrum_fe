@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import { IMinEvent, IOptions } from '../../../types';
 import { getErrorMessage } from '../../../utils/formUtils';
@@ -42,6 +42,12 @@ export default function DropdownV2(props: IDropdownV2) {
   const [showMenu, setShowMenu] = useState(false);
 
   const finalValue = options.filter((item) => item.value === value)[0]?.label;
+
+  useEffect(() => {
+    if (value === null && defaultValue) {
+      setValue(defaultValue);
+    }
+  }, [value, defaultValue]);
 
   const onChangeSelect = (val: string) => {
     const e = { target: { value: val, name } };

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useParams, NavLink } from 'react-router-dom';
-import { BsBriefcase, BsCreditCard } from 'react-icons/bs';
+import { BsBriefcase } from 'react-icons/bs';
 import { AiOutlineSetting } from 'react-icons/ai';
 import { CgProfile } from 'react-icons/cg';
 import { IProject, IProjectData } from '../../types';
@@ -43,13 +43,6 @@ export default function SubSettingMenu(props: ISubSettingMenu) {
         url: `/projects/${currentProject?.id}/members`,
         icon: <BsBriefcase />,
         dataTestId: 'company-details'
-      },
-      {
-        name: 'Plan & Billing (WIP)',
-        checkAccess: 'view:settings',
-        url: `/settings/${currentProject?.id}`,
-        icon: <BsCreditCard />,
-        dataTestId: 'plan-and-billing'
       }
     ]
   };

@@ -37,9 +37,14 @@ export default function InputV2(props: IInputV2) {
     value
   } = props;
   const [val, setVal] = useState(defaultValue);
-  const [hadDefaultValue] = useState(!value);
+  const [hadDefaultValue, setHadDefaultValue] = useState(value === null);
   const [error, setError] = useState<null | string>(null);
   const [isActive, setIsActive] = useState(false);
+  useEffect(() => {
+    if (value !== null) {
+      setHadDefaultValue(false);
+    }
+  }, [value]);
 
   const onChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     const errorMessage = getErrorMessage(e, props);

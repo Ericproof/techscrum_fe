@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { getUsers } from '../../../api/user/user';
 import DropdownV2 from '../../FormV2/DropdownV2/DropdownV2';
+import { getUsers } from '../../../api/user/user';
 
 interface IUsersFieldsV2 {
   onChange: (e: any) => void;

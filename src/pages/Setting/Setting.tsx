@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
 import { AiOutlineSetting, AiOutlineUnorderedList } from 'react-icons/ai';
-import { BsBriefcase, BsCreditCard } from 'react-icons/bs';
+import { BsBriefcase } from 'react-icons/bs';
 import styles from './Setting.module.scss';
 import { deleteProject, showProject, updateProject } from '../../api/projects/projects';
 import { IOnChangeProjectLead, IProjectData, IProjectEditor } from '../../types';
@@ -37,15 +37,6 @@ const subMenuItem = (projectId: string) => {
         url: `/projects/${projectId}/members`,
         icon: <BsBriefcase />,
         dataTestId: 'project-members'
-      }
-    ],
-    utilBtns: [
-      {
-        name: 'Plan & Billing (WIP)',
-        checkAccess: 'view:billing',
-        url: `/billing`,
-        icon: <BsCreditCard />,
-        dataTestId: 'plan-and-billing'
       }
     ],
     dailyScrumBtn: [

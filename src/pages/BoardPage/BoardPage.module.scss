@@ -1,6 +1,24 @@
-.navAndBoard {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    position: relative;
+.container {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  padding-top: 30px;
+  box-sizing: border-box;
+  width: 100%;
+  overflow: auto;
+  background: rgb(246, 248, 249);
+}
+
+
+.line{
+  height: 1px;
+  width: 95%;
+  border: none;
+  border-bottom: 2px solid rgb(218, 221, 227);
+  background: transparent;
+}
+
+.header{
+  margin: 0 0 0 30px;
+  color:rgb(34, 34, 34);
 }

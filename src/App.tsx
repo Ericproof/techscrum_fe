@@ -91,7 +91,7 @@ function App() {
                 {showPages && <Route path="/admin" element={<AdminPage />} />}
                 <Route path="/faq" element={<FAQPage />} />
                 <Route path="/verify" element={<VerifyPage />} />
-                {/* active new user */}
+                {/* active new user TODO: fix */}
                 <Route path="/verify-v2" element={<VerifyPageV2 />} />
                 {/* confirm existing user */}
                 {/*  <Route path="/user-confirm" element={<VerifyPageV2 />} />  */}
@@ -123,11 +123,11 @@ function App() {
                   <Route path="/settings/:projectId" element={<Setting />} />
                   <Route path="/me" element={<UserMePage />} />
 
-                  <Route path="/subscription" element={<SubscriptionPage />} />
-                  <Route path="/billing/paymentdetails" element={<PaymentDetailsPage />} />
+                  <Route path="/billing/info/overview" element={<SubscriptionPage />} />
+                  <Route path="/billing/info/detail" element={<PaymentDetailsPage />} />
                   <Route path="/payment/success" element={<PaymentSuccessPage />} />
-                  <Route path="/billing/history" element={<BillingHistoryPage />} />
-                  <Route path="/billing/subscription" element={<BillingSubscriptionPage />} />
+                  <Route path="/billing/info/history" element={<BillingHistoryPage />} />
+                  <Route path="/billing/info/subscription" element={<BillingSubscriptionPage />} />
 
                   <Route path="/user/:id" element={<UserPage />} />
                   <Route path="/access" element={<AccessPage />} />
