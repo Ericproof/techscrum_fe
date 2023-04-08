@@ -6,10 +6,10 @@ import {
   AiOutlineSearch,
   AiOutlineUser
 } from 'react-icons/ai';
-import { BsPeople } from 'react-icons/bs';
+import { BsPeople, BsCreditCard } from 'react-icons/bs';
 import { FiSettings } from 'react-icons/fi';
 import { MdList, MdLogout } from 'react-icons/md';
-import { TbReportSearch } from 'react-icons/tb';
+import { TbReportMoney, TbReportSearch } from 'react-icons/tb';
 import { VscChecklist } from 'react-icons/vsc';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -23,20 +23,23 @@ import { IProject } from '../../types';
 import { ProjectContext } from '../../context/ProjectProvider';
 import config from '../../config/config';
 
-const buttons = [
+const btnsForDomainOwner = [
   {
+    id: 'projects',
     name: 'Projects',
     url: `/projects`,
     icon: <AiOutlineFolderOpen />,
     dataTestId: 'projects-nav-btn'
   },
   {
+    id: 'myWork',
     name: 'My Work(WIP)',
     url: `/my-work`,
     icon: <VscChecklist />,
     dataTestId: 'my-work-nav-btn'
   },
   {
+    id: 'calendar',
     name: 'Calendar(WIP)',
     checkAccess: 'view:calendar',
     url: `/my-calendar`,
@@ -44,6 +47,7 @@ const buttons = [
     dataTestId: 'my-calendar-nav-btn'
   },
   {
+    id: 'report',
     name: 'Report(WIP)',
     checkAccess: 'view:reports',
     url: `/my-report`,
@@ -51,6 +55,15 @@ const buttons = [
     dataTestId: 'my-report-nav-btn'
   },
   {
+    id: 'billing',
+    name: 'Plan & Billing (WIP)',
+    checkAccess: 'view:billing',
+    url: `/billing`,
+    icon: <BsCreditCard />,
+    dataTestId: 'plan-and-billing'
+  },
+  {
+    id: 'roles',
     name: 'Roles',
     checkAccess: 'view:roles',
     url: `/roles`,
@@ -58,6 +71,8 @@ const buttons = [
     dataTestId: 'people'
   }
 ];
+
+const btnsForOthers = btnsForDomainOwner.filter((e) => e.id !== 'billing');
 
 export default function MainMenuV2() {
   const navigate = useNavigate();
@@ -69,6 +84,8 @@ export default function MainMenuV2() {
   const { id: userId } = userInfo;
   const projectList = useContext<IProject[]>(ProjectContext);
 
+  const btnsArray = isOwner ? btnsForDomainOwner : btnsForOthers;
+
   const logout = () => {
     localStorage.clear();
     setUserInfo({});
@@ -76,10 +93,8 @@ export default function MainMenuV2() {
   };
 
   useEffect(() => {
-    const currentDomain = `${window.location.hostname}:${window.location.port}`;
     const fetchData = async () => {
       const isOwnerBoolean = await axios.post(`${config.apiAddress}/domains/owner`, {
-        currentDomain,
         userId
       });
       setIsOwner(isOwnerBoolean.data);
@@ -106,9 +121,9 @@ export default function MainMenuV2() {
             Preferences (WIP)
           </div>
           {isOwner && (
-            <Link to="/subscription" className={styles.item}>
-              <FiSettings />
-              Subscriptions
+            <Link to="/billing/info/overview" className={styles.item}>
+              <TbReportMoney />
+              Plan & billing
             </Link>
           )}
           <hr />
@@ -135,7 +150,7 @@ export default function MainMenuV2() {
           <AiOutlineSearch className={styles.searchIcon} />
           Search
         </button>
-        {buttons.map((item) => {
+        {btnsArray.map((item) => {
           return (
             <NavigationBtn
               key={item.name}

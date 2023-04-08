@@ -5,8 +5,8 @@ import addProject from '../../fixtures/addProject.json';
 
 describe('/create-projects', () => {
   beforeEach(() => {
-    cy.visit('/v1/login');
-    cy.login('kitman200220022002@gmail.com', '12345678');
+    cy.visit('/v2/login');
+    cy.login('coffeetsang20@gmail.com', 'wendy123');
   });
 
   it('should have project details', () => {

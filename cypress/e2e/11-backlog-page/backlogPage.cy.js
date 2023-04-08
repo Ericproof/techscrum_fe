@@ -10,7 +10,7 @@ import backlogDataChangePriority from '../../fixtures/11-backlog-page/backlogCha
 import backlogDataTaskTypeChange from '../../fixtures/11-backlog-page/backlogChangeTaskType.json';
 import statusesData from '../../fixtures/statuses.json';
 import labelsData from '../../fixtures/labels.json';
-import usersData from '../../fixtures/users.json';
+import usersData from '../../fixtures/usersV2.json';
 import issuesByLabelBe from '../../fixtures/11-backlog-page/issuesByLabelBe.json';
 import issuesByLabelBeAndFe from '../../fixtures/11-backlog-page/issuesByLabelBeAndFe.json';
 import tasksByProject from '../../fixtures/11-backlog-page/tasksByProject.json';
@@ -26,9 +26,9 @@ describe('Backlog page', () => {
     cy.intercept('GET', '**/users', usersData).as('fetch-users');
     cy.intercept('GET', '**/boards/*/statuses', statusesData).as('fetch-statuses');
     cy.intercept('GET', '**/tasks/project/**', tasksByProject).as('fetch-tasksByProject');
-    cy.visit('/v1/login');
+    cy.visit('/v2/login');
     cy.wait('@fetch-types');
-    cy.login('kitman200220022002@gmail.com', '12345678');
+    cy.login('coffeetsang20@gmail.com', 'wendy123');
     cy.wait('@fetch-projects');
     cy.get('[data-testid="kitman-test1"]').click();
     cy.wait('@fetch-board');
@@ -38,7 +38,6 @@ describe('Backlog page', () => {
     cy.get('[data-testid="backlog-btn"]').click();
     cy.wait('@fetch-backlog');
     cy.wait('@fetch-statuses');
-    cy.wait('@fetch-users');
     cy.wait('@fetch-labels');
     cy.wait('@fetch-tasksByProject');
   });
