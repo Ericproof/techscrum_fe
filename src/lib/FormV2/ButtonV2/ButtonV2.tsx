@@ -12,7 +12,7 @@ interface IPropsButtonV2 {
   size?: 'xs' | 'md' | 'lg';
   dataTestId?: string;
   disabled?: boolean;
-  btnType?: 'button' | 'submit' | 'reset' | undefined;
+  btnType?: 'button' | 'submit' | 'reset';
 }
 
 export default function ButtonV2(props: IPropsButtonV2) {
