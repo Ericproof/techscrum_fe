@@ -32,7 +32,7 @@ export default function UsersFieldsV2(props: IUsersFieldsV2) {
       defaultValue={defaultValue}
       name={name}
       required={required}
-      options={userList.map((item) => {
+      options={userList?.map((item) => {
         return {
           label: item.name,
           value: item.id
