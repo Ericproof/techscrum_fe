@@ -13,26 +13,29 @@ $white: rgb(245, 245, 245);
   overflow-y: scroll;
   font-family: Poppins, sans-serif;
   z-index: 9;
-  transition: all .5s ease-in-out;
+  transition: all 0.5s ease-in-out;
   position: absolute;
-  top:0;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  top: 0;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-.showMenu{
+.showMenu {
   left: 240px;
 }
 
-.hideMenu{
+.hideMenu {
   left: -550px;
 }
 
-.container::-webkit-scrollbar{
+.container::-webkit-scrollbar {
   width: 1px;
   border-radius: 5px;
 }
 
-.container::-webkit-scrollbar-thumb{
+.container::-webkit-scrollbar-thumb {
   background: rgb(219, 220, 225);
   border-radius: 5px;
 }
@@ -85,13 +88,13 @@ $white: rgb(245, 245, 245);
       //background:rgb(226, 226, 233);
       border-right: 3px solid $primaryColor;
       border-radius: 0;
-      color:$primaryColor;
+      color: $primaryColor;
       font-weight: 300;
       .pencilLine {
         display: block;
       }
-      svg{
-        fill:$primaryColor
+      svg {
+        fill: $primaryColor;
       }
     }
 
@@ -140,48 +143,48 @@ $white: rgb(245, 245, 245);
   margin-top: 20px;
 }
 
-.header{
+.header {
   display: inline-block;
-    font-style: normal;
-    font-stretch: normal;
-    word-break: break-word;
-    font-family: Poppins, sans-serif;
-    line-height: 1.43;
-    color: rgb(79, 83, 102);
-    font-size: 22px;
-    font-weight: 600;
-    padding: 0px 0px 0px 15px;
+  font-style: normal;
+  font-stretch: normal;
+  word-break: break-word;
+  font-family: Poppins, sans-serif;
+  line-height: 1.43;
+  color: rgb(79, 83, 102);
+  font-size: 22px;
+  font-weight: 600;
+  padding: 0px 0px 0px 15px;
 }
 
-.recentActivityHeader{
-  color:rgb(11,14,13);
-  font-size:14px;
-  font-weight:700px
+.recentActivityHeader {
+  color: rgb(11, 14, 13);
+  font-size: 14px;
+  font-weight: 700px;
 }
 
-.searchItem{
+.searchItem {
   display: flex;
   align-items: center;
   padding: 5px 15px;
   border-radius: 40px;
-  transition: all .25s ease-in-out;
-  &:hover{
+  transition: all 0.25s ease-in-out;
+  &:hover {
     cursor: pointer;
     background-color: #ebebeb;
   }
 
-  .icon{
+  .icon {
     border-radius: 50%;
     background-color: $primaryColor;
     padding: 10px;
     font-size: 17px;
-    color:white
+    color: white;
   }
 
-  p{
+  p {
     font-size: 15px;
     margin-left: 12px;
-    color:black;
+    color: black;
     text-decoration: none;
   }
 }
