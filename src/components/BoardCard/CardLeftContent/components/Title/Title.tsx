@@ -33,6 +33,7 @@ export default function Title({
           onChange={onChangeTitle}
           onBlur={onBlurHandler}
           value={value}
+          maxLength={20}
         />
       </label>
     </div>
