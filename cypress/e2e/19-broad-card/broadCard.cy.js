@@ -35,7 +35,7 @@ describe('Project page', () => {
     cy.get('[data-testid="card-type-selection"]').then((items) => {
       items[0].click();
     });
-    cy.get('[data-testid="card-type-button"]').contains('Task');
+    cy.get('[data-testid="card-type-button"]').contains('Story');
   });
 
   it('Test should change status', () => {
