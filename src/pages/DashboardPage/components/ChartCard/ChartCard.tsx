@@ -114,7 +114,7 @@ function ChartCard({ style, dataKeyList, data, type }: Props) {
 
   const newData = useMemo(() => {
     if (!rawData) {
-      return { data: [], dataKeyList: [] };
+      return null;
     }
     return {
       dataKeyList: rawData?.map(({ title }) => title),
