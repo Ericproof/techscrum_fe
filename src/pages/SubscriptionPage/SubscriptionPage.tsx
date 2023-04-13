@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { HiUser, HiOutlinePencilAlt } from 'react-icons/hi';
-import { TbDirectionSignFilled } from 'react-icons/tb';
+import { RiBookOpenLine } from 'react-icons/ri';
 import styles from './SubscriptionPage.module.scss';
 import SubSettingMenu from '../../lib/SubSettingMenu/SubSettingMenu';
 import MainMenuV2 from '../MainMenuV2/MainMenuV2';
@@ -141,7 +141,7 @@ export default function SubscriptionPage() {
                     <>
                       <img src={folder} alt="folder" className={styles.folderImage} />
                       <h2 className={styles.textCenter}>Go to billing history to view invoices</h2>
-                      <TbDirectionSignFilled
+                      <RiBookOpenLine
                         className={styles.directIcon}
                         size="1.5rem"
                         onClick={onChangeToBillingHistory}
