@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import {
   XAxis,
   YAxis,
@@ -11,7 +11,12 @@ import {
   Line,
   LineChart
 } from 'recharts';
+import { IUserInfo } from '../../../../types';
 import styles from './ChartCard.module.scss';
+import { UserContext } from '../../../../context/UserInfoProvider';
+import { useFetchDashboardDailyScrumsByUser } from '../../hooks/useFetchDashboardData';
+import { getUsers } from '../../../../api/user/user';
+import { convertProgressData } from '../../utils';
 
 type Props = {
   data?: any;
@@ -78,26 +83,86 @@ function barChart(data: any) {
           left: 20,
           bottom: 5
         }}
-        barSize={50}
+        barSize={35}
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar key={crypto.randomUUID()} dataKey="count" fill="#8884d8" />;
+        <Bar key={crypto.randomUUID()} dataKey="count" fill="#6a2add" />;
       </BarChart>
     </ResponsiveContainer>
   );
 }
+
 function ChartCard({ style, dataKeyList, data, type }: Props) {
+  const { id: initialId } = useContext(UserContext);
+  const [chartData, setChartData] = useState(data);
+  const [chartDataKeyList, setDataKeyList] = useState(dataKeyList || []);
+  const [currentUserId, setCurrentUserId] = useState(initialId);
+  const [users, setUsers] = useState<IUserInfo[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      const res = await getUsers();
+      setUsers(res.data);
+    })();
+  }, []);
+
+  const rawData = useFetchDashboardDailyScrumsByUser(currentUserId as string);
+
+  const newData = useMemo(() => {
+    if (!rawData) {
+      return null;
+    }
+    return {
+      dataKeyList: rawData.map(({ title }) => title),
+      data: convertProgressData(
+        rawData?.map(({ title, progresses }) => ({
+          title,
+          progresses: progresses.map(({ timeStamp, value }) => ({
+            timeStamp,
+            value
+          }))
+        }))
+      )
+    };
+  }, [rawData]);
+
+  useEffect(() => {
+    if (!newData) {
+      return;
+    }
+    setChartData(newData.data);
+    setDataKeyList(newData.dataKeyList);
+  }, [newData]);
+
   return type === ChartType.LINE_CHART ? (
     <div style={{ ...style }} className={styles.mainWrapper}>
-      {lineChart(data, dataKeyList)}
+      {users?.length > 0 && (
+        <div className={styles.userSelect}>
+          <select
+            name="dashboard-user-select"
+            id="dashboard-user-select"
+            defaultValue={initialId}
+            onChange={(e) => {
+              setCurrentUserId(e.target.value);
+            }}
+          >
+            {users.map(({ name, id }) => (
+              <option key={id} value={id}>
+                {name}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
+      {lineChart(chartData, chartDataKeyList)}
     </div>
   ) : (
     <div style={{ ...style }} className={styles.mainWrapper}>
-      {barChart(data)}
+      {barChart(chartData)}
     </div>
   );
 }
