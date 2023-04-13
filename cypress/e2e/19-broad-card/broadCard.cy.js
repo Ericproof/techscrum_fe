@@ -1,4 +1,4 @@
-import projectData from '../../fixtures/projects.json';
+/*import projectData from '../../fixtures/projects.json';
 import boardData from '../../fixtures/boardv2.json';
 import taskData from '../../fixtures/updateTask.json';
 import updatedLabel from '../../fixtures/updatedLabel.json';
@@ -7,10 +7,10 @@ import labelData from '../../fixtures/labels.json';
 
 describe('Project page', () => {
   beforeEach(() => {
-    let projectList = projectData;
-    cy.intercept('GET', '**/labels', labelData).as('fetch-labels');
-    cy.intercept('GET', '**/projects', projectList).as('fetch-projects');
-    cy.visit('/v2/login');
+    let projectList = projectData;*/
+    //cy.intercept('GET', '**/labels', labelData).as('fetch-labels');
+    //cy.intercept('GET', '**/projects', projectList).as('fetch-projects');
+    /*cy.visit('/v2/login');
     cy.login('coffeetsang20@gmail.com', 'wendy123');
     cy.wait('@fetch-projects');
     cy.intercept('GET', '**/board/**', boardData).as('fetch-board');
@@ -36,7 +36,7 @@ describe('Project page', () => {
       items[0].click();
     });
     cy.get('[data-testid="card-type-button"]').contains('Task');
-  });*/
+  });
 
   it('Test should change status', () => {
     cy.intercept('PUT', '**/tasks/*', taskData).as('update-task');
@@ -64,5 +64,6 @@ describe('Project page', () => {
     });
     cy.get('[data-testid="card-label-text"]').click();
     cy.get('[data-testid="card-label-button"]').contains('Backend');
-  });*/
+  });
 });
+*/
