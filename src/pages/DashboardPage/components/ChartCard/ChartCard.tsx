@@ -114,14 +114,14 @@ function ChartCard({ style, dataKeyList, data, type }: Props) {
 
   const newData = useMemo(() => {
     if (!rawData) {
-      return null;
+      return { data: [], dataKeyList: [] };
     }
     return {
-      dataKeyList: rawData.map(({ title }) => title),
+      dataKeyList: rawData?.map(({ title }) => title),
       data: convertProgressData(
         rawData?.map(({ title, progresses }) => ({
           title,
-          progresses: progresses.map(({ timeStamp, value }) => ({
+          progresses: progresses?.map(({ timeStamp, value }) => ({
             timeStamp,
             value
           }))
@@ -134,8 +134,8 @@ function ChartCard({ style, dataKeyList, data, type }: Props) {
     if (!newData) {
       return;
     }
-    setChartData(newData.data);
-    setDataKeyList(newData.dataKeyList);
+    setChartData(newData?.data);
+    setDataKeyList(newData?.dataKeyList);
   }, [newData]);
 
   return type === ChartType.LINE_CHART ? (
