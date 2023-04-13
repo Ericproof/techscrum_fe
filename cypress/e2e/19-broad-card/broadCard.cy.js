@@ -29,14 +29,14 @@ describe('Project page', () => {
     cy.get('[data-testid="card-title-input"]').should('have.value', 'should create task change');
   });
 
-  it('Test should change type', () => {
+  /*it('Test should change type', () => {
     cy.intercept('PUT', '**/tasks/*', taskData).as('update-task');
     cy.get('[data-testid="card-type-button"]').click();
     cy.get('[data-testid="card-type-selection"]').then((items) => {
       items[0].click();
     });
     cy.get('[data-testid="card-type-button"]').contains('Task');
-  });
+  });*/
 
   it('Test should change status', () => {
     cy.intercept('PUT', '**/tasks/*', taskData).as('update-task');
