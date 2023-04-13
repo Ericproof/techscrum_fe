@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { HiUser, HiOutlinePencilAlt } from 'react-icons/hi';
+import { TbDirectionSignFilled } from 'react-icons/tb';
 import styles from './SubscriptionPage.module.scss';
 import SubSettingMenu from '../../lib/SubSettingMenu/SubSettingMenu';
 import MainMenuV2 from '../MainMenuV2/MainMenuV2';
@@ -8,8 +10,8 @@ import config from '../../config/config';
 import { UserContext } from '../../context/UserInfoProvider';
 import { paymentButtons } from '../../utils/billingButtons';
 import folder from '../../assets/billingFolder.svg';
-import InvoiceRow from '../BillingHistoryPage/InvoiceRow/InvoiceRow';
 import { checkIsUserSubscribePlan, fetchBillingOverview } from '../../utils/paymentUtils';
+import { formatTimeStamp } from '../../utils/helpers';
 
 export default function SubscriptionPage() {
   type BillOverviewInfo = {
@@ -46,7 +48,6 @@ export default function SubscriptionPage() {
     periodEnd = ''
   } = billOverviewInfo || {};
 
-  // it should render again, but after something changed.
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetchBillingOverview();
@@ -73,6 +74,11 @@ export default function SubscriptionPage() {
     navigate(url);
   };
 
+  const onChangeToBillingHistory = () => {
+    const url = '/billing/info/history';
+    navigate(url);
+  };
+
   return (
     <>
       <div className={styles.subscriptionPage}>
@@ -91,14 +97,12 @@ export default function SubscriptionPage() {
                 {isSubscrbePlan ? (
                   <div>
                     <div>
-                      <span>USD {amount}</span>
+                      <span>AUD {amount}.00</span>
                     </div>
-                    <div>Next Charge: {periodEnd}</div>
+                    <div>Next Charge: {formatTimeStamp(periodEnd)}</div>
                   </div>
                 ) : (
-                  <div>
-                    <span>USD 0.0</span>
-                  </div>
+                  <></>
                 )}
               </div>
               <div className={styles.box2}>
@@ -134,22 +138,15 @@ export default function SubscriptionPage() {
                 <h2>Billing history</h2>
                 <div>
                   {adminInvoice?.length > 0 ? (
-                    <table>
-                      <thead className={styles.tableRow}>
-                        <tr className={styles.tableRow}>
-                          <th className={styles.tableHeader}>Product</th>
-                          <th className={styles.tableHeader}>Plan</th>
-                          <th className={styles.tableHeader}>Amount</th>
-                          <th className={styles.tableHeader}>Period</th>
-                          <th className={styles.tableHeader}>Invoice</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {adminInvoice.map((e: Invoice) => (
-                          <InvoiceRow invoice={e} key={e.id} />
-                        ))}
-                      </tbody>
-                    </table>
+                    <>
+                      <img src={folder} alt="folder" className={styles.folderImage} />
+                      <h2 className={styles.textCenter}>Go to billing history to view invoices</h2>
+                      <TbDirectionSignFilled
+                        className={styles.directIcon}
+                        size="1.5rem"
+                        onClick={onChangeToBillingHistory}
+                      />
+                    </>
                   ) : (
                     <>
                       <img src={folder} alt="folder" className={styles.folderImage} />
@@ -162,10 +159,16 @@ export default function SubscriptionPage() {
               <div className={styles.box4}>
                 <h2>Billing contacts</h2>
                 <div>
-                  <div className={styles.icon} />
+                  <HiUser className={styles.userIcon} color="white" fontSize="2.5rem" />
                   <div className={styles.userInfo}>
-                    <h2>{customerName}</h2>
-                    <h2>{customerEmail}</h2>
+                    <HiOutlinePencilAlt
+                      className={styles.pen}
+                      fontSize="1.5rem"
+                      onClick={onHandleChange}
+                    />
+
+                    <span className={styles.customerName}>{customerName}</span>
+                    <span className={styles.customerEmail}>{customerEmail}</span>
                   </div>
                 </div>
               </div>

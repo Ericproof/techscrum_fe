@@ -130,6 +130,7 @@ function PlanOption(props: IPlanOptionProps) {
   const handleClick = () => {
     setIsChecked((ischecked) => !ischecked);
   };
+
   const handleButtonClick = async (id: number, isFreeTrial: boolean) => {
     if (userId && email) {
       if (id === ADVANCED_ID) {
@@ -150,8 +151,6 @@ function PlanOption(props: IPlanOptionProps) {
     };
     fetchData();
   }, [userId]);
-
-  useEffect(() => {}, [isCurrentPlan]);
 
   return (
     <div className={styles.group}>
@@ -196,7 +195,7 @@ function PlanOption(props: IPlanOptionProps) {
 
           {!isChecked && isCurrentPlan.productType === 'yearly' && plan.id === 1 && (
             <div className={styles.buttons}>
-              <h1>Current plan</h1>
+              <h1 className={styles.currentPlan}>Current plan</h1>
             </div>
           )}
 
@@ -218,7 +217,7 @@ function PlanOption(props: IPlanOptionProps) {
 
           {isChecked && isCurrentPlan.productType === 'monthly' && plan.id === 1 && (
             <div className={styles.buttons}>
-              <h1>Current plan</h1>
+              <h1 className={styles.currentPlan}>Current plan</h1>
             </div>
           )}
 
@@ -254,7 +253,7 @@ function PlanOption(props: IPlanOptionProps) {
             </div>
           )}
 
-          {plan.id === 1 && isCurrentPlan.productType === '' && (
+          {plan.id === 1 && isCurrentPlan.productType === undefined && (
             <div className={styles.buttons}>
               <button className={styles.action} onClick={() => handleButtonClick(plan.id, true)}>
                 {plan.action}

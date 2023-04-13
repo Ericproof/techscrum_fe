@@ -6,7 +6,7 @@ import {
   AiOutlineSearch,
   AiOutlineUser
 } from 'react-icons/ai';
-import { BsPeople, BsCreditCard } from 'react-icons/bs';
+import { BsPeople } from 'react-icons/bs';
 import { FiSettings } from 'react-icons/fi';
 import { MdList, MdLogout } from 'react-icons/md';
 import { TbReportMoney, TbReportSearch } from 'react-icons/tb';
@@ -53,14 +53,6 @@ const btnsForDomainOwner = [
     url: `/my-report`,
     icon: <TbReportSearch />,
     dataTestId: 'my-report-nav-btn'
-  },
-  {
-    id: 'billing',
-    name: 'Plan & Billing (WIP)',
-    checkAccess: 'view:billing',
-    url: `/billing`,
-    icon: <BsCreditCard />,
-    dataTestId: 'plan-and-billing'
   },
   {
     id: 'roles',

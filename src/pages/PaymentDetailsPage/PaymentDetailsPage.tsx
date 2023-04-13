@@ -14,6 +14,7 @@ import {
   checkIsUserSubscribePlan,
   fetchBillingOverview
 } from '../../utils/paymentUtils';
+import { formatTimeStamp } from '../../utils/helpers';
 
 type BillOverviewInfo = {
   amount: number;
@@ -111,13 +112,14 @@ export default function PaymentDetailsPage() {
                 <div>
                   <h4>Current Bill</h4>
                   <p className={styles.textSecondary}>
-                    {billOverviewInfo?.periodStart} {billOverviewInfo?.periodEnd}
+                    {formatTimeStamp(billOverviewInfo?.periodStart)} -
+                    {formatTimeStamp(billOverviewInfo?.periodEnd)}
                   </p>
                 </div>
                 <div className={styles.sideColumn__main}>
                   <p className={`${styles.currentPlan} ${styles.flexBetween}`}>
                     <span>{billOverviewInfo?.planName}</span>
-                    <span>$0.00</span>
+                    <span>${billOverviewInfo?.amount}.00</span>
                   </p>
                   {isUserFreeTrial && (
                     <>
@@ -132,7 +134,7 @@ export default function PaymentDetailsPage() {
                   </p>
                   <p className={`${styles.textSecondary} ${styles.flexBetween}`}>
                     <span>TOTAL</span>
-                    <span className={styles.totalPrice}>AUD {billOverviewInfo?.amount}</span>
+                    <span className={styles.totalPrice}>AUD {billOverviewInfo?.amount}.00</span>
                   </p>
                 </div>
               </div>
