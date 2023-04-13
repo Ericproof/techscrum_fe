@@ -9,7 +9,7 @@ const axiosConfig = {
   }
 };
 
-const http: AxiosInstance = axios.create(axiosConfig);
+export const http: AxiosInstance = axios.create(axiosConfig);
 
 http.interceptors.response.use(
   (response): IDailyScrumTicket => {
