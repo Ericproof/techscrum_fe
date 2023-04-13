@@ -8,6 +8,7 @@ import { UserContext } from '../../context/UserInfoProvider';
 import UsersFieldsV2 from '../../lib/FieldsV2/UsersFieldsV2/UsersFieldsV2';
 import ButtonV2 from '../../lib/FormV2/ButtonV2/ButtonV2';
 import InputV2 from '../../lib/FormV2/InputV2/InputV2';
+import TextAreaV2 from '../../lib/FormV2/TextAreaV2/TextAreaV2';
 import BtnContainer from '../../lib/Grid/BtnContainer/BtnContainer';
 import Row from '../../lib/Grid/Row/Row';
 
@@ -26,7 +27,8 @@ function ProjectEditor(props: ProjectEditorProps) {
     key: '',
     projectLeadId: 1,
     assigneeId: 1,
-    iconUrl: ''
+    iconUrl: '',
+    description: ''
   });
   const userInfo = useContext(UserContext);
   const [projectLeader, setProjectLeader] = useState('');
@@ -69,7 +71,16 @@ function ProjectEditor(props: ProjectEditorProps) {
     setData({ ...data, ...updateData });
   };
 
-  const onSave = () => {
+  const onChangeDesc = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setData({ ...data, description: e.target.value });
+  };
+
+  const onChangeWebsiteUrl = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setData({ ...data, websiteUrl: e.target.value });
+  };
+
+  const onSave = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (projectLeader !== '') {
       const apiData = { ...data, userId: userInfo.id };
       onClickSave(apiData);
@@ -87,7 +98,7 @@ function ProjectEditor(props: ProjectEditorProps) {
   return (
     <div className={styles.editSection}>
       <div className={styles.editContainer}>
-        <form>
+        <form onSubmit={onSave}>
           <ChangeIcon uploadSuccess={uploadSuccess} value={data.iconUrl} />
           <Row defaultMargin>
             <UsersFieldsV2
@@ -96,6 +107,7 @@ function ProjectEditor(props: ProjectEditorProps) {
               label="Project Lead"
               name="projectLeadId"
               required
+              dataTestId="project-lead"
             />
           </Row>
           <Row defaultMargin>
@@ -116,6 +128,24 @@ function ProjectEditor(props: ProjectEditorProps) {
               dataTestId="key"
             />
           </Row>
+          <Row defaultMargin>
+            <InputV2
+              name="websiteUrl"
+              label="Website Url"
+              onValueChanged={onChangeWebsiteUrl}
+              value={data.websiteUrl}
+              dataTestId="websiteUrl"
+            />
+          </Row>
+          <Row defaultMargin>
+            <TextAreaV2
+              label="Description"
+              onValueChanged={onChangeDesc}
+              defaultValue={data.description}
+              name="description"
+              dataTestId="project-description"
+            />
+          </Row>
           {hasError && (
             <p className={styles.error} data-testid="projectError">
               Error
@@ -123,7 +153,14 @@ function ProjectEditor(props: ProjectEditorProps) {
           )}
           <Row>
             <BtnContainer>
-              <ButtonV2 text="Save" onClick={onSave} dataTestId="save" fill loading={loading} />
+              <ButtonV2
+                text="Save"
+                onClick={() => {}}
+                dataTestId="save"
+                fill
+                loading={loading}
+                btnType="submit"
+              />
               {showCancelBtn && (
                 <ButtonV2
                   text="Cancel"
