@@ -23,6 +23,7 @@
 
 .subscriptionPage {
   display: flex;
+  min-height: 100vh;
 }
 .body {
   color: #172B4D;
@@ -190,6 +191,9 @@
           height: 23px;
           margin-bottom: 10px;
         }
+        .directIcon {
+          cursor: pointer;
+        }
 
       }
     }
@@ -202,19 +206,41 @@
         align-items: center;
         flex-direction: row;
 
-        .icon {
-          height: 40px;
-          width: 40px;
+        .userIcon {
+          background-color: gray;
           border-radius: 50%;
-          background-color: black;
-          overflow: hidden;
-          margin-right: 10px;
+          padding: 4px;
+          margin-right: 0.5rem;
+          margin-top: 10px;
         }
+
         .userInfo {
           display: flex;
           flex-direction: column;
           align-items: flex-start;
           justify-content: center;
+          min-width: 0px;
+          max-width: 100%;
+          padding-left: 8px;
+          flex: 1 1 100%;
+          line-height: 1.4;
+          margin-top: 10px;
+
+          .pen {
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            right: 8px;
+            padding-top: 4px;
+            height: 24px;
+          }
+
+          .customerName {
+            color: var(--ds-text,#091E42);
+          }
+          .customerEmail {
+            color: var(--ds-text-subtlest,#6B778C);
+          }
         }
       }
     }

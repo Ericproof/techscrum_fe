@@ -1,20 +1,11 @@
 import React from 'react';
 import logo from '../../../assets/small-logo.svg';
 import styles from './InvoiceRow.module.scss';
+import { formatTimeStamp } from '../../../utils/helpers';
 
 interface InvoiceRowProps {
   invoice: any;
 }
-
-const formatTimeStamp = (date: string): string => {
-  const planDate = new Date(date);
-  const formattedDate = planDate.toLocaleDateString('en-AU', {
-    year: '2-digit',
-    month: 'short',
-    day: 'numeric'
-  });
-  return formattedDate;
-};
 
 export default function InvoiceRow(props: InvoiceRowProps) {
   const { invoice } = props;

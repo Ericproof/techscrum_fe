@@ -5,19 +5,7 @@ import styles from './PaymentSuccessPage.module.scss';
 import paymentSuccess from '../../assets/payment-success.webp';
 import { UserContext } from '../../context/UserInfoProvider';
 import { fetchBillingOverview } from '../../utils/paymentUtils';
-
-const formatTimeStamp = (date: string | undefined): string => {
-  if (date === undefined) {
-    return '';
-  }
-  const planDate = new Date(date);
-  const formattedDate = planDate.toLocaleDateString('en-AU', {
-    year: '2-digit',
-    month: 'short',
-    day: 'numeric'
-  });
-  return formattedDate;
-};
+import { formatTimeStamp } from '../../utils/helpers';
 
 export default function PaymentSuccessPage() {
   const userInfo = useContext(UserContext);
@@ -50,8 +38,8 @@ export default function PaymentSuccessPage() {
         <p className={styles.textSecondary}>Hi, admin {billOverviewInfo?.customerName}</p>
         <p>
           Welcome to your {billOverviewInfo?.freeTrialDuration} days free trial of{' '}
-          {billOverviewInfo?.planName} subscription! The payment method you provided will be charged
-          monthly/yearly starting {formatTimeStamp(billOverviewInfo?.periodStart)}.
+          {billOverviewInfo?.planName} subscription! The plan starts from{' '}
+          {formatTimeStamp(billOverviewInfo?.periodStart)}.
         </p>
         <p>
           As a member, you can explore, manage, and cancel your subscription at any time by visiting

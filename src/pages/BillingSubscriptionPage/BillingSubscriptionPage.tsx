@@ -14,6 +14,7 @@ import {
   checkIsUserSubscribePlan,
   fetchBillingOverview
 } from '../../utils/paymentUtils';
+import { formatTimeStamp } from '../../utils/helpers';
 
 const userFree = {
   plan: 'free',
@@ -109,10 +110,10 @@ export default function BillingSubscriptionPage() {
                     <div className={styles.planEndDate}>
                       <p className={styles.textSecondary}>Price estimate</p>
                       {isUserFreeTrial ? (
-                        <p>Free until {billOverviewInfo?.periodEnd}</p>
+                        <p>Free until {formatTimeStamp(billOverviewInfo?.periodEnd)}</p>
                       ) : (
                         <p>
-                          {billOverviewInfo?.amount}
+                          ${billOverviewInfo?.amount}
                           .00
                         </p>
                       )}
@@ -174,7 +175,8 @@ export default function BillingSubscriptionPage() {
                   <h4>Current Bill</h4>
                   {isSubscrbePlan && (
                     <p className={styles.textSecondary}>
-                      {billOverviewInfo?.periodStart} - {billOverviewInfo?.periodEnd}
+                      {formatTimeStamp(billOverviewInfo?.periodStart)}-{' '}
+                      {formatTimeStamp(billOverviewInfo?.periodEnd)}
                     </p>
                   )}
                 </div>
