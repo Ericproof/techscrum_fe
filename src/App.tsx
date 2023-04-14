@@ -56,6 +56,7 @@ import PaymentSuccessPage from './pages/PaymentSuccessPage/PaymentSuccessPage';
 import PaymentDetailsPage from './pages/PaymentDetailsPage/PaymentDetailsPage';
 import BillingHistoryPage from './pages/BillingHistoryPage/BillingHistoryPage';
 import BillingSubscriptionPage from './pages/BillingSubscriptionPage/BillingSubscriptionPage';
+import DashBoardPage from './pages/DashboardPage/DashBoardPage';
 
 function App() {
   const [showPages, setShowPages] = useState(null);
@@ -119,6 +120,7 @@ function App() {
                     <Route path="board/:boardId" element={<BoardPage />} />
                     <Route path="board/:boardId/backlog" element={<BacklogPage />} />
                     <Route path="shortcuts" element={<ShortcutPage />} />
+                    <Route path="/projects/:projectId/dashboard" element={<DashBoardPage />} />
                   </Route>
                   <Route path="/settings/:projectId" element={<Setting />} />
                   <Route path="/me" element={<UserMePage />} />

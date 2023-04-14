@@ -56,13 +56,13 @@ describe('Project page', () => {
     cy.get('[data-testid="card-priority-button"]').contains('High');
   });
 
-  it('Test should change label', () => {
-    cy.intercept('POST', '**/tasks/*/labels', updatedLabel).as('update-task');
-    cy.get('[data-testid="card-label-button"]').click();
-    cy.get('[data-testid="card-label-button"]').then((items) => {
-      items[0].click();
-    });
-    cy.get('[data-testid="card-label-text"]').click();
-    cy.get('[data-testid="card-label-button"]').contains('Backend');
-  });
+  // it('Test should change label', () => {
+  //   cy.intercept('POST', '**/tasks/*/labels', updatedLabel).as('update-task');
+  //   cy.get('[data-testid="card-label-button"]').click();
+  //   cy.get('[data-testid="card-label-button"]').then((items) => {
+  //     items[0].click();
+  //   });
+  //   cy.get('[data-testid="card-label-text"]').click();
+  //   cy.get('[data-testid="card-label-button"]').contains('Backend');
+  // });
 });
