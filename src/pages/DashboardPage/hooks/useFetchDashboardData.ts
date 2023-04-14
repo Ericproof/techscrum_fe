@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { getDashBoardDailyScrumsByUser, getDashBoardData } from '../../../api/dashboard';
@@ -29,12 +29,17 @@ const useFetchDashboardData = () => {
   return { data, isLoading };
 };
 
-export const useFetchDashboardDailyScrumsByUser = () => {
-  const { id } = useContext(UserContext);
+export const useFetchDashboardDailyScrumsByUser = (id: string) => {
   const [data, setData] = useState<IDashBoardDailyScrum[] | null>(null);
+  const isMountedRef = useRef(false);
   const { projectId } = useParams<{ projectId: string }>();
 
   useEffect(() => {
+    if (!isMountedRef.current) {
+      isMountedRef.current = true;
+      return;
+    }
+
     if (!projectId || !id) {
       return;
     }
