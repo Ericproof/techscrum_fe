@@ -4,8 +4,8 @@ import ProjectNavigationV3 from '../../lib/ProjectNavigationV3/ProjectNavigation
 import ValueCard from './components/ValueCard/ValueCard';
 import styles from './DashBoardPage.module.scss';
 import useFetchDashboardData from './hooks/useFetchDashboardData';
-import { IDashBoardDailyScrum } from '../../types';
 import ChartCard, { ChartType } from './components/ChartCard/ChartCard';
+import { convertProgressData } from './utils';
 
 interface IValueCard {
   title: string;
@@ -15,14 +15,6 @@ interface IValueCard {
 interface ILineChartData {
   data: ReadonlyArray<object>;
   dataKeyList: string[];
-}
-
-interface IDashBoardDailyScrumModified
-  extends Omit<IDashBoardDailyScrum, 'id' | 'user' | 'progresses'> {
-  progresses: {
-    timeStamp: string;
-    value: number;
-  }[];
 }
 
 interface IBarChartData {
@@ -47,7 +39,7 @@ function DashBoardPage() {
         value: totalTask
       },
       {
-        title: 'issues needs support',
+        title: 'issues need support',
         value: dailyScrumCount?.isNeedSupport?.total
       },
       {
@@ -61,45 +53,12 @@ function DashBoardPage() {
         value: `${(
           ((toDo * 0 + inProgress * 0.7 + review * 0.8 + done * 1) / totalTask) *
           100
-        ).toFixed(2)}%`
+        ).toFixed(1)}%`
       }
     ];
 
     return valueCardListData;
   }, [data]);
-
-  const convertProgressData = (input: IDashBoardDailyScrumModified[]): ReadonlyArray<object> => {
-    const result: any[] = [];
-
-    // Extract all unique timestamps from the input
-    const timestamps: string[] = input.reduce(
-      (acc: string[], item: IDashBoardDailyScrumModified) => {
-        return acc.concat(
-          item.progresses.map(
-            (progress: { timeStamp: string; value: number }) => progress.timeStamp
-          )
-        );
-      },
-      []
-    );
-
-    const uniqueTimestamps = Array.from(new Set(timestamps));
-
-    // Iterate over the timestamps and create a new object for each one
-    uniqueTimestamps.forEach((timestamp) => {
-      const obj: { name: string } = { name: timestamp };
-
-      // Iterate over the items in the original input and add the progress value for each item to the new object
-      input.forEach((item: IDashBoardDailyScrumModified) => {
-        const progress = item.progresses.find((p) => p.timeStamp === timestamp);
-        obj[item.title] = progress ? progress.value : 0;
-      });
-
-      result.push(obj);
-    });
-
-    return result;
-  };
 
   // The accpeted data format for LineChart is like this:
   // [
@@ -159,9 +118,12 @@ function DashBoardPage() {
     <div className={styles.mainWrapper}>
       <h1 className={styles.header}>Dashboard</h1>
       <ProjectNavigationV3 />
+
       {!isLoading ? (
         <div className={styles.dashboardWrapper}>
-          <h2>Sprint number</h2>
+          <div className={styles.header}>
+            <h2>Sprint number</h2>
+          </div>
           <div className={styles.dashboardGridLayout}>
             {valueCardList.map(({ title, value }, index) => {
               return (
