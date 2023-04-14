@@ -7,7 +7,7 @@ import labelData from '../../fixtures/labels.json';
 
 describe('Project page', () => {
   beforeEach(() => {
-    let projectList = projectData;* /
+    let projectList = projectData;
     cy.intercept('GET', '**/labels', labelData).as('fetch-labels');
     cy.intercept('GET', '**/projects', projectList).as('fetch-projects');
     cy.visit('/v2/login');
