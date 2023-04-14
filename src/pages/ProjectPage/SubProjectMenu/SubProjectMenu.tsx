@@ -16,6 +16,7 @@ export default function SubProjectMenu(props: ISubProjectMenu) {
   const [filteredResult, setFilteredResult] = useState<any>(null);
   const [searchValue, setSearchValue] = useState('');
   const onChangeFilterProject = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
     if (!e.target.value) {
       setFilteredResult(null);
       return;
@@ -23,7 +24,6 @@ export default function SubProjectMenu(props: ISubProjectMenu) {
     const result = projectList.filter((item) => {
       return item.name?.toLowerCase().includes(e.target.value.toLowerCase());
     });
-    setSearchValue(e.target.value);
     setFilteredResult(result);
   };
 
