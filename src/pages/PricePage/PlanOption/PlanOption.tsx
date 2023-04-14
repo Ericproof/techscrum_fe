@@ -253,7 +253,7 @@ function PlanOption(props: IPlanOptionProps) {
             </div>
           )}
 
-          {plan.id === 1 && isCurrentPlan.productType === undefined && (
+          {plan.id === 1 && !isCurrentPlan.productType && (
             <div className={styles.buttons}>
               <button className={styles.action} onClick={() => handleButtonClick(plan.id, true)}>
                 {plan.action}

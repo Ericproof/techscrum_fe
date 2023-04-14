@@ -168,7 +168,7 @@ export const urlParamExtractor = (url: string, paramName: string) => {
 };
 
 export const formatTimeStamp = (date: string | undefined): string => {
-  if (date === undefined) {
+  if (!date) {
     return '';
   }
   const planDate = new Date(date);

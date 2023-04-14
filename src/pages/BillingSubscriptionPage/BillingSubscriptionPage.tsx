@@ -175,7 +175,7 @@ export default function BillingSubscriptionPage() {
                   <h4>Current Bill</h4>
                   {isSubscrbePlan && (
                     <p className={styles.textSecondary}>
-                      {formatTimeStamp(billOverviewInfo?.periodStart)} -{' '}
+                      {formatTimeStamp(billOverviewInfo?.periodStart)}-{' '}
                       {formatTimeStamp(billOverviewInfo?.periodEnd)}
                     </p>
                   )}
