@@ -1,4 +1,7 @@
-import React, { useMemo } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
+import { PDFViewer } from '@react-pdf/renderer';
+import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Loading from '../../components/Loading/Loading';
 import ProjectNavigationV3 from '../../lib/ProjectNavigationV3/ProjectNavigationV3';
 import ValueCard from './components/ValueCard/ValueCard';
@@ -6,6 +9,10 @@ import styles from './DashBoardPage.module.scss';
 import useFetchDashboardData from './hooks/useFetchDashboardData';
 import ChartCard, { ChartType } from './components/ChartCard/ChartCard';
 import { convertProgressData } from './utils';
+import PDFfile from './components/PDFfile/PDFfile';
+import { ProjectContext } from '../../context/ProjectProvider';
+import { IProject } from '../../types';
+import { getPDFReportContent } from '../../api/dashboard';
 
 interface IValueCard {
   title: string;
@@ -24,6 +31,15 @@ interface IBarChartData {
 
 function DashBoardPage() {
   const { data, isLoading } = useFetchDashboardData();
+  const { projectId } = useParams();
+  const [PDFcontent, setPDFcontent] = useState<string>('');
+  const [isPDFLoading, setIsPDFLoading] = useState<boolean>(false);
+  const [isShowPDF, setIsShowPDF] = useState<boolean>(false);
+
+  const projectList = useContext(ProjectContext);
+  const currentProject: IProject | { name: string } = projectList.find(
+    (project: IProject) => project.id === projectId
+  ) ?? { name: 'unkown project' };
 
   const valueCardList: IValueCard[] = useMemo(() => {
     if (!data) return [];
@@ -114,6 +130,25 @@ function DashBoardPage() {
     };
   }, [data]);
 
+  const generatePDFPreview = async () => {
+    try {
+      setIsPDFLoading(true);
+      const res = await getPDFReportContent(projectId as string);
+      setIsPDFLoading(false);
+      setIsShowPDF(true);
+      setPDFcontent(res?.content);
+    } catch (error) {
+      toast('Something went wrong when generating PDF!', {
+        theme: 'colored',
+        toastId: 'PDF error'
+      });
+    }
+  };
+
+  const closePDFPreview = () => {
+    setIsShowPDF(false);
+  };
+
   return (
     <div className={styles.mainWrapper}>
       <h1 className={styles.header}>Dashboard</h1>
@@ -123,7 +158,24 @@ function DashBoardPage() {
         <div className={styles.dashboardWrapper}>
           <div className={styles.header}>
             <h2>Sprint number</h2>
+            <div className={styles.PDFbtnControl}>
+              {isShowPDF ? (
+                <button type="button" className={styles.closePDFbtn} onClick={closePDFPreview}>
+                  Close Preview
+                </button>
+              ) : (
+                <button type="button" className={styles.exportPDFbtn} onClick={generatePDFPreview}>
+                  Preview PDF
+                </button>
+              )}
+            </div>
           </div>
+          {isPDFLoading ? <Loading /> : null}
+          {isShowPDF ? (
+            <PDFViewer width="100%" height="800px">
+              <PDFfile project={currentProject} content={PDFcontent} />
+            </PDFViewer>
+          ) : null}
           <div className={styles.dashboardGridLayout}>
             {valueCardList.map(({ title, value }, index) => {
               return (
