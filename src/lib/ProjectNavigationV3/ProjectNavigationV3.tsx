@@ -5,6 +5,7 @@ import { BsFillPeopleFill } from 'react-icons/bs';
 import { FiSettings } from 'react-icons/fi';
 import { IoMdList } from 'react-icons/io';
 import { FaDailymotion } from 'react-icons/fa';
+import { MdOutlineDashboard } from 'react-icons/md';
 import { VscNewFile } from 'react-icons/vsc';
 import { IProject, IProjectData } from '../../types';
 import { ProjectContext } from '../../context/ProjectProvider';
@@ -47,6 +48,12 @@ export default function Nav() {
       url: `/projects/${projectId}/board/${boardId}`,
       icon: <HiViewBoards />,
       dataTestId: 'board-btn'
+    },
+    {
+      name: 'Dashboard',
+      url: `/projects/${projectId}/dashboard`,
+      icon: <MdOutlineDashboard />,
+      dataTestId: 'dashboard-btn'
     },
     {
       name: 'Backlog',

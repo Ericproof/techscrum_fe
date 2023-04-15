@@ -103,8 +103,8 @@ export default function BoardMain({
                                     <div className={styles.cardFooterRight}>
                                       <img
                                         src={
-                                          item
-                                            ? item.assignId?.avatarIcon
+                                          item.assignId
+                                            ? item.assignId.avatarIcon
                                             : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'
                                         }
                                         alt="avatar"

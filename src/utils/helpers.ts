@@ -166,3 +166,16 @@ export const urlParamExtractor = (url: string, paramName: string) => {
   const end = url.indexOf('/', start) === -1 ? undefined : url.indexOf('/', start); // find the 1st "/" after start index
   return url.substring(start, end);
 };
+
+export const formatTimeStamp = (date: string | undefined): string => {
+  if (!date) {
+    return '';
+  }
+  const planDate = new Date(date);
+  const formattedDate = planDate.toLocaleDateString('en-AU', {
+    year: '2-digit',
+    month: 'short',
+    day: 'numeric'
+  });
+  return formattedDate;
+};
