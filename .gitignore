@@ -28,5 +28,3 @@ settings.json
 # cypress
 /cypress/screenshots
 /cypress/videos
-
-.env
