@@ -56,3 +56,25 @@
     pointer-events: none;
   }
 }
+
+.chartToPdfBtn {
+  all: unset;
+  position: absolute;
+  bottom: $size-14;
+  right: $size-24;
+  z-index: 1;
+  font-style: italic;
+  font-weight: 600;
+  color: $color-brand;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:disabled {
+    color: $color-grey-3;
+    cursor: default;
+    text-decoration: none;
+  }
+}
