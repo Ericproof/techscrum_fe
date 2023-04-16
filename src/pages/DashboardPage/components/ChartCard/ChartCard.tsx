@@ -144,7 +144,7 @@ function ChartCard({ style, dataKeyList, data, type, setChartBase64String, isSho
     setDataKeyList(newData?.dataKeyList);
   }, [newData]);
 
-  const handleLineCardDownload = async () => {
+  const handleChartPNGGeneration = async () => {
     const png = await getLinePng();
     if (!png) {
       toast.error('Please wait for the chart to load', {
@@ -160,7 +160,7 @@ function ChartCard({ style, dataKeyList, data, type, setChartBase64String, isSho
   return type === ChartType.LINE_CHART ? (
     <div style={{ ...style }} className={styles.mainWrapper}>
       <button
-        onClick={handleLineCardDownload}
+        onClick={handleChartPNGGeneration}
         className={styles.chartToPdfBtn}
         disabled={!isShowPDF}
       >
