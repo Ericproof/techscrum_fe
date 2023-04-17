@@ -87,7 +87,7 @@ function PDFfile({ project, content, chartBase64String }: IProps) {
         {chartBase64String ? (
           <Image
             src={{
-              data: Buffer.from(chartBase64String as string, 'base64'),
+              data: Buffer.from(chartBase64String, 'base64'),
               format: 'png'
             }}
           />
