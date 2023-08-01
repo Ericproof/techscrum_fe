@@ -14,8 +14,8 @@ export default function LoginTabs({ show }: Props) {
     <div className={`${styles.functionsLoginTabs} ${show ? styles.functionLoginTabsActive : ''}`}>
       {Object.keys(userInfo).length === 0 ? (
         <>
-          <Link to="/v2/login">Login</Link>
-          <Link to="/v2/register">Register</Link>
+          <Link to="/login">Login</Link>
+          <Link to="/register">Register</Link>
         </>
       ) : (
         <PersonalProfile userInfo={userInfo} />

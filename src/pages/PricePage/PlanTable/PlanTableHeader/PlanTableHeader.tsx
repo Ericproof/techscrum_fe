@@ -29,7 +29,7 @@ function PlanTableHeader(props: IPlanTableHeaderProps) {
         createSubcription(userId, ULTRA_PRICE_IDENTIFIER, isCheck, isFreeTrial);
       }
     } else {
-      navigate(`/v2/login`);
+      navigate(`/login`);
     }
   };
 

@@ -140,7 +140,7 @@ function PlanOption(props: IPlanOptionProps) {
         createSubcription(userId, ULTRA_PRICE_IDENTIFIER, isChecked, isFreeTrial);
       }
     } else {
-      navigate(`/v2/login`);
+      navigate(`/login`);
     }
   };
 
