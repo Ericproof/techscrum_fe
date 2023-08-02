@@ -30,7 +30,7 @@ function UserProvider({ children }: ILoginInfoProvider) {
       try {
         const result = await getUserInfo(token, refreshToken);
         const { user } = result.data;
-        const t = token || user.token;
+        const t = token ?? user.token;
         const projectRoles = JSON.stringify(projectRolesToObject(user.projectsRoles));
         setUserInfo({ ...user, token: t, projectRoles });
         setLocalStorage(user);
