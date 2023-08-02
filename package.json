@@ -15,6 +15,7 @@
     "@testing-library/react": "^13.2.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
+    "buffer": "^6.0.3",
     "draft-js": "^0.11.7",
     "jwt-decode": "^3.1.2",
     "react": "^18.1.0",
@@ -25,6 +26,7 @@
     "react-router-dom": "^6.3.0",
     "react-toastify": "^9.1.0",
     "recharts": "^2.5.0",
+    "recharts-to-png": "^2.2.1",
     "typescript": "^4.6.4",
     "uuid": "^8.3.2",
     "web-vitals": "^2.1.4"
@@ -75,7 +77,14 @@
     "@storybook/react": "^6.5.13",
     "@storybook/testing-library": "^0.0.13",
     "@storybook/theming": "^6.5.13",
+    "@types/draft-js": "^0.11.9",
+    "@types/jest": "^27.5.0",
+    "@types/node": "^16.11.33",
+    "@types/react": "^18.0.9",
+    "@types/react-beautiful-dnd": "^13.1.2",
+    "@types/react-dom": "^18.0.3",
     "@types/react-router-dom": "^5.3.3",
+    "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.22.0",
     "@typescript-eslint/parser": "^5.22.0",
     "babel-loader": "^8.3.0",
@@ -97,13 +106,6 @@
     "prettier": "^2.6.2",
     "react-scripts": "5.0.1",
     "sass": "^1.51.0",
-    "start-server-and-test": "^1.14.0",
-    "@types/draft-js": "^0.11.9",
-    "@types/jest": "^27.5.0",
-    "@types/node": "^16.11.33",
-    "@types/react": "^18.0.9",
-    "@types/react-beautiful-dnd": "^13.1.2",
-    "@types/react-dom": "^18.0.3",
-    "@types/uuid": "^8.3.4"
+    "start-server-and-test": "^1.14.0"
   }
 }

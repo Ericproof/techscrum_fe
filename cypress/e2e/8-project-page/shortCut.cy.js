@@ -18,7 +18,7 @@ describe('Project page', () => {
       projectList = newProjectList;
       return projectList;
     }).as('delete-projects');
-    cy.visit('/v2/login');
+    cy.visit('/login');
     cy.login('coffeetsang20@gmail.com', 'wendy123');
     cy.wait('@fetch-projects');
   });

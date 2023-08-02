@@ -35,6 +35,7 @@ function DashBoardPage() {
   const [PDFcontent, setPDFcontent] = useState<string>('');
   const [isPDFLoading, setIsPDFLoading] = useState<boolean>(false);
   const [isShowPDF, setIsShowPDF] = useState<boolean>(false);
+  const [chartBase64String, setChartBase64String] = useState<string>('');
 
   const projectList = useContext(ProjectContext);
   const currentProject: IProject | { name: string } = projectList.find(
@@ -142,11 +143,14 @@ function DashBoardPage() {
         theme: 'colored',
         toastId: 'PDF error'
       });
+      setIsShowPDF(false);
+      setIsPDFLoading(false);
     }
   };
 
   const closePDFPreview = () => {
     setIsShowPDF(false);
+    setChartBase64String('');
   };
 
   return (
@@ -173,7 +177,11 @@ function DashBoardPage() {
           {isPDFLoading ? <Loading /> : null}
           {isShowPDF ? (
             <PDFViewer width="100%" height="800px">
-              <PDFfile project={currentProject} content={PDFcontent} />
+              <PDFfile
+                project={currentProject}
+                content={PDFcontent}
+                chartBase64String={chartBase64String}
+              />
             </PDFViewer>
           ) : null}
           <div className={styles.dashboardGridLayout}>
@@ -193,11 +201,14 @@ function DashBoardPage() {
               dataKeyList={lineChartData?.dataKeyList}
               type={ChartType.LINE_CHART}
               style={{ gridArea: `chart-card-1` }}
+              setChartBase64String={setChartBase64String}
+              isShowPDF={isShowPDF}
             />
             <ChartCard
               data={barChartData?.data}
               type={ChartType.BAR_CHART}
               style={{ gridArea: `chart-card-2` }}
+              setChartBase64String={setChartBase64String}
             />
           </div>
         </div>

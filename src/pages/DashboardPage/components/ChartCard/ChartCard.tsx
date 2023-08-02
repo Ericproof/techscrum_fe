@@ -11,6 +11,8 @@ import {
   Line,
   LineChart
 } from 'recharts';
+import { useCurrentPng } from 'recharts-to-png';
+import { toast } from 'react-toastify';
 import { IUserInfo } from '../../../../types';
 import styles from './ChartCard.module.scss';
 import { UserContext } from '../../../../context/UserInfoProvider';
@@ -23,6 +25,8 @@ type Props = {
   dataKeyList?: string[];
   type: ChartType;
   style?: React.CSSProperties;
+  setChartBase64String: (base64: string) => void;
+  isShowPDF?: boolean;
 };
 
 export enum ChartType {
@@ -36,7 +40,7 @@ function getRandomHexColor() {
     .padStart(6, '0')}`;
 }
 
-function lineChart(data: any, dataKeyList: string[] = []) {
+function lineChart(data: any, ref: React.MutableRefObject<any>, dataKeyList: string[] = []) {
   return (
     <ResponsiveContainer width="100%" height="100%">
       <LineChart
@@ -49,6 +53,7 @@ function lineChart(data: any, dataKeyList: string[] = []) {
           left: 20,
           bottom: 5
         }}
+        ref={ref}
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
@@ -96,12 +101,13 @@ function barChart(data: any) {
   );
 }
 
-function ChartCard({ style, dataKeyList, data, type }: Props) {
+function ChartCard({ style, dataKeyList, data, type, setChartBase64String, isShowPDF }: Props) {
   const { id: initialId } = useContext(UserContext);
   const [chartData, setChartData] = useState(data);
-  const [chartDataKeyList, setDataKeyList] = useState(dataKeyList || []);
+  const [chartDataKeyList, setDataKeyList] = useState(dataKeyList ?? []);
   const [currentUserId, setCurrentUserId] = useState(initialId);
   const [users, setUsers] = useState<IUserInfo[]>([]);
+  const [getLinePng, { ref: lineRef }] = useCurrentPng();
 
   useEffect(() => {
     (async () => {
@@ -138,8 +144,28 @@ function ChartCard({ style, dataKeyList, data, type }: Props) {
     setDataKeyList(newData?.dataKeyList);
   }, [newData]);
 
+  const handleChartPNGGeneration = async () => {
+    const png = await getLinePng();
+    if (!png) {
+      toast.error('Please wait for the chart to load', {
+        theme: 'colored',
+        toastId: 'pdf-download-error'
+      });
+      return;
+    }
+    const base64 = png.split(',')[1]; // remove the data:image/png;base64, part
+    setChartBase64String(base64);
+  };
+
   return type === ChartType.LINE_CHART ? (
     <div style={{ ...style }} className={styles.mainWrapper}>
+      <button
+        onClick={handleChartPNGGeneration}
+        className={styles.chartToPdfBtn}
+        disabled={!isShowPDF}
+      >
+        Add this chart to PDF
+      </button>
       {users?.length > 0 && (
         <div className={styles.userSelect}>
           <select
@@ -158,7 +184,7 @@ function ChartCard({ style, dataKeyList, data, type }: Props) {
           </select>
         </div>
       )}
-      {lineChart(chartData, chartDataKeyList)}
+      {lineChart(chartData, lineRef, chartDataKeyList)}
     </div>
   ) : (
     <div style={{ ...style }} className={styles.mainWrapper}>
@@ -172,5 +198,6 @@ export default React.memo(ChartCard);
 ChartCard.defaultProps = {
   style: {},
   data: [],
-  dataKeyList: []
+  dataKeyList: [],
+  isShowPDF: false
 };

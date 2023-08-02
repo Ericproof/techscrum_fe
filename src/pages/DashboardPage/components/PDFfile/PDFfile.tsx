@@ -1,5 +1,6 @@
 import React from 'react';
 import { Page, Text, Document, StyleSheet, Image, View } from '@react-pdf/renderer';
+import { Buffer } from 'buffer';
 import { dateFormatter } from '../../../../utils/helpers';
 import { IProject } from '../../../../types';
 import { capitalise } from '../../../ReportPage/utils';
@@ -12,6 +13,7 @@ interface IProps {
         name: string;
       };
   content: string;
+  chartBase64String?: string;
 }
 
 const styles = StyleSheet.create({
@@ -59,13 +61,12 @@ const styles = StyleSheet.create({
   }
 });
 
-function PDFfile({ project, content }: IProps) {
+function PDFfile({ project, content, chartBase64String }: IProps) {
   return (
     <Document>
       <Page style={styles.body}>
         <Image src={Logo} style={styles.logo} />
         <View style={styles.sideDecoration} />
-
         <Text style={styles.mainTitle}>Sprint Report</Text>
         <Text style={{ ...styles.subTitle, fontSize: 20 }}>Project Name: </Text>
         <Text style={styles.subTitle}>{capitalise(project?.name)}</Text>
@@ -83,6 +84,15 @@ function PDFfile({ project, content }: IProps) {
       </Page>
 
       <Page style={styles.body}>
+        {chartBase64String ? (
+          <Image
+            src={{
+              data: Buffer.from(chartBase64String, 'base64'),
+              format: 'png'
+            }}
+          />
+        ) : null}
+        <View style={{ height: 60 }} />
         {content.split('\n\n').map((item) => (
           <Text
             key={crypto.randomUUID()}
@@ -99,3 +109,7 @@ function PDFfile({ project, content }: IProps) {
 }
 
 export default PDFfile;
+
+PDFfile.defaultProps = {
+  chartBase64String: ''
+};
