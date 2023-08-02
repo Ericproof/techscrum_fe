@@ -13,7 +13,7 @@
 
 describe('login', () => {
   beforeEach(() => {
-    cy.visit('/v2/login');
+    cy.visit('/login');
   });
 
   it('should able to login', () => {

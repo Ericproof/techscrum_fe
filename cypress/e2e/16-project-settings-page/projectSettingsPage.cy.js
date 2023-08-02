@@ -10,7 +10,7 @@ describe('Project setting page', () => {
   beforeEach(() => {
     cy.intercept('GET', '**/projects', projectsData).as('get-projects');
     cy.intercept('GET', '**/roles', rolesData).as('get-roles');
-    cy.visit('/v2/login');
+    cy.visit('/login');
     cy.login('coffeetsang20@gmail.com', 'wendy123');
     cy.wait('@get-roles');
     cy.wait('@get-projects');

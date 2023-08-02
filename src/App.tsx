@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import HomePage from './pages/HomePage/HomePage';
-import RegisterPage from './pages/Register/RegisterPage';
-import LoginPage from './pages/Login/LoginPage';
 import LoginPageV2 from './pages/LoginV2/LoginPageV2';
 import Setting from './pages/Setting/Setting';
 import GdprPage from './pages/GDPRPage/GDPRPage';
@@ -87,8 +85,7 @@ function App() {
           <ProjectProvider>
             <TaskTypesProvider>
               <Routes>
-                {showPages && <Route path="v1/register" element={<RegisterPage />} />}
-                <Route path="v2/register" element={<RegisterPageV2 />} />
+                {showPages && <Route path="register" element={<RegisterPageV2 />} />}
                 {showPages && <Route path="/admin" element={<AdminPage />} />}
                 <Route path="/faq" element={<FAQPage />} />
                 <Route path="/verify" element={<VerifyPage />} />
@@ -96,8 +93,7 @@ function App() {
                 <Route path="/verify-v2" element={<VerifyPageV2 />} />
                 {/* confirm existing user */}
                 {/*  <Route path="/user-confirm" element={<VerifyPageV2 />} />  */}
-                <Route path="v1/login" element={<LoginPage />} />
-                <Route path="v2/login" element={<LoginPageV2 />} />
+                <Route path="login" element={<LoginPageV2 />} />
                 <Route path="/" element={getHomePage()} />
                 <Route path="/login/reset-password" element={<ResetPasswordPage />} />
                 <Route path="/features/report" element={<ReportPage />} />

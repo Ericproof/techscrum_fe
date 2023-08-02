@@ -104,7 +104,7 @@ function barChart(data: any) {
 function ChartCard({ style, dataKeyList, data, type, setChartBase64String, isShowPDF }: Props) {
   const { id: initialId } = useContext(UserContext);
   const [chartData, setChartData] = useState(data);
-  const [chartDataKeyList, setDataKeyList] = useState(dataKeyList || []);
+  const [chartDataKeyList, setDataKeyList] = useState(dataKeyList ?? []);
   const [currentUserId, setCurrentUserId] = useState(initialId);
   const [users, setUsers] = useState<IUserInfo[]>([]);
   const [getLinePng, { ref: lineRef }] = useCurrentPng();
