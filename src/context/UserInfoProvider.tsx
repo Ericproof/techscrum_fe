@@ -44,7 +44,7 @@ function UserProvider({ children }: ILoginInfoProvider) {
 
     const token = localStorage.getItem('access_token');
     const refreshToken = localStorage.getItem('refresh_token');
-    const expirationDate = new Date(localStorage.getItem('expiration_date') || '');
+    const expirationDate = new Date(localStorage.getItem('expiration_date') ?? '');
     if (expirationDate <= new Date()) {
       localStorage.clear();
       setUserInfo({});
