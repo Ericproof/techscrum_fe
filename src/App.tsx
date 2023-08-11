@@ -37,10 +37,9 @@ import ContactPage from './pages/ContactPage/ContactPage';
 import FAQPage from './pages/FAQPage/FAQPage';
 import AuthenticationRoute from './routes/AuthenticationRoute';
 import SecurityPage from './pages/SecurityPage/SecurityPage';
-import AdminPage from './pages/AdminPage/AdminPage';
 import AboutPageT2 from './pages/AboutPageT2/AboutPageT2';
 import AboutPageT3 from './pages/AboutPageT3/AboutPageT3';
-import { getDomains } from './api/domain/domain';
+import { getDomainExists, getDomains } from './api/domain/domain';
 import BacklogPage from './pages/BacklogPage/BacklogPage';
 import ShortcutPage from './pages/ShortcutPage/ShortcutPage';
 import DashboardLayout from './lib/Layout/DashboardLayout/DashboardLayout';
@@ -55,9 +54,15 @@ import PaymentDetailsPage from './pages/PaymentDetailsPage/PaymentDetailsPage';
 import BillingHistoryPage from './pages/BillingHistoryPage/BillingHistoryPage';
 import BillingSubscriptionPage from './pages/BillingSubscriptionPage/BillingSubscriptionPage';
 import DashBoardPage from './pages/DashboardPage/DashBoardPage';
+import DomainFailPage from './pages/DomainFailPage/DomainFailPage';
 
 function App() {
   const [showPages, setShowPages] = useState(null);
+  const [isValidDomain, setValidDomain] = useState(null);
+  const getDomainValid = async () => {
+    const res = await getDomainExists();
+    setValidDomain(res.data);
+  };
 
   useEffect(() => {
     const getD = async () => {
@@ -65,6 +70,8 @@ function App() {
       setShowPages(res.data);
     };
     getD();
+    getDomainValid();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getHomePage = () => {
@@ -77,6 +84,17 @@ function App() {
     return <HomePage />;
   };
 
+  if (isValidDomain === null) {
+    return <></>;
+  }
+
+  if (!isValidDomain) {
+    return (
+      <Routes>
+        <Route path="/" element={<DomainFailPage />} />;
+      </Routes>
+    );
+  }
   return (
     <>
       <ToastContainer style={{ width: '400px' }} />
@@ -86,7 +104,6 @@ function App() {
             <TaskTypesProvider>
               <Routes>
                 {showPages && <Route path="register" element={<RegisterPageV2 />} />}
-                {showPages && <Route path="/admin" element={<AdminPage />} />}
                 <Route path="/faq" element={<FAQPage />} />
                 <Route path="/verify" element={<VerifyPage />} />
                 {/* active new user TODO: fix */}
@@ -147,8 +164,8 @@ function App() {
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/price" element={<PricePage />} />
                 <Route path="/features/kanban-board" element={<KanbanBoardPage />} />
-                <Route path="*" element={<ErrorPage />} />
                 <Route path="/support-center" element={<SupportCenterPage />} />
+                <Route path="*" element={<ErrorPage />} />
               </Routes>
             </TaskTypesProvider>
           </ProjectProvider>
