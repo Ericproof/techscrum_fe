@@ -9,7 +9,7 @@ const config = {
         "@semantic-release/npm",
         {
           "npmPublish": false,
-          "tarballDir": false,
+          "tarballDir": "false",
         }
       ],
       ['@semantic-release/git', {
