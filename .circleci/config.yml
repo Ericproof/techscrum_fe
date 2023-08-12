@@ -20,9 +20,21 @@ executors:
       - image: 'cypress/browsers:node16.14.2-slim-chrome100-ff99-edge'
 
 jobs:
+  check:
+    docker:
+      - image: circleci/node:14
+    steps:
+      - checkout
+      - run:
+          name: Check commit message
+          command: |
+            if git log --pretty=format:"%s" -n 1 | grep -q "[skip ci]"; then
+              echo "Commit message indicates to skip CI. Exiting."
+              circleci-agent step halt
+            fi
   build_production:
     docker:
-      - image: cimg/node:16.17.0-browsers
+      - image: cimg/node:20.5.1-browsers
     working_directory: ~/repo
     steps:
       - checkout
@@ -47,9 +59,12 @@ jobs:
       - aws-cloudfront/invalidate:
           distribution_id: E28E7CS1KHPD0K
           paths: /*
+      - run:
+          name: Run Semantic Release
+          command: npx semantic-release
   build_staging:
     docker:
-      - image: cimg/node:16.17.0-browsers
+      - image: cimg/node:20.5.1-browsers
     working_directory: ~/repo
     steps:
       - checkout
@@ -76,7 +91,7 @@ jobs:
           paths: /*
   build_dev:
     docker:
-      - image: cimg/node:16.17.0-browsers
+      - image: cimg/node:20.5.1-browsers
     working_directory: ~/repo
     steps:
       - checkout
@@ -103,7 +118,7 @@ jobs:
           paths: /*
   security_check:
     docker:
-      - image: cimg/node:16.17.0-browsers
+      - image: cimg/node:20.5.1-browsers
     working_directory: ~/repo
     steps:
       - checkout
@@ -122,7 +137,7 @@ jobs:
       # - snyk/scan
   code_qa:
     docker:
-      - image: cimg/node:16.17.0-browsers
+      - image: cimg/node:20.5.1-browsers
     working_directory: ~/repo
     steps:
       - checkout
@@ -144,7 +159,7 @@ jobs:
       - run: yarn lint
   bump_patch:
     docker:
-      - image: cimg/node:16.17.0-browsers
+      - image: cimg/node:20.5.1-browsers
     working_directory: ~/repo
     steps:
       - run: echo 'WIP'
@@ -153,6 +168,7 @@ jobs:
 workflows:
   simple_workflow:
     jobs:
+      - check
       - security_check
       - code_qa
       - cypress/install:
