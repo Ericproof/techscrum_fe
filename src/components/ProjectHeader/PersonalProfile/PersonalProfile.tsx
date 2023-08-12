@@ -29,7 +29,7 @@ export default function PersonalProfile({ userInfo }: Props) {
               <button type="button" onClick={() => handleClickOutside(true)}>
                 <div className={styles.avatarContent}>
                   <span>
-                    <img src={userInfo?.avatarIcon || avatarImg} alt="avatar" />
+                    <img src={userInfo?.avatarIcon ?? avatarImg} alt="avatar" />
                   </span>
                 </div>
               </button>
@@ -41,7 +41,7 @@ export default function PersonalProfile({ userInfo }: Props) {
                     <h1>Account</h1>
                     <div className={styles.accountContent}>
                       <img
-                        src={userInfo?.avatarIcon || avatarImg}
+                        src={userInfo?.avatarIcon ?? avatarImg}
                         alt="avatar"
                         className={styles.avatarIcon}
                       />
@@ -81,7 +81,7 @@ export default function PersonalProfile({ userInfo }: Props) {
             <button type="button" onClick={() => handleClickOutside(false)}>
               <div className={styles.avatarContent}>
                 <span>
-                  <img src={userInfo?.avatarIcon || avatarImg} alt="avatar" />
+                  <img src={userInfo?.avatarIcon ?? avatarImg} alt="avatar" />
                 </span>
               </div>
             </button>

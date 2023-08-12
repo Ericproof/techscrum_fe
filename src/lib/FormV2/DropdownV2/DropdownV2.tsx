@@ -35,7 +35,7 @@ export default function DropdownV2(props: IDropdownV2) {
     loading = false,
     dataTestId
   } = props;
-  const defaultPlaceHolder = placeHolder || 'None';
+  const defaultPlaceHolder = placeHolder ?? 'None';
   const [value, setValue] = useState(defaultValue);
   const [error, setError] = useState<null | string>(null);
   const [isActive, setIsActive] = useState(false);
