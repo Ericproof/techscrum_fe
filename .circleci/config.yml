@@ -20,6 +20,18 @@ executors:
       - image: 'cypress/browsers:node16.14.2-slim-chrome100-ff99-edge'
 
 jobs:
+  check:
+    docker:
+      - image: circleci/node:14
+    steps:
+      - checkout
+      - run:
+          name: Check commit message
+          command: |
+            if git log --pretty=format:"%s" -n 1 | grep -q "[skip ci]"; then
+              echo "Commit message indicates to skip CI. Exiting."
+              circleci-agent step halt
+            fi
   build_production:
     docker:
       - image: cimg/node:16.17.0-browsers
@@ -153,6 +165,7 @@ jobs:
 workflows:
   simple_workflow:
     jobs:
+      - check
       - security_check
       - code_qa
       - cypress/install:
