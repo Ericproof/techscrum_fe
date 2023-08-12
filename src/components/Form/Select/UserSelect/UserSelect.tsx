@@ -40,7 +40,7 @@ export default function UserSelect(props: IUserSelect) {
   }, [userList, query]);
 
   const onClickUser = (user: IUserInfo | null) => {
-    onChange({ target: { name: 'projectLeadId', value: user?.id || '' } });
+    onChange({ target: { name: 'projectLeadId', value: user?.id ?? '' } });
     setVisible(false);
     if (user) {
       setCurrentSelectedUser(user);
@@ -120,7 +120,7 @@ export default function UserSelect(props: IUserSelect) {
                         >
                           <img
                             src={
-                              user.avatarIcon ||
+                              user.avatarIcon ??
                               'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'
                             }
                             alt="avatar"

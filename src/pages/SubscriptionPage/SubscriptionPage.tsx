@@ -46,7 +46,7 @@ export default function SubscriptionPage() {
     customerEmail = '',
     customerName = '',
     periodEnd = ''
-  } = billOverviewInfo || {};
+  } = billOverviewInfo ?? {};
 
   useEffect(() => {
     const fetchData = async () => {

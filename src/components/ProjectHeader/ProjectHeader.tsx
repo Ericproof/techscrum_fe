@@ -80,16 +80,15 @@ export default function ProjectHeader() {
                       {starredProjects.length >= 1 && (
                         <div className={styles.starredTitle}>Starred</div>
                       )}
-                      {starredProjects &&
-                        starredProjects.map((project) => (
-                          <StartedProjectItem
-                            key={project.id}
-                            projectId={project.id}
-                            boardId={project.boardId ?? ''}
-                            projectName={project.name}
-                            iconUrl={project.iconUrl}
-                          />
-                        ))}
+                      {starredProjects?.map((project) => (
+                        <StartedProjectItem
+                          key={project.id}
+                          projectId={project.id}
+                          boardId={project.boardId ?? ''}
+                          projectName={project.name}
+                          iconUrl={project.iconUrl}
+                        />
+                      ))}
 
                       <div className={styles.recent}>RECENT</div>
                       {projectList.slice(0, 2).map((project, index) => (
@@ -103,7 +102,7 @@ export default function ProjectHeader() {
                               <span className={styles.icon}>
                                 <img
                                   src={
-                                    project.iconUrl ||
+                                    project.iconUrl ??
                                     'https://010001.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10418?size=small'
                                   }
                                   alt="icon"
