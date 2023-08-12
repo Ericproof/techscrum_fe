@@ -79,7 +79,7 @@ function App() {
   };
 
   if (isValidDomain === null || isRootDomain === null) {
-    return <></>;
+    return <>Loading...</>;
   }
 
   if (!isValidDomain) {
