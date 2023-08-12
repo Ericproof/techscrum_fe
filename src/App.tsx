@@ -85,7 +85,7 @@ function App() {
   if (!isValidDomain) {
     return (
       <Routes>
-        <Route path="/" element={<DomainFailPage />} />;
+        <Route path="*" element={<DomainFailPage />} />;
       </Routes>
     );
   }
