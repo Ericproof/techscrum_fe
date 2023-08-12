@@ -124,7 +124,7 @@ export const clickedShowMore = (e, refShowMore) => {
 
   for (const element of refShowMore) {
     const ref = element.current;
-    if (ref !== null && ref.contains(target)) {
+    if (ref?.contains(target)) {
       hasClickShowMore = true;
     }
   }

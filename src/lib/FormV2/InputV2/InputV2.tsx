@@ -64,7 +64,7 @@ export default function InputV2(props: IInputV2) {
 
   useEffect(() => {
     if (!loading) {
-      setVal(defaultValue || '');
+      setVal(defaultValue ?? '');
     }
   }, [loading]);
 
@@ -94,7 +94,7 @@ export default function InputV2(props: IInputV2) {
       <input
         className={[styles.input].join(' ')}
         type={type}
-        value={hadDefaultValue ? val || '' : value || ''}
+        value={hadDefaultValue ? val ?? '' : value ?? ''}
         name={name}
         onChange={onChanged}
         onBlur={onBlurValue}

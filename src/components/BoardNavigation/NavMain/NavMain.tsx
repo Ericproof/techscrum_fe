@@ -273,7 +273,7 @@ export default function NavMain(props: IPropsNavMain) {
             <React.Fragment key={shortcutData.id}>
               <a
                 href={
-                  shortcutData.shortcutLink && shortcutData.shortcutLink.includes('https://')
+                  shortcutData?.shortcutLink?.includes('https://')
                     ? shortcutData.shortcutLink
                     : `https://${shortcutData.shortcutLink}`
                 }

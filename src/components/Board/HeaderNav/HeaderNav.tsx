@@ -13,7 +13,7 @@ export default function HeaderNav() {
 
   const currentUrl = window.location.pathname;
 
-  if (!currentProject || !currentProject[0]) {
+  if (!currentProject[0]) {
     return null;
   }
   return (

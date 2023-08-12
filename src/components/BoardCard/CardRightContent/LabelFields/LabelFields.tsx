@@ -119,19 +119,18 @@ export default function LabelFields(props: IPropsLabel) {
         {visible && !isDisabled ? (
           <div className={styles.labelDropdownOpen}>
             <div className={styles.labelOptions}>
-              {selectedTaskLabelList !== undefined &&
-                selectedTaskLabelList.map((item: ILabelData) => {
-                  return (
-                    <div className={styles.labels} key={item.id}>
-                      <span>{item.name}</span>
-                      <TiDelete
-                        onClick={() => {
-                          removeLabelFromSelectedTaskList(item);
-                        }}
-                      />
-                    </div>
-                  );
-                })}
+              {selectedTaskLabelList?.map((item: ILabelData) => {
+                return (
+                  <div className={styles.labels} key={item.id}>
+                    <span>{item.name}</span>
+                    <TiDelete
+                      onClick={() => {
+                        removeLabelFromSelectedTaskList(item);
+                      }}
+                    />
+                  </div>
+                );
+              })}
               <input
                 onChange={onChangeInputLabel}
                 value={inputLabel}
@@ -173,10 +172,9 @@ export default function LabelFields(props: IPropsLabel) {
             data-testid="card-label-button"
             onClick={handleClickOutside}
           >
-            {selectedTaskLabelList !== undefined &&
-              selectedTaskLabelList?.map((item: ILabelData, index: number) => {
-                return <span key={item.id ?? index}>{item.name ?? ''}</span>;
-              })}
+            {selectedTaskLabelList?.map((item: ILabelData, index: number) => {
+              return <span key={item.id ?? index}>{item.name ?? ''}</span>;
+            })}
             {selectedTaskLabelList?.length === 0 && <span className={styles.noLabel}>None</span>}
           </button>
         )}
