@@ -34,7 +34,7 @@ jobs:
             fi
   build_production:
     docker:
-      - image: cimg/node:16.17.0-browsers
+      - image: cimg/node:20.5.1-browsers
     working_directory: ~/repo
     steps:
       - checkout
@@ -64,7 +64,7 @@ jobs:
           command: npx semantic-release
   build_staging:
     docker:
-      - image: cimg/node:16.17.0-browsers
+      - image: cimg/node:20.5.1-browsers
     working_directory: ~/repo
     steps:
       - checkout
@@ -91,7 +91,7 @@ jobs:
           paths: /*
   build_dev:
     docker:
-      - image: cimg/node:16.17.0-browsers
+      - image: cimg/node:20.5.1-browsers
     working_directory: ~/repo
     steps:
       - checkout
@@ -118,7 +118,7 @@ jobs:
           paths: /*
   security_check:
     docker:
-      - image: cimg/node:16.17.0-browsers
+      - image: cimg/node:20.5.1-browsers
     working_directory: ~/repo
     steps:
       - checkout
@@ -137,7 +137,7 @@ jobs:
       # - snyk/scan
   code_qa:
     docker:
-      - image: cimg/node:16.17.0-browsers
+      - image: cimg/node:20.5.1-browsers
     working_directory: ~/repo
     steps:
       - checkout
@@ -159,7 +159,7 @@ jobs:
       - run: yarn lint
   bump_patch:
     docker:
-      - image: cimg/node:16.17.0-browsers
+      - image: cimg/node:20.5.1-browsers
     working_directory: ~/repo
     steps:
       - run: echo 'WIP'
