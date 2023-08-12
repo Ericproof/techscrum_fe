@@ -54,7 +54,7 @@ import DashBoardPage from './pages/DashboardPage/DashBoardPage';
 import DomainFailPage from './pages/DomainFailPage/DomainFailPage';
 
 function App() {
-  const [showPages, setShowPages] = useState(null);
+  const [isRootDomain, setIsRootDomain] = useState(null);
   const [isValidDomain, setValidDomain] = useState(null);
   const getDomainValid = async () => {
     const res = await getDomainExists();
@@ -64,24 +64,21 @@ function App() {
   useEffect(() => {
     const getD = async () => {
       const res = await getDomains();
-      setShowPages(res.data);
+      setIsRootDomain(res.data);
     };
     getD();
     getDomainValid();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const getHomePage = () => {
-    if (showPages === null) {
-      return <></>;
-    }
-    if (!showPages) {
+  const getRootPage = () => {
+    if (!isRootDomain) {
       return <LoginPageV2 />;
     }
     return <HomePage />;
   };
 
-  if (isValidDomain === null) {
+  if (isValidDomain === null || isRootDomain === null) {
     return <></>;
   }
 
@@ -97,15 +94,15 @@ function App() {
       <ToastContainer style={{ width: '400px' }} />
       <UserProvider>
         <Routes>
-          {showPages && <Route path="register" element={<RegisterPageV2 />} />}
+          {isRootDomain && <Route path="register" element={<RegisterPageV2 />} />}
           <Route path="/faq" element={<FAQPage />} />
           <Route path="/verify" element={<VerifyPage />} />
           {/* active new user TODO: fix */}
           <Route path="/verify-v2" element={<VerifyPageV2 />} />
           {/* confirm existing user */}
           {/*  <Route path="/user-confirm" element={<VerifyPageV2 />} />  */}
-          <Route path="login" element={<LoginPageV2 />} />
-          <Route path="/" element={getHomePage()} />
+          <Route path="login" element={<LoginPageV2 isRootDomain={isRootDomain || false} />} />
+          <Route path="/" element={getRootPage()} />
           <Route path="/login/reset-password" element={<ResetPasswordPage />} />
           <Route path="/features/report" element={<ReportPage />} />
           <Route path="/login/change-password" element={<ChangePasswordPage />} />

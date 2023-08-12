@@ -9,7 +9,12 @@ import styles from './LoginMain.module.scss';
 import Icon from '../../../assets/logo.svg';
 import { setLocalStorage } from '../../../utils/helpers';
 
-export default function LoginMainV2() {
+interface Props {
+  isRootDomain?: boolean;
+}
+
+export default function LoginMainV2(props: Props) {
+  const { isRootDomain = false } = props;
   const navigate = useNavigate();
   const setUserInfo = useContext(UserDispatchContext);
   const illegalCharacter = /[%&]/;
@@ -129,8 +134,8 @@ export default function LoginMainV2() {
           Login
         </button>
         <div className={styles.formFooter}>
-          <Link to="/register">Register</Link>
-          <span>•</span>
+          {isRootDomain && <Link to="/register">Register</Link>}
+          {isRootDomain && <span>•</span>}
           <Link to="/login/reset-password">Forgot password</Link>
         </div>
       </form>
@@ -146,3 +151,7 @@ export default function LoginMainV2() {
     </div>
   );
 }
+
+LoginMainV2.defaultProps = {
+  isRootDomain: false
+};
