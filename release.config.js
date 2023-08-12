@@ -1,5 +1,6 @@
 const config = {
     branches: ['master'],
+    repositoryUrl: "https://bitbucket.org/010001/fe.techscrum.git",
     plugins: [
       '@semantic-release/commit-analyzer',
       '@semantic-release/release-notes-generator',
