@@ -59,9 +59,6 @@ jobs:
       - aws-cloudfront/invalidate:
           distribution_id: E28E7CS1KHPD0K
           paths: /*
-      - run:
-          name: Run Semantic Release
-          command: npx semantic-release
   build_staging:
     docker:
       - image: cimg/node:20.5.1-browsers
@@ -157,12 +154,14 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - jq/install
       - run: yarn lint
-  bump_patch:
+  semantic_release:
     docker:
       - image: cimg/node:20.5.1-browsers
     working_directory: ~/repo
     steps:
-      - run: echo 'WIP'
+      - run:
+          name: Run Semantic Release
+          command: npx semantic-release
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
@@ -183,10 +182,17 @@ workflows:
           browser: chrome
           start: yarn start
           record: true
-      - build_production:
+      - semantic_release:
           requires:
             - code_qa
             - security_check
+          filters:
+            branches:
+              only:
+                - master
+      - build_production:
+          requires:
+            - semantic_release
           filters:
             branches:
               only:
@@ -204,13 +210,6 @@ workflows:
             - code_qa
             - security_check
             - cypress/run
-          filters:
-            branches:
-              only:
-                - develop
-      - bump_patch:
-          requires:
-            - build_dev
           filters:
             branches:
               only:
