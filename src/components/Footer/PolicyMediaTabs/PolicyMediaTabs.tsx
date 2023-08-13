@@ -10,13 +10,13 @@ import { Link } from 'react-router-dom';
 import styles from './PolicyMediaTabs.module.scss';
 import IOS from './download-app-iOS.svg';
 import Android from './download-app-google.svg';
-import { version } from '../../../../package.json';
+import pJson from '../../../../package.json';
 
 export default function PolicyMediaTabs() {
   return (
     <div className={styles.policiesMediaDownloadPlatform}>
       <div className={styles.leftItem}>
-        <Link to="/privacy-policy">Terms & Privacy ({version})</Link>
+        <Link to="/privacy-policy">Terms & Privacy ({pJson.version})</Link>
       </div>
       <div className={styles.middleItem}>
         <a href="https://www.facebook.com/techscrumapp">
