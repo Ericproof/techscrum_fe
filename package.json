@@ -36,7 +36,7 @@
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "format": "prettier --write src/**/*.tsx",
-    "lint": "eslint src/",
+    "lint": "eslint src/ --cache",
     "lint-fix": "eslint src --quiet --fix",
     "deploy": "aws s3 sync build s3://techscrumapp.com",
     "cdn": "aws cloudfront create-invalidation --distribution-id E1V3T62UIWQDQ2 --paths /*",
