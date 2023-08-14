@@ -1,3 +1,10 @@
+# [1.5.0](https://bitbucket.org/010001/fe.techscrum/compare/v1.4.0...v1.5.0) (2023-08-14)
+
+
+### Features
+
+* improve ci ([3970d03](https://bitbucket.org/010001/fe.techscrum/commits/3970d03146e3a5734198d75af99064afc23b03be))
+
 # [1.4.0](https://bitbucket.org/010001/fe.techscrum/compare/v1.3.0...v1.4.0) (2023-08-13)
 
 
