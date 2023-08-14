@@ -52,19 +52,24 @@ import BillingHistoryPage from './pages/BillingHistoryPage/BillingHistoryPage';
 import BillingSubscriptionPage from './pages/BillingSubscriptionPage/BillingSubscriptionPage';
 import DashBoardPage from './pages/DashboardPage/DashBoardPage';
 import DomainFailPage from './pages/DomainFailPage/DomainFailPage';
+import config from './config/config';
 
 function App() {
-  const [isRootDomain, setIsRootDomain] = useState(null);
+  const [isRootDomain, setIsRootDomain] = useState<any>(null);
   const [isValidDomain, setValidDomain] = useState(null);
-  const getDomainValid = async () => {
-    const res = await getDomainExists();
-    setValidDomain(res.data);
-  };
 
   useEffect(() => {
+    if (config.isCI) {
+      setIsRootDomain(true);
+      return;
+    }
     const getD = async () => {
       const res = await getDomains();
       setIsRootDomain(res.data);
+    };
+    const getDomainValid = async () => {
+      const res = await getDomainExists();
+      setValidDomain(res.data);
     };
     getD();
     getDomainValid();
@@ -77,17 +82,18 @@ function App() {
     }
     return <HomePage />;
   };
+  if (!config.isCI) {
+    if (isValidDomain === null || isRootDomain === null) {
+      return <>Loading..</>;
+    }
 
-  if (isValidDomain === null || isRootDomain === null) {
-    return <>Loading..</>;
-  }
-
-  if (!isValidDomain) {
-    return (
-      <Routes>
-        <Route path="*" element={<DomainFailPage />} />;
-      </Routes>
-    );
+    if (!isValidDomain) {
+      return (
+        <Routes>
+          <Route path="*" element={<DomainFailPage />} />;
+        </Routes>
+      );
+    }
   }
   return (
     <>
