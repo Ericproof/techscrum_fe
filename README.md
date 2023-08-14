@@ -24,7 +24,7 @@ List of tools needed to be installed before the project can start
 Below are the command that you would need to run after clone down the repo, unless to told these command usually would need to be run only once
 
 - yarn install
-- cp .env.example .env
+- cp .env.local.example .env.local
 
 ### Start up
 
