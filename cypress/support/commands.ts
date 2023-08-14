@@ -10,21 +10,21 @@
 // ***********************************************
 //
 //
-
-
+import loginData from '../fixtures/login.json';
 declare namespace Cypress {
-    interface Chainable {
-      login(email:string, password:string): void
-    }
+  interface Chainable {
+    login(email: string, password: string): void;
+  }
 }
 
 // -- This is a parent command --
-Cypress.Commands.add('login', (email:string, password:string) => { 
-    cy.get('[data-testid="email"]').type(email)
-    cy.get('[data-testid="password"]').type(password)
-    cy.get('[data-testid="login"]').click();
-    cy.url({ timeout: 20000 }).should('be.equal', `${Cypress.config("baseUrl")}/projects`)
-})
+Cypress.Commands.add('login', (email: string, password: string) => {
+  cy.intercept('POST', '**/login', loginData).as('login');
+  cy.get('[data-testid="email"]').type(email);
+  cy.get('[data-testid="password"]').type(password);
+  cy.get('[data-testid="login"]').click();
+  cy.url({ timeout: 20000 }).should('be.equal', `${Cypress.config('baseUrl')}/projects`);
+});
 //
 //
 // -- This is a child command --
