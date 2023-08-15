@@ -13,22 +13,22 @@ describe('Project page', () => {
     cy.wait('@get-projects');
   });
 
-  // it('should search projects and find it in the project list', () => {
-  //   cy.get('[data-testid="search-btn"]').click();
-  //   cy.get('[data-testid="search-input"]').click();
-  //   cy.get('[data-testid="search-input"]').clear();
-  //   cy.get('[data-testid="search-input"]').type('123');
-  //   cy.get('[data-testid="search-result"]').should('have.length', 2);
-  //   cy.get('[data-testid="search-result"]').then((items) => {
-  //     expect(items[0]).to.contain.text('123');
-  //     expect(items[1]).to.contain.text('12333');
-  //   });
-  // });
+  it('should search projects and find it in the project list', () => {
+    cy.get('[data-testid="search-btn"]').click();
+    cy.get('[data-testid="search-input"]').click();
+    cy.get('[data-testid="search-input"]').clear();
+    cy.get('[data-testid="search-input"]').type('123');
+    cy.get('[data-testid="search-result"]').should('have.length', 2);
+    cy.get('[data-testid="search-result"]').then((items) => {
+      expect(items[0]).to.contain.text('123');
+      expect(items[1]).to.contain.text('12333');
+    });
+  });
 
-  // it('check the detail of a project', () => {
-  //   cy.get('[data-testid="project-name"]').eq(1).click();
-  //   cy.url().should('include', '62ea00a670f56ef135b5a579');
-  // });
+  it('check the detail of a project', () => {
+    cy.get('[data-testid="project-name"]').eq(1).click();
+    cy.url().should('include', '62ea00a670f56ef135b5a579');
+  });
 
   it('delete a project', () => {
     cy.intercept('DELETE', '**/projects/*',{
