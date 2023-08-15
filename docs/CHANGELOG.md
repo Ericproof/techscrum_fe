@@ -1,3 +1,10 @@
+## [1.7.2](https://bitbucket.org/010001/fe.techscrum/compare/v1.7.1...v1.7.2) (2023-08-15)
+
+
+### Bug Fixes
+
+* cypress test ([46dc573](https://bitbucket.org/010001/fe.techscrum/commits/46dc573075a24531e6fc2c736a081d40593fd33f))
+
 ## [1.7.1](https://bitbucket.org/010001/fe.techscrum/compare/v1.7.0...v1.7.1) (2023-08-14)
 
 
