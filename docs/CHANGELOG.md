@@ -1,3 +1,12 @@
+## [1.8.1](https://bitbucket.org/010001/fe.techscrum/compare/v1.8.0...v1.8.1) (2023-08-15)
+
+
+### Bug Fixes
+
+* cypress test ([ad9a586](https://bitbucket.org/010001/fe.techscrum/commits/ad9a5861f0370713bacaf83135e2b96d002aed0c))
+* improve test ([84d304b](https://bitbucket.org/010001/fe.techscrum/commits/84d304b3b0d3385d37eb567ed7e73fbb0cbc54d8))
+* improve test ([b4e0ef1](https://bitbucket.org/010001/fe.techscrum/commits/b4e0ef1af025921411207a3ca13b5b63024a2496))
+
 # [1.8.0](https://bitbucket.org/010001/fe.techscrum/compare/v1.7.2...v1.8.0) (2023-08-15)
 
 
