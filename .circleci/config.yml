@@ -113,7 +113,7 @@ jobs:
       - aws-cloudfront/invalidate:
           distribution_id: E28E7CS1KHPD0K
           paths: /*
-  security_check:
+  dependency_scan:
     docker:
       - image: cimg/node:20.5.1-browsers
     working_directory: ~/repo
@@ -132,7 +132,14 @@ jobs:
             - ~/.cache
           key: v1-dependencies-{{ checksum "package.json" }}
       # - snyk/scan
-  code_qa:
+  dast:
+    docker:
+      - image: cimg/node:20.5.1-browsers
+    working_directory: ~/repo
+    steps:
+      - checkout
+      # - snyk/scan
+  sast:
     docker:
       - image: cimg/node:20.5.1-browsers
     working_directory: ~/repo
@@ -181,8 +188,8 @@ workflows:
   simple_workflow:
     jobs:
       - check
-      - security_check
-      - code_qa
+      - dependency_scan
+      - sast
       - cypress/install:
           yarn: true
           executor: with-chrome
@@ -197,8 +204,8 @@ workflows:
           record: true
       - semantic_release:
           requires:
-            - code_qa
-            - security_check
+            - sast
+            - dependency_scan
           filters:
             branches:
               only:
@@ -212,18 +219,19 @@ workflows:
                 - master
       - build_staging:
           requires:
-            - code_qa
-            - security_check
+            - sast
+            - dependency_scan
           filters:
             branches:
               only:
                 - staging
       - build_dev:
           requires:
-            - code_qa
-            - security_check
+            - sast
+            - dependency_scan
             - cypress/run
           filters:
             branches:
               only:
                 - develop
+      - dast

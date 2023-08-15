@@ -2,7 +2,7 @@
   {
     "operation": "updated",
     "userId": {
-      "_id": "631dd53189d19ed1f532fb85",
+      "id": "631dd53189d19ed1f532fb85",
       "email": "kitman200220022002@gmail.com",
       "__v": 0,
       "active": true,
@@ -14,7 +14,7 @@
         {
           "projectId": "6350c09984d4276f1347d489",
           "roleId": "631d94d08a05945727602cdf",
-          "_id": "635666c1d377d106f9a8b85d"
+          "id": "635666c1d377d106f9a8b85d"
         }
       ],
       "updatedAt": "2022-10-24T10:19:45.417Z",
