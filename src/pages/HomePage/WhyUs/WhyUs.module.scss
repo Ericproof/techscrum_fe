@@ -250,7 +250,7 @@ $max_size: 768px;
     padding: 16px 24px;
     font-size: 12px;
     border-radius: 99px;
-    max-width: 105px;
+    min-width: 105px;
     width: 100%;
     text-align: center;
     text-decoration: none;
@@ -279,7 +279,10 @@ $max_size: 768px;
     width: 100%;
     justify-content: space-between;
     align-items: center;
-
+    @media (max-width: 748px) {
+        flex-wrap: wrap;
+        gap: 20px;
+    }
 }
 
 .bgImg {
