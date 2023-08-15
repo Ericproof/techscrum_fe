@@ -1,6 +1,6 @@
+import { Buffer } from 'buffer';
 import React from 'react';
 import { Page, Text, Document, StyleSheet, Image, View } from '@react-pdf/renderer';
-import { Buffer } from 'buffer';
 import { dateFormatter } from '../../../../utils/helpers';
 import { IProject } from '../../../../types';
 import { capitalise } from '../../../ReportPage/utils';
