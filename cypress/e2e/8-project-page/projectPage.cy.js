@@ -31,7 +31,9 @@ describe('Project page', () => {
   });
 
   it('delete a project', () => {
-    cy.intercept('DELETE', '**/projects/*').as('delete-project');
+    cy.intercept('DELETE', '**/projects/*',{
+      statusCode: 204
+    }).as('delete-project');
     cy.get(`[data-testid="project-expand-btn-${projectsData[0].id}"]`).click();
     cy.get('[data-testid="project-delete"]').click();
     cy.get('[data-testid="confirm-delete"]').click();
