@@ -148,7 +148,8 @@ nav.navNormal {
 
 nav.navActive {
   @media (max-width: $max-size) {
-    max-width: 400px;
+    max-width: unset;
+    width: 100%;
     min-height: none;
     max-height: none;
     height: 100vh;
