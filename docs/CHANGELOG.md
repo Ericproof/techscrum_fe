@@ -1,3 +1,11 @@
+# [1.8.0](https://bitbucket.org/010001/fe.techscrum/compare/v1.7.2...v1.8.0) (2023-08-15)
+
+
+### Features
+
+* fix home page css ([c0552d6](https://bitbucket.org/010001/fe.techscrum/commits/c0552d6ef5376679d105ef6541b6e28168c11a4a))
+* remove title limit ([5892202](https://bitbucket.org/010001/fe.techscrum/commits/5892202aa71206441617524a80a22e6177816127))
+
 ## [1.7.2](https://bitbucket.org/010001/fe.techscrum/compare/v1.7.1...v1.7.2) (2023-08-15)
 
 
