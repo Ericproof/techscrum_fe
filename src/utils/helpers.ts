@@ -85,9 +85,19 @@ export const getOwner = (projectId: string) => {
   return projectData[projectId]?.ownerId;
 };
 
-export const convertRolesArrayToObject = (roles: any) => {
+interface IRoles {
+  id: string;
+  name: string;
+  permission: any;
+  createdAt: string;
+  allowDelete: boolean;
+  updatedAt: string;
+  slug: string;
+}
+
+export const convertRolesArrayToObject = (roles: IRoles[]) => {
   const obj: any = {};
-  const keys = roles.map((item: any) => {
+  const keys = roles.map((item) => {
     return item.id;
   });
 
@@ -97,6 +107,7 @@ export const convertRolesArrayToObject = (roles: any) => {
   return obj;
 };
 
+/* TODO: FIX */
 export const getRoles = async () => {
   const path = `${config.apiAddress}/roles`;
   const res = await axios.get(path);

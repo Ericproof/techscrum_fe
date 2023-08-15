@@ -106,9 +106,11 @@ export default function BoardPage() {
     getProjectData();
   }, []);
 
-  const fetchColumnsData = useCallback((boardInfo: IBoardEntity) => {
+  const fetchColumnsData = useCallback((boardInfo: IBoardEntity | undefined) => {
     const columnInfoData: IColumnsFromBackend = {};
-
+    if (!boardInfo) {
+      return columnInfoData;
+    }
     for (const item of boardInfo.taskStatus) {
       columnInfoData[item.id] = {
         name: item.name,
