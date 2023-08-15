@@ -3,7 +3,7 @@
     "operation": "created",
     "userId": {
       "paymentHistoryId": [],
-      "_id": "64129b2d2110dfcdc0dd2da4",
+      "id": "64129b2d2110dfcdc0dd2da4",
       "email": "coffeetsang20@gmail.com",
       "isAdmin": 1,
       "refreshToken": "Ts4tXfNLoc",
@@ -22,22 +22,22 @@
         {
           "projectId": "641673fb0b80211502d3506b",
           "roleId": "641679ac459e0e37bde2ace6",
-          "_id": "64167885ec8cae809cd93a92"
+          "id": "64167885ec8cae809cd93a92"
         },
         {
           "projectId": "64168106ed2a76ad02bf366c",
           "roleId": "64168106ed2a76ad02bf366d",
-          "_id": "641682c04a7a3314ed2000b3"
+          "id": "641682c04a7a3314ed2000b3"
         },
         {
           "projectId": "6418e1d36c21de191de9e380",
           "roleId": "6418e1d36c21de191de9e381",
-          "_id": "64190107138513a13f31fc3a"
+          "id": "64190107138513a13f31fc3a"
         },
         {
           "projectId": "641912f771c79643bebdec7c",
           "roleId": "641912f771c79643bebdec7d",
-          "_id": "64191cbd09bb793df5232e56"
+          "id": "64191cbd09bb793df5232e56"
         }
       ],
       "createdAt": "2023-03-16T04:29:33.147Z",
