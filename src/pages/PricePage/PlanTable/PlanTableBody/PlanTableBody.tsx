@@ -13,10 +13,10 @@ function PlanTableBody(props: IPlanTableBodyProps) {
       <tbody className={styles.body}>
         <tr>
           <th className={styles.header}>Accessibility</th>
-          <td />
-          <td />
-          <td />
-          <td />
+          <td aria-label="1" />
+          <td aria-label="2" />
+          <td aria-label="3" />
+          <td aria-label="4" />
         </tr>
 
         {accessibility.content.content.map((each) => (
@@ -65,10 +65,10 @@ function PlanTableBody(props: IPlanTableBodyProps) {
 
         <tr>
           <th className={styles.second_header}>Users & Permissions</th>
-          <td />
-          <td />
-          <td />
-          <td />
+          <td aria-label="1" />
+          <td aria-label="2" />
+          <td aria-label="3" />
+          <td aria-label="4" />
         </tr>
 
         {usersPermissions.content.content.map((each) => (
