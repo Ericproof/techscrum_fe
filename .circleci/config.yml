@@ -182,7 +182,11 @@ workflows:
     jobs:
       - skip_ci_check
       - dast
+          requires:
+            - skip_ci_check
       - sast
+          requires:
+            - skip_ci_check
       - cypress/install:
           yarn: true
           executor: with-chrome
@@ -199,6 +203,7 @@ workflows:
           requires:
             - sast
             - dast
+            - cypress/run
           filters:
             branches:
               only:
