@@ -181,10 +181,10 @@ workflows:
   simple_workflow:
     jobs:
       - skip_ci_check
-      - dast
+      - dast:
           requires:
             - skip_ci_check
-      - sast
+      - sast:
           requires:
             - skip_ci_check
       - cypress/install:
