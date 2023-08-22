@@ -1,3 +1,10 @@
+# [1.9.0](https://bitbucket.org/010001/fe.techscrum/compare/v1.8.1...v1.9.0) (2023-08-22)
+
+
+### Features
+
+* added deprecation HOC ([d7b0add](https://bitbucket.org/010001/fe.techscrum/commits/d7b0adde09e3db82e51ec2d8fad397a5e06ecef9))
+
 ## [1.8.1](https://bitbucket.org/010001/fe.techscrum/compare/v1.8.0...v1.8.1) (2023-08-15)
 
 
