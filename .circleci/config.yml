@@ -20,7 +20,7 @@ executors:
       - image: 'cypress/browsers:node-20.5.0-chrome-114.0.5735.133-1-ff-114.0.2-edge-114.0.1823.51-1'
 
 jobs:
-  check:
+  skip_ci_check:
     docker:
       - image: circleci/node:14
     steps:
@@ -113,7 +113,7 @@ jobs:
       - aws-cloudfront/invalidate:
           distribution_id: E28E7CS1KHPD0K
           paths: /*
-  dependency_scan:
+  dast:
     docker:
       - image: cimg/node:20.5.1-browsers
     working_directory: ~/repo
@@ -131,13 +131,6 @@ jobs:
             - ~/.npm
             - ~/.cache
           key: v1-dependencies-{{ checksum "package.json" }}
-      # - snyk/scan
-  dast:
-    docker:
-      - image: cimg/node:20.5.1-browsers
-    working_directory: ~/repo
-    steps:
-      - checkout
       # - snyk/scan
   sast:
     docker:
@@ -187,8 +180,8 @@ jobs:
 workflows:
   simple_workflow:
     jobs:
-      - check
-      - dependency_scan
+      - skip_ci_check
+      - dast
       - sast
       - cypress/install:
           yarn: true
@@ -205,7 +198,7 @@ workflows:
       - semantic_release:
           requires:
             - sast
-            - dependency_scan
+            - dast
           filters:
             branches:
               only:
@@ -220,7 +213,7 @@ workflows:
       - build_staging:
           requires:
             - sast
-            - dependency_scan
+            - dast
           filters:
             branches:
               only:
@@ -228,10 +221,9 @@ workflows:
       - build_dev:
           requires:
             - sast
-            - dependency_scan
+            - dast
             - cypress/run
           filters:
             branches:
               only:
                 - develop
-      - dast
