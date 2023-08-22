@@ -6,6 +6,7 @@ import config from '../../config/config';
 import { IPermissions, IRole } from '../../types';
 import { clickedShowMore } from '../../utils/helpers';
 import styles from './RolePage.module.scss';
+import Deprecated from '../../components/DEPRECATED/Deprecated';
 
 export default function ProjectMembersPage() {
   const [roles, setRoles] = useState<IRole[]>([]);
@@ -62,7 +63,7 @@ export default function ProjectMembersPage() {
   });
 
   return (
-    <>
+    <Deprecated>
       <ProjectHeader />
       <div className={styles.rolePage}>
         <div className={styles.container}>
@@ -148,6 +149,6 @@ export default function ProjectMembersPage() {
           </div>
         </div>
       </div>
-    </>
+    </Deprecated>
   );
 }
