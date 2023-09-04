@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import React, { useContext, useMemo, useState } from 'react';
 import { PDFViewer } from '@react-pdf/renderer';
 import { useParams } from 'react-router-dom';
@@ -188,7 +189,7 @@ function DashBoardPage() {
             {valueCardList.map(({ title, value }, index) => {
               return (
                 <ValueCard
-                  key={crypto.randomUUID()}
+                  key={uuidv4()}
                   style={{ gridArea: `value-card-${index + 1}` }}
                   title={title}
                   value={value}
