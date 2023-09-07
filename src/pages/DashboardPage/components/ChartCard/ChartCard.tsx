@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import {
   XAxis,
@@ -64,7 +65,7 @@ function lineChart(data: any, ref: React.MutableRefObject<any>, dataKeyList: str
           return (
             <Line
               type="monotone"
-              key={crypto.randomUUID()}
+              key={uuidv4()}
               dataKey={dataKey}
               stroke={getRandomHexColor()}
               activeDot={{ r: 8 }}
@@ -95,7 +96,7 @@ function barChart(data: any) {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar key={crypto.randomUUID()} dataKey="count" fill="#6a2add" />;
+        <Bar key={uuidv4()} dataKey="count" fill="#6a2add" />;
       </BarChart>
     </ResponsiveContainer>
   );
