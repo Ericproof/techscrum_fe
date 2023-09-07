@@ -5,7 +5,7 @@ import rolesData from '../../fixtures/8-project-page/roles.json';
 import usersData from '../../fixtures/8-project-page/users.json';
 import projectSelected from '../../fixtures/16-project-settings-page/projectSelected.json';
 import projectUpdated from '../../fixtures/16-project-settings-page/projectUpdated.json';
-
+import autoFetchUserInfo from '../../fixtures/autoFetchInfo.json';
 describe('Project setting page', () => {
   beforeEach(() => {
     cy.intercept('GET', '**/projects', projectsData).as('get-projects');
@@ -23,6 +23,7 @@ describe('Project setting page', () => {
     cy.wait('@get-usersData');
     cy.wait('@get-selected-project');
     cy.get('[data-testid="setting-page"]').should('be.exist');
+    cy.intercept('POST','**/auto-fetch-userInfo',autoFetchUserInfo).as('auto-fetch-userInfo');
   });
 
   it('Selected project inputs filled', () => {
