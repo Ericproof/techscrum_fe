@@ -96,6 +96,12 @@
       color: white;
       height: 40px;
       line-height: 40px;
+
+      &:disabled{
+        background-color: #0052cc;
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
     }
 
     .thirdPartyRegisterContainer {

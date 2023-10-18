@@ -190,3 +190,8 @@ export const formatTimeStamp = (date: string | undefined): string => {
   });
   return formattedDate;
 };
+
+export const emailValidation = (email: string) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};

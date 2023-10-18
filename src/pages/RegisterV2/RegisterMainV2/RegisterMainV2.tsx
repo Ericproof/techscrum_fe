@@ -4,21 +4,25 @@ import styles from './RegisterMainV2.module.scss';
 import Icon from '../../../assets/logo.svg';
 import { userRegister } from '../../../api/registerV2/registerV2';
 import Email from '../../../assets/email.png';
+import { emailValidation } from '../../../utils/helpers';
 
 export default function RegisterMainV2() {
   const [company, setCompany] = useState('');
   const [emailRecorder, setEmailRecorder] = useState('');
   const [emailVerifyProcess, setEmailVerifyProcess] = useState(false);
+  const [emailError, setEmailError] = useState<boolean>(false);
 
-  const handleCompanyChange = (companyName) => {
+  const handleCompanyChange = (companyName: string) => {
     setCompany(companyName);
   };
 
-  const handleEmailChange = (email) => {
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const email: string = e.target.value;
     setEmailRecorder(email);
+    setEmailError(!emailValidation(email));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const data = { email: emailRecorder, company };
     await userRegister(data);
@@ -58,9 +62,7 @@ export default function RegisterMainV2() {
               placeholder="Enter your email address"
               type="email"
               name="email"
-              onChange={(e) => {
-                handleEmailChange(e.target.value);
-              }}
+              onChange={handleEmailChange}
             />
             <p className={styles.registerPolicy}>
               By registering, I accept the&nbsp;
@@ -75,9 +77,10 @@ export default function RegisterMainV2() {
             <button
               type="submit"
               className={styles.registerSubmitBtn}
-              onClick={(e) => {
+              onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                 handleSubmit(e);
               }}
+              disabled={emailError}
             >
               Register
             </button>
