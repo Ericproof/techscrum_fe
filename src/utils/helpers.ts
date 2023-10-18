@@ -192,6 +192,6 @@ export const formatTimeStamp = (date: string | undefined): string => {
 };
 
 export const emailValidation = (email: string) => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
   return emailRegex.test(email);
 };

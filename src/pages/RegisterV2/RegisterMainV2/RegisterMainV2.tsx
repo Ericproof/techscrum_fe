@@ -11,16 +11,21 @@ export default function RegisterMainV2() {
   const [company, setCompany] = useState('');
   const [emailRecorder, setEmailRecorder] = useState('');
   const [emailVerifyProcess, setEmailVerifyProcess] = useState(false);
-  const [emailError, setEmailError] = useState<boolean>(false);
+  const [enterError, setEnterError] = useState<boolean>(true);
 
   const handleCompanyChange = (companyName: string) => {
+    const isCompanyValid = companyName.trim() !== '';
+    const isEmailValid = emailValidation(emailRecorder);
     setCompany(companyName);
+    setEnterError(!(isEmailValid && isCompanyValid));
   };
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const email: string = e.target.value;
+    const isEmailValid = emailValidation(email);
+    const isCompanyValid = company.trim() !== '';
     setEmailRecorder(email);
-    setEmailError(!emailValidation(email));
+    setEnterError(!(isEmailValid && isCompanyValid));
   };
 
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -89,7 +94,7 @@ export default function RegisterMainV2() {
               onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                 handleSubmit(e);
               }}
-              disabled={emailError}
+              disabled={enterError}
             >
               Register
             </button>
