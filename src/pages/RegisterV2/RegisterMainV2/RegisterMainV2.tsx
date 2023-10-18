@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import styles from './RegisterMainV2.module.scss';
 import Icon from '../../../assets/logo.svg';
@@ -25,8 +26,16 @@ export default function RegisterMainV2() {
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const data = { email: emailRecorder, company };
-    await userRegister(data);
-    setEmailVerifyProcess(true);
+    try {
+      await userRegister(data);
+      setEmailVerifyProcess(true);
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        toast.error('An unexpected error occurred');
+      }
+    }
   };
 
   return (
