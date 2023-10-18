@@ -5,11 +5,12 @@
 TechScrum is a project management tools which helps company to prevent delays.
 
 #### Master
+
 [![CircleCI](https://dl.circleci.com/status-badge/img/bb/010001/fe.techscrum/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/bb/010001/fe.techscrum/tree/master)
 
 #### Develop
-[![CircleCI](https://dl.circleci.com/status-badge/img/bb/010001/fe.techscrum/tree/develop.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/bb/010001/fe.techscrum/tree/develop)
 
+[![CircleCI](https://dl.circleci.com/status-badge/img/bb/010001/fe.techscrum/tree/develop.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/bb/010001/fe.techscrum/tree/develop)
 
 ### Tech Stack
 
@@ -105,5 +106,3 @@ Kitman Yiu - [Kitman Yiu](www.kitmanyiu.com)
 - Prettier
 - Sonar
 - https://www.notion.so/Coding-Guidelines-bfa77d75476a4b19a195ddb20b02bb33
-
-Testing2

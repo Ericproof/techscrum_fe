@@ -130,7 +130,7 @@ export default function UserMePage() {
                   dataTestId="location"
                 />
               </div>
-              <ButtonV2 text="Save Changes" onClick={onSaveMe} />
+              <ButtonV2 text="Save Changes" onClick={onSaveMe} dataTestId="save-changes" />
             </SettingCard>
             <SettingCard title="Change Password">
               <div className={[styles.gap, styles.row, 'flex'].join(' ')}>
