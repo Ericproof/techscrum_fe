@@ -38,7 +38,7 @@ export default function RegisterMainV2() {
       if (error instanceof Error) {
         toast.error(error.message);
       } else {
-        toast.error('An unexpected error occurred');
+        toast.error('An unexpected error occurred, please try again');
       }
     }
   };
