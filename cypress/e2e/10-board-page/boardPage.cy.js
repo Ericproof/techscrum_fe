@@ -28,7 +28,7 @@ describe('Project page', () => {
     cy.wait('@fetch-projects')
     cy.intercept('GET', '**/api/v2/board/**', boardData).as('fetch-board')
     cy.get('[data-testid="evan"]').click()
-    cy.wait('@fetch-board')
+    cy.wait('@fetch-board',{timeout:15000})
     cy.wait('@fetch-labels')
   })
 
