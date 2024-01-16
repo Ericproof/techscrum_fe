@@ -1,28 +1,46 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import styles from './RegisterMainV2.module.scss';
 import Icon from '../../../assets/logo.svg';
 import { userRegister } from '../../../api/registerV2/registerV2';
 import Email from '../../../assets/email.png';
+import { emailValidation } from '../../../utils/helpers';
 
 export default function RegisterMainV2() {
   const [company, setCompany] = useState('');
   const [emailRecorder, setEmailRecorder] = useState('');
   const [emailVerifyProcess, setEmailVerifyProcess] = useState(false);
+  const [disableRegisterButton, setDisableRegisterButton] = useState<boolean>(true);
 
-  const handleCompanyChange = (companyName) => {
+  const handleCompanyChange = (companyName: string) => {
+    const isCompanyValid = companyName.trim() !== '';
+    const isEmailValid = emailValidation(emailRecorder);
     setCompany(companyName);
+    setDisableRegisterButton(!(isEmailValid && isCompanyValid));
   };
 
-  const handleEmailChange = (email) => {
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const email: string = e.target.value;
+    const isEmailValid = emailValidation(email);
+    const isCompanyValid = company.trim() !== '';
     setEmailRecorder(email);
+    setDisableRegisterButton(!(isEmailValid && isCompanyValid));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const data = { email: emailRecorder, company };
-    await userRegister(data);
-    setEmailVerifyProcess(true);
+    try {
+      await userRegister(data);
+      setEmailVerifyProcess(true);
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        toast.error('An unexpected error occurred, please try again');
+      }
+    }
   };
 
   return (
@@ -58,9 +76,7 @@ export default function RegisterMainV2() {
               placeholder="Enter your email address"
               type="email"
               name="email"
-              onChange={(e) => {
-                handleEmailChange(e.target.value);
-              }}
+              onChange={handleEmailChange}
             />
             <p className={styles.registerPolicy}>
               By registering, I accept the&nbsp;
@@ -75,9 +91,10 @@ export default function RegisterMainV2() {
             <button
               type="submit"
               className={styles.registerSubmitBtn}
-              onClick={(e) => {
+              onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                 handleSubmit(e);
               }}
+              disabled={disableRegisterButton}
             >
               Register
             </button>
