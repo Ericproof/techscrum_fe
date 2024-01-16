@@ -13,12 +13,15 @@ export default function ResetPasswordResult({ successFlag }: Props) {
       {successFlag ? (
         <>
           <img src={Email} alt="Email Icon" />
-          <h1>Your verifyEmail has been sent to your email, please check about it</h1>
+          <h1>
+            An email has been sent for password recovery. Please check your inbox for further
+            instructions.
+          </h1>
         </>
       ) : (
         <>
           <img src={Error} alt="Email Icon" />
-          <h1>Something went wrong, please try again</h1>
+          <h1>Something went wrong, please check your email or contact support</h1>
         </>
       )}
     </div>
