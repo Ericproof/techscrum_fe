@@ -109,7 +109,7 @@ function DailyScrumModal({ onClickCloseModal, projectId }: IDailyScrumModal): JS
         const results = await getDailyScrums(projectId, userId as string);
 
         if (results.length === 0) {
-          toast('No dailyScrum data for now!', { theme: 'colored', toastId: 'dailyScrum error' });
+          toast('No Daily Scrum data!', { theme: 'colored', toastId: 'dailyScrum error' });
         }
 
         dispatch({ type: DailyScrumTicketsActionType.GET_ALL_TICKETS, payload: results });
