@@ -21,7 +21,7 @@ export default function ResetPasswordResult({ successFlag }: Props) {
       ) : (
         <>
           <img src={Error} alt="Email Icon" />
-          <h1>Something went wrong, please check your email or contact support</h1>
+          <h1>Server error, Kindly review your email or contact support for assistance</h1>
         </>
       )}
     </div>
