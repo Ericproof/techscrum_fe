@@ -12,7 +12,7 @@ orbs:
   snyk: snyk/snyk@1.2.3
   aws-cloudfront: topmonks/aws-cloudfront@1.0.0
   jq: circleci/jq@2.2.0
-  sonarcloud: sonarsource/sonarcloud@1.0.3
+  sonarcloud: sonarsource/sonarcloud@2.0.0
 executors:
   with-chrome:
     resource_class: large
