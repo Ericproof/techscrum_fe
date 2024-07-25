@@ -18,8 +18,6 @@ pipeline {
             steps {
                 // npm install package
                 sh 'yarn cache clean'
-                sh 'rm -rf node_modules'
-                sh 'rm yarn.lock'
                 sh 'yarn install'
             }
         }
@@ -29,18 +27,15 @@ pipeline {
                 sh 'yarn run build'
             }
         }
+        // stage('Archive Artifacts') {
+        //     steps {
 
-        stage('Archive Artifacts') {
-            steps {
-                // 存档构建产物
-                archiveArtifacts artifacts: 'build/**'
-            }
-        }
-
+        //         archiveArtifacts artifacts: 'build/**'
+        //     }
+        // }
         stage('Deploy') {
             steps {
-                // 部署到服务器或其他目标（根据实际需求修改）
-                // 示例：将构建的文件推送到 S3
+
                 sh 'aws s3 sync build/ s3://eric-devops-techscrum-bucket/ --delete'
             }
         }
