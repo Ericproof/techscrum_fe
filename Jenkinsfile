@@ -5,25 +5,26 @@ pipeline {
         NODE_VERSION = '16.11.33' 
     }
     stages {
-        stage('Setup Node.js') {
-            steps {
-                // install Node.js
-                script {
-                    def node = tool name: "NodeJS ${env.NODE_VERSION}", type: 'NodeJSInstallation'
-                    env.PATH = "${node}/bin:${env.PATH}"
-                }
-            }
-        }
+        // stage('Setup Node.js') {
+        //     steps {
+        //         // install Node.js
+        //         script {
+        //             def node = tool name: "NodeJS ${env.NODE_VERSION}", type: 'NodeJSInstallation'
+        //             env.PATH = "${node}/bin:${env.PATH}"
+        //         }
+        //     }
+        // }
         stage('Install Dependencies') {
             steps {
                 // npm install package
-                sh 'npm install'
+                sh 'yarn install'
+
             }
         }
         stage('Build') {
             steps {
-                // npm build
-                sh 'npm run build'
+                // yarn build
+                sh 'yarn run build'
             }
         }
 
