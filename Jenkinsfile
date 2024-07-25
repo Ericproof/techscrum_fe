@@ -17,8 +17,10 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 // npm install package
+                sh 'yarn cache clean'
+                sh 'rm -rf node_modules'
+                sh 'rm yarn.lock'
                 sh 'yarn install'
-
             }
         }
         stage('Build') {
