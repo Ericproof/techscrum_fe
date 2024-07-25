@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-        //  Node.js version
-        NODE_VERSION = '16.11.33' 
+        AWS_ACCESS_KEY_ID = credentials('jenkins_aws_access_key_id')
+        AWS_SECRET_ACCESS_KEY = credentials('jenkins_aws_secret_access_key')
     }
     stages {
         // stage('Setup Node.js') {
@@ -35,7 +35,7 @@ pipeline {
         // }
         stage('Deploy') {
             steps {
-
+                //Deploy to S3
                 sh 'aws s3 sync build/ s3://eric-devops-techscrum-bucket/ --delete'
             }
         }
