@@ -1,10 +1,10 @@
 pipeline {
     agent any
-
     environment {
-        // 定义 Node.js 版本（根据需要调整）
+        //  Node.js version
         NODE_VERSION = '16.11.33' 
     }
+    stages {
         stage('Setup Node.js') {
             steps {
                 // install Node.js
@@ -14,14 +14,12 @@ pipeline {
                 }
             }
         }
-
         stage('Install Dependencies') {
             steps {
                 // npm install package
                 sh 'npm install'
             }
         }
-
         stage('Build') {
             steps {
                 // npm build
