@@ -12,8 +12,8 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    # runs-on: self-hosted-debian
+    # runs-on: ubuntu-latest
+    runs-on: self-hosted-debian
 
     steps:
       - name: Checkout code
