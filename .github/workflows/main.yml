@@ -7,17 +7,13 @@ on:
   pull_request:
     branches:
       - main
-      - deveops-action
+      - devops-action
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     # runs-on: self-hosted-debian
-
-    env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
     steps:
       - name: Checkout code
@@ -37,12 +33,15 @@ jobs:
         run: |
           yarn run build
 
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-southeast-2
       - name: Deploy to S3
         run: |
           aws s3 sync build/ s3://eric-devops-techscrum-bucket/ --delete
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Clean up workspace
         run: |
