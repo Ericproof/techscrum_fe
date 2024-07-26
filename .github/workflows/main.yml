@@ -12,8 +12,8 @@ on:
 
 jobs:
   build:
-    # runs-on: ubuntu-latest
-    runs-on: debian_linux
+    runs-on: ubuntu-latest
+    # runs-on: debian_linux
 
     steps:
       - name: Checkout code
