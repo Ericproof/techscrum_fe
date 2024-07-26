@@ -47,7 +47,7 @@ jobs:
 
       - name: Deploy to S3
         run: |
-          aws s3 sync build/ s3://eric-devops-techscrum-bucket/ --delete
+          aws s3 sync build/ s3://techscrumdevops.site/ --delete
 
       - name: Clean up workspace
         run: |
