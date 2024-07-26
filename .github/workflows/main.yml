@@ -1,0 +1,47 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - devops-practice
+  pull_request:
+    branches:
+      - main
+      - deveops-practice
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Install Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16' # Adjust this to your Node.js version
+
+    - name: Install Dependencies
+      run: |
+        yarn cache clean
+        yarn install
+
+    - name: Build
+      run: |
+        yarn run build
+
+    - name: Deploy to S3
+      run: |
+        aws s3 sync build/ s3://eric-devops-techscrum-bucket/ --delete
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+    - name: Clean up workspace
+      run: |
+        rm -rf build
