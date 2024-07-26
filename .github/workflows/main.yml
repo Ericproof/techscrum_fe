@@ -3,12 +3,12 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - devops-practice
+      - devops-action
   pull_request:
     branches:
       - main
-      - deveops-practice
-    workflow_dispatch:
+      - deveops-action
+  workflow_dispatch:
 
 jobs:
   build:
