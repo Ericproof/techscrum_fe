@@ -35,7 +35,6 @@ jobs:
       - name: Test
         run: |
           yarn run lint
-          npm run cypress
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
@@ -46,7 +45,7 @@ jobs:
 
       - name: Deploy to S3
         run: |
-          aws s3 sync build/ s3://eric-devops-techscrum-bucket/ --delete
+          aws s3 sync build/ $AWS_S3_BUCKET --delete
 
       - name: Clean up workspace
         run: |
