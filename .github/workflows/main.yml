@@ -12,7 +12,7 @@ on:
 
 jobs:
   build:
-    runs-on: debian
+    runs-on: ubuntu_latest
 
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
