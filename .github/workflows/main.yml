@@ -38,9 +38,9 @@ jobs:
 
       - name: Build
         run: |
-          echo "REACT_APP_API_URL=${{ secrets.REACT_APP_BACKEND_URL }}" > .env
-          echo "REACT_APP_CI=${{ secrets.REACT_APP_CI }}" >> .env
-          echo "GENERATE_SOURCEMAP=${{ secrets.GENERATE_SOURCEMAP }}" >> .env
+          echo "REACT_APP_API_URL=${{ secrets.REACT_APP_BACKEND_URL }}" > .env.production
+          echo "REACT_APP_CI=${{ secrets.REACT_APP_CI }}" >> .env.production
+          echo "GENERATE_SOURCEMAP=${{ secrets.GENERATE_SOURCEMAP }}" >> .env.production
           yarn run build
 
       - name: Deploy to S3
