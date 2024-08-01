@@ -38,10 +38,10 @@ jobs:
 
       - name: Build
         run: |
-          echo "REACT_APP_API_URL=${{ secrets.REACT_APP_BACKEND_URL }}" > .env.production
-          echo "REACT_APP_CI=${{ secrets.REACT_APP_CI }}" >> .env.production
-          echo "GENERATE_SOURCEMAP=${{ secrets.GENERATE_SOURCEMAP }}" >> .env.production
-          yarn run build
+          echo "REACT_APP_API_URL=${{ secrets.REACT_APP_BACKEND_URL }}" > .env.local
+          echo "REACT_APP_CI=${{ secrets.REACT_APP_CI }}" >> .env.local
+          echo "GENERATE_SOURCEMAP=${{ secrets.GENERATE_SOURCEMAP }}" >> .env.local
+          yarn build
 
       - name: Deploy to S3
         run: aws s3 sync build/ s3://${{ secrets.AWS_S3_BUCKET }} --delete
