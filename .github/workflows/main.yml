@@ -41,6 +41,7 @@ jobs:
           echo "REACT_APP_API_URL=${{ secrets.REACT_APP_BACKEND_URL }}" > .env.production
           echo "REACT_APP_CI=${{ secrets.REACT_APP_CI }}" >> .env.production
           echo "GENERATE_SOURCEMAP=${{ secrets.GENERATE_SOURCEMAP }}" >> .env.production
+          cat .env.production
           yarn build
       # cloudfront invalidation, make s3 bucket and edge server sync
       - name: Deploy to S3 and cloudfront invalidation
